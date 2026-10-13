@@ -1,0 +1,18 @@
+✔ valid desktop and mobile results pass (1.505127ms)
+✔ disabledRun false and missing both fail (0.251402ms)
+✔ prototypeLabel false and missing both fail (0.110112ms)
+✔ labelsPresent false and missing both fail (0.077468ms)
+✔ anchorsValid false and missing both fail (0.109377ms)
+✔ skipFirstFocus false and missing both fail (0.200202ms)
+✔ disclosureOpens false and missing both fail (0.089979ms)
+✔ aggregates overflow, headings, runtime errors, and HTTP failures (0.168595ms)
+✔ missing viewports and no observed HTTP responses fail (0.160395ms)
+✔ missing overflow measurement fails (0.314909ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 87.585757

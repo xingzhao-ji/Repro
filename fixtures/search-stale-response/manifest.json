@@ -1,0 +1,24 @@
+{
+  "id": "synthetic-search-stale-response-v1",
+  "classification": "synthetic-training-fixture",
+  "approval": {
+    "status": "pending-human-approval",
+    "approvedBy": null,
+    "approvedAt": null,
+    "instruction": "A human must review expectedBehavior before using this fixture as an approved acceptance oracle. Fixture tests may run before approval as demonstrations only."
+  },
+  "expectedBehavior": {
+    "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+    "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+    "latestRequestId": 2,
+    "latestQuery": "beta",
+    "expectedResults": ["Beta synthetic result"]
+  },
+  "inputs": {
+    "requests": [{"id": 1, "query": "alpha"}, {"id": 2, "query": "beta"}],
+    "responses": [
+      {"requestId": 2, "results": ["Beta synthetic result"]},
+      {"requestId": 1, "results": ["Alpha synthetic result"]}
+    ]
+  }
+}

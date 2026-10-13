@@ -1,0 +1,16 @@
+Verifying synthetic training fixtures, not product benchmarks or real-browser replay.
+✔ identical synthetic response order produces target failure only in buggy model (1.894798ms)
+✔ altered oracle is rejected instead of converting the buggy model into a pass (0.347127ms)
+✔ unrelated or forged errors are not accepted as the target bug (0.287297ms)
+✔ fixed model ignores old responses and still accepts its current response (0.405082ms)
+✔ CLI really exits nonzero for buggy invariant and zero for fixed (194.562105ms)
+✔ approval gate does not claim synthetic specification has human approval (0.25888ms)
+✔ demo serves only its fixture assets over localhost (37.452608ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 302.1868

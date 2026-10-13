@@ -1,0 +1,16 @@
+{
+  "templateOnly": true,
+  "caseId": "REPLACE_WITH_VERIFIED_CASE_ID",
+  "classification": "unselected",
+  "sourceIssueUrl": null,
+  "repositoryUrl": null,
+  "license": null,
+  "buggyRevision": null,
+  "expectedBehaviorSource": null,
+  "assertionApproval": "pending",
+  "evaluationPartition": "unassigned",
+  "supportedAdapter": null,
+  "selectionRecordedAt": null,
+  "eligible": false,
+  "notes": "No real case is claimed. Keep reference fix and hidden regression tests in an evaluator-controlled workspace."
+}

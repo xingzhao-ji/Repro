@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Synthetic stale search fixture</title>
+<style>body{font:18px system-ui,sans-serif;max-width:760px;margin:48px auto;padding:0 24px;line-height:1.5;background:#f7f7f3;color:#17241c}button,select{font:inherit;padding:8px 14px}section{padding:20px;border:1px solid #85998b;margin-top:20px}pre{white-space:pre-wrap;font-size:14px}.label{font-size:13px;letter-spacing:.08em}#status{font-weight:700}</style></head>
+<body><p class="label">SYNTHETIC TRAINING FIXTURE · HUMAN APPROVAL PENDING</p><h1>Search response race</h1>
+<p>Issue “alpha”, then “beta”. Complete beta first, then the stale alpha response. The latest query should keep its results.</p>
+<label for="mode">Implementation </label><select id="mode"><option value="buggy">Buggy</option><option value="fixed">Fixed</option></select> <button id="run">Run synthetic search race</button>
+<section aria-live="polite"><p>Latest query: <strong id="query">—</strong></p><p>Visible results: <strong id="results">—</strong></p><p id="status">Ready</p></section>
+<h2>Event log</h2><pre id="log"></pre><p>This local page demonstrates the state model. There is no live search service, recorded user session, browser replay engine, or verified production bug here.</p>
+<script type="module">
+import { createSearchModel } from '/model.mjs';
+const manifest = await fetch('/manifest.json').then(response => response.json());
+const $ = id => document.getElementById(id);
+const pause = ms => new Promise(resolve => setTimeout(resolve, ms));
+$('run').addEventListener('click', async () => {
+  $('run').disabled = true; $('mode').disabled = true; $('log').textContent = '';
+  const model = createSearchModel({mode:$('mode').value});
+  const render = () => { const state = model.snapshot(); $('query').textContent = state.query; $('results').textContent = state.results.join(', ') || 'Waiting…'; };
+  const log = value => { $('log').textContent += value + '\n'; };
+  try {
+    $('status').textContent = 'Running synthetic event sequence…';
+    for (const request of manifest.inputs.requests) { model.issue(request); log(`Issued #${request.id}: ${request.query}`); render(); await pause(150); }
+    // Deliberately complete responses in manifest order. Timers affect presentation only.
+    for (const response of manifest.inputs.responses) { await pause(600); model.receive(response); log(`Completed #${response.requestId}: ${response.results.join(', ')}`); render(); }
+    const state = model.snapshot();
+    const good = state.latestRequestId === manifest.expectedBehavior.latestRequestId && state.query === manifest.expectedBehavior.latestQuery && JSON.stringify(state.results) === JSON.stringify(manifest.expectedBehavior.expectedResults);
+    $('status').textContent = good ? 'PASS: beta results remain visible.' : 'TARGET FAILURE: stale alpha results replaced beta.';
+  } finally { $('run').disabled = false; $('mode').disabled = false; }
+});
+</script></body></html>

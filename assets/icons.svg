@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+<symbol id="capsule" viewBox="0 0 24 24"><path d="m3 7 9-5 9 5v10l-9 5-9-5Z M3 7l9 5 9-5 M12 12v10 M7 5l9 5v5"/></symbol>
+<symbol id="timeline" viewBox="0 0 24 24"><path d="M6 3v18M11 5h10M11 12h7M11 19h10"/><circle cx="6" cy="5" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="6" cy="19" r="2"/></symbol>
+<symbol id="graph" viewBox="0 0 24 24"><rect x="8" y="2" width="8" height="5" rx="1"/><rect x="2" y="17" width="7" height="5" rx="1"/><rect x="15" y="17" width="7" height="5" rx="1"/><path d="M12 7v5H5v5M12 12h7v5"/></symbol>
+<symbol id="compare" viewBox="0 0 24 24"><path d="M12 3v18M8 7H2m0 0 3-3M2 7l3 3M16 17h6m0 0-3-3m3 3-3 3"/></symbol>
+<symbol id="check" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></symbol>
+<symbol id="warning" viewBox="0 0 24 24"><path d="M12 3 2 21h20ZM12 9v5M12 18h.01"/></symbol>
+<symbol id="error" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 8 8 8M16 8l-8 8"/></symbol>
+<symbol id="file" viewBox="0 0 24 24"><path d="M14 2H5v20h14V7ZM14 2v6h5M8 12h8M8 16h6"/></symbol>
+<symbol id="arrow" viewBox="0 0 24 24"><path d="M4 12h16m-5-5 5 5-5 5"/></symbol>
+</svg>

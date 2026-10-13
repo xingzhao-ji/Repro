@@ -1,0 +1,358 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repro.example.invalid/schemas/manifest-v1.schema.json",
+  "title": "Repro registered synthetic manifest v1",
+  "description": "Structural contract for Manifest in src/contracts.ts. validateManifest remains authoritative for identity, canonical byte size, dependency references, calendar validity and execution compatibility. This schema is not execution authorization.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "id",
+    "classification",
+    "adapter",
+    "runnerVersion",
+    "expectation",
+    "assertionDigest",
+    "expectationBasis",
+    "humanApproval",
+    "actions",
+    "responses",
+    "environment",
+    "boundary",
+    "app"
+  ],
+  "properties": {
+    "schemaVersion": {
+      "const": 1
+    },
+    "id": {
+      "$ref": "#/$defs/identifier"
+    },
+    "classification": {
+      "const": "synthetic-training-fixture"
+    },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "version"
+      ],
+      "properties": {
+        "id": {
+          "const": "synthetic-search-v1"
+        },
+        "version": {
+          "const": "0.1.0"
+        }
+      }
+    },
+    "runnerVersion": {
+      "const": "0.1.0"
+    },
+    "expectation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "invariantId",
+        "description",
+        "latestRequestId",
+        "latestQuery",
+        "expectedResults"
+      ],
+      "properties": {
+        "invariantId": {
+          "const": "LATEST_SEARCH_RESPONSE_WINS"
+        },
+        "description": {
+          "const": "A response belonging to an older search request must not replace results for the most recently issued request."
+        },
+        "latestRequestId": {
+          "const": 2
+        },
+        "latestQuery": {
+          "const": "beta"
+        },
+        "expectedResults": {
+          "const": [
+            "Beta synthetic result"
+          ]
+        }
+      }
+    },
+    "assertionDigest": {
+      "$ref": "#/$defs/sha256"
+    },
+    "expectationBasis": {
+      "enum": [
+        "supplied-synthetic-specification",
+        "proposed-unconfirmed"
+      ]
+    },
+    "humanApproval": {
+      "const": "not-claimed"
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/action"
+      },
+      "maxItems": 256
+    },
+    "responses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/response"
+      },
+      "maxItems": 2,
+      "uniqueItems": true
+    },
+    "environment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "browser",
+        "viewport",
+        "locale",
+        "timezoneId",
+        "clock",
+        "seed",
+        "platform",
+        "timeoutMs"
+      ],
+      "properties": {
+        "browser": {
+          "const": "chromium"
+        },
+        "viewport": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "width",
+            "height"
+          ],
+          "properties": {
+            "width": {
+              "type": "integer",
+              "minimum": 64,
+              "maximum": 4096
+            },
+            "height": {
+              "type": "integer",
+              "minimum": 64,
+              "maximum": 4096
+            }
+          }
+        },
+        "locale": {
+          "const": "en-US"
+        },
+        "timezoneId": {
+          "const": "UTC"
+        },
+        "clock": {
+          "$ref": "#/$defs/utcTimestamp"
+        },
+        "seed": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 4294967295
+        },
+        "platform": {
+          "const": "linux-container"
+        },
+        "timeoutMs": {
+          "type": "integer",
+          "minimum": 100,
+          "maximum": 60000
+        }
+      }
+    },
+    "boundary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "behavior",
+        "network",
+        "database",
+        "externalDependencies"
+      ],
+      "properties": {
+        "behavior": {
+          "const": "frontend"
+        },
+        "network": {
+          "const": "controlled-http"
+        },
+        "database": {
+          "const": "none"
+        },
+        "externalDependencies": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 0
+        }
+      }
+    },
+    "app": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "revision",
+        "sourceDigest"
+      ],
+      "properties": {
+        "revision": {
+          "enum": [
+            "buggy",
+            "fixed"
+          ]
+        },
+        "sourceDigest": {
+          "$ref": "#/$defs/sha256"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,127}$",
+      "not": {
+        "pattern": "secret|password|authorization|cookie|private-key|privacy-sentinel|access-token"
+      }
+    },
+    "utcTimestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d{3}Z$"
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "kind",
+        "value",
+        "dependsOn"
+      ],
+      "properties": {
+        "id": {
+          "$ref": "#/$defs/identifier"
+        },
+        "kind": {
+          "enum": [
+            "navigate",
+            "search",
+            "noise"
+          ]
+        },
+        "value": {
+          "type": "string"
+        },
+        "dependsOn": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/identifier"
+          },
+          "maxItems": 256,
+          "uniqueItems": true
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "kind": {
+              "const": "navigate"
+            },
+            "value": {
+              "enum": [
+                "/"
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "search"
+            },
+            "value": {
+              "enum": [
+                "alpha",
+                "beta"
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "kind": {
+              "const": "noise"
+            },
+            "value": {
+              "enum": [
+                "focus"
+              ]
+            }
+          }
+        }
+      ]
+    },
+    "response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "requestId",
+        "results"
+      ],
+      "properties": {
+        "requestId": {
+          "enum": [
+            1,
+            2
+          ]
+        },
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 1
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "requestId": {
+              "const": 1
+            },
+            "results": {
+              "const": [
+                "Alpha synthetic result"
+              ]
+            }
+          }
+        },
+        {
+          "properties": {
+            "requestId": {
+              "const": 2
+            },
+            "results": {
+              "const": [
+                "Beta synthetic result"
+              ]
+            }
+          }
+        }
+      ]
+    }
+  }
+}

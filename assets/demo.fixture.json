@@ -1,0 +1,27 @@
+{
+  "fixture": true,
+  "notice": "Synthetic design fixture. Not captured from a real system. No replay or test was executed.",
+  "capsule": {"id": "DEMO-042", "title": "Retry returns a different receipt", "runtime": "Node.js 22 · example only", "scope": "checkout receipt handler", "provenance": "synthetic", "networkPolicy": "deny outbound"},
+  "events": [
+    {"id": "event-01", "atMs": 0, "kind": "request", "summary": "POST /receipts · idempotency key demo-k1"},
+    {"id": "event-02", "atMs": 8, "kind": "fixture", "summary": "Read receipt.store.json", "dependsOn": ["fixture-store"]},
+    {"id": "event-03", "atMs": 14, "kind": "response", "summary": "201 · receipt demo-r1"},
+    {"id": "event-04", "atMs": 100, "kind": "request", "summary": "Retry POST /receipts · same key"},
+    {"id": "event-05", "atMs": 112, "kind": "assertion", "summary": "Expected demo-r1; received demo-r2"}
+  ],
+  "dependencies": [
+    {"id": "fixture-input", "file": "request.json", "kind": "request", "requiredBy": ["handler"]},
+    {"id": "fixture-clock", "file": "clock.json", "kind": "clock", "requiredBy": ["handler"]},
+    {"id": "fixture-store", "file": "receipt.store.json", "kind": "storage", "requiredBy": ["handler"]}
+  ],
+  "comparison": {"baseline": {"state": "assertion_failed", "receipt": "demo-r2"}, "candidate": {"state": "assertion_passed", "receipt": "demo-r1"}, "evidence": "illustrative_only"},
+  "minimization": [
+    {"step": 1, "action": "Remove analytics event", "result": "failure retained"},
+    {"step": 2, "action": "Remove retry request", "result": "failure lost; restored"},
+    {"step": 3, "action": "Remove unrelated store row", "result": "failure retained"}
+  ],
+  "stateExamples": [
+    {"state": "inconclusive", "reason": "Missing dependency: receipt.store.json", "nextStep": "Supply fixture and rerun in an implemented runner."},
+    {"state": "runner_error", "reason": "Declared runtime unavailable", "nextStep": "Install or select the declared runtime in an implemented runner."}
+  ]
+}

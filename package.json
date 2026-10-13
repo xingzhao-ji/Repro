@@ -1,0 +1,53 @@
+{
+  "name": "repro-local",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Local portable failure compiler for explicitly registered synthetic web adapters",
+  "engines": {
+    "node": ">=24.0.0"
+  },
+  "bin": {
+    "repro": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "fixtures/search-stale-response",
+    "README.md",
+    "docs",
+    "evidence",
+    "schemas",
+    "fixtures/browser-search"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build": "node scripts/build.mjs",
+    "test": "tsx --test tests/*.test.ts",
+    "test:browser": "PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers tsx --test tests/*.browser.ts",
+    "repro": "PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers tsx src/cli.ts",
+    "dev": "PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers tsx src/cli.ts serve",
+    "check:kit": "node scripts/verify-fixtures.mjs && python3 scripts/check-kit.py",
+    "lint": "eslint src web tests scripts/*.ts",
+    "demo": "node scripts/demo.mjs",
+    "benchmark": "PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers tsx scripts/benchmark.ts",
+    "test:package": "node scripts/package-smoke.mjs"
+  },
+  "dependencies": {
+    "playwright": "1.64.0",
+    "react": "19.3.0",
+    "react-dom": "19.3.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
+    "@eslint/js": "10.0.1",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "ajv": "8.20.0",
+    "esbuild": "0.28.2",
+    "eslint": "10.12.0",
+    "tsx": "4.23.15",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.71.2"
+  }
+}

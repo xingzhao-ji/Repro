@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://repro.example.invalid/schemas/run-result-0.1.json",
+  "title": "Repro run result draft 0.1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "runId", "capsuleDigest", "oracleDigest", "outcome", "reason", "assertionsEvaluated", "evidenceArtifacts", "environment", "seed"],
+  "properties": {
+    "schemaVersion": {"const": "0.1.0"},
+    "runId": {"type": "string", "minLength": 1},
+    "capsuleDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "oracleDigest": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "outcome": {"enum": ["target-failure", "requirement-satisfied", "inconclusive", "cancelled"]},
+    "reason": {"type": "string", "minLength": 1},
+    "assertionsEvaluated": {"type": "integer", "minimum": 0},
+    "evidenceArtifacts": {"type": "array", "items": {"type": "string"}},
+    "environment": {"type": "string", "minLength": 1},
+    "seed": {"type": ["integer", "string"]},
+    "durationMs": {"type": "number", "minimum": 0},
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  },
+  "allOf": [{"if": {"properties": {"outcome": {"enum": ["target-failure", "requirement-satisfied"]}}}, "then": {"properties": {"assertionsEvaluated": {"minimum": 1}, "evidenceArtifacts": {"minItems": 1}}}}]
+}

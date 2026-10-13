@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+.repro-runs/
+.repro-cache/
+dist/
+coverage/
+playwright-report/
+test-results/
+assets/qa/*.png
+assets/qa/results.json

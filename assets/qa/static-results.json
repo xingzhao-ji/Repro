@@ -1,0 +1,28 @@
+{
+  "static_checks_passed": true,
+  "errors": [],
+  "local_reference_count": 20,
+  "svg_xml_valid": true,
+  "single_h1": true,
+  "unique_ids": true,
+  "no_javascript": true,
+  "fixture_counts_match_visible_labels": true,
+  "visible_counts": {
+    "events": 5,
+    "dependencies": 3,
+    "minimization": 3
+  },
+  "contrast_source": "Parsed current tokens.css semantic pairs; not computed browser styles",
+  "normal_text_contrast_minimum": 4.5,
+  "contrast_ratios": {
+    "body": 15.87,
+    "muted": 5.91,
+    "link": 6.51,
+    "pass": 6.52,
+    "fail": 6.23,
+    "warning": 6.27,
+    "neutral": 5.81,
+    "muted-canvas": 5.42
+  },
+  "browser_qa": "Blocked: Chromium launch fails with socket() Operation not permitted, including reviewed escalation. No screenshots or rendering claims."
+}
