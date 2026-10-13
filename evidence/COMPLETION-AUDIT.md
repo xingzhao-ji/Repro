@@ -37,3 +37,7 @@ The historical UI repair is verified by the final integrated suite and its exact
 ## Blocked audit after the local checkpoint
 
 At the third consecutive pending-prerequisite audit, commit `d5e43f7` was clean and all 68 recorded source/test hashes, nine build hashes and thirty reviewed screenshot hashes matched. The final passing logs and exact unexecuted policy proposal also matched. A separate read-only review found no further evidenced required local work that could progress independently of the two external prerequisites. The owned Colima profile is currently stopped. No new suite execution, native navigation or Linux security change was attempted. The [blocked-audit record](../.repro-runs/completion-audit/blocked-audit.json) preserves these observations. The objective remains incomplete and meets the blocked-status threshold.
+
+## Resumed Linux execution after approval
+
+The user explicitly approved the reviewed namespace profile. A fresh export from the current runtime built successfully and ran with that exact policy and the existing restrictions. Both revisions remained INCONCLUSIVE with zero assertions; the same-boundary diagnostic identified a failing Chromium chroot step. The [new Linux evidence and separately reviewed proposal](LINUX-REPLAY.md) supersede the earlier “namespace approval missing” blocker. The additional chroot allowance has not been applied. Native zoom still awaits a permitted review surface. This resumed turn made concrete progress; the earlier three-turn blocked-audit count does not carry over.
