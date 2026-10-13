@@ -1,6 +1,6 @@
 # Local release evidence
 
-Status: local synthetic alpha implemented; final native checks and the trusted standalone Linux arm64 capsule passed on 2026-10-13 UTC. The exact approved chroot profile was applied with all other restrictions preserved; no new security permission was needed. Native 200% Chrome zoom remains gated by the existing `net::ERR_BLOCKED_BY_CLIENT` restriction. Actual screen-reader usability and human HCI study are unrun. These checks remain distinct from passing technical, CSS reflow and automated accessibility samples. See [final Linux execution](LINUX-PACKAGED.md) and [HCI design/acceptance workstream](../docs/DESIGN.md).
+Status: local synthetic alpha implemented; final native checks and the trusted standalone Linux arm64 capsule passed on 2026-10-13 UTC. The exact approved chroot profile was applied with all other restrictions preserved; no new security permission was needed. Native 200% Chrome zoom remains gated by the existing `net::ERR_BLOCKED_BY_CLIENT` restriction. Actual screen-reader usability and human HCI study are unrun. These checks remain distinct from passing technical, CSS reflow and automated accessibility samples. See [final Linux execution](LINUX-PACKAGED.md) and [independent HCI review](HCI-REVIEW.md).
 
 The only supported target is the registered synthetic stale-response frontend. Capture is a consented scripted browser session. There is no arbitrary-site recorder, PostgreSQL adapter, arbitrary patch executor, historical-bug corpus, public hosting, LLM dependency or API key. [Supported scope](../docs/SUPPORTED-SCOPE.md), [usage](../docs/USAGE.md), [architecture decision](../docs/adr/0001-local-experiment-boundary.md) and [deployment prerequisites](../docs/DEPLOYMENT-PLAN.md) define the boundary.
 
@@ -26,7 +26,7 @@ The original synthetic assertion digest is `fd86f0acbf1b63d4cd8d301878700a7d45ee
 | R7 code health | Passed | Final strict typecheck/lint, 64 unit/contract tests, 24 browser checks and installed-package smoke |
 | R8 benchmark integrity | Synthetic only | One failure family; historical evaluation not performed and not counted as passed |
 | R9 release evidence | Delivered locally; authorized source delivery tracked separately | Current portable synthetic summary, raw retained local evidence, executable examples and documentation |
-| R10 UI/UX/HCI | Technical/heuristic baseline; research drafts pending in this checkpoint | Original task-specific rationale and acceptance criteria saved; actual screen-reader/native zoom/participant gates remain explicit |
+| R10 UI/UX/HCI | Technical/heuristic baseline and research/protocol drafts delivered | Ten images independently reopened; candidate interaction/comparator, full keyboard investigation, screen-reader/native zoom and human evaluation remain pending |
 
 ## Current final packaging checks
 

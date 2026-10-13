@@ -32,7 +32,7 @@ The demo performs capture, reduction, verification, export, import and capsule r
 - [Implementation decision](docs/adr/0001-local-experiment-boundary.md): why this vertical slice is deliberately narrow.
 - [Independent integration review](evidence/INDEPENDENT-REVIEW.md): defects found, reproductions and repairs; automated review is not human approval.
 - [Deployment plan](docs/DEPLOYMENT-PLAN.md): authorized private source delivery and separate hosted-runtime prerequisites.
-- [HCI workstream](docs/DESIGN.md): original interaction rationale and acceptance criteria; related-work/protocol drafts are pending in this continuity checkpoint, with no participant results claimed.
+- [HCI research](docs/HCI-RESEARCH.md) and [study protocol](docs/HCI-STUDY-PROTOCOL.md): reviewed drafts and blank materials; candidate interaction/comparator work and human validation remain pending.
 - [Portable setup](CLOUD-SETUP.md): source-bundle verification and fresh-environment instructions.
 
 The expectation basis is the supplied synthetic specification. A source digest establishes identity, not author trust or correctness. An exported directory is not itself proof of successful clean-machine replay. Timeouts, unsupported state, missing dependencies and wrong failures remain INCONCLUSIVE. Reduction reports its tested neighborhood and budget; it does not claim global minimality.

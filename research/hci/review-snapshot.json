@@ -1,0 +1,189 @@
+{
+  "recordedAt": "2026-10-13T19:43:34.273556+00:00",
+  "classification": "agent-source-and-screenshot-review-not-participant-data",
+  "sourceBaseCommit": "2f67f0480c1d04a351e83cdf85a2260ee35334e8",
+  "status": "documentation-checkpoint; human study not run",
+  "priorCheckpoint": ".repro-runs/completion-audit/content-hashes.json",
+  "sources": [
+    {
+      "path": "web/main.tsx",
+      "sha256": "9831bc1949af00000dbac32a66e59157efff35413f45289dbd5424284e0940b6",
+      "bytes": 31251,
+      "priorCheckpointSha256": "9831bc1949af00000dbac32a66e59157efff35413f45289dbd5424284e0940b6",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "web/style.css",
+      "sha256": "17673c4205b10b4c488aa6121169d9198b6e8e23b4c74f3bf4f4bfec560e3397",
+      "bytes": 14182,
+      "priorCheckpointSha256": "17673c4205b10b4c488aa6121169d9198b6e8e23b4c74f3bf4f4bfec560e3397",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "assets/tokens.css",
+      "sha256": "af768ba5d1ae984c25e0d8b6f525700d6485db24881f347ca35b83893d2d540d",
+      "bytes": 813,
+      "priorCheckpointSha256": "af768ba5d1ae984c25e0d8b6f525700d6485db24881f347ca35b83893d2d540d",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "src/server.ts",
+      "sha256": "26ee01a141d815733b5a9ad971e2c5b4775be69b64decece63c2e1454c803fcb",
+      "bytes": 7757,
+      "priorCheckpointSha256": "26ee01a141d815733b5a9ad971e2c5b4775be69b64decece63c2e1454c803fcb",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "src/oracle.ts",
+      "sha256": "f69cf7d3585975ceaf289088c3b5ca9ffc5fa43a71ed4b4e3af88a14ac1fb4c7",
+      "bytes": 2286,
+      "priorCheckpointSha256": "f69cf7d3585975ceaf289088c3b5ca9ffc5fa43a71ed4b4e3af88a14ac1fb4c7",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "src/manifest.ts",
+      "sha256": "8a2de336c676db5ee1decfd74ea7299583282676ab6681c879931e7e8f6e8e14",
+      "bytes": 10653,
+      "priorCheckpointSha256": "8a2de336c676db5ee1decfd74ea7299583282676ab6681c879931e7e8f6e8e14",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "src/service.ts",
+      "sha256": "f1934baf2d444d142ae86a62c05c936c56993917ecdf08584be7914cffa47325",
+      "bytes": 5906,
+      "priorCheckpointSha256": "f1934baf2d444d142ae86a62c05c936c56993917ecdf08584be7914cffa47325",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "src/adapter.ts",
+      "sha256": "8767389b482fe01f81990242e7f0520b3d479ea0ae9ecb01cae401321c7b1050",
+      "bytes": 21555,
+      "priorCheckpointSha256": "8767389b482fe01f81990242e7f0520b3d479ea0ae9ecb01cae401321c7b1050",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "tests/ui-review.browser.ts",
+      "sha256": "b30a72684a974f82acde64ea9e78a857eb83123ae5e2a213aa18b1e34e204aeb",
+      "bytes": 8132,
+      "priorCheckpointSha256": "b30a72684a974f82acde64ea9e78a857eb83123ae5e2a213aa18b1e34e204aeb",
+      "matchesPriorCheckpoint": true
+    },
+    {
+      "path": "dist/web.js",
+      "sha256": "c3d4cf4704be58b02bd744fb1c8bd730f62386ce4fcb12f5c450ca2a3fbb96ec",
+      "bytes": 1243000,
+      "priorCheckpointSha256": null,
+      "matchesPriorCheckpoint": null
+    },
+    {
+      "path": "dist/web.js.map",
+      "sha256": "c8a6f5d85ab7bd01cb9912b5cde9e9fbef15514fe819a6adf0eafd4e5885abd5",
+      "bytes": 1904706,
+      "priorCheckpointSha256": null,
+      "matchesPriorCheckpoint": null
+    },
+    {
+      "path": "dist/web.css",
+      "sha256": "7d19be05afc8b457aef1e483e7e3d2aee2d52f6260db3d9378a2d285fbc03c43",
+      "bytes": 16486,
+      "priorCheckpointSha256": null,
+      "matchesPriorCheckpoint": null
+    },
+    {
+      "path": "dist/web.css.map",
+      "sha256": "f24b1c44a03431f977a4468365c13bcf97f90c256a2ff1b77461b9f0f2cb4daf",
+      "bytes": 26400,
+      "priorCheckpointSha256": null,
+      "matchesPriorCheckpoint": null
+    }
+  ],
+  "screenshotsActuallyOpened": [
+    {
+      "path": ".repro-runs/ui/browser-7b77249f-d4e4-4ba9-9ccd-073b6db6ee3f/empty-desktop.png",
+      "sha256": "77cc223f5a736592fea606cc9ee20ff43ccf21120345014adf1c70a862da6007",
+      "bytes": 142819,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui/browser-7b77249f-d4e4-4ba9-9ccd-073b6db6ee3f/comparison-desktop.png",
+      "sha256": "70376332dd2cef483882c9e12b9531d02021a01b3c55de947dd7644b4099287c",
+      "bytes": 163914,
+      "pngWidth": 1440,
+      "pngHeight": 1288,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui/browser-7b77249f-d4e4-4ba9-9ccd-073b6db6ee3f/reduction-desktop.png",
+      "sha256": "a0c3f1709ea434dc5a62c3dfb316db16eb989f3e1ac0bfb1082dee7531f84d3f",
+      "bytes": 241769,
+      "pngWidth": 1440,
+      "pngHeight": 1796,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui/browser-7b77249f-d4e4-4ba9-9ccd-073b6db6ee3f/comparison-768.png",
+      "sha256": "036391023912df15563d8e97036d10ac0dcb3e502032a9c3e2e6727d56c1b124",
+      "bytes": 187735,
+      "pngWidth": 768,
+      "pngHeight": 2184,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui/browser-7b77249f-d4e4-4ba9-9ccd-073b6db6ee3f/identity-expanded-390.png",
+      "sha256": "93c8981348f69b1618bb5e7453ad7202caef91539fc3229a57bb4fa699193d0a",
+      "bytes": 223197,
+      "pngWidth": 390,
+      "pngHeight": 3345,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui/browser-7b77249f-d4e4-4ba9-9ccd-073b6db6ee3f/cancelled-desktop.png",
+      "sha256": "f2fdc1f927dfccdbd8c992339863db14253d1002173c4e46bbfad7df1f431afa",
+      "bytes": 122910,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui/browser-7b77249f-d4e4-4ba9-9ccd-073b6db6ee3f/dependencies-390.png",
+      "sha256": "b551b343741f59560073b4522dfb90c9fe2af9f273fa0253291ad04604c44572",
+      "bytes": 179765,
+      "pngWidth": 390,
+      "pngHeight": 2960,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui/browser-7b77249f-d4e4-4ba9-9ccd-073b6db6ee3f/export-desktop.png",
+      "sha256": "c79a78a7094ee3c638ff5f12d9edbcd782a11e6530ad56d916fa6cdbe6bf4f06",
+      "bytes": 143149,
+      "pngWidth": 1440,
+      "pngHeight": 928,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui-history/b86f62df-131f-4265-834b-586e4ab69162/record-selected-comparison.png",
+      "sha256": "3a01a86714ccbff83e1d2f428c220a4ecfc374d224e1316bbfaf60f327b96fb9",
+      "bytes": 95168,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    },
+    {
+      "path": ".repro-runs/ui-history/b86f62df-131f-4265-834b-586e4ab69162/unknown-explicit-run.png",
+      "sha256": "a27d521abee0126821b38166c7d85c525f59fc0390ac6853563a9e94c751fa0a",
+      "bytes": 109006,
+      "pngWidth": 1440,
+      "pngHeight": 900,
+      "inspection": "Opened with view_image in this review; screenshot inspection only"
+    }
+  ],
+  "scopeLimits": [
+    "No fresh browser interaction, test execution or native zoom review in this HCI review.",
+    "No participant recruitment or data collection.",
+    "Raw local screenshots/logs are excluded from portable source handoff.",
+    "Protocol, proposed UI, comparator, analysis script and matched task sets remain pending their stated gates.",
+    "Null prior-checkpoint comparison means no entry in this inspected inventory, not a match or mismatch."
+  ]
+}
