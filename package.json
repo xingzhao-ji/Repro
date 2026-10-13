@@ -17,7 +17,8 @@
     "docs",
     "evidence",
     "schemas",
-    "fixtures/browser-search"
+    "fixtures/browser-search",
+    "security"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",

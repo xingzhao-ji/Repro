@@ -1,5 +1,8 @@
 # Independent integration and release review
 
+Historical review record. Its pending Linux-policy and failed-portability statements describe earlier checkpoints only. The exact approved chroot profile and final standalone Linux arm64 capsule subsequently passed; see [current Linux verification](LINUX-PACKAGED.md) and [current release matrix](RELEASE.md). Native zoom remains a separate gate. Earlier findings and observations below are preserved.
+
+
 Reviewed 2026-10-13 UTC by a separate implementation agent. This is an automated review, not human approval. The reviewer authored the browser adapter and its tests; independence here applies to the other agents' manifest, capsule, ledger, service, server and UI integration. Browser results below are supporting execution evidence, not a claim of an independently written browser oracle.
 
 Inspected `GOAL.md`, `docs/ACCEPTANCE.md`, security/architecture documents, the benchmark integrity skill, `src/{capsule,manifest,service,server,ledger,contracts}.ts`, `web/`, schema drafts, tests, exported readable tests and actual package/install reports. No sealed historical test or fix material exists in this kit. No proposed seccomp configuration was executed by this reviewer.

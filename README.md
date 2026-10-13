@@ -2,7 +2,7 @@
 
 Repro records a registered synthetic browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench uses the same real runner as the CLI. The buggy and fixed search implementations are evaluated with the same frozen expected behavior in fresh browser state.
 
-This is a local synthetic alpha. Native Chromium replay works; the Linux portability gate currently stops at Chromium's sandbox launch under Docker's default policy. See [release evidence](evidence/RELEASE.md) for actual checks and open gates. Arbitrary websites, real-user recording, PostgreSQL adapters, historical-bug validation and public execution are outside this version's supported scope.
+This is a local synthetic alpha. Native Chromium replay and the trusted Linux arm64 capsule pass with the exact explicitly approved container policy. Native 200% Chrome zoom and actual screen-reader usability remain unverified. See [release evidence](evidence/RELEASE.md) for actual checks and open gates. Arbitrary websites, real-user recording, PostgreSQL adapters, historical-bug validation and public execution are outside this version's supported scope.
 
 ## Run locally
 
@@ -31,7 +31,9 @@ The demo performs capture, reduction, verification, export, import and capsule r
 - [Supported scope](docs/SUPPORTED-SCOPE.md): capture, adapter, replay, oracle, reduction and isolation boundaries.
 - [Implementation decision](docs/adr/0001-local-experiment-boundary.md): why this vertical slice is deliberately narrow.
 - [Independent integration review](evidence/INDEPENDENT-REVIEW.md): defects found, reproductions and repairs; automated review is not human approval.
-- [Deployment plan](docs/DEPLOYMENT-PLAN.md): prerequisites only. No remote repository, hosted service or deployment was created.
+- [Deployment plan](docs/DEPLOYMENT-PLAN.md): authorized private source delivery and separate hosted-runtime prerequisites.
+- [HCI workstream](docs/DESIGN.md): original interaction rationale and acceptance criteria; related-work/protocol drafts are pending in this continuity checkpoint, with no participant results claimed.
+- [Portable setup](CLOUD-SETUP.md): source-bundle verification and fresh-environment instructions.
 
 The expectation basis is the supplied synthetic specification. A source digest establishes identity, not author trust or correctness. An exported directory is not itself proof of successful clean-machine replay. Timeouts, unsupported state, missing dependencies and wrong failures remain INCONCLUSIVE. Reduction reports its tested neighborhood and budget; it does not claim global minimality.
 

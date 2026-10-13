@@ -36,6 +36,34 @@ test('secret-bearing capture is rejected before any bundle or partial output is 
   assert.deepEqual(await readdir(parent), []);
 });
 
+test('capsule carries the exact approved inert Linux policy in its integrity inventory', async () => {
+  const parent = await workspace(); const output = join(parent, 'bundle');
+  await exportCapsule(createManifest(), output);
+  const path = 'security/repro-chromium-seccomp.json';
+  const policy = await readFile(join(output, path));
+  const expected = '949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b';
+  assert.equal(createHash('sha256').update(policy).digest('hex'), expected);
+  const index = JSON.parse(await readFile(join(output, 'integrity.json'), 'utf8'));
+  assert.deepEqual(index.files.find((file: { path: string }) => file.path === path), { path, sha256: expected, bytes: policy.length });
+  assert.deepEqual(await importCapsule(output), createManifest());
+});
+
+test('a broadened policy with recomputed integrity cannot pass trusted capsule validation', async () => {
+  const parent = await workspace(); const output = join(parent, 'bundle');
+  await exportCapsule(createManifest(), output);
+  const path = 'security/repro-chromium-seccomp.json';
+  const policy = JSON.parse(await readFile(join(output, path), 'utf8'));
+  policy.defaultAction = 'SCMP_ACT_ALLOW';
+  const bytes = Buffer.from(JSON.stringify(policy));
+  await writeFile(join(output, path), bytes);
+  const indexPath = join(output, 'integrity.json');
+  const index = JSON.parse(await readFile(indexPath, 'utf8'));
+  const artifact = index.files.find((file: { path: string }) => file.path === path);
+  artifact.bytes = bytes.length; artifact.sha256 = createHash('sha256').update(bytes).digest('hex');
+  await writeFile(indexPath, JSON.stringify(index));
+  await assert.rejects(importCapsule(output), (error: unknown) => error instanceof ReproError && error.code === 'CAPSULE_TRUST');
+});
+
 test('cancelled export never finalizes and clears its owned partial directory', async () => {
   const parent = await workspace();
   const controller = new AbortController(); controller.abort();

@@ -1,4 +1,25 @@
-# Requirement-by-requirement completion audit
+# Current completion audit
+
+2026-10-13: the approved chroot permission and final standalone Linux arm64 replay are complete. The [current release matrix](RELEASE.md), [Linux report](LINUX-PACKAGED.md) and [portable evidence summary](linux-packaged-summary.json) supersede the historical blocked checkpoints below. Original product scope and all acceptance gates remain in force.
+
+| Workstream | Current status |
+| --- | --- |
+| Core, reduction, persistence, privacy and registered synthetic behavior | Passed within documented scope |
+| Final code health and fresh package | Build, kit, typecheck, lint, 64 unit/contract and 24 browser checks, installed-package smoke passed |
+| Linux portability | Final fresh trusted Linux arm64 capsule passed with exact approved policy and original restrictions; VM stopped |
+| UI technical/visual checks | Existing current-byte screenshot review and fresh automated workflow/accessibility checks passed within sampled scope |
+| Native 200% Chrome zoom | Gated: existing ERR_BLOCKED_BY_CLIENT; no bypass or repeat |
+| Screen-reader usability | Unrun; semantics and automated checks are not a user workflow result |
+| HCI contribution and study | Related work, rationale, protocol and reproducible blank artifacts being delivered; no participants or outcomes claimed |
+| Delivery | Private GitHub push and source-only Library handoff authorized; confirmed outcomes recorded in delivery receipts |
+
+The autonomous continuation contract in GOAL.md requires completing independent work while a check is gated. Do not request the same fulfilled chroot approval or stop the entire workflow because native zoom is unavailable.
+
+## Historical audit record
+
+The retained text below records earlier checkpoints, their then-current failures and the evidence behind them. Its pending-approval and blocked-status language is historical, not current restart authority.
+
+### Earlier requirement-by-requirement audit
 
 Audited against the original launch attachment, `GOAL.md`, `docs/ACCEPTANCE.md`, and the current implementation. A passing test proves only the exercised behavior. Linux portability and native zoom remain unverified; the goal is not complete.
 

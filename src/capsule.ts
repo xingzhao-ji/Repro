@@ -10,7 +10,9 @@ const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const LIMIT = 16 * 1024 * 1024;
 const TOTAL_LIMIT = 32 * 1024 * 1024;
 const GENERATED = new Set(['node_modules', '.repro-runs', '.repro-cache']);
-const FILES = ['.dockerignore', 'Dockerfile', 'README.md', 'dist/cli.js', 'dist/index.js', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', 'manifest.json', 'package-lock.json', 'package.json', 'replay.test.mjs'] as const;
+const POLICY_PATH = 'security/repro-chromium-seccomp.json';
+const POLICY_SHA256 = '949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b';
+const FILES = ['.dockerignore', 'Dockerfile', 'README.md', 'dist/cli.js', 'dist/index.js', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', 'manifest.json', 'package-lock.json', 'package.json', 'replay.test.mjs', POLICY_PATH] as const;
 type Artifact = { path: string; sha256: string; bytes: number };
 type Integrity = { format: 'repro-directory-v1'; schemaVersion: 1; manifestDigest: string; files: Artifact[] };
 export interface ExportProgress { phase: 'staging' | 'artifact-written' | 'validated'; completed: number; total: number; path?: string }
@@ -114,19 +116,39 @@ The readable test runs separate fresh browser state for buggy and fixed revision
 
 ## Container boundary
 
-The Dockerfile provides an explicit Linux recipe. Build acquisition requires the network. Run the built image without external networking, with a read-only filesystem and an owned writable evidence directory:
+The supported container recipe is Linux arm64 with Docker, the pinned Node 26.7.0 Debian image, Playwright 1.64.0 and Chromium 156.0.8078.4. It was tested using Docker daemon 29.5.2 in an owned Colima 0.10.3 vz VM (2 CPUs, 3 GiB RAM, 12 GiB data disk, 8 GiB root disk), with no host directory mounts, SSH-agent forwarding, SSH-config updates, active-context changes or application port forwarding. Other architectures and runtimes are unverified. Build acquisition requires the network; replay uses only container loopback.
+
+The inert file \`${POLICY_PATH}\` is included in integrity validation and has SHA-256 \`${POLICY_SHA256}\`. Import/export does not apply it or change Docker, Codex or browser settings. It preserves the inspected Docker all-capabilities-dropped arm64 default policy and adds unfiltered clone, setns, unshare and chroot calls for Chromium's enabled sandbox. These allowances cover all container processes and cannot restrict chroot's pathname. They expand the kernel interface even though parent capabilities are dropped; nested user namespaces may hold their own capabilities. Use only with this explicitly trusted synthetic fixture after specific approval of this exact profile and boundary. No privileged mode, additional capability or disabled Chromium sandbox is needed.
+
+After reviewing and explicitly approving that policy, use these commands from the capsule directory with Docker pointing to your isolated owned runtime. Set \`REPRO_APPROVED_POLICY_SHA256\` to the exact hash above as a deliberate opt-in. The guard below checks both the opt-in and file bytes before any container is created:
 
 \`\`\`sh
-docker build --tag repro-synthetic-capsule .
-mkdir -p .repro-runs/container
-docker run --rm --network none --read-only --cap-drop ALL --security-opt no-new-privileges --pids-limit 128 --memory 1g --cpus 2 --tmpfs /tmp:rw,nosuid,size=256m --shm-size 256m --mount type=bind,src="$(pwd)/.repro-runs/container",dst=/work/.repro-runs repro-synthetic-capsule
+# Export REPRO_APPROVED_POLICY_SHA256 only after specific approval.
+node -e 'const fs=require("node:fs"),crypto=require("node:crypto"),assert=require("node:assert/strict"); const expected="${POLICY_SHA256}"; assert.equal(process.env.REPRO_APPROVED_POLICY_SHA256,expected,"Explicit policy opt-in required"); assert.equal(crypto.createHash("sha256").update(fs.readFileSync("${POLICY_PATH}")).digest("hex"),expected,"Policy hash mismatch");' && (
+  set -eu
+  repro_run="repro-$(node -e 'console.log(require("node:crypto").randomUUID())')"
+  repro_volume="$repro_run-evidence"
+  mkdir -p ".repro-runs/$repro_run"
+  docker build --iidfile ".repro-runs/$repro_run/image-id" .
+  repro_image="$(cat ".repro-runs/$repro_run/image-id")"
+  docker volume create "$repro_volume"
+  docker create --name "$repro_run" --network none --read-only --cap-drop ALL --security-opt no-new-privileges --security-opt "seccomp=$(pwd)/${POLICY_PATH}" --pids-limit 128 --memory 1g --cpus 2 --tmpfs /tmp:rw,nosuid,size=256m --shm-size 256m --mount "type=volume,src=$repro_volume,dst=/work/.repro-runs" "$repro_image"
+  docker inspect "$repro_run" > ".repro-runs/$repro_run/container-before.json"
+  repro_exit=0
+  docker start --attach "$repro_run" || repro_exit=$?
+  docker inspect "$repro_run" > ".repro-runs/$repro_run/container-after.json"
+  docker cp "$repro_run:/work/.repro-runs/." ".repro-runs/$repro_run/"
+  exit "$repro_exit"
+)
 \`\`\`
+
+The image runs as unprivileged USER node. Each invocation has a fresh named evidence volume, no host bind mounts, Docker socket, credentials, public ports or external network, a read-only root, all capabilities dropped, no-new-privileges, and the resource bounds shown above. The adapter deadline is declared by environment.timeoutMs in manifest.json (10 seconds in the supplied default fixture). Retain the exited container and volume until evidence is reviewed; stop only your owned runtime afterward. If another permission is required, stop and obtain a new specific decision instead of broadening this policy.
 
 Ordinary containers are a development boundary, not a hostile-code sandbox. A build recipe is not evidence that the portability gate passed. Consult the originating project's release evidence for actual Linux executions. The base image digest is pinned. System dependency acquisition remains explicit but is not a snapshot of the Debian package repository, so the OS build is not byte-for-byte reproducible.
 
 ## Included data and validation
 
-Only the approved manifest, registered synthetic frontend sources, trusted runner files, locked npm metadata, this documentation and the readable test are exported. Browser profiles, cookies, authorization headers, raw user data, unrelated source files, capture logs, screenshots and traces are excluded. No redaction is claimed: supported inputs are synthetic from their origin.
+Only the approved manifest, registered synthetic frontend sources, trusted runner files, locked npm metadata, the exact inert container policy, this documentation and the readable test are exported. Browser profiles, cookies, authorization headers, raw user data, unrelated source files, capture logs, screenshots and traces are excluded. No redaction is claimed: supported inputs are synthetic from their origin. Older exports without the policy must be re-exported using this trusted build; the exact artifact allowlist and trusted-runner identity deliberately reject incompatible bundles.
 
 Import validates schema, app/runner/adapter/assertion identity, artifact allowlists, sizes and hashes before replay. Paths, symlinks, hardlinks, archives and extra artifacts are rejected. Top-level node_modules, .repro-runs and .repro-cache are explicitly excluded generated runtime directories; import does not attest to their contents or installed dependency integrity. Acquire dependencies with npm ci from the lockfile in a clean environment. Empty/incomplete exports do not have a finalized integrity record. Artifact hashes are self-consistency evidence; the trusted importing runner additionally compares executable artifacts against its own installed implementation.
 `;
@@ -170,7 +192,7 @@ async function trustedArtifacts(): Promise<Map<string, Buffer>> {
     ['README.md', Buffer.from(README)], ['Dockerfile', Buffer.from(DOCKERFILE)],
     ['replay.test.mjs', Buffer.from(READABLE_TEST)],
   ]);
-  for (const file of ['dist/cli.js', 'dist/index.js', 'package.json', 'package-lock.json', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js']) {
+  for (const file of ['dist/cli.js', 'dist/index.js', 'package.json', 'package-lock.json', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', POLICY_PATH]) {
     try {
       let source = join(ROOT, file);
       if (file === 'package-lock.json') {
@@ -182,9 +204,14 @@ async function trustedArtifacts(): Promise<Map<string, Buffer>> {
           source = join(ROOT, 'dist/package-lock.json');
         }
       }
-      files.set(file, await readBounded(source));
+      const content = await readBounded(source);
+      if (file === POLICY_PATH && hash(content) !== POLICY_SHA256) throw new ReproError('verification', 'CAPSULE_POLICY', 'The installed container policy differs from the specifically approved profile.');
+      files.set(file, content);
     }
-    catch (cause) { throw new ReproError('environment', 'CAPSULE_BUILD_REQUIRED', 'Build the trusted runner and install its lockfile before importing or exporting capsules.', { cause }); }
+    catch (cause) {
+      if (cause instanceof ReproError && cause.code === 'CAPSULE_POLICY') throw cause;
+      throw new ReproError('environment', 'CAPSULE_BUILD_REQUIRED', 'Build the trusted runner and install its lockfile before importing or exporting capsules.', { cause });
+    }
   }
   return files;
 }
@@ -199,7 +226,7 @@ async function scanDirectory(directory: string, prefix = ''): Promise<Set<string
     if (!prefix && GENERATED.has(entry.name) && stat.isDirectory()) continue;
     const local = prefix ? `${prefix}/${entry.name}` : entry.name;
     if (stat.isDirectory()) {
-      if (!['dist', 'fixtures', 'fixtures/browser-search'].includes(local)) throw new ReproError('input', 'CAPSULE_DIRECTORY', 'Capsule contains an unapproved directory.');
+      if (!['dist', 'fixtures', 'fixtures/browser-search', 'security'].includes(local)) throw new ReproError('input', 'CAPSULE_DIRECTORY', 'Capsule contains an unapproved directory.');
       for (const child of await scanDirectory(path, local)) result.add(child);
     } else {
       if (local !== 'integrity.json') safeArtifactPath(local);

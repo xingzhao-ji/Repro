@@ -1,5 +1,8 @@
 # Security and correctness review
 
+Historical review record. Its pending Linux-policy and failed-portability statements describe earlier checkpoints only. The exact approved chroot profile and final standalone Linux arm64 capsule subsequently passed; see [current Linux verification](LINUX-PACKAGED.md) and [current release matrix](RELEASE.md). Native zoom remains a separate gate. Earlier findings and observations below are preserved.
+
+
 Reviewed 2026-10-13 UTC against [recorded source hashes](../.repro-runs/security-review/review-source-hashes.json), Node 26.7.0, macOS arm64. This automated review is independent of the input, CLI, path, ledger, service, server, reducer and UI implementations. The reviewer authored manifest/capsule code; their tests are supporting checks, not independent authorship. No Linux policy execution or native-browser zoom retry occurred in this audit.
 
 **Final focused result: 62 passed, 0 failed, 0 skipped.** Command: `node --import tsx --test tests/*.test.ts`; [terminal log](../.repro-runs/security-review/final-audit-stable.log). The CLI test file also passed ESLint. One earlier combined run overlapped the integrator's dependency reinstall and had eight CLI subprocess failures; that [unsuccessful run](../.repro-runs/security-review/final-audit.log) is preserved separately.

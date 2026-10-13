@@ -1,4 +1,6 @@
-# Approved Linux replay attempt
+# Historical namespace-only Linux replay attempt
+
+This record describes the earlier failed checkpoint. The later approved chroot profile and standalone capsule **passed**; see [current Linux verification](LINUX-PACKAGED.md). Approval and application are no longer pending. Statements below describe that historical attempt only.
 
 The user approved the previously reviewed namespace policy on 2026-10-13. The current reduced capsule was freshly exported from commit `1a59cb2`, validated by the trusted CLI, and built inside the task-owned Linux VM. This attempt is **INCONCLUSIVE**: both revisions executed zero assertions. Linux portability remains unverified.
 

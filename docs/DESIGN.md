@@ -20,3 +20,15 @@ Generic styling is often a symptom of missing product decisions. Choose informat
 Capture actual product screenshots at desktop/tablet/mobile and 200% zoom. Inspect dense and empty sessions, long paths/error messages, 100+ timeline items, keyboard focus, and all outcomes. Compare with the intended tokens. Fix overlap, inconsistent alignment, weak hierarchy, inaccessible status, or fake interactions, then rerun browser tests and recapture. Pixel appearance alone never establishes functionality.
 
 Read docs/PROMPTING-RESEARCH.md and prompts/design-review.md when available for the evidence-based prompting workflow.
+
+## Task-specific simplicity and interaction rationale
+
+The core object is a failure experiment with a selected run, not a dashboard of product metrics. Present information in the order an engineer needs to reason: the expected behavior and supported scope; the observed result; the action/dependency sequence and controlled response order; reduction decisions and uncertainty; the same-assertion buggy/fixed comparison; exact identities and raw artifacts. Keep the current selected run visible when changing sections or returning through history.
+
+Progressive disclosure puts plain-language outcomes and their reasons first, then the evidence needed to challenge them, then long identifiers and raw JSON. A disclosure may reduce visual density, but must not hide that minimality is unverified, that backend responses are mocked, or that an assertion did not execute. Comparison should make configuration differences inspectable before the user can infer a fix. Export is a local artifact operation, distinct from publishing or demonstrated portability.
+
+Evaluate a linear task-oriented walkthrough, the existing timeline/detail workbench, and a raw-log/equivalent-evidence baseline. The walkthrough can improve first-use orientation but constrain expert backtracking; a persistent inspector supports comparison but adds density; raw logs retain auditability but demand more interpretation. Choose through observed task comprehension and error evidence, not visual fashion. Do not add ornamental statistics or generic template panels.
+
+The intended HCI contribution concerns evidence comprehension and calibrated trust under uncertainty. See HCI-RESEARCH.md and HCI-STUDY-PROTOCOL.md for the research question, related work, alternative conditions and pre-study materials. evidence/HCI-REVIEW.md separates technical/heuristic observations from unrun human study and assistive-technology checks. No participant findings or publication-readiness claim follows from these design documents.
+
+Maintain an explicit evaluation matrix for keyboard tasks, screen-reader interaction, focus transitions, errors and recovery, reduced motion, responsive behavior, contrast, CSS reflow and native browser zoom. Preserve blocked/unrun states. Native Chrome's existing ERR_BLOCKED_BY_CLIENT restriction is not resolved by container permission; no bypass is permitted.

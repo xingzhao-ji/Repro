@@ -30,6 +30,13 @@ Synthetic demos are labeled synthetic. Historical-bug cohort selection, buggy/fi
 ## R9 — release evidence
 Produce evidence/RELEASE.md, machine-readable run summaries, actual logs, screenshots, architecture decisions, supported-scope matrix, limitations, and an executable demo script. Each claim has a source/run. Deployed success requires exact remote commit, terminal CI, deployment result, and live behavior; otherwise label local-only.
 
+## R10 — original interaction design and HCI research integrity
+Maintain an original task-specific interface and a written rationale linking each primary view, status and disclosure to an engineer's evidence question. Reject generic dashboard content without a task purpose. Demonstrate that the supported workflow exposes capture scope, retained/removed actions, dependencies, exact run identity, frozen assertion, reproduced failure, candidate observation and limits without implying that a completed operation establishes an unrun property.
+
+Maintain technical and heuristic coverage for keyboard-only workflows, screen-reader semantics and actual screen-reader usability, focus, meaningful status announcements, errors/recovery, reduced motion, responsive layouts, contrast and native 200% zoom. Distinguish passed samples, observed defects, blocked checks and unrun checks. Full screen-reader usability and native zoom require actual evidence, not inference from axe, screenshots or CSS zoom.
+
+Deliver a research question, intended contribution, primary related-work review, alternative/comparator design, reproducible usability tasks and answer keys, calibrated-trust/comprehension/recovery measures, comparison/counterbalancing plan, analysis rules and blank study artifacts. Pilot technical fidelity and heuristic tasks autonomously within permissions. Human participants, recruitment, consent/ethics and participant-data use remain separately authorized gates. No fabricated observations or conference acceptance/readiness claim; prepared study materials do not establish the research hypothesis.
+
 ## Independent review prompts
 Architecture reviewer: find incompatible contracts and needless abstraction.
 Correctness reviewer: try to obtain a false reproduction or false patch pass.

@@ -1,0 +1,192 @@
+{
+  "recordedAt": "2026-10-13T19:28:42.551493+00:00",
+  "scope": "Trusted registered synthetic fixture on the documented Linux arm64 boundary; no hostile-code or human-usability claim.",
+  "sourceBaseCommit": "2f67f0480c1d04a351e83cdf85a2260ee35334e8",
+  "sourceIdentityAggregateSha256": "c0f5c970656052415b6b13763ed574ef033a995860d1c1f49e7a0fc50877001e",
+  "sourceIdentityAlgorithm": "SHA-256 of UTF-8 JSON rows with sorted keys and compact comma/colon separators; rows in content-hashes.json order.",
+  "policySha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+  "policyApplied": true,
+  "additionalSecurityChangeNeeded": false,
+  "imageId": "sha256:fc86009d51aab1af25c4c3c8586ab997b899e320e736f04bf81f5813e4f57644",
+  "capsuleIntegritySha256": "a1573e4214c803084982ab0dd853fe78e75046d6cd8a20d45d315b0955750a34",
+  "indexedCapsuleFiles": 13,
+  "imageCapsuleFilesCompared": 14,
+  "sourceAndBuildFilesChecked": 78,
+  "conventionalTest": {
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "outerDeadlineExpired": false
+  },
+  "restrictionsVerified": {
+    "user": "node",
+    "network": "none",
+    "rootFilesystem": "read-only",
+    "capabilitiesDropped": "ALL",
+    "noNewPrivileges": true,
+    "pidsLimit": 128,
+    "memoryBytes": 1073741824,
+    "cpus": 2,
+    "tmpfs": "/tmp:rw,nosuid,size=256m",
+    "sharedMemoryBytes": 268435456,
+    "freshNamedEvidenceVolume": true,
+    "bindMounts": false,
+    "privileged": false,
+    "publicPorts": false,
+    "dockerSocket": false,
+    "ambientCredentials": false,
+    "chromiumSandboxEnabled": true
+  },
+  "vm": {
+    "profile": "r",
+    "cpus": 2,
+    "memoryGiB": 3,
+    "dataDiskGiB": 12,
+    "rootDiskGiB": 8,
+    "type": "vz",
+    "hostDirectoryMounts": false,
+    "sshAgentForwarding": false,
+    "sshConfigUpdates": false,
+    "applicationPortForwarding": false,
+    "finalState": "stopped"
+  },
+  "runs": [
+    {
+      "id": "2682ecdd-ebd7-4eaa-b7b4-de44bf221b8f",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "outcome": "target-failure",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "f93f38c955f28a3d23057860730e3222d24608cdc31e61c025cc183576ad1695",
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "linux-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      },
+      "responseCompletionOrder": [
+        2,
+        1
+      ],
+      "evidenceSha256": "a099e695bd4d35596b7fb9bbb47e593b64880fa8195c28679590f8ad6ba79bf1"
+    },
+    {
+      "id": "bef79d0e-a81e-4815-9a8f-52f8b370dd60",
+      "appRevision": "fixed",
+      "appDigest": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09",
+      "outcome": "requirement-satisfied",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "f93f38c955f28a3d23057860730e3222d24608cdc31e61c025cc183576ad1695",
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "linux-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      },
+      "responseCompletionOrder": [
+        2,
+        1
+      ],
+      "evidenceSha256": "b24e69b17b37c0c1ad486a2e762cb4a7fead81b59b5d38d702375d9623a1b115"
+    }
+  ],
+  "finalChecks": [
+    {
+      "name": "build",
+      "argv": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "exitCode": 0,
+      "log": ".repro-runs/linux-chroot-approved/20261013-e1afc3f5b97e/final-wording-build.log"
+    },
+    {
+      "name": "kit",
+      "argv": [
+        "npm",
+        "run",
+        "check:kit"
+      ],
+      "exitCode": 0,
+      "log": ".repro-runs/linux-chroot-approved/20261013-e1afc3f5b97e/final-wording-kit.log"
+    },
+    {
+      "name": "typecheck",
+      "argv": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "exitCode": 0,
+      "log": ".repro-runs/linux-chroot-approved/20261013-e1afc3f5b97e/final-wording-typecheck.log"
+    },
+    {
+      "name": "lint",
+      "argv": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "exitCode": 0,
+      "log": ".repro-runs/linux-chroot-approved/20261013-e1afc3f5b97e/final-wording-lint.log"
+    },
+    {
+      "name": "unit",
+      "argv": [
+        "npm",
+        "test"
+      ],
+      "exitCode": 0,
+      "log": ".repro-runs/linux-chroot-approved/20261013-e1afc3f5b97e/final-wording-unit.log"
+    },
+    {
+      "name": "browser",
+      "argv": [
+        "npm",
+        "run",
+        "test:browser"
+      ],
+      "exitCode": 0,
+      "log": ".repro-runs/linux-chroot-approved/20261013-e1afc3f5b97e/final-wording-browser.log"
+    },
+    {
+      "name": "package",
+      "argv": [
+        "npm",
+        "run",
+        "test:package"
+      ],
+      "exitCode": 0,
+      "log": ".repro-runs/linux-chroot-approved/20261013-e1afc3f5b97e/final-wording-package.log"
+    }
+  ],
+  "native200PercentZoom": "unverified: existing ERR_BLOCKED_BY_CLIENT restriction",
+  "screenReaderUsability": "unrun; automated accessibility samples are separate",
+  "humanStudy": "not conducted",
+  "rawEvidenceRetainedLocally": ".repro-runs/linux-final/20261013-4419b9104f7e",
+  "deadlineDocumentationCheck": {
+    "manifestTimeoutMs": 30000,
+    "exportImportAndWording": "passed",
+    "runtimeExecuted": false
+  }
+}
