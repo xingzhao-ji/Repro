@@ -1,5 +1,7 @@
 # Independent HCI review
 
+Historical research/heuristic review of checkpoint 9399a6c before the subsequent selected-run inspector implementation. Feature gaps and keyboard coverage below describe that reviewed checkpoint. See [current release evidence](RELEASE.md) for later implementation and executed checks; human usability and native zoom remain distinct unverified gates.
+
 Reviewed 2026-10-13 by a separate agent that did not author Repro's UI. **No new critical defect observed in this bounded source/screenshot review; human usability and the new HCI acceptance requirements remain unverified.** This is not human approval, a participant study, a live interaction walkthrough or a WCAG certification.
 
 ## Scope and evidence identity

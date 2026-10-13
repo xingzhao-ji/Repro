@@ -39,3 +39,11 @@ Provide commands `doctor`, `record`, `replay`, `reduce`, `verify`, `export`, `in
 
 ## ADRs required
 Record choices for capture scope, reproducibility boundary, expected-behavior approval, mock semantics, isolation mechanism, reduction search, cache identity, cancellation ownership, storage recovery, and version compatibility. State alternatives and evidence; avoid invented “industry best practice” claims.
+
+## Implemented read-only evidence inspection
+
+`GET /api/jobs/:jobId/input` reads only that owned job’s saved `manifest.json`; it never substitutes the mutable session manifest. It validates the manifest and compares available recorded input digests. The response distinguishes readable input from confirmed recorded association.
+
+`GET /api/jobs/:jobId/trials/:index` reconstructs the selected candidate from the frozen input and contiguous accepted-trial prefix. The baseline removes nothing; later removals preserve dependency validity. The reader derives execution directories from preceding run counts and reads only the selected trial’s exact linked evidence files. It checks identity, assertion count and synthetic observations against the recorded baseline harness, preserving historical builds. Missing artifacts, inconsistent records and unsupported data yield INCONCLUSIVE. Placeholder run IDs are not executed assertions.
+
+The new module uses bounded regular-file reads with ancestor/leaf link rejection and single-link checks, returns allowlisted fields, and exposes no arbitrary file route or raw artifact paths. Existing loopback Host/Origin and no-store controls remain. This validates selected evidence association within the trusted local workspace; it does not independently authenticate every ancestor artifact or make local files tamper-proof. Concurrent hostile ancestor replacement remains outside the existing trusted-workspace model. Adapter, oracle, reducer and persistence behavior are unchanged.

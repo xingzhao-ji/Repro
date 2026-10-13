@@ -1,0 +1,128 @@
+{
+  "recordedAt": "2026-10-13T20:30:40.860229+00:00",
+  "baseCommit": "9399a6c7405aa7599d7b4e35d86152069a23906a",
+  "sourceBuildFiles": 81,
+  "sourceBuildAggregateSha256": "c263f4380f8a6dad58f9403df0135ad34f313a9c24518c1752e744529c67c65d",
+  "sourceBuildSnapshotSha256": "a60f4869ed0e82b3f6888fd62e8dbab72f261e8797d9db2ea05ecb309ce41556",
+  "localSourceSnapshot": ".repro-runs/hci-increment/final-capsule-equivalence-e12c8561a6ee/final-content-hashes.json",
+  "unitContractTests": 101,
+  "browserTests": 29,
+  "failedTests": 0,
+  "skippedTests": 0,
+  "checks": [
+    {
+      "name": "build",
+      "command": [
+        "npm",
+        "run",
+        "build"
+      ],
+      "startedAt": "2026-10-13T20:29:33.854699+00:00",
+      "finishedAt": "2026-10-13T20:29:34.180790+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-increment/final-checks/build.log",
+      "logSha256": "e72c7ae118b13edfce9f09d41f28217c3e90a948d924bbeb538157e981a0aee7"
+    },
+    {
+      "name": "kit",
+      "command": [
+        "npm",
+        "run",
+        "check:kit"
+      ],
+      "startedAt": "2026-10-13T20:02:56.432051+00:00",
+      "finishedAt": "2026-10-13T20:02:57.904278+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-increment/final-checks/kit.log",
+      "logSha256": "7ed023ec6c8f6c8ffdb568b458d45369d30a6b52b09755429a744355650ab9ca"
+    },
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "startedAt": "2026-10-13T20:29:34.181298+00:00",
+      "finishedAt": "2026-10-13T20:29:35.511685+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-increment/final-checks/typecheck.log",
+      "logSha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4"
+    },
+    {
+      "name": "lint",
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "startedAt": "2026-10-13T20:29:35.512261+00:00",
+      "finishedAt": "2026-10-13T20:29:36.476963+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-increment/final-checks/lint.log",
+      "logSha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23"
+    },
+    {
+      "name": "unit",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "startedAt": "2026-10-13T20:02:57.904817+00:00",
+      "finishedAt": "2026-10-13T20:03:03.801929+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-increment/final-checks/unit.log",
+      "logSha256": "ddec92e3c53ebd092dfd0778b9e06c397644eb7a688ea9de9df33d189ce5faf4"
+    },
+    {
+      "name": "browser",
+      "command": [
+        "npm",
+        "run",
+        "test:browser"
+      ],
+      "startedAt": "2026-10-13T20:29:36.477465+00:00",
+      "finishedAt": "2026-10-13T20:29:58.653668+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-increment/final-checks/browser.log",
+      "logSha256": "0338cd3599d661a0e1143eff896fb33081fe84c8c1b7a6dd90c726051d6b9086"
+    },
+    {
+      "name": "package",
+      "command": [
+        "npm",
+        "run",
+        "test:package"
+      ],
+      "startedAt": "2026-10-13T20:29:58.654159+00:00",
+      "finishedAt": "2026-10-13T20:30:03.424785+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-increment/final-checks/package.log",
+      "logSha256": "271d192ddc967e65379b7003dd1403b79c0ef9de6befaf00a9ba3e42d29b6d6b"
+    }
+  ],
+  "ui": {
+    "localEvidence": ".repro-runs/hci-increment/investigation-7e4fdbf8-0b91-4ef0-be05-fd270612cde1/summary.json",
+    "assertionChecks": 156,
+    "keyboardTargets": 41,
+    "axeSamples": 7,
+    "axeViolations": 0,
+    "axeIncomplete": 0,
+    "fixtureAdjustment": {
+      "originalTimeoutMs": 10000,
+      "reductionTimeoutMs": 1500,
+      "reason": "Owned synthetic UI fixture bound; actual browser, reducer, oracle and all outcomes preserved."
+    },
+    "focusEvidence": ".repro-runs/hci-increment/selection-focus-93eb68c0-18dc-491a-9957-14bbcab2a6b8/summary.json",
+    "malformedSummaryEvidence": ".repro-runs/hci-increment/enum-coercion-a6813b86-0ad0-48a6-86bb-88e9b2e0f02b/summary.json",
+    "keyboardOverflowEvidence": ".repro-runs/hci-increment/keyboard-scroll-08e6ebe9-ffcd-4388-b741-39b378845352/summary.json"
+  },
+  "packageEvidence": ".repro-runs/package-smoke/run-iW0rP5/summary.json",
+  "linuxSummary": "evidence/linux-hci-summary.json",
+  "limits": [
+    "Technical and software-agent heuristic checks are not human usability results.",
+    "Keyboard history selection used actual native character typeahead; native arrow-menu behavior is not established.",
+    "Selected trial association is validated; the whole ancestor artifact history is not independently authenticated.",
+    "Comparator, study analysis script, task-family breadth, screen-reader workflow, native zoom and human study remain pending."
+  ]
+}

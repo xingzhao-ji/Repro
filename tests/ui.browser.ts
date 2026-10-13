@@ -62,12 +62,12 @@ test('real workbench capture, reduction, comparison, export, recovery and respon
     await page.getByRole('heading', { name: 'Frozen expectation' }).waitFor();
     await capture('overview-desktop', 'overview');
     await page.getByRole('link', { name: 'Dependencies', exact: false }).click();
-    await page.getByRole('heading', { name: 'Current capsule dependencies' }).waitFor();
+    await page.getByRole('heading', { name: 'Selected run dependencies' }).waitFor();
     const dependencyUrl = page.url();
-    await page.reload(); await page.getByRole('heading', { name: 'Current capsule dependencies' }).waitFor();
+    await page.reload(); await page.getByRole('heading', { name: 'Selected run dependencies' }).waitFor();
     assert.equal(page.url(), dependencyUrl);
     await page.goBack(); await page.getByRole('heading', { name: 'Frozen expectation' }).waitFor();
-    await page.goForward(); await page.getByRole('heading', { name: 'Current capsule dependencies' }).waitFor();
+    await page.goForward(); await page.getByRole('heading', { name: 'Selected run dependencies' }).waitFor();
     await capture('dependencies-desktop', 'dependencies');
     await page.setViewportSize({ width: 390, height: 844 });
     await capture('dependencies-390', 'dependencies');

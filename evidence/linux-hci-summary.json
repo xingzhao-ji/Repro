@@ -1,0 +1,87 @@
+{
+  "scope": "Trusted registered synthetic Linux arm64 capsule; no hostile-code or native browser usability claim",
+  "baseCommit": "9399a6c7405aa7599d7b4e35d86152069a23906a",
+  "localEvidence": ".repro-runs/linux-hci-final/20261013-ebe20840191f",
+  "imageId": "sha256:aceae7b9b2f1d8efadfe25835b0a3e0e16fcbfe4de6b3dd6da0391f7e1954019",
+  "capsuleIntegritySha256": "70a408a802af4366fe984820d21ad0e52c733f5801f89f668293ad2f4c05e19c",
+  "policySha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+  "profileApplied": true,
+  "allRequestedRestrictionsPreserved": true,
+  "vmStopped": true,
+  "verification": {
+    "status": "passed",
+    "executedConventionalTests": 1,
+    "skippedConventionalTests": 0,
+    "assertionsPerRevision": 1,
+    "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+    "harnessDigest": "f93f38c955f28a3d23057860730e3222d24608cdc31e61c025cc183576ad1695",
+    "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+    "revisionIdentities": {
+      "buggy": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "fixed": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09"
+    },
+    "actualResponseCompletionOrder": [
+      2,
+      1
+    ]
+  },
+  "runs": [
+    {
+      "id": "a2a28eea-d867-42a3-b8fa-411ffea20a17",
+      "outcome": "target-failure",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "f93f38c955f28a3d23057860730e3222d24608cdc31e61c025cc183576ad1695",
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "linux-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "id": "9d302a67-a858-4a12-b1b8-6522510d4078",
+      "outcome": "requirement-satisfied",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "f93f38c955f28a3d23057860730e3222d24608cdc31e61c025cc183576ad1695",
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "appRevision": "fixed",
+      "appDigest": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "linux-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    }
+  ],
+  "finalPayloadComparison": {
+    "localEvidence": ".repro-runs/hci-increment/final-capsule-equivalence-e12c8561a6ee/summary.json",
+    "filesCompared": 14,
+    "allByteIdentical": true,
+    "additionalVmExecution": false
+  },
+  "limitations": [
+    "Cached dependency image layers reused; fresh image, container, browser state and evidence volume.",
+    "The later UI-only repair is separately checked; all final capsule bytes equal the actual executed image.",
+    "Native 200% zoom, actual screen-reader usability and human HCI evaluation remain unverified."
+  ]
+}

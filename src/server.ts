@@ -5,6 +5,7 @@ import { ReproError } from './contracts.js';
 import { createManifest } from './manifest.js';
 import { Coordinator, publicError } from './service.js';
 import { Ledger, type Operation } from './ledger.js';
+import { inspectJobInput, inspectTrial } from './evidence-inspector.js';
 
 const html = '<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Repro · Evidence workbench</title><link rel="stylesheet" href="/web.css"></head><body><div id="root"></div><script type="module" src="/web.js"></script></body></html>';
 function json(response: ServerResponse, status: number, value: unknown) { response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' }); response.end(JSON.stringify(value)); }
@@ -57,6 +58,10 @@ export async function serve(options: { port: number; root: string }) {
       if (path === '/api/sessions') { json(response, 200, { sessions: ledger.sessions() }); return; }
       const session = /^\/api\/sessions\/([a-zA-Z0-9_-]{1,100})$/.exec(path);
       if (session?.[1]) { json(response, 200, { session: ledger.getSession(session[1]), jobs: ledger.jobs(session[1]) }); return; }
+      const input = /^\/api\/jobs\/([a-zA-Z0-9_-]{1,100})\/input$/.exec(path);
+      if (input?.[1]) { json(response, 200, await inspectJobInput(ledger, input[1])); return; }
+      const trial = /^\/api\/jobs\/([a-zA-Z0-9_-]{1,100})\/trials\/(0|[1-9][0-9]{0,2})$/.exec(path);
+      if (trial?.[1] && trial[2]) { json(response, 200, await inspectTrial(ledger, trial[1], Number(trial[2]))); return; }
       const job = /^\/api\/jobs\/([a-zA-Z0-9_-]{1,100})$/.exec(path);
       if (job?.[1]) { json(response, 200, { job: ledger.getJob(job[1]), events: ledger.events(job[1]) }); return; }
       if (path === '/') { response.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); response.end(html); return; }

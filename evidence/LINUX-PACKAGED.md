@@ -1,4 +1,15 @@
-# Approved standalone Linux capsule verification
+# Current Linux capsule verification
+
+The HCI package at `.repro-runs/linux-hci-final/20261013-ebe20840191f` passed in a fresh image/container and named evidence volume under the exact already-approved policy. Cached dependency image layers were reused. The container remained nonroot, network-none, read-only, cap-drop ALL, no-new-privileges, with the existing limits and Chromium sandbox enabled. No bind mounts, credentials, socket, public ports or additional capabilities were introduced. Owned Colima profile r is confirmed stopped; resources remain retained.
+
+Image: `sha256:aceae7b9b2f1d8efadfe25835b0a3e0e16fcbfe4de6b3dd6da0391f7e1954019`. Capsule integrity SHA-256: `70a408a802af4366fe984820d21ad0e52c733f5801f89f668293ad2f4c05e19c`. Both revisions executed one assertion with matching frozen assertion/harness identities and response order 2 then 1; buggy observed Alpha for beta, fixed observed Beta. No new security permission was required.
+
+The later UI-only validation repair does not change the capsule: fresh final export matches all 14 actual image-copied files byte for byte. [Current full scope and checks](HCI-INSPECTOR.md), [portable Linux summary](linux-hci-summary.json), [raw execution](../.repro-runs/linux-hci-final/20261013-ebe20840191f/summary.json), [VM shutdown](../.repro-runs/linux-hci-final/20261013-ebe20840191f/vm-final.json) and [final equivalence](../.repro-runs/hci-increment/final-capsule-equivalence-e12c8561a6ee/summary.json).
+
+## Earlier packaging checkpoint — historical
+
+The report below preserves the previous package identity and its actual observations. Its references to final/unchanged UI bytes are relative to that earlier checkpoint, superseded for current status by the HCI report above. The earlier `linux-packaged-summary.json` also remains historical.
+
 
 Verified 2026-10-13 UTC: the exact approved policy was applied and the final standalone capsule passed on Linux arm64. No additional security change was required. Native Chrome zoom and human HCI evaluation are separate gates.
 
