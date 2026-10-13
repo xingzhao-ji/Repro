@@ -1,6 +1,6 @@
 # Development state
 
-2026-10-13 UTC. Goal is active after the user resumed it. The local synthetic product is implemented, but Linux portability and native 200% zoom review remain unverified. No publication, cloud resources, paid service or personal data use is authorized.
+2026-10-13 UTC. The third resumed blocked audit found the same two pending prerequisites; the goal is incomplete and meets the blocked-status threshold. The local synthetic product is implemented, but Linux portability and native 200% zoom review remain unverified. No publication, cloud resources, paid service or personal data use is authorized.
 
 ## Current authority and next decisions
 
@@ -10,7 +10,7 @@ The approved policy did not establish replay. Chromium progressed to a failing `
 
 A second pending async question asks whether the native Chrome/client restriction has been resolved and the same local Repro page may be retried. Inventory shows Chrome available but no evidence that the earlier `net::ERR_BLOCKED_BY_CLIENT` condition changed. No native navigation retry has occurred. Native 200% remains distinct from CSS layout zoom. Do not route around the restriction through another tool or surface.
 
-The earlier blocked goal was explicitly resumed; the audit count starts fresh. This is the first resumed turn and made concrete progress through actual approved execution, failure diagnosis and an independently reviewed next proposal. Keep the full goal active while awaiting the specific decisions. If the same prerequisite remains for three consecutive resumed turns and no meaningful authorized work remains, mark blocked again; do not infer approval from continuation or elapsed time.
+The earlier blocked goal was explicitly resumed; its audit count did not carry over. Resumed turn one made concrete progress through actual approved execution, failure diagnosis and an independently reviewed next proposal. Turn two only revalidated existing evidence and made no release-gate progress. Turn three confirms that the same prerequisites remain, the owned VM is stopped, and no verification handle is live. All 77 source/build hashes and both Linux evidence hashes still match. The record is `.repro-runs/completion-audit/resumed-blocked-audit-3.json`. Mark the goal blocked after this audit; resume when a pending prerequisite receives an actionable answer. Do not infer approval from continuation or elapsed time.
 
 ## Current Linux evidence
 
