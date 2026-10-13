@@ -20,9 +20,13 @@ Independent review then found test harness gaps: failed `ps` queries could imply
 
 Strict TypeScript module boundaries, frozen supplied assertion SHA-256 `fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711`, registered synthetic frontend, explicit controlled HTTP and Node oracle remain unchanged. No arbitrary app, database adapter, historical evaluation, human approval, public hosting or hostile-code isolation claim. Generated data stays under ignored task-owned directories. Original kit assets preserved.
 
-## Remaining work and authority
+## Blocked audit and resume requirements
 
-This continuation made concrete progress and a complete requirement audit; do not mark the goal complete. Both external blockers below persist with no user response. The previous continuation also made progress. The blocking threshold requires three consecutive goal turns; this is the second pending-blocker audit, with authorized improvements completed. On the next continuation inspect actual state and any new answer, then if the same prerequisites remain and no meaningful authorized work remains, mark the goal blocked instead of inventing extra scope or rerunning unchanged checks. Do not infer authorization from automatic continuation or elapsed time.
+The third consecutive audit re-read the launch attachment, inspected clean commit `d5e43f7`, and rechecked 68 source/test hashes, 9 built artifact hashes, 30 reviewed screenshot hashes, the final terminal logs, and the exact prepared namespace-policy delta. The preceding turn is classified as progress: it repaired historical attribution, added behavioral checks, completed verification and committed the result. This audit does not claim new test executions or implementation progress.
+
+A separate reviewer inspected the current reports and raw evidence and found no concrete required local work that can meaningfully progress independently of the two prerequisites below. Both remain unresolved: no specific policy approval and no resolution of the native-browser navigation restriction. The scoped Colima status query now confirms profile `r` is not running; no process or job is being awaited. Machine record: `.repro-runs/completion-audit/blocked-audit.json`.
+
+The blocked-audit threshold is met. The goal must be marked blocked, not complete. Resume when an explicit policy decision or permitted native-zoom review surface is supplied; then revalidate the applicable prerequisite and continue the original full objective. Do not infer authorization from automatic continuation, repeat the denied navigation, or rerun unchanged failing tests. After any explicit user resume, start a fresh blocked-audit count if the prerequisite remains unavailable.
 
 ## Pending specific approval: Linux sandbox policy
 
@@ -46,4 +50,4 @@ Computer-use navigation to `http://127.0.0.1:4318` returned `net::ERR_BLOCKED_BY
 
 ## Next useful action
 
-Read the release report and actual state, check for a user response to the pending specific proposal, and resolve only authorized remaining gates. If no response, preserve blocker and do not repeatedly execute unchanged failing tests. The blocked-goal threshold requires three consecutive goal turns at a real impasse; do not infer a prior continuation count from elapsed time. No publishing/cloud/charges/credentials/data sharing are authorized. Default local work is reversible and needs no repeated permission.
+Read the release report and actual state, check the user’s specific decision or changed review-surface availability, and resolve the applicable gate. The current blocked audit is complete; no work is running in the background. Preserve the existing checkpoint while awaiting the missing prerequisite. No publishing/cloud/charges/credentials/data sharing are authorized. Default local work is reversible and needs no repeated permission.
