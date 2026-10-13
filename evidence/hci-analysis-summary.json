@@ -1,0 +1,86 @@
+{
+  "classification": "synthetic-analysis-test",
+  "scope": "offline-instrument-test",
+  "recordedAt": "2026-10-13T20:51:45.418715+00:00",
+  "baseCommit": "cc52c80795ff9696297309b836d651b35492a4e7",
+  "files": [
+    {
+      "path": "scripts/analyze-hci.ts",
+      "sha256": "32eef846fb05d0326169da32bb43fa7680d3ad1f181b5c0e37be1d1ca714ab25",
+      "bytes": 33848
+    },
+    {
+      "path": "tests/hci-analysis.test.ts",
+      "sha256": "c2edae7a95c6c39501ca385a2735a914feaf76e64a6a49c1101b7ed9bfd7faa9",
+      "bytes": 24337
+    },
+    {
+      "path": "research/hci/ANALYSIS-CONTRACT.md",
+      "sha256": "ae473cbf2093600c65d736dcd07d3f85575c841a8ad3dbd0256d58619183b044",
+      "bytes": 10358
+    },
+    {
+      "path": "research/hci/synthetic-analysis-test/calibration.json",
+      "sha256": "6a4ff8f7ab8ee29eaca9909ff9f359e3caa8d01984d852b7ffb63be4367f81ed",
+      "bytes": 3522
+    }
+  ],
+  "sourceTestContractFixtureAggregateSha256": "ecb18f0620aee7da7514b4abc991561e34e8c7a422c8f93d16d7582143fb5c6b",
+  "instrumentTests": 73,
+  "fullUnitContractTests": 174,
+  "failed": 0,
+  "skipped": 0,
+  "checks": [
+    {
+      "name": "typecheck",
+      "command": [
+        "npm",
+        "run",
+        "typecheck"
+      ],
+      "startedAt": "2026-10-13T20:48:36.809918+00:00",
+      "finishedAt": "2026-10-13T20:48:38.324949+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-analysis/final-checks-strict/typecheck.log",
+      "logSha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4"
+    },
+    {
+      "name": "lint",
+      "command": [
+        "npm",
+        "run",
+        "lint"
+      ],
+      "startedAt": "2026-10-13T20:48:38.325439+00:00",
+      "finishedAt": "2026-10-13T20:48:39.363750+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-analysis/final-checks-strict/lint.log",
+      "logSha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23"
+    },
+    {
+      "name": "unit",
+      "command": [
+        "npm",
+        "test"
+      ],
+      "startedAt": "2026-10-13T20:48:39.364080+00:00",
+      "finishedAt": "2026-10-13T20:48:45.451453+00:00",
+      "exitCode": 0,
+      "log": ".repro-runs/hci-analysis/final-checks-strict/unit.log",
+      "logSha256": "0ef47a3f227f7c31315aa2fd086e40a476c8b6f865a04bd79bf2eeb109cd8aef"
+    }
+  ],
+  "independentVerification": ".repro-runs/hci-analysis/verification-final.json",
+  "independentVerificationSha256": "052be402a63aa035cfebd55871ffc862202aa9532a222abd2ee9cec2ecb90adc",
+  "standaloneCliReport": ".repro-runs/hci-analysis/verified-final-calibration-report.json",
+  "canonicalFixtureSha256": "c43225376e6cd472ccc1779ef5e016439ae554263045730f702bb07f06a1ac5c",
+  "handCalculatedBrier": 0.285,
+  "runtime81FilesUnchanged": true,
+  "runtimeCheckpoint": "cc52c80795ff9696297309b836d651b35492a4e7",
+  "limits": [
+    "Nonparticipant synthetic instrument regression results only; no human-study result or interface-effectiveness claim.",
+    "Declared classification and hashes do not authenticate data origin; shared filesystem is not a sealed holdout.",
+    "No inferential intervals, comprehension coding, experience effects, CSV/human-data importer, matched comparator or participant workflow.",
+    "The prior browser/package/Linux evidence is retained for unchanged runtime bytes; those expensive checks were not repeated for this offline instrument."
+  ]
+}

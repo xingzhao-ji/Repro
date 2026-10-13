@@ -1,8 +1,10 @@
 # Local release evidence
 
-The selected-run evidence inspector is implemented and technically verified for the registered synthetic stale-response frontend. Current checks: **101 unit/contract tests, 29 browser tests**, build, kit, strict typecheck, lint and installed-package smoke passed with zero failures/skips. The final exported capsule is byte-identical to the fresh Linux image that passed buggy/fixed assertions under the approved policy. The VM is stopped. [Detailed HCI evidence](HCI-INSPECTOR.md), [portable check index](hci-inspector-summary.json), [Linux evidence](LINUX-PACKAGED.md).
+The selected-run evidence inspector is implemented and technically verified for the registered synthetic stale-response frontend. Inspector checkpoint checks: **101 unit/contract tests, 29 browser tests**, build, kit, strict typecheck, lint and installed-package smoke passed with zero failures/skips. The final exported capsule is byte-identical to the fresh Linux image that passed buggy/fixed assertions under the approved policy. The VM is stopped. [Detailed HCI evidence](HCI-INSPECTOR.md), [portable check index](hci-inspector-summary.json), [Linux evidence](LINUX-PACKAGED.md).
 
-Native 200% Chrome zoom remains gated, actual screen-reader usability and human study are unrun, and the study comparator/analysis instruments remain pending. These do not become passes from screenshots, Axe or CSS zoom. The product remains a local synthetic alpha, with no arbitrary-site recorder, PostgreSQL adapter, arbitrary patch executor, historical-bug corpus, hosted service, LLM dependency or API key requirement.
+Native 200% Chrome zoom remains gated, actual screen-reader usability and human study are unrun, and the study comparator and human-study analysis remain pending. These do not become passes from screenshots, Axe or CSS zoom. The product remains a local synthetic alpha, with no arbitrary-site recorder, PostgreSQL adapter, arbitrary patch executor, historical-bug corpus, hosted service, LLM dependency or API key requirement.
+
+The subsequent [offline analysis instrument](HCI-ANALYSIS.md) passes 73 dedicated regressions and 174 total unit/contract tests. Its source/test/fixture inventory is separate; the prior 81 runtime files remain unchanged.
 
 ## Gate status
 
@@ -15,10 +17,10 @@ Native 200% Chrome zoom remains gated, actual screen-reader usability and human 
 | R4 persistence/recovery | Passed tested scope | Immutable historical inputs, interruption/retry, exact job/trial selection, late-response protection and focus preservation |
 | R5 UI | Technical workflow/reflow passed; native zoom unverified | Real keyboard workflow, 390/768/1024/1440 captures, keyboard overflow access and automated accessibility; no screen-reader usability claim |
 | R6 privacy/isolation | Passed applicable trusted-synthetic checks | Bounded owned file reads, allowlisted fields, malicious inputs, preserved container restrictions; no hostile-workspace/authenticity claim |
-| R7 code health | Passed | 101 unit/contract, 29 browser, build/typecheck/lint/package smoke; zero skips |
+| R7 code health | Passed | Current 174 unit/contract tests and typecheck/lint; retained 29-browser/build/package evidence for unchanged runtime; zero skips |
 | R8 benchmark integrity | Synthetic only | Historical bugs, real users, adoption and generality unestablished |
-| R9 release evidence/delivery | Local evidence retained; private source delivery authorized | Reviewed initial checkpoint published; final milestone push/readback pending at report preparation; no remote CI configured |
-| R10 HCI | Inspector and technical checks delivered; research incomplete | Research/protocol drafts, 156 workflow assertions and 7 clean Axe samples; comparator, broader tasks, analysis script and human validation pending |
+| R9 release evidence/delivery | Local evidence retained; private source delivery authorized | Inspector checkpoint cc52c80 delivered; subsequent offline-instrument increment push/readback pending at report preparation; no remote CI configured |
+| R10 HCI | Inspector and technical checks delivered; research incomplete | Research/protocol drafts, 156 workflow assertions and 7 clean Axe samples; offline synthetic analysis instrument tested; comparator, broader tasks, inferential analysis and human validation pending |
 
 ## Provenance and verification boundaries
 
@@ -32,6 +34,6 @@ The exact approved seccomp SHA-256 is `949b87f781131e0c1a842e306ee102506d33ba5f3
 
 ## Delivery and retained history
 
-The user explicitly approved private source/tests/assets/docs/history delivery to [xingzhao-ji/Repro](https://github.com/xingzhao-ji/Repro), without force or visibility change. The first checkpoint 9399a6c is published and backed up in private Library. [Delivery report](GITHUB-DELIVERY.md). At report preparation the final milestone push/readback is pending. Consult subsequent receipts under `.repro-runs/delivery/` to establish actual remote commits; a successful local test is not a CI result. No GitHub Actions workflow is configured. No hosted runtime was deployed.
+The user explicitly approved private source/tests/assets/docs/history delivery to [xingzhao-ji/Repro](https://github.com/xingzhao-ji/Repro), without force or visibility change. The first checkpoint 9399a6c is published and backed up in private Library. [Delivery report](GITHUB-DELIVERY.md). Inspector checkpoint cc52c80795ff9696297309b836d651b35492a4e7 was subsequently published and its remote HEAD/main verified; GitHub reports zero statuses, check runs and Actions runs for that commit. At report preparation the later offline-instrument increment push/readback is pending. Consult subsequent receipts under `.repro-runs/delivery/` to establish actual remote commits; a successful local test is not a CI result. No GitHub Actions workflow is configured. No hosted runtime was deployed.
 
 Raw traces/screenshots/VM files and private machine configuration stay local and ignored. Local evidence links require this workspace. Earlier observations remain in Git history and [completion audit](COMPLETION-AUDIT.md), [historical independent review](INDEPENDENT-REVIEW.md), [historical security review](SECURITY-REVIEW.md), [historical visual review](VISUAL-REVIEW.md) and [pre-implementation HCI review](HCI-REVIEW.md). Failed red tests and harness diagnostics are retained alongside green results, not silently reclassified.

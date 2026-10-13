@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "classification": "synthetic-analysis-test",
+  "protocolVersion": "0.1-test-only",
+  "keyVersion": "synthetic-calibration-v1",
+  "units": [
+    {
+      "unitId": "synthetic-unit-01",
+      "blocks": [
+        {
+          "blockId": "block-P",
+          "condition": "P",
+          "order": 1,
+          "caseSet": "A",
+          "caseId": "case-A",
+          "tasks": [
+            {
+              "slotId": "inspect",
+              "taskId": "T2",
+              "module": "inspection",
+              "limitSeconds": 240
+            }
+          ],
+          "claims": [
+            {
+              "slotId": "claim-1",
+              "taskSlotId": "inspect",
+              "claimId": "C1",
+              "keyId": "key-1",
+              "order": 1
+            },
+            {
+              "slotId": "claim-2",
+              "taskSlotId": "inspect",
+              "claimId": "C2",
+              "keyId": "key-2",
+              "order": 2
+            },
+            {
+              "slotId": "claim-3",
+              "taskSlotId": "inspect",
+              "claimId": "C3",
+              "keyId": "key-3",
+              "order": 3
+            },
+            {
+              "slotId": "claim-4",
+              "taskSlotId": "inspect",
+              "claimId": "C4",
+              "keyId": "key-4",
+              "order": 4
+            },
+            {
+              "slotId": "claim-5",
+              "taskSlotId": "inspect",
+              "claimId": "C5",
+              "keyId": "key-5",
+              "order": 5
+            },
+            {
+              "slotId": "claim-6",
+              "taskSlotId": "inspect",
+              "claimId": "C6",
+              "keyId": "key-6",
+              "order": 6
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "claimKeys": [
+    {
+      "keyId": "key-1",
+      "caseId": "case-A",
+      "claimId": "C1",
+      "supported": false
+    },
+    {
+      "keyId": "key-2",
+      "caseId": "case-A",
+      "claimId": "C2",
+      "supported": false
+    },
+    {
+      "keyId": "key-3",
+      "caseId": "case-A",
+      "claimId": "C3",
+      "supported": false
+    },
+    {
+      "keyId": "key-4",
+      "caseId": "case-A",
+      "claimId": "C4",
+      "supported": true
+    },
+    {
+      "keyId": "key-5",
+      "caseId": "case-A",
+      "claimId": "C5",
+      "supported": true
+    },
+    {
+      "keyId": "key-6",
+      "caseId": "case-A",
+      "claimId": "C6",
+      "supported": true
+    }
+  ],
+  "claimObservations": [
+    {
+      "unitId": "synthetic-unit-01",
+      "blockId": "block-P",
+      "slotId": "claim-1",
+      "answer": "yes",
+      "supportProbabilityPercent": 80
+    },
+    {
+      "unitId": "synthetic-unit-01",
+      "blockId": "block-P",
+      "slotId": "claim-2",
+      "answer": "no",
+      "supportProbabilityPercent": 10
+    },
+    {
+      "unitId": "synthetic-unit-01",
+      "blockId": "block-P",
+      "slotId": "claim-3",
+      "answer": "unsure",
+      "supportProbabilityPercent": 50
+    },
+    {
+      "unitId": "synthetic-unit-01",
+      "blockId": "block-P",
+      "slotId": "claim-4",
+      "answer": "yes",
+      "supportProbabilityPercent": 90
+    },
+    {
+      "unitId": "synthetic-unit-01",
+      "blockId": "block-P",
+      "slotId": "claim-5",
+      "answer": "no",
+      "supportProbabilityPercent": 20
+    },
+    {
+      "unitId": "synthetic-unit-01",
+      "blockId": "block-P",
+      "slotId": "claim-6",
+      "answer": "unsure",
+      "supportProbabilityPercent": 60
+    }
+  ],
+  "taskObservations": []
+}
