@@ -1,0 +1,20 @@
+{
+  "status": "template-not-a-valid-packet",
+  "schemaVersion": 1,
+  "caseSha256": null,
+  "evidence": {
+    "schemaVersion": 1,
+    "classification": "real-synthetic-execution-evidence",
+    "mode": "inspection-only",
+    "caseId": null,
+    "failureFamily": "synthetic-search-stale-response",
+    "source": { "commit": null, "runtimeInventorySha256": null, "databaseSha256": null, "files": [] },
+    "session": null,
+    "roles": { "record": null, "reduction": null, "comparison": null, "export": null, "cancelled": null },
+    "defaultJobId": null,
+    "jobs": [],
+    "exportDocuments": [],
+    "redactions": [],
+    "excludedArtifacts": ["trace-bytes", "screenshot-bytes", "export-execution-bundle"]
+  }
+}

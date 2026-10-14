@@ -21,6 +21,7 @@ export interface TrialEvidence {
   outcome: Outcome; reason: string; code?: string; trial: Trial | null;
   candidate: Manifest | null; runs: InspectedRun[];
 }
+export type ReadonlyEvidenceLedger = Pick<Ledger, 'root' | 'getJob' | 'events'>;
 const hash = /^[a-f0-9]{64}$/;
 const outcomes: Outcome[] = ['target-failure', 'requirement-satisfied', 'inconclusive', 'cancelled'];
 const categories = ['input', 'unsupported', 'environment', 'harness', 'target-failure', 'cancelled', 'verification'];
@@ -64,7 +65,7 @@ async function readOwnedJson(root: string, parts: string[], limit: number): Prom
     catch { problem('EVIDENCE_JSON', 'Evidence is not valid JSON.'); }
   } finally { await file.close(); }
 }
-function trialRecords(ledger: Ledger, job: Job): unknown[] {
+function trialRecords(ledger: ReadonlyEvidenceLedger, job: Job): unknown[] {
   const result = job.result === null ? null : record(job.result);
   // The existing local ledger is trusted; fixed coordinator budgets bound normal histories.
   const events = ledger.events(job.id).filter(event => event.type === 'trial');
@@ -84,7 +85,7 @@ function trialRecords(ledger: Ledger, job: Job): unknown[] {
   return recorded;
 }
 
-export async function inspectJobInput(ledger: Ledger, jobId: string): Promise<JobInputEvidence> {
+export async function inspectJobInput(ledger: ReadonlyEvidenceLedger, jobId: string): Promise<JobInputEvidence> {
   const job = ledger.getJob(jobId);
   const identity = { jobId: job.id, sessionId: job.sessionId };
   try {
@@ -173,7 +174,7 @@ function publicReason(reason: string): string {
   return known.includes(reason) || /^Target failure preserved in [12]\/2 required repetitions\.$/.test(reason) ? reason : 'Recorded explanation is withheld because it is outside the registered public evidence text.';
 }
 
-export async function inspectTrial(ledger: Ledger, jobId: string, trialIndex: number): Promise<TrialEvidence> {
+export async function inspectTrial(ledger: ReadonlyEvidenceLedger, jobId: string, trialIndex: number): Promise<TrialEvidence> {
   const job = ledger.getJob(jobId);
   if (job.operation !== 'reduce' || !Number.isSafeInteger(trialIndex) || trialIndex < 0 || trialIndex > 50) throw new ReproError('input', 'NOT_FOUND', 'Reduction trial not found.');
   const identity = { jobId: job.id, sessionId: job.sessionId, trialIndex };

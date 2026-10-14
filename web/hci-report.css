@@ -1,0 +1,40 @@
+.study-shell { width: min(1280px, 100%); margin: 0 auto; padding: 28px 32px 40px; }
+.study-heading { margin-bottom: 24px; }
+.study-heading h1 { max-width: 850px; }
+.study-notice, .study-search, .study-identity { padding: 18px 20px; margin: 16px 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.study-notice h2 { margin-bottom: 8px; }
+.study-notice p { margin-bottom: 8px; }
+.study-search label { display: block; font-weight: 650; margin-bottom: 8px; }
+.study-search-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.study-search-controls input { flex: 1 1 340px; }
+.study-search-controls a { padding: 8px 0; }
+.study-search .table-scroll { max-height: 460px; }
+.study-search [role=status] { margin: 10px 0 0; }
+.study-shell .history-bar { flex-wrap: wrap; margin-top: 24px; }
+.study-shell .history-bar select { flex: 1 1 420px; max-width: 100%; }
+.study-navigation { display: flex; flex-wrap: wrap; gap: 6px; padding: 16px 0 24px; }
+.study-navigation a { display: inline-block; padding: 8px 12px; border: 1px solid var(--line); background: var(--surface); border-radius: var(--radius-sm); }
+.study-navigation a[aria-current] { border-color: var(--blue); font-weight: 650; background: var(--blue-soft); }
+.study-glossary, .study-appendix { background: var(--surface); padding: 16px 20px; }
+.study-glossary dt { font-weight: 650; margin: 16px 0 4px; }
+.study-glossary dd { margin: 0; }
+.study-appendix { margin-top: 24px; }
+.study-export-references { padding: 18px 20px; margin-top: 24px; background: var(--surface); border: 1px solid var(--line); }
+.study-export-references h3 { margin: 24px 0 12px; }
+.study-appendix .table-scroll { max-height: 480px; }
+.study-shell table code { overflow-wrap: anywhere; white-space: normal; }
+.study-shell .key-value { min-width: 0; }
+.study-shell dd { overflow-wrap: anywhere; }
+.study-shell th[scope=row] { width: 40%; overflow-wrap: anywhere; }
+.condition-L { max-width: 1050px; background: var(--surface); }
+.condition-L .study-notice, .condition-L .study-search, .condition-L .study-identity { background: var(--surface-soft); }
+.conventional-report>section { padding: 24px 0; border-top: 2px solid var(--line); scroll-margin-top: 16px; }
+.conventional-report h2 { font-size: 19px; margin-bottom: 16px; }
+.conventional-report .evidence-grid, .conventional-report .comparison { display: block; }
+.conventional-report .panel { border: none; box-shadow: none; border-radius: 0; margin-bottom: 20px; }
+.conventional-report .panel-head { padding: 12px 0; border: none; background: transparent; }
+.conventional-report .panel-body { padding: 0; }
+.conventional-report .comparison .run-evidence+.run-evidence { margin-top: 24px; padding: 20px 0 0; border: none; border-top: 1px solid var(--line); }
+.conventional-report .trial-changes { display: block; }
+.conventional-report .trial-changes>section { margin-bottom: 24px; }
+@media (max-width: 720px) { .study-shell { padding: 20px 16px 32px; } .study-notice, .study-search, .study-identity, .study-glossary, .study-appendix { padding: 14px; } .study-navigation a { flex: 1 1 auto; } .study-shell .history-bar select { width: 100%; flex-basis: 100%; } .study-shell th, .study-shell td { padding: 9px; } }

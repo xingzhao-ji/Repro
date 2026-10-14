@@ -15,6 +15,11 @@ await writeFile(join(directory, 'global.npmrc'), '');
 const environment = {
   PATH: process.env.PATH,
   LANG: process.env.LANG ?? 'en_US.UTF-8',
+  // Preserve the host's configured route and Node CA trust without unrelated credentials.
+  ...Object.fromEntries(
+    ['HTTP_PROXY', 'HTTPS_PROXY', 'ALL_PROXY', 'NO_PROXY', 'http_proxy', 'https_proxy', 'all_proxy', 'no_proxy', 'NODE_EXTRA_CA_CERTS']
+      .flatMap(name => process.env[name] === undefined ? [] : [[name, process.env[name]]]),
+  ),
   NPM_CONFIG_USERCONFIG: join(directory, 'user.npmrc'),
   NPM_CONFIG_GLOBALCONFIG: join(directory, 'global.npmrc'),
   NPM_CONFIG_CACHE: resolve('.repro-cache/npm'),
