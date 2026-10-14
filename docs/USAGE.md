@@ -14,7 +14,16 @@ npm run dev
 
 The workbench binds to `http://127.0.0.1:4318`. Open that exact URL; a different Host or Origin is intentionally rejected. Capture requires opt-in and executes only the registered synthetic search scenario. Review the frozen expectation and capture surfaces before starting. Runs, events, traces, screenshots and exports stay under `.repro-runs/`.
 
-Pinned Chromium passed the latest local browser tests. Early installation/probe failures and the explicitly selected installed Chrome investigation are retained in development logs. If troubleshooting locally, `REPRO_BROWSER_CHANNEL=chrome` explicitly selects a fresh installed Chrome profile; there is no automatic fallback and the actual browser version is recorded. Local browser results do not establish Linux portability.
+Pinned Chromium passed the retained Mac browser tests and the approved Linux arm64 capsule checks. The current cloud comparator is blocked before rendering by Chromium's `No usable sandbox!` error; see [the current triage](../evidence/REPRO-BLOCKER-TRIAGE.md). Those historical passes do not establish browser support on another host.
+
+`doctor` performs a sandboxed browser probe. Its `browser.available: false` result includes a stable diagnostic code:
+
+- `BROWSER_SANDBOX_UNAVAILABLE`: keep sandboxing enabled and have the environment owner review the effective policy. Reinstalling the browser or selecting another channel does not resolve an identified permission boundary.
+- `BROWSER_UNAVAILABLE`: the selected executable is missing; follow the pinned-browser setup above.
+- `BROWSER_DEPENDENCIES_UNAVAILABLE`: required system libraries are missing; check the supported dependencies within the environment's permissions.
+- `BROWSER_PROBE_FAILED`: the cause is not established; inspect the local failure evidence before retrying.
+
+The diagnostic does not print raw launch logs or private paths. Do not rerun the probe after an access restriction until the supported configuration is confirmed. `REPRO_BROWSER_CHANNEL=chrome` remains an explicit selection for an already supported installed Chrome environment, with no automatic fallback; it is not a way to evade a denied capability.
 
 ```sh
 # Expected exit 1: this records the intended failure, not a broken command.
@@ -27,7 +36,9 @@ npm run repro -- inspect --manifest .repro-runs/reduced/reduced.manifest.json
 npm run repro -- export --manifest .repro-runs/reduced/reduced.manifest.json --output .repro-runs/capsule
 ```
 
-Exports must use a new directory. `replay --capsule DIRECTORY` validates bundle integrity and installed trusted-runner identity before execution. Follow the exported README for fresh Linux execution. A hash proves byte identity, not author trust; do not execute unknown bundle code on the host.
+Each CLI record, replay, reduce, verify or export operation must use a new output directory. Reusing a run destination returns `OUTPUT_EXISTS` without changing earlier evidence; exports retain their `EXPORT_EXISTS` error. Omit `--output` to create a unique directory automatically. Incomplete run directories remain available for inspection; retry with a new destination. The workbench's persistent `serve --output` directory remains reusable across restarts.
+
+`replay --capsule DIRECTORY` validates bundle integrity and installed trusted-runner identity before execution. Follow the exported README for fresh Linux execution. A hash proves byte identity, not author trust; do not execute unknown bundle code on the host.
 
 CLI behavioral exits: 0 for a satisfied requirement or completed non-replay operation, 1 for an intended target failure, 2 for invalid/unsupported/inconclusive execution, 130 for owner cancellation. Reduction's JSON explicitly reports budget exhaustion and unverified minimality. An export succeeding means bytes were finalized; it does not imply the failure was reproduced on a clean machine.
 

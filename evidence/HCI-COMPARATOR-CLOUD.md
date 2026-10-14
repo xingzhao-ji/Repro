@@ -1,6 +1,6 @@
 # Cloud comparator repair checkpoint
 
-Current diagnosis: the ARM entries in the stored profile alone do not establish an x86 incompatibility. The effective policy governing the failed browser remains unidentified; no policy edit or repeated launch is justified.
+This retained checkpoint is followed by [current blocker triage and the doctor diagnostic correction](REPRO-BLOCKER-TRIAGE.md), with 422 passing non-browser tests. That report clarifies that the stored ARM architecture entries alone do not establish x86 incompatibility and separates current CLI bytes from prior capsule equivalence. Original run evidence below remains unchanged.
 
 2026-10-14 UTC. Product acceptance remains incomplete. Migration completion is separate from browser fidelity and release completion.
 

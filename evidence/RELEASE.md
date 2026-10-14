@@ -1,5 +1,15 @@
 # Local release evidence
 
+## Current application increment — 2026-10-14
+
+The final built CLI now preserves earlier run evidence across repeated/concurrent commands and reports export cancellation as exit 130. An actual export/deduplication/restart/inspection flow passed with a real 14-file capsule; all 435 nonbrowser tests and final typecheck/lint/build/kit passed. See [CLI evidence preservation](CLI-EVIDENCE-PRESERVATION.md) for exact observations, independent reviews and the distinction between usable export flows and Chromium-gated capture/replay/UI acceptance. Current capsule identity is 11/14 files versus the historical executed reference; no current-byte runtime pass is claimed. The original release criteria remain intact, and older notices below retain their historical scope.
+
+## Current cloud continuation — 2026-10-14
+
+The historical release record below remains evidence for its recorded source. Current comparator and diagnostic work is described in [Repro blocker triage](REPRO-BLOCKER-TRIAGE.md). Chromium fails before rendering with `No usable sandbox!`; static inspection found no missing declared browser libraries. The exact host policy remains unidentified. The application's misleading `doctor` installation advice is corrected and verified with controlled non-browser tests; this does not resolve or bypass the environment restriction. Current command receipts, remaining release gates and the provider's smallest supported next action are linked in that report. Authentication has separate coordination and does not gate local Repro engineering.
+
+## Retained inspector and analysis release
+
 The selected-run evidence inspector is implemented and technically verified for the registered synthetic stale-response frontend. Inspector checkpoint checks: **101 unit/contract tests, 29 browser tests**, build, kit, strict typecheck, lint and installed-package smoke passed with zero failures/skips. The final exported capsule is byte-identical to the fresh Linux image that passed buggy/fixed assertions under the approved policy. The VM is stopped. [Detailed HCI evidence](HCI-INSPECTOR.md), [portable check index](hci-inspector-summary.json), [Linux evidence](LINUX-PACKAGED.md).
 
 Native 200% Chrome zoom remains gated, actual screen-reader usability and human study are unrun, and the study comparator and human-study analysis remain pending. These do not become passes from screenshots, Axe or CSS zoom. The product remains a local synthetic alpha, with no arbitrary-site recorder, PostgreSQL adapter, arbitrary patch executor, historical-bug corpus, hosted service, LLM dependency or API key requirement.

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { parseArgs } from 'node:util';
-import { mkdir } from 'node:fs/promises';
+import { randomUUID } from 'node:crypto';
 import { resolve, join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { chromium, type Browser } from 'playwright';
@@ -12,6 +12,7 @@ import { runBrowser } from './adapter.js';
 import { reduce } from './reducer.js';
 import { verify, publicError } from './service.js';
 import { ownedDirectory, regularOwnedFile, writeOwnedFile } from './paths.js';
+import { browserProbeFailure } from './browser-diagnostics.js';
 
 const help = `Repro ${VERSION} — local synthetic failure compiler
 
@@ -33,7 +34,7 @@ Use the same PLAYWRIGHT_BROWSERS_PATH when invoking Repro.
 Scope: trusted, explicitly registered synthetic frontend only. No human approval claimed.
 `;
 export async function doctor() {
-  let browser: { available: boolean; version?: string; reason?: string };
+  let browser: { available: boolean; version?: string; code?: string; reason?: string };
   let instance: Browser | undefined;
   const channel = process.env.REPRO_BROWSER_CHANNEL;
   try {
@@ -45,7 +46,7 @@ export async function doctor() {
     await page.getByRole('button', { name: 'Observed' }).waitFor({ timeout: 3000 });
     await page.screenshot({ timeout: 3000 });
     browser = { available: true, version: `${instance.version()} (${channel ?? 'pinned chromium'})` };
-  } catch { browser = { available: false, reason: 'Browser could not complete a sandboxed click and screenshot. Install the pinned browser, or explicitly select an installed Chrome with REPRO_BROWSER_CHANNEL=chrome for local development.' }; }
+  } catch (error) { browser = browserProbeFailure(error); }
   finally { await instance?.close(); }
   const container = spawnSync('docker', ['info', '--format', '{{.ServerVersion}}'], { encoding: 'utf8', timeout: 5000, maxBuffer: 4096 });
   return { runnerVersion: VERSION, node: process.version, platform: `${process.platform}-${process.arch}`, browser, linuxContainer: container.status === 0 ? { available: true, version: container.stdout.trim() } : { available: false, reason: 'Docker engine unavailable; fresh Linux-container replay remains unverified.' }, scope: 'Trusted registered synthetic fixture; no arbitrary capsule execution, credentials, or LLM required.' };
@@ -80,14 +81,14 @@ async function main(): Promise<void> {
   if (command === 'inspect') { console.log(JSON.stringify(manifest, null, 2)); return; }
   const budget = Number(options.budget ?? '50');
   if (command === 'reduce' && (!Number.isInteger(budget) || budget < 1 || budget > 200)) throw new ReproError('input', 'BUDGET', 'Execution budget must be 1–200.');
-  const output = command === 'export' ? resolve(options.output ?? `.repro-runs/export-${Date.now()}`) : ownedDirectory(options.output ?? `.repro-runs/${command}-${Date.now()}`);
+  const destination = options.output ?? `.repro-runs/${command}-${randomUUID()}`;
+  const output = command === 'export' ? resolve(destination) : ownedDirectory(destination, { exclusive: true });
   const controller = new AbortController();
   const cancel = () => controller.abort(); process.once('SIGINT', cancel); process.once('SIGTERM', cancel);
   let result: unknown;
   try {
     if (command === 'export') result = await exportCapsule(manifest, output, { signal: controller.signal });
     else {
-      await mkdir(output, { recursive: true, mode: 0o700 });
       for (const leaf of ['manifest.json', 'result.json', ...(command === 'reduce' ? ['reduced.manifest.json'] : [])]) regularOwnedFile(join(output, leaf));
       await writeOwnedFile(join(output, 'manifest.json'), JSON.stringify(manifest, null, 2));
       if (command === 'reduce') {
@@ -106,5 +107,6 @@ async function main(): Promise<void> {
 main().catch(error => {
   const failure = error instanceof Error && 'code' in error && String(error.code).startsWith('ERR_PARSE_ARGS')
     ? new ReproError('input', 'ARGUMENTS', 'Invalid command arguments. Use --help.', { cause: error }) : error;
-  console.error(JSON.stringify(publicError(failure), null, 2)); process.exitCode = 2;
+  const result = publicError(failure);
+  console.error(JSON.stringify(result, null, 2)); process.exitCode = result.outcome === 'cancelled' ? 130 : 2;
 });
