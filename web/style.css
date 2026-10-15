@@ -156,6 +156,7 @@ td code { display: inline-block; max-width: 290px; }
 .experiment-summary details { margin-top: 10px; padding-top: 8px; }
 .session-state { color: #c5cedb; font-size: 11px; margin: 7px 0 0; }
 .reduction-workspace { min-width: 0; }
+.reduction-workspace > .panel.trial-inspector { box-shadow: none; }
 .trial-select { padding: 7px 9px; font-size: 12px; white-space: nowrap; }
 .trial-select[aria-pressed=true] { background: var(--blue-soft); color: var(--blue); border-color: var(--blue); }
 .trial-cost { display: block; margin-top: 6px; }
