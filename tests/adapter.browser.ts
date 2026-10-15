@@ -9,6 +9,7 @@ import { ADAPTER, VERSION, type Manifest } from '../src/contracts.js';
 import { runBrowser, installNetworkBoundary } from '../src/adapter.js';
 import { EXPECTATION, ASSERTION_DIGEST, assertObservation, TargetFailure } from '../src/oracle.js';
 import { fixtureDigest } from '../src/fixture.js';
+import { testRuntime } from './helpers/test-runtime.js';
 
 const artifactDir = '.repro-runs/adapter-tests';
 function manifest(): Manifest {
@@ -136,8 +137,9 @@ test('missing browser dependency is inconclusive with an actionable reason', asy
     // Playwright resolves registry paths at module load, so a deliberately absent
     // executable is tested in a fresh Node child instead of mutating its registry.
     const { spawn } = await import('node:child_process');
-    const script = `import {runBrowser} from './src/adapter.ts'; import {createManifest} from './src/manifest.ts'; console.log(JSON.stringify(await runBrowser(createManifest(), {artifactDir:'.repro-runs/adapter-tests/missing-browser-run'})));`;
-    const child = spawn(process.execPath, ['--import', 'tsx', '--input-type=module', '-e', script], { env: process.env, stdio: ['ignore', 'pipe', 'pipe'] });
+    const runtime = testRuntime(import.meta.url);
+    const script = `import {runBrowser} from ${JSON.stringify(runtime.moduleUrl('../src/adapter.js'))}; import {createManifest} from ${JSON.stringify(runtime.moduleUrl('../src/manifest.js'))}; console.log(JSON.stringify(await runBrowser(createManifest(), {artifactDir:'.repro-runs/adapter-tests/missing-browser-run'})));`;
+    const child = spawn(process.execPath, [...runtime.execArgv, '--input-type=module', '-e', script], { env: process.env, stdio: ['ignore', 'pipe', 'pipe'] });
     let output = ''; let errors = '';
     child.stdout.on('data', chunk => { output += String(chunk); }); child.stderr.on('data', chunk => { errors += String(chunk); });
     const exit = await new Promise<number | null>((resolve, reject) => { child.once('error', reject); child.once('close', resolve); });

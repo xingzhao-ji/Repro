@@ -4,11 +4,14 @@ import { spawn, spawnSync } from 'node:child_process';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
 import { Ledger, type Job, type Operation, type Session } from '../src/ledger.js';
 import { Coordinator } from '../src/service.js';
 import { importCapsule } from '../src/capsule.js';
 import { digest } from '../src/manifest.js';
+import { inspectOwnedProcess, remainingOwnedProcesses, type OwnedProcess, type ProcessInspection } from './helpers/owned-process.js';
+import { testRuntime } from './helpers/test-runtime.js';
 
 interface Boundary {
   pid: number;
@@ -17,22 +20,6 @@ interface Boundary {
   session: Session;
   boundary: { kind: string; path?: string; bytes?: number; trial?: { accepted: boolean; runIds: string[] } };
 }
-interface OwnedProcess { pid: number; ppid: number; identity: string }
-interface ProcessInspection { status: number | null; stdout: string | null; stderr: string | null; signal?: NodeJS.Signals | null; error?: Error }
-
-function identity(pid: number, inspect = (value: number): ProcessInspection => spawnSync('ps', ['-p', String(value), '-o', 'lstart=', '-o', 'comm='], { encoding: 'utf8', timeout: 2000 })): string | undefined {
-  const result = inspect(pid);
-  if (result.error || result.signal || typeof result.stdout !== 'string' || typeof result.stderr !== 'string') {
-    throw new Error('Process inspection failed; owned process absence is not established.', { cause: result.error });
-  }
-  const value = result.stdout.trim();
-  if (!result.stderr.trim()) {
-    if (result.status === 0 && value) return value;
-    if (result.status === 1 && !value) return undefined;
-  }
-  throw new Error('Process inspection failed; owned process absence is not established.', { cause: result.error });
-}
-
 test('process identity inspection errors cannot establish absence', () => {
   const failures: ProcessInspection[] = [
     { status: null, stdout: '', stderr: '', signal: 'SIGTERM', error: new Error('Owned test inspection timed out') },
@@ -42,14 +29,14 @@ test('process identity inspection errors cannot establish absence', () => {
     { status: 0, stdout: '', stderr: '' },
     { status: 1, stdout: 'unexpected output', stderr: '' },
   ];
-  for (const result of failures) assert.throws(() => identity(12345, () => result), /Process inspection failed/);
+  for (const result of failures) assert.throws(() => inspectOwnedProcess(12345, () => result), /Process inspection failed/);
   const cause = new Error('Owned ps spawn failure');
-  assert.throws(() => identity(12345, () => ({ status: null, stdout: null, stderr: null, error: cause })), error => error instanceof Error && error.cause === cause);
+  assert.throws(() => inspectOwnedProcess(12345, () => ({ status: null, stdout: null, stderr: null, error: cause })), error => error instanceof Error && error.cause === cause);
 });
 
 test('process identity recognizes only successful identity or explicit no-PID output', () => {
-  assert.equal(identity(12345, () => ({ status: 0, stdout: '  owned-process-start owned-executable\n', stderr: '' })), 'owned-process-start owned-executable');
-  assert.equal(identity(12345, () => ({ status: 1, stdout: '', stderr: '' })), undefined);
+  assert.deepEqual(inspectOwnedProcess(12345, () => ({ status: 0, stdout: '  1 Z owned-process-start owned-executable\n', stderr: '' })), { pid: 12345, ppid: 1, state: 'Z', identity: 'owned-process-start owned-executable' });
+  assert.equal(inspectOwnedProcess(12345, () => ({ status: 1, stdout: '', stderr: '' })), undefined);
 });
 
 function descendants(owner: number): OwnedProcess[] {
@@ -66,8 +53,8 @@ function descendants(owner: number): OwnedProcess[] {
   }
   return rows.flatMap(([pid, ppid]) => {
     if (!pid || !ppid || pid === owner || !owned.has(pid)) return [];
-    const value = identity(pid);
-    return value ? [{ pid, ppid, identity: value }] : [];
+    const current = inspectOwnedProcess(pid);
+    return current ? [current] : [];
   });
 }
 
@@ -86,14 +73,15 @@ for (const operation of ['record', 'reduce', 'export'] as const) {
   test(`abrupt ${operation} interruption recovers actual work and retries in fresh owned state`, { timeout: 180_000 }, async () => {
     const root = resolve('.repro-runs/recovery-browser', `${operation}-${randomUUID()}`);
     await mkdir(root, { recursive: true });
-    const child = spawn(process.execPath, ['--import', 'tsx', 'tests/helpers/recovery-worker.ts', operation, root], { stdio: ['ignore', 'pipe', 'pipe'] });
+    const runtime = testRuntime(import.meta.url);
+    const child = spawn(process.execPath, [...runtime.execArgv, fileURLToPath(runtime.moduleUrl('./helpers/recovery-worker.js')), operation, root], { stdio: ['ignore', 'pipe', 'pipe'] });
     let stdout = '', stderr = '';
     child.stdout.on('data', chunk => { stdout += String(chunk); });
     child.stderr.on('data', chunk => { stderr += String(chunk); });
     const exited = new Promise<{ code: number | null; signal: NodeJS.Signals | null }>((accept, reject) => {
       child.once('error', reject); child.once('exit', (code, signal) => accept({ code, signal }));
     });
-    let owned: OwnedProcess[] = [];
+    let owned: OwnedProcess[] | undefined;
     let ledger: Ledger | undefined;
     let coordinator: Coordinator | undefined;
     let failed = false;
@@ -136,8 +124,8 @@ for (const operation of ['record', 'reduce', 'export'] as const) {
       report['termination'] = await exited;
       assert.equal((report['termination'] as { signal: string }).signal, 'SIGKILL');
       const until = Date.now() + 10_000;
-      let remaining = owned.filter(process => identity(process.pid) === process.identity);
-      while (remaining.length && Date.now() < until) { await delay(100); remaining = owned.filter(process => identity(process.pid) === process.identity); }
+      let remaining = remainingOwnedProcesses(owned);
+      while (remaining.length && Date.now() < until) { await delay(100); remaining = remainingOwnedProcesses(owned); }
       report['survivingOwnedProcessesBeforeTestCleanup'] = remaining;
       assert.deepEqual(remaining, [], 'Product/browser transport must not leave owned browser processes after abrupt worker exit');
 
@@ -181,14 +169,24 @@ for (const operation of ['record', 'reduce', 'export'] as const) {
       // Cleanup is separately reported and cannot turn a failed residue check
       // into product success. Check the recorded start/executable identity again.
       const cleaned: number[] = [];
-      for (const process of owned) {
+      for (const process of owned ?? []) {
         await cleanup(`Recorded owned process ${process.pid} inspection or cleanup failed`, () => {
-          if (identity(process.pid) !== process.identity) return;
+          if (inspectOwnedProcess(process.pid)?.identity !== process.identity) return;
           try { globalThis.process.kill(process.pid, 'SIGKILL'); cleaned.push(process.pid); }
           catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ESRCH')) throw error; }
         });
       }
       report['testCleanupPids'] = cleaned;
+      report['ownedDescendantSnapshotEstablished'] = owned !== undefined;
+      report['postCleanupAbsence'] = 'unverified';
+      await cleanup('Post-cleanup owned process absence was not established', async () => {
+        const until = Date.now() + 2000;
+        let remaining = remainingOwnedProcesses(owned);
+        while (remaining.length && Date.now() < until) { await delay(100); remaining = remainingOwnedProcesses(owned); }
+        report['survivingOwnedProcessesAfterTestCleanup'] = remaining;
+        report['postCleanupAbsence'] = remaining.length ? 'residue-observed' : 'confirmed';
+        assert.deepEqual(remaining, [], 'Test cleanup must not leave matching owned process identities, including zombies');
+      });
       await cleanup('Worker stdout evidence write failed', () => writeFile(join(root, 'worker.stdout.log'), stdout));
       await cleanup('Worker stderr evidence write failed', () => writeFile(join(root, 'worker.stderr.log'), stderr));
       if (cleanupFailures.length) report['status'] = 'failed';

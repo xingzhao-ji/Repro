@@ -12,7 +12,7 @@ export async function runSyntheticBenchmark(root = join('.repro-runs', 'benchmar
   await mkdir(root, { recursive: true, mode: 0o700 });
   const manifest = createManifest();
   const expected = { manifestDigest: digest(manifest), assertionDigest: ASSERTION_DIGEST, appDigests: { buggy: fixtureDigest('buggy'), fixed: fixtureDigest('fixed') }, repetitionsPerRevision: 20 };
-  const metadata = { classification: 'synthetic-training-fixture', historicalBugs: 0, startedAt: new Date().toISOString(), runner: 'source TypeScript via tsx', node: process.version, host: `${process.platform}-${process.arch}`, channel: process.env['REPRO_BROWSER_CHANNEL'] ?? 'pinned Chromium', expected };
+  const metadata = { classification: 'synthetic-training-fixture', historicalBugs: 0, startedAt: new Date().toISOString(), runner: fileURLToPath(import.meta.url).endsWith('.ts') ? 'TypeScript source module' : 'JavaScript module', node: process.version, host: `${process.platform}-${process.arch}`, channel: process.env['REPRO_BROWSER_CHANNEL'] ?? 'pinned Chromium', expected };
   await writeFile(join(root, 'specification.json'), JSON.stringify({ ...metadata, manifest }, null, 2) + '\n', { mode: 0o600 });
   const runs: { repetition: number; revision: 'buggy' | 'fixed'; expectedOutcome: string; matchesExpected: boolean; observationDigest: string; run: RunResult }[] = [];
   let harness: string | undefined;
