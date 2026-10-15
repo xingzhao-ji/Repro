@@ -95,6 +95,7 @@ export const runBrowser: RunFunction = async (manifest, options) => {
   let browser: Browser | undefined;
   let context: BrowserContext | undefined;
   let page: Page | undefined;
+  let starting: Promise<void> | undefined;
   let launching: Promise<Browser> | undefined;
   let timer: NodeJS.Timeout | undefined;
   let stopped = false;
@@ -153,8 +154,13 @@ export const runBrowser: RunFunction = async (manifest, options) => {
     source = fixtureSource(revision);
     result.appDigest = fixtureDigest(revision);
     scriptHash = createHash('sha256').update(/<script>([\s\S]*)<\/script>/.exec(source)?.[1] ?? '').digest('base64');
-    await mkdir(directory, { recursive: true });
-    await new Promise<void>((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+    starting = (async () => {
+      await mkdir(directory, { recursive: true });
+      check();
+      await new Promise<void>((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+    })();
+    await starting;
+    check();
     const address = server.address();
     if (!address || typeof address === 'string') throw new ReproError('harness', 'SERVER_ADDRESS', 'Owned fixture did not bind to a loopback port.');
     origin = `http://127.0.0.1:${address.port}`;
@@ -251,6 +257,9 @@ export const runBrowser: RunFunction = async (manifest, options) => {
   } finally {
     stopped = true; if (timer) clearTimeout(timer);
     options.signal?.removeEventListener('abort', abort);
+    // Settle owned startup before closing: an in-flight listen can bind after
+    // server.listening was inspected, even when cancellation already won.
+    await starting?.catch(() => undefined);
     for (const response of pending.values()) response.destroy();
     server.closeAllConnections();
     await new Promise<void>(resolve => { if (!server.listening) resolve(); else server.close(() => resolve()); });
