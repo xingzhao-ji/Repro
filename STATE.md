@@ -1,5 +1,13 @@
 # Development state
 
+## Current minimal lifecycle diagnostic — 2026-10-15
+
+One authorized real browser/context/inert-page lifecycle passed the unchanged sampled zero-zombie criterion under the existing limits: five samples, zero Z, source and external exit 0, normal browser close, 70-task peak and 157,011,968-byte kernel memory peak. The driver took 0.909027 seconds. All 178 inputs matched before/after and all owned containers/volumes were removed. No rendering acceptance cases or retries ran.
+
+The causal limitation is explicit: context close (6.204042 ms) and browser close (37.052376 ms) both occurred entirely between recorded sampler process-stat reads. All five samples retain read bounds, so no close-time process observation was obtained. This proves only that the sampled criterion can be achieved; it identifies no product shutdown defect or lifecycle correction and does not establish an original-P57 runtime path. The historical pilot's Z failure remains unresolved, and all 57 new CSS candidate occurrences remain unmeasured.
+
+Read `evidence/LIFECYCLE-MINIMAL-DIAGNOSTIC.md` and `.repro-runs/cloud-continuation/lifecycle-resolution-diagnostic-v1/RESULT.md`. Preparation passed 47 focused source/budget checks and 12 independent validator challenges. A 16 KiB source-summary reservation preserves the original aggregate metadata/telemetry caps. The next distinct scope decision, if diagnosis continues, is one frozen workload-matched capture of the stopped P390 pilot with these diagnostics and unchanged gates, after exact binding/review; no repeat of this minimal run or automatic 57-case batch. There is no access/permission blocker or justified criterion waiver. No publication, security change, paid service or increased limit occurred.
+
 ## Current P57 correction preparation — 2026-10-15
 
 The narrow trial-inspector shadow removal is recorded locally in `b48c69672f35d4b51db3325eb2d7a212ec68bcc6`. Study-builder tests pass 15/15 and a separate frozen candidate preserves the scripts, evidence and all 57 static occurrence identities. No new rendered contrast pass is claimed; all 57 need fresh candidate verification. The original pilot remains sealed at 12 unresolved, 45 unattempted and zero accepted occurrences, with its zero-observed-zombie gate failed.
