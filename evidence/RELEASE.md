@@ -1,10 +1,24 @@
 # Local release evidence
 
-## Current application increment — 2026-10-14
+## Current verification status — 2026-10-15
+
+**Not all release gates are met.** Later evidence supersedes the older “Current” notices and gate table below; those sections retain their original source/build scope. No generic cloud sandbox denial currently prevents the approved trusted diagnostic workload. Native Chrome zoom has a separate unresolved supported-surface denial.
+
+The sealed release-completion candidate passed 464/464 source and 464/464 emitted checks, build/typecheck/lint/kit, a 40-run synthetic benchmark, six CLI demo steps, actual installed readable/CLI browser replay and 12 offline install checks. Its original 31-test browser matrix remains 24 passed, 6 failed and 1 started-interrupted. A later separate comparator completed 688 checks and its final invariants; it does not rewrite that matrix. See the [sealed release result](../.repro-runs/cloud-continuation/release-completion-v1/RESULT.md) and [later comparator result](../.repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/RESULT.md).
+
+A bounded current-source comparison found 91 of 92 baseline code/test/config files unchanged; the sole changed baseline source is `web/style.css`, plus an opt-in lifecycle helper and tests. The narrow inspector-shadow CSS change passed 15 builder tests and statically preserves 57 occurrence identities; all 57 corrected-CSS measurements remain unrun. Original 188 axe occurrences remain incomplete, with differing supplemental methods and unresolved complete outside-paint exclusion. Keep prior exact-byte core/package passes; do not treat them as a new final CSS build or fresh full-suite result.
+
+The one workload-matched lifecycle diagnostic completed 50 controls and 12 unresolved original-CSS observations, while failing the unchanged zero-observed-Z and 75-second gates. It observed 2 Z samples and 76.87940784-second driver duration; final normal browser closure, byte accounting, input integrity and zero-owned cleanup passed. No supported lifecycle fix, permission increase or gate waiver was established. See the [workload diagnostic](LIFECYCLE-WORKLOAD-DIAGNOSTIC.md).
+
+Remaining technical acceptance includes the six original capture/cancellation/UI failures, final-candidate browser/CLI/package identity and applicable validation, 57 new-CSS measurements with bounded paint evidence, native 200% zoom and actual screen-reader usability. Bounded reduction with `minimality=unverified` remains permitted by R2 / ADR 0001; stronger minimality is unclaimed. Broader historical/HCI research remains separately scoped, and actual human participation requires its own authorization; local synthetic-alpha status does not establish those research claims. No remote CI, deployment or publication is claimed by this continuation.
+
+Read the [prospective completion decision](COMPLETION-DECISION.md) and [detailed checklist with hash-bound sources](../.repro-runs/cloud-continuation/completion-decision-v1/release-checklist/RELEASE-CHECKLIST.md). The two proposed continuation changes have not been adopted. All earlier observations below remain historical evidence, not current aggregate gate passes.
+
+## Historical application increment — 2026-10-14
 
 The final built CLI now preserves earlier run evidence across repeated/concurrent commands and reports export cancellation as exit 130. An actual export/deduplication/restart/inspection flow passed with a real 14-file capsule; all 435 nonbrowser tests and final typecheck/lint/build/kit passed. See [CLI evidence preservation](CLI-EVIDENCE-PRESERVATION.md) for exact observations, independent reviews and the distinction between usable export flows and Chromium-gated capture/replay/UI acceptance. Current capsule identity is 11/14 files versus the historical executed reference; no current-byte runtime pass is claimed. The original release criteria remain intact, and older notices below retain their historical scope.
 
-## Current cloud continuation — 2026-10-14
+## Historical cloud continuation — 2026-10-14
 
 The historical release record below remains evidence for its recorded source. Current comparator and diagnostic work is described in [Repro blocker triage](REPRO-BLOCKER-TRIAGE.md). Chromium fails before rendering with `No usable sandbox!`; static inspection found no missing declared browser libraries. The exact host policy remains unidentified. The application's misleading `doctor` installation advice is corrected and verified with controlled non-browser tests; this does not resolve or bypass the environment restriction. Current command receipts, remaining release gates and the provider's smallest supported next action are linked in that report. Authentication has separate coordination and does not gate local Repro engineering.
 
@@ -16,9 +30,9 @@ Native 200% Chrome zoom remains gated, actual screen-reader usability and human 
 
 The subsequent [offline analysis instrument](HCI-ANALYSIS.md) passes 73 dedicated regressions and 174 total unit/contract tests. Its source/test/fixture inventory is separate; the prior 81 runtime files remain unchanged.
 
-## Gate status
+## Historical inspector/analysis gate status
 
-| Gate | Current result | Evidence and limits |
+| Gate | Result at that checkpoint | Evidence and limits |
 | --- | --- | --- |
 | R0 kit/provenance | Passed | Seven supplied fixture tests and structural checks; distinct from browser execution |
 | R1 behavioral core | Passed in supported fixture | Frozen assertion, actual browser observations; prior 20 buggy/20 fixed repetitions retained, protected core unchanged |
@@ -27,7 +41,7 @@ The subsequent [offline analysis instrument](HCI-ANALYSIS.md) passes 73 dedicate
 | R4 persistence/recovery | Passed tested scope | Immutable historical inputs, interruption/retry, exact job/trial selection, late-response protection and focus preservation |
 | R5 UI | Technical workflow/reflow passed; native zoom unverified | Real keyboard workflow, 390/768/1024/1440 captures, keyboard overflow access and automated accessibility; no screen-reader usability claim |
 | R6 privacy/isolation | Passed applicable trusted-synthetic checks | Bounded owned file reads, allowlisted fields, malicious inputs, preserved container restrictions; no hostile-workspace/authenticity claim |
-| R7 code health | Passed | Current 174 unit/contract tests and typecheck/lint; retained 29-browser/build/package evidence for unchanged runtime; zero skips |
+| R7 code health | Passed | Then-current 174 unit/contract tests and typecheck/lint; retained 29-browser/build/package evidence for unchanged runtime; zero skips |
 | R8 benchmark integrity | Synthetic only | Historical bugs, real users, adoption and generality unestablished |
 | R9 release evidence/delivery | Local evidence retained; private source delivery authorized | Inspector checkpoint cc52c80 delivered; subsequent offline-instrument increment push/readback pending at report preparation; no remote CI configured |
 | R10 HCI | Inspector and technical checks delivered; research incomplete | Research/protocol drafts, 156 workflow assertions and 7 clean Axe samples; offline synthetic analysis instrument tested; comparator, broader tasks, inferential analysis and human validation pending |
