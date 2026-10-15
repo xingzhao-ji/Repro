@@ -87,6 +87,7 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
   let baseline = noRun(original, options.signal?.aborted ? 'cancelled' : 'inconclusive', 'Baseline has not executed.');
   let harnessDigest: string | undefined;
   const trials: Trial[] = [];
+  const runIds = new Set<string>();
 
   const stopped = (): Stop | undefined => {
     if (options.signal?.aborted) return 'cancelled';
@@ -138,7 +139,10 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
         reason = stop === 'cancelled' ? 'Reduction cancelled during execution.' : 'Reduction wall-time budget expired during execution.';
         break;
       }
-      const invalid = evidenceProblem(observed, input, inputDigest, harnessDigest);
+      const repeatedRun = runIds.has(observed.id);
+      runIds.add(observed.id);
+      const invalid = repeatedRun ? 'A run identifier was reused; independent executions are not established.'
+        : evidenceProblem(observed, input, inputDigest, harnessDigest);
       if (invalid) { outcome = 'inconclusive'; reason = invalid; break; }
       if (harnessDigest === undefined) harnessDigest = observed.harnessDigest;
       if (observed.outcome === 'cancelled') {
