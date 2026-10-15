@@ -1,0 +1,24 @@
+{
+  "utc": "2026-10-14T20:25:17.778273+00:00",
+  "repository": "/workspace/repro-development-rv5abotj/repro",
+  "schemas": {
+    "baseline": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/baseline/schemas/run-result-v1.schema.json",
+    "candidate": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/candidate/schemas/run-result-v1.schema.json"
+  },
+  "baselineSchemaSha256": "046a45c16aab3928673d3cfaa0862b9d40da1c34c7e9fb028207462078b7c57f",
+  "corpusRoot": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight",
+  "inventory": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/result-inventory.json",
+  "inventorySha256": "2aa1ed34a1b603451e1b4b29c81fc2ff93d2805d9fcb8b63244cf2c09a26be50",
+  "scriptSha256": "77d9869b00d66147fa33262292d9e7b29dba33503c11ee3eeb557b7c7af50ee5",
+  "nodeExecutable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "cases": 700,
+  "runs": 2,
+  "boundPerRun": {
+    "seconds": 120,
+    "combinedLogBytes": 2097152
+  },
+  "productExecutions": 0,
+  "expectedBaseline": "700 actual nonconclusive preflight results rejected solely at appDigest pattern",
+  "expectedCandidate": "Same700 records accepted structurally after narrow schema correction; no behavioral verdict or minimality change",
+  "scope": "Offline retained-evidence schema validation only; immutable original candidate and receipts; no browser/listener/network/auth/Docker/resource changes."
+}

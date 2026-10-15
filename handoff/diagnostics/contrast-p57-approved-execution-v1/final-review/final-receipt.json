@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-15T06:54:15.224985+00:00",
+  "status": "FROZEN_FINAL_REVIEW",
+  "files": [
+    {
+      "path": "CLEARANCE.json",
+      "bytes": 4292,
+      "sha256": "0b6a218627ad18d7972cef9b1951e0071402e0f8c0feb8252195adad0b6dfaec"
+    },
+    {
+      "path": "RESULT.md",
+      "bytes": 1067,
+      "sha256": "22a81dc6e47efc18b856ec4a7508f5bd10efcf1855a842451e668f7339cba321"
+    },
+    {
+      "path": "initial-findings.json",
+      "bytes": 1553,
+      "sha256": "7d751dff1d92c4998ec778692d906a22ec04c571407d9bf4b45ef1d31dd7d48f"
+    }
+  ]
+}

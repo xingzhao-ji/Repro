@@ -1,0 +1,40 @@
+{
+  "scope": "Read-only source references; not runtime evidence from this task",
+  "references": [
+    {
+      "path": "evidence/COMPLETION-DECISION.md",
+      "bytes": 12143,
+      "sha256": "4da2527422cbca864cb8c9a1c650bb2d159df2b129b9fd4a4d5f2106c04e3c42"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/cleanup_gate.py",
+      "bytes": 7949,
+      "sha256": "f29222815b9f6419eb7b4a01eef4cb8aac9369a7a4681ca498c9826d4091f814"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/driver.py",
+      "bytes": 17161,
+      "sha256": "69e3e06ec16684287b0cdc56d0c8b0435242e197bb0fa4b6125ef2c991fc8bc4"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11/root-facts.json",
+      "bytes": 2246,
+      "sha256": "1b916a85d25acda7f3b43eb42fcd8f5cdbf1cfe4001142240c8a9639d2f1b6d0"
+    }
+  ]
+}

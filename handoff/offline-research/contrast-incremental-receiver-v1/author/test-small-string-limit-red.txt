@@ -1,0 +1,29 @@
+✔ receiver exposes incremental graph decoder and does not join whole wire or parse tagged graph (1.306291ms)
+✔ incremental receiver matches sealed decoder through every split and one-unit chunks (19.305562ms)
+✔ incremental parser withholds graph until finish and clears state on abort/failure (1.178608ms)
+✔ all encoder bytes are identical to sealed predecessor (0.224007ms)
+✖ string budget applies to data and keys, not fixed protocol tag/special-number labels (0.330136ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 4
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 95.029155
+
+✖ failing tests:
+
+test at .repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs:23:1
+✖ string budget applies to data and keys, not fixed protocol tag/special-number labels (0.330136ms)
+  Error: TRANSPORT_STRING_LIMIT
+      at fail (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs:80:31)
+      at append (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs:81:76)
+      at consume (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs:153:5)
+      at Object.write (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs:185:145)
+      at Module.decodeGraph (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs:197:10)
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs:25:78)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)

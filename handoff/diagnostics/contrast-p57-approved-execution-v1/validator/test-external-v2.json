@@ -1,0 +1,113 @@
+{
+  "status": "PASS",
+  "method": "Synthetic in-memory telemetry only; no runtime, network, proc or writes.",
+  "checks": 26,
+  "results": [
+    {
+      "name": "honest workload exit1 can pass complete diagnostic telemetry while recording no close-time read coverage",
+      "status": "PASS"
+    },
+    {
+      "name": "valid source/diagnostics with a literal Z still retains literal Z observations",
+      "status": "PASS"
+    },
+    {
+      "name": "complete-looking files cannot override external final I/O failure86",
+      "status": "PASS"
+    },
+    {
+      "name": "false completion byte accounting is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "separately capped summary cannot evade aggregate metadata cap",
+      "status": "PASS"
+    },
+    {
+      "name": "unavailable process read cannot establish no-Z completeness",
+      "status": "PASS"
+    },
+    {
+      "name": "first-Z target identity loss remains incomplete attribution",
+      "status": "PASS"
+    },
+    {
+      "name": "retained context after close cannot masquerade as complete close",
+      "status": "PASS"
+    },
+    {
+      "name": "missing terminal sample is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "no counted Z with incomplete observation cannot establish complete telemetry",
+      "status": "PASS"
+    },
+    {
+      "name": "raw Z survives a later metadata parse exception without loss",
+      "status": "PASS"
+    },
+    {
+      "name": "normal browser-close log passes but successful-looking kill fallback is rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "a green external exit cannot replace expected original unresolved workload exit1",
+      "status": "PASS"
+    },
+    {
+      "name": "workload exit1 is not automatically classified as instrumentation failure",
+      "status": "PASS"
+    },
+    {
+      "name": "stable identity and successful first-Z reads do not require repeated Z or imply whole-group termination",
+      "status": "PASS"
+    },
+    {
+      "name": "unexpected deadline phase cannot masquerade as completed original workload",
+      "status": "PASS"
+    },
+    {
+      "name": "complete unresolved original workload sidecar preserves provisional closure and exit1",
+      "status": "PASS"
+    },
+    {
+      "name": "historical verified inputs cannot substitute for actual executed caller identity",
+      "status": "PASS"
+    },
+    {
+      "name": "sidecar cannot silently green original unresolved source result",
+      "status": "PASS"
+    },
+    {
+      "name": "partial source observation cannot satisfy workload sidecar closure",
+      "status": "PASS"
+    },
+    {
+      "name": "terminal first-Z may follow complete provisional sidecar and remains explicitly retained",
+      "status": "PASS"
+    },
+    {
+      "name": "new sidecar alone cannot exceed16KiB even when legacy summary is much larger",
+      "status": "PASS"
+    },
+    {
+      "name": "driver exact90 boundary accepts; NaN/Inf/bool/negative/over90/watchdog/logcap/wrongjob reject",
+      "status": "PASS"
+    },
+    {
+      "name": "boolean external exit is not integer sourceexit1",
+      "status": "PASS"
+    },
+    {
+      "name": "boolean sidecar exit cannot masquerade as legitimate completed unresolved1",
+      "status": "PASS"
+    },
+    {
+      "name": "actual frozen five-job binding schema yields exact retained artifactsets including sourceindex screenshots",
+      "status": "PASS"
+    }
+  ],
+  "validatorSha256": "83b78b9e928bc32419a84372f028a8ee7232ee256e2f8d7ff22b134b2e64e437",
+  "challengeSha256": "cc17ffabc9341b421dbcc4097a12db1a02cd6f4c04da41e0c4658b2a46cafe1f"
+}

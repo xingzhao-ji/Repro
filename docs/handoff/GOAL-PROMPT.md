@@ -1,0 +1,45 @@
+# Repro goal prompt for a new coding agent
+
+This is a continuation brief for the owner to give a new coding agent when ready. The previous agent was told to stop development, experiments and diagnostics and deliver the repository. This document does not itself restart work or authorize a pending pilot.
+
+---
+
+You are taking over **Repro**, a local portable failure compiler. Inspect the checkout and preserve existing work before choosing changes. Read `AGENTS.md`, `GOAL.md`, `README.md`, `docs/PRODUCT.md`, `docs/ARCHITECTURE.md`, `docs/SECURITY.md`, `docs/ACCEPTANCE.md`, `docs/SUPPORTED-SCOPE.md`, `docs/handoff/STATUS.md`, and `docs/handoff/EXCLUDED-LOCAL.md`. `STATE.md` and `evidence/RELEASE.md` retain chronological checkpoints: older sections headed “Current” can be superseded by later evidence. Do not restart a historical diagnostic plan merely because an old document says to continue.
+
+## Product goal
+
+Build a dependable tool for a developer maintaining a supported self-hostable web app: capture a failure with explicit consent, establish the expected behavior, reproduce the intended failure, reduce the action sequence without changing the assertion, and export a dependency-explicit capsule that runs on a clean supported machine. Evaluate the same frozen assertion against another application revision. Export conventional readable tests and a documented bundle; core execution must require neither a proprietary viewer, an LLM nor an API key.
+
+Keep capture completion, reproduction, reduction, portability, candidate verification and human expectation approval distinct. Missing state, unsupported features, empty assertions, wrong failures, timeouts or incomplete evidence are INCONCLUSIVE. Never substitute a different failure for the intended one or claim global minimality, arbitrary-site replay, universal determinism, formal correctness or production readiness without evidence.
+
+The current scope is intentionally one synthetic Chromium/JavaScript stale-response search fixture with an explicit local adapter and controlled HTTP response order. The wider goal mentions resettable PostgreSQL where needed; this fixture needs no database and no PostgreSQL adapter is implemented. Real-user/manual capture, arbitrary app adapters/candidate code, production authentication, historical-bug coverage and hostile public execution are unsupported. Broader support should follow a complete supported vertical slice.
+
+## Implemented foundation
+
+This is an implemented local synthetic alpha, not only a design prototype. `src/` contains the CLI, contracts and manifest validation, browser adapter, frozen oracle, bounded dependency-aware reducer, capsule validation/export/import/replay, SQLite event/job persistence, service and evidence inspector. `web/` contains a real React workbench backed by these operations. It supports explicit capture consent, timeline and selected-run evidence, reduction history, candidate comparison, export, cancellation and recovery. `fixtures/browser-search/` supplies separate buggy/fixed targets. `assets/prototype.html` is only the original illustrative design reference.
+
+Preserve existing repairs, including immutable CLI output history, export cancellation status, startup acquisition ownership in the adapter, schema validation, sidebar focus contrast and the scoped inspector shadow CSS correction. Keep adapter, capture, reducer, oracle, runner and presentation responsibilities separate. Use strict TypeScript, structured errors, bounded work and readable tests. Keep the independent assertion/harness outside a candidate's writable scope.
+
+HCI work includes an evidence inspector, research/protocol materials, a study/comparator builder, case tooling and a synthetic-only offline analysis instrument. Technical fidelity is not human validation. No participant results, screen-reader usability, generalized benefit or conference readiness have been established.
+
+## Evidence to preserve
+
+The newest broad release-candidate baseline recorded **464/464 source tests and 464/464 emitted tests**, build/typecheck/lint/kit, twenty buggy plus twenty fixed synthetic benchmark runs, six CLI demo steps, actual installed readable/CLI browser replay and twelve offline install checks. These belong to their recorded source/build identities. They were not rerun for this handoff, and later focused checks are not a new aggregate full-suite pass.
+
+The original browser matrix remains **24 passed, 6 failed, 1 started-interrupted** out of 31. The six capture/cancellation/UI failures retain inconclusive target behavior; some required overlapping Chromium trees exhausted the then-configured 128-task boundary. A later comparator completed 688 checks, but it does not erase the original matrix. Native 200% zoom and actual screen-reader usability remain unverified. Follow the exact evidence and current host capabilities rather than inferring all browsers are blocked from an older sandbox error.
+
+The corrected-CSS contrast pilot completed fifty controls and twelve provisional measured-pass rows in 41.72000612 seconds. It stopped because kernel memory was 899.3984375 MiB against that diagnostic plan's 896 MiB headroom gate, and a distinct natural post-close interval census was absent. Forty-five of the 57 occurrences remain unattempted; zero are accepted through the sequence's aggregate gate. A clean terminal census is not the missing distinct interval, and missing evidence is not proof of a process leak.
+
+Two offline transport candidates remain **uninstalled**, archived with their reports and tests under `handoff/offline-research/`. These archival copies retain their original path references and are not turnkey tests for a fresh clone. The incremental receiver eliminates a full intermediate graph but overlaps the remote graph with the developing client graph. Its frozen predecessor suite remains **107/108**: malformed input now fails immediately with a syntax category instead of eventually hitting a size-limit category. A separate adjusted expectation passed 108/108; never report that as an unchanged-suite pass. Receiver-only RSS fell, but end-to-end simulated RSS was mixed and transfers were slower. The results do not justify installation. A subsequent focused review found no evidence-backed smaller correction preserving error semantics.
+
+The observation-only lifecycle extension and one bounded memory-attribution pilot are separate **pending, unadopted proposals**. Do not run either, install either transport candidate, change gates, or start broad benchmark sweeps on the strength of this handoff.
+
+## Requirement provenance and next decisions
+
+The product contract is `GOAL.md` and `docs/ACCEPTANCE.md` R0–R10, including faithful assertions, owned cleanup, bounded execution, portability, usable accessible UI, privacy and honest evidence. The **896 MiB headroom gate**, earlier **zero Z at every sample / 75-second** rules, later approved **completed cleanup / 90-second** contrast-job criterion, and required distinct post-close/terminal censuses are later engineering diagnostic-plan criteria. They are not original product requirements or universal performance guarantees. The 1 GiB/128-task/2-CPU container boundary and exact approved security profiles likewise describe the authorized historical execution setup. Preserve their recorded verdicts and scope. Any prospective change needs its own explicit rationale and applicable owner authorization; do not silently rewrite history or weaken security.
+
+When the owner resumes engineering, prioritize the remaining supported-product gaps: the six unresolved original browser behaviors, final candidate/build/package identity, remaining corrected-CSS and paint evidence, native zoom through a legitimate supported surface, and actual screen-reader workflows. Keep `minimality=unverified` where final neighbors cannot execute the oracle; stronger minimality and human research are not invented mandatory gates for the narrower local alpha. Use bounded, hypothesis-driven work and independent review; do not repeat an unchanged failing arrangement or rerun unchanged expensive checks merely for a newer timestamp.
+
+Use documented scripts from `package.json` and `docs/USAGE.md`. Plan verification appropriate to actual changes and host permissions; a fresh clone has no installed dependencies, build products or raw evidence. Review the excluded-file inventory before assuming a local evidence link will resolve. A source digest establishes identity, not correctness or trust. Report passing, failing, blocked, unrun and unsupported outcomes separately, with exact source/build identity. The handoff's commit/push is delivery only, not a successful CI run, deployment or completed release.
+
+Respect the owner's current scope, existing access controls and explicit denials. Do not publish a release, deploy a service, incur charges, recruit participants, disclose private data, change credentials or broaden security permissions without specific authority. Retain all failures and useful excluded evidence. Make small coherent changes and leave the next owner an accurate state record.

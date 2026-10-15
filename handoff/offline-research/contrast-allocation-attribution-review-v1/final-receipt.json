@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-10-15T08:29:15.204135+00:00",
+  "status": "SEALED_FOCUSED_REVIEW_NO_CORRECTION_SELECTED_PENDING_ATTRIBUTION_DECISION",
+  "commit": "823c3751f1c02a834d713665fa89927b618530f2",
+  "manifestSha256": "6a4672b04415e5d5b686254a45ee389229e5f2817bdb2ea3b9694317866d217d",
+  "resultSha256": "69504234d96aa20a9814e67d079d3d8b217c66cccacbdf4996c3f5204106f2c1",
+  "planSha256": "193bf942319668e28e7b94adcc93ffe8ea41d08c4555d74921a530dca6bea6e8",
+  "summarySha256": "4e5f1e9d30f1e7c6c85774a12cae170c726ab0abc62986ef060378f84fc1e6e8",
+  "preservationReadbackSha256": "f838b16a5981d58664864761e7fc21a91c8ca59a09cd5b4a21c19d08fce1935e",
+  "files": 16,
+  "bytes": 49135,
+  "readback": "PASS",
+  "priorFrozenTask": {
+    "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1",
+    "files": 125,
+    "receiptSha256": "97c10f818109d852804b3ab8ed0ba54d12fb38387fd5ce530f878e5d0eb101c5",
+    "manifestSha256": "a37a8e32f938214f0727e5f75b2d408663ef7e106abb683e7bed33dfc474c20d",
+    "readback": "PASS"
+  },
+  "childSeals": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review",
+      "files": 2,
+      "receiptSha256": "12548d99cf77104faa0555950eff89b9cdf8eb3d4d33c549565e632ce596c68d",
+      "manifestSha256": "b9f04328e7d371f962fb040e05181955da2c22d3f13e63e6a4783f150ef93d4f",
+      "readback": "PASS"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review",
+      "files": 2,
+      "receiptSha256": "7fbf9fa6ee0fc45380aa0ee38732f413daabadeb6b068e35da8184a915936442",
+      "manifestSha256": "1c4e2c52000bf5b1e350727db48ddcfcada9ba0e8adc4695dbdf0c24401ef1b8",
+      "readback": "PASS"
+    }
+  ],
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "candidateInstalled": false,
+  "frozenRegressionPreserved": {
+    "pass": 107,
+    "fail": 1
+  },
+  "newImplementation": false,
+  "newTests": 0,
+  "newBenchmarkWorkers": 0,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "gateMiB": 896,
+  "gateChanges": false,
+  "permissionChanges": false,
+  "published": false,
+  "observationHold": "PENDING_NOT_ADOPTED",
+  "decisionPending": "Whether to prepare/review the diagnostic-only patch and authorize exactly one bounded native-transport attribution pilot; no execution authorized now"
+}

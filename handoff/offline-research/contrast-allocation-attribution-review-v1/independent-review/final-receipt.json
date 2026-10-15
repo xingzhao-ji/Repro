@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "status": "SEALED_FOCUSED_REVIEW_NO_SUPPORTED_CORRECTION_PROPOSAL_ONLY",
+  "utc": "2026-10-15T08:28:32.833940+00:00",
+  "reviewSha256": "bdefbd0834b03d9d403b036006fd693a693b8e1c3e61efe1b60d4902cc52bb66",
+  "evidenceSha256": "edb1504e28776b1f83b5506b675e7e5ca6608475af2e7afa2f43a64b312f1121",
+  "manifestSha256": "1c4e2c52000bf5b1e350727db48ddcfcada9ba0e8adc4695dbdf0c24401ef1b8",
+  "planSha256": "193bf942319668e28e7b94adcc93ffe8ea41d08c4555d74921a530dca6bea6e8",
+  "artifactFiles": 2,
+  "artifactReadback": "PASS",
+  "sourceBindingsReadback": 12,
+  "localLinksReadback": 6,
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "frozenRegression": "107/108 preserved",
+  "correctionSelected": false,
+  "conclusion": "Buffer-after-dispose sequencing changes current failure precedence and retains wire; weak/EOF reference changes do not remove during-read overlap; existing metrics do not establish causal benefit.",
+  "prospectivePlanReview": "CLEAR AS PROPOSAL ONLY; pending separate decision",
+  "resolvedPlanSpecifications": [
+    "Preserve measurementStarted/measurementDurationMs/nodeDurationMs assignments; markers outside original directly timed regions",
+    "Bound memory.stat read at4KiB+1sentinel; truncation means unavailable",
+    "Keep original process fingerprint/census semantics; memory telemetry separate and budgeted",
+    "Estimate telemetry bytes against archived and worst-case envelope before any pilot"
+  ],
+  "gateMiB": 896,
+  "observationLifecycleExtensionAdopted": false,
+  "candidateEdits": 0,
+  "testsOrBenchmarksRun": 0,
+  "browserOrContainerStarts": 0,
+  "runtimeInstalls": 0,
+  "published": false,
+  "permissionsChanged": false,
+  "openReviewFindings": []
+}

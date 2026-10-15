@@ -1,0 +1,745 @@
+{
+  "scope": "independent synthetic challenges only; no runtime/historical reclassification",
+  "target": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/cleanup_gate.py",
+  "targetSha256": "47b298290d0037a97b1db119093c208e61069516ecaae5445bb4981a5a60d99b",
+  "count": 32,
+  "passed": 30,
+  "results": [
+    {
+      "name": "clean_distinct_first_and_terminal",
+      "expected": "PASS",
+      "passed": true,
+      "actual": {
+        "status": "PASS",
+        "issues": [],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "preclose_z_preserved",
+      "expected": "PASS",
+      "passed": true,
+      "actual": {
+        "status": "PASS",
+        "issues": [],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [
+          1
+        ],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "initial_node_identity_missing",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_INITIAL_IDENTITIES",
+          "CLEANUP_MALFORMED_OR_MISSING_EVIDENCE"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [],
+        "browserIdentity": null,
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "initial_init_identity_missing",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_INITIAL_IDENTITIES",
+          "CLEANUP_MALFORMED_OR_MISSING_EVIDENCE"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [],
+        "browserIdentity": null,
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "incomplete_first_with_later_clean",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_UNREADABLE_PROCESS",
+          "CLEANUP_PROCESS_IDENTITY_FIELDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "missing_first_bounds_with_later_clean",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_MISSING_CENSUS_BOUNDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "missing_first_list_with_later_clean",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_INCOMPLETE_CENSUS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "later_compressed_list_missing",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_INCOMPLETE_CENSUS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "later_bounds_missing",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_MISSING_CENSUS_BOUNDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "terminal_only_anchor",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_DISTINCT_FIRST_INTERVAL_REQUIRED",
+          "CLEANUP_MALFORMED_OR_MISSING_EVIDENCE"
+        ],
+        "firstPostCloseSample": null,
+        "terminalSample": null,
+        "checkedSampleIds": [],
+        "browserIdentity": null,
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "duplicate_bound_same_sample",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_DUPLICATE_BOUNDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "initial_node_pid_reused_after_close",
+      "expected": "FAIL",
+      "passed": true,
+      "actual": {
+        "status": "FAIL",
+        "issues": [
+          "CLEANUP_ORIGINAL_IDENTITY_CHANGED"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "first_init_z",
+      "expected": "FAIL",
+      "passed": true,
+      "actual": {
+        "status": "FAIL",
+        "issues": [
+          "CLEANUP_INIT_NODE_Z"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [
+          2
+        ],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "later_interval_live_residue",
+      "expected": "FAIL",
+      "passed": true,
+      "actual": {
+        "status": "FAIL",
+        "issues": [
+          "CLEANUP_BROWSER_RESIDUE"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "terminal_z_residue",
+      "expected": "FAIL",
+      "passed": true,
+      "actual": {
+        "status": "FAIL",
+        "issues": [
+          "CLEANUP_BROWSER_RESIDUE"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [
+          4
+        ],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "browser_exit_missing",
+      "expected": "FAIL",
+      "passed": true,
+      "actual": {
+        "status": "FAIL",
+        "issues": [
+          "CLEANUP_NORMAL_BROWSER_EXIT_REQUIRED"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "forced_fallback_even_normal_exit",
+      "expected": "FAIL",
+      "passed": true,
+      "actual": {
+        "status": "FAIL",
+        "issues": [
+          "CLEANUP_FORCED_SHUTDOWN"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "browser_identity_unseen",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_BROWSER_IDENTITY_UNESTABLISHED"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": null,
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "browser_identity_is_node",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_BROWSER_IDENTITY_UNESTABLISHED"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 7,
+          "start_ticks": "102"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "first_sweep_before_close",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_SWEEP_NOT_WHOLE_POST_CLOSE",
+          "CLEANUP_PROCESS_READ_BOUNDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "terminal_window_before_settlement",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_SWEEP_NOT_WHOLE_POST_CLOSE",
+          "CLEANUP_PROCESS_READ_BOUNDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "read_window_outside_sweep",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_PROCESS_READ_BOUNDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "duplicate_read_pid",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_PROCESS_READ_COVERAGE"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "census_claim_atomic",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_BOUND_ENCODING"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "active_context_at_start",
+      "expected": "FAIL",
+      "passed": true,
+      "actual": {
+        "status": "FAIL",
+        "issues": [
+          "CLEANUP_ACTIVE_CONTEXTS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "active_context_at_settlement",
+      "expected": "FAIL",
+      "passed": true,
+      "actual": {
+        "status": "FAIL",
+        "issues": [
+          "CLEANUP_ACTIVE_CONTEXTS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "skip_first_complete_census_by_advanced_anchor",
+      "expected": "NOT_ESTABLISHED",
+      "passed": false,
+      "actual": {
+        "status": "PASS",
+        "issues": [],
+        "firstPostCloseSample": 3,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "postclose_sweeps_reverse_temporal_order",
+      "expected": "NOT_ESTABLISHED",
+      "passed": false,
+      "actual": {
+        "status": "PASS",
+        "issues": [],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "bad_sample_index_bool",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_SETTLED_SAMPLE_INDEX",
+          "CLEANUP_MALFORMED_OR_MISSING_EVIDENCE"
+        ],
+        "firstPostCloseSample": null,
+        "terminalSample": null,
+        "checkedSampleIds": [],
+        "browserIdentity": null,
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "bad_pid_bool",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_PROCESS_IDENTITY_FIELDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "process_state_unknown",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_PROCESS_IDENTITY_FIELDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    },
+    {
+      "name": "unknown_process_with_valid_pid",
+      "expected": "NOT_ESTABLISHED",
+      "passed": true,
+      "actual": {
+        "status": "NOT_ESTABLISHED",
+        "issues": [
+          "CLEANUP_PROCESS_IDENTITY_FIELDS"
+        ],
+        "firstPostCloseSample": 2,
+        "terminalSample": 4,
+        "checkedSampleIds": [
+          2,
+          3,
+          4
+        ],
+        "browserIdentity": {
+          "pid": 13,
+          "start_ticks": "103"
+        },
+        "retainedZSampleIds": [],
+        "continuousZombieAbsenceClaimed": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+  "utc": "2026-10-15T06:48:37.519191+00:00",
+  "status": "INDEPENDENT_STOP_CONFIRMED",
+  "job": "p390-00-11",
+  "nonce": "7b4232475825",
+  "reviewer": "/root/approved_p57_review",
+  "runtimePerformedByReviewer": false,
+  "sourceObservations": {
+    "complete": true,
+    "measuredPass": 12,
+    "measuredFail": 0,
+    "unresolved": 0,
+    "coveredPrintableCharacters": 443,
+    "controlCount": 50,
+    "acceptance": "PROVISIONAL_NOT_ACCEPTED_AFTER_ALL_GATES"
+  },
+  "driverSeconds": 41.72000611999829,
+  "sourceDurationMs": 41343,
+  "continuation": "STOP",
+  "memoryGate": {
+    "status": "FAIL",
+    "observedBytes": 943087616,
+    "observedMiB": 899.3984375,
+    "allowedBytes": 939524096,
+    "allowedMiB": 896,
+    "excessBytes": 3563520,
+    "excessMiB": 3.3984375,
+    "stickyPeakRows": 21,
+    "notIndependentResourceEvents": true
+  },
+  "completedCleanupGate": {
+    "status": "NOT_ESTABLISHED",
+    "reason": "No distinct naturally scheduled post-close nonterminal census",
+    "nextSampleIndexAtSettlement": 267,
+    "terminalSampleIndex": 267,
+    "qualifyingNonterminalSamples": [],
+    "terminalOriginalInitNodeOnly": true
+  },
+  "otherObservations": {
+    "taskPeak": 75,
+    "nonzeroPIDMemoryOOMEvents": 0,
+    "hardDeadlineOrLogcap": false,
+    "normalBrowserExit": {
+      "pid": 13,
+      "startTicks": "5101686",
+      "exitCode": 0,
+      "signal": null
+    },
+    "retainedZSampleIds": [
+      76,
+      266
+    ],
+    "totalSamples": 268,
+    "ownedCleanup": "PASS_ZERO_REMAINING_OWNED_OBJECTS",
+    "inputBeforeAfter": "3614 files and 10 confined links identical"
+  },
+  "nextUniqueJob": {
+    "id": "p320-00-10",
+    "readiness": "NOT_ELIGIBLE",
+    "reason": "Preceding continuation gate did not pass; no retry/repartition/criterion change authorized by this result",
+    "remainingOccurrencesUnattempted": 45
+  },
+  "remainingReleaseWorkAssessment": "No additional supported local runtime closure was established by this review. Root reports final package verification already completed separately. Reconcile actual evidence and blocked release claims; native zoom/screen-reader and original unresolved browser behaviors remain independent gates. Do not add diagnostic work merely to obtain a different result.",
+  "bindings": [
+    {
+      "path": "postrun/p390-00-11-review/observe.py",
+      "bytes": 7787,
+      "sha256": "12d592047f6bc02b11e4d5da20e002a32fc43ca8091bc3b965240f464cc05999"
+    },
+    {
+      "path": "postrun/p390-00-11-review/primary-observations.json",
+      "bytes": 22084,
+      "sha256": "8357c6850553e8d91a0c8773596196f1057e356b7f69ed765895703e33f5b13d"
+    },
+    {
+      "path": "postrun/p390-00-11/validation.json",
+      "bytes": 1222922,
+      "sha256": "d17b6fbd4c8b3e018400ebe650a00019457d73e295ecb320405238a74a6a2212"
+    },
+    {
+      "path": "postrun/p390-00-11/validation-receipt.json",
+      "bytes": 538,
+      "sha256": "2ebb2c6e39e62892d5cfcfb45d090cb0cc335d12fd85757fe4c29938229792c2"
+    },
+    {
+      "path": "validator/validate-approved-job.py",
+      "bytes": 35048,
+      "sha256": "83b78b9e928bc32419a84372f028a8ee7232ee256e2f8d7ff22b134b2e64e437"
+    },
+    {
+      "path": "validator/cleanup_gate.py",
+      "bytes": 7949,
+      "sha256": "f29222815b9f6419eb7b4a01eef4cb8aac9369a7a4681ca498c9826d4091f814"
+    },
+    {
+      "path": "validator/workload-evidence/workload_validator.py",
+      "bytes": 28728,
+      "sha256": "8133771e3447ed71544699cd3b86015f9ed29559472a1d11ef23390bfbaf0cc6"
+    },
+    {
+      "path": "validator/workload-evidence/prospective-expectations.json",
+      "bytes": 316316,
+      "sha256": "e5b973ed32dbd7b1fbfb4aad71a95830c02d44134b61e82d0f044541cdba48a9"
+    },
+    {
+      "path": "review/PILOT-READINESS.json",
+      "bytes": 6152,
+      "sha256": "9129963142f35987a1935d7adfc143129375714b709c9786d3f2a219ed1af00a"
+    },
+    {
+      "path": "runtime/p390-00-11/cleanup-receipt.json",
+      "bytes": 397,
+      "sha256": "4b7d47f11f4f23c1d4e028c926acdd3aaaf38a69f69df77e5b1910cc8c43757c"
+    },
+    {
+      "path": "runtime/p390-00-11/remaining-owned-containers.json",
+      "bytes": 318,
+      "sha256": "23889ae587b1101164ee1461cb25a003d8ba826b3206a240c43aefb113864542"
+    },
+    {
+      "path": "runtime/p390-00-11/remaining-owned-volumes.json",
+      "bytes": 307,
+      "sha256": "4d68c84f5b4cb6171edc589dae2ccd9ce01ac3fa0564fae79c79d60164097e2e"
+    },
+    {
+      "path": "runtime/p390-00-11/input-manifest.json",
+      "bytes": 1034465,
+      "sha256": "f61b5c66f7394615724b4f7ac60b9698aa5236a6b8aa8d43d2fb4ae94bc5b23a"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/test-receipt.json",
+      "bytes": 759,
+      "sha256": "04c48968715339aa1f90e7016a6fedd98a4e0b79582b8959c343d1be90ab0a50"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifact-manifest.json",
+      "bytes": 4585,
+      "sha256": "25287d0f3769eff7e43b8392baeb4e3fb14ed66b9525e93502985010c5907bf5"
+    }
+  ]
+}

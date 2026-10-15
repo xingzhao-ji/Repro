@@ -1,0 +1,147 @@
+{
+  "schemaVersion": 1,
+  "createdUtc": "2026-10-14T20:07:23.703369+00:00",
+  "scope": "Synthetic unit-model reducer decision verification only. No browser, Docker, application replay, network, authentication, installation or upload. No product-source edits.",
+  "candidateRoot": "/workspace/repro-development-rv5abotj/repro",
+  "priorEvidenceRoot": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/browser-lifetime-review-v1",
+  "formats": [
+    "source",
+    "emitted",
+    "installed"
+  ],
+  "independentProcessesPerFormat": 2,
+  "graphs": [
+    {
+      "id": "chain-noise",
+      "actions": [
+        {
+          "id": "root",
+          "dependsOn": []
+        },
+        {
+          "id": "chain-one",
+          "dependsOn": [
+            "root"
+          ]
+        },
+        {
+          "id": "chain-two",
+          "dependsOn": [
+            "chain-one"
+          ]
+        },
+        {
+          "id": "noise",
+          "dependsOn": [
+            "root"
+          ]
+        }
+      ],
+      "closedSubsetCount": 7,
+      "outcomeTableCount": 64
+    },
+    {
+      "id": "star",
+      "actions": [
+        {
+          "id": "root",
+          "dependsOn": []
+        },
+        {
+          "id": "leaf-one",
+          "dependsOn": [
+            "root"
+          ]
+        },
+        {
+          "id": "leaf-two",
+          "dependsOn": [
+            "root"
+          ]
+        },
+        {
+          "id": "leaf-three",
+          "dependsOn": [
+            "root"
+          ]
+        }
+      ],
+      "closedSubsetCount": 9,
+      "outcomeTableCount": 256
+    }
+  ],
+  "tablePolicy": "Enumerate every dependency-valid subset by bit-mask membership and direct prerequisite check; fix original full subset to failure and enumerate all Boolean values for other closed subsets. A table true produces frozen Alpha observation; false produces frozen Beta observation. No actual browser behavior is inferred.",
+  "neighborReference": "For each final selected unit, breadth-first traverse reverse dependency adjacency to remove that unit and all present dependents. Deduplicate resulting subsets. Never call production without() or copy its ordered forward-pass algorithm.",
+  "defaultBudget": {
+    "maxExecutions": 128,
+    "maxDurationMs": 5000,
+    "repetitions": 2
+  },
+  "controls": [
+    "baseline-inconclusive",
+    "baseline-unstable",
+    "baseline-manifest-mismatch",
+    "baseline-assertion-mismatch",
+    "baseline-app-digest-mismatch",
+    "baseline-revision-mismatch",
+    "baseline-adapter-mismatch",
+    "baseline-runner-mismatch",
+    "baseline-seed-mismatch",
+    "baseline-invalid-harness",
+    "baseline-changed-harness",
+    "baseline-missing-observation",
+    "baseline-wrong-observation",
+    "baseline-contradictory-label",
+    "baseline-zero-assertions",
+    "baseline-unknown-outcome",
+    "neighbor-inconclusive",
+    "neighbor-unstable",
+    "neighbor-changed-harness",
+    "neighbor-manifest-mismatch",
+    "cancel-before",
+    "cancel-during-baseline",
+    "cancel-during-candidate",
+    "budget-incomplete-baseline",
+    "budget-incomplete-candidate",
+    "budget-exact-complete",
+    "deadline-during-baseline",
+    "unconfirmed-expectation",
+    "runner-throws",
+    "runner-reports-cancelled",
+    "baseline-satisfied-then-failure",
+    "neighbor-satisfied-then-failure"
+  ],
+  "controlOverrides": {
+    "budget-incomplete-baseline": {
+      "maxExecutions": 1
+    },
+    "budget-incomplete-candidate": {
+      "maxExecutions": 3
+    },
+    "budget-exact-complete": {
+      "maxExecutions": 3
+    },
+    "deadline-during-baseline": {
+      "maxDurationMs": 20
+    }
+  },
+  "processWallLimitSeconds": 180,
+  "overallWallLimitSeconds": 1080,
+  "ordering": "Each process runs chain-noise tables 0..63, star tables 0..255, then controls in frozen listed order. Formats source, emitted, installed each run twice in separate sequential processes.",
+  "comparison": "Compare complete reduction results, full model run evidence and reference audit after deleting only keys startedAt/durationMs and replacing the exact owned per-process artifact root with <OWNED_ARTIFACT_ROOT>. Case-level process metadata is retained separately and not part of the semantic transcript. IDs, reasons, observations, manifests, identities, event order and execution counts must match.",
+  "identity": "Preflight hash every frozen source file from prior emission manifest, every prior emitted input, and every installed package inventory member; compare before import and after execution. Model harnessDigest is SHA256 of verifier worker bytes, explicitly separate from actual source/emitted/installed harness identities.",
+  "acceptance": [
+    "Every actual candidate is a subset of the frozen original, dependency-valid and frozen; its assertion, fixture and execution identity remain exact.",
+    "Every invocation receives a unique owned execution artifact path and a fresh model reset marker.",
+    "Every accepted trial contains exactly two conclusive target failures with matching identities.",
+    "Final best preserves table failure; all final BFS dependency-group neighbors are oracle-nonfailing and actually tested after final acceptance before a 1-minimal claim is accepted.",
+    "Enumerate global smallest failures and retain all larger-than-global outcomes without calling them errors or claiming global minimality.",
+    "Known inconclusive, unstable, identity-mismatch, cancellation, deadline and incomplete-budget cases cannot accept incomplete repetitions. For satisfaction-first alternation, report early rejection and any resulting minimality label under the product policy separately from stronger unestablished repeated-neighbor stability.",
+    "All six per-case semantic transcripts match; failures and exceptions are retained without selective rerun."
+  ],
+  "expectedReducerInvocations": 2112,
+  "expectedTableInvocations": 1920,
+  "expectedControlInvocations": 192,
+  "retention": "Each process writes append-only raw case NDJSON, summary and command receipt. Every case retains run evidence, trial ledger, final manifest and exhaustive-reference audit. Preserve every outcome including validation failures.",
+  "controlSemantics": "Alternating failure-then-satisfaction and satisfaction-then-failure are both scheduled per candidate. Record actual invocations and unobserved scheduled follow-up. The product criterion requires two failures for acceptance; a first satisfied observation may reject after one run. Do not assume symmetric stability guarantees or call that explicit policy a defect. Flag any stronger final-neighbor stability claim as unsupported when follow-up was not executed."
+}

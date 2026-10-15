@@ -1,0 +1,1033 @@
+{
+  "scope": "Selected archival source/tests/plans/reports; partial trees, original raw evidence remains local; no executable verification performed during handoff",
+  "files": [
+    {
+      "source": ".repro-runs/cloud-continuation/completion-decision-v1/RESULT.md",
+      "destination": "handoff/diagnostics/completion-decision-v1/RESULT.md",
+      "bytes": 3296,
+      "sha256": "6387da2de9f5d4f44ca6ab12412c6557d48a6d8ff64cc23ab0030cb37901453c"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/completion-decision-v1/decision.json",
+      "destination": "handoff/diagnostics/completion-decision-v1/decision.json",
+      "bytes": 2850,
+      "sha256": "502b3463f7ea123ebbe5364da78f3551e26ab8ae52b413bfca7b4571fe861049"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/completion-decision-v1/final-receipt.json",
+      "destination": "handoff/diagnostics/completion-decision-v1/final-receipt.json",
+      "bytes": 1163,
+      "sha256": "87d15904a8870207ce8275197d20f78e7408f04d0672af8a80331e1eb276ad35"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/RESULT.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/RESULT.md",
+      "bytes": 4324,
+      "sha256": "05241089e10915820ecd74c2369fd9b1216210cba375e13f29f4db2f1eb9d402"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/decisions/p390-00-11.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/decisions/p390-00-11.json",
+      "bytes": 794,
+      "sha256": "859b3d05228c806bee3a7a3c3d22ea72752f84ba0384cd0c5d14ec1d16c1b166"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-receipt.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/final-receipt.json",
+      "bytes": 1071,
+      "sha256": "e815a4f74bafc02a12f8e96d66ec5e0fc2c224cc148eb7ce1acccc1b05574043"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/CLEARANCE.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/final-review/CLEARANCE.json",
+      "bytes": 4292,
+      "sha256": "0b6a218627ad18d7972cef9b1951e0071402e0f8c0feb8252195adad0b6dfaec"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/RESULT.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/final-review/RESULT.md",
+      "bytes": 1067,
+      "sha256": "22a81dc6e47efc18b856ec4a7508f5bd10efcf1855a842451e668f7339cba321"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/final-receipt.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/final-review/final-receipt.json",
+      "bytes": 549,
+      "sha256": "6c8eb8ace54cd36366d0103482acf9d4840a8af50197084088cd53ad1234504a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/initial-findings.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/final-review/initial-findings.json",
+      "bytes": 1553,
+      "sha256": "7d751dff1d92c4998ec778692d906a22ec04c571407d9bf4b45ef1d31dd7d48f"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/INTEGRATION.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/INTEGRATION.md",
+      "bytes": 3289,
+      "sha256": "eb796592206cf8e0b49192aec6b200f11f85d8c488d24d2755fc7d99c71d41aa"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/RESULT.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/RESULT.md",
+      "bytes": 3172,
+      "sha256": "a6f5cfb194a09f4cff30ee5d0d67ab7759e9e421d43d9fa9157b8f7696ab20ea"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/actual/study/P.html",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/actual/study/P.html",
+      "bytes": 398463,
+      "sha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/artifact-manifest.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/artifact-manifest.json",
+      "bytes": 4633,
+      "sha256": "9e6c316ef4d800498f1f86c70ff787bc2538ac4803c4723b657391152c5f0c49"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/caller.diff",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/caller.diff",
+      "bytes": 10080,
+      "sha256": "46620b964494cbd4bbdf0dbf42fe6a44182cb17b3ea3b3249edbfca21c4a8442"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/contrast-p57-approved-batch-inputs.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/contrast-p57-approved-batch-inputs.json",
+      "bytes": 95986,
+      "sha256": "0dd78a13a85e6f0290bf9917c33f2face81c1b3bea5e6e94b78e37aa798e4da2"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/expected-bindings.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/expected-bindings.json",
+      "bytes": 367271,
+      "sha256": "456fd9b0403fe82a42cc5cb016a2320823a24f4934aa8bd22ecdef0819c6139b"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/final-receipt.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/final-receipt.json",
+      "bytes": 462,
+      "sha256": "41ab7fdf4b1713fd753955d1e3ee1c7387b41202f83ebb9e9faad73c6e1b237f"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/lifecycle-diagnostics.diff",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/lifecycle-diagnostics.diff",
+      "bytes": 2378,
+      "sha256": "277a909e7f117dad6754e78615e20459181b5196c6ed282ab9e6aea63f1189ff"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/make-bindings.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/make-bindings.mjs",
+      "bytes": 2063,
+      "sha256": "187874740b9f4e17a2f215a0c6bd19fb540afafea951ce9e41aeba4fd296b140"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/overlay-manifest.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/overlay-manifest.json",
+      "bytes": 6760,
+      "sha256": "124a9af10f7e3fb47508a0be9c6805f141872207df953f1ab3e1086607e568b1"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/prepare-tests.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/prepare-tests.py",
+      "bytes": 3977,
+      "sha256": "893b3dc07ec6fa2f4a938e02615ad96dbecbc71170627513c769b24de8fa0978"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/prepare.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/prepare.py",
+      "bytes": 12412,
+      "sha256": "bf53b953f0be787bcf4f4cd8af13cd53672aaa3e2d3a2d1e76b4a81714eb6350"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/resource-probe.diff",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/resource-probe.diff",
+      "bytes": 1947,
+      "sha256": "a69a701a8fd7191a0d86ce2dabd68fe746ddbaa8483fb055d51942a4f53d3d14"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/source-freeze.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/source-freeze.json",
+      "bytes": 2655,
+      "sha256": "b49450b8b30245d308750c4018a84bdc9032babdb9c8670b8fe82f51921a4510"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/source-preservation.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/source-preservation.json",
+      "bytes": 699,
+      "sha256": "f4dc5357ec6dc6692b13d489b62650c17029c7db2292bc7be235c8d76d4aecb4"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/FINAL-OFFLINE-TEST-RESULT.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/tests/FINAL-OFFLINE-TEST-RESULT.json",
+      "bytes": 1440,
+      "sha256": "23a3c9fa4ed9ba3645a5e5ce85c1f38e8939f99ae4f6d6d29b41fac87429018f"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/candidate-offline.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/tests/candidate-offline.log",
+      "bytes": 1066,
+      "sha256": "aa88d20ae8054d38087c890047cdb213a8ab7e076a62b9f181a11e352ef4ce9d"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/candidate.test.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/tests/candidate.test.mjs",
+      "bytes": 2809,
+      "sha256": "2f0d4e8f1aa57259b4aedc6e7c00b642c83ba88948a0faaf4a3ef0e8ebdeb316"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/capture.test.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/tests/capture.test.mjs",
+      "bytes": 16857,
+      "sha256": "c6571158658620098c3adc80b345ddd135941df960cc84236df4b65121085f44"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/final-offline.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/tests/final-offline.log",
+      "bytes": 6953,
+      "sha256": "8da9f93eb82e34d334b9f8598a75c4006614c6471c681fe5bf931e6ebb845b2a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/initial-offline.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/tests/initial-offline.log",
+      "bytes": 5711,
+      "sha256": "2fc1cc3668d6c734c4a7c4c7836e0146763313797e226adee51e71fad43bec0a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/sampler.test.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/tests/sampler.test.mjs",
+      "bytes": 9899,
+      "sha256": "1bf15f1b1c8ce65ced8c94bdf0346a875ae5be2f294a5456fe1128b077a245b1"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/batch-partition.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/candidate-binding.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/verification-inputs/candidate-binding.mjs",
+      "bytes": 2096,
+      "sha256": "2b0a23499bb1bdeb33e7cd7242e968251b27c20d969c9d3a503c4bd2afc75766"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/selection-state.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/inputs/verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/POSTRUN-REVIEW.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/POSTRUN-REVIEW.json",
+      "bytes": 4931,
+      "sha256": "153b64c0d3b223b326f75223d84d5e9c167ff2a6e98d4afb5f2096a1fba1d7b3"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/RESULT.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/RESULT.md",
+      "bytes": 2377,
+      "sha256": "721fb75becda17d315da6b483068f1ca903165953de4e6ae1dc5fe28540005d1"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/observe.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/observe.py",
+      "bytes": 7787,
+      "sha256": "12d592047f6bc02b11e4d5da20e002a32fc43ca8091bc3b965240f464cc05999"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/primary-observations.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/primary-observations.json",
+      "bytes": 22084,
+      "sha256": "8357c6850553e8d91a0c8773596196f1057e356b7f69ed765895703e33f5b13d"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11/root-facts.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/postrun/p390-00-11/root-facts.json",
+      "bytes": 2246,
+      "sha256": "1b916a85d25acda7f3b43eb42fcd8f5cdbf1cfe4001142240c8a9639d2f1b6d0"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11/validation-receipt.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/postrun/p390-00-11/validation-receipt.json",
+      "bytes": 538,
+      "sha256": "2ebb2c6e39e62892d5cfcfb45d090cb0cc335d12fd85757fe4c29938229792c2"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/RESULT-before-wording-correction.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/reconciliation/RESULT-before-wording-correction.md",
+      "bytes": 4106,
+      "sha256": "fadacc61042c05fdc740f8980200f2c2325d04c29e4e73ffc3d444ed064318c5"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/correction-review.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/reconciliation/correction-review.json",
+      "bytes": 9913,
+      "sha256": "6557354e0f8256ab71c3bd76ea86dd5930ea07fb3f60d1a0804ebfcf0cec3445"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/correction-review.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/reconciliation/correction-review.md",
+      "bytes": 1618,
+      "sha256": "862a37b93fc0f4c0bd53d2fa19c081a0ab29830ab376ba54fa39fd086818dca5"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/wording-correction.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/reconciliation/wording-correction.json",
+      "bytes": 1145,
+      "sha256": "0a5e9e1e6a3709c8d5df584d88a69d9000f5018025e05c3262a6e3c27c9fe1ca"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/EXECUTABLE-CONTRACT.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/EXECUTABLE-CONTRACT.md",
+      "bytes": 5507,
+      "sha256": "2bbcd4f175770dd56cf6c9fea4f35351ede70e555507c2ca5649f3dcbabf6615"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/PILOT-READINESS.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/PILOT-READINESS.json",
+      "bytes": 6152,
+      "sha256": "9129963142f35987a1935d7adfc143129375714b709c9786d3f2a219ed1af00a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/PILOT-READINESS.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/PILOT-READINESS.md",
+      "bytes": 2414,
+      "sha256": "bd051ac19ba1481cde99ebade04afe1f616a4daf9e749d4b377452863d008cfc"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-semantic-expectations.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/check-semantic-expectations.py",
+      "bytes": 3238,
+      "sha256": "b33550b89641e5702266c6dc354677ca97bb74d9e8e4b14d48636c6980903d0a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-stage.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/check-stage.py",
+      "bytes": 5096,
+      "sha256": "94eadcd46f9ba1939dcc2f4c1eff93146d57c9f1a2b7709e33bb9b497d8e04a9"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-static-input.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/check-static-input.py",
+      "bytes": 6006,
+      "sha256": "9021ca2e179390b67a45bbff135cc255b75a1a6bcf8ced552bbf5ffbdb459723"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-challenges.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/independent-cleanup-challenges.py",
+      "bytes": 6362,
+      "sha256": "9bb3c48b65d02d8b5add5b612621f1548481861f814097bd331144ca4469854a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-corrected.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/independent-cleanup-corrected.json",
+      "bytes": 18225,
+      "sha256": "63684385b5d005aeaf1aef2cadde04d6994b8d3c03b197b1778dfa63ee7aee02"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-counterexamples.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/independent-cleanup-counterexamples.json",
+      "bytes": 17983,
+      "sha256": "c8a8163f3d0397a9e4c5f85eca761a656a7d8058c9be41f332b4486b723d2c20"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-final.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/independent-cleanup-final.json",
+      "bytes": 18225,
+      "sha256": "6148a825c792a6774b03f97a16cd0c540756c81253b1487d585e9f4843a66cbd"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-initial.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/independent-cleanup-initial.json",
+      "bytes": 16948,
+      "sha256": "257a29710b449799fdd5a1145aff23c8ddccdc1f00f56476c4377fdcc9ec4515"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-external-challenges.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/independent-external-challenges.py",
+      "bytes": 3182,
+      "sha256": "195088b59748dd164734bf1e16d986926a57b2f93605c4c4920075d3991a1d47"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-external-final.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/independent-external-final.json",
+      "bytes": 1431,
+      "sha256": "f535ec39f94086605fcc5f8f9f76aea4e9b7e11bcb4cc466e28a3476abf748af"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/p390-00-11-stage-review.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/p390-00-11-stage-review.json",
+      "bytes": 1539,
+      "sha256": "feda795cd3205186587ef14d6393f036adc450c2e2f4ac9a9bd4de69e9e0dc2d"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/semantic-expectations-review.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/semantic-expectations-review.json",
+      "bytes": 701,
+      "sha256": "45f6a93db93d99b88f1653a1da3ff2aca744347a0cced2eab1e86ae297886aa2"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/static-input-review.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/review/static-input-review.json",
+      "bytes": 19025,
+      "sha256": "ff0727a7e428589a907eccfa0bc1188b59b4a37037717378b26adcbfa10ff826"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/summary.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/summary.json",
+      "bytes": 696,
+      "sha256": "85aea57b5e7908c4e2c409321e06ab132f4ded81095fd3500917e3889d2a4edf"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/RESULT.md",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/RESULT.md",
+      "bytes": 3967,
+      "sha256": "f0076a39b606260f58ff09fff437de52cb1d6941515bc0cc4e5d6fde1255f2ea"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/adapt-external.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/adapt-external.py",
+      "bytes": 6570,
+      "sha256": "0a5d5fb55e0e6a6834d502eb8e3b8ba30c3e307699aab897f6a33a305f31e56b"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/adapt-helper.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/adapt-helper.py",
+      "bytes": 4683,
+      "sha256": "9507836f092655ab85998b99dec605fcf21e824bbfeed3b472a6f87976e367ed"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/author-freeze-v2.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/author-freeze-v2.json",
+      "bytes": 2490,
+      "sha256": "5bf6a832612df33fb8ace20b6dfbd12a87f6ab8363a3d643ae3b1b8631faa6d9"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/author-freeze.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/author-freeze.json",
+      "bytes": 2282,
+      "sha256": "15bd8f1590a9d8c06c9bb1a07f2d270a3c84a9e2729cd7a2bb9395a731e464b1"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/build-semantic-expectations.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/build-semantic-expectations.py",
+      "bytes": 3590,
+      "sha256": "b196854804ebfe9e2a302e69f19716c2df08fa8c3778ecebe63aa9fcbc2ecfea"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/cleanup_gate.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/cleanup_gate.py",
+      "bytes": 7949,
+      "sha256": "f29222815b9f6419eb7b4a01eef4cb8aac9369a7a4681ca498c9826d4091f814"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/original-workload-expectations-20261015.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/original-workload-expectations-20261015.json",
+      "bytes": 40446,
+      "sha256": "72c71baf551f5a8a29eb2b3a0d0927c4a505b6a729230f5c9f341846fe39f967"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-final.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test-cleanup-final.log",
+      "bytes": 2406,
+      "sha256": "9fbfeb46c15e7c59288bd9b60ad36059f2fb754d82d50fc77c39fb0fb78439fa"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-first.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test-cleanup-first.log",
+      "bytes": 2406,
+      "sha256": "316e396819ccb7477357d2faa1d2ca621b0a89c866928f144bfbc39e5c7317d8"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-red.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test-cleanup-red.log",
+      "bytes": 305,
+      "sha256": "2afc144750081a0468cbeacd34460b5cea21ce54c3367d11e37e53d83febc6d3"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-second.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test-cleanup-second.log",
+      "bytes": 2406,
+      "sha256": "9a6a913a0e693e87a0b9d0922b9370a0f9989665f5e2c1916f284c8f4099c880"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-final.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test-external-final.json",
+      "bytes": 3464,
+      "sha256": "81697a36c99517b1387bf58fa7d4ab6738a38ca358709cbf7eb3d62b4612018e"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-first.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test-external-first.json",
+      "bytes": 3464,
+      "sha256": "592d9e2a2dd124c31b5f87d91ec3f4280dd822b40e9a13c64a8c854916c3158a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-second.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test-external-second.json",
+      "bytes": 3464,
+      "sha256": "8bb4a3d0a04bdd3a96655be6956ee91869a463d56745f9511481dd9308917ec7"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-v2.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test-external-v2.json",
+      "bytes": 3624,
+      "sha256": "c5b89de62132e2ed075c91dc20a6b4c37f66f21cf949894a9a18a927da864896"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test_cleanup_gate.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test_cleanup_gate.py",
+      "bytes": 6216,
+      "sha256": "f27ee1b51826888945c00ec95d32c51dfd39541328fea3e17b4f6cb2612e9da3"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test_external_validator.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/test_external_validator.py",
+      "bytes": 13625,
+      "sha256": "cc17ffabc9341b421dbcc4097a12db1a02cd6f4c04da41e0c4658b2a46cafe1f"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/validate-approved-job.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/validate-approved-job.py",
+      "bytes": 35048,
+      "sha256": "83b78b9e928bc32419a84372f028a8ee7232ee256e2f8d7ff22b134b2e64e437"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/prospective-expectations.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/workload-evidence/prospective-expectations.json",
+      "bytes": 316316,
+      "sha256": "e5b973ed32dbd7b1fbfb4aad71a95830c02d44134b61e82d0f044541cdba48a9"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/semantic-expectations.json",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/workload-evidence/semantic-expectations.json",
+      "bytes": 79149,
+      "sha256": "79cf0dede1be5b81ecb28b837d8cabfeb94101745af0f34c4ac8b97db7e76979"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-final.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/workload-evidence/test-final.log",
+      "bytes": 546,
+      "sha256": "b3706340fb8b93f87dc31e07c1c3707c1b2fd25402a3b592845d4494e926c4a8"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-first.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/workload-evidence/test-first.log",
+      "bytes": 405,
+      "sha256": "6420a2739d6226362b77167f403a275c5828e2a8a2e344f83e87a1930d765a30"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-second.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/workload-evidence/test-second.log",
+      "bytes": 546,
+      "sha256": "3852a96aea3d867b16a5cd705a81b139bb23b01a355d18776f1e63709d4115ad"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-third.log",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/workload-evidence/test-third.log",
+      "bytes": 546,
+      "sha256": "ac0be5d649936b4ad49b2db88647ebc6785802aa0e55d92cc7611c863bde5a74"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test_workload_validator.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/workload-evidence/test_workload_validator.py",
+      "bytes": 18768,
+      "sha256": "03ff9b71390e12ee22f1da3f5011ad503ed2c952edb6f834ccaa7601bc7f65e4"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/workload_validator.py",
+      "destination": "handoff/diagnostics/contrast-p57-approved-execution-v1/validator/workload-evidence/workload_validator.py",
+      "bytes": 28728,
+      "sha256": "8133771e3447ed71544699cd3b86015f9ed29559472a1d11ef23390bfbaf0cc6"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/RESULT.md",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/RESULT.md",
+      "bytes": 6057,
+      "sha256": "528dfc828bca097c4cd527e10050525d73bcab6d181060af3d7369a2125d53a3"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/final-receipt.json",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/final-receipt.json",
+      "bytes": 3703,
+      "sha256": "7295c27f5ae1e5ead68e61d6250a743d21e0e77706471202bce3ad8d12577e71"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-challenge-20261015.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/review/completion-regression-challenge-20261015.mjs",
+      "bytes": 4397,
+      "sha256": "0618ea419e086276b56f9e91615d3576c7c7740dcc347110022ada674dfcb5ce"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-result-20261015.json",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/review/completion-regression-result-20261015.json",
+      "bytes": 1257,
+      "sha256": "0b29fa98fb40ce80c800936114e55202c8a037a785e6e884fe4cffa7d2005005"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-result-final-20261015.json",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/review/completion-regression-result-final-20261015.json",
+      "bytes": 1257,
+      "sha256": "494f688fcc7d69cf1be853b0457809a48eca6c2a3b93347b9e136eee42e65590"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/final-independent-receipt-20261015.json",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/review/final-independent-receipt-20261015.json",
+      "bytes": 5561,
+      "sha256": "09699790565eb92f8c13a28546822d35be2437d1af2d096f1d3cd57c3463f01d"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/final-independent-review-20261015.md",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/review/final-independent-review-20261015.md",
+      "bytes": 6232,
+      "sha256": "e0cb3194496134e8a491c591f424a86430cac5aeb190b6270a8d794949987eeb"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/independent-test-contract-20261015.md",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/review/independent-test-contract-20261015.md",
+      "bytes": 5455,
+      "sha256": "6a3050da6ac650b7691480c68f84cc81f54aae71301224b1c7fbd8d7ab3f9220"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/initial-completion-sink-counterexample-20261015.json",
+      "destination": "handoff/diagnostics/contrast-p57-correction-preparation-v1/review/initial-completion-sink-counterexample-20261015.json",
+      "bytes": 1274,
+      "sha256": "acf8c7160c691fa2eb1aac34bb7df6ed12d7dd87e50b12dce58288455cf8aa15"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/PLAN.md",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/PLAN.md",
+      "bytes": 10784,
+      "sha256": "beb766eb8a30e008367eef7a32883187e54bc47a4158af2cb85e8c980f8a142c"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/RESULT.md",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/RESULT.md",
+      "bytes": 6586,
+      "sha256": "ea6500153c81424329ba802b3bc16691ea2f917e67b428ff29b48efb4500bb00"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-20261015-7cfa196a.json",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-20261015-7cfa196a.json",
+      "bytes": 98662,
+      "sha256": "4d34661cfe2487d20f66faf6cea0ab457ab73cc5cc436c44f165492c96e925e6"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-20261015-7cfa196a.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-20261015-7cfa196a.mjs",
+      "bytes": 9388,
+      "sha256": "70599b0d9b2f2f1cbb0d04f17c00761f4515e2cb18d93fceece325c74158b3b9"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-attempt-20261015-7cfa196a.json",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-attempt-20261015-7cfa196a.json",
+      "bytes": 1049,
+      "sha256": "fcf0009d0e6097bf726e51b214de6123d27f2c35cd032aaeb666b7f8831f5060"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/focused-batch-source-review-20261015.json",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/audit/focused-batch-source-review-20261015.json",
+      "bytes": 35227,
+      "sha256": "39f1f0302abc4c107bd65406d6fa84fb2ede585b0a75801701e80526a2b66d58"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/focused-batch-source-review-20261015.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/audit/focused-batch-source-review-20261015.mjs",
+      "bytes": 10154,
+      "sha256": "ef80fe46eedf4614c879ef1c60604e6a3454713d6a0d55623aac1382a2ea2502"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/lossless-retained-evidence-challenge-20261015.json",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/audit/lossless-retained-evidence-challenge-20261015.json",
+      "bytes": 1078,
+      "sha256": "09d80121cf7ea42e523c20c56be389fedb01427c623a81e4ec5bc435d8967de6"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/lossless-retained-evidence-challenge-20261015.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/audit/lossless-retained-evidence-challenge-20261015.mjs",
+      "bytes": 5515,
+      "sha256": "6d4a57ae2a6e621e6f3a6ce07ed1096c3e4c61d5817ffaaab721765560e07089"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/final-receipt.json",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/final-receipt.json",
+      "bytes": 4079,
+      "sha256": "a40de95dce92b83237ad650c2afd11e321ea04b76c66c3fbf00a9cd4fbfb452d"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/PLAN.md",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/source/PLAN.md",
+      "bytes": 7882,
+      "sha256": "4fc353beaa459e3e05e19a04efab98168e975912921bb864c4e085f95995f5cb"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/batch-partition-controls.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/source/batch-partition-controls.mjs",
+      "bytes": 16723,
+      "sha256": "992e6e70e604f3044bce745cddc3a5be33d4f9fcf56667f7c758f386661d9a3c"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/evidence-store-controls.json",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/source/evidence-store-controls.json",
+      "bytes": 1112,
+      "sha256": "6516474f85086a1ab33376a1069327040c3e35413fb836f49082b1fdf5e40079"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/evidence-store-controls.mjs",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/source/evidence-store-controls.mjs",
+      "bytes": 14630,
+      "sha256": "dd827b1b9a245550396a50ef3208403991fd9511d01f659c93f38601a53d84b5"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/partition-controls.json",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/source/partition-controls.json",
+      "bytes": 7867,
+      "sha256": "d7e3d5af2f83a93fdb0bb8466740dcf3e6a3dccc955bf85ab99e19aa7a0bf2bc"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/pure-controls.json",
+      "destination": "handoff/diagnostics/contrast-p57-memory-diagnostics-v1/source/pure-controls.json",
+      "bytes": 15864,
+      "sha256": "54d263e7426ebf125d5f73ff499e294354672141c7cdf05585cb8fc9b09cea94"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/RESULT.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/RESULT.md",
+      "bytes": 10775,
+      "sha256": "f0b10f561a53a5bf84fa22eb53e86058755a71429a3c6a81748e72b162d30e6b"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/FINDINGS.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/contract-audit/FINDINGS.md",
+      "bytes": 9585,
+      "sha256": "0d137b800d58e7ed4951b4109c7ad34cbcf7b1daa2a1e1a902f3f0eb2f9ba5cb"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/ORACLE-MODEL-REVIEW.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/contract-audit/ORACLE-MODEL-REVIEW.md",
+      "bytes": 5038,
+      "sha256": "b17f7973bd55c12882bd23158cfbedcf3649bbd2fc348e2e203c801c8391959e"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/SCHEMA-PATCH-REVIEW.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/contract-audit/SCHEMA-PATCH-REVIEW.md",
+      "bytes": 6666,
+      "sha256": "db1eeb5df44a3f479dea589badae437d6f7efe6ad6749c47f297c4508ae3df07"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/final-receipt.json",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/final-receipt.json",
+      "bytes": 3420,
+      "sha256": "5e301ac833374f00a9eb4ae1b86f12dab75284bff49321c17ce8810fd3977595"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/PLAN.json",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/oracle-audit/PLAN.json",
+      "bytes": 6438,
+      "sha256": "59ddbe5bb2cec80366783b00c598f67348e3084f605b4598903ac7ae6e7fa234"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/REPORT.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/oracle-audit/REPORT.md",
+      "bytes": 7932,
+      "sha256": "dc2da8c6a102e96949998be26a1232bde61cd9494e7a83124e31649d29896c91"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/fixture-model.mjs",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/oracle-audit/fixture-model.mjs",
+      "bytes": 10326,
+      "sha256": "a22fc11770f6800b0dbcd6ea39b50ab47cc53ab0bcc3daf9cf3ff212a24bc6dd"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/PLAN-v2.json",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/regression-review/PLAN-v2.json",
+      "bytes": 4208,
+      "sha256": "83d0aac29c0cb913f4bfdd7bd2c0a1799e2bd14c7b578edb9fb9fc352a2237b6"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/PLAN.json",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/regression-review/PLAN.json",
+      "bytes": 8676,
+      "sha256": "4c8a2d7aff161f0e0d87061fb8235d869e536e6e377760ba8e8a06e954e4d4e0"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/RESULT.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/regression-review/RESULT.md",
+      "bytes": 4243,
+      "sha256": "cc7e5f761a799b3aefe27f400843546559eac60aa7b3108bc000e15b6e428347"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/REVIEW-v2.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/regression-review/REVIEW-v2.md",
+      "bytes": 1203,
+      "sha256": "810afe1f9d61b80baab10091916dacbc9425168e8c99d176bcae4201d4ea6b0c"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/REVIEW.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/regression-review/REVIEW.md",
+      "bytes": 3567,
+      "sha256": "97d4e830b61319f3c95521efdb85c3b2169a18cc4b3fbaec55ecdeb48426ba1f"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/run-diagnosis.mjs",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/regression-review/run-diagnosis.mjs",
+      "bytes": 11425,
+      "sha256": "96e914329d55343408e659c47a02c06c1dff8a594bb5fa1c9c64454b26ce6d16"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/remaining-release-requirements.json",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/remaining-release-requirements.json",
+      "bytes": 3074,
+      "sha256": "cc4e7e0b4935ecbfc313b004806ba393c167b0f68aa960c3cc8d09d51c5f00db"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/PLAN.json",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/schema-corpus/PLAN.json",
+      "bytes": 1482,
+      "sha256": "9e5d2a598165617ecd177564459da433ecf3f1e07df1d30f6c8b922a5d02a4c6"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/RESULT.md",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/schema-corpus/RESULT.md",
+      "bytes": 1652,
+      "sha256": "9adf4e36451af5253f258c4bdf9021c6bb4805326b4e5ec5c292407f2744845c"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/check.mjs",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/schema-corpus/check.mjs",
+      "bytes": 3113,
+      "sha256": "77d9869b00d66147fa33262292d9e7b29dba33503c11ee3eeb557b7c7af50ee5"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/execute.py",
+      "destination": "handoff/diagnostics/missing-steps-diagnosis-v1/schema-corpus/execute.py",
+      "bytes": 2370,
+      "sha256": "26b0b0fade38cba432994ce8f3cd57f45ea614b841bf72b3e8f4cbffe2d4533b"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/RESULT.md",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/RESULT.md",
+      "bytes": 10800,
+      "sha256": "6d0671abb62744737a428a49a5dfc5408cf908f574536feb4a3e975393a09347"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/RESULT.md",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/audit/RESULT.md",
+      "bytes": 13047,
+      "sha256": "b21cff63ac9405a553922dc951208e4492ecb1e92f6e637a4fe282d00e7417cd"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_historical.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/audit/audit_historical.py",
+      "bytes": 15281,
+      "sha256": "68f90a09189c4ec0f151b9cecf819e617e2af2b6764d9a84f6e03d5deac41a07"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_model.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/audit/audit_model.py",
+      "bytes": 11352,
+      "sha256": "8844427fe75bf5ae7e1ae81dcebfda4b9bfe30685fa182a323137a9f473df905"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_preflight.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/audit/audit_preflight.py",
+      "bytes": 10271,
+      "sha256": "450a93a7b7c3e578ead80b873c0b61137189b89c94cb0eec215f44989ca8efa5"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/final-receipt.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/audit/final-receipt.json",
+      "bytes": 2499,
+      "sha256": "5a178ecc7ee80fc58000003ac96b56558f1f543054a1c1039e07857493dea1e3"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/final-receipt.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/final-receipt.json",
+      "bytes": 4172,
+      "sha256": "a785e30e4e106f2da770dd4f5fe4113fb26f560828482607d056d12793dc508a"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/RESULT.md",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/preflight/RESULT.md",
+      "bytes": 7828,
+      "sha256": "b1c3120358a682674dbb75e503d0976e06f25466f5b71deb741f10eb74be9616"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/audit-receipt.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/preflight/audit-receipt.json",
+      "bytes": 7710,
+      "sha256": "cd70caecfe42af304058a9806fc09be9348958d15c4a083d5e5f62e35026dfa7"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/audit-results.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/preflight/audit-results.py",
+      "bytes": 7330,
+      "sha256": "f2203cd0291b23d938cb53928169a6301350398800bb6c73ac4d69a574a36972"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/execute.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/preflight/execute.py",
+      "bytes": 2315,
+      "sha256": "c3be369c6a4d83a99b0a47630faaa5d5b29c33c5b9f556e0b995292d74cadc3c"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/failed-attempt-summary.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/preflight/failed-attempt-summary.json",
+      "bytes": 52932,
+      "sha256": "e00892b1a4fde34dae7087672bcacbde58ac2ed2968ff11b041a306ff18048ac"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/freeze.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/preflight/freeze.py",
+      "bytes": 7702,
+      "sha256": "2bb46130b37424e5297fdd53b52a12500f08f785b1e23409d0837b5eea066dc1"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/plan.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/preflight/plan.json",
+      "bytes": 30071,
+      "sha256": "27177ce83057c5c8ac89a9eadcaf1e6177de3092945b3ed249b5154150335f38"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/verify-format.mjs",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/preflight/verify-format.mjs",
+      "bytes": 11601,
+      "sha256": "f39078a916f30b160e5ce424978f4faf010f22a6c21d7c7097f1e2a6a4387559"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/PLAN-v2.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/PLAN-v2.json",
+      "bytes": 7348,
+      "sha256": "7046939bc5f7c0b0163f0e9ede0a19078ff10ebb5e3e50642b0b2ccb2024b4f2"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/PLAN.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/PLAN.json",
+      "bytes": 6660,
+      "sha256": "f191b4ddc4d9e27461c9c18f99c2691f2f5b24e8fa7cb7b3d467f867e3252d9e"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/RESULT.md",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/RESULT.md",
+      "bytes": 10957,
+      "sha256": "2aee40e4c7e0c5655e779352802845ed579c32c9f52d4ab104aff9baa8a74849"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/audit_raw.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/audit_raw.py",
+      "bytes": 11780,
+      "sha256": "2c927b52c33f27ef7d7d5011ad33161e854b6b96cd326cfc5409c211fed8d334"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/driver-pre-node-path.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/driver-pre-node-path.py",
+      "bytes": 4576,
+      "sha256": "b49d6ff7675dece2095e79d08d1c72289d89b3f59ca6a302019584b4bb8f9167"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/driver.py",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/driver.py",
+      "bytes": 4729,
+      "sha256": "2cfeb6d200bb02d39def9f813fb11e21d247470f1271f3312949bb2b8753c8c8"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/final-receipt.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/final-receipt.json",
+      "bytes": 2137,
+      "sha256": "fa5dd3f13e52eab2dcafe5ad64a04ebf7a6569dcf5b4dcf81229dc77fd0df4d6"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/raw-audit.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/raw-audit.json",
+      "bytes": 25867,
+      "sha256": "8f0f212e0f127215f68e24702ee8348d886a947bb05357bda7df5b4bff37d8fb"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/unexecuted-launch-failure.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/unexecuted-launch-failure.json",
+      "bytes": 489,
+      "sha256": "bcfeac844c5fd3854d54e10d3dcd205140ea1f6f8a9b4193c072400d9d2e03cc"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/worker.mjs",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/reference-model/worker.mjs",
+      "bytes": 22204,
+      "sha256": "ec4b0ead0b7170f6faa9bdfee27b4ddcb7f896a11a09d8e422906527459f2ec7"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/remaining-actions.json",
+      "destination": "handoff/diagnostics/reduction-repeatability-review-v1/remaining-actions.json",
+      "bytes": 2587,
+      "sha256": "4ffbce1598e2d0ad4f4749f08eed36f8b207f80b5d572a318b1c57218e443659"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/release-completion-v1/RESULT.md",
+      "destination": "handoff/diagnostics/release-completion-v1/RESULT.md",
+      "bytes": 8938,
+      "sha256": "93821182c61a81faa3eba61fa7742fde3012197c3408407035984d47ddacf6dc"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/release-completion-v1/browser/RESULT.md",
+      "destination": "handoff/diagnostics/release-completion-v1/browser/RESULT.md",
+      "bytes": 11059,
+      "sha256": "5d96a86314e669a140acae15eda1e0ebcd52f935b73e3d549c498d570929706c"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/release-completion-v1/browser/final-receipt.json",
+      "destination": "handoff/diagnostics/release-completion-v1/browser/final-receipt.json",
+      "bytes": 61925,
+      "sha256": "e2908f727689f0bf9447803cb23e4e6b461fa2d685b347de0ecb1c4031450e02"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/release-completion-v1/final-receipt.json",
+      "destination": "handoff/diagnostics/release-completion-v1/final-receipt.json",
+      "bytes": 4853,
+      "sha256": "12e9763cfe53cde62acb6738d1129e717a6c19e51ac24a23c547197f76bead88"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/RESULT.md",
+      "destination": "handoff/diagnostics/release-completion-v1/nonbrowser/RESULT.md",
+      "bytes": 4577,
+      "sha256": "8434395f8fecd92c4e273d7e60e2efacfaab279621f1a6badf1c1f573683dd96"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/final-receipt.json",
+      "destination": "handoff/diagnostics/release-completion-v1/nonbrowser/final-receipt.json",
+      "bytes": 12387,
+      "sha256": "f3ad55a92430582736a5d50f2f3b65c499f61710889aa3d02a068d9f00269ea0"
+    },
+    {
+      "source": ".repro-runs/cloud-continuation/release-completion-v1/usability/RESULT.md",
+      "destination": "handoff/diagnostics/release-completion-v1/usability/RESULT.md",
+      "bytes": 11137,
+      "sha256": "dc75054c137549e1a81696c0971da2fc3c3cc8f03585264d072458853ea1c1fa"
+    }
+  ],
+  "fileCount": 171,
+  "bytes": 2715507
+}

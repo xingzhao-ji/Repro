@@ -1,0 +1,38 @@
+{
+  "planVersion": 2,
+  "status": "frozen-before-execution",
+  "supersedesUnexecutedPlan": "PLAN.json",
+  "reason": "Parent review retains conservative reducer classification unchanged. Separately assigned schema investigation establishes the actionable published-contract defect. This runner only diagnoses actual original adapter evidence.",
+  "runner": "run-diagnosis.mjs",
+  "command": ["node", "--import", "tsx", ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/run-diagnosis.mjs"],
+  "cwd": "/workspace/repro-development-rv5abotj/repro",
+  "sourceRoot": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/baseline",
+  "sourcePolicy": "Frozen preserved original candidate only; no source edits or alternative harness.",
+  "outputRoot": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/execution-v2",
+  "bounds": { "maxProcessDurationMs": 120000, "maxCombinedStdoutStderrBytes": 2097152, "sequentialProcesses": true, "maxReductionDurationMs": 5000, "maxReductionExecutions": 8, "repetitions": 2, "expectedActualAdapterCalls": 3 },
+  "cases": [
+    { "id": "delete-navigate-closure", "remainingActions": [], "structuralValidity": "valid", "actualAdapterCalls": 1, "expectedRawCode": "MISSING_STEPS" },
+    { "id": "delete-alpha-closure", "remainingActions": ["navigate"], "structuralValidity": "valid", "actualAdapterCalls": 1, "expectedRawCode": "MISSING_STEPS" },
+    { "id": "delete-beta", "remainingActions": ["navigate", "search-alpha"], "structuralValidity": "valid", "actualAdapterCalls": 1, "expectedRawCode": "MISSING_STEPS" },
+    { "id": "invalid-dangling-beta-dependency", "remainingActions": ["navigate", "search-beta"], "structuralValidity": "invalid", "actualAdapterCalls": 0, "expectedCode": "ACTION_DEPENDENCY" }
+  ],
+  "assertions": [
+    "Each valid closure passes manifest validation and preserves expectation, assertion, app identity, environment and response schedule.",
+    "Each actual guarded adapter rejection has verification/inconclusive MISSING_STEPS, blank appDigest, zero assertions, null observation, empty events, browser not-launched, matching input/assertion/harness/revision/adapter/runner/seed identities.",
+    "Both chromium.launch and Server.prototype.listen are fail-closed throwing guards; neither is called; exact original descriptors restored.",
+    "Each reducer baseline makes one actual adapter call, retains the baseline raw MISSING_STEPS and run ID, returns inconclusive/unverified with no accepted trial, and preserves the input.",
+    "Record existing conservative reducer trial identity-mismatch wording as original behavior; do not assert a desired wording or diagnose a correctness defect solely from that text.",
+    "Actual artifact paths are owned, regular single-link files; size/SHA and persisted JSON match returned raw evidence; returned result stays settled after two event-loop barriers.",
+    "Invalid dangling dependency is rejected as input ACTION_DEPENDENCY before any adapter call.",
+    "Preserved adapter/reducer/oracle/manifest hashes match before and after; original manifests remain unchanged."
+  ],
+  "safety": { "browser": false, "listener": false, "network": false, "Docker": false, "auth": false, "sourceEdits": false, "syntheticTargetFailureCalls": 0, "publication": false },
+  "evidenceRetention": "Unique output directory must not exist before run. Preserve every returned actual run, each reduction result, raw evidence.json files, final summary, command receipt and all logs. No selective rerun or overwriting.",
+  "executionState": "Prepared only; awaiting parent review before execution.",
+  "remainingRequirements": [
+    "Separate agent performs real schema failing-before/passing-after regression without changing reducer, adapter or oracle.",
+    "Final candidate needs relevant source, emitted and installed nonbrowser validation plus type/lint/build checks.",
+    "Current browser acceptance/repeatability, CLI demo and installed browser replay remain blocked/unrun.",
+    "All real deletion neighbors remain incomplete under the current adapter boundary; no real-capsule minimality claim follows from the schema repair or these offline tests."
+  ]
+}

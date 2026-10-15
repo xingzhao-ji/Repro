@@ -1,0 +1,687 @@
+{
+  "status": "STOP_CONTINUATION_INDEPENDENT_PRIMARY_OBSERVATIONS",
+  "job": "p390-00-11",
+  "nonce": "7b4232475825",
+  "sourceComplete": true,
+  "observations": {
+    "measuredPass": 12,
+    "measuredFail": 0,
+    "unresolved": 0,
+    "acceptedAfterAllGates": 0,
+    "remaining57Unattempted": 45,
+    "browserControls": 50,
+    "nodeFacts": [
+      {
+        "sourceAuditNodeIndex": 0,
+        "status": "measured-pass",
+        "characters": 47,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 4090
+      },
+      {
+        "sourceAuditNodeIndex": 1,
+        "status": "measured-pass",
+        "characters": 8,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2345
+      },
+      {
+        "sourceAuditNodeIndex": 2,
+        "status": "measured-pass",
+        "characters": 47,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2383
+      },
+      {
+        "sourceAuditNodeIndex": 3,
+        "status": "measured-pass",
+        "characters": 15,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2516
+      },
+      {
+        "sourceAuditNodeIndex": 4,
+        "status": "measured-pass",
+        "characters": 47,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2345
+      },
+      {
+        "sourceAuditNodeIndex": 5,
+        "status": "measured-pass",
+        "characters": 15,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2226
+      },
+      {
+        "sourceAuditNodeIndex": 6,
+        "status": "measured-pass",
+        "characters": 80,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2524
+      },
+      {
+        "sourceAuditNodeIndex": 7,
+        "status": "measured-pass",
+        "characters": 8,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2407
+      },
+      {
+        "sourceAuditNodeIndex": 8,
+        "status": "measured-pass",
+        "characters": 80,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2332
+      },
+      {
+        "sourceAuditNodeIndex": 9,
+        "status": "measured-pass",
+        "characters": 8,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2402
+      },
+      {
+        "sourceAuditNodeIndex": 10,
+        "status": "measured-pass",
+        "characters": 80,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2473
+      },
+      {
+        "sourceAuditNodeIndex": 11,
+        "status": "measured-pass",
+        "characters": 8,
+        "steps": 2,
+        "minimumContrast": 15.865809304375075,
+        "requiredContrast": 4.5,
+        "measurementDurationMs": 2843
+      }
+    ],
+    "controls": [
+      {
+        "field": "controls",
+        "id": "wide-pass",
+        "expected": "measured-pass",
+        "observed": "measured-pass"
+      },
+      {
+        "field": "controls",
+        "id": "wide-low-contrast",
+        "expected": "measured-fail",
+        "observed": "measured-fail"
+      },
+      {
+        "field": "controls",
+        "id": "opacity-unsupported",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "controls",
+        "id": "gradient-unsupported",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "controls",
+        "id": "pointer-events-none-overlay",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "controls",
+        "id": "inadequate-scroll-budget",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "screenshotControls",
+        "id": "screenshot-default",
+        "expected": "one-empty-style-attribute-added",
+        "observed": null
+      },
+      {
+        "field": "screenshotControls",
+        "id": "screenshot-initial",
+        "expected": "exact-body-unchanged",
+        "observed": null
+      },
+      {
+        "field": "surfaceControls",
+        "id": "adjacent-text-boundary",
+        "expected": "measured-pass",
+        "observed": "measured-pass"
+      },
+      {
+        "field": "surfaceControls",
+        "id": "nested-element-rejected",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "surfaceControls",
+        "id": "rounded-outset-safe-interior",
+        "expected": "measured-pass",
+        "observed": "measured-pass"
+      },
+      {
+        "field": "surfaceControls",
+        "id": "rounded-unsafe-corner",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "surfaceControls",
+        "id": "inset-shadow-rejected",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "surfaceControls",
+        "id": "multiple-shadow-rejected",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "surfaceControls",
+        "id": "percent-radius-rejected",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "surfaceControls",
+        "id": "elliptic-radius-rejected",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "surfaceControls",
+        "id": "adjacent-tight-edge-incomplete-coverage",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "single-reviewed-block",
+        "expected": "measured-pass",
+        "observed": "measured-pass"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "history-surface-excludes-second-inspector-panel",
+        "expected": "measured-pass",
+        "observed": "measured-pass"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "inline-surface-rejected",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "multicolumn-surface-rejected",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "surface-outside-explicit-selector",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "unrelated-finite-shadow-disjoint",
+        "expected": "measured-pass",
+        "observed": "measured-pass"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "unrelated-shadow-offset-intersects",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "unrelated-blurred-shadow-unbounded",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "unrelated-filter-outside-box",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      },
+      {
+        "field": "guardBrowserControls",
+        "id": "unrelated-generated-content-outside-box",
+        "expected": "unresolved",
+        "observed": "unresolved"
+      }
+    ],
+    "bodyBytesBeforeAfter": 1050507,
+    "fullSelectionAndCandidateStylesUnchanged": true
+  },
+  "driverSeconds": 41.72000611999829,
+  "sourceDurationMs": 41343,
+  "sourceExit": 0,
+  "normalBrowserExit": {
+    "pid": 13,
+    "startTicks": "5101686",
+    "exitCode": 0,
+    "signal": null
+  },
+  "resources": {
+    "memoryPeakBytes": 943087616,
+    "memoryPeakMiB": 899.3984375,
+    "memoryGateBytes": 939524096,
+    "overGateBytes": 3563520,
+    "samplesOverGate": [
+      247,
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254,
+      255,
+      256,
+      257,
+      258,
+      259,
+      260,
+      261,
+      262,
+      263,
+      264,
+      265,
+      266,
+      267
+    ],
+    "taskPeak": 75,
+    "nonzeroResourceEvents": []
+  },
+  "cleanupCensuses": {
+    "status": "NOT_ESTABLISHED",
+    "reason": "No distinct naturally scheduled nonterminal census begins after final browser-close settlement; next sample is terminal.",
+    "settledMonoNs": "51057563228412",
+    "settledNextSampleIndex": 267,
+    "qualifyingNonterminalSampleIds": [],
+    "terminalSample": 267,
+    "terminalSweep": {
+      "kind": "read-bounds",
+      "sample": 267,
+      "before": {
+        "utc": "2026-10-15T06:44:37.547Z",
+        "monoNs": "51057584257106"
+      },
+      "after": {
+        "utc": "2026-10-15T06:44:37.547Z",
+        "monoNs": "51057584515517"
+      },
+      "processReadEncoding": "[pid,beforeOffsetNs,afterOffsetNs] from before.monoNs",
+      "processReads": [
+        [
+          1,
+          "164178",
+          "179567"
+        ],
+        [
+          7,
+          "198081",
+          "208763"
+        ]
+      ],
+      "atomicSnapshot": false
+    },
+    "terminalProcesses": [
+      {
+        "pid": 1,
+        "name": "docker-init",
+        "state": "S",
+        "ppid": 0,
+        "threads": 1,
+        "start_ticks": "5101611"
+      },
+      {
+        "pid": 7,
+        "name": "MainThread",
+        "state": "R",
+        "ppid": 1,
+        "threads": 5,
+        "start_ticks": "5101616"
+      }
+    ],
+    "terminalSweepBeginsAfterSettlementMs": 21.028694
+  },
+  "retainedZObservations": [
+    {
+      "sample": 76,
+      "utc": "2026-10-15T06:44:04.286Z",
+      "processes": [
+        {
+          "pid": 60,
+          "name": "chrome-headless",
+          "state": "Z",
+          "ppid": 19,
+          "threads": 2,
+          "start_ticks": "5101702"
+        }
+      ]
+    },
+    {
+      "sample": 266,
+      "utc": "2026-10-15T06:44:37.511Z",
+      "processes": [
+        {
+          "pid": 13,
+          "name": "chrome-headless",
+          "state": "Z",
+          "ppid": 7,
+          "threads": 2,
+          "start_ticks": "5101686"
+        }
+      ]
+    }
+  ],
+  "sampleCount": 268,
+  "ownedCleanup": {
+    "result": "PASS",
+    "utc": "2026-10-15T06:44:56.445974+00:00",
+    "input_after_matches_before": {
+      "regular_files": 3614,
+      "confined_symlinks": 10
+    },
+    "remaining_owned_containers": [],
+    "remaining_owned_volumes": [],
+    "retained_image_id": "sha256:847f71bbb3f17fc1032d50d75bf6fb3fdcf188b16dff81f24667fe9ae9409e01",
+    "jobs": [
+      "p390-00-11"
+    ],
+    "transfer_never_started": true
+  },
+  "limitations": [
+    "No later job is authorized to continue because the preceding gate did not pass.",
+    "These12 measured-pass observations remain provisional under failed continuation gates; no aggregate contrast PASS.",
+    "Clean terminal alone does not satisfy the approved two-census contract.",
+    "Historical failures remain unchanged; no runtime retry or source mutation performed by reviewer."
+  ],
+  "bindings": [
+    {
+      "path": "runtime/p390-00-11/plan.json",
+      "bytes": 5561,
+      "sha256": "855904502fa8cd6a226d3e388371c912b954a15ab650739e95c13d0674253039"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/test-receipt.json",
+      "bytes": 759,
+      "sha256": "04c48968715339aa1f90e7016a6fedd98a4e0b79582b8959c343d1be90ab0a50"
+    },
+    {
+      "path": "runtime/p390-00-11/cleanup-receipt.json",
+      "bytes": 397,
+      "sha256": "4b7d47f11f4f23c1d4e028c926acdd3aaaf38a69f69df77e5b1910cc8c43757c"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifact-manifest.json",
+      "bytes": 4585,
+      "sha256": "25287d0f3769eff7e43b8392baeb4e3fb14ed66b9525e93502985010c5907bf5"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/P-reflow-390-body-after.html",
+      "bytes": 1050507,
+      "sha256": "7239c6a8bc2c01e43847bdb4e76251df1a1dd864b90fb8434d0149a7100184be"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/P-reflow-390-body-before.html",
+      "bytes": 1050507,
+      "sha256": "7239c6a8bc2c01e43847bdb4e76251df1a1dd864b90fb8434d0149a7100184be"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/P-reflow-390-node-0.png",
+      "bytes": 75490,
+      "sha256": "a5807b143de196c65c6a77f5c682e453c13b2fe97f8a2e3d6fb316fbe7207377"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/controls-p390-00-11.json",
+      "bytes": 1780774,
+      "sha256": "7bbbc2c42e27581576ebce0664348abb4d970d342534842bd95aed9ca677fee3"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/lifecycle-source.json",
+      "bytes": 1879,
+      "sha256": "15bf2154bfc4fa3082404da1f0cda240f6a77770d7cb55cadc4d35a63dedf73c"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-000.json",
+      "bytes": 3086523,
+      "sha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-001.json",
+      "bytes": 3054600,
+      "sha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-002.json",
+      "bytes": 3085954,
+      "sha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-003.json",
+      "bytes": 3059652,
+      "sha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-004.json",
+      "bytes": 3086110,
+      "sha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-005.json",
+      "bytes": 3059411,
+      "sha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-006.json",
+      "bytes": 3111559,
+      "sha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-007.json",
+      "bytes": 3055792,
+      "sha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-008.json",
+      "bytes": 3111933,
+      "sha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-009.json",
+      "bytes": 3055962,
+      "sha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-010.json",
+      "bytes": 3111845,
+      "sha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-011.json",
+      "bytes": 3055880,
+      "sha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/screenshot-control-default.png",
+      "bytes": 3715,
+      "sha256": "a8168997a75f55a5cc6ded95fe32960d9ae4a842ba450d7f1395f3a777cc14fb"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/screenshot-control-initial.png",
+      "bytes": 3715,
+      "sha256": "a8168997a75f55a5cc6ded95fe32960d9ae4a842ba450d7f1395f3a777cc14fb"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/summary.json",
+      "bytes": 1992791,
+      "sha256": "6ddc16e3231f2ae0a6dfc59ea704ce065908868fca3620d7991314240e497823"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/completion.json",
+      "bytes": 623,
+      "sha256": "e91370f3cbb462438643ccfefba67776d417e1fca0d4d0c18c1bb3e2b34e3233"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/lifecycle.ndjson",
+      "bytes": 43319,
+      "sha256": "d5d4cca5e48dfa948c7dcf8d61fb5a429ce30b1560c8af6718eae5f7841f0d56"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/samples.ndjson",
+      "bytes": 191291,
+      "sha256": "ba86a227002beadb8f47043201dbf4f96e19e351941a076f0f6bc79ff18f2275"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/summary.json",
+      "bytes": 1992791,
+      "sha256": "6ddc16e3231f2ae0a6dfc59ea704ce065908868fca3620d7991314240e497823"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/lifecycle-source.json",
+      "bytes": 1879,
+      "sha256": "15bf2154bfc4fa3082404da1f0cda240f6a77770d7cb55cadc4d35a63dedf73c"
+    },
+    {
+      "path": "validator/workload-evidence/prospective-expectations.json",
+      "bytes": 316316,
+      "sha256": "e5b973ed32dbd7b1fbfb4aad71a95830c02d44134b61e82d0f044541cdba48a9"
+    },
+    {
+      "path": "inputs/expected-bindings.json",
+      "bytes": 367271,
+      "sha256": "456fd9b0403fe82a42cc5cb016a2320823a24f4934aa8bd22ecdef0819c6139b"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/controls-p390-00-11.json",
+      "bytes": 1780774,
+      "sha256": "7bbbc2c42e27581576ebce0664348abb4d970d342534842bd95aed9ca677fee3"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-000.json",
+      "bytes": 3086523,
+      "sha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-001.json",
+      "bytes": 3054600,
+      "sha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-002.json",
+      "bytes": 3085954,
+      "sha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-003.json",
+      "bytes": 3059652,
+      "sha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-004.json",
+      "bytes": 3086110,
+      "sha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-005.json",
+      "bytes": 3059411,
+      "sha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-006.json",
+      "bytes": 3111559,
+      "sha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-007.json",
+      "bytes": 3055792,
+      "sha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-008.json",
+      "bytes": 3111933,
+      "sha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-009.json",
+      "bytes": 3055962,
+      "sha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-010.json",
+      "bytes": 3111845,
+      "sha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-011.json",
+      "bytes": 3055880,
+      "sha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/P-reflow-390-body-before.html",
+      "bytes": 1050507,
+      "sha256": "7239c6a8bc2c01e43847bdb4e76251df1a1dd864b90fb8434d0149a7100184be"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/P-reflow-390-body-after.html",
+      "bytes": 1050507,
+      "sha256": "7239c6a8bc2c01e43847bdb4e76251df1a1dd864b90fb8434d0149a7100184be"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/samples.ndjson",
+      "bytes": 191291,
+      "sha256": "ba86a227002beadb8f47043201dbf4f96e19e351941a076f0f6bc79ff18f2275"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/lifecycle.ndjson",
+      "bytes": 43319,
+      "sha256": "d5d4cca5e48dfa948c7dcf8d61fb5a429ce30b1560c8af6718eae5f7841f0d56"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/completion.json",
+      "bytes": 623,
+      "sha256": "e91370f3cbb462438643ccfefba67776d417e1fca0d4d0c18c1bb3e2b34e3233"
+    },
+    {
+      "path": "runtime/p390-00-11/jobs/p390-00-11/test.log",
+      "bytes": 17808,
+      "sha256": "b318e010bfd6c64aef65db5975837125e402658065ed0b50d9321605ab2179f7"
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "mode": "native",
+  "node": "v24.19.0",
+  "playwrightVersion": "1.64.0",
+  "playwrightBundleSha256": "2325ca4c1c83070e89dc49fb82525508f0a68e0cf12e2a624277968da216b7e0",
+  "method": "single Node heap combines remote and receiver; exact staged Playwright wire transform; checkpoints not allocation profiler; explicit gc only between rows; no browser or cgroup",
+  "records": [
+    {
+      "name": "node-p390-00-11-000.json",
+      "sourceArtifactSha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53",
+      "mode": "native",
+      "elapsedMs": 853.942018,
+      "before": {
+        "rss": 53030912,
+        "heapTotal": 28045312,
+        "heapUsed": 9244344,
+        "external": 16246514,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 54545512,
+      "observedHeapDelta": 45301168,
+      "observedMaximumRSS": 150044672,
+      "observedRSSDelta": 97013760,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-001.json",
+      "sourceArtifactSha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc",
+      "mode": "native",
+      "elapsedMs": 810.8485009999999,
+      "before": {
+        "rss": 143687680,
+        "heapTotal": 77590528,
+        "heapUsed": 9291360,
+        "external": 15716129,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 91438336,
+      "observedHeapDelta": 82146976,
+      "observedMaximumRSS": 190087168,
+      "observedRSSDelta": 46399488,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-002.json",
+      "sourceArtifactSha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea",
+      "mode": "native",
+      "elapsedMs": 972.1185260000002,
+      "before": {
+        "rss": 177545216,
+        "heapTotal": 144699392,
+        "heapUsed": 9351056,
+        "external": 15715560,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 80345256,
+      "observedHeapDelta": 70994200,
+      "observedMaximumRSS": 235573248,
+      "observedRSSDelta": 58028032,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-003.json",
+      "sourceArtifactSha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3",
+      "mode": "native",
+      "elapsedMs": 931.3177190000001,
+      "before": {
+        "rss": 226263040,
+        "heapTotal": 144699392,
+        "heapUsed": 9331104,
+        "external": 15720612,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 79581728,
+      "observedHeapDelta": 70250624,
+      "observedMaximumRSS": 237694976,
+      "observedRSSDelta": 11431936,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-004.json",
+      "sourceArtifactSha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d",
+      "mode": "native",
+      "elapsedMs": 1238.600061,
+      "before": {
+        "rss": 213225472,
+        "heapTotal": 144699392,
+        "heapUsed": 9361088,
+        "external": 15720768,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 79720904,
+      "observedHeapDelta": 70359816,
+      "observedMaximumRSS": 237871104,
+      "observedRSSDelta": 24645632,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-005.json",
+      "sourceArtifactSha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa",
+      "mode": "native",
+      "elapsedMs": 1049.2827889999999,
+      "before": {
+        "rss": 228519936,
+        "heapTotal": 144699392,
+        "heapUsed": 9332576,
+        "external": 15720527,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 82011312,
+      "observedHeapDelta": 72678736,
+      "observedMaximumRSS": 240189440,
+      "observedRSSDelta": 11669504,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-006.json",
+      "sourceArtifactSha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c",
+      "mode": "native",
+      "elapsedMs": 874.9258949999994,
+      "before": {
+        "rss": 228651008,
+        "heapTotal": 144699392,
+        "heapUsed": 9399192,
+        "external": 15745976,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 82714288,
+      "observedHeapDelta": 73315096,
+      "observedMaximumRSS": 240451584,
+      "observedRSSDelta": 11800576,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-007.json",
+      "sourceArtifactSha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7",
+      "mode": "native",
+      "elapsedMs": 819.9730829999999,
+      "before": {
+        "rss": 228659200,
+        "heapTotal": 144699392,
+        "heapUsed": 9337240,
+        "external": 15742357,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 80352000,
+      "observedHeapDelta": 71014760,
+      "observedMaximumRSS": 240328704,
+      "observedRSSDelta": 11669504,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-008.json",
+      "sourceArtifactSha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164",
+      "mode": "native",
+      "elapsedMs": 845.4768989999993,
+      "before": {
+        "rss": 228663296,
+        "heapTotal": 144699392,
+        "heapUsed": 9411432,
+        "external": 15742731,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 82586680,
+      "observedHeapDelta": 73175248,
+      "observedMaximumRSS": 240463872,
+      "observedRSSDelta": 11800576,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-009.json",
+      "sourceArtifactSha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b",
+      "mode": "native",
+      "elapsedMs": 1020.4103320000013,
+      "before": {
+        "rss": 228663296,
+        "heapTotal": 144699392,
+        "heapUsed": 9339248,
+        "external": 15742901,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 84867464,
+      "observedHeapDelta": 75528216,
+      "observedMaximumRSS": 240332800,
+      "observedRSSDelta": 11669504,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-010.json",
+      "sourceArtifactSha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b",
+      "mode": "native",
+      "elapsedMs": 828.1819860000014,
+      "before": {
+        "rss": 228667392,
+        "heapTotal": 144699392,
+        "heapUsed": 9412744,
+        "external": 15742813,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 85150240,
+      "observedHeapDelta": 75737496,
+      "observedMaximumRSS": 238108672,
+      "observedRSSDelta": 9441280,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    },
+    {
+      "name": "node-p390-00-11-011.json",
+      "sourceArtifactSha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746",
+      "mode": "native",
+      "elapsedMs": 1014.6478369999986,
+      "before": {
+        "rss": 228638720,
+        "heapTotal": 144699392,
+        "heapUsed": 9340960,
+        "external": 15742731,
+        "arrayBuffers": 143611
+      },
+      "observedMaximumHeapUsed": 77823408,
+      "observedHeapDelta": 68482448,
+      "observedMaximumRSS": 240308224,
+      "observedRSSDelta": 11669504,
+      "checkpoints": 5,
+      "messages": 0,
+      "maxChunkUnits": 0,
+      "equivalence": "complete JSON bytes"
+    }
+  ],
+  "maxRSSKiB": 237900
+}

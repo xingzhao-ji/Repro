@@ -1,0 +1,23 @@
+{
+  "status": "PURE_LOSSLESS_RETENTION_REVIEW_PASS",
+  "scope": "Re-encoding of already retained v3 evidence only; no new measurement or runtime",
+  "assertions": 73,
+  "evidenceStoreSha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a",
+  "originalSummarySha256": "aae719ed137110374c6df66cc0b8efe55c4673d7d744aca262dfc0bfab5cb109",
+  "originalSummaryBytes": 50745836,
+  "compactCheckpointBytes": 1962676,
+  "artifactDirectory": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/retained-evidence-roundtrip-HUe5JS",
+  "controlFieldCount": 5,
+  "productRows": 6,
+  "distinctProductSteps": 12,
+  "outsidePaintRecords": 18972,
+  "sourceObservationComplete": false,
+  "memoryConclusion": "Output size reduction is observed; RSS reduction and future batch feasibility are unproven.",
+  "effects": {
+    "browser": false,
+    "docker": false,
+    "sourceMutation": false,
+    "priorTaskMutation": false
+  },
+  "scriptSha256": "6d4a57ae2a6e621e6f3a6ce07ed1096c3e4c61d5817ffaaab721765560e07089"
+}

@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-15T06:36:45.369193+00:00",
+  "status": "INPUTS_FROZEN_NO_RUNTIME_PENDING_INDEPENDENT_REVIEW",
+  "manifestSha256": "9e6c316ef4d800498f1f86c70ff787bc2538ac4803c4723b657391152c5f0c49",
+  "fileCount": 28,
+  "totalBytes": 1110462,
+  "readback": "PASS",
+  "sourceFreezeSha256": "b49450b8b30245d308750c4018a84bdc9032babdb9c8670b8fe82f51921a4510",
+  "offlineTests": {
+    "passed": 83,
+    "failed": 0,
+    "skipped": 0
+  },
+  "writesFrozen": true
+}

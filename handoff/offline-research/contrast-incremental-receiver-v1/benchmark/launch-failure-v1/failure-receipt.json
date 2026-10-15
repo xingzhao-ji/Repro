@@ -1,0 +1,26 @@
+{
+  "status": "PRELAUNCH_HARNESS_ERROR",
+  "utc": "2026-10-15T08:09:10.851238+00:00",
+  "command": [
+    "python",
+    ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks.py",
+    "--reviewed-plan"
+  ],
+  "exitCode": 1,
+  "errorType": "FileNotFoundError",
+  "message": "[Errno 2] No such file or directory: 'node'",
+  "failurePoint": "subprocess.Popen executable lookup before any child launch",
+  "nodeWorkersStarted": 0,
+  "measurementRowsCompleted": 0,
+  "cause": "minimal PATH omitted the installed Node executable directory",
+  "preservedFiles": [
+    {
+      "path": "run-benchmarks.py",
+      "sha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b"
+    },
+    {
+      "path": "bindings.json",
+      "sha256": "cd026f77f369180b7aaa2df59fc436ad98c459d8089c59fe0b747caab7fdc514"
+    }
+  ]
+}

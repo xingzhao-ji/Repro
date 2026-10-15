@@ -1,0 +1,364 @@
+{
+  "at": "2026-10-14T23:45:23.328877+00:00",
+  "outcome": "All final nonbrowser checks passed; initial failed attempt preserved.",
+  "scope": "Build, strict typecheck, full lint, kit/fixture checks, full source suite, full emitted suite with documented generated harness path adaptation. Browser checks handled separately.",
+  "requiredPassingCommands": [
+    "final-build",
+    "final-typecheck",
+    "final-lint",
+    "final-fixture-check",
+    "final-kit-check",
+    "final-source-full",
+    "final-compile",
+    "final-assets-emitted-full",
+    "final-source-identity",
+    "final-emitted-identity"
+  ],
+  "commands": [
+    {
+      "path": "build.receipt.json",
+      "sha256": "8b5f3993bdeb318cf1dd4b0d1beb958621b7b02768652770efaf80ab65061fca",
+      "name": "build",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "compile.receipt.json",
+      "sha256": "85b383517673d5dcda8e3ea13123972b4b99ed4be928f4125f8427d867c9854c",
+      "name": "compile",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "final-assets-emitted-full.receipt.json",
+      "sha256": "17fdd5cb25180f346768ed8ff57e8c8db21b323631455790ce70528e2a9e0600",
+      "name": "final-assets-emitted-full",
+      "exitCode": 0,
+      "passed": true,
+      "summary": [
+        "\u2139 tests 464",
+        "\u2139 pass 464",
+        "\u2139 fail 0",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 51148.052502"
+      ]
+    },
+    {
+      "path": "final-build.receipt.json",
+      "sha256": "804a0b2efac1817f29357450f2ae122981b198226b8ea5c0e87b7ed66cf20959",
+      "name": "final-build",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "final-compile.receipt.json",
+      "sha256": "ebcf453fd36201b83d68fdf37f79ff9fb8548217c315d510cf4b3157f323e4a8",
+      "name": "final-compile",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "final-emitted-full.receipt.json",
+      "sha256": "5d0d12f791af578ca2f308e65e5e43eddf0d56e9059e504772956a82405d3673",
+      "name": "final-emitted-full",
+      "exitCode": 1,
+      "passed": false,
+      "summary": [
+        "\u2139 tests 464",
+        "\u2139 pass 461",
+        "\u2139 fail 3",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 35091.728594"
+      ]
+    },
+    {
+      "path": "final-emitted-identity.receipt.json",
+      "sha256": "1d5e071425ff3c766c609305d70eeb119382424f153dd2189d222a19962557d2",
+      "name": "final-emitted-identity",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "final-fixture-check.receipt.json",
+      "sha256": "41c97a31c609eeef1104d7f79fc915c49da5ac4e3814ba9ebae149ab0d4df893",
+      "name": "final-fixture-check",
+      "exitCode": 0,
+      "passed": true,
+      "summary": [
+        "\u2139 tests 7",
+        "\u2139 pass 7",
+        "\u2139 fail 0",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 686.181147"
+      ]
+    },
+    {
+      "path": "final-kit-check.receipt.json",
+      "sha256": "7871678a3d678055f984d022351c368404eea18c14e69949574108f9adb343c5",
+      "name": "final-kit-check",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "final-lint.receipt.json",
+      "sha256": "ea734b0017a87bcc6c2ff32eb7bea498f4e99967c3ddc42805dbf555ffcbdeb2",
+      "name": "final-lint",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "final-source-full.receipt.json",
+      "sha256": "1db40b429c60d7340d256cbaf602fa4cfffbc2f9c92a152ec1dde61c2b016efb",
+      "name": "final-source-full",
+      "exitCode": 0,
+      "passed": true,
+      "summary": [
+        "\u2139 tests 464",
+        "\u2139 pass 464",
+        "\u2139 fail 0",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 60090.311516"
+      ]
+    },
+    {
+      "path": "final-source-identity.receipt.json",
+      "sha256": "80fddc27da5823d23c6f92c065f5d56c56f16ba6e9f339fbad4b28b061f81feb",
+      "name": "final-source-identity",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "final-typecheck.receipt.json",
+      "sha256": "1f2909e85121d781f0a4cbab51fa4c829661f2dad1312203034545e0033835b3",
+      "name": "final-typecheck",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "fixture-check.receipt.json",
+      "sha256": "77f4dae4df3267fc30c335412055d4daf3108fe5c1de31dc9c47df15b5c175f8",
+      "name": "fixture-check",
+      "exitCode": 0,
+      "passed": true,
+      "summary": [
+        "\u2139 tests 7",
+        "\u2139 pass 7",
+        "\u2139 fail 0",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 1512.081123"
+      ]
+    },
+    {
+      "path": "kit-check.receipt.json",
+      "sha256": "179bf35b85a3b2cf4b5d861844a05de3a70440fa0741ea04f3f8415dae905736",
+      "name": "kit-check",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "lint.receipt.json",
+      "sha256": "443afe48d55af77981c9caa4c04c9aa9ba1068ec1c8e9864eeee8d9bccdcdcef",
+      "name": "lint",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    },
+    {
+      "path": "source-full.receipt.json",
+      "sha256": "4b71b45b34fc1f99e802d0fb7aeb9f5c703ef03504fae54bae4f7973b71bc887",
+      "name": "source-full",
+      "exitCode": 1,
+      "passed": false,
+      "summary": [
+        "\u2139 tests 464",
+        "\u2139 pass 463",
+        "\u2139 fail 1",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 44695.659759"
+      ]
+    },
+    {
+      "path": "source-timeout-isolated.receipt.json",
+      "sha256": "20a2488ff4a75eb760f5f1b4e7dae74e7f2f95f92842001c61089ab7d7b3ac34",
+      "name": "source-timeout-isolated",
+      "exitCode": 0,
+      "passed": true,
+      "summary": [
+        "\u2139 tests 1",
+        "\u2139 pass 1",
+        "\u2139 fail 0",
+        "\u2139 cancelled 0",
+        "\u2139 skipped 0",
+        "\u2139 todo 0",
+        "\u2139 duration_ms 784.66719"
+      ]
+    },
+    {
+      "path": "typecheck.receipt.json",
+      "sha256": "6ed0272e90cd9f95b721bc8f2037a6d7edcc660d7a29fa8e42f2525e78b2a835",
+      "name": "typecheck",
+      "exitCode": 0,
+      "passed": true,
+      "summary": []
+    }
+  ],
+  "rawEmittedFilesVerified": 62,
+  "emittedInputsVerified": 146,
+  "builtFilesVerified": 9,
+  "productionAndHelperJavascriptUnchangedFromTsc": [
+    {
+      "path": "src/adapter.js",
+      "sha256": "2fce5922c08143a706cfc3119cc8fa078f40b3930eb9c0dd9cf5d2cd35861af9"
+    },
+    {
+      "path": "src/browser-diagnostics.js",
+      "sha256": "28612b5c7a1ea52970ca3d05bc0b4508596d8d3d3a8bd79b918fbc4643f7a813"
+    },
+    {
+      "path": "src/capsule.js",
+      "sha256": "65723a0565d10f530d92885f7ae1072c8238cea69518d014eacd3d1b30181ec0"
+    },
+    {
+      "path": "src/cli.js",
+      "sha256": "0594aa25de6800e6f75be29f8f12a94d0695bfcb1df8053927d2263549d82fe7"
+    },
+    {
+      "path": "src/contracts.js",
+      "sha256": "967511012aebb247e5ccd3492e42f5c4a7e93b0504dc39d908bdb1718e0a9f65"
+    },
+    {
+      "path": "src/evidence-inspector.js",
+      "sha256": "2aa70bd9ac3b03ef119b6017cbd2d60746a3b08b96b9fd822e57698280dc74af"
+    },
+    {
+      "path": "src/fixture.js",
+      "sha256": "d730978e3c81031ec772164d77cdbc162310e622e7105b65eea6c0b59d15a037"
+    },
+    {
+      "path": "src/index.js",
+      "sha256": "a7fe5f565fcabcf062b46ad71d8912c30178461e1b8454572d4b071b47548b4a"
+    },
+    {
+      "path": "src/input.js",
+      "sha256": "d33f3048ea7a63aaf7f436538c791346856f9a41d2ad6873050277895a4223af"
+    },
+    {
+      "path": "src/ledger.js",
+      "sha256": "839a6aaefabe3c313ba48a4ac365a4658c61dd26f9e63e7c1a8621a0366e5299"
+    },
+    {
+      "path": "src/manifest.js",
+      "sha256": "d03afedc36ee8acc7d02f1b65ca0a1e2d438b2a0ec657bb6171d5c1fb652229c"
+    },
+    {
+      "path": "src/oracle.js",
+      "sha256": "5e0833a4e7459b4579155afab1976cc86d9743380d090cbebb132ceee0ea0a83"
+    },
+    {
+      "path": "src/paths.js",
+      "sha256": "7021f67a9486465795ecea67946f8f27d1a4ceea8b0c76a1bb58a0afb41a83f0"
+    },
+    {
+      "path": "src/reducer.js",
+      "sha256": "8eb6b1b3e2b6b1e19df49fca3de63a43de07e3cb88a201a1322c087d65ca4e27"
+    },
+    {
+      "path": "src/server.js",
+      "sha256": "f3f418d1ebe91bda4d0a8892aa4b71e8c98f6431372c48b2124263096ec2005a"
+    },
+    {
+      "path": "src/service.js",
+      "sha256": "f4e8e7c79d3bdfcc4545d56f518b278828b0436decf35f01b99ec8529c6b30ca"
+    },
+    {
+      "path": "scripts/analyze-hci.js",
+      "sha256": "a9160a73f2477a8e6cba2d17c0209570cbe670828c0a24c03665c1d38ac501e8"
+    },
+    {
+      "path": "scripts/benchmark.js",
+      "sha256": "ffb877532ac2bad9ec05ebfc9370410f92f9e166e0499d1f787126551cdcdbc3"
+    },
+    {
+      "path": "scripts/build-hci-study.js",
+      "sha256": "51297dd2d96b0bd031188dec5344475725b4f8ec17efc433a66ea68a37fadc6f"
+    },
+    {
+      "path": "scripts/freeze-hci-case.js",
+      "sha256": "a9377e7bd24e1bd8a0083a0f46ccf943b352eda6d412f7b45092d4077e09a0b9"
+    },
+    {
+      "path": "scripts/hci-case.js",
+      "sha256": "9d97e6c301bfc3e30f3d11542752f3abd322cdc7885e638b3e5d03132af4f8cf"
+    },
+    {
+      "path": "tests/helpers/hci-case-fixture.js",
+      "sha256": "a85b2d2c46434fd3f04a5e69283153a2cc671753a3b478a3d7659cae118cf24e"
+    },
+    {
+      "path": "tests/helpers/owned-process.js",
+      "sha256": "c0bfeaeb78569d2b050246e9eaf53d9a40a544be948b813131046f452fda8a31"
+    },
+    {
+      "path": "tests/helpers/recovery-worker.js",
+      "sha256": "2dfa52390cd86fb79c1927ed316c0c7fd41cbbb8ae76084c81534cad98c41ea8"
+    },
+    {
+      "path": "tests/helpers/test-runtime.js",
+      "sha256": "088168a8edc4bc85c1c3ac4d918e921f30fb0bc8e94373f9dcf64dbc7fe21a5e"
+    }
+  ],
+  "generatedHarnessChanges": "emitted-launch-plumbing.json",
+  "runtimeEvidence": "emitted-runtime-observation.json",
+  "identities": {
+    "source": {
+      "format": "source",
+      "adapterUrl": "file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/release-completion-v1/candidate/src/adapter.ts",
+      "adapterArtifactSha256": "2727f237d460b98d620d5e2620547305d6d6e4d6e1c3c093f56419b2d475ee60",
+      "harnessDigest": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "buggy": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "fixed": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09"
+    },
+    "emitted": {
+      "format": "emitted",
+      "adapterUrl": "file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/release-completion-v1/emitted/src/adapter.js",
+      "adapterArtifactSha256": "2fce5922c08143a706cfc3119cc8fa078f40b3930eb9c0dd9cf5d2cd35861af9",
+      "harnessDigest": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "buggy": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "fixed": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09"
+    }
+  },
+  "sourceRuntimeFallback": false,
+  "browserExecutedByThisTask": false,
+  "limitations": [
+    "Initial concurrent full source run had one existing 5-second child timeout; retained separately.",
+    "Initial full emitted run failed 3 HCI build/fault tests because generated runner input omitted assets/tokens.css; failed logs/coverage and initial input manifest preserved, exact frozen asset added before full rerun.",
+    "Test-runtime coverage intentionally executes temporary synthetic TS workers.",
+    "HCI export tests intentionally bundle original web TSX build inputs.",
+    "Emitted full suite uses V8 coverage instrumentation, whose overhead is included in its recorded duration; no performance comparison is claimed.",
+    "This receipt does not establish browser acceptance, offline installed package correctness, native zoom, or screen-reader usability."
+  ]
+}

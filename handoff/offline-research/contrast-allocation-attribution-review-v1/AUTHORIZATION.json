@@ -1,0 +1,9 @@
+{
+  "utc": "2026-10-15T08:20:21.691906+00:00",
+  "instruction": "The full transport results do not justify installing this candidate. Keep it uninstalled and preserve the frozen 107/108 outcome. Make one focused offline review of the existing measurements and code to identify whether a smaller allocation correction can avoid remote/client graph overlap without changing error semantics or measurement data. Do not add broad benchmark sweeps. If no evidence-backed local correction exists, provide a concise bounded attribution plan for a future pilot and stop pending that decision. The lifecycle extension remains pending user approval. No browser/container runs, no gate relaxation or publication.",
+  "sourceThread": "01a11810-e516-712c-85d8-3a870bf43005",
+  "scope": "One focused offline existing-evidence/code review; no benchmarks or runtime execution; future pilot plan only unless a sufficiently supported local correction emerges",
+  "candidateInstalled": false,
+  "frozenRegression": "107/108 preserved",
+  "observationHold": "PENDING_NOT_ADOPTED"
+}

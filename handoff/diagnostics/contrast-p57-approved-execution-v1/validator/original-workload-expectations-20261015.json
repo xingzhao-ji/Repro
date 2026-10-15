@@ -1,0 +1,844 @@
+{
+  "status": "EXPECTED_ORIGINAL_WORKLOAD_FROZEN_BEFORE_NEW_SOURCE_REVIEW",
+  "utc": "2026-10-15T04:07:03.332479+00:00",
+  "job": "p390-00-11",
+  "originalBindings": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input-manifest.json",
+      "bytes": 840721,
+      "sha256": "1035b18a38ad19b11c06d8cf135af9f8767356bd5d9c509db62496f68c7dab33"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/contrast-p57-memory-batch-probe.mjs",
+      "bytes": 77784,
+      "sha256": "9b8f407a554434f793bd93b7cf50cf145adfba828d6660c6b49896fe82da7053"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/contrast-p57-memory-batch-inputs.json",
+      "bytes": 95203,
+      "sha256": "1d3102b0d55538f50522b0e82291556ebc4098cf03b4616e31bcc6801887b08c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/batch-plan.json",
+      "bytes": 14104,
+      "sha256": "0abcd3553b3875fca305670cf6ec4e3ec0ae3af15176013df40a26479422a0dd"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/frozen-v3-inputs.json",
+      "bytes": 94418,
+      "sha256": "9299adf0dcc84668d4c5410ae98be6929728b120c918736507f1467e9d998d37"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/actual/study/P.html",
+      "bytes": 398403,
+      "sha256": "a8fa8f83540c4377901ffe305c1a1943f0a512332b4f14f7a54eec99db433646"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/actual/packet.json",
+      "bytes": 110557,
+      "sha256": "2931a3b104efb5410461669cc6115b457831c8ec0a20b55d8509fddd80740c42"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/actual/study/evidence.json",
+      "bytes": 110556,
+      "sha256": "b91e820b0107715efeefd9b0befe29752cf1e48863424ea676f50e8abafc51d0"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/verification-inputs/resource-probe.mjs",
+      "bytes": 4739,
+      "sha256": "0c5c58eb20eaf87486a1b1938d3b49a245d3c704433d079e3ede04dcd5c763f8"
+    }
+  ],
+  "batch": {
+    "id": "p390-00-11",
+    "stateId": "P-reflow-390",
+    "expectedNodeCount": 12,
+    "nodes": [
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 0,
+        "nodeSha256": "8f43d0cad07f698a22a3e532cf470becc41d47e770ee34894796ecd9d41544c6"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 1,
+        "nodeSha256": "281f595813c300d78539b1dfb36afca7935b5049dd166c4e65990297bc74b657"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 2,
+        "nodeSha256": "281c58d0c6c21e88a5c2bbfe77bb965422cc91d03abc4a4c395e53a59f5ce1e0"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 3,
+        "nodeSha256": "c2b66d03ef8c7f5fabfd8132485d8f6d47f876ea7744eea8e4b2e67f0e89385e"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 4,
+        "nodeSha256": "590f71de28d25258e033fd717ff420391efbd495a63f0f0ca370f8ad9456f6ff"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 5,
+        "nodeSha256": "221fb1276441c0dfa3f741d2b66ce3f4e1d3f13997d550c4dc3a4135dfd6ebd3"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 6,
+        "nodeSha256": "9c8c20b2d821fad0b3dba6095f12515924bc34e02d4987ab17f1ef778668d102"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 7,
+        "nodeSha256": "030e826306e47e6d242b82407e3ad275bea56c04e51b0211ffbb6b2ebd9334ab"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 8,
+        "nodeSha256": "6695da094f6cafe105c66b03bfc8042bd4ca50dfb737fb6a54650c6733c84a55"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 9,
+        "nodeSha256": "762a3216e00f649719c9a51273f3b31eb9cc72465f306097e5fc3fbee074d149"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 10,
+        "nodeSha256": "0f303438a9c5aade00f4864c028752b64297e46068c4c2398ebbb2e7957b4129"
+      },
+      {
+        "stateId": "P-reflow-390",
+        "sourceAuditNodeIndex": 11,
+        "nodeSha256": "9203d52f595a7f53b340c62e3dce6a252149a33e5f3c84e71924decc070ff25f"
+      }
+    ]
+  },
+  "stateWithoutNodes": {
+    "id": "P-reflow-390",
+    "condition": "P",
+    "auditState": "reflow-390",
+    "viewport": {
+      "width": 390,
+      "height": 900
+    },
+    "selectedTrial": 1,
+    "predictedScrollPositions": 48
+  },
+  "selectedOriginalNodes": [
+    {
+      "sourceAuditNodeIndex": 0,
+      "target": [
+        ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(3) > .trial-reason"
+      ],
+      "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+      "rowIndex": 1,
+      "field": "reason",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 0,
+        "trialIndex": 0,
+        "renderedGroup": "kept",
+        "field": "reason"
+      },
+      "expectedText": "Target failure preserved in 2/2 required repetitions.",
+      "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+      "printableASCIICharacters": 47,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "11px",
+        "opacity": "1",
+        "rect": {
+          "x": 222.625,
+          "y": -286.28125,
+          "width": 202,
+          "height": 34.09375
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 471,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 1,
+      "target": [
+        ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(4)"
+      ],
+      "originalHtml": "<td>Baseline</td>",
+      "rowIndex": 1,
+      "field": "decision",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 0,
+        "trialIndex": 0,
+        "renderedGroup": "kept",
+        "field": "decision"
+      },
+      "expectedText": "Baseline",
+      "expectedTextSha256": "cc9ea7f7c64e772c81eb80854c0e7db8f504943549c0675d893a983b8f545152",
+      "printableASCIICharacters": 8,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px",
+        "opacity": "1",
+        "rect": {
+          "x": 433.625,
+          "y": -324.28125,
+          "width": 70,
+          "height": 83.59375
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 471,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 2,
+      "target": [
+        ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3) > .trial-reason"
+      ],
+      "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+      "rowIndex": 2,
+      "field": "reason",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 5,
+        "trialIndex": 5,
+        "renderedGroup": "kept",
+        "field": "reason"
+      },
+      "expectedText": "Target failure preserved in 2/2 required repetitions.",
+      "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+      "printableASCIICharacters": 47,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "11px",
+        "opacity": "1",
+        "rect": {
+          "x": 222.625,
+          "y": -202.6875,
+          "width": 202,
+          "height": 34.09375
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 471,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 3,
+      "target": [
+        ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4)"
+      ],
+      "originalHtml": "<td>Removal accepted</td>",
+      "rowIndex": 2,
+      "field": "decision",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 5,
+        "trialIndex": 5,
+        "renderedGroup": "kept",
+        "field": "decision"
+      },
+      "expectedText": "Removal accepted",
+      "expectedTextSha256": "b62d17e67b8b11f5a07a195a6cdc5a7f1903aa3b7f0ea5d26370e656772a934e",
+      "printableASCIICharacters": 15,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px",
+        "opacity": "1",
+        "rect": {
+          "x": 433.625,
+          "y": -240.6875,
+          "width": 70,
+          "height": 83.59375
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 471,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 4,
+      "target": [
+        ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3) > .trial-reason"
+      ],
+      "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+      "rowIndex": 3,
+      "field": "reason",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 9,
+        "trialIndex": 9,
+        "renderedGroup": "kept",
+        "field": "reason"
+      },
+      "expectedText": "Target failure preserved in 2/2 required repetitions.",
+      "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+      "printableASCIICharacters": 47,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "11px",
+        "opacity": "1",
+        "rect": {
+          "x": 222.625,
+          "y": -119.09375,
+          "width": 202,
+          "height": 34.09375
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 471,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 5,
+      "target": [
+        ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4)"
+      ],
+      "originalHtml": "<td>Removal accepted</td>",
+      "rowIndex": 3,
+      "field": "decision",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 9,
+        "trialIndex": 9,
+        "renderedGroup": "kept",
+        "field": "decision"
+      },
+      "expectedText": "Removal accepted",
+      "expectedTextSha256": "b62d17e67b8b11f5a07a195a6cdc5a7f1903aa3b7f0ea5d26370e656772a934e",
+      "printableASCIICharacters": 15,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px",
+        "opacity": "1",
+        "rect": {
+          "x": 433.625,
+          "y": -157.09375,
+          "width": 70,
+          "height": 83.59375
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 471,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 6,
+      "target": [
+        ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3) > .trial-reason"
+      ],
+      "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+      "rowIndex": 2,
+      "field": "reason",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 2,
+        "trialIndex": 2,
+        "renderedGroup": "rejected",
+        "field": "reason"
+      },
+      "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+      "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+      "printableASCIICharacters": 80,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "11px",
+        "opacity": "1",
+        "rect": {
+          "x": 229.8125,
+          "y": 313.5,
+          "width": 202,
+          "height": 51.140625
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 478,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 7,
+      "target": [
+        ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4)"
+      ],
+      "originalHtml": "<td>Restored</td>",
+      "rowIndex": 2,
+      "field": "decision",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 2,
+        "trialIndex": 2,
+        "renderedGroup": "rejected",
+        "field": "decision"
+      },
+      "expectedText": "Restored",
+      "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+      "printableASCIICharacters": 8,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px",
+        "opacity": "1",
+        "rect": {
+          "x": 440.8125,
+          "y": 275.5,
+          "width": 70,
+          "height": 100.5625
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 478,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 8,
+      "target": [
+        ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3) > .trial-reason"
+      ],
+      "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+      "rowIndex": 3,
+      "field": "reason",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 3,
+        "trialIndex": 3,
+        "renderedGroup": "rejected",
+        "field": "reason"
+      },
+      "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+      "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+      "printableASCIICharacters": 80,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "11px",
+        "opacity": "1",
+        "rect": {
+          "x": 229.8125,
+          "y": 414.0625,
+          "width": 202,
+          "height": 51.140625
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 478,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 9,
+      "target": [
+        ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4)"
+      ],
+      "originalHtml": "<td>Restored</td>",
+      "rowIndex": 3,
+      "field": "decision",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 3,
+        "trialIndex": 3,
+        "renderedGroup": "rejected",
+        "field": "decision"
+      },
+      "expectedText": "Restored",
+      "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+      "printableASCIICharacters": 8,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px",
+        "opacity": "1",
+        "rect": {
+          "x": 440.8125,
+          "y": 376.0625,
+          "width": 70,
+          "height": 222.90625
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 478,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 10,
+      "target": [
+        "tr:nth-child(4) > td:nth-child(3) > .trial-reason"
+      ],
+      "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+      "rowIndex": 4,
+      "field": "reason",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 4,
+        "trialIndex": 4,
+        "renderedGroup": "rejected",
+        "field": "reason"
+      },
+      "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+      "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+      "printableASCIICharacters": 80,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "11px",
+        "opacity": "1",
+        "rect": {
+          "x": 229.8125,
+          "y": 636.96875,
+          "width": 202,
+          "height": 51.140625
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 478,
+            "clientWidth": 324
+          }
+        ]
+      }
+    },
+    {
+      "sourceAuditNodeIndex": 11,
+      "target": [
+        "tr:nth-child(4) > td:nth-child(4)"
+      ],
+      "originalHtml": "<td>Restored</td>",
+      "rowIndex": 4,
+      "field": "decision",
+      "packetBinding": {
+        "collection": "job.result.trials",
+        "arrayIndex": 4,
+        "trialIndex": 4,
+        "renderedGroup": "rejected",
+        "field": "decision"
+      },
+      "expectedText": "Restored",
+      "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+      "printableASCIICharacters": 8,
+      "predictedScrollPositions": 2,
+      "retainedRendering": {
+        "color": "rgb(24, 35, 49)",
+        "backgroundColor": "rgba(0, 0, 0, 0)",
+        "fontSize": "12px",
+        "opacity": "1",
+        "rect": {
+          "x": 440.8125,
+          "y": 598.96875,
+          "width": 70,
+          "height": 100.5625
+        },
+        "viewport": {
+          "width": 390,
+          "height": 900
+        },
+        "scrollContainers": [
+          {
+            "role": "region",
+            "label": "Reduction trials",
+            "scrollLeft": 0,
+            "scrollTop": 0,
+            "scrollWidth": 478,
+            "clientWidth": 324
+          }
+        ]
+      }
+    }
+  ],
+  "originalAssertionLines": [
+    "  assert.equal(observed.tag, 'TD', 'Exact cell tag');",
+    "  assert.deepEqual(observed.attributes, [], 'Frozen report message cells have no attributes');",
+    "  assert.equal(observed.childElementCount, 0, 'Message has no nested element/alternate paint');",
+    "  assert.equal(observed.childNodeCount, 1, 'Exactly one original text node');",
+    "  assert.equal(observed.firstChildType, 3, 'Original text node');",
+    "  assert.equal(observed.text, expected.event.message, 'Independent frozen packet message identity');",
+    "  assert.equal(observed.sequence, String(expected.event.seq), 'Independent packet event sequence');",
+    "  assert.equal(observed.time, expected.event.at, 'Independent packet event timestamp');",
+    "  assert.equal(observed.eventTypeAndAction, expected.event.type + (expected.event.actionId ?? 'Not action-specific'), 'Independent packet event kind/action');",
+    "  assert.equal(observed.eventRowIndex, expected.eventRowIndex, 'Exact event row position');",
+    "  assert.equal(observed.columnIndex, 4, 'Exact message column');",
+    "  assert.equal(observed.region, 'Recorded events', 'Exact report region');",
+    "    assert.equal(observed.outerHTML.slice(0, 4), expected.originalHtml, 'Available original opening tag');",
+    "  } else assert.equal(observed.outerHTML, expected.originalHtml, 'Complete original axe HTML');",
+    "  assert.equal(math.blackWhite, 21); assert.equal(math.identical, 1); assert.ok(Math.abs(math.inkWhite - 15.865809304375075) < 1e-12);",
+    "  assert.deepEqual(math.translucentBlackOnWhite, [127.5, 127.5, 127.5]); assert.deepEqual(math.parsed, [24, 35, 49, 0.5]); assert.deepEqual(math.bad, [null, null, null, null]);",
+    "  for (const [field, value] of mutations) assert.throws(() => checkIdentity({ ...observed, [field]: value }, expected), field);",
+    "  assert.throws(() => checkIdentity(observed, { ...expected, originalHtml: '<td>wrong</td>' }));",
+    "      assert.equal(overlaps(raw,target) && legacy, legacy, 'Raw-box prefilter must preserve clipped intersection'); rectangleControls++;",
+    "  assert.equal(binding.collection, 'job.result.trials');",
+    "  const trial = job.job.result.trials[binding.arrayIndex]; assert.ok(trial); assert.equal(trial.index, binding.trialIndex);",
+    "  const group = trial.accepted ? 'kept' : 'rejected'; assert.equal(group, binding.renderedGroup);",
+    "  assert.equal(groupTrials[node.rowIndex-1].index, trial.index, 'Exact group-relative frozen trial position');",
+    "  const field = node.field; assert.ok(['reason','decision','duration'].includes(field)); assert.equal(binding.field, field);",
+    "  assert.equal(observed.tag, tag); assert.deepEqual(observed.attributes, attributes); assert.equal(observed.childElementCount, 0);",
+    "  assert.deepEqual(observed.textNodes, field === 'duration' ? [String(Math.round(trial.durationMs)), ' ms'] : [text], 'Exact renderer text-node boundaries');",
+    "  assert.ok(observed.nodeTypes.every(type => type === 3)); assert.equal(observed.nodeTypes.length, observed.textNodes.length);",
+    "  assert.equal(observed.text, text); assert.equal(text, node.expectedText); assert.equal(digest(text), node.expectedTextSha256);",
+    "  assert.equal(observed.outerHTML, node.originalHtml, 'Complete original axe HTML');",
+    "  assert.equal(observed.trialButton, `Inspect trial ${trial.index}`); assert.equal(observed.rowIndex, node.rowIndex);",
+    "  assert.equal(observed.group, group); assert.equal(observed.region, 'Reduction trials');",
+    "  assert.equal(observed.columnIndex, field === 'reason' ? 3 : field === 'decision' ? 4 : 1);",
+    "  const g = await sampleText(null,{geometryOnly:{raw,style}}); assert.equal(g.supported,true); assert.deepEqual(g.safeInterior,{left:10,right:90,top:10,bottom:90,width:80,height:80});",
+    "  for (const test of negativeStyles) assert.equal((await sampleText(null,{geometryOnly:{raw,style:test}})).supported,false);",
+    "  const mapping = await sampleText(null,{textMappingOnly:[{type:3,data:'12'},{type:3,data:' ms'}]}); assert.deepEqual(mapping,[{nodeIndex:0,start:0,end:2,data:'12'},{nodeIndex:1,start:2,end:5,data:' ms'}]);",
+    "  assert.equal(await sampleText(null,{textMappingOnly:[{type:3,data:'x'},{type:1,data:'y'}]}),null);",
+    "  assert.equal(await sampleText(null,{textMappingOnly:[]}),null);",
+    "    if (inside) { assert.ok(x>=10&&x<=90&&y>=10&&y<=90); geometryContainmentChecks++; }",
+    "      assert.throws(()=>checkTrialIdentity({...observed,[key]:value},node,job)); identityNegativeControls++;",
+    "    assert.throws(()=>checkTrialIdentity(observed,{...node,packetBinding:{...node.packetBinding,trialIndex:3}},job));identityNegativeControls++;",
+    "  const scopeResult=await sampleText(null,{surfaceScopeOnly:{raw,scope}});assert.equal(scopeResult.supported,true);",
+    "  for (const mutation of scopeMutations) assert.equal((await sampleText(null,{surfaceScopeOnly:{raw,scope:{...scope,...mutation}}})).supported,false);",
+    "  const asymmetric=await sampleText(null,{geometryOnly:{raw,style}});assert.equal(asymmetric.supported,true);assert.deepEqual(asymmetric.safeInterior,{left:27,right:91,top:31,bottom:87,width:64,height:56});",
+    "  const empty=await sampleText(null,{geometryOnly:{raw,style:{...style,borders:['45px','60px','45px','60px']}}});assert.equal(empty.supported,false);assert.ok(empty.reasons.includes('empty-safe-interior'));",
+    "  for(const control of eligibilityCases)assert.equal(await sampleText(null,{surfaceEligibilityOnly:control.slice(0,4)}),control[4]);",
+    "  for (const control of cases) {const result=await sampleText(null,{outsidePaintOnly:{effect:{...effect,...control.patch},boxes:control.boxes??boxes,target}});assert.equal(result.supported,control.expected,control.id);if(control.reason)assert.ok(result.reasons.includes(control.reason),control.id);}",
+    "    assert.equal(await page.locator('body').evaluate(el=>el.outerHTML),before,control.id+' exact complete DOM unchanged');",
+    "    assert.equal(sampled.status,control.expected,control.id);if(control.reason)assert.ok(sampled.reasons.includes(control.reason),control.id);",
+    "    assert.ok(sampled.steps.length>0);for(const step of sampled.steps){assert.equal(step.occluderEquivalence.checked,true);assert.equal(step.occluderEquivalence.equal,true);assert.deepEqual(step.occluderEquivalence.legacyOccluders,step.possibleOccluders);}",
+    "    if(control.expected==='measured-pass') assert.ok(sampled.characters.some(c=>c.witness?.stepIndex>0),control.id+' requires real multi-position glyph coverage');",
+    "    if(control.historyPanels) {assert.equal(await page.locator('.reduction-workspace > section.panel').count(),2);assert.ok(sampled.steps.every(step=>step.paint.layers.some(layer=>layer.opaqueSurface?.scope?.selectedSurface)));}",
+    "      assert.ok(sampled.steps.some(step=>step.outsidePaint.some(paint=>paint.owner.id==='outside')),control.id+' inventoried before raw box rejection');",
+    "      assert.ok(sampled.steps.every(step=>!step.possibleOccluders.some(paint=>paint.owner.id==='outside')),control.id+' lies outside legacy/optimized raw boxes');",
+    "  assert.equal(manifest.batchPlan,'batch-plan.json');assert.equal(manifest.frozenManifest,'frozen-v3-inputs.json');",
+    "  const memory=phase=>{assert.ok(result.memorySnapshots.length<64,'Bounded memory telemetry');const {rss,heapUsed,heapTotal,external,arrayBuffers}=process.memoryUsage();result.memorySnapshots.push({phase,elapsedMs:Date.now()-startedAt,rss,heapUsed,heapTotal,external,arrayBuffers});};",
+    "      const path = resolve(input, entry.path); assert.ok(path.startsWith(input + '/'), 'Input path confinement');",
+    "      const bytes = await readFile(path); assert.equal(bytes.length, entry.bytes); assert.equal(digest(bytes), entry.sha256, entry.path + ' byte identity'); result.verifiedInputs.push(entry);",
+    "    assert.deepEqual(packet, evidence); assert.equal(packet.caseSha256, manifest.caseSha256);",
+    "    assert.equal(manifest.revision,'p57-memory-batch-v1');",
+    "    assert.equal(digest(frozenManifestBytes),plan.frozenManifestSha256);",
+    "    for(const [key,value] of Object.entries(frozenManifest))if(!['revision','probeSources'].includes(key))assert.deepEqual(manifest[key],value,'Original full57 manifest field '+key);",
+    "    const jobs=packet.evidence.jobs.filter(row=>row.job.id===manifest.jobId);assert.equal(jobs.length,1);const job=jobs[0];assert.equal(job.job.sessionId,manifest.sessionId);",
+    "    assert.equal(inventory.jobId, manifest.jobId); assert.equal(inventory.caseSha256, manifest.caseSha256);",
+    "    assert.deepEqual(manifest.states, inventory.states.filter(s => s.condition === 'P'));",
+    "    assert.deepEqual(manifest.states.map(s=>s.nodes.length), [24,33]);",
+    "      const rules = audit.incomplete.filter(r=>r.id==='color-contrast'); assert.equal(rules.length,1); const rule=rules[0];",
+    "      assert.equal(rule.nodeCount,state.nodes.length); assert.equal(rule.omittedNodes,0);",
+    "      assert.deepEqual(state.nodes.map(n=>n.sourceAuditNodeIndex),rule.nodes.map((_,i)=>i));",
+    "      for (const node of state.nodes) { const original=rule.nodes[node.sourceAuditNodeIndex]; assert.deepEqual(node.target,original.target); assert.equal(node.originalHtml,original.html); }",
+    "        assert.equal(before, '<body><input id=\"caret\" value=\"probe\"></body>', 'Each screenshot control starts with the exact pristine fixture');",
+    "        assert.equal(await page.locator('#caret').getAttribute('style'), null, 'Neither screenshot control starts with a style attribute');",
+    "          assert.equal(before, '<body><input id=\"caret\" value=\"probe\"></body>');",
+    "          assert.equal(after, '<body><input id=\"caret\" value=\"probe\" style=\"\"></body>', 'Default screenshot reproduces exact empty-style mutation');",
+    "          assert.ok(mutations.some(record => record.id === 'caret' && record.attributeName === 'style'));",
+    "        } else { assert.equal(after, before, 'Explicit initial caret preserves complete DOM'); assert.equal(mutations.length, 0, 'No screenshot attribute/content mutation'); }",
+    "        if (control.id !== 'inadequate-scroll-budget') assert.ok(sampled.steps.length > 0, control.id + ' executes occluder comparisons');",
+    "          assert.equal(step.occluderEquivalence.checked, true, control.id + ' checks legacy/optimized occluders');",
+    "          assert.equal(step.occluderEquivalence.equal, true, control.id + ' exact occluder-list equivalence');",
+    "          assert.deepEqual(step.occluderEquivalence.legacyOccluders, step.possibleOccluders, control.id + ' independently compare full occluder lists');",
+    "        assert.equal(sampled.status, control.expected, control.id + ' sampler control');",
+    "        if (control.id === 'wide-pass') assert.ok(sampled.characters.some(c => c.witness.stepIndex > 0), 'Control needs real multi-position coverage');",
+    "        assert.equal(await page.locator('body').evaluate(el=>el.outerHTML),before,control.id+' exact complete DOM unchanged');",
+    "        assert.equal(sampled.status,control.expected,control.id);",
+    "        if (control.reason) assert.ok(sampled.reasons.includes(control.reason),control.id+' specific rejection');",
+    "        if (!control.nested) assert.ok(sampled.steps.length>0,control.id+' executes occluder comparisons');",
+    "        for (const step of sampled.steps) { assert.equal(step.occluderEquivalence.checked,true);assert.equal(step.occluderEquivalence.equal,true);assert.deepEqual(step.occluderEquivalence.legacyOccluders,step.possibleOccluders); }",
+    "        if (control.adjacent) {assert.equal(sampled.textNodeMapping.length,2);assert.ok(sampled.characters.some(c=>c.textNodeIndex===0&&c.witness));assert.ok(sampled.characters.some(c=>c.textNodeIndex===1&&c.witness));}",
+    "        if (control.id==='rounded-outset-safe-interior') assert.ok(sampled.steps.every(step=>step.paint.layers.some(layer=>layer.opaqueSurface?.supported)));",
+    "        if (control.unsafe) assert.ok(sampled.steps.some(step=>step.backgroundAreaRejected>0),'Unsafe corner is rejected by actual range/background bounds');",
+    "        if (control.expected==='measured-pass') assert.ok(sampled.characters.some(c=>c.witness?.stepIndex>0),control.id+' requires real multi-position glyph coverage');",
+    "          assert.equal(sampled.text,'12 ms '+'0123456789abcdef'.repeat(8));",
+    "          assert.deepEqual(sampled.textNodeMapping,[{nodeIndex:0,start:0,end:2,data:'12'},{nodeIndex:1,start:2,end:134,data:' ms '+'0123456789abcdef'.repeat(8)}]);",
+    "          assert.deepEqual(sampled.reasons,['incomplete-character-coverage']);assert.equal(sampled.totalCharacters,132);assert.equal(sampled.coveredCharacters,131);",
+    "          assert.deepEqual(sampled.uncoveredOffsets,[133]);assert.deepEqual(sampled.unsupportedOffsets,[]);",
+    "          assert.deepEqual(sampled.characters.at(-1),{offset:133,textNodeIndex:1,textNodeOffset:131,character:'f',witness:null});",
+    "          assert.deepEqual(sampled.plannedScrollPositions,[0,144,288,432,570]);",
+    "          assert.equal(last.actualScrollLeft,570);assert.equal(last.scrollWidth,858);assert.equal(last.clientWidth,288);",
+    "          assert.deepEqual(last.clip,{left:25,top:25,right:313,bottom:45});assert.equal(last.outsideClip,1);",
+    "          for(const step of sampled.steps){assert.deepEqual(step.paint.issues,[]);assert.ok(step.outsidePaint.every(effect=>effect.supported));assert.deepEqual(step.possibleOccluders,[]);for(const counter of ['hitTestRejected','overlapRejected','backgroundAreaRejected','noRangeRect'])assert.equal(step[counter],0);}",
+    "          assert.equal(terminalRange.text,'f');assert.equal(terminalRange.scroll.left,last.actualScrollLeft);assert.equal(terminalRange.scroll.scrollWidth,last.scrollWidth);assert.equal(terminalRange.scroll.clientWidth,last.clientWidth);",
+    "          assert.deepEqual(terminalRange.windowScroll,last.windowScroll);assert.deepEqual(terminalRange.viewport,last.viewport);",
+    "          assert.ok(terminalRange.clientRects.length>0);assert.ok(terminalRange.outsideEdges.some(edges=>edges.length>0),'Direct terminal Range is outside the unchanged recorded clip');",
+    "    assert.deepEqual(result.browserControlCounts,{screenshots:2,sampler:6,surface:9,guards:10,selection:23});",
+    "    assert.equal(result.browserControlCounts.total,manifest.syntheticFixtureRevision.totalBrowserControls);assert.equal(result.browserControlCounts.total,50);",
+    "        assert.deepEqual(JSON.parse(await page.locator('#hci-evidence').textContent()),packet,'Exact frozen packet embedded in unchanged HTML');",
+    "        assert.equal(await page.locator('#root').getAttribute('data-condition'),'P');assert.equal(await page.evaluate(()=>location.hash),manifest.route);",
+    "        assert.equal(await page.locator('.rejected-trials').getAttribute('open'),'');",
+    "        assert.equal(await page.locator('[aria-label=\"Reduction trials\"] tbody > tr').count(),job.job.result.trials.length);",
+    "        assert.equal(digest(JSON.stringify(outsidePaintInventory.styles)),manifest.paintScope.stylesSha256,'Exact reviewed frozen stylesheet');",
+    "        assert.equal(outsidePaintInventory.externalStylesheets,0);assert.equal(outsidePaintInventory.inlineStyledElements,0);",
+    "            assert.equal(node.target.length,1);const locator=page.locator(node.target[0]);assert.equal(await locator.count(),1,'Exact unique original selector');",
+    "            assert.equal(after.outerHTML,observed.outerHTML);assert.equal(after.text,row.identity.text);assert.deepEqual(after.textNodes,observed.textNodes);assert.deepEqual(after.nodeTypes,observed.nodeTypes);",
+    "            for (const step of row.steps??[]) if (step.occluderEquivalence.checked) {assert.equal(step.occluderEquivalence.equal,true);assert.deepEqual(step.occluderEquivalence.legacyOccluders,step.possibleOccluders);}",
+    "        assert.deepEqual(stateResult.selectionAfter,stateResult.selectionBefore,'Exact rendered selection and inspector preserved');",
+    "        assert.equal(digest(JSON.stringify(await page.locator('style').allTextContents())),manifest.paintScope.stylesSha256);",
+    "        assert.equal(afterDOM,beforeDOM,'Product DOM unchanged by scroll-only measurement');stateResult.status='exact-dom-preserved';",
+    "        assert.equal(stateResult.nodes.length,selected.nodes.length,'Every assigned occurrence started');",
+    "        assert.equal(result.nodes.filter(row=>row.productChecksCompleted===true&&row.artifact).length,selected.nodes.length,'Every assigned occurrence fully checked and archived');",
+    "    assert.equal(result.states.length,1);assert.ok(result.states.every(state=>state.status==='exact-dom-preserved'));",
+    "    assert.equal(result.checkpointCounts.completed,selected.nodes.length);",
+    "    assert.equal(result.checkpointCounts.productChecksCompleted,selected.nodes.length);"
+  ],
+  "originalAssertionLineCount": 121,
+  "originalAssertionVectorSHA256": "cfa7d7a4d8062b0f2e87f87dadcd60f76394456597a1b536da4f689ffe346d52",
+  "expectedControlCounts": {
+    "screenshots": 2,
+    "sampler": 6,
+    "surface": 9,
+    "guards": 10,
+    "selection": 23,
+    "total": 50
+  },
+  "originalObservedOutcome": {
+    "status": "incomplete",
+    "sourceObservationComplete": true,
+    "sourceExitCode": 1,
+    "started": 12,
+    "completed": 12,
+    "unresolved": 12,
+    "productChecksCompleted": 12,
+    "unattemptedSelected": 0,
+    "remainingFull57": 45
+  },
+  "interpretation": "Expected original unresolved result is not instrumentation failure or productpass. Actualexit1 requires exact source/result closure; arbitraryerror/partialexit1 fails. Diagnostic/zeroZ outcomes remain separate."
+}

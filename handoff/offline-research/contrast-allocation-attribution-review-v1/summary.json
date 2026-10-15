@@ -1,0 +1,24 @@
+{
+  "status": "FOCUSED_REVIEW_COMPLETE_NO_EVIDENCE_BACKED_ERROR_INVARIANT_CORRECTION",
+  "utc": "2026-10-15T08:27:28.001304+00:00",
+  "candidateInstalled": false,
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "frozenRegressionPreserved": {
+    "pass": 107,
+    "fail": 1
+  },
+  "newImplementation": false,
+  "newTests": 0,
+  "newBenchmarkWorkers": 0,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "memoryGateMiB": 896,
+  "gateChanges": false,
+  "permissionChanges": false,
+  "published": false,
+  "observationHold": "PENDING_NOT_ADOPTED",
+  "decisionPending": "Whether to prepare/review the diagnostic-only patch and authorize exactly one bounded native-transport attribution pilot; no execution authorized now",
+  "planSha256": "193bf942319668e28e7b94adcc93ffe8ea41d08c4555d74921a530dca6bea6e8",
+  "resultSha256": "69504234d96aa20a9814e67d079d3d8b217c66cccacbdf4996c3f5204106f2c1",
+  "existingEvidenceExtractionSha256": "e7fce192fcdcd5c14e579244154c8c95f2e94f97c313a28d116e8a6b939c3eca"
+}

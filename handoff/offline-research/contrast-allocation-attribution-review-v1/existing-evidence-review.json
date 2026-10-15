@@ -1,0 +1,74 @@
+{
+  "status": "EXISTING_EVIDENCE_ONLY_NO_NEW_RUNTIME_OBSERVATIONS",
+  "utc": "2026-10-15T08:23:07.555586+00:00",
+  "bindings": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/samples.ndjson",
+      "sha256": "ba86a227002beadb8f47043201dbf4f96e19e351941a076f0f6bc79ff18f2275",
+      "bytes": 191291
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/summary.json",
+      "sha256": "6ddc16e3231f2ae0a6dfc59ea704ce065908868fca3620d7991314240e497823",
+      "bytes": 1992791
+    }
+  ],
+  "resourceSamples": 268,
+  "driverPhaseSnapshots": 28,
+  "memoryPeakBytes": 943087616,
+  "maximumSampledMemoryCurrentBytes": 939384832,
+  "finalPeakFirstObserved": {
+    "sample": 261,
+    "utc": "2026-10-15T06:44:35.666Z",
+    "phase": "interval",
+    "elapsedFromWorkloadStartMs": 39483.0,
+    "memoryCurrentBytes": 889835520,
+    "memoryPeakBytes": 943087616
+  },
+  "precedingSample": {
+    "sample": 260,
+    "utc": "2026-10-15T06:44:35.566Z",
+    "phase": "interval",
+    "elapsedFromWorkloadStartMs": 39383.0,
+    "memoryCurrentBytes": 938500096,
+    "memoryPeakBytes": 942858240
+  },
+  "driverSnapshotsBracketingFirstPeakObservation": [
+    {
+      "phase": "node-10-archived",
+      "elapsedMs": 38257,
+      "rss": 423878656,
+      "heapUsed": 173333048,
+      "heapTotal": 245448704,
+      "external": 13493399,
+      "arrayBuffers": 8959948
+    },
+    {
+      "phase": "node-11-archived",
+      "elapsedMs": 41190,
+      "rss": 413364224,
+      "heapUsed": 66874848,
+      "heapTotal": 157286400,
+      "external": 13379997,
+      "arrayBuffers": 8846546
+    }
+  ],
+  "perProcessRSSRecorded": false,
+  "rawProcessKeys": [
+    "name",
+    "pid",
+    "ppid",
+    "start_ticks",
+    "state",
+    "threads"
+  ],
+  "transportInternalPhaseSamplesRecorded": false,
+  "limitations": [
+    "memory.peak is historical high water; first observation does not identify the exact allocation or peak instant.",
+    "UTC/elapsed alignment is approximate and cannot replace absent common monotonic phase markers.",
+    "Current samples and driver boundary snapshots are not synchronized per-process measurements.",
+    "Process records contain identity/state/thread information but no RSS.",
+    "No object allocation stacks or separate native transport/decode phase observations exist."
+  ],
+  "conclusion": "Existing pilot data do not attribute the cgroup excess to transport graph overlap, browser retention, driver decoding, evidence writing or allocator/native memory. Use only to scope a future diagnostic; do not infer causation."
+}

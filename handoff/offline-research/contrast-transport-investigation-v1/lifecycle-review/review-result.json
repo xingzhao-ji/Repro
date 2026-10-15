@@ -1,0 +1,30 @@
+{
+  "utc": "2026-10-15T07:47:15.866303+00:00",
+  "status": "DESIGN_REVIEW_CLEAR_PROPOSAL_ONLY",
+  "remainingFindings": [],
+  "resolvedFindings": [
+    {
+      "id": "L1",
+      "resolution": "Removed standalone200ms threshold after scope clarification; one first-existing-interval attempt is bounded only by original absolute90s deadline."
+    }
+  ],
+  "proposalSha256": "b87d764719dc0eb7a00ed90d20d36d0ad1e4dfbb9dd03d7682753549eb1b430b",
+  "modelSha256": "3b2b83a88a4cd34a583f9b24e6ed2cd0216eacb384ba7e7f63c7e141c5a482c8",
+  "modelTestsSha256": "c738ad1aa422d815c3289097ef8fd09d05d8ab1485c28b1c3a4982eae206862e",
+  "checks": {
+    "frozenCleanupTests": 29,
+    "authorModelTestsIndependentlyRerun": 29,
+    "independentFrozenValidatorChallenges": 3,
+    "sourceReferenceEntriesReadBack": 14,
+    "runtimeStarts": 0
+  },
+  "scopeLimits": [
+    "Proposal only; observation hold is not implemented or authorized.",
+    "100ms timer cadence is not a maximum scheduling delay.",
+    "Synthetic model does not establish full raw-schema validation, actual process cleanup, Node integration, or memory reduction.",
+    "Actual896MiB gate and stoppedpilot verdict remain unchanged."
+  ],
+  "smallestDecision": "Prospectively permit holding the existing sampler timer through its first scheduled post-close attempt, bounded by original absolute90s deadline, while retaining separate terminal evidence and sticky first/later failures.",
+  "authorReceiptSha256": "4a7e57165c6c22c65f5622b76c0f213548bf212f98df400433aac09dc109b053",
+  "authorArtifactsReadBack": 5
+}

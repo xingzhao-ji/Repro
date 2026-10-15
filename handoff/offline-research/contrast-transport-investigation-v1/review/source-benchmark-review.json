@@ -1,0 +1,43 @@
+{
+  "status": "PASS_SCOPED_OFFLINE_SOURCE_AND_BENCHMARK_REVIEW",
+  "sourceFilesBound": 19,
+  "prospectiveDelta": "exact one import and one product call name/locator replacement; all sampler/control/deadline/evidence/lifecycle source otherwise identical",
+  "installed": false,
+  "sampleTextBytes": 27906,
+  "sampleTextSha256": "9cb9c70100e1657cac9b7259cb5490ca36cd177b33fedbbe12dd627c17d7a5c6",
+  "benchmarkRecordsChecked": 72,
+  "benchmarkSummary": {
+    "native": {
+      "processMaxRSSKiB": [
+        237900,
+        236940,
+        237992
+      ],
+      "heapDeltaMiB": {
+        "min": 43.145835876464844,
+        "median": 67.75946044921875,
+        "max": 81.36373901367188
+      }
+    },
+    "candidate": {
+      "processMaxRSSKiB": [
+        246616,
+        230516,
+        231916
+      ],
+      "heapDeltaMiB": {
+        "min": 47.335716247558594,
+        "median": 66.77096557617188,
+        "max": 68.94529724121094
+      }
+    }
+  },
+  "observations": [
+    "Maximum observed Node RSS ranges overlap; candidate maximum exceeds native maximum in this local model. No consistent whole-process RSS reduction established.",
+    "Checkpoints do not profile transient live allocations inside decodeGraph; joining chunks, JSON.parse wire graph and decoded output coexist transiently.",
+    "The benchmark keeps original source row reachable in its outer scope even after fake original-handle disposal. It combines browser/server/client allocations in one Node heap and has no real IPC costs.",
+    "Archived JSON has lost original browser aliases; actual sampler graph can differ. Explicit gc occurs only between offline rows, is not a runtime proposal.",
+    "Candidate needs about 62\u201364 string/metadata result messages per archived row, plus handle operations absent from that message count.",
+    "No browser process, cgroup memory gate, actual Playwright integration, or 90-second runtime guarantee was tested."
+  ]
+}

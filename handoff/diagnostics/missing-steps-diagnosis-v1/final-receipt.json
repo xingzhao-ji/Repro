@@ -1,0 +1,85 @@
+{
+  "utc": "2026-10-14T20:33:03.891736+00:00",
+  "outcome": "Diagnosis completed and separate schema-only patch verified; original startup-repair candidate and receipts preserved.",
+  "environmentRecoveryConfirmedUtc": "2026-10-14T20:28:15.864279+00:00",
+  "unfinishedTaskSteps": [],
+  "head": "370ebb452f1b826d9885bcc61520d860dc9bb22e",
+  "diagnosis": {
+    "dependencyClosure": "correct",
+    "missingSteps": "intentional complete-experiment boundary rejection",
+    "fixtureOracleReducerAcceptanceDefectEstablished": false,
+    "actionableProductDefect": "Run-result schema rejects legitimate empty application digest in unstarted inconclusive/cancelled results.",
+    "runtimeChanges": 0,
+    "actualCapsuleMinimality": "unverified",
+    "minimalityMandatoryForR2": false
+  },
+  "patch": {
+    "path": "schema-patch/schema-representation.patch",
+    "sha256": "4cfeffe4eb0f1c4b6b55bd6d33bb853074ee4d1cf0ad074dd40626fb13e25d9b",
+    "changedPaths": [
+      "schemas/README.md",
+      "schemas/run-result-v1.schema.json",
+      "tests/schema-preflight.test.ts"
+    ],
+    "appliedToOriginal": false,
+    "separateCandidateFiles": 183,
+    "dryRunApplicationPassed": true,
+    "candidateSchemaSha256": "5999f3db272858d4eba9fdf322eb90ea9bd0c12062ac664ec04af5080215e4e9"
+  },
+  "tests": {
+    "correctedRed": {
+      "passed": 4,
+      "failed": 5,
+      "actualPreflightSchemaFailures": 4
+    },
+    "green": {
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0
+    },
+    "existingScopedRegressions": {
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typecheck": "pass",
+    "scopedLint": "pass",
+    "actualDiagnosisCases": 4,
+    "fixtureModelCases": 8,
+    "fixtureModelProcesses": 2,
+    "independentModelChecks": 196,
+    "independentSchemaReviewChecks": 2584,
+    "actualRetainedResultCorpus": {
+      "records": 700,
+      "baselineStructurallyValid": 0,
+      "candidateStructurallyValid": 700,
+      "inconclusiveOutcomesPreserved": 600,
+      "cancelledOutcomesPreserved": 100
+    }
+  },
+  "allNewAdapterCalls": 15,
+  "schemaRegressionAdapterCalls": 12,
+  "reducerDiagnosisAdapterCalls": 3,
+  "newBrowserLaunches": 0,
+  "newHttpListens": 0,
+  "newTargetAssertions": 0,
+  "retainedSetupFailure": "Initial red used candidate cwd with sibling evidence path;3 OUTPUT_BOUNDARY results retained. Invocation corrected only, same frozen test.",
+  "originalRepositoryFilesVerified": 182,
+  "originalRepositoryUnchanged": true,
+  "priorReceiptSha256": "a785e30e4e106f2da770dd4f5fe4113fb26f560828482607d056d12793dc508a",
+  "priorReportEntriesVerified": 1415,
+  "startupReportEntriesVerified": 134,
+  "reportSha256": "f0b10f561a53a5bf84fa22eb53e86058755a71429a3c6a81748e72b162d30e6b",
+  "manifestSha256": "7c19fb520b7d62af3dcc00e1074998c7068202768a5db32e251494810b5e9709",
+  "manifestEntriesVerified": 499,
+  "manifestTotalBytes": 3988879,
+  "preservationSha256": "20cd9ec60ceafd0e3a634c92cef01d5eb2038a275ab072c99e6574f4fef1fa37",
+  "schemaPatchReceiptSha256": "247703338651f39ac2850b1e4ccd73c2e48f9d254392ea79dcc6342257c65d38",
+  "independentReviewReceiptSha256": "bceb0d1fef1fbb0eae2d99c860a773f265782841e973b23941d4baff1d2e824a",
+  "currentBrowserAcceptance": "blocked / unrun",
+  "newPackageBuildOrInstall": false,
+  "remainingReleaseRequirements": "remaining-release-requirements.json",
+  "resourcePermissionAuthenticationChanges": 0,
+  "externalWrites": 0,
+  "runningCommands": false
+}

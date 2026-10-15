@@ -1,0 +1,71 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-10-15T07:47:54.749721+00:00",
+  "status": "FROZEN_INDEPENDENT_DESIGN_REVIEW_CLEAR_PROPOSAL_ONLY",
+  "authorReceipt": {
+    "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/final-receipt.json",
+    "sha256": "4a7e57165c6c22c65f5622b76c0f213548bf212f98df400433aac09dc109b053"
+  },
+  "proposalSha256": "b87d764719dc0eb7a00ed90d20d36d0ad1e4dfbb9dd03d7682753549eb1b430b",
+  "remainingFindings": [],
+  "resolvedFindings": [
+    "L1: standalone200ms threshold removed after scope clarification"
+  ],
+  "tests": {
+    "frozenValidator": 29,
+    "authorModelIndependentlyRerun": 29,
+    "independentValidatorChallenges": 3,
+    "allExitCodes": 0
+  },
+  "readback": "PASS",
+  "artifacts": [
+    {
+      "path": "RESULT.md",
+      "bytes": 3210,
+      "sha256": "9fc5b56cebea1ab78b78c2fce7d1e5d4c5e5a7fbd76a0816b99f307a55115d0a"
+    },
+    {
+      "path": "draft-findings.json",
+      "bytes": 1235,
+      "sha256": "9a219ee73d8a1910db83d7b80ae0834a46220c11263d89f7cf369b0e91566642"
+    },
+    {
+      "path": "frozen-cleanup-tests.log",
+      "bytes": 2406,
+      "sha256": "316e396819ccb7477357d2faa1d2ca621b0a89c866928f144bfbc39e5c7317d8"
+    },
+    {
+      "path": "historical-source-check.json",
+      "bytes": 10112,
+      "sha256": "e49517f012d23982922325e2c5885ca446707b610deae22785c2cbcc463a37bd"
+    },
+    {
+      "path": "independent-cleanup-tests.log",
+      "bytes": 535,
+      "sha256": "dea73a89e0d0dfe0da989b327cf848955e14c7eec3172761315fff40a559e689"
+    },
+    {
+      "path": "proposal-model-tests.log",
+      "bytes": 3551,
+      "sha256": "aa061216f46acfa93c75b07455f787e7f36ddc07efa492efa510b2f137597445"
+    },
+    {
+      "path": "review-result.json",
+      "bytes": 1553,
+      "sha256": "16cbdb3e51ad36e0f76dd767ce18cb8d8b2df37093932375989d1cb990ffb3af"
+    },
+    {
+      "path": "test_independent_cleanup.py",
+      "bytes": 2850,
+      "sha256": "db98d014fb3cf891c867c880d99daf2ac39eba81a50ccc861a66ac91fadb562e"
+    }
+  ],
+  "runtimeAuthorized": false,
+  "activeRunnerChanges": 0,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "historicalArtifactWrites": 0,
+  "gitWrites": 0,
+  "networkOperations": 0,
+  "smallestUnresolvedDecision": "Prospectively permit holding the existing sampler timer through its first scheduled post-close attempt, bounded by original absolute90s deadline, while retaining separate terminal evidence and sticky first/later failures."
+}

@@ -1,0 +1,100 @@
+✖ falsy promise rejection remains a failure undefined (2.831753ms)
+✖ falsy promise rejection remains a failure null (0.519974ms)
+✖ falsy promise rejection remains a failure false (0.246849ms)
+✖ falsy promise rejection remains a failure 0 (0.256209ms)
+✖ falsy promise rejection remains a failure  (0.191302ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 0
+ℹ fail 5
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 119.630328
+
+✖ failing tests:
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:49
+✖ falsy promise rejection remains a failure undefined (2.831753ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:313)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:49
+✖ falsy promise rejection remains a failure null (0.519974ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:313)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:49
+✖ falsy promise rejection remains a failure false (0.246849ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:313)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:49
+✖ falsy promise rejection remains a failure 0 (0.256209ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:313)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:49
+✖ falsy promise rejection remains a failure  (0.191302ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:38:313)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

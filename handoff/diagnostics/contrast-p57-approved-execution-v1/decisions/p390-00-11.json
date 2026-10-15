@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-15T06:50:23.657439+00:00",
+  "status": "STOP_CONTINUATION",
+  "job": "p390-00-11",
+  "independentReviewComplete": true,
+  "validatorResultPath": "postrun/p390-00-11/validation.json",
+  "validatorResultSha256": "d17b6fbd4c8b3e018400ebe650a00019457d73e295ecb320405238a74a6a2212",
+  "validatorExitCode": 1,
+  "independentReviewPath": "postrun/p390-00-11-review/POSTRUN-REVIEW.json",
+  "independentReviewSha256": "153b64c0d3b223b326f75223d84d5e9c167ff2a6e98d4afb5f2096a1fba1d7b3",
+  "reasons": [
+    "COMPLETED_CLEANUP_NOT_ESTABLISHED",
+    "MEMORY_OR_HEADROOM_LIMIT"
+  ],
+  "nextJob": "p320-00-10",
+  "nextJobEligibility": "NOT_ELIGIBLE",
+  "allRemainingJobs": "NOT_STARTED",
+  "retryAuthorized": false,
+  "criteriaRemainAdopted": true,
+  "historicalFailuresUnchanged": true
+}

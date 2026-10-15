@@ -1,0 +1,46 @@
+{
+  "scope": "Frozen prior candidate, regression suite and pending lifecycle design; read-only references",
+  "files": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.mjs",
+      "bytes": 7800,
+      "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.test.mjs",
+      "bytes": 4454,
+      "sha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs",
+      "bytes": 10074,
+      "sha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/native-oracle.mjs",
+      "bytes": 1787,
+      "sha256": "411033a90851d363763e2e4e59aca74aee001cee2f543444138d36d8fe8a224f"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "bytes": 2679,
+      "sha256": "1c47c2d5fb328b2b60d99d8e0548f26c42afee94858e3720ba26e38e414a2ee3"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/PROPOSAL.md",
+      "bytes": 12142,
+      "sha256": "b87d764719dc0eb7a00ed90d20d36d0ad1e4dfbb9dd03d7682753549eb1b430b"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/final-receipt.json",
+      "bytes": 1707,
+      "sha256": "4a7e57165c6c22c65f5622b76c0f213548bf212f98df400433aac09dc109b053"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/final-receipt.json",
+      "bytes": 2458,
+      "sha256": "63dd4cc2cb1620d6f7be933e4fffc7c54f245a2b1a95d3f95d27739106090947"
+    }
+  ],
+  "observationHoldApproval": "PENDING_NOT_ADOPTED"
+}

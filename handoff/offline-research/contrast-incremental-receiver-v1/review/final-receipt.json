@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "status": "SEALED_OFFLINE_REVIEW_CLEAR_MEMORY_REMEDY_UNESTABLISHED",
+  "utc": "2026-10-15T08:17:18.642872+00:00",
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "resultSha256": "0a06285ff0bf434661b49f20d19d0f98fe3c2c48c38d9724d05d9bc079856554",
+  "manifestSha256": "3c3be3a03bd8a7a8995421d805ff6db3d24213566a0fffd585bb9cb759d7886c",
+  "functionalClearanceSha256": "9ae227e51c692ea73d20d2b2e699885072d36b87bb126e8444c542f4fa176ecf",
+  "benchmarkReviewSha256": "124a10dd0d0bbb6d8327a1f65a014bf49c76fffb5874df6e8fc6bd16a4bc3f71",
+  "authorReceiptSha256": "5bc7e5977e2557de440f0cf91048029e9812a2c95f24522d0ec995a014d77323",
+  "benchmarkReceiptSha256": "f03ac2f32a056fdc693049687a1e4b6531f399708774a34004a25338436b6188",
+  "artifactFiles": 32,
+  "artifactReadback": "PASS",
+  "authorFilesReadback": 19,
+  "benchmarkFilesReadback": 56,
+  "frozenRegression": {
+    "pass": 107,
+    "fail": 1,
+    "documentedDifference": "earlier invalid-stream BAD_JSON rejection"
+  },
+  "explicitlyAdjustedRegression": {
+    "pass": 108,
+    "fail": 0
+  },
+  "independentStreaming": {
+    "pass": 86,
+    "fail": 0,
+    "wireMutations": 1728
+  },
+  "instrumentedCleanup": {
+    "pass": 13,
+    "fail": 0
+  },
+  "independentlyReviewedWorkers": 12,
+  "independentlyReviewedCases": 156,
+  "openFunctionalFindings": [],
+  "endToEndRSSHigherPairs": 2,
+  "endToEndRSSLowerPairs": 1,
+  "receiverOnlyRSSLowerPairs": 3,
+  "incrementalSlowerTimingPairs": 6,
+  "gateMiB": 896,
+  "gateComplianceEstablished": false,
+  "candidateInstalled": false,
+  "browserOrContainerStarts": 0,
+  "observationLifecycleExtensionAdopted": false,
+  "published": false,
+  "permissionChanged": false,
+  "recommendation": "Keep uninstalled research artifact; isolated decoder savings do not demonstrate a complete-transfer memory remedy."
+}

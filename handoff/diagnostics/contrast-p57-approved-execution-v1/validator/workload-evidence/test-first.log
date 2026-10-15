@@ -1,0 +1,8 @@
+test_independent_negative_challenges (__main__.Challenges.test_independent_negative_challenges) ... ok
+test_three_legitimate_product_outcomes (__main__.Challenges.test_three_legitimate_product_outcomes) ... ok
+test_witness_internal_consistency (__main__.Challenges.test_witness_internal_consistency) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 1.330s
+
+OK

@@ -1,0 +1,16 @@
+--- frozen/contrast-p57-approved-batch-probe.mjs
++++ prospective/contrast-p57-approved-batch-probe.mjs
+@@ -1,3 +1,4 @@
++import { transferMeasurement } from './transport.mjs';
+ // Approved prospective P57 corrected-CSS batch: exact frozen partition and all 50 control bodies retained. External continuation review required.
+ // Supplemental measurement only. The original axe audits and release result remain unchanged.
+ import assert from 'node:assert/strict';
+@@ -792,7 +793,7 @@
+             const observed=await locator.evaluate(el=>{const cell=el.closest('td'),row=el.closest('tr');return {tag:el.tagName,attributes:[...el.attributes].map(a=>[a.name,a.value]),childElementCount:el.childElementCount,textNodes:[...el.childNodes].map(n=>n.data),nodeTypes:[...el.childNodes].map(n=>n.nodeType),text:el.textContent,outerHTML:el.outerHTML,trialButton:row.querySelector('button.trial-select')?.textContent,rowIndex:row.sectionRowIndex+1,columnIndex:cell.cellIndex+1,group:el.closest('.rejected-trials')?'rejected':'kept',region:el.closest('[role="region"]')?.getAttribute('aria-label')};});
+             row.identity=checkTrialIdentity(observed,node,job);
+             const measurementStarted=Date.now();
+-            Object.assign(row,await locator.evaluate(sampleText,{allowDirectAdjacentText:true,allowOpaqueRoundedSurface:true,surfaceScope:manifest.paintScope.surface,outsidePaintInventory,verifyOccluderEquivalence:node.sourceAuditNodeIndex===0||node.field==='duration',maximumCharacters:manifest.maximumCharacters,maximumScrollPositions:manifest.maximumScrollPositions,stopAtPerformanceMs:await page.evaluate(()=>performance.now())+Math.max(0,manifest.stopAfterElapsedMs-(Date.now()-startedAt))}));
++            Object.assign(row,await transferMeasurement(locator,sampleText,{allowDirectAdjacentText:true,allowOpaqueRoundedSurface:true,surfaceScope:manifest.paintScope.surface,outsidePaintInventory,verifyOccluderEquivalence:node.sourceAuditNodeIndex===0||node.field==='duration',maximumCharacters:manifest.maximumCharacters,maximumScrollPositions:manifest.maximumScrollPositions,stopAtPerformanceMs:await page.evaluate(()=>performance.now())+Math.max(0,manifest.stopAfterElapsedMs-(Date.now()-startedAt))}));
+             row.measurementDurationMs=Date.now()-measurementStarted;
+             const after=await locator.evaluate(el=>({outerHTML:el.outerHTML,text:el.textContent,textNodes:[...el.childNodes].map(n=>n.data),nodeTypes:[...el.childNodes].map(n=>n.nodeType)}));
+             assert.equal(after.outerHTML,observed.outerHTML);assert.equal(after.text,row.identity.text);assert.deepEqual(after.textNodes,observed.textNodes);assert.deepEqual(after.nodeTypes,observed.nodeTypes);

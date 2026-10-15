@@ -1,0 +1,3527 @@
+{
+  "schemaVersion": 1,
+  "capturedAtUtc": "2026-10-15T19:39:00.906243+00:00",
+  "repositoryRoot": "/workspace/repro-development-rv5abotj/repro",
+  "scope": "Filesystem metadata inventory and selected source/report inspection only; no product code, test, benchmark, browser or container executed.",
+  "counting": "Logical regular-file sizes from lstat, without following symlinks; directories not counted. Overlapping subtree rows must not be added together. Snapshot may predate later handoff delivery logs. No credentials, .env contents or unrelated workspaces read.",
+  "ignoredRoots": [
+    ".repro-runs",
+    ".repro-cache",
+    "dist",
+    "node_modules"
+  ],
+  "excludedSubtrees": [
+    {
+      "path": ".repro-cache",
+      "regularFiles": 536,
+      "regularBytes": 310276353,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Downloaded browser binaries and npm cache; machine-specific, regenerable and outside authored source."
+    },
+    {
+      "path": ".repro-runs",
+      "regularFiles": 143105,
+      "regularBytes": 9198801028,
+      "symlinks": 502,
+      "otherEntries": 14,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/adapter-lifetime-tests",
+      "regularFiles": 0,
+      "regularBytes": 0,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/capsule-tests",
+      "regularFiles": 783,
+      "regularBytes": 15805322,
+      "symlinks": 6,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation",
+      "regularFiles": 128372,
+      "regularBytes": 9021088416,
+      "symlinks": 372,
+      "otherEntries": 4,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/actual-case-redaction-repair-v1",
+      "regularFiles": 2,
+      "regularBytes": 112746,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1",
+      "regularFiles": 5862,
+      "regularBytes": 200625648,
+      "symlinks": 13,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/capsule-equivalence-v1",
+      "regularFiles": 14,
+      "regularBytes": 291570,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/cli-evidence-preservation-v1",
+      "regularFiles": 64,
+      "regularBytes": 831333,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/cli-export-cancellation-v1",
+      "regularFiles": 4,
+      "regularBytes": 5040,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1",
+      "regularFiles": 12721,
+      "regularBytes": 954933964,
+      "symlinks": 30,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1",
+      "regularFiles": 31,
+      "regularBytes": 297965,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Original historical task tree retained locally; selected authored harnesses, tests and reports are proposed as partial archival copies under handoff/diagnostics. Runtime inputs, repeated staging, caches, dependencies and unselected raw evidence remain excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1",
+      "regularFiles": 18,
+      "regularBytes": 54369,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Original sealed research tree retained unchanged locally; byte-preserving archival mirror included under handoff/offline-research."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1",
+      "regularFiles": 22786,
+      "regularBytes": 2222180476,
+      "symlinks": 63,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1",
+      "regularFiles": 127,
+      "regularBytes": 1251887,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Original sealed research tree retained unchanged locally; byte-preserving archival mirror included under handoff/offline-research."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1",
+      "regularFiles": 8690,
+      "regularBytes": 596863806,
+      "symlinks": 23,
+      "otherEntries": 0,
+      "reason": "Original historical task tree retained locally; selected authored harnesses, tests and reports are proposed as partial archival copies under handoff/diagnostics. Runtime inputs, repeated staging, caches, dependencies and unselected raw evidence remain excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1",
+      "regularFiles": 87,
+      "regularBytes": 749856,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Original historical task tree retained locally; selected authored harnesses, tests and reports are proposed as partial archival copies under handoff/diagnostics. Runtime inputs, repeated staging, caches, dependencies and unselected raw evidence remain excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1",
+      "regularFiles": 114,
+      "regularBytes": 26502920,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Original historical task tree retained locally; selected authored harnesses, tests and reports are proposed as partial archival copies under handoff/diagnostics. Runtime inputs, repeated staging, caches, dependencies and unselected raw evidence remain excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1",
+      "regularFiles": 18154,
+      "regularBytes": 794535381,
+      "symlinks": 50,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-postpilot-diagnosis-v1",
+      "regularFiles": 14,
+      "regularBytes": 349631,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1",
+      "regularFiles": 79,
+      "regularBytes": 375867,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Original sealed research tree retained unchanged locally; byte-preserving archival mirror included under handoff/offline-research."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/docker-browser-preflight-v1",
+      "regularFiles": 208,
+      "regularBytes": 23352568,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/docker-browser-retest-v2",
+      "regularFiles": 237,
+      "regularBytes": 58971050,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/docker-browser-run-v1",
+      "regularFiles": 222,
+      "regularBytes": 57506881,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/failure-remediation-v1",
+      "regularFiles": 8038,
+      "regularBytes": 605839944,
+      "symlinks": 20,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/init-diagnostic-v1",
+      "regularFiles": 4109,
+      "regularBytes": 316021311,
+      "symlinks": 10,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-resolution-diagnostic-v1",
+      "regularFiles": 280,
+      "regularBytes": 57104319,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1",
+      "regularFiles": 3777,
+      "regularBytes": 393976231,
+      "symlinks": 10,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/linux-reference-capsule-v1",
+      "regularFiles": 14,
+      "regularBytes": 291571,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/local-commits-v1",
+      "regularFiles": 1544,
+      "regularBytes": 12812422,
+      "symlinks": 6,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1",
+      "regularFiles": 501,
+      "regularBytes": 4079825,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Original historical task tree retained locally; selected authored harnesses, tests and reports are proposed as partial archival copies under handoff/diagnostics. Runtime inputs, repeated staging, caches, dependencies and unselected raw evidence remain excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/output-preservation-v1",
+      "regularFiles": 103,
+      "regularBytes": 115329,
+      "symlinks": 2,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/package-install-contract-v1",
+      "regularFiles": 406,
+      "regularBytes": 96552534,
+      "symlinks": 3,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/recovery-diagnostics-repair-v1",
+      "regularFiles": 16,
+      "regularBytes": 13381,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1",
+      "regularFiles": 1417,
+      "regularBytes": 57873146,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Original historical task tree retained locally; selected authored harnesses, tests and reports are proposed as partial archival copies under handoff/diagnostics. Runtime inputs, repeated staging, caches, dependencies and unselected raw evidence remain excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-browser-review-v1",
+      "regularFiles": 2,
+      "regularBytes": 9239,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1",
+      "regularFiles": 34108,
+      "regularBytes": 2129762518,
+      "symlinks": 132,
+      "otherEntries": 4,
+      "reason": "Original historical task tree retained locally; selected authored harnesses, tests and reports are proposed as partial archival copies under handoff/diagnostics. Runtime inputs, repeated staging, caches, dependencies and unselected raw evidence remain excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-triage-v1",
+      "regularFiles": 86,
+      "regularBytes": 505006,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-verification-v3",
+      "regularFiles": 4387,
+      "regularBytes": 380644621,
+      "symlinks": 10,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/sandbox-diagnosis-v1",
+      "regularFiles": 2,
+      "regularBytes": 16769,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/sandbox-resolution-v1",
+      "regularFiles": 18,
+      "regularBytes": 109386,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/tls-profile-review-v1",
+      "regularFiles": 74,
+      "regularBytes": 24960752,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/version-control-resume-v1",
+      "regularFiles": 15,
+      "regularBytes": 113634,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/delivery",
+      "regularFiles": 7,
+      "regularBytes": 7558,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/handoff",
+      "regularFiles": 1,
+      "regularBytes": 684,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Local handoff delivery records generated during takeover; exclude operational staging/logs from product source, retain locally."
+    },
+    {
+      "path": ".repro-runs/handoff/user-takeover-20261015",
+      "regularFiles": 1,
+      "regularBytes": 684,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Local handoff delivery records generated during takeover; exclude operational staging/logs from product source, retain locally."
+    },
+    {
+      "path": ".repro-runs/hci-analysis",
+      "regularFiles": 130,
+      "regularBytes": 641265,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/hci-comparator",
+      "regularFiles": 10952,
+      "regularBytes": 101450860,
+      "symlinks": 41,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/hci-increment",
+      "regularFiles": 379,
+      "regularBytes": 28652783,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/linux-hci-final",
+      "regularFiles": 83,
+      "regularBytes": 1107689,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/peer-review",
+      "regularFiles": 52,
+      "regularBytes": 1113137,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/privacy-review",
+      "regularFiles": 147,
+      "regularBytes": 2038946,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated privacy-test fixtures, SQLite/output artifacts and environment-like sentinel filenames; preserve locally, do not publish wholesale."
+    },
+    {
+      "path": ".repro-runs/recovery-tests",
+      "regularFiles": 14,
+      "regularBytes": 516096,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/release-review",
+      "regularFiles": 118,
+      "regularBytes": 2666324,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/test-runtime",
+      "regularFiles": 0,
+      "regularBytes": 0,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": ".repro-runs/tests",
+      "regularFiles": 2067,
+      "regularBytes": 23711948,
+      "symlinks": 83,
+      "otherEntries": 10,
+      "reason": "Generated run evidence, repeated staged source/dependencies, runtime archives, historical logs and local journals. Preserve locally; only reviewed compact archival copies are version-controlled."
+    },
+    {
+      "path": "dist",
+      "regularFiles": 9,
+      "regularBytes": 3841195,
+      "symlinks": 0,
+      "otherEntries": 0,
+      "reason": "Generated build outputs; source and build scripts are version-controlled, and this root build may predate current source."
+    },
+    {
+      "path": "node_modules",
+      "regularFiles": 3577,
+      "regularBytes": 87975546,
+      "symlinks": 10,
+      "otherEntries": 0,
+      "reason": "Installed third-party dependencies and executable links; restore from the lockfile under the new owner\u2019s environment."
+    }
+  ],
+  "portableResearchMirrors": [
+    {
+      "originalRoot": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1",
+      "copyRoot": "handoff/offline-research/contrast-transport-investigation-v1",
+      "status": "Byte-preserving archival copy selected; originals remain local and excluded at original paths.",
+      "regularFiles": 79,
+      "regularBytes": 375867,
+      "files": [
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/AUTHORIZATION.json",
+          "bytes": 1073,
+          "sha256": "4c38068564fc247d204b9f59b9f07ad31d31151a6e2c9a884353fdcd4055f5d8"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/RESULT.md",
+          "bytes": 5026,
+          "sha256": "cee10dc5100317db4c612a95f7a9db07ed8fd5c2bbfe1093ed10109e38b0e0fc"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/artifact-manifest.json",
+          "bytes": 12946,
+          "sha256": "170a02707294f7104a1bc550caa7467d1f57b992d077dca4b38bc5da95c94cd9"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/RESULT.md",
+          "bytes": 7509,
+          "sha256": "adfc85522c2f250a0a13bfd73944bdb0aace4349ba50b6ac295717b14dbbf004"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-1-candidate.json",
+          "bytes": 8440,
+          "sha256": "0661ae604ebb930cc20ea2b66f1d9223a72ad39ece5880e4ecbafa7e761e5863"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-1-candidate.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-1-native.json",
+          "bytes": 8301,
+          "sha256": "cc28a751ceb8387f84f78a40af68cb8babb2468a9057488f0a7377d905d3449b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-1-native.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-2-candidate.json",
+          "bytes": 8428,
+          "sha256": "26c6dc402f10ee20c3f8f6ae589aaae213b10de11dd5990b73bc025c89f1ffff"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-2-candidate.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-2-native.json",
+          "bytes": 8308,
+          "sha256": "9509f8c725c7d44edbaa7ff65774604bc7ef108bac017feb41258b465e42e78e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-2-native.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-3-candidate.json",
+          "bytes": 8434,
+          "sha256": "44c4a95258da987670704ee5321e2fae044f99cb0f03b3c1d93fb05af1aec47a"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-3-candidate.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-3-native.json",
+          "bytes": 8294,
+          "sha256": "b375f7958afe40334e64820591bd2119267f609cb1a3834b31d22af2ec6d7d70"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-3-native.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-summary.json",
+          "bytes": 2103,
+          "sha256": "35df757ccc9d4c3e2a896e9690f2b901828371efdacfa381b9d39eba918f5d8f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/artifact-manifest.json",
+          "bytes": 5071,
+          "sha256": "0505d6e00c4a997f28bb305321b4c814df2cfdd9b17280c764215a953479ac99"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/baseline-invariant-failure.txt",
+          "bytes": 951,
+          "sha256": "f0ccbe6a1e5cb7f0764f102ed49f077670126cf1e422421061bb8af7f340fa58"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-candidate-reconstruction.mjs",
+          "bytes": 7745,
+          "sha256": "2848ea01d0fe98dd8fb016e43d5d4b8bacd5554cf4162653d8d594152d48759b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-source-provenance.json",
+          "bytes": 637,
+          "sha256": "ed7fd721239f3e365d21ebb648a146e2d9330767112b0412a2dad5bdc844953f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+          "bytes": 2679,
+          "sha256": "1c47c2d5fb328b2b60d99d8e0548f26c42afee94858e3720ba26e38e414a2ee3"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/command-receipts.json",
+          "bytes": 4508,
+          "sha256": "b933516f17fe1babf71b3e9f0313fb35728d24105c0cf780c36d6b283154415e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/final-receipt.json",
+          "bytes": 1113,
+          "sha256": "c6f75cf903948e30648749600faffcfecd963f34297b7f2bce309e72e7cbfe9a"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/fixture.mjs",
+          "bytes": 2784,
+          "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/prospective-caller.diff",
+          "bytes": 2690,
+          "sha256": "6a6210fa28c3e6a21d5a0309d7afac48b0666facad0456bb99bfc34c91f67384"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/review-fixes.diff",
+          "bytes": 2710,
+          "sha256": "42b4dfbf3dfed07d92934e43c1bc197356328ca04c917dc6e74a192488d85d45"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/run-checks.py",
+          "bytes": 1258,
+          "sha256": "82e660154ce623bd14cb2d50bcc3e3d84a1b4143d9b7bf79b44e815daf111c5d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/seal-author.py",
+          "bytes": 2367,
+          "sha256": "4ac753867bdaccf23aa29781262e8a64a7c25092e9c1c95c61008ca47bef0bf5"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/source-bindings.json",
+          "bytes": 5461,
+          "sha256": "42fdf5b475d9ccfcf8f2aa49650eea37b64f9dce333705c696f00981dbc41dbd"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/test-final.txt",
+          "bytes": 794,
+          "sha256": "85f9440a76282452b173e196dbc80f38774405cbb90e7e80c99f0e824882bcb9"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/test-initial-implementation.txt",
+          "bytes": 1516,
+          "sha256": "348183cc0440a031c4b6bbab1f55f20a1ea423e96f420801f6033488401675d9"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/test-review-fixes.txt",
+          "bytes": 718,
+          "sha256": "3c622fce099cf9cc64ef000181f72a2b0f50559fb67125ae394062e1746ab5d2"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/tests.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/tests.txt",
+          "bytes": 719,
+          "sha256": "5dc77f235ba4ac240481e4ab02e58723e9966c4c1d5a3d860f9f54b73cb15a6f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.mjs",
+          "bytes": 7800,
+          "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.test.mjs",
+          "bytes": 4454,
+          "sha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/final-receipt.json",
+          "bytes": 2015,
+          "sha256": "68092df3f62b44871b54035d5d9602f7112496805edef575e11c27e9e314eb1f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/PROPOSAL.md",
+          "bytes": 12142,
+          "sha256": "b87d764719dc0eb7a00ed90d20d36d0ad1e4dfbb9dd03d7682753549eb1b430b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/final-receipt.json",
+          "bytes": 1707,
+          "sha256": "4a7e57165c6c22c65f5622b76c0f213548bf212f98df400433aac09dc109b053"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/model.py",
+          "bytes": 7013,
+          "sha256": "3b2b83a88a4cd34a583f9b24e6ed2cd0216eacb384ba7e7f63c7e141c5a482c8"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/source-bindings.json",
+          "bytes": 1728,
+          "sha256": "a181664982ebff035b8c2c8943fb09b08548d224fc0bd8e158e56a9e03b4b77a"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/test-output.txt",
+          "bytes": 3609,
+          "sha256": "2ab5381ab268c3e20b61ca8b5089738af48857988cd70af83cc1168f9b2dcb6b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/test_model.py",
+          "bytes": 8247,
+          "sha256": "c738ad1aa422d815c3289097ef8fd09d05d8ab1485c28b1c3a4982eae206862e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/RESULT.md",
+          "bytes": 3210,
+          "sha256": "9fc5b56cebea1ab78b78c2fce7d1e5d4c5e5a7fbd76a0816b99f307a55115d0a"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/draft-findings.json",
+          "bytes": 1235,
+          "sha256": "9a219ee73d8a1910db83d7b80ae0834a46220c11263d89f7cf369b0e91566642"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/final-receipt.json",
+          "bytes": 2458,
+          "sha256": "63dd4cc2cb1620d6f7be933e4fffc7c54f245a2b1a95d3f95d27739106090947"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/frozen-cleanup-tests.log",
+          "bytes": 2406,
+          "sha256": "316e396819ccb7477357d2faa1d2ca621b0a89c866928f144bfbc39e5c7317d8"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/historical-source-check.json",
+          "bytes": 10112,
+          "sha256": "e49517f012d23982922325e2c5885ca446707b610deae22785c2cbcc463a37bd"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/independent-cleanup-tests.log",
+          "bytes": 535,
+          "sha256": "dea73a89e0d0dfe0da989b327cf848955e14c7eec3172761315fff40a559e689"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/proposal-model-tests.log",
+          "bytes": 3551,
+          "sha256": "aa061216f46acfa93c75b07455f787e7f36ddc07efa492efa510b2f137597445"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/review-result.json",
+          "bytes": 1553,
+          "sha256": "16cbdb3e51ad36e0f76dd767ce18cb8d8b2df37093932375989d1cb990ffb3af"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/test_independent_cleanup.py",
+          "bytes": 2850,
+          "sha256": "db98d014fb3cf891c867c880d99daf2ac39eba81a50ccc861a66ac91fadb562e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/prior-task-seal.json",
+          "bytes": 466,
+          "sha256": "3a29086979992514ef03f54823f986ca4cad776c746a925e302902eac0c50af0"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/REVIEW.md",
+          "bytes": 6845,
+          "sha256": "c4f3782766945e3d1f8c1e39d358ed242b9d88d15fd62ea36f0eac1c8a73b22d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/artifact-manifest.json",
+          "bytes": 2885,
+          "sha256": "71f55c918135fc5212a6b63719888f652d6e16f99bd02d8e86738dfea0e243b5"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-candidate-before.json",
+          "bytes": 100,
+          "sha256": "34ff3078cab8dac9538f436ea8d958e2e9a55c2ecf6e3603e04a4041c4f71fd4"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-receipt.json",
+          "bytes": 1159,
+          "sha256": "e8b059ab4f28ffe179e3ff83ca24f1de91a760b5962fa75be957827c0da01648"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-revised-candidate-before.json",
+          "bytes": 100,
+          "sha256": "f8198676026827f0a0f0a0fb89d4c06fac1af5701bd41fe53141d79bdb311000"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-source-bindings.json",
+          "bytes": 6720,
+          "sha256": "3cca358d1fd130c39e51ef0994e895857d21f00b6967c3500ba0c999784e5d6c"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/findings.json",
+          "bytes": 3132,
+          "sha256": "76d0a4fbdc0cf9a5467c69f324a4ecc6d8a1dacdb339584559bb3c426bbbf747"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/first-candidate-binding.json",
+          "bytes": 139,
+          "sha256": "790016872e912b96dda1b11d1c2f06b7b1197db463fe9595764876b4d7f4852c"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs",
+          "bytes": 10074,
+          "sha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/native-oracle.mjs",
+          "bytes": 1787,
+          "sha256": "411033a90851d363763e2e4e59aca74aee001cee2f543444138d36d8fe8a224f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/pilot-row-inventory.json",
+          "bytes": 13568,
+          "sha256": "39576c12011f18afde0e7092452acb135e0a4161d4a3918ab8e811f0b18dc4b8"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/preimplementation-review.json",
+          "bytes": 2682,
+          "sha256": "956e3770446b2d75544fb0b840be61bcfeb9d7be279c6b895858e3b338af8f33"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/prospective-syntax-only.mjs",
+          "bytes": 86148,
+          "sha256": "8323fddb7bcd7c7da667aa0db8ce3f5e9d444d133063de30d3f819b9a2ca3944"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/review-result.json",
+          "bytes": 1036,
+          "sha256": "9d5f73f1a040518b5f77146b199b80c9d0e97fef56080d6f0208b1a04b366b34"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/reviewed-first-candidate.mjs",
+          "bytes": 7745,
+          "sha256": "2848ea01d0fe98dd8fb016e43d5d4b8bacd5554cf4162653d8d594152d48759b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/source-benchmark-review.json",
+          "bytes": 1933,
+          "sha256": "eceade88a6c9795a7c3960c4000507a6cab7c7834a8b8871e25c198c1de608d6"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/test-falsy-failure.txt",
+          "bytes": 4210,
+          "sha256": "4df5423637dca647bf3140de13d69cf60717932f36d416e2cc4599db4237d7ec"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/test-final-revised-run.txt",
+          "bytes": 6927,
+          "sha256": "619e62871ec0cab42fa55dee47924cb477eb2da40b6085984905f0d28fa20cb9"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/test-final-run.txt",
+          "bytes": 6603,
+          "sha256": "e382aa7be34dd93dfc4bfcf23c528b68d28c8961a25ac0533b25d699b6018f0e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/test-first-run.txt",
+          "bytes": 7881,
+          "sha256": "4e3e8e1bb44a890fc03868b56bed80447b3cba660070b4b3ba4ce714ed243a8b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/root-baseline-after-checkpoint.json",
+          "bytes": 1197,
+          "sha256": "3a6f143ea86ed707131ba0c2327a05155b6ebd194e93edf4db9b227305913fca"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/root-final-checks.json",
+          "bytes": 1248,
+          "sha256": "586ec87def2ae575919732a42226de8135ec6f93bf03530812785cc26ca28d67"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/root-lifecycle-readback.json",
+          "bytes": 348,
+          "sha256": "2fc5e00fa0692aa26ba85f353fd150779e0df9e62bf0eb1b73b794abd4f126b6"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/root-preservation-check.json",
+          "bytes": 444,
+          "sha256": "8ae67a9455b6616c796ae4118a27caa0ed33f9def9d8ef72494900b7bd06fce7"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/summary.json",
+          "bytes": 1282,
+          "sha256": "2192c3b408a97489994a836c4e8d3a41e027f6b3dd6a7354da2356165089dc4b"
+        }
+      ]
+    },
+    {
+      "originalRoot": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1",
+      "copyRoot": "handoff/offline-research/contrast-incremental-receiver-v1",
+      "status": "Byte-preserving archival copy selected; originals remain local and excluded at original paths.",
+      "regularFiles": 127,
+      "regularBytes": 1251887,
+      "files": [
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/AUTHORIZATION.json",
+          "bytes": 899,
+          "sha256": "2bacf00ba7f871339fe433a9891e186e0d361f48b23df03d35aa6cc6fad26e1f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/RESULT.md",
+          "bytes": 7480,
+          "sha256": "f22af79c1748b1192e18008a52c529135a428e05a84e59cba9f73f066699043b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/artifact-manifest.json",
+          "bytes": 21311,
+          "sha256": "a37a8e32f938214f0727e5f75b2d408663ef7e106abb683e7bed33dfc474c20d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/RESULT.md",
+          "bytes": 6391,
+          "sha256": "9ac74cce640fa9f78c7674e810b375e0444561f73b5453fb1735653e0da70b1c"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/artifact-manifest.json",
+          "bytes": 3007,
+          "sha256": "d6bb21fda9db08bf78972c41fd630ee44134da97b47036af23091572ceb0f023"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/baseline-mechanism-failure.txt",
+          "bytes": 3164,
+          "sha256": "f532fe944ed189062415ad3327f01192caaeeb170d96a19473490e045b35519e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/baseline-transport.mjs",
+          "bytes": 7800,
+          "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/candidate-freeze.json",
+          "bytes": 1165,
+          "sha256": "b58ab2757b9ec95854f76fdf0baaff47737990ff0a2fecc6c3981ce9105e1783"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/final-receipt.json",
+          "bytes": 1349,
+          "sha256": "5bc7e5977e2557de440f0cf91048029e9812a2c95f24522d0ec995a014d77323"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/fixture.mjs",
+          "bytes": 2784,
+          "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs",
+          "bytes": 5929,
+          "sha256": "78c02c4c2a6da2f35daa3cd374066aeec0b159d020c2b2b62553d1ad02dae1e9"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/initial-candidate.mjs",
+          "bytes": 13663,
+          "sha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/prospective-caller.diff",
+          "bytes": 2690,
+          "sha256": "6a6210fa28c3e6a21d5a0309d7afac48b0666facad0456bb99bfc34c91f67384"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/receiver-tail.mjs.txt",
+          "bytes": 9863,
+          "sha256": "46415bfbb4869646a6cd20aa0762f6bf34c26c0f00dbacd194eb7a3b36807873"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/regression-receipt.json",
+          "bytes": 818,
+          "sha256": "87327855d55dbe37bfc1a26e1a4b68e188f7776aaba379521fd475f8f35ea696"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/seal-author.py",
+          "bytes": 2862,
+          "sha256": "c1634cd04267b78799a3e32769c544c81aa1b91ad38bc5c12cc6dd22d770c453"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/source-bindings.json",
+          "bytes": 6472,
+          "sha256": "6f6f7364c3ada6e1b6c0c3208fc4dd892d8a9348d924b862c15dfa1dfc65ece2"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-expanded.txt",
+          "bytes": 1764,
+          "sha256": "5fa687fd1087760d6bbc480a392429088159a7d2b2304906d2910b0f1a23ff03"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-final-candidate.txt",
+          "bytes": 1766,
+          "sha256": "ebfb85ba5342d21becc7e90851ea18593d9a0efe22f9819d8dc94c88fe08ce7a"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-first-implementation.txt",
+          "bytes": 1179,
+          "sha256": "2f256815575dd5e5c3931ffc60ad9534da7c5b20cd0592bdcb827ca3bde2079c"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-small-string-limit-green.txt",
+          "bytes": 599,
+          "sha256": "a1da8a76fbb7fc24ac4e9c5856416a4f7fe7efcdc70b912b76fe757a87a4b38c"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-small-string-limit-red.txt",
+          "bytes": 2118,
+          "sha256": "1fd1ff7ac6d8b44b9a189e8ab2427cfe66226e4293fecd89fd8523da8898bd47"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+          "bytes": 13991,
+          "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.test.mjs",
+          "bytes": 4454,
+          "sha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/PROTOCOL.md",
+          "bytes": 4842,
+          "sha256": "e305b7ac92d3c8432e5452f6c945b458343a5a26418bb35d7942dbb6bae3bbcf"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/RESULT.md",
+          "bytes": 5046,
+          "sha256": "9542551f42085bd4a03373ba6a61656c228a3bd27b6226bb6a36f51038593757"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/artifact-manifest.json",
+          "bytes": 11243,
+          "sha256": "f568df3408fd4acf9ce5e9c490d2251f3ae8c214557af4f9a43b742429e74614"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+          "bytes": 14562,
+          "sha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings.json",
+          "bytes": 14015,
+          "sha256": "cd026f77f369180b7aaa2df59fc436ad98c459d8089c59fe0b747caab7fdc514"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/command-receipts.json",
+          "bytes": 20276,
+          "sha256": "658ee9baeaa765f7fa1139e2e3d26fe70f9df74b7f0c467844f3eb21160808ef"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings-v2.py",
+          "bytes": 2260,
+          "sha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings.py",
+          "bytes": 2251,
+          "sha256": "8c46eb3f0c7f32ae9fc84585adac833db8d607bb86158106540e34bbbc12dc04"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.startup.json",
+          "bytes": 12500,
+          "sha256": "46dbe6434558e68689b2f651e9bc8366afd6d5c5f1d6860952795291e7cfd5c3"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.stdout.json",
+          "bytes": 44946,
+          "sha256": "47d8843cdb7d27fc05e2bbb7b457b60f7935ee1ab06de25f52fb7f45609e3682"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.startup.json",
+          "bytes": 12494,
+          "sha256": "8ca5263f128940a9c7006d82ecfdf34c74858e262176ce603dc266969d4fc814"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.stdout.json",
+          "bytes": 44855,
+          "sha256": "04b200c34fb2bcf9a6b4ae53531065463a91bd50595b96dde615b8a234cd6d94"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.startup.json",
+          "bytes": 12500,
+          "sha256": "c2b51d2a42acf76f702971e64bc690ff4f8cb024c5263f56f3915720b89abffa"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.stdout.json",
+          "bytes": 44938,
+          "sha256": "5433f0365f24718cd328f969b2d251bdb11ae36d94b1ef16d8945d5d021b0f46"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.startup.json",
+          "bytes": 12494,
+          "sha256": "63b6c4e3733a264dfaf415375f86313077f2ba2fd1901b42a6755e6fb7ca477d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.stdout.json",
+          "bytes": 44853,
+          "sha256": "6f205664bb091aac76fa5e70684e39df547afe88ba27c891c4b722c9c868d9a5"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.startup.json",
+          "bytes": 12500,
+          "sha256": "16b3485df22f0ba3ea298b3f9c4be94ca5077f3257526506383fa673fb3fb994"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.stdout.json",
+          "bytes": 44943,
+          "sha256": "34b4fc693a66628982ba6ea186c0933f2c5c5b13456fe452296b49bd6cdeaff4"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.startup.json",
+          "bytes": 12494,
+          "sha256": "b14ced5dfa64689ed67eee212cd6a4484d11c3d2b2d3e4d85f733922f3958353"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.stdout.json",
+          "bytes": 44865,
+          "sha256": "de297a4dd7a4c4b5cf205709d459be2f6b13a551b0c1a3fcccb8db60d1ecfaca"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/final-receipt.json",
+          "bytes": 1397,
+          "sha256": "f03ac2f32a056fdc693049687a1e4b6531f399708774a34004a25338436b6188"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-correction.diff",
+          "bytes": 3056,
+          "sha256": "d0aa45b95b658cbdb8796147e26d7a5ca2018c7942a518e29cbb94233753e9c3"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-correction.json",
+          "bytes": 1270,
+          "sha256": "133f344d29adde892ad0bafb706b134a02d0bcc1701ae0849feea0b56a1aaa70"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/bindings.json",
+          "bytes": 14015,
+          "sha256": "cd026f77f369180b7aaa2df59fc436ad98c459d8089c59fe0b747caab7fdc514"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/failure-receipt.json",
+          "bytes": 854,
+          "sha256": "8dc90516ea5518e6531b1c8a3207d6f82cf47262b3f160d9f36afc151a37e489"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/run-benchmarks.py",
+          "bytes": 2533,
+          "sha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/tool-output.txt",
+          "bytes": 1015,
+          "sha256": "06d762ca72c0009e33adba268bfdb38b963e6827e76c5b5b75de0c845a13be86"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/oracle.mjs",
+          "bytes": 2257,
+          "sha256": "431cd1a29834dddf8009d6a83cfcd39781cefdac3e53be5360f86fb584318084"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/readback-verification.json",
+          "bytes": 527,
+          "sha256": "744143147b7fb89063835d8274b45ac975309757e383cc107fae9abb4327772c"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.startup.json",
+          "bytes": 12503,
+          "sha256": "190ee434122d9138fe8259c76f2f8f5e9f982950a248fd4e67569ae433757a0e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.stdout.json",
+          "bytes": 44455,
+          "sha256": "dbdd916a54d3c4ea4b708b6820295ff72ed0dbae30fb01e107028b4145fee39c"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.startup.json",
+          "bytes": 12497,
+          "sha256": "fad9ae2e91243ed20bb1c2ef312f791a0b2b4f49580f34f9ca0bc7afdc62f935"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.stdout.json",
+          "bytes": 42088,
+          "sha256": "0c80e4d64c17e471543e0133c358196fd444898c8827315a133b3300797c22d6"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.startup.json",
+          "bytes": 12503,
+          "sha256": "59afc4bc485108ae3ee0f60cc6a8add5598786974a359ba8cb57ab4090d2a77a"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.stdout.json",
+          "bytes": 44446,
+          "sha256": "222a84095335b3879a58792da800311245ffa4b4e821fde58cc16b5126a565e6"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.startup.json",
+          "bytes": 12497,
+          "sha256": "3b1e707909542c943b5c96273c7e6bfbd580ef7d3534cad21a192407128a424f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.stdout.json",
+          "bytes": 42087,
+          "sha256": "69555aa491a7d3729be52f551bc79aa3cef66d775997cb91ff0808c9973b0e40"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.startup.json",
+          "bytes": 12503,
+          "sha256": "d8ca7e961ffb1a7831043008789bd998401cc77dbf5bcecedc7c2fdab3ffe6b3"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.stdout.json",
+          "bytes": 44460,
+          "sha256": "b6d40b702a6b35c7ce93d4e588446219fb0d972ed7648f9dfa4c438fc30028d2"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.startup.json",
+          "bytes": 12497,
+          "sha256": "16d11e6bca4ce7e3fe11f59912b3a3a164ffb4963166b5985c8c92079d1e20d9"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.stderr.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.stdout.json",
+          "bytes": 42088,
+          "sha256": "23f0233548f3160c4bd88ee5e6ff0014f7b4da7e003f029352bba16ed552d16b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks-v2.py",
+          "bytes": 2600,
+          "sha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks.py",
+          "bytes": 2533,
+          "sha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/summarize.py",
+          "bytes": 3354,
+          "sha256": "f597070e7dc26d4fd2071aa6252d6d25bb5cbe9203f842c0ee1f93594474f09a"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/summary.json",
+          "bytes": 10926,
+          "sha256": "5db38aab4ef70c4d25f2cf6b19b17af07daa001099f308f46b2c09037b0e84b2"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+          "bytes": 5729,
+          "sha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/final-receipt.json",
+          "bytes": 4341,
+          "sha256": "97c10f818109d852804b3ab8ed0ba54d12fb38387fd5ce530f878e5d0eb101c5"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/preservation-readback.json",
+          "bytes": 2405,
+          "sha256": "1cc073f28a81dec51606016f7c6e1de4e647ae8949861e565d2f50b65852c2bb"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/prior-input-bindings.json",
+          "bytes": 2003,
+          "sha256": "00a038cd23cc102908b9a173f8d5a436f6e6ace337aa86b4e8c284db942f69ef"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/REVIEW.md",
+          "bytes": 9271,
+          "sha256": "0a06285ff0bf434661b49f20d19d0f98fe3c2c48c38d9724d05d9bc079856554"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/artifact-manifest.json",
+          "bytes": 5136,
+          "sha256": "3c3be3a03bd8a7a8995421d805ff6db3d24213566a0fffd585bb9cb759d7886c"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/author-seal-readback.json",
+          "bytes": 3378,
+          "sha256": "ceca36e4ac277fe04a7c4c7ae0d0a9f3c94028abb99b9cad339dc1e84dbcde8b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/benchmark-launch-review.json",
+          "bytes": 1063,
+          "sha256": "d2952393aa167e1e2fb6c3ba2e5f50034ce14446be90735e2cfebb8f8903a83e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/benchmark-result-review.json",
+          "bytes": 4913,
+          "sha256": "124a10dd0d0bbb6d8327a1f65a014bf49c76fffb5874df6e8fc6bd16a4bc3f71"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/benchmark-seal-readback.json",
+          "bytes": 9735,
+          "sha256": "a599442bccd1db0191435a81a37ac63b66dbff2de77bb46c458b50a590a9f1b1"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/cleanup-final.log",
+          "bytes": 1174,
+          "sha256": "0d0b8af5d657ad9b0fd1017c9185492b45f482e29fd2b2b45b62557cee2db735"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/cleanup.test.mjs",
+          "bytes": 2802,
+          "sha256": "9b9b15252671da06eacc3909602270d236c5168e30ffbe32cf285dd25a564c14"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/compatibility-adjustment.json",
+          "bytes": 537,
+          "sha256": "eef15da3a73ae79ec7163865cb27844ab37e33058db0045c7010a0a9606fb080"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/compatible-final.log",
+          "bytes": 6931,
+          "sha256": "c6233b75b2b0c3862d819aee418a2217fb5b9df379e0c73008004e852776ba81"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/compatible-regressions.test.mjs",
+          "bytes": 10083,
+          "sha256": "98c790b823b2cf7f459172d356989529dddcc198b9bd60cb78ffc849a2497e3d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/final-command-receipts.json",
+          "bytes": 6630,
+          "sha256": "74b14cbd50e4bd02b3a1bce0888ca0cfbc0a05781c2db2516c907109b0f85177"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/final-receipt.json",
+          "bytes": 1856,
+          "sha256": "db9002c87dee1eebf235e775dc47209b3faf457a1a0da6fea944ffafb736ab43"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/findings.json",
+          "bytes": 2595,
+          "sha256": "f01f56f27ba4f1142890b068be2f8e09fc907082b5cba3e48343415a6c3426bd"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/first-candidate.mjs",
+          "bytes": 13663,
+          "sha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/first-test-bindings.json",
+          "bytes": 960,
+          "sha256": "1617abaf319a88d7eaf478da4dee60bbbf841cac856fe59357a9abbcfb7f0b93"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/frozen-final.log",
+          "bytes": 8945,
+          "sha256": "d45e8959299a422956894c3b2968ec9fd709bae65c7f3381e04bf8b15164e279"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/frozen-first-run.log",
+          "bytes": 8935,
+          "sha256": "af1df5a1d100d640f81d7eb4c57e0cee213ee94dfc1c419b5dd7d0a3221e3320"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/functional-clearance.json",
+          "bytes": 4998,
+          "sha256": "9ae227e51c692ea73d20d2b2e699885072d36b87bb126e8444c542f4fa176ecf"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/independent.test.mjs",
+          "bytes": 10074,
+          "sha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/instrumentation-binding.json",
+          "bytes": 608,
+          "sha256": "84280c5d07ecaefcecf3e58611537a4d0f6b9859788de8bfe9ce23afd81934e6"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/instrumented-candidate.mjs",
+          "bytes": 14045,
+          "sha256": "59167112aabf46f45fb22b5724b55d28af89c6737c740933556145881aa90947"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/native-oracle.mjs",
+          "bytes": 1787,
+          "sha256": "411033a90851d363763e2e4e59aca74aee001cee2f543444138d36d8fe8a224f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/preimplementation-review.json",
+          "bytes": 2007,
+          "sha256": "b8249e9419e44af041f41955d16a534d65d58cd736e29fa1537015ef1da0010d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/prospective-syntax-only.mjs",
+          "bytes": 86148,
+          "sha256": "8323fddb7bcd7c7da667aa0db8ce3f5e9d444d133063de30d3f819b9a2ca3944"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/seal-review.py",
+          "bytes": 3729,
+          "sha256": "40d8020daaec1fdc333319b4466031a8d9f712e11bc12488bb297de48e1582f8"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/second-candidate.mjs",
+          "bytes": 13991,
+          "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/second-test-bindings.json",
+          "bytes": 960,
+          "sha256": "0cbf6c13cbe1642d9ee3ea0662ea244224d7dba14a1c9773f4c100a1a3bd6066"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/source-review.json",
+          "bytes": 7202,
+          "sha256": "244dc4c78601d0f24952bcb52282da82957674bc4b583c799289e2d84a170317"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/stream-first-run.log",
+          "bytes": 7634,
+          "sha256": "149dae0a56f984e8267d25bfd1da957e8b70bd753cf10b5b29f67058206284b5"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/stream-second-receipt.json",
+          "bytes": 2106,
+          "sha256": "b5f542e92aaff96dfd3c24a890bfb3f9c0fd6a85fc05848522154500cdfcb153"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/stream-second-run.log",
+          "bytes": 7212,
+          "sha256": "e65f2d99ab2c1dce010c900d61a8de5b6582a7edcabf23957ed78242c653857b"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming-first.test.mjs",
+          "bytes": 10570,
+          "sha256": "f572cb74c0e6059f19e88f8dcb1eadbb013662b68e358c63127bb19ca70b3090"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming.test.mjs",
+          "bytes": 13415,
+          "sha256": "c8b17f3700d133eabe201e4de35e4c73299dc9fad4f3e6c942add2b35abb0680"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-baseline.json",
+          "bytes": 1408,
+          "sha256": "86f79e1a728b5f2b98f72c1f9852cd7857c5a99282ab7f86766ab17e75f8d87d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-benchmark-harness-addendum.json",
+          "bytes": 874,
+          "sha256": "31963aff0c2d24770e20738781ece2dcdf75d10835dd126f26c11bd33cfad49f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-benchmark-harness-review.json",
+          "bytes": 1742,
+          "sha256": "fc7b1067c0f81834e5a33433d6ad3cf514fa3ba8a67efa72baa864bcf0aca6bd"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-benchmark-launch-correction-review.json",
+          "bytes": 1557,
+          "sha256": "9424234586b0f93a7daefa31660b185df0777bb5f3f0723f5cfafedf29166410"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-metrics-review.json",
+          "bytes": 868,
+          "sha256": "aafd8ca9983f01df519a9197e263d664636da2b69eb6dcdf12abc10837349830"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/seal-task.py",
+          "bytes": 3926,
+          "sha256": "4d6dd909b3c4084ef5e038c26aa0e303842e9af3ab0627df1aa9c16a642ed059"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/summary.json",
+          "bytes": 15224,
+          "sha256": "f42d74722738587562cf854841b6713cfadac103359424bc2526d8590e068c29"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/verify-preservation.py",
+          "bytes": 3361,
+          "sha256": "538fe35a0fcf1bd38bbb34297fd82071cbf7e43f7beb17854a4bdb9782619c28"
+        }
+      ]
+    },
+    {
+      "originalRoot": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1",
+      "copyRoot": "handoff/offline-research/contrast-allocation-attribution-review-v1",
+      "status": "Byte-preserving archival copy selected; originals remain local and excluded at original paths.",
+      "regularFiles": 18,
+      "regularBytes": 54369,
+      "files": [
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/ATTRIBUTION-PLAN.md",
+          "bytes": 6530,
+          "sha256": "193bf942319668e28e7b94adcc93ffe8ea41d08c4555d74921a530dca6bea6e8"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/AUTHORIZATION.json",
+          "bytes": 1062,
+          "sha256": "a4a93d8f3f5ab37934efdd00b41fe4ced49702d18b69a351477d144b3b6f9818"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/RESULT.md",
+          "bytes": 4105,
+          "sha256": "69504234d96aa20a9814e67d079d3d8b217c66cccacbdf4996c3f5204106f2c1"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/artifact-manifest.json",
+          "bytes": 2859,
+          "sha256": "6a4672b04415e5d5b686254a45ee389229e5f2817bdb2ea3b9694317866d217d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/baseline.json",
+          "bytes": 1767,
+          "sha256": "c5ef41c1c2aa0bc240c70a61a07d08e39868b475e8af191328419ea55f3f7f05"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/REVIEW.md",
+          "bytes": 7208,
+          "sha256": "fefb482b18870789d79b64ded0094590cd56671db0f111631018f30d8ba38cad"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/artifact-manifest.json",
+          "bytes": 489,
+          "sha256": "b9f04328e7d371f962fb040e05181955da2c22d3f13e63e6a4783f150ef93d4f"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/final-receipt.json",
+          "bytes": 1014,
+          "sha256": "12548d99cf77104faa0555950eff89b9cdf8eb3d4d33c549565e632ce596c68d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/source-bindings.json",
+          "bytes": 2530,
+          "sha256": "f9ffa2d629de43832e4ef69a5bc9d738c5f8c68525431a43c43528f68a410c7d"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/existing-evidence-review.json",
+          "bytes": 2723,
+          "sha256": "e7fce192fcdcd5c14e579244154c8c95f2e94f97c313a28d116e8a6b939c3eca"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/final-receipt.json",
+          "bytes": 2375,
+          "sha256": "7776d162efec6076e2623a4b6a01f85100d9dd8fa0ccc19df3178f8e5bbae8c2"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/REVIEW.md",
+          "bytes": 5729,
+          "sha256": "bdefbd0834b03d9d403b036006fd693a693b8e1c3e61efe1b60d4902cc52bb66"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/artifact-manifest.json",
+          "bytes": 341,
+          "sha256": "1c4e2c52000bf5b1e350727db48ddcfcada9ba0e8adc4695dbdf0c24401ef1b8"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/evidence-review.json",
+          "bytes": 4894,
+          "sha256": "edb1504e28776b1f83b5506b675e7e5ca6608475af2e7afa2f43a64b312f1121"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/final-receipt.json",
+          "bytes": 1754,
+          "sha256": "7fbf9fa6ee0fc45380aa0ee38732f413daabadeb6b068e35da8184a915936442"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/preservation-readback.json",
+          "bytes": 1590,
+          "sha256": "f838b16a5981d58664864761e7fc21a91c8ca59a09cd5b4a21c19d08fce1935e"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/seal-review.py",
+          "bytes": 6362,
+          "sha256": "26a26e1f000daa9c8dc7ca7d53b33310a7bafd0bbec81160f9b35cf44fe2dc58"
+        },
+        {
+          "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/summary.json",
+          "bytes": 1037,
+          "sha256": "4e5f1e9d30f1e7c6c85774a12cae170c726ab0abc62986ef060378f84fc1e6e8"
+        }
+      ]
+    }
+  ],
+  "portableAdditionalSelections": [
+    ".repro-runs/cloud-continuation/completion-decision-v1/RESULT.md",
+    ".repro-runs/cloud-continuation/completion-decision-v1/decision.json",
+    ".repro-runs/cloud-continuation/completion-decision-v1/final-receipt.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/RESULT.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/decisions/p390-00-11.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-receipt.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/CLEARANCE.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/RESULT.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/final-receipt.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/initial-findings.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/INTEGRATION.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/RESULT.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/actual/study/P.html",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/artifact-manifest.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/caller.diff",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/contrast-p57-approved-batch-inputs.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/expected-bindings.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/final-receipt.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/lifecycle-diagnostics.diff",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/make-bindings.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/overlay-manifest.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/prepare-tests.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/prepare.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/resource-probe.diff",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/source-freeze.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/source-preservation.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/FINAL-OFFLINE-TEST-RESULT.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/candidate-offline.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/candidate.test.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/capture.test.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/final-offline.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/initial-offline.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/sampler.test.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/batch-partition.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/candidate-binding.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/selection-state.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/POSTRUN-REVIEW.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/RESULT.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/observe.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/primary-observations.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11/root-facts.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11/validation-receipt.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/RESULT-before-wording-correction.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/correction-review.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/correction-review.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/wording-correction.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/EXECUTABLE-CONTRACT.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/PILOT-READINESS.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/PILOT-READINESS.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-semantic-expectations.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-stage.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-static-input.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-challenges.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-corrected.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-counterexamples.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-final.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-initial.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-external-challenges.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-external-final.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/p390-00-11-stage-review.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/semantic-expectations-review.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/static-input-review.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/summary.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/RESULT.md",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/adapt-external.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/adapt-helper.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/author-freeze-v2.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/author-freeze.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/build-semantic-expectations.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/cleanup_gate.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/original-workload-expectations-20261015.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-final.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-first.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-red.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-second.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-final.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-first.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-second.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-v2.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test_cleanup_gate.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test_external_validator.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/validate-approved-job.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/prospective-expectations.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/semantic-expectations.json",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-final.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-first.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-second.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-third.log",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test_workload_validator.py",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/workload_validator.py",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/RESULT.md",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/final-receipt.json",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-challenge-20261015.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-result-20261015.json",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-result-final-20261015.json",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/final-independent-receipt-20261015.json",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/final-independent-review-20261015.md",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/independent-test-contract-20261015.md",
+    ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/initial-completion-sink-counterexample-20261015.json",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/PLAN.md",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/RESULT.md",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-20261015-7cfa196a.json",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-20261015-7cfa196a.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-attempt-20261015-7cfa196a.json",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/focused-batch-source-review-20261015.json",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/focused-batch-source-review-20261015.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/lossless-retained-evidence-challenge-20261015.json",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/lossless-retained-evidence-challenge-20261015.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/final-receipt.json",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/PLAN.md",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/batch-partition-controls.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/evidence-store-controls.json",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/evidence-store-controls.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/partition-controls.json",
+    ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/pure-controls.json",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/RESULT.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/FINDINGS.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/ORACLE-MODEL-REVIEW.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/SCHEMA-PATCH-REVIEW.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/final-receipt.json",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/PLAN.json",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/REPORT.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/fixture-model.mjs",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/PLAN-v2.json",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/PLAN.json",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/RESULT.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/REVIEW-v2.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/REVIEW.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/run-diagnosis.mjs",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/remaining-release-requirements.json",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/PLAN.json",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/RESULT.md",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/check.mjs",
+    ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/execute.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/RESULT.md",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/RESULT.md",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_historical.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_model.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_preflight.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/final-receipt.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/final-receipt.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/RESULT.md",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/audit-receipt.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/audit-results.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/execute.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/failed-attempt-summary.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/freeze.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/plan.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/verify-format.mjs",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/PLAN-v2.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/PLAN.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/RESULT.md",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/audit_raw.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/driver-pre-node-path.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/driver.py",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/final-receipt.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/raw-audit.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/unexecuted-launch-failure.json",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/worker.mjs",
+    ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/remaining-actions.json",
+    ".repro-runs/cloud-continuation/release-completion-v1/RESULT.md",
+    ".repro-runs/cloud-continuation/release-completion-v1/browser/RESULT.md",
+    ".repro-runs/cloud-continuation/release-completion-v1/browser/final-receipt.json",
+    ".repro-runs/cloud-continuation/release-completion-v1/final-receipt.json",
+    ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/RESULT.md",
+    ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/final-receipt.json",
+    ".repro-runs/cloud-continuation/release-completion-v1/usability/RESULT.md"
+  ],
+  "portableAdditionalSelectionMetadata": [
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/RESULT.md",
+      "bytes": 3296,
+      "sha256": "6387da2de9f5d4f44ca6ab12412c6557d48a6d8ff64cc23ab0030cb37901453c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/decision.json",
+      "bytes": 2850,
+      "sha256": "502b3463f7ea123ebbe5364da78f3551e26ab8ae52b413bfca7b4571fe861049"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/final-receipt.json",
+      "bytes": 1163,
+      "sha256": "87d15904a8870207ce8275197d20f78e7408f04d0672af8a80331e1eb276ad35"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/RESULT.md",
+      "bytes": 4324,
+      "sha256": "05241089e10915820ecd74c2369fd9b1216210cba375e13f29f4db2f1eb9d402"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/decisions/p390-00-11.json",
+      "bytes": 794,
+      "sha256": "859b3d05228c806bee3a7a3c3d22ea72752f84ba0384cd0c5d14ec1d16c1b166"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-receipt.json",
+      "bytes": 1071,
+      "sha256": "e815a4f74bafc02a12f8e96d66ec5e0fc2c224cc148eb7ce1acccc1b05574043"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/CLEARANCE.json",
+      "bytes": 4292,
+      "sha256": "0b6a218627ad18d7972cef9b1951e0071402e0f8c0feb8252195adad0b6dfaec"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/RESULT.md",
+      "bytes": 1067,
+      "sha256": "22a81dc6e47efc18b856ec4a7508f5bd10efcf1855a842451e668f7339cba321"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/final-receipt.json",
+      "bytes": 549,
+      "sha256": "6c8eb8ace54cd36366d0103482acf9d4840a8af50197084088cd53ad1234504a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/initial-findings.json",
+      "bytes": 1553,
+      "sha256": "7d751dff1d92c4998ec778692d906a22ec04c571407d9bf4b45ef1d31dd7d48f"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/INTEGRATION.md",
+      "bytes": 3289,
+      "sha256": "eb796592206cf8e0b49192aec6b200f11f85d8c488d24d2755fc7d99c71d41aa"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/RESULT.md",
+      "bytes": 3172,
+      "sha256": "a6f5cfb194a09f4cff30ee5d0d67ab7759e9e421d43d9fa9157b8f7696ab20ea"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/actual/study/P.html",
+      "bytes": 398463,
+      "sha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/artifact-manifest.json",
+      "bytes": 4633,
+      "sha256": "9e6c316ef4d800498f1f86c70ff787bc2538ac4803c4723b657391152c5f0c49"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/caller.diff",
+      "bytes": 10080,
+      "sha256": "46620b964494cbd4bbdf0dbf42fe6a44182cb17b3ea3b3249edbfca21c4a8442"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/contrast-p57-approved-batch-inputs.json",
+      "bytes": 95986,
+      "sha256": "0dd78a13a85e6f0290bf9917c33f2face81c1b3bea5e6e94b78e37aa798e4da2"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/expected-bindings.json",
+      "bytes": 367271,
+      "sha256": "456fd9b0403fe82a42cc5cb016a2320823a24f4934aa8bd22ecdef0819c6139b"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/final-receipt.json",
+      "bytes": 462,
+      "sha256": "41ab7fdf4b1713fd753955d1e3ee1c7387b41202f83ebb9e9faad73c6e1b237f"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/lifecycle-diagnostics.diff",
+      "bytes": 2378,
+      "sha256": "277a909e7f117dad6754e78615e20459181b5196c6ed282ab9e6aea63f1189ff"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/make-bindings.mjs",
+      "bytes": 2063,
+      "sha256": "187874740b9f4e17a2f215a0c6bd19fb540afafea951ce9e41aeba4fd296b140"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/overlay-manifest.json",
+      "bytes": 6760,
+      "sha256": "124a9af10f7e3fb47508a0be9c6805f141872207df953f1ab3e1086607e568b1"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/prepare-tests.py",
+      "bytes": 3977,
+      "sha256": "893b3dc07ec6fa2f4a938e02615ad96dbecbc71170627513c769b24de8fa0978"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/prepare.py",
+      "bytes": 12412,
+      "sha256": "bf53b953f0be787bcf4f4cd8af13cd53672aaa3e2d3a2d1e76b4a81714eb6350"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/resource-probe.diff",
+      "bytes": 1947,
+      "sha256": "a69a701a8fd7191a0d86ce2dabd68fe746ddbaa8483fb055d51942a4f53d3d14"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/source-freeze.json",
+      "bytes": 2655,
+      "sha256": "b49450b8b30245d308750c4018a84bdc9032babdb9c8670b8fe82f51921a4510"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/source-preservation.json",
+      "bytes": 699,
+      "sha256": "f4dc5357ec6dc6692b13d489b62650c17029c7db2292bc7be235c8d76d4aecb4"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/FINAL-OFFLINE-TEST-RESULT.json",
+      "bytes": 1440,
+      "sha256": "23a3c9fa4ed9ba3645a5e5ce85c1f38e8939f99ae4f6d6d29b41fac87429018f"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/candidate-offline.log",
+      "bytes": 1066,
+      "sha256": "aa88d20ae8054d38087c890047cdb213a8ab7e076a62b9f181a11e352ef4ce9d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/candidate.test.mjs",
+      "bytes": 2809,
+      "sha256": "2f0d4e8f1aa57259b4aedc6e7c00b642c83ba88948a0faaf4a3ef0e8ebdeb316"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/capture.test.mjs",
+      "bytes": 16857,
+      "sha256": "c6571158658620098c3adc80b345ddd135941df960cc84236df4b65121085f44"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/final-offline.log",
+      "bytes": 6953,
+      "sha256": "8da9f93eb82e34d334b9f8598a75c4006614c6471c681fe5bf931e6ebb845b2a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/initial-offline.log",
+      "bytes": 5711,
+      "sha256": "2fc1cc3668d6c734c4a7c4c7836e0146763313797e226adee51e71fad43bec0a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/sampler.test.mjs",
+      "bytes": 9899,
+      "sha256": "1bf15f1b1c8ce65ced8c94bdf0346a875ae5be2f294a5456fe1128b077a245b1"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/candidate-binding.mjs",
+      "bytes": 2096,
+      "sha256": "2b0a23499bb1bdeb33e7cd7242e968251b27c20d969c9d3a503c4bd2afc75766"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/POSTRUN-REVIEW.json",
+      "bytes": 4931,
+      "sha256": "153b64c0d3b223b326f75223d84d5e9c167ff2a6e98d4afb5f2096a1fba1d7b3"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/RESULT.md",
+      "bytes": 2377,
+      "sha256": "721fb75becda17d315da6b483068f1ca903165953de4e6ae1dc5fe28540005d1"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/observe.py",
+      "bytes": 7787,
+      "sha256": "12d592047f6bc02b11e4d5da20e002a32fc43ca8091bc3b965240f464cc05999"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11-review/primary-observations.json",
+      "bytes": 22084,
+      "sha256": "8357c6850553e8d91a0c8773596196f1057e356b7f69ed765895703e33f5b13d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11/root-facts.json",
+      "bytes": 2246,
+      "sha256": "1b916a85d25acda7f3b43eb42fcd8f5cdbf1cfe4001142240c8a9639d2f1b6d0"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/postrun/p390-00-11/validation-receipt.json",
+      "bytes": 538,
+      "sha256": "2ebb2c6e39e62892d5cfcfb45d090cb0cc335d12fd85757fe4c29938229792c2"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/RESULT-before-wording-correction.md",
+      "bytes": 4106,
+      "sha256": "fadacc61042c05fdc740f8980200f2c2325d04c29e4e73ffc3d444ed064318c5"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/correction-review.json",
+      "bytes": 9913,
+      "sha256": "6557354e0f8256ab71c3bd76ea86dd5930ea07fb3f60d1a0804ebfcf0cec3445"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/correction-review.md",
+      "bytes": 1618,
+      "sha256": "862a37b93fc0f4c0bd53d2fa19c081a0ab29830ab376ba54fa39fd086818dca5"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/reconciliation/wording-correction.json",
+      "bytes": 1145,
+      "sha256": "0a5e9e1e6a3709c8d5df584d88a69d9000f5018025e05c3262a6e3c27c9fe1ca"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/EXECUTABLE-CONTRACT.md",
+      "bytes": 5507,
+      "sha256": "2bbcd4f175770dd56cf6c9fea4f35351ede70e555507c2ca5649f3dcbabf6615"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/PILOT-READINESS.json",
+      "bytes": 6152,
+      "sha256": "9129963142f35987a1935d7adfc143129375714b709c9786d3f2a219ed1af00a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/PILOT-READINESS.md",
+      "bytes": 2414,
+      "sha256": "bd051ac19ba1481cde99ebade04afe1f616a4daf9e749d4b377452863d008cfc"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-semantic-expectations.py",
+      "bytes": 3238,
+      "sha256": "b33550b89641e5702266c6dc354677ca97bb74d9e8e4b14d48636c6980903d0a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-stage.py",
+      "bytes": 5096,
+      "sha256": "94eadcd46f9ba1939dcc2f4c1eff93146d57c9f1a2b7709e33bb9b497d8e04a9"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/check-static-input.py",
+      "bytes": 6006,
+      "sha256": "9021ca2e179390b67a45bbff135cc255b75a1a6bcf8ced552bbf5ffbdb459723"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-challenges.py",
+      "bytes": 6362,
+      "sha256": "9bb3c48b65d02d8b5add5b612621f1548481861f814097bd331144ca4469854a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-corrected.json",
+      "bytes": 18225,
+      "sha256": "63684385b5d005aeaf1aef2cadde04d6994b8d3c03b197b1778dfa63ee7aee02"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-counterexamples.json",
+      "bytes": 17983,
+      "sha256": "c8a8163f3d0397a9e4c5f85eca761a656a7d8058c9be41f332b4486b723d2c20"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-final.json",
+      "bytes": 18225,
+      "sha256": "6148a825c792a6774b03f97a16cd0c540756c81253b1487d585e9f4843a66cbd"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-cleanup-initial.json",
+      "bytes": 16948,
+      "sha256": "257a29710b449799fdd5a1145aff23c8ddccdc1f00f56476c4377fdcc9ec4515"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-external-challenges.py",
+      "bytes": 3182,
+      "sha256": "195088b59748dd164734bf1e16d986926a57b2f93605c4c4920075d3991a1d47"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/independent-external-final.json",
+      "bytes": 1431,
+      "sha256": "f535ec39f94086605fcc5f8f9f76aea4e9b7e11bcb4cc466e28a3476abf748af"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/p390-00-11-stage-review.json",
+      "bytes": 1539,
+      "sha256": "feda795cd3205186587ef14d6393f036adc450c2e2f4ac9a9bd4de69e9e0dc2d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/semantic-expectations-review.json",
+      "bytes": 701,
+      "sha256": "45f6a93db93d99b88f1653a1da3ff2aca744347a0cced2eab1e86ae297886aa2"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/review/static-input-review.json",
+      "bytes": 19025,
+      "sha256": "ff0727a7e428589a907eccfa0bc1188b59b4a37037717378b26adcbfa10ff826"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/summary.json",
+      "bytes": 696,
+      "sha256": "85aea57b5e7908c4e2c409321e06ab132f4ded81095fd3500917e3889d2a4edf"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/RESULT.md",
+      "bytes": 3967,
+      "sha256": "f0076a39b606260f58ff09fff437de52cb1d6941515bc0cc4e5d6fde1255f2ea"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/adapt-external.py",
+      "bytes": 6570,
+      "sha256": "0a5d5fb55e0e6a6834d502eb8e3b8ba30c3e307699aab897f6a33a305f31e56b"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/adapt-helper.py",
+      "bytes": 4683,
+      "sha256": "9507836f092655ab85998b99dec605fcf21e824bbfeed3b472a6f87976e367ed"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/author-freeze-v2.json",
+      "bytes": 2490,
+      "sha256": "5bf6a832612df33fb8ace20b6dfbd12a87f6ab8363a3d643ae3b1b8631faa6d9"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/author-freeze.json",
+      "bytes": 2282,
+      "sha256": "15bd8f1590a9d8c06c9bb1a07f2d270a3c84a9e2729cd7a2bb9395a731e464b1"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/build-semantic-expectations.py",
+      "bytes": 3590,
+      "sha256": "b196854804ebfe9e2a302e69f19716c2df08fa8c3778ecebe63aa9fcbc2ecfea"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/cleanup_gate.py",
+      "bytes": 7949,
+      "sha256": "f29222815b9f6419eb7b4a01eef4cb8aac9369a7a4681ca498c9826d4091f814"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/original-workload-expectations-20261015.json",
+      "bytes": 40446,
+      "sha256": "72c71baf551f5a8a29eb2b3a0d0927c4a505b6a729230f5c9f341846fe39f967"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-final.log",
+      "bytes": 2406,
+      "sha256": "9fbfeb46c15e7c59288bd9b60ad36059f2fb754d82d50fc77c39fb0fb78439fa"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-first.log",
+      "bytes": 2406,
+      "sha256": "316e396819ccb7477357d2faa1d2ca621b0a89c866928f144bfbc39e5c7317d8"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-red.log",
+      "bytes": 305,
+      "sha256": "2afc144750081a0468cbeacd34460b5cea21ce54c3367d11e37e53d83febc6d3"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-cleanup-second.log",
+      "bytes": 2406,
+      "sha256": "9a6a913a0e693e87a0b9d0922b9370a0f9989665f5e2c1916f284c8f4099c880"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-final.json",
+      "bytes": 3464,
+      "sha256": "81697a36c99517b1387bf58fa7d4ab6738a38ca358709cbf7eb3d62b4612018e"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-first.json",
+      "bytes": 3464,
+      "sha256": "592d9e2a2dd124c31b5f87d91ec3f4280dd822b40e9a13c64a8c854916c3158a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-second.json",
+      "bytes": 3464,
+      "sha256": "8bb4a3d0a04bdd3a96655be6956ee91869a463d56745f9511481dd9308917ec7"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test-external-v2.json",
+      "bytes": 3624,
+      "sha256": "c5b89de62132e2ed075c91dc20a6b4c37f66f21cf949894a9a18a927da864896"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test_cleanup_gate.py",
+      "bytes": 6216,
+      "sha256": "f27ee1b51826888945c00ec95d32c51dfd39541328fea3e17b4f6cb2612e9da3"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/test_external_validator.py",
+      "bytes": 13625,
+      "sha256": "cc17ffabc9341b421dbcc4097a12db1a02cd6f4c04da41e0c4658b2a46cafe1f"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/validate-approved-job.py",
+      "bytes": 35048,
+      "sha256": "83b78b9e928bc32419a84372f028a8ee7232ee256e2f8d7ff22b134b2e64e437"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/prospective-expectations.json",
+      "bytes": 316316,
+      "sha256": "e5b973ed32dbd7b1fbfb4aad71a95830c02d44134b61e82d0f044541cdba48a9"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/semantic-expectations.json",
+      "bytes": 79149,
+      "sha256": "79cf0dede1be5b81ecb28b837d8cabfeb94101745af0f34c4ac8b97db7e76979"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-final.log",
+      "bytes": 546,
+      "sha256": "b3706340fb8b93f87dc31e07c1c3707c1b2fd25402a3b592845d4494e926c4a8"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-first.log",
+      "bytes": 405,
+      "sha256": "6420a2739d6226362b77167f403a275c5828e2a8a2e344f83e87a1930d765a30"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-second.log",
+      "bytes": 546,
+      "sha256": "3852a96aea3d867b16a5cd705a81b139bb23b01a355d18776f1e63709d4115ad"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test-third.log",
+      "bytes": 546,
+      "sha256": "ac0be5d649936b4ad49b2db88647ebc6785802aa0e55d92cc7611c863bde5a74"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/test_workload_validator.py",
+      "bytes": 18768,
+      "sha256": "03ff9b71390e12ee22f1da3f5011ad503ed2c952edb6f834ccaa7601bc7f65e4"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/workload-evidence/workload_validator.py",
+      "bytes": 28728,
+      "sha256": "8133771e3447ed71544699cd3b86015f9ed29559472a1d11ef23390bfbaf0cc6"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/RESULT.md",
+      "bytes": 6057,
+      "sha256": "528dfc828bca097c4cd527e10050525d73bcab6d181060af3d7369a2125d53a3"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/final-receipt.json",
+      "bytes": 3703,
+      "sha256": "7295c27f5ae1e5ead68e61d6250a743d21e0e77706471202bce3ad8d12577e71"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-challenge-20261015.mjs",
+      "bytes": 4397,
+      "sha256": "0618ea419e086276b56f9e91615d3576c7c7740dcc347110022ada674dfcb5ce"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-result-20261015.json",
+      "bytes": 1257,
+      "sha256": "0b29fa98fb40ce80c800936114e55202c8a037a785e6e884fe4cffa7d2005005"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/completion-regression-result-final-20261015.json",
+      "bytes": 1257,
+      "sha256": "494f688fcc7d69cf1be853b0457809a48eca6c2a3b93347b9e136eee42e65590"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/final-independent-receipt-20261015.json",
+      "bytes": 5561,
+      "sha256": "09699790565eb92f8c13a28546822d35be2437d1af2d096f1d3cd57c3463f01d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/final-independent-review-20261015.md",
+      "bytes": 6232,
+      "sha256": "e0cb3194496134e8a491c591f424a86430cac5aeb190b6270a8d794949987eeb"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/independent-test-contract-20261015.md",
+      "bytes": 5455,
+      "sha256": "6a3050da6ac650b7691480c68f84cc81f54aae71301224b1c7fbd8d7ab3f9220"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/review/initial-completion-sink-counterexample-20261015.json",
+      "bytes": 1274,
+      "sha256": "acf8c7160c691fa2eb1aac34bb7df6ed12d7dd87e50b12dce58288455cf8aa15"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/PLAN.md",
+      "bytes": 10784,
+      "sha256": "beb766eb8a30e008367eef7a32883187e54bc47a4158af2cb85e8c980f8a142c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/RESULT.md",
+      "bytes": 6586,
+      "sha256": "ea6500153c81424329ba802b3bc16691ea2f917e67b428ff29b48efb4500bb00"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-20261015-7cfa196a.json",
+      "bytes": 98662,
+      "sha256": "4d34661cfe2487d20f66faf6cea0ab457ab73cc5cc436c44f165492c96e925e6"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-20261015-7cfa196a.mjs",
+      "bytes": 9388,
+      "sha256": "70599b0d9b2f2f1cbb0d04f17c00761f4515e2cb18d93fceece325c74158b3b9"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/batch-partition-independent-attempt-20261015-7cfa196a.json",
+      "bytes": 1049,
+      "sha256": "fcf0009d0e6097bf726e51b214de6123d27f2c35cd032aaeb666b7f8831f5060"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/focused-batch-source-review-20261015.json",
+      "bytes": 35227,
+      "sha256": "39f1f0302abc4c107bd65406d6fa84fb2ede585b0a75801701e80526a2b66d58"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/focused-batch-source-review-20261015.mjs",
+      "bytes": 10154,
+      "sha256": "ef80fe46eedf4614c879ef1c60604e6a3454713d6a0d55623aac1382a2ea2502"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/lossless-retained-evidence-challenge-20261015.json",
+      "bytes": 1078,
+      "sha256": "09d80121cf7ea42e523c20c56be389fedb01427c623a81e4ec5bc435d8967de6"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/audit/lossless-retained-evidence-challenge-20261015.mjs",
+      "bytes": 5515,
+      "sha256": "6d4a57ae2a6e621e6f3a6ce07ed1096c3e4c61d5817ffaaab721765560e07089"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/final-receipt.json",
+      "bytes": 4079,
+      "sha256": "a40de95dce92b83237ad650c2afd11e321ea04b76c66c3fbf00a9cd4fbfb452d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/PLAN.md",
+      "bytes": 7882,
+      "sha256": "4fc353beaa459e3e05e19a04efab98168e975912921bb864c4e085f95995f5cb"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/batch-partition-controls.mjs",
+      "bytes": 16723,
+      "sha256": "992e6e70e604f3044bce745cddc3a5be33d4f9fcf56667f7c758f386661d9a3c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/evidence-store-controls.json",
+      "bytes": 1112,
+      "sha256": "6516474f85086a1ab33376a1069327040c3e35413fb836f49082b1fdf5e40079"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/evidence-store-controls.mjs",
+      "bytes": 14630,
+      "sha256": "dd827b1b9a245550396a50ef3208403991fd9511d01f659c93f38601a53d84b5"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/partition-controls.json",
+      "bytes": 7867,
+      "sha256": "d7e3d5af2f83a93fdb0bb8466740dcf3e6a3dccc955bf85ab99e19aa7a0bf2bc"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/pure-controls.json",
+      "bytes": 15864,
+      "sha256": "54d263e7426ebf125d5f73ff499e294354672141c7cdf05585cb8fc9b09cea94"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/RESULT.md",
+      "bytes": 10775,
+      "sha256": "f0b10f561a53a5bf84fa22eb53e86058755a71429a3c6a81748e72b162d30e6b"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/FINDINGS.md",
+      "bytes": 9585,
+      "sha256": "0d137b800d58e7ed4951b4109c7ad34cbcf7b1daa2a1e1a902f3f0eb2f9ba5cb"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/ORACLE-MODEL-REVIEW.md",
+      "bytes": 5038,
+      "sha256": "b17f7973bd55c12882bd23158cfbedcf3649bbd2fc348e2e203c801c8391959e"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/SCHEMA-PATCH-REVIEW.md",
+      "bytes": 6666,
+      "sha256": "db1eeb5df44a3f479dea589badae437d6f7efe6ad6749c47f297c4508ae3df07"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/final-receipt.json",
+      "bytes": 3420,
+      "sha256": "5e301ac833374f00a9eb4ae1b86f12dab75284bff49321c17ce8810fd3977595"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/PLAN.json",
+      "bytes": 6438,
+      "sha256": "59ddbe5bb2cec80366783b00c598f67348e3084f605b4598903ac7ae6e7fa234"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/REPORT.md",
+      "bytes": 7932,
+      "sha256": "dc2da8c6a102e96949998be26a1232bde61cd9494e7a83124e31649d29896c91"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit/fixture-model.mjs",
+      "bytes": 10326,
+      "sha256": "a22fc11770f6800b0dbcd6ea39b50ab47cc53ab0bcc3daf9cf3ff212a24bc6dd"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/PLAN-v2.json",
+      "bytes": 4208,
+      "sha256": "83d0aac29c0cb913f4bfdd7bd2c0a1799e2bd14c7b578edb9fb9fc352a2237b6"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/PLAN.json",
+      "bytes": 8676,
+      "sha256": "4c8a2d7aff161f0e0d87061fb8235d869e536e6e377760ba8e8a06e954e4d4e0"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/RESULT.md",
+      "bytes": 4243,
+      "sha256": "cc7e5f761a799b3aefe27f400843546559eac60aa7b3108bc000e15b6e428347"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/REVIEW-v2.md",
+      "bytes": 1203,
+      "sha256": "810afe1f9d61b80baab10091916dacbc9425168e8c99d176bcae4201d4ea6b0c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/REVIEW.md",
+      "bytes": 3567,
+      "sha256": "97d4e830b61319f3c95521efdb85c3b2169a18cc4b3fbaec55ecdeb48426ba1f"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/run-diagnosis.mjs",
+      "bytes": 11425,
+      "sha256": "96e914329d55343408e659c47a02c06c1dff8a594bb5fa1c9c64454b26ce6d16"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/remaining-release-requirements.json",
+      "bytes": 3074,
+      "sha256": "cc4e7e0b4935ecbfc313b004806ba393c167b0f68aa960c3cc8d09d51c5f00db"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/PLAN.json",
+      "bytes": 1482,
+      "sha256": "9e5d2a598165617ecd177564459da433ecf3f1e07df1d30f6c8b922a5d02a4c6"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/RESULT.md",
+      "bytes": 1652,
+      "sha256": "9adf4e36451af5253f258c4bdf9021c6bb4805326b4e5ec5c292407f2744845c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/check.mjs",
+      "bytes": 3113,
+      "sha256": "77d9869b00d66147fa33262292d9e7b29dba33503c11ee3eeb557b7c7af50ee5"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/execute.py",
+      "bytes": 2370,
+      "sha256": "26b0b0fade38cba432994ce8f3cd57f45ea614b841bf72b3e8f4cbffe2d4533b"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/RESULT.md",
+      "bytes": 10800,
+      "sha256": "6d0671abb62744737a428a49a5dfc5408cf908f574536feb4a3e975393a09347"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/RESULT.md",
+      "bytes": 13047,
+      "sha256": "b21cff63ac9405a553922dc951208e4492ecb1e92f6e637a4fe282d00e7417cd"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_historical.py",
+      "bytes": 15281,
+      "sha256": "68f90a09189c4ec0f151b9cecf819e617e2af2b6764d9a84f6e03d5deac41a07"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_model.py",
+      "bytes": 11352,
+      "sha256": "8844427fe75bf5ae7e1ae81dcebfda4b9bfe30685fa182a323137a9f473df905"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/audit_preflight.py",
+      "bytes": 10271,
+      "sha256": "450a93a7b7c3e578ead80b873c0b61137189b89c94cb0eec215f44989ca8efa5"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/final-receipt.json",
+      "bytes": 2499,
+      "sha256": "5a178ecc7ee80fc58000003ac96b56558f1f543054a1c1039e07857493dea1e3"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/final-receipt.json",
+      "bytes": 4172,
+      "sha256": "a785e30e4e106f2da770dd4f5fe4113fb26f560828482607d056d12793dc508a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/RESULT.md",
+      "bytes": 7828,
+      "sha256": "b1c3120358a682674dbb75e503d0976e06f25466f5b71deb741f10eb74be9616"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/audit-receipt.json",
+      "bytes": 7710,
+      "sha256": "cd70caecfe42af304058a9806fc09be9348958d15c4a083d5e5f62e35026dfa7"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/audit-results.py",
+      "bytes": 7330,
+      "sha256": "f2203cd0291b23d938cb53928169a6301350398800bb6c73ac4d69a574a36972"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/execute.py",
+      "bytes": 2315,
+      "sha256": "c3be369c6a4d83a99b0a47630faaa5d5b29c33c5b9f556e0b995292d74cadc3c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/failed-attempt-summary.json",
+      "bytes": 52932,
+      "sha256": "e00892b1a4fde34dae7087672bcacbde58ac2ed2968ff11b041a306ff18048ac"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/freeze.py",
+      "bytes": 7702,
+      "sha256": "2bb46130b37424e5297fdd53b52a12500f08f785b1e23409d0837b5eea066dc1"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/plan.json",
+      "bytes": 30071,
+      "sha256": "27177ce83057c5c8ac89a9eadcaf1e6177de3092945b3ed249b5154150335f38"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/verify-format.mjs",
+      "bytes": 11601,
+      "sha256": "f39078a916f30b160e5ce424978f4faf010f22a6c21d7c7097f1e2a6a4387559"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/PLAN-v2.json",
+      "bytes": 7348,
+      "sha256": "7046939bc5f7c0b0163f0e9ede0a19078ff10ebb5e3e50642b0b2ccb2024b4f2"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/PLAN.json",
+      "bytes": 6660,
+      "sha256": "f191b4ddc4d9e27461c9c18f99c2691f2f5b24e8fa7cb7b3d467f867e3252d9e"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/RESULT.md",
+      "bytes": 10957,
+      "sha256": "2aee40e4c7e0c5655e779352802845ed579c32c9f52d4ab104aff9baa8a74849"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/audit_raw.py",
+      "bytes": 11780,
+      "sha256": "2c927b52c33f27ef7d7d5011ad33161e854b6b96cd326cfc5409c211fed8d334"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/driver-pre-node-path.py",
+      "bytes": 4576,
+      "sha256": "b49d6ff7675dece2095e79d08d1c72289d89b3f59ca6a302019584b4bb8f9167"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/driver.py",
+      "bytes": 4729,
+      "sha256": "2cfeb6d200bb02d39def9f813fb11e21d247470f1271f3312949bb2b8753c8c8"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/final-receipt.json",
+      "bytes": 2137,
+      "sha256": "fa5dd3f13e52eab2dcafe5ad64a04ebf7a6569dcf5b4dcf81229dc77fd0df4d6"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/raw-audit.json",
+      "bytes": 25867,
+      "sha256": "8f0f212e0f127215f68e24702ee8348d886a947bb05357bda7df5b4bff37d8fb"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/unexecuted-launch-failure.json",
+      "bytes": 489,
+      "sha256": "bcfeac844c5fd3854d54e10d3dcd205140ea1f6f8a9b4193c072400d9d2e03cc"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/worker.mjs",
+      "bytes": 22204,
+      "sha256": "ec4b0ead0b7170f6faa9bdfee27b4ddcb7f896a11a09d8e422906527459f2ec7"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/remaining-actions.json",
+      "bytes": 2587,
+      "sha256": "4ffbce1598e2d0ad4f4749f08eed36f8b207f80b5d572a318b1c57218e443659"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/RESULT.md",
+      "bytes": 8938,
+      "sha256": "93821182c61a81faa3eba61fa7742fde3012197c3408407035984d47ddacf6dc"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/browser/RESULT.md",
+      "bytes": 11059,
+      "sha256": "5d96a86314e669a140acae15eda1e0ebcd52f935b73e3d549c498d570929706c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/browser/final-receipt.json",
+      "bytes": 61925,
+      "sha256": "e2908f727689f0bf9447803cb23e4e6b461fa2d685b347de0ecb1c4031450e02"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/final-receipt.json",
+      "bytes": 4853,
+      "sha256": "12e9763cfe53cde62acb6738d1129e717a6c19e51ac24a23c547197f76bead88"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/RESULT.md",
+      "bytes": 4577,
+      "sha256": "8434395f8fecd92c4e273d7e60e2efacfaab279621f1a6badf1c1f573683dd96"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/final-receipt.json",
+      "bytes": 12387,
+      "sha256": "f3ad55a92430582736a5d50f2f3b65c499f61710889aa3d02a068d9f00269ea0"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/usability/RESULT.md",
+      "bytes": 11137,
+      "sha256": "dc75054c137549e1a81696c0971da2fc3c3cc8f03585264d072458853ea1c1fa"
+    }
+  ],
+  "portableAdditionalCopyRoot": "handoff/diagnostics/<path relative to .repro-runs/cloud-continuation/>",
+  "portableAdditionalStatus": "Root will review and copy these exact files; consult final handoff copy manifest for actual copied set. Original task trees remain excluded.",
+  "usefulLocalReportsAndSeals": [
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/RESULT.md",
+      "bytes": 8007,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/final-receipt.json",
+      "bytes": 3711,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/RESULT.md",
+      "bytes": 7590,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/final-receipt.json",
+      "bytes": 1999,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/report-manifest.json",
+      "bytes": 12571,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/peak-review/RESULT.md",
+      "bytes": 11364,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/report-manifest.json",
+      "bytes": 23718,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/startup-repair/RESULT.md",
+      "bytes": 3591,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/cli-evidence-preservation-v1/FINAL-STATUS.json",
+      "bytes": 1852,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/RESULT.md",
+      "bytes": 7484,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/frozen-v1/RESULT.md",
+      "bytes": 1827,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/frozen-v2-single-process/RESULT.md",
+      "bytes": 1769,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/frozen-v3-bounded-node-pools/RESULT.md",
+      "bytes": 1860,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/plumbing/RESULT.md",
+      "bytes": 2896,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/report-manifest.json",
+      "bytes": 71378,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/runner-mode-validation/RESULT.md",
+      "bytes": 5412,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/runner-pool-validation/RESULT.md",
+      "bytes": 5446,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/RESULT.md",
+      "bytes": 3296,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/artifact-manifest.json",
+      "bytes": 5082,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/final-receipt.json",
+      "bytes": 1163,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/release-checklist/final-receipt.json",
+      "bytes": 1553,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/time-budget/RESULT.md",
+      "bytes": 10050,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/time-budget/final-receipt.json",
+      "bytes": 1354,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/zero-z-origin/artifact-manifest.json",
+      "bytes": 500,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/completion-decision-v1/zero-z-origin/final-receipt.json",
+      "bytes": 1122,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/RESULT.md",
+      "bytes": 4105,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/artifact-manifest.json",
+      "bytes": 2859,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/REVIEW.md",
+      "bytes": 7208,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/artifact-manifest.json",
+      "bytes": 489,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/final-receipt.json",
+      "bytes": 1014,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/final-receipt.json",
+      "bytes": 2375,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/REVIEW.md",
+      "bytes": 5729,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/artifact-manifest.json",
+      "bytes": 341,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/final-receipt.json",
+      "bytes": 1754,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/RESULT.md",
+      "bytes": 12395,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/artifact-manifest.json",
+      "bytes": 4983485,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/audit-coverage/RESULT.md",
+      "bytes": 3540,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/comparator/RESULT.md",
+      "bytes": 5628,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/comparator/final-receipt.json",
+      "bytes": 4075,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/final-receipt.json",
+      "bytes": 3083,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/RESULT.md",
+      "bytes": 7480,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/artifact-manifest.json",
+      "bytes": 21311,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/RESULT.md",
+      "bytes": 6391,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/artifact-manifest.json",
+      "bytes": 3007,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/final-receipt.json",
+      "bytes": 1349,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/RESULT.md",
+      "bytes": 5046,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/artifact-manifest.json",
+      "bytes": 11243,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/final-receipt.json",
+      "bytes": 1397,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/final-receipt.json",
+      "bytes": 4341,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/REVIEW.md",
+      "bytes": 9271,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/artifact-manifest.json",
+      "bytes": 5136,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/final-receipt.json",
+      "bytes": 1856,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/RESULT.md",
+      "bytes": 4324,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/artifact-manifest.json",
+      "bytes": 1811635,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-receipt.json",
+      "bytes": 1071,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/RESULT.md",
+      "bytes": 1067,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/final-review/final-receipt.json",
+      "bytes": 549,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/RESULT.md",
+      "bytes": 3172,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/artifact-manifest.json",
+      "bytes": 4633,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/final-receipt.json",
+      "bytes": 462,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/package-review/RESULT.md",
+      "bytes": 3783,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/package-review/artifact-manifest.json",
+      "bytes": 663,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/package-review/final-receipt.json",
+      "bytes": 503,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/package/RESULT.md",
+      "bytes": 6937,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/package/artifact-manifest.json",
+      "bytes": 953783,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/package/final-receipt.json",
+      "bytes": 4665,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/RESULT.md",
+      "bytes": 3967,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/RESULT.md",
+      "bytes": 6057,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/artifact-manifest.json",
+      "bytes": 14953,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/css/RESULT.md",
+      "bytes": 2513,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/css/artifact-manifest.json",
+      "bytes": 3938,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/final-receipt.json",
+      "bytes": 3703,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/instrumentation/RESULT.md",
+      "bytes": 5429,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/instrumentation/artifact-manifest.json",
+      "bytes": 8618,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/instrumentation/final-receipt.json",
+      "bytes": 614,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/RESULT.md",
+      "bytes": 6586,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/artifact-manifest.json",
+      "bytes": 21823,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/final-receipt.json",
+      "bytes": 4079,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/artifact-manifest.json",
+      "bytes": 12604,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/RESULT.md",
+      "bytes": 6870,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/artifact-manifest.json",
+      "bytes": 3932012,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/final-receipt.json",
+      "bytes": 6015,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-postpilot-diagnosis-v1/RESULT.md",
+      "bytes": 6409,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-postpilot-diagnosis-v1/lifecycle/RESULT.md",
+      "bytes": 7170,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/RESULT.md",
+      "bytes": 5026,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/artifact-manifest.json",
+      "bytes": 12946,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/RESULT.md",
+      "bytes": 7509,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/artifact-manifest.json",
+      "bytes": 5071,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/final-receipt.json",
+      "bytes": 1113,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/final-receipt.json",
+      "bytes": 2015,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/RESULT.md",
+      "bytes": 3210,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/final-receipt.json",
+      "bytes": 2458,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/final-receipt.json",
+      "bytes": 1707,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/REVIEW.md",
+      "bytes": 6845,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/artifact-manifest.json",
+      "bytes": 2885,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-receipt.json",
+      "bytes": 1159,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/docker-browser-retest-v2/RESULT.md",
+      "bytes": 4198,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/docker-browser-run-v1/RESULT.md",
+      "bytes": 4654,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/failure-remediation-v1/RESULT.md",
+      "bytes": 7624,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/failure-remediation-v1/report-manifest.json",
+      "bytes": 1305,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/init-diagnostic-v1/RESULT.md",
+      "bytes": 6425,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/init-diagnostic-v1/report-manifest.json",
+      "bytes": 9955,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-resolution-diagnostic-v1/RESULT.md",
+      "bytes": 6512,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-resolution-diagnostic-v1/artifact-manifest.json",
+      "bytes": 54898,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-resolution-diagnostic-v1/final-receipt.json",
+      "bytes": 7539,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-resolution-diagnostic-v1/instrumentation/RESULT.md",
+      "bytes": 4039,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-resolution-diagnostic-v1/instrumentation/artifact-manifest.json",
+      "bytes": 4933,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-resolution-diagnostic-v1/instrumentation/final-receipt.json",
+      "bytes": 573,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/RESULT.md",
+      "bytes": 8290,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/artifact-manifest.json",
+      "bytes": 927393,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/final-receipt.json",
+      "bytes": 8924,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/instrumentation/RESULT.md",
+      "bytes": 3598,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/instrumentation/artifact-manifest.json",
+      "bytes": 6148,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/instrumentation/final-receipt.json",
+      "bytes": 1062,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/kernel-reference/final-receipt.json",
+      "bytes": 686,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/post-run-kernel/final-receipt.json",
+      "bytes": 901,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/RESULT.md",
+      "bytes": 10775,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/contract-audit/final-receipt.json",
+      "bytes": 1724,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/final-receipt.json",
+      "bytes": 3420,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/RESULT.md",
+      "bytes": 4243,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/REVIEW.md",
+      "bytes": 3567,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/regression-review/artifact-manifest.json",
+      "bytes": 3207,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/report-manifest.json",
+      "bytes": 87526,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-corpus/RESULT.md",
+      "bytes": 1652,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-patch/RESULT.md",
+      "bytes": 6030,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-patch/final-receipt.json",
+      "bytes": 1260,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/missing-steps-diagnosis-v1/schema-patch/report-manifest.json",
+      "bytes": 13918,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/recovery-diagnostics-repair-v1/RESULT.md",
+      "bytes": 2254,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/RESULT.md",
+      "bytes": 10800,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/RESULT.md",
+      "bytes": 13047,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/final-receipt.json",
+      "bytes": 2499,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/audit/report-manifest.json",
+      "bytes": 1987,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/final-receipt.json",
+      "bytes": 4172,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/RESULT.md",
+      "bytes": 7828,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight/report-manifest.json",
+      "bytes": 316472,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/RESULT.md",
+      "bytes": 10957,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/final-receipt.json",
+      "bytes": 2137,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/reference-model/report-manifest.json",
+      "bytes": 9189,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/report-manifest.json",
+      "bytes": 344173,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-browser-review-v1/REVIEW.md",
+      "bytes": 2326,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/RESULT.md",
+      "bytes": 8938,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/artifact-manifest.json",
+      "bytes": 7730263,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/audit/artifact-manifest.json",
+      "bytes": 49323,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/browser/RESULT.md",
+      "bytes": 11059,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/browser/final-receipt.json",
+      "bytes": 61925,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/final-receipt.json",
+      "bytes": 4853,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/RESULT.md",
+      "bytes": 4577,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/final-receipt.json",
+      "bytes": 12387,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/nonbrowser/report-manifest.json",
+      "bytes": 63329,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/usability/RESULT.md",
+      "bytes": 11137,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/usability/artifact-manifest.json",
+      "bytes": 17917,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-triage-v1/FINAL-STATUS.json",
+      "bytes": 1081,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-verification-v3/RESULT.md",
+      "bytes": 9458,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-verification-v3/report-manifest.json",
+      "bytes": 2538,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/sandbox-resolution-v1/EVIDENCE-MANIFEST.json",
+      "bytes": 2884,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/sandbox-resolution-v1/RESULT.md",
+      "bytes": 8577,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/tls-profile-review-v1/RESULT.md",
+      "bytes": 7350,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/version-control-resume-v1/artifact-manifest.json",
+      "bytes": 2482,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/version-control-resume-v1/final-receipt.json",
+      "bytes": 561,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/version-control-resume-v1/git-review/REVIEW.md",
+      "bytes": 6989,
+      "reason": "Retained historical report or seal; full original evidence remains local. A report or receipt alone is not independent replay or acceptance proof."
+    }
+  ],
+  "environmentLikePathsMetadataOnly": [
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/candidate/.repro-runs/privacy-review/case-Dg0fbJ/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/candidate/.repro-runs/privacy-review/case-fhvssS/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/emitted/.repro-runs/privacy-review/case-saHykr/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/release-completion-v1/emitted/.repro-runs/privacy-review/case-wpyExL/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/privacy-review/case-06n0gu/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/privacy-review/case-08fpSy/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/privacy-review/case-A8Nz7g/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/privacy-review/case-MoJ3gR/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/privacy-review/case-O4PyvP/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/privacy-review/case-TbYjal/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    },
+    {
+      "path": ".repro-runs/privacy-review/case-mSgbwP/unrelated-private.env",
+      "bytes": 44,
+      "reason": "Environment-like test/output file; contents not opened for handoff and excluded."
+    }
+  ],
+  "portabilityLimits": [
+    "Archival source is not installed in runtime and is not an automatically runnable fresh-clone test suite.",
+    "Original manifests and receipts bind original paths and omitted local files; copying a receipt does not make a partial archive a complete sealed tree.",
+    "Fixture/native-oracle code expects archived pilot rows, fifty-control JSON and exact staged Playwright 1.64.0 coreBundle.js/package.json. These inputs and dependencies are not supplied by the research mirror.",
+    "Benchmark and diagnostic plans bind absolute workspace paths, source digests, historical emitted/installed forms and environment-specific Node paths. Rebinding or adapting later changes identity and needs fresh verification.",
+    "Historical pilot readiness and author test passes are superseded for acceptance by actual postrun STOP. The 896 MiB, 90/120-second, first scheduled post-close census and similar bounds are prior diagnostic/continuation policy, not original product requirements.",
+    "Both transport candidates remain uninstalled; the incremental predecessor regression result remains 107/108. The lifecycle extension and attribution proposal remain pending, with no fresh runtime authority supplied by this archive."
+  ]
+}

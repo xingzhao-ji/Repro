@@ -1,0 +1,91 @@
+{
+  "utc": "2026-10-15T06:47:25.866728+00:00",
+  "job": "p390-00-11",
+  "nonce": "7b4232475825",
+  "status": "STOP_CONTINUATION",
+  "validatorStatus": "CONTINUATION_GATES_STOP",
+  "validatorExitCode": 1,
+  "uniqueIssues": [
+    "COMPLETED_CLEANUP_NOT_ESTABLISHED",
+    "MEMORY_OR_HEADROOM_LIMIT"
+  ],
+  "issueCount": 22,
+  "sourceComplete": true,
+  "sourceCounts": {
+    "measured-pass": 12,
+    "measured-fail": 0,
+    "unresolved": 0,
+    "started": 12,
+    "completed": 12,
+    "inProgress": 0,
+    "remaining": 0,
+    "unattempted": 0
+  },
+  "acceptedCandidateOccurrences": 0,
+  "remainingCandidateOccurrencesUnattempted": 45,
+  "sourceExit": 0,
+  "driverSeconds": 41.72000611999829,
+  "driverMaximumSeconds": 90,
+  "samples": 268,
+  "zSampleIds": [
+    76,
+    266
+  ],
+  "taskPeak": 75,
+  "kernelMemoryPeakBytes": 943087616,
+  "kernelMemoryPeakMiB": 899.3984375,
+  "kernelMemoryGateBytes": 939524096,
+  "excessBytes": 3563520,
+  "zeroResourceEvents": true,
+  "deadlineExpired": false,
+  "logLimitExceeded": false,
+  "cleanup": {
+    "result": "PASS",
+    "utc": "2026-10-15T06:44:56.445974+00:00",
+    "input_after_matches_before": {
+      "regular_files": 3614,
+      "confined_symlinks": 10
+    },
+    "remaining_owned_containers": [],
+    "remaining_owned_volumes": [],
+    "retained_image_id": "sha256:847f71bbb3f17fc1032d50d75bf6fb3fdcf188b16dff81f24667fe9ae9409e01",
+    "jobs": [
+      "p390-00-11"
+    ],
+    "transfer_never_started": true
+  },
+  "closeSettlement": {
+    "kind": "phase",
+    "phase": "final.browser.close",
+    "event": "settled",
+    "utc": "2026-10-15T06:44:37.526Z",
+    "monoNs": "51057563228412",
+    "contextCount": 0,
+    "nextSampleIndex": 267
+  },
+  "terminalSampleId": 267,
+  "terminalPhase": "exit",
+  "terminalProcesses": [
+    {
+      "pid": 1,
+      "name": "docker-init",
+      "state": "S",
+      "ppid": 0,
+      "threads": 1,
+      "start_ticks": "5101611"
+    },
+    {
+      "pid": 7,
+      "name": "MainThread",
+      "state": "R",
+      "ppid": 1,
+      "threads": 5,
+      "start_ticks": "5101616"
+    }
+  ],
+  "terminalSweepStartAfterSettlementNs": 21028694,
+  "distinctPostCloseInterval": "ABSENT",
+  "noAdditionalStarts": true,
+  "noRetries": true,
+  "historicalFailuresUnchanged": true
+}

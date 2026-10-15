@@ -1,0 +1,34 @@
+test_abnormal_exit (__main__.Challenges.test_abnormal_exit) ... ok
+test_browser_pid_never_seen (__main__.Challenges.test_browser_pid_never_seen) ... ok
+test_browser_reused_identity (__main__.Challenges.test_browser_reused_identity) ... ok
+test_duplicate_bound (__main__.Challenges.test_duplicate_bound) ... ok
+test_duplicate_process (__main__.Challenges.test_duplicate_process) ... ok
+test_duplicate_read (__main__.Challenges.test_duplicate_read) ... ok
+test_first_missing_bounds_does_not_skip (__main__.Challenges.test_first_missing_bounds_does_not_skip) ... ok
+test_first_missing_processes_does_not_skip (__main__.Challenges.test_first_missing_processes_does_not_skip) ... ok
+test_first_sweep_straddles (__main__.Challenges.test_first_sweep_straddles) ... ok
+test_first_unreadable (__main__.Challenges.test_first_unreadable) ... ok
+test_forced_close (__main__.Challenges.test_forced_close) ... ok
+test_init_z (__main__.Challenges.test_init_z) ... ok
+test_invalid_process_state (__main__.Challenges.test_invalid_process_state) ... ok
+test_late_window_reversed (__main__.Challenges.test_late_window_reversed) ... ok
+test_later_interval_residue (__main__.Challenges.test_later_interval_residue) ... ok
+test_missing_next_index (__main__.Challenges.test_missing_next_index) ... ok
+test_missing_read (__main__.Challenges.test_missing_read) ... ok
+test_no_nonterminal (__main__.Challenges.test_no_nonterminal) ... ok
+test_no_settlement_marker (__main__.Challenges.test_no_settlement_marker) ... ok
+test_node_active_context (__main__.Challenges.test_node_active_context) ... ok
+test_node_identity_must_originate_at_start (__main__.Challenges.test_node_identity_must_originate_at_start) ... ok
+test_outoforder_sequence (__main__.Challenges.test_outoforder_sequence) ... ok
+test_pid_reuse (__main__.Challenges.test_pid_reuse) ... ok
+test_positive (__main__.Challenges.test_positive) ... ok
+test_preclose_z_retained (__main__.Challenges.test_preclose_z_retained) ... ok
+test_read_precedes_settlement (__main__.Challenges.test_read_precedes_settlement) ... ok
+test_residue_first_even_later_clean (__main__.Challenges.test_residue_first_even_later_clean) ... ok
+test_terminal_residue (__main__.Challenges.test_terminal_residue) ... ok
+test_unknown_process_field (__main__.Challenges.test_unknown_process_field) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.005s
+
+OK

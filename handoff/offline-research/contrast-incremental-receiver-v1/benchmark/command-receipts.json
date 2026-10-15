@@ -1,0 +1,458 @@
+[
+  {
+    "label": "end-to-end-1-prior",
+    "experiment": "end-to-end",
+    "trial": 1,
+    "mode": "prior",
+    "order": [
+      "prior",
+      "incremental"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "end-to-end",
+      "prior",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:11:21.322244+00:00",
+    "finishedAt": "2026-10-15T08:11:28.165235+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 6.84004474899848,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "end-to-end-1-prior.stdout.json",
+    "stdoutSha256": "04b200c34fb2bcf9a6b4ae53531065463a91bd50595b96dde615b8a234cd6d94",
+    "stderr": "end-to-end-1-prior.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "end-to-end-1-prior.startup.json",
+    "startupSha256": "8ca5263f128940a9c7006d82ecfdf34c74858e262176ce603dc266969d4fc814"
+  },
+  {
+    "label": "end-to-end-1-incremental",
+    "experiment": "end-to-end",
+    "trial": 1,
+    "mode": "incremental",
+    "order": [
+      "prior",
+      "incremental"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "end-to-end",
+      "incremental",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:11:28.172034+00:00",
+    "finishedAt": "2026-10-15T08:11:35.984767+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 7.811738110001897,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "end-to-end-1-incremental.stdout.json",
+    "stdoutSha256": "47d8843cdb7d27fc05e2bbb7b457b60f7935ee1ab06de25f52fb7f45609e3682",
+    "stderr": "end-to-end-1-incremental.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "end-to-end-1-incremental.startup.json",
+    "startupSha256": "46dbe6434558e68689b2f651e9bc8366afd6d5c5f1d6860952795291e7cfd5c3"
+  },
+  {
+    "label": "end-to-end-2-incremental",
+    "experiment": "end-to-end",
+    "trial": 2,
+    "mode": "incremental",
+    "order": [
+      "incremental",
+      "prior"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "end-to-end",
+      "incremental",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:11:35.986506+00:00",
+    "finishedAt": "2026-10-15T08:11:43.104323+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 7.117101130999799,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "end-to-end-2-incremental.stdout.json",
+    "stdoutSha256": "5433f0365f24718cd328f969b2d251bdb11ae36d94b1ef16d8945d5d021b0f46",
+    "stderr": "end-to-end-2-incremental.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "end-to-end-2-incremental.startup.json",
+    "startupSha256": "c2b51d2a42acf76f702971e64bc690ff4f8cb024c5263f56f3915720b89abffa"
+  },
+  {
+    "label": "end-to-end-2-prior",
+    "experiment": "end-to-end",
+    "trial": 2,
+    "mode": "prior",
+    "order": [
+      "incremental",
+      "prior"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "end-to-end",
+      "prior",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:11:43.106561+00:00",
+    "finishedAt": "2026-10-15T08:11:49.657846+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 6.549690621999616,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "end-to-end-2-prior.stdout.json",
+    "stdoutSha256": "6f205664bb091aac76fa5e70684e39df547afe88ba27c891c4b722c9c868d9a5",
+    "stderr": "end-to-end-2-prior.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "end-to-end-2-prior.startup.json",
+    "startupSha256": "63b6c4e3733a264dfaf415375f86313077f2ba2fd1901b42a6755e6fb7ca477d"
+  },
+  {
+    "label": "end-to-end-3-prior",
+    "experiment": "end-to-end",
+    "trial": 3,
+    "mode": "prior",
+    "order": [
+      "prior",
+      "incremental"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "end-to-end",
+      "prior",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:11:49.659624+00:00",
+    "finishedAt": "2026-10-15T08:11:56.118833+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 6.4586881669965805,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "end-to-end-3-prior.stdout.json",
+    "stdoutSha256": "de297a4dd7a4c4b5cf205709d459be2f6b13a551b0c1a3fcccb8db60d1ecfaca",
+    "stderr": "end-to-end-3-prior.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "end-to-end-3-prior.startup.json",
+    "startupSha256": "b14ced5dfa64689ed67eee212cd6a4484d11c3d2b2d3e4d85f733922f3958353"
+  },
+  {
+    "label": "end-to-end-3-incremental",
+    "experiment": "end-to-end",
+    "trial": 3,
+    "mode": "incremental",
+    "order": [
+      "prior",
+      "incremental"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "end-to-end",
+      "incremental",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:11:56.119934+00:00",
+    "finishedAt": "2026-10-15T08:12:03.161815+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 7.041521766994265,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "end-to-end-3-incremental.stdout.json",
+    "stdoutSha256": "34b4fc693a66628982ba6ea186c0933f2c5c5b13456fe452296b49bd6cdeaff4",
+    "stderr": "end-to-end-3-incremental.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "end-to-end-3-incremental.startup.json",
+    "startupSha256": "16b3485df22f0ba3ea298b3f9c4be94ca5077f3257526506383fa673fb3fb994"
+  },
+  {
+    "label": "receiver-only-1-prior",
+    "experiment": "receiver-only",
+    "trial": 1,
+    "mode": "prior",
+    "order": [
+      "prior",
+      "incremental"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "receiver-only",
+      "prior",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:12:03.162713+00:00",
+    "finishedAt": "2026-10-15T08:12:10.344244+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 7.181111836005584,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "receiver-only-1-prior.stdout.json",
+    "stdoutSha256": "0c80e4d64c17e471543e0133c358196fd444898c8827315a133b3300797c22d6",
+    "stderr": "receiver-only-1-prior.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "receiver-only-1-prior.startup.json",
+    "startupSha256": "fad9ae2e91243ed20bb1c2ef312f791a0b2b4f49580f34f9ca0bc7afdc62f935"
+  },
+  {
+    "label": "receiver-only-1-incremental",
+    "experiment": "receiver-only",
+    "trial": 1,
+    "mode": "incremental",
+    "order": [
+      "prior",
+      "incremental"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "receiver-only",
+      "incremental",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:12:10.345096+00:00",
+    "finishedAt": "2026-10-15T08:12:18.808686+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 8.46293765000155,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "receiver-only-1-incremental.stdout.json",
+    "stdoutSha256": "dbdd916a54d3c4ea4b708b6820295ff72ed0dbae30fb01e107028b4145fee39c",
+    "stderr": "receiver-only-1-incremental.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "receiver-only-1-incremental.startup.json",
+    "startupSha256": "190ee434122d9138fe8259c76f2f8f5e9f982950a248fd4e67569ae433757a0e"
+  },
+  {
+    "label": "receiver-only-2-incremental",
+    "experiment": "receiver-only",
+    "trial": 2,
+    "mode": "incremental",
+    "order": [
+      "incremental",
+      "prior"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "receiver-only",
+      "incremental",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:12:18.809748+00:00",
+    "finishedAt": "2026-10-15T08:12:26.972557+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 8.162002808996476,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "receiver-only-2-incremental.stdout.json",
+    "stdoutSha256": "222a84095335b3879a58792da800311245ffa4b4e821fde58cc16b5126a565e6",
+    "stderr": "receiver-only-2-incremental.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "receiver-only-2-incremental.startup.json",
+    "startupSha256": "59afc4bc485108ae3ee0f60cc6a8add5598786974a359ba8cb57ab4090d2a77a"
+  },
+  {
+    "label": "receiver-only-2-prior",
+    "experiment": "receiver-only",
+    "trial": 2,
+    "mode": "prior",
+    "order": [
+      "incremental",
+      "prior"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "receiver-only",
+      "prior",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:12:26.973864+00:00",
+    "finishedAt": "2026-10-15T08:12:34.540543+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 7.566287360001297,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "receiver-only-2-prior.stdout.json",
+    "stdoutSha256": "69555aa491a7d3729be52f551bc79aa3cef66d775997cb91ff0808c9973b0e40",
+    "stderr": "receiver-only-2-prior.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "receiver-only-2-prior.startup.json",
+    "startupSha256": "3b1e707909542c943b5c96273c7e6bfbd580ef7d3534cad21a192407128a424f"
+  },
+  {
+    "label": "receiver-only-3-prior",
+    "experiment": "receiver-only",
+    "trial": 3,
+    "mode": "prior",
+    "order": [
+      "prior",
+      "incremental"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "receiver-only",
+      "prior",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:12:34.546459+00:00",
+    "finishedAt": "2026-10-15T08:12:41.559333+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 7.012407551999786,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "receiver-only-3-prior.stdout.json",
+    "stdoutSha256": "23f0233548f3160c4bd88ee5e6ff0014f7b4da7e003f029352bba16ed552d16b",
+    "stderr": "receiver-only-3-prior.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "receiver-only-3-prior.startup.json",
+    "startupSha256": "16d11e6bca4ce7e3fe11f59912b3a3a164ffb4963166b5985c8c92079d1e20d9"
+  },
+  {
+    "label": "receiver-only-3-incremental",
+    "experiment": "receiver-only",
+    "trial": 3,
+    "mode": "incremental",
+    "order": [
+      "prior",
+      "incremental"
+    ],
+    "command": [
+      "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "receiver-only",
+      "incremental",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.startup.json"
+    ],
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "startedAt": "2026-10-15T08:12:41.560305+00:00",
+    "finishedAt": "2026-10-15T08:12:49.940684+00:00",
+    "exitCode": 0,
+    "elapsedSeconds": 8.379790869999852,
+    "timeoutSeconds": 45,
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "stdout": "receiver-only-3-incremental.stdout.json",
+    "stdoutSha256": "b6d40b702a6b35c7ce93d4e588446219fb0d972ed7648f9dfa4c438fc30028d2",
+    "stderr": "receiver-only-3-incremental.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "startup": "receiver-only-3-incremental.startup.json",
+    "startupSha256": "d8ca7e961ffb1a7831043008789bd998401cc77dbf5bcecedc7c2fdab3ffe6b3"
+  }
+]

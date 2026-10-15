@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-10-15T03:35:24.389188+00:00",
+  "status": "LOCAL_PREPARATION_COMPLETE_ACCEPTANCE_BLOCKED",
+  "localCommits": {
+    "css": "b48c69672f35d4b51db3325eb2d7a212ec68bcc6",
+    "diagnostics": "93b0cc455d95032a305ca7cbd13bf989eec6fe25"
+  },
+  "checks": {
+    "cssBuilder": {
+      "passed": 15,
+      "failed": 0
+    },
+    "finalHelper": {
+      "passed": 43,
+      "failed": 0,
+      "skipped": 0
+    },
+    "mockedSamplerAndExtractedCallerSites": {
+      "passed": 16,
+      "failed": 0
+    },
+    "independentFinalChallenges": {
+      "passed": 7,
+      "failed": 0
+    },
+    "strictTypecheckExit": 0,
+    "scopedLintExit": 0,
+    "manifestReadback": "PASS"
+  },
+  "manifest": {
+    "path": "artifact-manifest.json",
+    "sha256": "5d4f9f21be12581d6ae4df82b42122ade0e4f023cae8a72dea8f929e8078298b",
+    "files": 85,
+    "bytes": 731200,
+    "symlinks": 0
+  },
+  "references": [
+    {
+      "path": "RESULT.md",
+      "sha256": "528dfc828bca097c4cd527e10050525d73bcab6d181060af3d7369a2125d53a3"
+    },
+    {
+      "path": "root-git-checkpoint.json",
+      "sha256": "b174eeb97a28786c0e30de3b56285a51cf43bcdcde38263a7a1725757d3de620"
+    },
+    {
+      "path": "root-final-focused-tests.json",
+      "sha256": "7b9de49f7930b10a91e1d1bbbea78a517455dd5770079506e7ea66d604f6f319"
+    },
+    {
+      "path": "root-final-typecheck.json",
+      "sha256": "f11513b3b228201d01fc6e6188c1e69f77b17c6428e8a678ef3b42b968cdd073"
+    },
+    {
+      "path": "root-final-scoped-lint.json",
+      "sha256": "1da5e614a083490bc1017e0034e135302a1c8cb0a27e99a005a5b8c2231c504f"
+    },
+    {
+      "path": "css/RESULT.md",
+      "sha256": "a5e00f0eabe0411279591d4c75f9396dc08590f1a6576c1eaa0750951cb63c98"
+    },
+    {
+      "path": "css/candidate-static-bindings.json",
+      "sha256": "a0061cf222388f305cbe5fd3ff9fb8b2767a01dc84ca81669324e577f8362d6c"
+    },
+    {
+      "path": "instrumentation/RESULT.md",
+      "sha256": "142d28c0fc063c316e8ef71ebdb7e99626e67436df59683e2ae830e207f87c84"
+    },
+    {
+      "path": "instrumentation/tests/caller-integration-final-source-receipt.json",
+      "sha256": "03c5e598411c8162dbf6b6ac9615a34df3de621a829ebdbe51627dcb8d97a22f"
+    },
+    {
+      "path": "instrumentation/tests/retained-417-capacity-replay.json",
+      "sha256": "92a2ce7bc78d2bbbffbfc45f8a0647d145de4ac665912536cab9763dc34c70f9"
+    },
+    {
+      "path": "instrumentation/final-receipt.json",
+      "sha256": "5c2d4be31ff3694ee304df7dfcaaf011c37b320fb7163723dfc5cf03ba9a0c93"
+    },
+    {
+      "path": "instrumentation/artifact-manifest.json",
+      "sha256": "b7f99a6701e36f39d33f8fbbaaa28c9bb0024ffb9f9dedd0b3e1031a294210de"
+    },
+    {
+      "path": "review/final-independent-receipt-20261015.json",
+      "sha256": "09699790565eb92f8c13a28546822d35be2437d1af2d096f1d3cd57c3463f01d"
+    },
+    {
+      "path": "review/final-independent-review-20261015.md",
+      "sha256": "e0cb3194496134e8a491c591f424a86430cac5aeb190b6270a8d794949987eeb"
+    },
+    {
+      "path": "css/artifact-manifest.json",
+      "sha256": "8c3fa944a280df29a894804a1da070681f7f6b9f218112dc7e9b11212fa062a0"
+    }
+  ],
+  "acceptance": {
+    "browserOrDockerRun": false,
+    "newRenderedOccurrences": 0,
+    "newAcceptedOccurrences": 0,
+    "all57NeedFreshVerification": true,
+    "evidenceBackedLifecycleCorrection": false,
+    "validRuntimePathEstablished": false,
+    "candidateBindings": "PENDING",
+    "historicalPilot": "SEALED_12_UNRESOLVED_45_UNATTEMPTED_ZERO_ACCEPTED_ZERO_ZOMBIE_GATE_FAILED",
+    "originalGatesAndLimitsUnchanged": true
+  },
+  "publication": false,
+  "credentialOrSecurityChange": false,
+  "paidServices": false,
+  "preexistingWorkPreserved": true,
+  "writesFrozen": true
+}

@@ -1,0 +1,16 @@
+{
+  "utc": "2026-10-15T08:04:30.110424+00:00",
+  "status": "CLEAR",
+  "files": [
+    {
+      "path": "benchmark/create-bindings.py",
+      "sha256": "8c46eb3f0c7f32ae9fc84585adac833db8d607bb86158106540e34bbbc12dc04"
+    },
+    {
+      "path": "benchmark/summarize.py",
+      "sha256": "f597070e7dc26d4fd2071aa6252d6d25bb5cbe9203f842c0ee1f93594474f09a"
+    }
+  ],
+  "review": "Binding helper pins candidate, prior candidate, oracle, all worker scripts, archived rows and package/bundle before execution. Summarizer preserves signed pair differences, both improvement and regression, reports allPassed false for partial/failing matrices. Any stopped matrix must also report its explicit failed worker and unattempted workers in final prose.",
+  "conditions": "Same conditions as root-benchmark-harness-review.json; no runtime authority beyond bounded offline Node workers."
+}

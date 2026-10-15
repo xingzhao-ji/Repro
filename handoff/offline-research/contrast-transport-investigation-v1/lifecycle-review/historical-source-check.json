@@ -1,0 +1,401 @@
+{
+  "utc": "2026-10-15T07:42:41.226843+00:00",
+  "scope": "READ_ONLY_HISTORICAL_SOURCE_AND_EVIDENCE",
+  "inputs": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/cleanup_gate.py",
+      "bytes": 7949,
+      "sha256": "f29222815b9f6419eb7b4a01eef4cb8aac9369a7a4681ca498c9826d4091f814"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/driver.py",
+      "bytes": 17161,
+      "sha256": "69e3e06ec16684287b0cdc56d0c8b0435242e197bb0fa4b6125ef2c991fc8bc4"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/samples.ndjson",
+      "bytes": 191291,
+      "sha256": "ba86a227002beadb8f47043201dbf4f96e19e351941a076f0f6bc79ff18f2275"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/resource-diagnostics/lifecycle.ndjson",
+      "bytes": 43319,
+      "sha256": "d5d4cca5e48dfa948c7dcf8d61fb5a429ce30b1560c8af6718eae5f7841f0d56"
+    }
+  ],
+  "closeEvents": [
+    {
+      "kind": "phase",
+      "phase": "final.browser.close",
+      "event": "start",
+      "utc": "2026-10-15T06:44:37.483Z",
+      "monoNs": "51057520061945",
+      "contextCount": 0,
+      "nextSampleIndex": 266
+    },
+    {
+      "kind": "phase",
+      "phase": "final.browser.close",
+      "event": "settled",
+      "utc": "2026-10-15T06:44:37.526Z",
+      "monoNs": "51057563228412",
+      "contextCount": 0,
+      "nextSampleIndex": 267
+    }
+  ],
+  "lastSamples": [
+    {
+      "utc": "2026-10-15T06:44:37.411Z",
+      "phase": "interval",
+      "sample": 265,
+      "counters": {
+        "pids.current": "75",
+        "pids.max": "128",
+        "pids.peak": "75",
+        "pids.events": "max 0",
+        "pids.events.local": "max 0",
+        "memory.current": "822898688",
+        "memory.peak": "943087616",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "memory.events.local": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+      },
+      "process_count": 9,
+      "zombie_count": 0,
+      "visible_threads": 75,
+      "processes": [
+        {
+          "pid": 1,
+          "name": "docker-init",
+          "state": "S",
+          "ppid": 0,
+          "threads": 1,
+          "start_ticks": "5101611"
+        },
+        {
+          "pid": 7,
+          "name": "MainThread",
+          "state": "R",
+          "ppid": 1,
+          "threads": 5,
+          "start_ticks": "5101616"
+        },
+        {
+          "pid": 13,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 7,
+          "threads": 25,
+          "start_ticks": "5101686"
+        },
+        {
+          "pid": 16,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 13,
+          "threads": 1,
+          "start_ticks": "5101688"
+        },
+        {
+          "pid": 17,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 13,
+          "threads": 1,
+          "start_ticks": "5101688"
+        },
+        {
+          "pid": 19,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 17,
+          "threads": 1,
+          "start_ticks": "5101691"
+        },
+        {
+          "pid": 37,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 16,
+          "threads": 17,
+          "start_ticks": "5101700"
+        },
+        {
+          "pid": 48,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 13,
+          "threads": 11,
+          "start_ticks": "5101700"
+        },
+        {
+          "pid": 85,
+          "name": "chrome-headless",
+          "state": "R",
+          "ppid": 19,
+          "threads": 13,
+          "start_ticks": "5102435"
+        }
+      ]
+    },
+    {
+      "utc": "2026-10-15T06:44:37.511Z",
+      "phase": "interval",
+      "sample": 266,
+      "counters": {
+        "pids.current": "11",
+        "pids.max": "128",
+        "pids.peak": "75",
+        "pids.events": "max 0",
+        "pids.events.local": "max 0",
+        "memory.current": "434044928",
+        "memory.peak": "943087616",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "memory.events.local": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+      },
+      "process_count": 6,
+      "zombie_count": 1,
+      "visible_threads": 11,
+      "processes": [
+        {
+          "pid": 1,
+          "name": "docker-init",
+          "state": "S",
+          "ppid": 0,
+          "threads": 1,
+          "start_ticks": "5101611"
+        },
+        {
+          "pid": 7,
+          "name": "MainThread",
+          "state": "R",
+          "ppid": 1,
+          "threads": 5,
+          "start_ticks": "5101616"
+        },
+        {
+          "pid": 13,
+          "name": "chrome-headless",
+          "state": "Z",
+          "ppid": 7,
+          "threads": 2,
+          "start_ticks": "5101686"
+        },
+        {
+          "pid": 16,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 13,
+          "threads": 1,
+          "start_ticks": "5101688"
+        },
+        {
+          "pid": 17,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 13,
+          "threads": 1,
+          "start_ticks": "5101688"
+        },
+        {
+          "pid": 19,
+          "name": "chrome-headless",
+          "state": "S",
+          "ppid": 17,
+          "threads": 1,
+          "start_ticks": "5101691"
+        }
+      ]
+    },
+    {
+      "utc": "2026-10-15T06:44:37.547Z",
+      "phase": "exit",
+      "sample": 267,
+      "counters": {
+        "pids.current": "6",
+        "pids.max": "128",
+        "pids.peak": "75",
+        "pids.events": "max 0",
+        "pids.events.local": "max 0",
+        "memory.current": "413638656",
+        "memory.peak": "943087616",
+        "memory.events": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0",
+        "memory.events.local": "low 0\nhigh 0\nmax 0\noom 0\noom_kill 0\noom_group_kill 0"
+      },
+      "process_count": 2,
+      "zombie_count": 0,
+      "visible_threads": 6,
+      "processes": [
+        {
+          "pid": 1,
+          "name": "docker-init",
+          "state": "S",
+          "ppid": 0,
+          "threads": 1,
+          "start_ticks": "5101611"
+        },
+        {
+          "pid": 7,
+          "name": "MainThread",
+          "state": "R",
+          "ppid": 1,
+          "threads": 5,
+          "start_ticks": "5101616"
+        }
+      ]
+    }
+  ],
+  "lastReadBounds": [
+    {
+      "kind": "read-bounds",
+      "sample": 265,
+      "before": {
+        "utc": "2026-10-15T06:44:37.410Z",
+        "monoNs": "51057447428941"
+      },
+      "after": {
+        "utc": "2026-10-15T06:44:37.411Z",
+        "monoNs": "51057447950248"
+      },
+      "processReadEncoding": "[pid,beforeOffsetNs,afterOffsetNs] from before.monoNs",
+      "processReads": [
+        [
+          1,
+          "249018",
+          "269536"
+        ],
+        [
+          13,
+          "287189",
+          "308685"
+        ],
+        [
+          16,
+          "315216",
+          "324181"
+        ],
+        [
+          17,
+          "328104",
+          "337671"
+        ],
+        [
+          19,
+          "341369",
+          "349038"
+        ],
+        [
+          37,
+          "353763",
+          "367834"
+        ],
+        [
+          48,
+          "372736",
+          "384690"
+        ],
+        [
+          7,
+          "388693",
+          "398059"
+        ],
+        [
+          85,
+          "402343",
+          "412944"
+        ]
+      ],
+      "atomicSnapshot": false
+    },
+    {
+      "kind": "read-bounds",
+      "sample": 266,
+      "before": {
+        "utc": "2026-10-15T06:44:37.510Z",
+        "monoNs": "51057547463971"
+      },
+      "after": {
+        "utc": "2026-10-15T06:44:37.511Z",
+        "monoNs": "51057547794062"
+      },
+      "processReadEncoding": "[pid,beforeOffsetNs,afterOffsetNs] from before.monoNs",
+      "processReads": [
+        [
+          1,
+          "181226",
+          "197371"
+        ],
+        [
+          13,
+          "214715",
+          "224197"
+        ],
+        [
+          16,
+          "230279",
+          "238658"
+        ],
+        [
+          17,
+          "242965",
+          "251976"
+        ],
+        [
+          19,
+          "255507",
+          "263093"
+        ],
+        [
+          7,
+          "267068",
+          "276526"
+        ]
+      ],
+      "atomicSnapshot": false
+    },
+    {
+      "kind": "read-bounds",
+      "sample": 267,
+      "before": {
+        "utc": "2026-10-15T06:44:37.547Z",
+        "monoNs": "51057584257106"
+      },
+      "after": {
+        "utc": "2026-10-15T06:44:37.547Z",
+        "monoNs": "51057584515517"
+      },
+      "processReadEncoding": "[pid,beforeOffsetNs,afterOffsetNs] from before.monoNs",
+      "processReads": [
+        [
+          1,
+          "164178",
+          "179567"
+        ],
+        [
+          7,
+          "198081",
+          "208763"
+        ]
+      ],
+      "atomicSnapshot": false
+    }
+  ],
+  "settledNextIndex": 267,
+  "terminalIndex": 267,
+  "firstPostCloseIntervalAbsent": true,
+  "terminalSweepStartAfterSettlementNs": 21028694
+}

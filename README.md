@@ -1,5 +1,7 @@
 # Repro — local failure compiler
 
+User takeover checkpoint: read [HANDOFF.md](HANDOFF.md) for the current implementation, known failures, source/history delivery and goal prompt. Historical passing results below do not establish complete acceptance of the latest candidate. Development and diagnostic work stopped at this handoff.
+
 Repro records a registered synthetic browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench uses the same real runner as the CLI. The buggy and fixed search implementations are evaluated with the same frozen expected behavior in fresh browser state.
 
 This is a local synthetic alpha. Native Chromium replay and the trusted Linux arm64 capsule pass with the exact explicitly approved container policy. Native 200% Chrome zoom and actual screen-reader usability remain unverified. See [release evidence](evidence/RELEASE.md) for actual checks and open gates. Arbitrary websites, real-user recording, PostgreSQL adapters, historical-bug validation and public execution are outside this version's supported scope.

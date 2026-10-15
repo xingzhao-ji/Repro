@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-10-15T06:39:49.689682+00:00",
+  "status": "AUTHOR_FROZEN_PENDING_FINAL_INDEPENDENT_REVIEW",
+  "runtimeExecuted": false,
+  "cleanupTests": 29,
+  "externalTelemetryLogSidecarDriverCases": 25,
+  "workloadTests": {
+    "methods": 4,
+    "legitimateOutcomes": 3,
+    "originalNegativeChallenges": 27,
+    "witnessCorruptions": 5,
+    "exactJobPositiveAndWrongPartition": 10
+  },
+  "preflightStatus": "STAGED_BINDINGS_PASS",
+  "bindings": {
+    "validate-approved-job.py": {
+      "bytes": 34983,
+      "sha256": "2ce24385b240326ec3c1f87dbb97d43db134e8d2b236211b950010f81b70e9cc"
+    },
+    "cleanup_gate.py": {
+      "bytes": 7949,
+      "sha256": "f29222815b9f6419eb7b4a01eef4cb8aac9369a7a4681ca498c9826d4091f814"
+    },
+    "workload-evidence/workload_validator.py": {
+      "bytes": 28728,
+      "sha256": "8133771e3447ed71544699cd3b86015f9ed29559472a1d11ef23390bfbaf0cc6"
+    },
+    "workload-evidence/prospective-expectations.json": {
+      "bytes": 316316,
+      "sha256": "e5b973ed32dbd7b1fbfb4aad71a95830c02d44134b61e82d0f044541cdba48a9"
+    },
+    "test_cleanup_gate.py": {
+      "bytes": 6216,
+      "sha256": "f27ee1b51826888945c00ec95d32c51dfd39541328fea3e17b4f6cb2612e9da3"
+    },
+    "test_external_validator.py": {
+      "bytes": 12850,
+      "sha256": "911cbb9d0db15da6b8e710735a708ee2b43fd1279f31f31977df52e72e37503c"
+    },
+    "workload-evidence/test_workload_validator.py": {
+      "bytes": 18768,
+      "sha256": "03ff9b71390e12ee22f1da3f5011ad503ed2c952edb6f834ccaa7601bc7f65e4"
+    },
+    "build-semantic-expectations.py": {
+      "bytes": 3590,
+      "sha256": "b196854804ebfe9e2a302e69f19716c2df08fa8c3778ecebe63aa9fcbc2ecfea"
+    },
+    "test-cleanup-final.log": {
+      "bytes": 2406,
+      "sha256": "9fbfeb46c15e7c59288bd9b60ad36059f2fb754d82d50fc77c39fb0fb78439fa"
+    },
+    "test-external-final.json": {
+      "bytes": 3464,
+      "sha256": "81697a36c99517b1387bf58fa7d4ab6738a38ca358709cbf7eb3d62b4612018e"
+    },
+    "workload-evidence/test-final.log": {
+      "bytes": 546,
+      "sha256": "b3706340fb8b93f87dc31e07c1c3707c1b2fd25402a3b592845d4494e926c4a8"
+    },
+    "preflight-final.json": {
+      "bytes": 1186887,
+      "sha256": "c75fd25a9c975096e327dfdb042fce43366569e7b49f29ef330f8b596b03be23"
+    }
+  }
+}

@@ -1,0 +1,39 @@
+--- run-benchmarks.py
++++ run-benchmarks-v2.py
+@@ -1,7 +1,7 @@
+ from pathlib import Path
+ import subprocess,json,time,hashlib,os,datetime,sys
+ base=Path(__file__).resolve().parent
+-bindings_path=base/'bindings.json'
++bindings_path=base/'bindings-v2.json'
+ bindings_bytes=bindings_path.read_bytes();bindings=json.loads(bindings_bytes)
+ assert sys.argv[1:]==['--reviewed-plan'], 'Root and independent review required before execution'
+ for f in bindings['files']:
+@@ -14,7 +14,7 @@
+  for trial,order in enumerate(orders,1):
+   for mode in order:
+    label=f'{experiment}-{trial}-{mode}'
+-   command=['node','--max-old-space-size=384','--expose-gc',str(base/'worker.mjs'),experiment,mode,str(bindings_path),str(base/(label+'.startup.json'))]
++   command=['/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node','--max-old-space-size=384','--expose-gc',str(base/'worker.mjs'),experiment,mode,str(bindings_path),str(base/(label+'.startup.json'))]
+    start=time.monotonic();started=datetime.datetime.now(datetime.timezone.utc).isoformat()
+    try:
+     result=subprocess.run(command,cwd=base,env=env,capture_output=True,timeout=45)
+--- create-bindings.py
++++ create-bindings-v2.py
+@@ -12,7 +12,7 @@
+ assert hashlib.sha256(module.read_bytes()).hexdigest()==expected_sha
+ assert hashlib.sha256((old/'transport.mjs').read_bytes()).hexdigest()=='440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727'
+ assert freeze_path.is_file() and freeze_path.is_relative_to(author)
+-assert not (base/'bindings.json').exists()
++assert not (base/'bindings-v2.json').exists()
+ rows=sorted(artifacts.glob('node-*.json'));assert len(rows)==12
+ pw=pilot/'runtime/p390-00-11/input/node_modules/playwright-core'
+ paths=[old/'transport.mjs',old/'fixture.mjs',module,freeze_path,pw/'lib/coreBundle.js',pw/'package.json',*rows,*sorted(base.glob('*.mjs')),*sorted(base.glob('*.py')),base/'PROTOCOL.md']
+@@ -22,5 +22,5 @@
+ def binding(p):
+  b=p.read_bytes();return {'path':str(p),'bytes':len(b),'sha256':hashlib.sha256(b).hexdigest()}
+ value={'schemaVersion':1,'createdAt':datetime.datetime.now(datetime.timezone.utc).isoformat(),'priorModule':str(old/'transport.mjs'),'incrementalModule':str(module),'freezeReceipt':str(freeze_path),'oracleModule':str(base/'oracle.mjs'),'fixtureModule':str(old/'fixture.mjs'),'playwrightBundleSha256':hashlib.sha256((pw/'lib/coreBundle.js').read_bytes()).hexdigest(),'playwrightVersion':json.loads((pw/'package.json').read_text())['version'],'rows':[{'name':p.name,**binding(p)} for p in rows],'files':[binding(p) for p in paths]}
+-(base/'bindings.json').write_text(json.dumps(value,indent=2)+'\n')
+-print(json.dumps({'bindingSha256':hashlib.sha256((base/'bindings.json').read_bytes()).hexdigest(),'files':len(paths),'rows':len(rows),'candidateSha256':expected_sha},indent=2))
++(base/'bindings-v2.json').write_text(json.dumps(value,indent=2)+'\n')
++print(json.dumps({'bindingSha256':hashlib.sha256((base/'bindings-v2.json').read_bytes()).hexdigest(),'files':len(paths),'rows':len(rows),'candidateSha256':expected_sha},indent=2))

@@ -1,0 +1,690 @@
+{
+  "status": "pass",
+  "legacy": {
+    "status": "pass",
+    "rectangleControls": 4900,
+    "numericalChecks": 6,
+    "identityPositiveControls": 2,
+    "identityNegativeControls": 14,
+    "math": {
+      "blackWhite": 21,
+      "identical": 1,
+      "inkWhite": 15.865809304375075,
+      "translucentBlackOnWhite": [
+        127.5,
+        127.5,
+        127.5
+      ],
+      "parsed": [
+        24,
+        35,
+        49,
+        0.5
+      ],
+      "bad": [
+        null,
+        null,
+        null,
+        null
+      ]
+    }
+  },
+  "guardControls": {
+    "status": "pass",
+    "surfaceScopePositive": 1,
+    "surfaceScopeNegative": 11,
+    "asymmetricBorderDominantPositive": 1,
+    "emptyInteriorNegative": 1,
+    "firstOpaqueEligibilityPositive": 1,
+    "firstOpaqueEligibilityNegative": 5,
+    "outsidePaintControls": [
+      {
+        "id": "no-effects",
+        "expected": true,
+        "status": "pass"
+      },
+      {
+        "id": "finite-disjoint-shadow",
+        "expected": true,
+        "status": "pass"
+      },
+      {
+        "id": "shadow-offset-crosses-raw-box-gap",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "negative-spread-still-conservative",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "blur-has-no-assumed-bound",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "unknown-shadow",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "multiple-shadow",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "inset-shadow",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "fragmented-shadow",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "filter",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "backdrop",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "mask",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "transform",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "pseudo",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "text-shadow",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "outline",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "animation",
+        "expected": false,
+        "status": "pass"
+      },
+      {
+        "id": "transition",
+        "expected": false,
+        "status": "pass"
+      }
+    ]
+  },
+  "selectionControls": [
+    {
+      "status": "pure-selection-controls-passed",
+      "expectationBasis": "independent-frozen-packet-and-original-html-source",
+      "positive": {
+        "status": "selection-identity-matched",
+        "snapshotSha256": "c4d6d853f9aed38ed04622fbc9b77d77a6768bb7be553baca642e5fbeeac9d1c",
+        "trialCount": 13
+      },
+      "negativeCount": 65,
+      "controls": [
+        {
+          "id": "wrong-root-condition",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-root",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-root",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-route",
+          "status": "rejected"
+        },
+        {
+          "id": "controls-outside-root",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-selected-job",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-job-select",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-job-select",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-selected-option",
+          "status": "rejected"
+        },
+        {
+          "id": "extra-job-option",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-job-option",
+          "status": "rejected"
+        },
+        {
+          "id": "reordered-job-options",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-job-option-label",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-job-identity",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-job-identity",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-0",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-1",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-2",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-3",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-4",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-5",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-6",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-7",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-reason",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-trial-row",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-trial-row",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-trial-label",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-trial-button",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-trial-button",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-group-order",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-row-order",
+          "status": "rejected"
+        },
+        {
+          "id": "no-pressed-button",
+          "status": "rejected"
+        },
+        {
+          "id": "multiple-pressed-buttons",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-aria-pressed",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-selected-row",
+          "status": "rejected"
+        },
+        {
+          "id": "extra-selected-row",
+          "status": "rejected"
+        },
+        {
+          "id": "extra-trial-control",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "stale-inspector-trial",
+          "status": "rejected"
+        },
+        {
+          "id": "loading-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "unavailable-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "busy-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-explanatory-notice",
+          "status": "rejected"
+        },
+        {
+          "id": "inspector-error",
+          "status": "rejected"
+        },
+        {
+          "id": "stale-actual-availability",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-inspector-outcome",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-inspector-reason",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-inspector-identity",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-inspector-identity",
+          "status": "rejected"
+        },
+        {
+          "id": "trial-identity-field-0",
+          "status": "rejected"
+        },
+        {
+          "id": "trial-identity-field-1",
+          "status": "rejected"
+        },
+        {
+          "id": "trial-identity-field-2",
+          "status": "rejected"
+        },
+        {
+          "id": "trial-identity-field-3",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-linked-run",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-linked-run",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-linked-run-id",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-0",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-1",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-2",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-3",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-4",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-5",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-linked-run-outcome",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-linked-run-reason",
+          "status": "rejected"
+        }
+      ],
+      "browserControls": "UNRUN",
+      "productObservation": "UNRUN"
+    },
+    {
+      "status": "pure-selection-controls-passed",
+      "expectationBasis": "independent-frozen-packet-and-original-html-source",
+      "positive": {
+        "status": "selection-identity-matched",
+        "snapshotSha256": "c4d6d853f9aed38ed04622fbc9b77d77a6768bb7be553baca642e5fbeeac9d1c",
+        "trialCount": 13
+      },
+      "negativeCount": 65,
+      "controls": [
+        {
+          "id": "wrong-root-condition",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-root",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-root",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-route",
+          "status": "rejected"
+        },
+        {
+          "id": "controls-outside-root",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-selected-job",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-job-select",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-job-select",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-selected-option",
+          "status": "rejected"
+        },
+        {
+          "id": "extra-job-option",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-job-option",
+          "status": "rejected"
+        },
+        {
+          "id": "reordered-job-options",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-job-option-label",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-job-identity",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-job-identity",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-0",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-1",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-2",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-3",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-4",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-5",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-6",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-field-7",
+          "status": "rejected"
+        },
+        {
+          "id": "job-identity-reason",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-trial-row",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-trial-row",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-trial-label",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-trial-button",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-trial-button",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-group-order",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-row-order",
+          "status": "rejected"
+        },
+        {
+          "id": "no-pressed-button",
+          "status": "rejected"
+        },
+        {
+          "id": "multiple-pressed-buttons",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-aria-pressed",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-selected-row",
+          "status": "rejected"
+        },
+        {
+          "id": "extra-selected-row",
+          "status": "rejected"
+        },
+        {
+          "id": "extra-trial-control",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "stale-inspector-trial",
+          "status": "rejected"
+        },
+        {
+          "id": "loading-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "unavailable-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "busy-inspector",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-explanatory-notice",
+          "status": "rejected"
+        },
+        {
+          "id": "inspector-error",
+          "status": "rejected"
+        },
+        {
+          "id": "stale-actual-availability",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-inspector-outcome",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-inspector-reason",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-inspector-identity",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-inspector-identity",
+          "status": "rejected"
+        },
+        {
+          "id": "trial-identity-field-0",
+          "status": "rejected"
+        },
+        {
+          "id": "trial-identity-field-1",
+          "status": "rejected"
+        },
+        {
+          "id": "trial-identity-field-2",
+          "status": "rejected"
+        },
+        {
+          "id": "trial-identity-field-3",
+          "status": "rejected"
+        },
+        {
+          "id": "missing-linked-run",
+          "status": "rejected"
+        },
+        {
+          "id": "duplicate-linked-run",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-linked-run-id",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-0",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-1",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-2",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-3",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-4",
+          "status": "rejected"
+        },
+        {
+          "id": "linked-run-identity-field-5",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-linked-run-outcome",
+          "status": "rejected"
+        },
+        {
+          "id": "wrong-linked-run-reason",
+          "status": "rejected"
+        }
+      ],
+      "browserControls": "UNRUN",
+      "productObservation": "UNRUN"
+    }
+  ],
+  "geometryPositiveControls": 1,
+  "geometryNegativeControls": 10,
+  "geometryContainmentChecks": 6561,
+  "textMappingPositiveControls": 1,
+  "textMappingNegativeControls": 2,
+  "identityPositiveControls": 3,
+  "identityNegativeControls": 38
+}

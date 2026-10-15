@@ -1,0 +1,156 @@
+{
+  "utc": "2026-10-15T06:42:17.063059+00:00",
+  "status": "READY_FOR_ONE_AUTHORIZED_PILOT",
+  "job": "p390-00-11",
+  "nonce": "7b4232475825",
+  "reviewer": "/root/approved_p57_review",
+  "runtimePerformedByReviewer": false,
+  "newUserPermissionRequired": false,
+  "approvalSource": "Sentinel_c0c1a97e7fc48191b9a0be45fd712492",
+  "independentChecks": {
+    "staticInput": 69,
+    "semanticExpectation": 143,
+    "cleanupSynthetic": 32,
+    "externalPureSynthetic": 38,
+    "stageFileModeIdentityAssertions": 7731,
+    "externalValidatorPreflight": "STAGED_BINDINGS_PASS"
+  },
+  "resolvedFindings": [
+    "Cleanup draft accepted advanced settlement index skipping an earlier qualifying census; fixed, negative retained.",
+    "Cleanup draft accepted reverse/overlapping sample sweep windows; fixed, negative retained.",
+    "Generalized validator had original-only sidecar, output path and stale plan fields; adapted to exact approved stage.",
+    "Generalized workload checks confused local result index with original source index for occluder equivalence and screenshots; fixed to unchanged source predicates.",
+    "External artifact schema used nonexistent nodes key; fixed and tested against actual five-job expected bindings."
+  ],
+  "openReviewBlockers": [],
+  "scopeLimits": [
+    "Readiness covers one fresh pilot with this exact stage, validator and input; it is not a runtime result.",
+    "No grace sleep, added sample, cadence/process-read change, forced shutdown, resource/security increase, extra control, repeat or extra job.",
+    "Every prior failure and literal transient observation remains retained.",
+    "Later unique jobs need prior continuation PASS, owned cleanup and independent actual-evidence review; first P320 remains separate.",
+    "Existing50 include positive history-panel exclusion and unrelated blurred-shadow negative coverage; no exact new candidate/reinstated-inspector pair was executed.",
+    "Sampled completed cleanup is not continuous zombie absence; source-complete unresolved paint is not contrast PASS."
+  ],
+  "bindings": [
+    {
+      "path": "AUTHORIZATION.json",
+      "bytes": 2194,
+      "sha256": "7bedb76541ba77f230d2e0b0f99c80b2743ef607fb496583e6a4f30989f55306"
+    },
+    {
+      "path": "review/EXECUTABLE-CONTRACT.md",
+      "bytes": 5507,
+      "sha256": "2bbcd4f175770dd56cf6c9fea4f35351ede70e555507c2ca5649f3dcbabf6615"
+    },
+    {
+      "path": "inputs/source-freeze.json",
+      "bytes": 2655,
+      "sha256": "b49450b8b30245d308750c4018a84bdc9032babdb9c8670b8fe82f51921a4510"
+    },
+    {
+      "path": "inputs/overlay-manifest.json",
+      "bytes": 6760,
+      "sha256": "124a9af10f7e3fb47508a0be9c6805f141872207df953f1ab3e1086607e568b1"
+    },
+    {
+      "path": "inputs/expected-bindings.json",
+      "bytes": 367271,
+      "sha256": "456fd9b0403fe82a42cc5cb016a2320823a24f4934aa8bd22ecdef0819c6139b"
+    },
+    {
+      "path": "inputs/tests/FINAL-OFFLINE-TEST-RESULT.json",
+      "bytes": 1440,
+      "sha256": "23a3c9fa4ed9ba3645a5e5ce85c1f38e8939f99ae4f6d6d29b41fac87429018f"
+    },
+    {
+      "path": "validator/author-freeze-v2.json",
+      "bytes": 2490,
+      "sha256": "5bf6a832612df33fb8ace20b6dfbd12a87f6ab8363a3d643ae3b1b8631faa6d9"
+    },
+    {
+      "path": "validator/validate-approved-job.py",
+      "bytes": 35048,
+      "sha256": "83b78b9e928bc32419a84372f028a8ee7232ee256e2f8d7ff22b134b2e64e437"
+    },
+    {
+      "path": "validator/cleanup_gate.py",
+      "bytes": 7949,
+      "sha256": "f29222815b9f6419eb7b4a01eef4cb8aac9369a7a4681ca498c9826d4091f814"
+    },
+    {
+      "path": "validator/workload-evidence/workload_validator.py",
+      "bytes": 28728,
+      "sha256": "8133771e3447ed71544699cd3b86015f9ed29559472a1d11ef23390bfbaf0cc6"
+    },
+    {
+      "path": "validator/workload-evidence/prospective-expectations.json",
+      "bytes": 316316,
+      "sha256": "e5b973ed32dbd7b1fbfb4aad71a95830c02d44134b61e82d0f044541cdba48a9"
+    },
+    {
+      "path": "review/static-input-review.json",
+      "bytes": 19025,
+      "sha256": "ff0727a7e428589a907eccfa0bc1188b59b4a37037717378b26adcbfa10ff826"
+    },
+    {
+      "path": "review/semantic-expectations-review.json",
+      "bytes": 701,
+      "sha256": "45f6a93db93d99b88f1653a1da3ff2aca744347a0cced2eab1e86ae297886aa2"
+    },
+    {
+      "path": "review/independent-cleanup-counterexamples.json",
+      "bytes": 17983,
+      "sha256": "c8a8163f3d0397a9e4c5f85eca761a656a7d8058c9be41f332b4486b723d2c20"
+    },
+    {
+      "path": "review/independent-cleanup-final.json",
+      "bytes": 18225,
+      "sha256": "6148a825c792a6774b03f97a16cd0c540756c81253b1487d585e9f4843a66cbd"
+    },
+    {
+      "path": "review/independent-external-final.json",
+      "bytes": 1431,
+      "sha256": "f535ec39f94086605fcc5f8f9f76aea4e9b7e11bcb4cc466e28a3476abf748af"
+    },
+    {
+      "path": "review/independent-validator-preflight.json",
+      "bytes": 1186887,
+      "sha256": "c75fd25a9c975096e327dfdb042fce43366569e7b49f29ef330f8b596b03be23"
+    },
+    {
+      "path": "review/p390-00-11-stage-review.json",
+      "bytes": 1539,
+      "sha256": "feda795cd3205186587ef14d6393f036adc450c2e2f4ac9a9bd4de69e9e0dc2d"
+    },
+    {
+      "path": "prepare-runtime.py",
+      "bytes": 10761,
+      "sha256": "f0c4be14bc77cafe50c97b67fac7dff4b3b64d25e462712f6e7f99dbfbe10f24"
+    },
+    {
+      "path": "run-approved-operation.py",
+      "bytes": 3623,
+      "sha256": "4329460603393c2b90ac518c18301293b1a140dca3368d67b30b39d3d6704f67"
+    },
+    {
+      "path": "runtime/p390-00-11/plan.json",
+      "bytes": 5561,
+      "sha256": "855904502fa8cd6a226d3e388371c912b954a15ab650739e95c13d0674253039"
+    },
+    {
+      "path": "runtime/p390-00-11/driver.py",
+      "bytes": 17161,
+      "sha256": "69e3e06ec16684287b0cdc56d0c8b0435242e197bb0fa4b6125ef2c991fc8bc4"
+    },
+    {
+      "path": "runtime/p390-00-11/input-manifest.json",
+      "bytes": 1034465,
+      "sha256": "f61b5c66f7394615724b4f7ac60b9698aa5236a6b8aa8d43d2fb4ae94bc5b23a"
+    },
+    {
+      "path": "runtime/p390-00-11/preparation-receipt.json",
+      "bytes": 1731,
+      "sha256": "42ef31b98e6daf77793dfd21bd0b95fad41e5a8132cbe392b5c309597af0ee0a"
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "status": "SEALED_REVIEW_CLEAR_OFFLINE_ONLY",
+  "utc": "2026-10-15T07:53:30.343201+00:00",
+  "candidateSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+  "authorFinalReceiptSha256": "c6f75cf903948e30648749600faffcfecd963f34297b7f2bce309e72e7cbfe9a",
+  "authorArtifactsReadback": 32,
+  "sourceBindingsReadback": 19,
+  "independentTests": {
+    "passed": 108,
+    "failed": 0,
+    "skipped": 0,
+    "exitCode": 0,
+    "outputSha256": "619e62871ec0cab42fa55dee47924cb477eb2da40b6085984905f0d28fa20cb9"
+  },
+  "manifestSha256": "71f55c918135fc5212a6b63719888f652d6e16f99bd02d8e86738dfea0e243b5",
+  "artifactFiles": 18,
+  "artifactReadback": "PASS",
+  "reportSha256": "c4f3782766945e3d1f8c1e39d358ed242b9d88d15fd62ea36f0eac1c8a73b22d",
+  "resultSha256": "9d5f73f1a040518b5f77146b199b80c9d0e97fef56080d6f0208b1a04b366b34",
+  "openCodeFindings": [],
+  "memoryReductionEstablished": false,
+  "below896MiBGateEstablished": false,
+  "candidateInstalled": false,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "networkActions": 0,
+  "productionEdits": 0,
+  "gitActions": 0,
+  "runtimeAuthorizationGranted": false
+}

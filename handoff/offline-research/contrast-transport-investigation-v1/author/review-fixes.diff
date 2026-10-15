@@ -1,0 +1,40 @@
+--- reconstructed-pre-review.mjs
++++ transport.mjs
+@@ -2,7 +2,7 @@
+ export const DEFAULT_LIMITS=Object.freeze({chunkUnits:65536,maxEncodedUnits:16777216,maxStringUnits:1048576,maxNodes:1000000,maxDepth:128});
+ function checkedLimits(given={}){
+  const result={...DEFAULT_LIMITS,...given};
+- for(const [key,value] of Object.entries(result))if(!(key in DEFAULT_LIMITS)||!Number.isSafeInteger(value)||value<1||value>DEFAULT_LIMITS[key])throw new RangeError('TRANSPORT_INVALID_LIMIT:'+key);
++ for(const [key,value] of Object.entries(result))if(!Object.hasOwn(DEFAULT_LIMITS,key)||!Number.isSafeInteger(value)||value<1||value>DEFAULT_LIMITS[key])throw new RangeError('TRANSPORT_INVALID_LIMIT:'+key);
+  if(result.chunkUnits>result.maxEncodedUnits)throw new RangeError('TRANSPORT_INVALID_CHUNK_LIMIT');
+  return result;
+ }
+@@ -99,7 +99,7 @@
+  return decode(wire,0);
+ }
+ export async function transferMeasurement(locator,sampler,argument,given={}){
+- const limits=checkedLimits(given);let original,encoded,output,error;
++ const limits=checkedLimits(given);let original,encoded,output,error,failed=false;
+  try{
+   original=await locator.evaluateHandle(sampler,argument);
+   encoded=await original.evaluateHandle(createRemoteEncoder,limits);
+@@ -115,15 +115,15 @@
+   }
+   if(!ended)throw new Error('TRANSPORT_CHUNK_LIMIT');
+   const metadata=await encoded.evaluate(state=>state.metadata());
+-  if(metadata?.version!==1||metadata.done!==true||metadata.units!==units||metadata.chunks!==chunks.length+1||!Number.isSafeInteger(metadata.nodes)||metadata.nodes>limits.maxNodes)throw new Error('TRANSPORT_BAD_METADATA');
++  if(metadata?.version!==1||metadata.done!==true||metadata.units!==units||metadata.chunks!==chunks.length+1||!Number.isSafeInteger(metadata.nodes)||metadata.nodes<1||metadata.nodes>limits.maxNodes)throw new Error('TRANSPORT_BAD_METADATA');
+   // Dispose the browser graph before allocating Node's decoded graph.
+   const encodedToDispose=encoded;encoded=undefined;await encodedToDispose.dispose();
+   output=decodeGraph(chunks.join(''),limits);
+- }catch(cause){error=cause;}
++ }catch(cause){failed=true;error=cause;}
+  const disposeErrors=[];
+  for(const handle of [encoded,original])if(handle)try{await handle.dispose();}catch(cause){disposeErrors.push(cause);}
+- if(error&&disposeErrors.length)throw new AggregateError([error,...disposeErrors],'TRANSPORT_FAILED_AND_DISPOSAL_FAILED',{cause:error});
+- if(error)throw error;
++ if(failed&&disposeErrors.length)throw new AggregateError([error,...disposeErrors],'TRANSPORT_FAILED_AND_DISPOSAL_FAILED',{cause:error});
++ if(failed)throw error;
+  if(disposeErrors.length)throw new AggregateError(disposeErrors,'TRANSPORT_DISPOSAL_FAILED');
+  return output;
+ }

@@ -1,0 +1,66 @@
+{
+  "utc": "2026-10-14T20:18:09.389622+00:00",
+  "status": "COMPLETE: scoped independent nonbrowser evidence audit; no blocking discrepancy found",
+  "reviewer": "/root/reduction_evidence_audit",
+  "readOnlyEvidenceInputsReverified": 1744,
+  "auditChecks": {
+    "historical": 879,
+    "model": 50308,
+    "preflight": 5853
+  },
+  "countsAreNotProductTestCounts": true,
+  "historical": {
+    "benchmarkRuns": 40,
+    "acceptedReductionRuns": 6,
+    "fixedReducedRuns": 1,
+    "traceObservations": 47,
+    "artifactsVerified": 157,
+    "finalNeighborPreflights": 3,
+    "allReductionPreflights": 10,
+    "minimality": "unverified"
+  },
+  "model": {
+    "reducerInvocations": 2112,
+    "syntheticRunnerCalls": 13596,
+    "independentProcesses": 6,
+    "allNormalizedTranscriptsEqual": true,
+    "localButNotGlobalTableCases": 23,
+    "uniqueDeterministicTables": 320
+  },
+  "preflight": {
+    "completeFinalMatrixCalls": 420,
+    "completeFinalMatrixArtifacts": 360,
+    "allSavedCallsIncludingVerifierFailures": 700,
+    "allSavedArtifactsIncludingVerifierFailures": 600,
+    "noBrowserLaunchOrHttpListen": true
+  },
+  "rootScopeReportsReviewed": [
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/RESULT.md",
+      "bytes": 10641,
+      "sha256": "cc0e210fd795947cbdc06547c7b65ba31dadb8b4950f7ea444f19a85b204a3c4"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/remaining-actions.json",
+      "bytes": 2587,
+      "sha256": "4ffbce1598e2d0ad4f4749f08eed36f8b207f80b5d572a318b1c57218e443659"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/reduction-repeatability-review-v1/final-preservation.json",
+      "bytes": 30347,
+      "sha256": "dd92ffc915d97bf5bc1a5c5e308135cef5b805c36039f498e61819fea67e2c34"
+    }
+  ],
+  "sourceEdits": 0,
+  "productExecutionsByThisReviewer": 0,
+  "browserOrDockerOperationsByThisReviewer": 0,
+  "networkAuthenticationOrExternalWrites": 0,
+  "reportSha256": "b21cff63ac9405a553922dc951208e4492ecb1e92f6e637a4fe282d00e7417cd",
+  "manifestSha256": "45a691bdbbcf9c0bd12ef4240bfbe714e44992a9559d330583d24c19c5313ddb",
+  "manifestEntries": 8,
+  "remainingBlockers": [
+    "Current-candidate real browser acceptance and repeatability remain blocked/unrun under the unchanged 128-task constraints.",
+    "The exact current final neighbors remain MISSING_STEPS before the oracle; browser capacity repair alone cannot establish their minimality."
+  ],
+  "priorFailuresRetained": true
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-10-15T08:18:14.548243+00:00",
+  "status": "SEALED_OFFLINE_INCREMENTAL_RECEIVER_COMPLETE_END_TO_END_MEMORY_REMEDY_NOT_ESTABLISHED",
+  "commit": "823c3751f1c02a834d713665fa89927b618530f2",
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "manifestSha256": "a37a8e32f938214f0727e5f75b2d408663ef7e106abb683e7bed33dfc474c20d",
+  "resultSha256": "f22af79c1748b1192e18008a52c529135a428e05a84e59cba9f73f066699043b",
+  "summarySha256": "f42d74722738587562cf854841b6713cfadac103359424bc2526d8590e068c29",
+  "preservationReadbackSha256": "1cc073f28a81dec51606016f7c6e1de4e647ae8949861e565d2f50b65852c2bb",
+  "files": 125,
+  "bytes": 1226235,
+  "links": 0,
+  "readback": "PASS",
+  "childSeals": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author",
+      "receiptSha256": "5bc7e5977e2557de440f0cf91048029e9812a2c95f24522d0ec995a014d77323",
+      "manifestSha256": "d6bb21fda9db08bf78972c41fd630ee44134da97b47036af23091572ceb0f023",
+      "files": 19,
+      "bytes": 89472,
+      "links": 0,
+      "readback": "PASS"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark",
+      "receiptSha256": "f03ac2f32a056fdc693049687a1e4b6531f399708774a34004a25338436b6188",
+      "manifestSha256": "f568df3408fd4acf9ce5e9c490d2251f3ae8c214557af4f9a43b742429e74614",
+      "files": 56,
+      "bytes": 792927,
+      "links": 0,
+      "readback": "PASS"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review",
+      "receiptSha256": "db9002c87dee1eebf235e775dc47209b3faf457a1a0da6fea944ffafb736ab43",
+      "manifestSha256": "3c3be3a03bd8a7a8995421d805ff6db3d24213566a0fffd585bb9cb759d7886c",
+      "files": 32,
+      "bytes": 278101,
+      "links": 0,
+      "readback": "PASS"
+    }
+  ],
+  "priorSealedTrees": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1",
+      "receiptSha256": "e815a4f74bafc02a12f8e96d66ec5e0fc2c224cc148eb7ce1acccc1b05574043",
+      "manifestSha256": "caf8344b15cf40424293bb126d564199516f0b3c371c822132fc2632277d8d17",
+      "files": 8688,
+      "bytes": 595051100,
+      "links": 23,
+      "readback": "PASS"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1",
+      "receiptSha256": "68092df3f62b44871b54035d5d9602f7112496805edef575e11c27e9e314eb1f",
+      "manifestSha256": "170a02707294f7104a1bc550caa7467d1f57b992d077dca4b38bc5da95c94cd9",
+      "files": 77,
+      "bytes": 360906,
+      "links": 0,
+      "readback": "PASS"
+    }
+  ],
+  "authorTests": {
+    "pass": 17,
+    "fail": 0
+  },
+  "independentTests": {
+    "frozenRegression": {
+      "tests": 108,
+      "pass": 107,
+      "fail": 1,
+      "failure": "Malformed x now fails immediately TRANSPORT_BAD_JSON instead of eventual ENCODED_LIMIT/CHUNK_LIMIT; exact original test retained"
+    },
+    "explicitlyAdjustedRegression": {
+      "tests": 108,
+      "pass": 108,
+      "fail": 0,
+      "onlyChange": "Accept early BAD_JSON in original malformed-stream bounded-failure assertion"
+    },
+    "independentStreaming": {
+      "tests": 86,
+      "pass": 86,
+      "fail": 0,
+      "deterministicMutations": 1728
+    },
+    "instrumentedCleanup": {
+      "tests": 13,
+      "pass": 13,
+      "fail": 0
+    }
+  },
+  "benchmarkWorkers": 12,
+  "benchmarkCaseChecks": 156,
+  "prelaunchFailuresPreserved": 1,
+  "measuredWorkerFailures": 0,
+  "unattemptedMeasuredWorkers": 0,
+  "endToEndRSSHigherPairs": 2,
+  "endToEndRSSLowerPairs": 1,
+  "receiverOnlyRSSLowerPairs": 3,
+  "incrementalSlowerTimingPairs": 6,
+  "fullIntermediateDecodedGraphRemoved": true,
+  "allocationProfileTaken": false,
+  "endToEndMemoryReductionEstablished": false,
+  "below896MiBEstablished": false,
+  "transportInstalled": false,
+  "observationHold": "PENDING_NOT_ADOPTED",
+  "newBrowserStarts": 0,
+  "newContainerStarts": 0,
+  "gateChanges": false,
+  "permissionsChanged": false,
+  "published": false,
+  "oldPilotRemainsSTOP": true,
+  "recommendation": "Keep candidate uninstalled as a research artifact. Isolated receiver RSS fell in all3 pairs, while end-to-end RSS increased in2 of3 and all6 timing pairs worsened. Address parser cost and graph-lifetime overlap before any future integration proposal."
+}

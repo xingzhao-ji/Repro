@@ -1,0 +1,9 @@
+test_all_five_exact_assignments_and_duration_text_nodes (__main__.Challenges.test_all_five_exact_assignments_and_duration_text_nodes) ... ok
+test_independent_negative_challenges (__main__.Challenges.test_independent_negative_challenges) ... ok
+test_three_legitimate_product_outcomes (__main__.Challenges.test_three_legitimate_product_outcomes) ... ok
+test_witness_internal_consistency (__main__.Challenges.test_witness_internal_consistency) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 2.456s
+
+OK

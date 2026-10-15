@@ -1,0 +1,147 @@
+{
+  "utc": "2026-10-15T00:21:47.119452+00:00",
+  "status": "NOT_ALL_RELEASE_GATES_MET",
+  "workspace": "/workspace/repro-development-rv5abotj/repro",
+  "candidate": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/release-completion-v1/candidate",
+  "deliveryStatus": "Local candidate artifacts and verification packet finalized",
+  "sourceTests": {
+    "total": 464,
+    "passed": 464,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "emittedTests": {
+    "total": 464,
+    "passed": 464,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "originalBrowserTests": {
+    "planned": 31,
+    "passed": 24,
+    "failed": 6,
+    "startedInterrupted": 1,
+    "skipped": 0,
+    "unrun": 0
+  },
+  "cliDemo": {
+    "steps": 6,
+    "passed": 6
+  },
+  "currentBenchmark": {
+    "observed": 40,
+    "matched": 40
+  },
+  "installedBrowserReplays": "PASS with exact final runtime binding",
+  "remainingBlockers": [
+    "Six original browser failures with task/thread-exhaustion evidence",
+    "Original actual-packet comparator interrupted at 120 seconds before final checks",
+    "Fifteen unresolved actual contrast samples",
+    "Native Chrome 200 percent zoom blocked/unverified",
+    "Actual screen-reader session unavailable/unrun"
+  ],
+  "artifacts": [
+    {
+      "path": "RESULT.md",
+      "bytes": 8938,
+      "sha256": "93821182c61a81faa3eba61fa7742fde3012197c3408407035984d47ddacf6dc"
+    },
+    {
+      "path": "STATE.md",
+      "bytes": 2484,
+      "sha256": "0d9494c922845a2db3c01d4393dbf504d56ac38de399f9604480d667113cee27"
+    },
+    {
+      "path": "execution-checkpoint.json",
+      "bytes": 2781,
+      "sha256": "e2f9c2aa1d83dae4de8b5f49fca2ae26bd13ca4a0c5946853cded3e0252bcc54"
+    },
+    {
+      "path": "final-source-inventory.json",
+      "bytes": 29996,
+      "sha256": "82e39f0e9a5c3e6bf990d6b896edd8fc6795cd332aac1ee829ce1f80ae9ee24d"
+    },
+    {
+      "path": "package/final/repro-local-0.1.0.tgz",
+      "bytes": 852567,
+      "sha256": "1b4bf924e1e36c2227922e21f2f5a2eb80e0a3ed82432657ecb36c9a35d89440"
+    },
+    {
+      "path": "package/final/final-receipt.json",
+      "bytes": 3960,
+      "sha256": "d4d1e751a88a933f770c67414df5e6d18cfb14739aea4016915674a499286c33"
+    },
+    {
+      "path": "repro-release-candidate-source.tar.gz",
+      "bytes": 387756,
+      "sha256": "3422e87273256cba074046b1aaed7263894b073c7ad1bcc0f3547a546037cbaa"
+    },
+    {
+      "path": "release-candidate.patch",
+      "bytes": 28782,
+      "sha256": "5aedf5a0ceae69b5ea5652ce2ff80e5f512c333a6a727097cc1650eb5a1d4450"
+    },
+    {
+      "path": "source-delivery-receipt.json",
+      "bytes": 2561,
+      "sha256": "3d33b544a78614e32106f5b77bf05e683a73c614854abcd0d712dbad5eafe5fd"
+    },
+    {
+      "path": "nonbrowser/final-receipt.json",
+      "bytes": 12387,
+      "sha256": "f3ad55a92430582736a5d50f2f3b65c499f61710889aa3d02a068d9f00269ea0"
+    },
+    {
+      "path": "browser/final-receipt.json",
+      "bytes": 61925,
+      "sha256": "e2908f727689f0bf9447803cb23e4e6b461fa2d685b347de0ecb1c4031450e02"
+    },
+    {
+      "path": "usability/completion-receipt.json",
+      "bytes": 3929,
+      "sha256": "8ab37dda139ab38fbf2955e26e2ffd5cf31672b32c365af86f7272f147aba195"
+    },
+    {
+      "path": "audit/FINAL-REVIEW.md",
+      "bytes": 7967,
+      "sha256": "95380d115443be45d0a6dd5d1229fbebeeddb9dbca9535b7b3c648275fa1bb89"
+    },
+    {
+      "path": "audit/final-review.json",
+      "bytes": 11372,
+      "sha256": "a8381d4aa0ca6fdc0f9dfab09cfd6d655f126fffeaa10d01c6129c186a5589fe"
+    }
+  ],
+  "manifest": {
+    "path": "artifact-manifest.json",
+    "bytes": 7730263,
+    "sha256": "a3a4709f20086e78c62d9ed72112d0ad7601a3200970842de8844fbde0c7687c"
+  },
+  "manifestFileCount": 34106,
+  "manifestSymlinkCount": 132,
+  "manifestSpecialEntryCount": 4,
+  "sealPreparationCorrection": "Initial seal stopped at a preserved CLI-test FIFO. Failure and original script retained; corrected seal records special-entry metadata without opening it. See seal-initial-failure.json.",
+  "originalSourceFilesPreserved": 182,
+  "priorEvidenceEntriesPreserved": 2048,
+  "independentAudit": "audit/final-review.json",
+  "noChanges": [
+    "original repository source",
+    "authentication",
+    "GitHub writes",
+    "security settings",
+    "resource limits",
+    "publication"
+  ],
+  "scopeNote": "Synthetic fixture and exact recorded Linux amd64/runtime policy only. Tests, benchmark runs, CLI steps and supplemental samples are distinct units. Original failures and interruption remain.",
+  "wholeTaskReadback": {
+    "utc": "2026-10-15T00:22:13.166829+00:00",
+    "status": "PASS",
+    "regularFileHashesVerified": 34106,
+    "symlinkTargetsVerifiedWithoutFollowing": 132,
+    "specialEntriesVerifiedWithoutOpening": 4,
+    "unexpectedOrMissingEntries": 0,
+    "referencedArtifactHashesVerified": 14
+  }
+}

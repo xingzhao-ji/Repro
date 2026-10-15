@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "status": "SEALED_OFFLINE_INCREMENTAL_RECEIVER_UNINSTALLED",
+  "utc": "2026-10-15T08:08:28.298333+00:00",
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "freezeSha256": "b58ab2757b9ec95854f76fdf0baaff47737990ff0a2fecc6c3981ce9105e1783",
+  "resultSha256": "9ac74cce640fa9f78c7674e810b375e0444561f73b5453fb1735653e0da70b1c",
+  "manifestSha256": "d6bb21fda9db08bf78972c41fd630ee44134da97b47036af23091572ceb0f023",
+  "artifactFiles": 19,
+  "sourceBindingsReadback": 22,
+  "artifactReadback": "PASS",
+  "authorTests": {
+    "groups": 17,
+    "passed": 17,
+    "failed": 0,
+    "outputSha256": "ebfb85ba5342d21becc7e90851ea18593d9a0efe22f9819d8dc94c88fe08ce7a"
+  },
+  "independentFunctionalReview": "CLEAR",
+  "independentReviewEvidence": {
+    "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/functional-clearance.json",
+    "sha256": "9ae227e51c692ea73d20d2b2e699885072d36b87bb126e8444c542f4fa176ecf"
+  },
+  "memoryOutcome": "Not measured by author; independently frozen sibling benchmark owns allocation/RSS evidence",
+  "runtimePilotCount": 0,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "networkActions": 0,
+  "installed": false,
+  "gatesChanged": false,
+  "gateMiB": 896,
+  "observationLifecycleExtensionAdopted": false,
+  "published": false
+}

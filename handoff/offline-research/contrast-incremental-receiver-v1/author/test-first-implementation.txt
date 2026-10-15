@@ -1,0 +1,19 @@
+✔ receiver exposes incremental graph decoder and does not join whole wire or parse tagged graph (1.275509ms)
+✔ incremental receiver matches sealed decoder through every split and one-unit chunks (19.511032ms)
+✔ incremental parser withholds graph until finish and clears state on abort/failure (0.729021ms)
+✔ all encoder bytes are identical to sealed predecessor (0.155973ms)
+✔ complete stored row through bounded handle transport (878.078434ms)
+✔ all 12 complete stored rows and complete controls evidence round-trip (7603.031282ms)
+✔ aliases, cycles, own undefined, special numbers, bigint, keys and Unicode retain pinned Playwright semantics (23.916823ms)
+✔ unsupported values fail closed without invoking getters and release both handles (1.833854ms)
+✔ bounded limits reject invalid options before sampling and oversize/deep graphs without truncating (1.256754ms)
+✔ sampler, handle-open, read, corruption, disposal faults are surfaced with cleanup (0.537004ms)
+✔ falsy rejection reasons are preserved rather than swallowed (0.282259ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 11
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 8616.221283

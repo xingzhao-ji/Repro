@@ -1,0 +1,83 @@
+--- sealed-workload/caller
++++ approved-inputs/caller
+@@ -1,6 +1,8 @@
+-// P57 memory batch proposal: lossless complete-observation artifacts and exact subsets; frozen v3 sampler and all 50 browser control bodies unchanged. PREPARED_NOT_EXECUTED.
++// Approved prospective P57 corrected-CSS batch: exact frozen partition and all 50 control bodies retained. External continuation review required.
+ // Supplemental measurement only. The original axe audits and release result remain unchanged.
+ import assert from 'node:assert/strict';
++import { verifyCandidateManifest } from './candidate-binding.mjs';
++const approvedBatchIds=Object.freeze(['p390-00-11','p320-00-10','p390-12-23','p320-11-21','p320-22-32']);
+ import { openSync as lifecycleOpenSync, readSync as lifecycleReadSync, closeSync as lifecycleCloseSync } from 'node:fs';
+ import { validateBatchPlan, selectBatch, assertBatchSourceComplete } from './batch-partition.mjs';
+ import { createEvidenceStore } from './evidence-store.mjs';
+@@ -520,7 +522,7 @@
+ }
+ 
+ // New diagnostics only. Original workload results/controls remain untouched.
+-export function createWorkloadLifecycleCapture({ lifecycle, resourceProbe, callerSha256, writeSidecar, clock, runtimeVersions = {} }) {
++export function createWorkloadLifecycleCapture({ lifecycle, resourceProbe, callerSha256, writeSidecar, clock, runtimeVersions = {}, batchId }) {
+   const issues=new Set();let validated=false,finished=false,complete=false,started=null;
+   const add=code=>issues.add(code);
+   const version=value=>typeof value==='string'&&Buffer.byteLength(value)<=128&&/^[\w.+()# -]+$/.test(value)?value:'unavailable';
+@@ -528,7 +530,7 @@
+   function stamp(){try{const value=clock();if(typeof value.utc!=='string'||value.utc.length>64||!Number.isFinite(Date.parse(value.utc))||typeof value.monoNs!=='bigint'||value.monoNs<0n||value.monoNs.toString().length>24)throw new Error();return {utc:value.utc,monoNs:value.monoNs.toString()};}catch{add('CLOCK_ERROR');return null;}}
+   function mark(label,event){try{if(validated)lifecycle.mark(label,event);}catch{add('DIAGNOSTIC_PHASE_FAILED');}}
+   function validate(){
+-    if(resourceProbe?.selected!==true||resourceProbe?.intendedTest!==true||resourceProbe.entrypoint!=='/work/verification-inputs/contrast-p57-workload-lifecycle-probe.mjs'||resourceProbe.ppid!==1||resourceProbe.runnerMode!=='single-script-bounded-pools'||resourceProbe.nodePools?.v8!==1||resourceProbe.nodePools?.libuv!==1||!budgetValid()||!/^[a-f0-9]{64}$/.test(callerSha256??'')||!lifecycle||!['mark','observeClose','summary'].every(key=>typeof lifecycle[key]==='function')){add('PRELOAD_INVALID');throw new Error('LIFECYCLE_PRELOAD_INVALID');}
++    if(!approvedBatchIds.includes(batchId)||resourceProbe?.selected!==true||resourceProbe?.intendedTest!==true||resourceProbe.entrypoint!=='/work/verification-inputs/contrast-p57-approved-batch-probe.mjs'||resourceProbe.ppid!==1||resourceProbe.runnerMode!=='single-script-bounded-pools'||resourceProbe.nodePools?.v8!==1||resourceProbe.nodePools?.libuv!==1||!budgetValid()||!/^[a-f0-9]{64}$/.test(callerSha256??'')||!lifecycle||!['mark','observeClose','summary'].every(key=>typeof lifecycle[key]==='function')){add('PRELOAD_INVALID');throw new Error('LIFECYCLE_PRELOAD_INVALID');}
+     validated=true;started=stamp();mark('workload.capture','start');
+   }
+   function observeClose(label,operation,contextCount){
+@@ -540,7 +542,7 @@
+   async function finish(source){
+     if(finished){add('ISSUE_FINISH_REPEATED');complete=false;return {complete:false,status:'diagnostic-capture-incomplete',errors:[...issues]};}
+     finished=true;if(!validated)add('PRELOAD_INVALID');
+-    if(!source||source.batchId!=='p390-00-11'||!['started','incomplete','error','measured-failure','all-batch-requested-nodes-measured-pass'].includes(source.status)||![0,1].includes(source.expectedExitCode)||!Number.isSafeInteger(source.cleanupErrorCount)||source.cleanupErrorCount<0||source.cleanupErrorCount>128){add('SOURCE_SNAPSHOT_INVALID');}
++    if(!source||source.batchId!==batchId||!['started','incomplete','error','measured-failure','all-batch-requested-nodes-measured-pass'].includes(source.status)||![0,1].includes(source.expectedExitCode)||!Number.isSafeInteger(source.cleanupErrorCount)||source.cleanupErrorCount<0||source.cleanupErrorCount>128){add('SOURCE_SNAPSHOT_INVALID');}
+     if(source?.sourceObservationComplete!==true||!['incomplete','measured-failure','all-batch-requested-nodes-measured-pass'].includes(source?.status)||source?.internalBudgetExpired!==false||source?.cleanupErrorCount!==0)add('SOURCE_WORKLOAD_INCOMPLETE');
+     const originalExpectedExitCode=source?.status==='all-batch-requested-nodes-measured-pass'&&source?.cleanupErrorCount===0?0:1;
+     if(source?.expectedExitCode!==originalExpectedExitCode)add('SOURCE_EXIT_MISMATCH');
+@@ -551,12 +553,12 @@
+     if(diagnostic.status!=='complete')add('DIAGNOSTICS_INCOMPLETE');
+     if(!budgetValid()||resourceProbe?.sourceSummaryBudget?.failure)add('SOURCE_BUDGET_INCOMPLETE');
+     const ended=stamp();if(started&&ended&&BigInt(ended.monoNs)<BigInt(started.monoNs))add('CLOCK_ERROR');
+-    const record={schemaVersion:1,scope:'original-p390-00-11-lifecycle-diagnostic-only',acceptance:'NOT_EVALUATED',
++    const record={schemaVersion:1,scope:'prospective-corrected-css-p57-batch',acceptance:'NOT_EVALUATED',
+       closure:'PROVISIONAL_PENDING_SIDECAR_AND_TELEMETRY_IO_AND_EXTERNAL_GATES',
+-      executedCaller:{file:'verification-inputs/contrast-p57-workload-lifecycle-probe.mjs',sha256:callerSha256},
++      executedCaller:{file:'verification-inputs/contrast-p57-approved-batch-probe.mjs',sha256:callerSha256},
+       originalWorkloadProbeSha256:'9b8f407a554434f793bd93b7cf50cf145adfba828d6660c6b49896fe82da7053',
+-      historicalVerifiedInputsMeaning:'ORIGINAL_WORKLOAD_PROVENANCE_NOT_EXECUTED_CALLER_IDENTITY',
+-      source:{batchId:source?.batchId==='p390-00-11'?'p390-00-11':null,status:['started','incomplete','error','measured-failure','all-batch-requested-nodes-measured-pass'].includes(source?.status)?source.status:null,sourceObservationComplete:source?.sourceObservationComplete===true,internalBudgetExpired:source?.internalBudgetExpired===true,cleanupErrorCount:Number.isSafeInteger(source?.cleanupErrorCount)&&source.cleanupErrorCount>=0&&source.cleanupErrorCount<=128?source.cleanupErrorCount:null,expectedExitCode:[0,1].includes(source?.expectedExitCode)?source.expectedExitCode:null},
++      historicalVerifiedInputsMeaning:'CANDIDATE_AND_EXECUTED_CALLER_WITH_IMMUTABLE_BASELINE_REFERENCES',
++      source:{batchId:source?.batchId===batchId?batchId:null,status:['started','incomplete','error','measured-failure','all-batch-requested-nodes-measured-pass'].includes(source?.status)?source.status:null,sourceObservationComplete:source?.sourceObservationComplete===true,internalBudgetExpired:source?.internalBudgetExpired===true,cleanupErrorCount:Number.isSafeInteger(source?.cleanupErrorCount)&&source.cleanupErrorCount>=0&&source.cleanupErrorCount<=128?source.cleanupErrorCount:null,expectedExitCode:[0,1].includes(source?.expectedExitCode)?source.expectedExitCode:null},
+       runtimeVersions:{node:version(runtimeVersions.node),kernelRelease:version(runtimeVersions.kernelRelease),browser:version(source?.browserVersion)},
+       started,ended,lifecycleDiagnostics:diagnostic,sourceSummaryBudget:resourceProbe?.sourceSummaryBudget??null,
+       observationsComplete:issues.size===0,errors:[...issues]};
+@@ -575,7 +577,7 @@
+   const manifestBytes = await readFile(manifestPath), manifest = JSON.parse(manifestBytes);
+   const startedAt = Date.now();
+   const batchId=process.argv[4];
+-  assert.equal(batchId,'p390-00-11','One authorized original workload capture');
++  assert.ok(approvedBatchIds.includes(batchId),'One of five exact approved unique batch IDs');
+   assert.equal(manifest.batchPlan,'batch-plan.json');assert.equal(manifest.frozenManifest,'frozen-v3-inputs.json');
+   const planBytes=await readFile(resolve(input,manifest.batchPlan)),plan=JSON.parse(planBytes);
+   validateBatchPlan(manifest,plan);
+@@ -593,7 +595,7 @@
+   let browser,deadlineTimer;
+   let lifecycleCapture,lifecycleCaptureComplete=false;
+   try {
+-    lifecycleCapture=createWorkloadLifecycleCapture({lifecycle:globalThis[Symbol.for('repro.lifecycleDiagnostics')],resourceProbe:globalThis[Symbol.for('repro.resourceProbe')],callerSha256:digest(await readFile(new URL(import.meta.url))),
++    lifecycleCapture=createWorkloadLifecycleCapture({batchId,lifecycle:globalThis[Symbol.for('repro.lifecycleDiagnostics')],resourceProbe:globalThis[Symbol.for('repro.resourceProbe')],callerSha256:digest(await readFile(new URL(import.meta.url))),
+       clock:()=>({utc:new Date().toISOString(),monoNs:process.hrtime.bigint()}),runtimeVersions:{node:process.version,kernelRelease:workloadKernelRelease()},
+       writeSidecar:async serialized=>{const file=join(out,'lifecycle-source.json');await writeFile(file,serialized,{flag:'wx',mode:0o600});const recovered=await readFile(file);if(!recovered.equals(Buffer.from(serialized)))throw new Error('LIFECYCLE_SIDECAR_READBACK_FAILED');}});
+     lifecycleCapture.validate();
+@@ -611,7 +613,7 @@
+     const frozenManifestBytes=await readFile(resolve(input,manifest.frozenManifest));
+     assert.equal(digest(frozenManifestBytes),plan.frozenManifestSha256);
+     const frozenManifest=JSON.parse(frozenManifestBytes);
+-    for(const [key,value] of Object.entries(frozenManifest))if(!['revision','probeSources'].includes(key))assert.deepEqual(manifest[key],value,'Original full57 manifest field '+key);
++    verifyCandidateManifest(manifest,frozenManifest);
+     const jobs=packet.evidence.jobs.filter(row=>row.job.id===manifest.jobId);assert.equal(jobs.length,1);const job=jobs[0];assert.equal(job.job.sessionId,manifest.sessionId);
+     const inventory = JSON.parse(await readFile(resolve(input, manifest.inventory))), comparator = JSON.parse(await readFile(resolve(input, manifest.comparatorSummary)));
+     assert.equal(inventory.jobId, manifest.jobId); assert.equal(inventory.caseSha256, manifest.caseSha256);

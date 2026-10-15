@@ -1,0 +1,36 @@
+{
+  "status": "PROPOSED_NARROW_LAUNCH_CORRECTION",
+  "utc": "2026-10-15T08:09:56.684980+00:00",
+  "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "executableBytes": 125989464,
+  "executableSha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12",
+  "versionCommand": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "--version"
+  ],
+  "versionStdout": "v24.19.0\n",
+  "versionStderr": "",
+  "versionExitCode": 0,
+  "environment": {
+    "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+    "LANG": "C",
+    "LC_ALL": "C",
+    "TZ": "UTC"
+  },
+  "measurementWorkersStarted": 0,
+  "scope": "Absolute existing executable path plus versioned bindings filename only; original order/fixtures/heap/deadline/GC/stop rules unchanged",
+  "revisedFiles": [
+    {
+      "path": "run-benchmarks-v2.py",
+      "sha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac"
+    },
+    {
+      "path": "create-bindings-v2.py",
+      "sha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d"
+    },
+    {
+      "path": "launch-correction.diff",
+      "sha256": "d0aa45b95b658cbdb8796147e26d7a5ca2018c7942a518e29cbb94233753e9c3"
+    }
+  ]
+}

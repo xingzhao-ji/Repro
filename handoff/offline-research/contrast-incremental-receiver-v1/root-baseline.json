@@ -1,0 +1,30 @@
+{
+  "utc": "2026-10-15T07:57:13.357882+00:00",
+  "head": "823c3751f1c02a834d713665fa89927b618530f2",
+  "gitStatus": " M STATE.md\n?? evidence/BROWSER-COMPILED-RUNNER.md\n?? evidence/BROWSER-INIT-DIAGNOSTIC.md\n?? evidence/BROWSER-RESOURCE-DIAGNOSIS.md\n",
+  "preservedWorktreeFiles": [
+    {
+      "path": "STATE.md",
+      "sha256": "5ddcae79bf1e9b5c90e7661a45c4edaf9bed9c89a6ffc8f7fd70aaa3f11a76d5"
+    },
+    {
+      "path": "evidence/BROWSER-COMPILED-RUNNER.md",
+      "sha256": "2de7137160ca24da841793b0330f804936ec9ef3b4835abac255f624be7bb7a0"
+    },
+    {
+      "path": "evidence/BROWSER-INIT-DIAGNOSTIC.md",
+      "sha256": "35d9f9391ef0910158421f153c18491e528353b9ab2c25cd9549409d064ecc7b"
+    },
+    {
+      "path": "evidence/BROWSER-RESOURCE-DIAGNOSIS.md",
+      "sha256": "f4431aa1739f6546ca00b19f736ea091bdd3674a182e434fe15fa10e7d09d376"
+    }
+  ],
+  "priorTaskReceiptSha256": "68092df3f62b44871b54035d5d9602f7112496805edef575e11c27e9e314eb1f",
+  "priorTaskManifestSha256": "170a02707294f7104a1bc550caa7467d1f57b992d077dca4b38bc5da95c94cd9",
+  "pilotTaskReceiptSha256": "e815a4f74bafc02a12f8e96d66ec5e0fc2c224cc148eb7ce1acccc1b05574043",
+  "pilotTaskManifestSha256": "caf8344b15cf40424293bb126d564199516f0b3c371c822132fc2632277d8d17",
+  "previousCandidateSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+  "memoryGateBytes": 939524096,
+  "historicalPilotStarts": 1
+}

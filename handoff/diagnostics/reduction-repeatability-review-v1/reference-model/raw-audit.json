@@ -1,0 +1,1038 @@
+{
+  "createdUtc": "2026-10-14T20:13:44.170840+00:00",
+  "scope": "Independent Python audit of retained raw synthetic model decisions, not another product execution or browser evidence.",
+  "normalization": "Delete only startedAt and durationMs object keys and replace the exact owned per-process model artifact root. Preserve every other raw-case field.",
+  "planSha256": "7046939bc5f7c0b0163f0e9ede0a19078ff10ebb5e3e50642b0b2ccb2024b4f2",
+  "modelHarnessDigest": "ec4b0ead0b7170f6faa9bdfee27b4ddcb7f896a11a09d8e422906527459f2ec7",
+  "totalReducerInvocations": 2112,
+  "totalSyntheticModelExecutions": 13596,
+  "totalRawBytes": 51717541,
+  "uniqueExhaustiveTables": 320,
+  "tableInvocations": 1920,
+  "uniqueControls": 32,
+  "controlInvocations": 192,
+  "globalMinimumGapTables": [
+    {
+      "caseId": "chain-noise-table-002",
+      "finalIds": [
+        "root",
+        "chain-one",
+        "chain-two",
+        "noise"
+      ],
+      "finalActionCount": 4,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 3
+    },
+    {
+      "caseId": "chain-noise-table-034",
+      "finalIds": [
+        "root",
+        "chain-one",
+        "noise"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "chain-noise-table-042",
+      "finalIds": [
+        "root",
+        "chain-one",
+        "noise"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-002",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 4,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 3
+    },
+    {
+      "caseId": "star-table-008",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 4,
+      "globalMinimumActionCount": 2,
+      "globalMinimumSubsets": [
+        [
+          "root",
+          "leaf-two"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-010",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 4,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 3
+    },
+    {
+      "caseId": "star-table-018",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-032",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 4,
+      "globalMinimumActionCount": 2,
+      "globalMinimumSubsets": [
+        [
+          "root",
+          "leaf-three"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-034",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 4,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 3
+    },
+    {
+      "caseId": "star-table-040",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 4,
+      "globalMinimumActionCount": 2,
+      "globalMinimumSubsets": [
+        [
+          "root",
+          "leaf-two"
+        ],
+        [
+          "root",
+          "leaf-three"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-042",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 4,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 3
+    },
+    {
+      "caseId": "star-table-048",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 2,
+      "globalMinimumSubsets": [
+        [
+          "root",
+          "leaf-three"
+        ]
+      ],
+      "gap": 1
+    },
+    {
+      "caseId": "star-table-050",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-two"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-066",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-072",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 2,
+      "globalMinimumSubsets": [
+        [
+          "root",
+          "leaf-two"
+        ]
+      ],
+      "gap": 1
+    },
+    {
+      "caseId": "star-table-074",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-082",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-088",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 2,
+      "globalMinimumSubsets": [
+        [
+          "root",
+          "leaf-two"
+        ]
+      ],
+      "gap": 1
+    },
+    {
+      "caseId": "star-table-090",
+      "finalIds": [
+        "root",
+        "leaf-one",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-130",
+      "finalIds": [
+        "root",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-146",
+      "finalIds": [
+        "root",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-194",
+      "finalIds": [
+        "root",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    },
+    {
+      "caseId": "star-table-210",
+      "finalIds": [
+        "root",
+        "leaf-two",
+        "leaf-three"
+      ],
+      "finalActionCount": 3,
+      "globalMinimumActionCount": 1,
+      "globalMinimumSubsets": [
+        [
+          "root"
+        ]
+      ],
+      "gap": 2
+    }
+  ],
+  "controls": [
+    {
+      "caseId": "control-baseline-inconclusive",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "inconclusive"
+      ],
+      "runIds": [
+        "control-baseline-inconclusive-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-unstable",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 2,
+      "outcomes": [
+        "target-failure",
+        "requirement-satisfied"
+      ],
+      "runIds": [
+        "control-baseline-unstable-execution-000001",
+        "control-baseline-unstable-execution-000002"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-manifest-mismatch",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-manifest-mismatch-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-assertion-mismatch",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-assertion-mismatch-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-app-digest-mismatch",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-app-digest-mismatch-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-revision-mismatch",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-revision-mismatch-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-adapter-mismatch",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-adapter-mismatch-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-runner-mismatch",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-runner-mismatch-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-seed-mismatch",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-seed-mismatch-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-invalid-harness",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-invalid-harness-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-changed-harness",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 2,
+      "outcomes": [
+        "target-failure",
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-changed-harness-execution-000001",
+        "control-baseline-changed-harness-execution-000002"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-missing-observation",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-missing-observation-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-wrong-observation",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-wrong-observation-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-contradictory-label",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-contradictory-label-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-zero-assertions",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-baseline-zero-assertions-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-unknown-outcome",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "unregistered"
+      ],
+      "runIds": [
+        "control-baseline-unknown-outcome-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-neighbor-inconclusive",
+      "status": "complete",
+      "minimality": "unverified",
+      "executions": 3,
+      "outcomes": [
+        "target-failure",
+        "target-failure",
+        "inconclusive"
+      ],
+      "runIds": [
+        "control-neighbor-inconclusive-execution-000001",
+        "control-neighbor-inconclusive-execution-000002",
+        "control-neighbor-inconclusive-execution-000003"
+      ],
+      "acceptedTrials": [
+        0
+      ],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-neighbor-unstable",
+      "status": "complete",
+      "minimality": "unverified",
+      "executions": 4,
+      "outcomes": [
+        "target-failure",
+        "target-failure",
+        "target-failure",
+        "requirement-satisfied"
+      ],
+      "runIds": [
+        "control-neighbor-unstable-execution-000001",
+        "control-neighbor-unstable-execution-000002",
+        "control-neighbor-unstable-execution-000003",
+        "control-neighbor-unstable-execution-000004"
+      ],
+      "acceptedTrials": [
+        0
+      ],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-neighbor-changed-harness",
+      "status": "complete",
+      "minimality": "unverified",
+      "executions": 3,
+      "outcomes": [
+        "target-failure",
+        "target-failure",
+        "requirement-satisfied"
+      ],
+      "runIds": [
+        "control-neighbor-changed-harness-execution-000001",
+        "control-neighbor-changed-harness-execution-000002",
+        "control-neighbor-changed-harness-execution-000003"
+      ],
+      "acceptedTrials": [
+        0
+      ],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-neighbor-manifest-mismatch",
+      "status": "complete",
+      "minimality": "unverified",
+      "executions": 3,
+      "outcomes": [
+        "target-failure",
+        "target-failure",
+        "requirement-satisfied"
+      ],
+      "runIds": [
+        "control-neighbor-manifest-mismatch-execution-000001",
+        "control-neighbor-manifest-mismatch-execution-000002",
+        "control-neighbor-manifest-mismatch-execution-000003"
+      ],
+      "acceptedTrials": [
+        0
+      ],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-cancel-before",
+      "status": "cancelled",
+      "minimality": "unverified",
+      "executions": 0,
+      "outcomes": [],
+      "runIds": [],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-cancel-during-baseline",
+      "status": "cancelled",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-cancel-during-baseline-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-cancel-during-candidate",
+      "status": "cancelled",
+      "minimality": "unverified",
+      "executions": 3,
+      "outcomes": [
+        "target-failure",
+        "target-failure",
+        "target-failure"
+      ],
+      "runIds": [
+        "control-cancel-during-candidate-execution-000001",
+        "control-cancel-during-candidate-execution-000002",
+        "control-cancel-during-candidate-execution-000003"
+      ],
+      "acceptedTrials": [
+        0
+      ],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-budget-incomplete-baseline",
+      "status": "budget-exhausted",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-budget-incomplete-baseline-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-budget-incomplete-candidate",
+      "status": "budget-exhausted",
+      "minimality": "unverified",
+      "executions": 3,
+      "outcomes": [
+        "target-failure",
+        "target-failure",
+        "target-failure"
+      ],
+      "runIds": [
+        "control-budget-incomplete-candidate-execution-000001",
+        "control-budget-incomplete-candidate-execution-000002",
+        "control-budget-incomplete-candidate-execution-000003"
+      ],
+      "acceptedTrials": [
+        0
+      ],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-budget-exact-complete",
+      "status": "complete",
+      "minimality": "dependency-group-1-minimal",
+      "executions": 3,
+      "outcomes": [
+        "target-failure",
+        "target-failure",
+        "requirement-satisfied"
+      ],
+      "runIds": [
+        "control-budget-exact-complete-execution-000001",
+        "control-budget-exact-complete-execution-000002",
+        "control-budget-exact-complete-execution-000003"
+      ],
+      "acceptedTrials": [
+        0
+      ],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-deadline-during-baseline",
+      "status": "budget-exhausted",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-deadline-during-baseline-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-unconfirmed-expectation",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 0,
+      "outcomes": [],
+      "runIds": [],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-runner-throws",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "target-failure"
+      ],
+      "runIds": [
+        "control-runner-throws-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-runner-reports-cancelled",
+      "status": "cancelled",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "cancelled"
+      ],
+      "runIds": [
+        "control-runner-reports-cancelled-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": null
+    },
+    {
+      "caseId": "control-baseline-satisfied-then-failure",
+      "status": "inconclusive",
+      "minimality": "unverified",
+      "executions": 1,
+      "outcomes": [
+        "requirement-satisfied"
+      ],
+      "runIds": [
+        "control-baseline-satisfied-then-failure-execution-000001"
+      ],
+      "acceptedTrials": [],
+      "scopeLimit": null,
+      "unobservedScheduledFollowup": "target-failure on repetition 2; never invoked"
+    },
+    {
+      "caseId": "control-neighbor-satisfied-then-failure",
+      "status": "complete",
+      "minimality": "dependency-group-1-minimal",
+      "executions": 3,
+      "outcomes": [
+        "target-failure",
+        "target-failure",
+        "requirement-satisfied"
+      ],
+      "runIds": [
+        "control-neighbor-satisfied-then-failure-execution-000001",
+        "control-neighbor-satisfied-then-failure-execution-000002",
+        "control-neighbor-satisfied-then-failure-execution-000003"
+      ],
+      "acceptedTrials": [
+        0
+      ],
+      "scopeLimit": "Reported 1-minimality follows the N-of-N failure-preservation rejection policy. Repeated neighbor stability and general stochastic minimality are not established.",
+      "unobservedScheduledFollowup": "target-failure on final-neighbor repetition 2; never invoked"
+    }
+  ],
+  "audits": [
+    {
+      "label": "source-1",
+      "cases": 352,
+      "modelExecutions": 2266,
+      "trials": 1527,
+      "acceptedTrials": 737,
+      "finalTableNeighborsIndependentlyChecked": 302,
+      "uniqueExecutionScopes": 2266,
+      "beforeAfterInputChecks": 217,
+      "rawSha256": "f450c562593a1f4ed7ce5467c811df252710bceb83f665d481724a1fec571221"
+    },
+    {
+      "label": "source-2",
+      "cases": 352,
+      "modelExecutions": 2266,
+      "trials": 1527,
+      "acceptedTrials": 737,
+      "finalTableNeighborsIndependentlyChecked": 302,
+      "uniqueExecutionScopes": 2266,
+      "beforeAfterInputChecks": 217,
+      "rawSha256": "c18374cff97954c498fac7c14d21c5e17a8542d19f745de48037100ca482cb0b"
+    },
+    {
+      "label": "emitted-1",
+      "cases": 352,
+      "modelExecutions": 2266,
+      "trials": 1527,
+      "acceptedTrials": 737,
+      "finalTableNeighborsIndependentlyChecked": 302,
+      "uniqueExecutionScopes": 2266,
+      "beforeAfterInputChecks": 217,
+      "rawSha256": "5567f00487783fac8940dfde7adcc3c9d80baa9955238eb49195bfddb3a7d589"
+    },
+    {
+      "label": "emitted-2",
+      "cases": 352,
+      "modelExecutions": 2266,
+      "trials": 1527,
+      "acceptedTrials": 737,
+      "finalTableNeighborsIndependentlyChecked": 302,
+      "uniqueExecutionScopes": 2266,
+      "beforeAfterInputChecks": 217,
+      "rawSha256": "5607bba54ebe975a57760c0d914f7d92d68c3ba4458992459f3d12d3cda36458"
+    },
+    {
+      "label": "installed-1",
+      "cases": 352,
+      "modelExecutions": 2266,
+      "trials": 1527,
+      "acceptedTrials": 737,
+      "finalTableNeighborsIndependentlyChecked": 302,
+      "uniqueExecutionScopes": 2266,
+      "beforeAfterInputChecks": 217,
+      "rawSha256": "a3d9263101ccfd3a10394ade5a899db4fae911c89c6a14abcf2d326cab69f69a"
+    },
+    {
+      "label": "installed-2",
+      "cases": 352,
+      "modelExecutions": 2266,
+      "trials": 1527,
+      "acceptedTrials": 737,
+      "finalTableNeighborsIndependentlyChecked": 302,
+      "uniqueExecutionScopes": 2266,
+      "beforeAfterInputChecks": 217,
+      "rawSha256": "d80aa6e678f39eeaa45e6eaeb57129caa664e26b6c2d582c615fd7fd40a9dd1c"
+    }
+  ],
+  "comparisons": [
+    {
+      "label": "source-1",
+      "fullSemanticRecordsEqual": true,
+      "transcriptSha256": "c0bcbf8aa82196c20a99a07509adb41170a20d065fad8b32f8b39c03d8744e6a",
+      "rawBytes": 8613083
+    },
+    {
+      "label": "source-2",
+      "fullSemanticRecordsEqual": true,
+      "transcriptSha256": "c0bcbf8aa82196c20a99a07509adb41170a20d065fad8b32f8b39c03d8744e6a",
+      "rawBytes": 8613131
+    },
+    {
+      "label": "emitted-1",
+      "fullSemanticRecordsEqual": true,
+      "transcriptSha256": "c0bcbf8aa82196c20a99a07509adb41170a20d065fad8b32f8b39c03d8744e6a",
+      "rawBytes": 8617923
+    },
+    {
+      "label": "emitted-2",
+      "fullSemanticRecordsEqual": true,
+      "transcriptSha256": "c0bcbf8aa82196c20a99a07509adb41170a20d065fad8b32f8b39c03d8744e6a",
+      "rawBytes": 8617975
+    },
+    {
+      "label": "installed-1",
+      "fullSemanticRecordsEqual": true,
+      "transcriptSha256": "c0bcbf8aa82196c20a99a07509adb41170a20d065fad8b32f8b39c03d8744e6a",
+      "rawBytes": 8627645
+    },
+    {
+      "label": "installed-2",
+      "fullSemanticRecordsEqual": true,
+      "transcriptSha256": "c0bcbf8aa82196c20a99a07509adb41170a20d065fad8b32f8b39c03d8744e6a",
+      "rawBytes": 8627784
+    }
+  ],
+  "status": "PASS for the stated finite synthetic decision-verification scope",
+  "browserAcceptance": "UNRUN; unchanged capacity blocker and existing actual reduction minimality limitations remain."
+}

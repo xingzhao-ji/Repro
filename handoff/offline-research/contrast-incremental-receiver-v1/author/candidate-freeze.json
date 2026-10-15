@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-10-15T08:08:28.213823+00:00",
+  "status": "CANDIDATE_SOURCE_FROZEN_UNINSTALLED",
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "functionalReview": "CLEAR",
+  "reviewEvidence": {
+    "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/functional-clearance.json",
+    "sha256": "9ae227e51c692ea73d20d2b2e699885072d36b87bb126e8444c542f4fa176ecf"
+  },
+  "sourceBindingsSha256": "6f6f7364c3ada6e1b6c0c3208fc4dd892d8a9348d924b862c15dfa1dfc65ece2",
+  "authorRegressionSha256": "87327855d55dbe37bfc1a26e1a4b68e188f7776aaba379521fd475f8f35ea696",
+  "tests": [
+    {
+      "path": "incremental.test.mjs",
+      "sha256": "78c02c4c2a6da2f35daa3cd374066aeec0b159d020c2b2b62553d1ad02dae1e9"
+    },
+    {
+      "path": "transport.test.mjs",
+      "sha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795"
+    },
+    {
+      "path": "fixture.mjs",
+      "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+    }
+  ],
+  "activeAuthorWorkers": 0,
+  "installed": false,
+  "gateMiB": 896,
+  "lifecycleExtensionAdopted": false
+}

@@ -1,0 +1,36 @@
+{
+  "status": "PRESERVATION_READBACK_PASS",
+  "utc": "2026-10-15T08:29:15.199823+00:00",
+  "head": "823c3751f1c02a834d713665fa89927b618530f2",
+  "gitStatus": " M STATE.md\n?? evidence/BROWSER-COMPILED-RUNNER.md\n?? evidence/BROWSER-INIT-DIAGNOSTIC.md\n?? evidence/BROWSER-RESOURCE-DIAGNOSIS.md\n",
+  "indexClean": true,
+  "baselineFilesVerified": 8,
+  "priorFrozenTask": {
+    "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1",
+    "files": 125,
+    "receiptSha256": "97c10f818109d852804b3ab8ed0ba54d12fb38387fd5ce530f878e5d0eb101c5",
+    "manifestSha256": "a37a8e32f938214f0727e5f75b2d408663ef7e106abb683e7bed33dfc474c20d",
+    "readback": "PASS"
+  },
+  "childSeals": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review",
+      "files": 2,
+      "receiptSha256": "12548d99cf77104faa0555950eff89b9cdf8eb3d4d33c549565e632ce596c68d",
+      "manifestSha256": "b9f04328e7d371f962fb040e05181955da2c22d3f13e63e6a4783f150ef93d4f",
+      "readback": "PASS"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review",
+      "files": 2,
+      "receiptSha256": "7fbf9fa6ee0fc45380aa0ee38732f413daabadeb6b068e35da8184a915936442",
+      "manifestSha256": "1c4e2c52000bf5b1e350727db48ddcfcada9ba0e8adc4695dbdf0c24401ef1b8",
+      "readback": "PASS"
+    }
+  ],
+  "codeReviewSourceBindings": 11,
+  "independentReviewSourceBindings": 12,
+  "archivedPilotDiagnosticsVerifiedAgainstSeal": 2,
+  "candidateInstalled": false,
+  "frozenRegression": "107/108 preserved"
+}

@@ -1,0 +1,141 @@
+✔ ordinary graph equals exact native oracle with own undefined, aliases, cycles and specials (10.033418ms)
+✔ numeric/string insertion order and prototype-named safe own properties (0.441286ms)
+✔ unsupported domain fails closed null-prototype (0.525027ms)
+✔ unsupported domain fails closed custom-prototype (0.109864ms)
+✔ unsupported domain fails closed date (0.16796ms)
+✔ unsupported domain fails closed map (0.088701ms)
+✔ unsupported domain fails closed set (0.157449ms)
+✔ unsupported domain fails closed typed-array (0.466278ms)
+✔ unsupported domain fails closed function (0.167977ms)
+✔ unsupported domain fails closed symbol (0.16015ms)
+✔ unsupported domain fails closed sparse-array (0.219316ms)
+✔ unsupported domain fails closed array-extra (0.100576ms)
+✔ unsupported domain fails closed symbol-key (0.057344ms)
+✔ unsupported domain fails closed hidden (0.047023ms)
+✔ unsupported domain fails closed proto-key (0.042564ms)
+✔ getter is never called (0.189252ms)
+✔ malformed wire rejected missing (0.08869ms)
+✔ malformed wire rejected duplicate-id (0.055427ms)
+✔ malformed wire rejected forward-ref (0.043361ms)
+✔ malformed wire rejected duplicate-key (0.053038ms)
+✔ malformed wire rejected proto-pollution (0.122369ms)
+✔ malformed wire rejected bad-bigint (0.154498ms)
+✔ malformed wire rejected bad-number (0.083811ms)
+✔ malformed wire rejected object (0.042383ms)
+✔ malformed wire rejected truncated (0.181265ms)
+✔ malformed wire rejected unknown-tag (0.054046ms)
+✔ key order and UTF16 survive every chunk size from one to seventeen (7.287767ms)
+✔ exact budget succeeds and one less fails (0.367472ms)
+✔ depth/string/node budget fail closed (0.269953ms)
+✔ invalid option chunkUnits=0 (0.753492ms)
+✔ invalid option chunkUnits=-1 (0.114031ms)
+✔ invalid option chunkUnits=NaN (0.093976ms)
+✔ invalid option chunkUnits=Infinity (0.061867ms)
+✔ invalid option chunkUnits=1.5 (0.165949ms)
+✔ invalid option chunkUnits=1 (0.304194ms)
+✔ invalid option chunkUnits=65537 (0.174644ms)
+✔ invalid option maxEncodedUnits=0 (0.153375ms)
+✔ invalid option maxEncodedUnits=-1 (0.104184ms)
+✔ invalid option maxEncodedUnits=NaN (0.159572ms)
+✔ invalid option maxEncodedUnits=Infinity (0.066993ms)
+✔ invalid option maxEncodedUnits=1.5 (0.050186ms)
+✔ invalid option maxEncodedUnits=1 (0.049524ms)
+✔ invalid option maxEncodedUnits=16777217 (0.046402ms)
+✔ invalid option maxStringUnits=0 (0.050035ms)
+✔ invalid option maxStringUnits=-1 (0.045581ms)
+✔ invalid option maxStringUnits=NaN (0.052438ms)
+✔ invalid option maxStringUnits=Infinity (0.048513ms)
+✔ invalid option maxStringUnits=1.5 (0.053922ms)
+✔ invalid option maxStringUnits=1 (0.046183ms)
+✔ invalid option maxStringUnits=1048577 (0.046179ms)
+✔ invalid option maxNodes=0 (0.04531ms)
+✔ invalid option maxNodes=-1 (0.042777ms)
+✔ invalid option maxNodes=NaN (0.052809ms)
+✔ invalid option maxNodes=Infinity (0.248922ms)
+✔ invalid option maxNodes=1.5 (0.095273ms)
+✔ invalid option maxNodes=1 (0.339004ms)
+✔ invalid option maxNodes=1000001 (0.069333ms)
+✔ invalid option maxDepth=0 (0.056608ms)
+✔ invalid option maxDepth=-1 (0.073356ms)
+✔ invalid option maxDepth=NaN (0.134198ms)
+✔ invalid option maxDepth=Infinity (0.049886ms)
+✔ invalid option maxDepth=1.5 (0.084501ms)
+✔ invalid option maxDepth=1 (0.058901ms)
+✔ invalid option maxDepth=129 (0.050224ms)
+✔ unknown option unknown rejected before sampler (0.133931ms)
+✖ unknown option toString rejected before sampler (1.141298ms)
+✖ unknown option constructor rejected before sampler (0.331169ms)
+✔ successful handle lifecycle is bounded and disposes original before reads and encoded before return (1.511767ms)
+✔ failure path disposes all created handles sample (0.408039ms)
+✔ failure path disposes all created handles encode (0.298926ms)
+✔ failure path disposes all created handles chunk-0 (0.115178ms)
+✔ failure path disposes all created handles chunk-1 (0.10473ms)
+✔ failure path disposes all created handles metadata (0.118507ms)
+✖ invalid metadata fails closed and disposes handles (0.517788ms)
+✔ nonstring, oversized and malformed chunks fail closed (0.48898ms)
+✔ disposal fault surfaced without repeated disposal original (0.29553ms)
+✔ disposal fault surfaced without repeated disposal encoded (0.138989ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-000.json (1291.911945ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-001.json (1049.781543ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-002.json (1061.881291ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-003.json (945.60667ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-004.json (1013.017862ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-005.json (924.972136ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-006.json (1117.501547ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-007.json (1960.953469ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-008.json (1301.199161ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-009.json (2266.639142ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-010.json (2398.483929ms)
+✔ complete archived row byte-equivalent and native-equal node-p390-00-11-011.json (1224.057515ms)
+ℹ tests 89
+ℹ suites 0
+ℹ pass 86
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 16895.378287
+
+✖ failing tests:
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:27:55
+✖ unknown option toString rejected before sampler (1.141298ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:27:143)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:27:55
+✖ unknown option constructor rejected before sampler (0.331169ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:27:143)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: undefined,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:30:1
+✖ invalid metadata fails closed and disposes handles (0.517788ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs:30:116)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /METADATA/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

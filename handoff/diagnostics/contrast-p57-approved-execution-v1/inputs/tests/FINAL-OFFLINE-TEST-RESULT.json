@@ -1,0 +1,36 @@
+{
+  "utc": "2026-10-15T06:34:50.119623+00:00",
+  "command": [
+    "node",
+    "--test",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/candidate.test.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/capture.test.mjs",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/sampler.test.mjs"
+  ],
+  "durationSeconds": 0.5986710529978154,
+  "exitCode": 0,
+  "testFiles": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/candidate.test.mjs",
+      "sha256": "2f0d4e8f1aa57259b4aedc6e7c00b642c83ba88948a0faaf4a3ef0e8ebdeb316"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/capture.test.mjs",
+      "sha256": "c6571158658620098c3adc80b345ddd135941df960cc84236df4b65121085f44"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/tests/sampler.test.mjs",
+      "sha256": "1bf15f1b1c8ce65ced8c94bdf0346a875ae5be2f294a5456fe1128b077a245b1"
+    }
+  ],
+  "log": {
+    "file": "final-offline.log",
+    "sha256": "8da9f93eb82e34d334b9f8598a75c4006614c6471c681fe5bf931e6ebb845b2a",
+    "bytes": 6953
+  },
+  "runtimeScope": "Offline VM, functions, parser and static input checks; no browser/Docker/proc reads/network/Git",
+  "tests": 83,
+  "passed": 83,
+  "failed": 0,
+  "skipped": 0
+}

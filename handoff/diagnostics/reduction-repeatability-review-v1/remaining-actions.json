@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-14T20:14:47.857812+00:00",
+  "current_candidate_browser_status": "BLOCKED / UNRUN",
+  "current_capsule_minimality": "UNVERIFIED",
+  "actions": [
+    {
+      "gate": "Browser capacity and acceptance",
+      "needed": "Identify and independently review an evidence-backed execution strategy for the required two-browser overlap within the existing 128-task cap and all existing sandbox/resource restrictions. No equivalent strategy is currently selected. Then execute the current 31-test browser matrix, separate CLI demo and installed-package browser replay, retaining each exact source/emitted/package identity and all failed attempts.",
+      "constraint": "Do not raise limits, weaken overlap/liveness/fresh-replay assertions, change browser flags or treat historical passes as current-byte acceptance."
+    },
+    {
+      "gate": "Current browser repeatability",
+      "needed": "After a supported execution boundary exists, run the declared fresh-reset buggy/fixed repetitions with unchanged seed, response schedule, fixtures and assertion. Retain every result and trace and compare actual observations under each exact executable identity.",
+      "constraint": "Model transcript equality and repeated preflight rejection do not establish browser repeatability."
+    },
+    {
+      "gate": "Capsule minimality",
+      "needed": "Retain minimality=unverified for the current three-action capsule. A new minimality claim requires a separately specified supported case/deletion boundary whose final permitted dependency-group deletions actually execute the unchanged relevant oracle, plus a predeclared budget and repetition criterion. Re-establish baseline and re-evaluate every neighbor of the final accepted candidate.",
+      "constraint": "The current three final neighbors all return MISSING_STEPS before any assertion. Do not relabel unsupported experiments as requirement-satisfied or weaken the oracle. Capacity repair alone is insufficient."
+    },
+    {
+      "gate": "Separate usability/research gates",
+      "needed": "Complete the previously documented native zoom, actual screen-reader use, accessibility findings, broader-case and human-research work under their respective evidence requirements.",
+      "constraint": "No acceptance for these gates is claimed by this local nonbrowser review."
+    }
+  ],
+  "further_unchanged_nonbrowser_retests": "Not justified after the frozen checks and independent audits pass; no demonstrated product defect from this review requires an implementation change.",
+  "authorization_boundaries_unchanged": true
+}

@@ -1,0 +1,42 @@
+{
+  "utc": "2026-10-15T08:03:43.251227+00:00",
+  "status": "HARNESS_REVIEW_CLEAR_CONDITIONAL_ON_FINAL_CANDIDATE_AND_INDEPENDENT_REVIEW",
+  "scope": "12 prespecified bounded offline Node workers only; no browser/container/runtime install",
+  "reviewedFiles": [
+    {
+      "path": "benchmark/PROTOCOL.md",
+      "sha256": "e305b7ac92d3c8432e5452f6c945b458343a5a26418bb35d7942dbb6bae3bbcf",
+      "bytes": 4842
+    },
+    {
+      "path": "benchmark/worker.mjs",
+      "sha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d",
+      "bytes": 5729
+    },
+    {
+      "path": "benchmark/run-benchmarks.py",
+      "sha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b",
+      "bytes": 2533
+    },
+    {
+      "path": "benchmark/oracle.mjs",
+      "sha256": "431cd1a29834dddf8009d6a83cfcd39781cefdac3e53be5360f86fb584318084",
+      "bytes": 2257
+    }
+  ],
+  "conditions": [
+    "Freeze final candidate and input identities before any measurement",
+    "Independent functional and benchmark harness review clear",
+    "All regression workers finished before matrix starts",
+    "Exact 12-worker protocol, preserve all results, stop on first failure",
+    "Never interpret model RSS as a896MiB browser/cgroup pass"
+  ],
+  "findings": [],
+  "methodNotes": [
+    "Receiver-only releases source beforeGC and preserves same precomputedchunks forbothvariants",
+    "End-to-end retains sourceequally and uses exactpinnedpurePlaywrightserializer",
+    "ProcessmaxRSS includes setup/assertions; checkpointheapisnotcontinuouspeak",
+    "Startup+end hashes avoid prior sourceattestationgap; minimal4-keyenv excludesambientcredentials",
+    "Threepairs aredescriptive and order isprespecified; noadaptiverepeats"
+  ]
+}

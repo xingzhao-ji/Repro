@@ -1,0 +1,74 @@
+{
+  "utc": "2026-10-15T06:35:07.554263+00:00",
+  "status": "SOURCE_FROZEN_PENDING_INDEPENDENT_REVIEW",
+  "runtimePerformed": false,
+  "author": "/root/approved_p57_inputs",
+  "overlay": {
+    "path": "overlay-manifest.json",
+    "bytes": 6760,
+    "sha256": "124a9af10f7e3fb47508a0be9c6805f141872207df953f1ab3e1086607e568b1"
+  },
+  "expectedBindings": {
+    "path": "expected-bindings.json",
+    "bytes": 367271,
+    "sha256": "456fd9b0403fe82a42cc5cb016a2320823a24f4934aa8bd22ecdef0819c6139b"
+  },
+  "files": [
+    {
+      "path": "actual/study/P.html",
+      "bytes": 398463,
+      "sha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f"
+    },
+    {
+      "path": "contrast-p57-approved-batch-inputs.json",
+      "bytes": 95986,
+      "sha256": "0dd78a13a85e6f0290bf9917c33f2face81c1b3bea5e6e94b78e37aa798e4da2"
+    },
+    {
+      "path": "verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824"
+    },
+    {
+      "path": "verification-inputs/candidate-binding.mjs",
+      "bytes": 2096,
+      "sha256": "2b0a23499bb1bdeb33e7cd7242e968251b27c20d969c9d3a503c4bd2afc75766"
+    },
+    {
+      "path": "verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": "verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": "verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    },
+    {
+      "path": "verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": "verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+    }
+  ],
+  "sourcePreservation": {
+    "path": "source-preservation.json",
+    "bytes": 699,
+    "sha256": "f4dc5357ec6dc6692b13d489b62650c17029c7db2292bc7be235c8d76d4aecb4"
+  },
+  "tests": {
+    "path": "tests/FINAL-OFFLINE-TEST-RESULT.json",
+    "bytes": 1440,
+    "sha256": "23a3c9fa4ed9ba3645a5e5ce85c1f38e8939f99ae4f6d6d29b41fac87429018f"
+  },
+  "changes": "Exact CSS candidate and five-job binding plus complete retention of existing close-window sample data and current sample counter anchor. No added sample/read/wait/cadence/control/product behavior changes."
+}

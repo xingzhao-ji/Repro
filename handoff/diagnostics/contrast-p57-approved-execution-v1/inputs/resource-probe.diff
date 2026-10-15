@@ -1,0 +1,28 @@
+--- sealed-workload/resource-probe
++++ approved-inputs/resource-probe
+@@ -3,7 +3,7 @@
+ import { closeSync, mkdirSync, openSync, opendirSync, readSync, readFileSync, readdirSync, writeSync } from 'node:fs';
+ import { createLifecycleDiagnostics } from './lifecycle-diagnostics.mjs';
+ 
+-const intendedTest = process.argv[1] === '/work/verification-inputs/contrast-p57-workload-lifecycle-probe.mjs';
++const intendedTest = process.argv[1] === '/work/verification-inputs/contrast-p57-approved-batch-probe.mjs';
+ const selected = intendedTest;
+ if (selected && (!process.execArgv.includes('--v8-pool-size=1') || process.env.UV_THREADPOOL_SIZE !== '1')) throw new Error('Declared Node background pools were not selected; workload stopped.');
+ if (selected && process.ppid !== 1) throw new Error('Direct Node script boundary under Docker init was not observed; workload stopped.');
+@@ -32,6 +32,7 @@
+   }
+   const diagnostics = createLifecycleDiagnostics({
+     clock: () => ({ utc: new Date().toISOString(), monoNs: process.hrtime.bigint() }),
++    nextSampleIndex: () => samples,
+     readStat(path, maxBytes) {
+       const statFd = openSync(path, 'r'); const data = Buffer.alloc(maxBytes + 1); let bytes = 0;
+       try { while (bytes < data.length) { const n = readSync(statFd, data, bytes, data.length - bytes, null); if (!n) break; bytes += n; } }
+@@ -86,7 +87,7 @@
+       const list = processes();
+       const fingerprint = JSON.stringify(list);
+       const record = { utc: new Date().toISOString(), phase, sample: samples++, counters, process_count: list.length, zombie_count: list.filter(p => p.state === 'Z').length, visible_threads: list.reduce((sum, p) => sum + (p.threads ?? 0), 0) };
+-      if (fingerprint !== lastProcesses || phase !== 'interval') {
++      if (diagnostics.retainClosingSamples() || fingerprint !== lastProcesses || phase !== 'interval') {
+         record.processes = list;
+         lastProcesses = fingerprint;
+       }

@@ -1,0 +1,57 @@
+✖ receiver exposes incremental graph decoder and does not join whole wire or parse tagged graph (1.82686ms)
+✖ incremental receiver matches sealed decoder through every split and one-unit chunks (1.845875ms)
+✖ incremental parser withholds graph until finish and clears state on abort/failure (0.207351ms)
+✔ all encoder bytes are identical to sealed predecessor (0.993271ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 1
+ℹ fail 3
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 82.579215
+
+✖ failing tests:
+
+test at .repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs:7:1
+✖ receiver exposes incremental graph decoder and does not join whole wire or parse tagged graph (1.82686ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs:8:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at .repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs:12:1
+✖ incremental receiver matches sealed decoder through every split and one-unit chunks (1.845875ms)
+  TypeError: candidate.createIncrementalDecoder is not a function
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs:15:58)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3)
+
+test at .repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs:18:1
+✖ incremental parser withholds graph until finish and clears state on abort/failure (0.207351ms)
+  TypeError: candidate.createIncrementalDecoder is not a function
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs:19:20)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7)

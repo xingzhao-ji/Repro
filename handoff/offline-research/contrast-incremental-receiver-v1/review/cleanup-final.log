@@ -1,0 +1,21 @@
+✔ metadata failure clears populated graph even for undefined (4.589377ms)
+✔ metadata failure clears populated graph even for null (0.704974ms)
+✔ metadata failure clears populated graph even for false (0.682935ms)
+✔ metadata failure clears populated graph even for 0 (0.566176ms)
+✔ metadata failure clears populated graph even for  (2.137753ms)
+✔ metadata failure clears populated graph even for Error: metadata (0.460355ms)
+✔ final disposal failure clears complete private graph even for undefined (0.687218ms)
+✔ final disposal failure clears complete private graph even for null (0.371849ms)
+✔ final disposal failure clears complete private graph even for false (0.620516ms)
+✔ final disposal failure clears complete private graph even for 0 (0.989801ms)
+✔ final disposal failure clears complete private graph even for  (0.411532ms)
+✔ final disposal failure clears complete private graph even for Error: dispose (0.412621ms)
+✔ completed graph withheld until actual disposal settlement, then parser references cleared (27.940074ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 13
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 110.590552

@@ -1,0 +1,8 @@
+test_advanced_marker_cannot_hide_dirty_first_interval (__main__.IndependentCleanupChallenges.test_advanced_marker_cannot_hide_dirty_first_interval) ... ok
+test_control_fabricated_clean_sequence (__main__.IndependentCleanupChallenges.test_control_fabricated_clean_sequence) ... ok
+test_overlapping_complete_sweeps_cannot_prove_sequence (__main__.IndependentCleanupChallenges.test_overlapping_complete_sweeps_cannot_prove_sequence) ... ok
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.001s
+
+OK

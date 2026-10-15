@@ -1,0 +1,47 @@
+{
+  "schemaVersion": 1,
+  "status": "FROZEN_PROSPECTIVE_DESIGN_ONLY",
+  "utc": "2026-10-15T07:47:11.506391+00:00",
+  "scope": "Synthetic observation-lifecycle proposal and deterministic tests only; no active runner change",
+  "syntheticTests": 29,
+  "testExitCode": 0,
+  "activeRunnerChanges": 0,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "historicalArtifactWrites": 0,
+  "newNumericAcceptanceThresholds": 0,
+  "retainedSampleCadenceMs": 100,
+  "retainedInternalDeadlineMs": 90000,
+  "retainedDriverGateMs": 90000,
+  "retainedOuterDeadlineMs": 120000,
+  "retainedKernelPeakGateBytes": 939524096,
+  "unresolvedDecision": "Permit observation-only ownership of existing sampler timer until first scheduled post-close attempt, fail on first bad/incomplete attempt, release at original absolute90s deadline; distinct terminal still required. Explicit prospective no-delay amendment; no runtime authorization implied.",
+  "artifacts": [
+    {
+      "path": "PROPOSAL.md",
+      "bytes": 12142,
+      "sha256": "b87d764719dc0eb7a00ed90d20d36d0ad1e4dfbb9dd03d7682753549eb1b430b"
+    },
+    {
+      "path": "model.py",
+      "bytes": 7013,
+      "sha256": "3b2b83a88a4cd34a583f9b24e6ed2cd0216eacb384ba7e7f63c7e141c5a482c8"
+    },
+    {
+      "path": "test_model.py",
+      "bytes": 8247,
+      "sha256": "c738ad1aa422d815c3289097ef8fd09d05d8ab1485c28b1c3a4982eae206862e"
+    },
+    {
+      "path": "test-output.txt",
+      "bytes": 3609,
+      "sha256": "2ab5381ab268c3e20b61ca8b5089738af48857988cd70af83cc1168f9b2dcb6b"
+    },
+    {
+      "path": "source-bindings.json",
+      "bytes": 1728,
+      "sha256": "a181664982ebff035b8c2c8943fb09b08548d224fc0bd8e158e56a9e03b4b77a"
+    }
+  ],
+  "readback": "PASS"
+}

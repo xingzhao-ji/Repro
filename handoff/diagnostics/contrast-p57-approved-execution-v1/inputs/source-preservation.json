@@ -1,0 +1,15 @@
+{
+  "originalAssertionLines": 122,
+  "retainedUnchanged": 120,
+  "replacedOnly": [
+    "  assert.equal(batchId,'p390-00-11','One authorized original workload capture');",
+    "    for(const [key,value] of Object.entries(frozenManifest))if(!['revision','probeSources'].includes(key))assert.deepEqual(manifest[key],value,'Original full57 manifest field '+key);"
+  ],
+  "replacementReasons": [
+    "Exact five authorized batch IDs replace one original diagnostic ID.",
+    "Exact candidate sourceFiles and paintScope replace original identities; every other original field is deep-equal."
+  ],
+  "originalControlBodyUnchanged": true,
+  "sampler100msUnchanged": true,
+  "rawStatParserUnchanged": true
+}

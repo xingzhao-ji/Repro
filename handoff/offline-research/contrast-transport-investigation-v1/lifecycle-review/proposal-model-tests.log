@@ -1,0 +1,34 @@
+test_active_contexts_fail (__main__.LifecycleModelTests.test_active_contexts_fail) ... ok
+test_clean_distinct_samples (__main__.LifecycleModelTests.test_clean_distinct_samples) ... ok
+test_close_after_deadline_does_not_rearm_hold (__main__.LifecycleModelTests.test_close_after_deadline_does_not_rearm_hold) ... ok
+test_close_failure_releases_and_cannot_retry (__main__.LifecycleModelTests.test_close_failure_releases_and_cannot_retry) ... ok
+test_close_just_after_tick_uses_next_existing_tick (__main__.LifecycleModelTests.test_close_just_after_tick_uses_next_existing_tick) ... ok
+test_close_just_before_tick (__main__.LifecycleModelTests.test_close_just_before_tick) ... ok
+test_dirty_first_is_not_skipped (__main__.LifecycleModelTests.test_dirty_first_is_not_skipped) ... ok
+test_dirty_later_interval_remains_failure (__main__.LifecycleModelTests.test_dirty_later_interval_remains_failure) ... ok
+test_earlier_z_retained_without_becoming_post_close_failure (__main__.LifecycleModelTests.test_earlier_z_retained_without_becoming_post_close_failure) ... ok
+test_evidence_and_terminal_absence_fail_closed (__main__.LifecycleModelTests.test_evidence_and_terminal_absence_fail_closed) ... ok
+test_external_and_memory_gates_unchanged (__main__.LifecycleModelTests.test_external_and_memory_gates_unchanged) ... ok
+test_finalization_deadline_is_not_cleared_early (__main__.LifecycleModelTests.test_finalization_deadline_is_not_cleared_early) ... ok
+test_first_write_failure_is_sticky (__main__.LifecycleModelTests.test_first_write_failure_is_sticky) ... ok
+test_fixed_parameters (__main__.LifecycleModelTests.test_fixed_parameters) ... ok
+test_hold_clipped_by_original_deadline (__main__.LifecycleModelTests.test_hold_clipped_by_original_deadline) ... ok
+test_hold_prevents_21ms_exit_but_does_not_take_immediate_sample (__main__.LifecycleModelTests.test_hold_prevents_21ms_exit_but_does_not_take_immediate_sample) ... ok
+test_hold_timeout_releases_without_a_new_sample (__main__.LifecycleModelTests.test_hold_timeout_releases_without_a_new_sample) ... ok
+test_identity_change (__main__.LifecycleModelTests.test_identity_change) ... ok
+test_incomplete_first_releases_immediately_and_stays_unknown (__main__.LifecycleModelTests.test_incomplete_first_releases_immediately_and_stays_unknown) ... ok
+test_late_callback_after_hold_deadline_cannot_repair_timeout (__main__.LifecycleModelTests.test_late_callback_after_hold_deadline_cannot_repair_timeout) ... ok
+test_missing_first_index_fails_even_if_later_clean (__main__.LifecycleModelTests.test_missing_first_index_fails_even_if_later_clean) ... ok
+test_normal_exit_required (__main__.LifecycleModelTests.test_normal_exit_required) ... ok
+test_original_no_hold_exits_before_next_tick (__main__.LifecycleModelTests.test_original_no_hold_exits_before_next_tick) ... ok
+test_same_timestamp_is_not_strictly_post_close (__main__.LifecycleModelTests.test_same_timestamp_is_not_strictly_post_close) ... ok
+test_sweep_crosses_hold_deadline (__main__.LifecycleModelTests.test_sweep_crosses_hold_deadline) ... ok
+test_sweep_started_before_close_cannot_be_used (__main__.LifecycleModelTests.test_sweep_started_before_close_cannot_be_used) ... ok
+test_terminal_cannot_count_twice (__main__.LifecycleModelTests.test_terminal_cannot_count_twice) ... ok
+test_terminal_residue (__main__.LifecycleModelTests.test_terminal_residue) ... ok
+test_unknown_process_read (__main__.LifecycleModelTests.test_unknown_process_read) ... ok
+
+----------------------------------------------------------------------
+Ran 29 tests in 0.006s
+
+OK

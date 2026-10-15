@@ -1,0 +1,42 @@
+{
+  "kind": "independent-preimplementation-review",
+  "utc": "2026-10-15T07:58:50.551639+00:00",
+  "sourceBindings": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs",
+      "sha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690",
+      "bytes": 10074
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/native-oracle.mjs",
+      "sha256": "411033a90851d363763e2e4e59aca74aee001cee2f543444138d36d8fe8a224f",
+      "bytes": 1787
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.mjs",
+      "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+      "bytes": 7800
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "36179a26ed04690fb670f59243c744d7edb4ba768455a4d99acdad75368a0b12",
+      "bytes": 2278
+    }
+  ],
+  "requirements": [
+    "Frozen108 suite unchanged bytes with same relative import now binding new candidate; exact staged pure Playwright oracle",
+    "No tagged JSON graph, full joined wire, or retained transport chunks; only bounded tokenizer/frame state plus output graph/reference table",
+    "Strict JSON grammar/EOF; cycles, aliases, undefined, negative zero/numeric specials, bigint, property order, Unicode/surrogate code units across chunk boundaries",
+    "Reject duplicate keys/ids, forwardrefs, malformedtags, budget overruns; no partial return",
+    "Created handles receive one release attempt even on falsy primary/cleanup rejection; decoder abort clears graph references",
+    "Archived12 whole rows and complete50-control artifact remain equivalent; no new measured observations",
+    "Offline allocation comparison preserves adverse trials; no 896MiB claim from Node-only measurements"
+  ],
+  "scope": {
+    "browser": false,
+    "container": false,
+    "network": false,
+    "runtimeInstall": false,
+    "observationHoldAdopted": false
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "status": "PURE_CONTROLS_PASSED",
+  "browserOrDockerExecuted": false,
+  "assertionCount": 101,
+  "controlCount": 9,
+  "controls": [
+    "full distinct node evidence roundtrips; subsequent saves retain compact rows and immutable bytes",
+    "partial rows stay full in checkpoints and are not counted completed or measured-pass",
+    "existing node artifact is rejected and never adopted or overwritten",
+    "failed immutable writes publish no references and preserve all full fields",
+    "all five full control fields roundtrip exactly and compact reference is checkpointed",
+    "existing control artifact collision leaves full fields intact and publishes no reference",
+    "control archive requires the exact original fifty-control gate and all full fields",
+    "injected orphan reference is rejected without a summary",
+    "empty checkpoint and nonfinite duration remain incomplete without acceptance or cleanup claims"
+  ],
+  "outputDirectory": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/test-output-evidence-store-YQwZnf"
+}

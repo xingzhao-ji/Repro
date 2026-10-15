@@ -1,0 +1,13 @@
+✔ receiver exposes incremental graph decoder and does not join whole wire or parse tagged graph (1.269708ms)
+✔ incremental receiver matches sealed decoder through every split and one-unit chunks (20.152851ms)
+✔ incremental parser withholds graph until finish and clears state on abort/failure (1.057615ms)
+✔ all encoder bytes are identical to sealed predecessor (0.143503ms)
+✔ string budget applies to data and keys, not fixed protocol tag/special-number labels (0.498802ms)
+ℹ tests 5
+ℹ suites 0
+ℹ pass 5
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 94.182713

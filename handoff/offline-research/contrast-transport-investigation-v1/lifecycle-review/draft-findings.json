@@ -1,0 +1,20 @@
+{
+  "utc": "2026-10-15T07:44:18.235247+00:00",
+  "scope": "OFFLINE_PROSPECTIVE_DESIGN_REVIEW_NOT_RUNTIME_APPROVAL",
+  "reviewedPath": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/model.py",
+  "reviewedSha256": "addfaf97b7ad9109a8a48be0fd3993aab8a46319420193ef03c0ab7d8c06f816",
+  "findings": [
+    {
+      "id": "L1",
+      "severity": "scope",
+      "status": "OPEN",
+      "source": "model.py:10 HOLD_CAP_US=200_000",
+      "finding": "A separate 200ms postsettlement timeout is an unsupported new prospective threshold. Original absolute90s already bounds the single-next-existing-interval hold; a new 200ms gate is unnecessary to the delegated design scope.",
+      "requestedCorrection": "Use the original absolute90s deadline, release after exactly the first existing scheduled sweep regardless of result, and state that100ms cadence is not a maximum wall delay."
+    }
+  ],
+  "notes": [
+    "Synthetic model cannot prove Node timer cadence, process-read completeness, normal child exit, or no forced shutdown; actual frozen cleanup validator remains responsible for evidence details.",
+    "Do not implement or authorize the proposed timer.ref hold under the approved no-delay condition."
+  ]
+}

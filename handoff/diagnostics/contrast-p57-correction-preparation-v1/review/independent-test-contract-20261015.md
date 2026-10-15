@@ -1,0 +1,27 @@
+# Independent preparation review contract
+
+Status: contract frozen before implementation review; no runtime or rendered acceptance. The root owns Git, source authors own their assigned implementation, and this reviewer writes only new files in this task's review directory. Existing sealed preparation/pilot evidence and its zero-zombie FAIL remain immutable.
+
+## Required diagnostic invariants
+
+1. **Observations and gate unchanged.** Keep the original 100 ms sampler, raw cgroup/process/thread/zombie counts, process identity fields and existing sample/terminal record semantics. Retained sample 414 remains `Z`, zombie count 1; neither phase annotation nor classification may subtract, normalize, suppress or reinterpret it. Keep sampling through context/browser closure and the existing terminal sample. Preserve the existing normalized comparison fingerprint; additional metadata is supplemental, not part of a rewritten historical fingerprint.
+2. **Bound every addition.** At most 32 phase records and 16 KiB of serialized phase metadata. Total added metadata at most 128 KiB, inside the existing shared 4 MiB telemetry budget. Count actual UTF-8 bytes, including serialization/framing attributable to the addition. Bound input strings/errors and accumulated output, not just a final truncation. Provide a bounded explicit overflow/truncation/error status when data cannot fit; reserve enough space so the status itself cannot evade the limit. No unbounded per-step/per-character/process event collection.
+3. **First-Z snapshot only.** Capture additional task information for the first observed Z process only, with at most 128 task-entry read attempts. Bind the target to the observed PID/start ticks and check target identity before and after inspection. Record every success/failure/truncation/absence outcome within bounded metadata. An absent node, PID reuse, unreadable directory/stat, malformed record or changed identity must never become a clean empty set or evidence that the original process was reaped. Preserve partial reads as partial. Do not attribute a later process/thread to the prior identity; do not infer exact zombie lifetime/reaper from sampling.
+4. **Instrumented stages are observations.** Phase events identify the existing close stages and monotonic/order association; they may not alter lifecycle order, delays, shutdown calls, retries, cleanup ownership or polling cadence. There is no demonstrated lifecycle fix. Any instrument failure is explicit secondary evidence; it must not replace, swallow or convert the primary operation/cleanup exception. All original successful and failure close paths still perform the original cleanup.
+5. **Boundary preserved.** No added process, thread, child, network action, global hooks affecting unrelated jobs, capability, syscall/profile change, browser flag, resource allowance, new mount or runtime invocation. No browser/Docker acceptance in this preparation. Source instrumentation and offline tests are not proof of actual browser shutdown behavior or future zero-zombie success.
+
+## Focused offline challenges
+
+- Synthetic first-Z samples retain unchanged raw counts/fingerprint and sample-414 semantics; no-Z samples cause no task inspection; repeated Z samples do not repeat the first-Z inspection.
+- Stable identity succeeds; PID reuse both before and after, disappearance, listing/stat errors, malformed identity and TID errors remain explicit. Enforce the 128-attempt cap at/below/above its boundary; over-limit and partial reads cannot masquerade as complete.
+- Exercise UTF-8/multibyte and long metadata, 32/33 phase events, 16 KiB phase cap, 128 KiB total-new-metadata cap and interaction with the unchanged shared telemetry cap. Output and counters must show the real truncation/drop reason without exceeding bounds.
+- A primary close rejection survives phase/snapshot/write failure unchanged as primary; the diagnostic failure remains separately visible. Success with missing diagnostics must not be reported as fully observed acceptance. Review actual close-call integration, not only a standalone helper.
+- Confirm helper/tests do not execute a browser or Docker, inspect unrelated live processes, or mutate historical artifacts. Targeted offline adversarial checks may use in-memory/injected readers and task-owned review fixtures.
+
+## CSS and new-candidate contract
+
+The only product candidate is `.reduction-workspace > .panel.trial-inspector { box-shadow: none; }`. Review the exact one-rule diff in real product CSS. Shared shadow token, history panel, borders/radii/focus/content and behavior stay unchanged. Preserve original sampler blur rejection and all original acceptance assertions. The old snapshot's 57 identities/outcomes remain historical; map all 57 identities into a distinct candidate with explicit new source/style/build hashes and exact unchanged packet/semantic identities. No probe-only style injection, sealed-HTML mutation or rendered pass is permitted. Source/static preparation cannot establish current contrast or replace the future all-character witnesses, new rendering validation and independent runtime gate.
+
+The final independent review must name inspected code/integration versions, actual offline commands/results, unresolved findings and exact limits. A passing preparation review is not runtime GO. No user permission question is required for this authorized local preparation.
+
+Frozen UTC: 2026-10-15T03:14:44.093841+00:00

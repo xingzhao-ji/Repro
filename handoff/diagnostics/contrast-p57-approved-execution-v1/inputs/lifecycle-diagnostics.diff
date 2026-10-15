@@ -1,0 +1,50 @@
+--- sealed-workload/lifecycle-diagnostics
++++ approved-inputs/lifecycle-diagnostics
+@@ -40,6 +40,7 @@
+   const issues = /* @__PURE__ */ new Set();
+   let issueOverflow = false;
+   let sweepStart, reads = [], lastFingerprint = "";
++  let closingSamples = false;
+   let previousClock;
+   const fail = (code) => {
+     if (issues.size < 16 || issues.has(code)) issues.add(code);
+@@ -132,6 +133,7 @@
+       return;
+     }
+     const phase = boundedLabel(label);
++    if (phase === "final.browser.close" && event === "start") closingSamples = true;
+     if (!["start", "settled", "error", "event"].includes(event)) {
+       fail("PHASE_INVALID");
+       return;
+@@ -140,7 +142,12 @@
+       fail("CONTEXT_COUNT_INVALID");
+       return;
+     }
+-    emit({ kind: "phase", phase, event, ...now(), ...contextCount === void 0 ? {} : { contextCount } }, true);
++    let nextSampleIndex;
++    if (phase === "final.browser.close") {
++      try { nextSampleIndex = options.nextSampleIndex(); } catch { fail("SAMPLE_INDEX_UNAVAILABLE"); }
++      if (!Number.isSafeInteger(nextSampleIndex) || nextSampleIndex < 0) { fail("SAMPLE_INDEX_INVALID"); nextSampleIndex = null; }
++    }
++    emit({ kind: "phase", phase, event, ...now(), ...contextCount === void 0 ? {} : { contextCount }, ...phase === "final.browser.close" ? { nextSampleIndex } : {} }, true);
+   }
+   function safeContextCount(get) {
+     if (!get) return void 0;
+@@ -271,7 +278,7 @@
+   function observeSample(list, fingerprint, sample, phase) {
+     const after = now();
+     const zombies = list.filter((p) => p.state === "Z");
+-    if (phase !== "interval" || fingerprint !== lastFingerprint || zombies.length) {
++    if (closingSamples || phase !== "interval" || fingerprint !== lastFingerprint || zombies.length) {
+       const origin = sweepStart?.monoNs;
+       const offset = (stamp) => origin !== void 0 && origin !== null && stamp.monoNs !== null ? (BigInt(stamp.monoNs) - BigInt(origin)).toString() : null;
+       emit({
+@@ -367,7 +374,7 @@
+     completionWritten = append(options.appendCompletion, line, "metadata");
+     return summary();
+   }
+-  return { mark, observeClose, beginSweep, timedRead, observeSample, writeRaw, summary, finish };
++  return { mark, observeClose, beginSweep, timedRead, observeSample, writeRaw, summary, finish, retainClosingSamples: () => closingSamples };
+ }
+ export {
+   LIFECYCLE_LIMITS,

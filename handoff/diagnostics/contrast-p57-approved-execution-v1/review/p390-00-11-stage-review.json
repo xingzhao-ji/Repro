@@ -1,0 +1,33 @@
+{
+  "status": "PASS_PREPARED_STAGE_ONLY",
+  "job": "p390-00-11",
+  "nonce": "7b4232475825",
+  "checks": 7731,
+  "regularFiles": 3614,
+  "links": 10,
+  "inputBytes": 99342211,
+  "changed": [
+    "actual/study/P.html",
+    "verification-inputs/resource-probe.mjs"
+  ],
+  "added": [
+    "contrast-p57-approved-batch-inputs.json",
+    "verification-inputs/candidate-binding.mjs",
+    "verification-inputs/contrast-p57-approved-batch-probe.mjs",
+    "verification-inputs/lifecycle-diagnostics.mjs"
+  ],
+  "bindings": {
+    "runtime/p390-00-11/plan.json": "855904502fa8cd6a226d3e388371c912b954a15ab650739e95c13d0674253039",
+    "runtime/p390-00-11/driver.py": "69e3e06ec16684287b0cdc56d0c8b0435242e197bb0fa4b6125ef2c991fc8bc4",
+    "runtime/p390-00-11/input-manifest.json": "f61b5c66f7394615724b4f7ac60b9698aa5236a6b8aa8d43d2fb4ae94bc5b23a",
+    "runtime/p390-00-11/preparation-receipt.json": "42ef31b98e6daf77793dfd21bd0b95fad41e5a8132cbe392b5c309597af0ee0a",
+    "prepare-runtime.py": "f0c4be14bc77cafe50c97b67fac7dff4b3b64d25e462712f6e7f99dbfbe10f24",
+    "run-approved-operation.py": "4329460603393c2b90ac518c18301293b1a140dca3368d67b30b39d3d6704f67",
+    "inputs/overlay-manifest.json": "124a9af10f7e3fb47508a0be9c6805f141872207df953f1ab3e1086607e568b1",
+    "review/EXECUTABLE-CONTRACT.md": "2bbcd4f175770dd56cf6c9fea4f35351ede70e555507c2ca5649f3dcbabf6615"
+  },
+  "limitations": [
+    "No runtime or actual container inspect performed by this reviewer.",
+    "Final independent validator freeze and GO bindings are still required."
+  ]
+}

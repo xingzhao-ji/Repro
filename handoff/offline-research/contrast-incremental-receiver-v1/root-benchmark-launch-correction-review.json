@@ -1,0 +1,33 @@
+{
+  "status": "NARROW_LAUNCH_CORRECTION_REVIEW_CLEAR",
+  "utc": "2026-10-15T08:10:29.766573+00:00",
+  "reviewedFiles": [
+    {
+      "path": "benchmark/launch-correction.diff",
+      "sha256": "d0aa45b95b658cbdb8796147e26d7a5ca2018c7942a518e29cbb94233753e9c3"
+    },
+    {
+      "path": "benchmark/launch-correction.json",
+      "sha256": "133f344d29adde892ad0bafb706b134a02d0bcc1701ae0849feea0b56a1aaa70"
+    },
+    {
+      "path": "benchmark/run-benchmarks-v2.py",
+      "sha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac"
+    },
+    {
+      "path": "benchmark/create-bindings-v2.py",
+      "sha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d"
+    },
+    {
+      "path": "author/candidate-freeze.json",
+      "sha256": "b58ab2757b9ec95854f76fdf0baaff47737990ff0a2fecc6c3981ce9105e1783"
+    },
+    {
+      "path": "review/functional-clearance.json",
+      "sha256": "9ae227e51c692ea73d20d2b2e699885072d36b87bb126e8444c542f4fa176ecf"
+    }
+  ],
+  "findings": [],
+  "scope": "Absolute existing Node executable and new bindings filename only. Original measurements did not start. Same two experiments, three pairs, 12 workers, archived data, order, timeouts, heap limit, minimal environment, GC and stop rules. Original launch failure and bindings preserved. Executable hash stays outside measured workers.",
+  "authorization": "Proceed with existing authorized offline matrix once independent correction review also clears; no further permission request needed. No runtime or lifecycle changes authorized."
+}

@@ -1,0 +1,53 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-10-15T07:54:44.993236+00:00",
+  "status": "SEALED_OFFLINE_INVESTIGATION_COMPLETE_MEMORY_INCONCLUSIVE",
+  "commit": "823c3751f1c02a834d713665fa89927b618530f2",
+  "oldTaskReceiptSha256": "e815a4f74bafc02a12f8e96d66ec5e0fc2c224cc148eb7ce1acccc1b05574043",
+  "manifestSha256": "170a02707294f7104a1bc550caa7467d1f57b992d077dca4b38bc5da95c94cd9",
+  "resultSha256": "cee10dc5100317db4c612a95f7a9db07ed8fd5c2bbfe1093ed10109e38b0e0fc",
+  "summarySha256": "2192c3b408a97489994a836c4e8d3a41e027f6b3dd6a7354da2356165089dc4b",
+  "childReceipts": [
+    {
+      "subtree": "author",
+      "receiptSha256": "c6f75cf903948e30648749600faffcfecd963f34297b7f2bce309e72e7cbfe9a",
+      "filesVerified": 32,
+      "readback": "PASS"
+    },
+    {
+      "subtree": "review",
+      "receiptSha256": "e8b059ab4f28ffe179e3ff83ca24f1de91a760b5962fa75be957827c0da01648",
+      "filesVerified": 18,
+      "readback": "PASS"
+    },
+    {
+      "subtree": "lifecycle",
+      "receiptSha256": "4a7e57165c6c22c65f5622b76c0f213548bf212f98df400433aac09dc109b053",
+      "filesVerified": 5,
+      "readback": "PASS"
+    },
+    {
+      "subtree": "lifecycle-review",
+      "receiptSha256": "63dd4cc2cb1620d6f7be933e4fffc7c54f245a2b1a95d3f95d27739106090947",
+      "filesVerified": 8,
+      "readback": "PASS"
+    }
+  ],
+  "files": 77,
+  "bytes": 360906,
+  "links": 0,
+  "readback": "PASS",
+  "transportFunctionalReview": "PASS_SCOPED_108_TESTS",
+  "memoryReductionEstablished": false,
+  "below896MiBEstablished": false,
+  "transportInstalled": false,
+  "lifecycleDesignReview": "CLEAR_PROPOSAL_ONLY",
+  "lifecycleImplemented": false,
+  "newBrowserStarts": 0,
+  "newContainerStarts": 0,
+  "gateChanges": false,
+  "permissionsChanged": false,
+  "published": false,
+  "oldPilotRemainsSTOP": true,
+  "smallestUnresolvedDecision": "Prospective permission for the first-existing-interval observation hold within the original absolute90s budget, retaining distinct terminal evidence; no runtime authorization implied."
+}

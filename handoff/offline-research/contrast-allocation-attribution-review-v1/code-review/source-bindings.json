@@ -1,0 +1,60 @@
+{
+  "scope": "existing source and sealed measurements only",
+  "files": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/AUTHORIZATION.json",
+      "bytes": 1062,
+      "sha256": "a4a93d8f3f5ab37934efdd00b41fe4ced49702d18b69a351477d144b3b6f9818"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.mjs",
+      "bytes": 7800,
+      "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/final-receipt.json",
+      "bytes": 1113,
+      "sha256": "c6f75cf903948e30648749600faffcfecd963f34297b7f2bce309e72e7cbfe9a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+      "bytes": 13991,
+      "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/final-receipt.json",
+      "bytes": 1349,
+      "sha256": "5bc7e5977e2557de440f0cf91048029e9812a2c95f24522d0ec995a014d77323"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "bytes": 5729,
+      "sha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/summary.json",
+      "bytes": 10926,
+      "sha256": "5db38aab4ef70c4d25f2cf6b19b17af07daa001099f308f46b2c09037b0e84b2"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/RESULT.md",
+      "bytes": 5046,
+      "sha256": "9542551f42085bd4a03373ba6a61656c228a3bd27b6226bb6a36f51038593757"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/final-receipt.json",
+      "bytes": 1397,
+      "sha256": "f03ac2f32a056fdc693049687a1e4b6531f399708774a34004a25338436b6188"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/REVIEW.md",
+      "bytes": 9271,
+      "sha256": "0a06285ff0bf434661b49f20d19d0f98fe3c2c48c38d9724d05d9bc079856554"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/functional-clearance.json",
+      "bytes": 4998,
+      "sha256": "9ae227e51c692ea73d20d2b2e699885072d36b87bb126e8444c542f4fa176ecf"
+    }
+  ]
+}

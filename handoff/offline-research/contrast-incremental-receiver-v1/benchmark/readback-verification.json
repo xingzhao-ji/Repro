@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "utc": "2026-10-15T08:14:31.773171+00:00",
+  "measuredWorkers": 12,
+  "failedWorkers": [],
+  "unattemptedWorkers": [],
+  "prelaunchHarnessFailures": 1,
+  "prelaunchFailureWorkersStarted": 0,
+  "caseEquivalenceChecks": 156,
+  "incrementalReceiverTerminalInspections": 39,
+  "artifactAndBindingChecks": 451,
+  "startupAndEndBindingFilesPerWorker": 31,
+  "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+  "sourceHashUnchanged": true,
+  "noFurtherMeasurements": true
+}

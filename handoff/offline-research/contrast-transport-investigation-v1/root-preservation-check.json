@@ -1,0 +1,13 @@
+{
+  "utc": "2026-10-15T07:49:51.554693+00:00",
+  "status": "PASS",
+  "oldSealedFilesChecked": 8688,
+  "oldSealedLinksChecked": 23,
+  "oldTaskTreeExact": true,
+  "oldTaskReceiptSha256": "e815a4f74bafc02a12f8e96d66ec5e0fc2c224cc148eb7ce1acccc1b05574043",
+  "gitHead": "823c3751f1c02a834d713665fa89927b618530f2",
+  "gitStatusUnchanged": true,
+  "preservedWorktreeFiles": 4,
+  "historicalRuntimeStartCount": 1,
+  "newBrowserOrContainerStarts": 0
+}

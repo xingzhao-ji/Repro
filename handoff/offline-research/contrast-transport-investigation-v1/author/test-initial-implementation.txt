@@ -1,0 +1,30 @@
+✔ complete stored row through bounded handle transport (1725.436165ms)
+✔ all 12 complete stored rows and complete controls evidence round-trip (9337.832925ms)
+✔ aliases, cycles, own undefined, special numbers, bigint, keys and Unicode retain pinned Playwright semantics (29.586443ms)
+✔ unsupported values fail closed without invoking getters and release both handles (1.658638ms)
+✖ bounded limits reject invalid options before sampling and oversize/deep graphs without truncating (1.49823ms)
+✔ sampler, handle-open, read, corruption, disposal faults are surfaced with cleanup (1.114943ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 5
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 11340.188188
+
+✖ failing tests:
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.test.mjs:39:1
+✖ bounded limits reject invalid options before sampling and oversize/deep graphs without truncating (1.49823ms)
+  AssertionError [ERR_ASSERTION]: Missing expected rejection.
+      at async TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.test.mjs:41:204)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: /TRANSPORT_/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

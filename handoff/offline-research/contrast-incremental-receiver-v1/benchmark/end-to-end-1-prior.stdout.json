@@ -1,0 +1,1055 @@
+{
+  "status": "PASS",
+  "experiment": "end-to-end",
+  "mode": "prior",
+  "startup": {
+    "startedAt": "2026-10-15T08:11:21.385Z",
+    "pid": 114069,
+    "experiment": "end-to-end",
+    "mode": "prior",
+    "node": "v24.19.0",
+    "execPath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "execArgv": [
+      "--max-old-space-size=384",
+      "--expose-gc"
+    ],
+    "platform": "linux",
+    "arch": "x64",
+    "environment": {
+      "PATH": "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "LANG": "C",
+      "LC_ALL": "C",
+      "TZ": "UTC"
+    },
+    "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+    "files": [
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/baseline-transport.mjs",
+        "bytes": 7800,
+        "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+        "actualSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/candidate-freeze.json",
+        "bytes": 1165,
+        "sha256": "b58ab2757b9ec95854f76fdf0baaff47737990ff0a2fecc6c3981ce9105e1783",
+        "actualSha256": "b58ab2757b9ec95854f76fdf0baaff47737990ff0a2fecc6c3981ce9105e1783"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/fixture.mjs",
+        "bytes": 2784,
+        "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab",
+        "actualSha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs",
+        "bytes": 5929,
+        "sha256": "78c02c4c2a6da2f35daa3cd374066aeec0b159d020c2b2b62553d1ad02dae1e9",
+        "actualSha256": "78c02c4c2a6da2f35daa3cd374066aeec0b159d020c2b2b62553d1ad02dae1e9"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/initial-candidate.mjs",
+        "bytes": 13663,
+        "sha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49",
+        "actualSha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+        "bytes": 13991,
+        "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+        "actualSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.test.mjs",
+        "bytes": 4454,
+        "sha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795",
+        "actualSha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/PROTOCOL.md",
+        "bytes": 4842,
+        "sha256": "e305b7ac92d3c8432e5452f6c945b458343a5a26418bb35d7942dbb6bae3bbcf",
+        "actualSha256": "e305b7ac92d3c8432e5452f6c945b458343a5a26418bb35d7942dbb6bae3bbcf"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings-v2.py",
+        "bytes": 2260,
+        "sha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d",
+        "actualSha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings.py",
+        "bytes": 2251,
+        "sha256": "8c46eb3f0c7f32ae9fc84585adac833db8d607bb86158106540e34bbbc12dc04",
+        "actualSha256": "8c46eb3f0c7f32ae9fc84585adac833db8d607bb86158106540e34bbbc12dc04"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/oracle.mjs",
+        "bytes": 2257,
+        "sha256": "431cd1a29834dddf8009d6a83cfcd39781cefdac3e53be5360f86fb584318084",
+        "actualSha256": "431cd1a29834dddf8009d6a83cfcd39781cefdac3e53be5360f86fb584318084"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks-v2.py",
+        "bytes": 2600,
+        "sha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac",
+        "actualSha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks.py",
+        "bytes": 2533,
+        "sha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b",
+        "actualSha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/summarize.py",
+        "bytes": 3354,
+        "sha256": "f597070e7dc26d4fd2071aa6252d6d25bb5cbe9203f842c0ee1f93594474f09a",
+        "actualSha256": "f597070e7dc26d4fd2071aa6252d6d25bb5cbe9203f842c0ee1f93594474f09a"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+        "bytes": 5729,
+        "sha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d",
+        "actualSha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/input/node_modules/playwright-core/lib/coreBundle.js",
+        "bytes": 3584989,
+        "sha256": "2325ca4c1c83070e89dc49fb82525508f0a68e0cf12e2a624277968da216b7e0",
+        "actualSha256": "2325ca4c1c83070e89dc49fb82525508f0a68e0cf12e2a624277968da216b7e0"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/input/node_modules/playwright-core/package.json",
+        "bytes": 876,
+        "sha256": "1d6b6f80ffb0c52865af0f9fe01abf2140df019e49ae6ac134605e462d583f3a",
+        "actualSha256": "1d6b6f80ffb0c52865af0f9fe01abf2140df019e49ae6ac134605e462d583f3a"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-000.json",
+        "bytes": 3086523,
+        "sha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53",
+        "actualSha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-001.json",
+        "bytes": 3054600,
+        "sha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc",
+        "actualSha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-002.json",
+        "bytes": 3085954,
+        "sha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea",
+        "actualSha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-003.json",
+        "bytes": 3059652,
+        "sha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3",
+        "actualSha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-004.json",
+        "bytes": 3086110,
+        "sha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d",
+        "actualSha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-005.json",
+        "bytes": 3059411,
+        "sha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa",
+        "actualSha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-006.json",
+        "bytes": 3111559,
+        "sha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c",
+        "actualSha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-007.json",
+        "bytes": 3055792,
+        "sha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7",
+        "actualSha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-008.json",
+        "bytes": 3111933,
+        "sha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164",
+        "actualSha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-009.json",
+        "bytes": 3055962,
+        "sha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b",
+        "actualSha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-010.json",
+        "bytes": 3111845,
+        "sha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b",
+        "actualSha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-011.json",
+        "bytes": 3055880,
+        "sha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746",
+        "actualSha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/fixture.mjs",
+        "bytes": 2784,
+        "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab",
+        "actualSha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+      },
+      {
+        "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.mjs",
+        "bytes": 7800,
+        "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+        "actualSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+      }
+    ]
+  },
+  "finishedAt": "2026-10-15T08:11:28.126Z",
+  "finalFiles": [
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/baseline-transport.mjs",
+      "bytes": 7800,
+      "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+      "actualSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/candidate-freeze.json",
+      "bytes": 1165,
+      "sha256": "b58ab2757b9ec95854f76fdf0baaff47737990ff0a2fecc6c3981ce9105e1783",
+      "actualSha256": "b58ab2757b9ec95854f76fdf0baaff47737990ff0a2fecc6c3981ce9105e1783"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/fixture.mjs",
+      "bytes": 2784,
+      "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab",
+      "actualSha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs",
+      "bytes": 5929,
+      "sha256": "78c02c4c2a6da2f35daa3cd374066aeec0b159d020c2b2b62553d1ad02dae1e9",
+      "actualSha256": "78c02c4c2a6da2f35daa3cd374066aeec0b159d020c2b2b62553d1ad02dae1e9"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/initial-candidate.mjs",
+      "bytes": 13663,
+      "sha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49",
+      "actualSha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+      "bytes": 13991,
+      "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+      "actualSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.test.mjs",
+      "bytes": 4454,
+      "sha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795",
+      "actualSha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/PROTOCOL.md",
+      "bytes": 4842,
+      "sha256": "e305b7ac92d3c8432e5452f6c945b458343a5a26418bb35d7942dbb6bae3bbcf",
+      "actualSha256": "e305b7ac92d3c8432e5452f6c945b458343a5a26418bb35d7942dbb6bae3bbcf"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings-v2.py",
+      "bytes": 2260,
+      "sha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d",
+      "actualSha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings.py",
+      "bytes": 2251,
+      "sha256": "8c46eb3f0c7f32ae9fc84585adac833db8d607bb86158106540e34bbbc12dc04",
+      "actualSha256": "8c46eb3f0c7f32ae9fc84585adac833db8d607bb86158106540e34bbbc12dc04"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/oracle.mjs",
+      "bytes": 2257,
+      "sha256": "431cd1a29834dddf8009d6a83cfcd39781cefdac3e53be5360f86fb584318084",
+      "actualSha256": "431cd1a29834dddf8009d6a83cfcd39781cefdac3e53be5360f86fb584318084"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks-v2.py",
+      "bytes": 2600,
+      "sha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac",
+      "actualSha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks.py",
+      "bytes": 2533,
+      "sha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b",
+      "actualSha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/summarize.py",
+      "bytes": 3354,
+      "sha256": "f597070e7dc26d4fd2071aa6252d6d25bb5cbe9203f842c0ee1f93594474f09a",
+      "actualSha256": "f597070e7dc26d4fd2071aa6252d6d25bb5cbe9203f842c0ee1f93594474f09a"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "bytes": 5729,
+      "sha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d",
+      "actualSha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/input/node_modules/playwright-core/lib/coreBundle.js",
+      "bytes": 3584989,
+      "sha256": "2325ca4c1c83070e89dc49fb82525508f0a68e0cf12e2a624277968da216b7e0",
+      "actualSha256": "2325ca4c1c83070e89dc49fb82525508f0a68e0cf12e2a624277968da216b7e0"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/input/node_modules/playwright-core/package.json",
+      "bytes": 876,
+      "sha256": "1d6b6f80ffb0c52865af0f9fe01abf2140df019e49ae6ac134605e462d583f3a",
+      "actualSha256": "1d6b6f80ffb0c52865af0f9fe01abf2140df019e49ae6ac134605e462d583f3a"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-000.json",
+      "bytes": 3086523,
+      "sha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53",
+      "actualSha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-001.json",
+      "bytes": 3054600,
+      "sha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc",
+      "actualSha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-002.json",
+      "bytes": 3085954,
+      "sha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea",
+      "actualSha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-003.json",
+      "bytes": 3059652,
+      "sha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3",
+      "actualSha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-004.json",
+      "bytes": 3086110,
+      "sha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d",
+      "actualSha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-005.json",
+      "bytes": 3059411,
+      "sha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa",
+      "actualSha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-006.json",
+      "bytes": 3111559,
+      "sha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c",
+      "actualSha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-007.json",
+      "bytes": 3055792,
+      "sha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7",
+      "actualSha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-008.json",
+      "bytes": 3111933,
+      "sha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164",
+      "actualSha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-009.json",
+      "bytes": 3055962,
+      "sha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b",
+      "actualSha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-010.json",
+      "bytes": 3111845,
+      "sha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b",
+      "actualSha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-011.json",
+      "bytes": 3055880,
+      "sha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746",
+      "actualSha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/fixture.mjs",
+      "bytes": 2784,
+      "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab",
+      "actualSha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.mjs",
+      "bytes": 7800,
+      "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+      "actualSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+    }
+  ],
+  "node": "v24.19.0",
+  "playwrightVersion": "1.64.0",
+  "playwrightBundleSha256": "2325ca4c1c83070e89dc49fb82525508f0a68e0cf12e2a624277968da216b7e0",
+  "gcPolicy": "explicit GC immediately before transfer and after releasing row; no explicit GC during transfer",
+  "measurementScope": "offline single fresh Node process; process maxRSS includes setup and assertions; no browser/cgroup",
+  "sourceRetention": "source remains reachable equally; browser and receiver simulated in one heap",
+  "records": [
+    {
+      "name": "node-p390-00-11-000.json",
+      "sourceArtifactSha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "0df3319537494423b4d77bd91d9cc278087d75d090859a75c162259a78c0520c"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 519.255946,
+      "before": {
+        "rss": 64819200,
+        "heapTotal": 28307456,
+        "heapUsed": 9363504,
+        "external": 16312050,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 138043392,
+        "heapTotal": 111058944,
+        "heapUsed": 59761896,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 59761152,
+      "observedHeapDelta": 50397648,
+      "observedMaximumRSS": 138043392,
+      "observedRSSDelta": 73224192,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 63,
+        "wire-serialized": 63,
+        "wire-stringified": 63,
+        "wire-parsed": 63,
+        "wire-decoded": 63,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 320,
+      "messages": 63,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-001.json",
+      "sourceArtifactSha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "85fb92d9961d8baf07febff2dc0bf3315e0f6348748c36d4f4221231a4205082"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 492.11597499999993,
+      "before": {
+        "rss": 136495104,
+        "heapTotal": 149942272,
+        "heapUsed": 14768728,
+        "external": 12695142,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 224169984,
+        "heapTotal": 164700160,
+        "heapUsed": 56392400,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 84970104,
+      "observedHeapDelta": 70201376,
+      "observedMaximumRSS": 224169984,
+      "observedRSSDelta": 87674880,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 62,
+        "wire-serialized": 62,
+        "wire-stringified": 62,
+        "wire-parsed": 62,
+        "wire-decoded": 62,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 315,
+      "messages": 62,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-002.json",
+      "sourceArtifactSha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "930325f457cf4941df885b862dda7abe6d42bda2dc900a7b769ee6d7381a4ef5"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 482.002082,
+      "before": {
+        "rss": 215396352,
+        "heapTotal": 150466560,
+        "heapUsed": 14760880,
+        "external": 12726496,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 226373632,
+        "heapTotal": 165400576,
+        "heapUsed": 60651240,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 86603240,
+      "observedHeapDelta": 71842360,
+      "observedMaximumRSS": 226373632,
+      "observedRSSDelta": 10977280,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 63,
+        "wire-serialized": 63,
+        "wire-stringified": 63,
+        "wire-parsed": 63,
+        "wire-decoded": 63,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 320,
+      "messages": 63,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-003.json",
+      "sourceArtifactSha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "6588d0721b96039a9b92e8f5b605ae8966453b97d8c249207f03070fa9c0089a"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 501.8652380000001,
+      "before": {
+        "rss": 216432640,
+        "heapTotal": 150466560,
+        "heapUsed": 14787256,
+        "external": 12700194,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 225558528,
+        "heapTotal": 164442112,
+        "heapUsed": 55777304,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 84791520,
+      "observedHeapDelta": 70004264,
+      "observedMaximumRSS": 225558528,
+      "observedRSSDelta": 9125888,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 62,
+        "wire-serialized": 62,
+        "wire-stringified": 62,
+        "wire-parsed": 62,
+        "wire-decoded": 62,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 315,
+      "messages": 62,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-004.json",
+      "sourceArtifactSha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "598ae871de3adacae05f53fa5ae28c3947e6886bf66a2efb657f1228b32f3688"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 419.6482040000001,
+      "before": {
+        "rss": 216576000,
+        "heapTotal": 150466560,
+        "heapUsed": 14773984,
+        "external": 12726652,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 226525184,
+        "heapTotal": 165400576,
+        "heapUsed": 59200632,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 84845368,
+      "observedHeapDelta": 70071384,
+      "observedMaximumRSS": 226525184,
+      "observedRSSDelta": 9949184,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 63,
+        "wire-serialized": 63,
+        "wire-stringified": 63,
+        "wire-parsed": 63,
+        "wire-decoded": 63,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 320,
+      "messages": 63,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-005.json",
+      "sourceArtifactSha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "5eaaedb0ed37a59343ae83550fa3422274e5c86581c9cc3e760acce74526e427"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 437.65463499999987,
+      "before": {
+        "rss": 216584192,
+        "heapTotal": 150204416,
+        "heapUsed": 14789672,
+        "external": 12699953,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 225579008,
+        "heapTotal": 164704256,
+        "heapUsed": 55502040,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 84718688,
+      "observedHeapDelta": 69929016,
+      "observedMaximumRSS": 225579008,
+      "observedRSSDelta": 8994816,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 62,
+        "wire-serialized": 62,
+        "wire-stringified": 62,
+        "wire-parsed": 62,
+        "wire-decoded": 62,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 315,
+      "messages": 62,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-006.json",
+      "sourceArtifactSha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "46d90d72333dee9583697229bd4fc8ffce904791658191de195e7965cd79539d"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 462.4747089999996,
+      "before": {
+        "rss": 216481792,
+        "heapTotal": 150466560,
+        "heapUsed": 14816952,
+        "external": 12752101,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 228196352,
+        "heapTotal": 165433344,
+        "heapUsed": 62046128,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 84885096,
+      "observedHeapDelta": 70068144,
+      "observedMaximumRSS": 228196352,
+      "observedRSSDelta": 11714560,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 64,
+        "wire-serialized": 64,
+        "wire-stringified": 64,
+        "wire-parsed": 64,
+        "wire-decoded": 64,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 325,
+      "messages": 64,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-007.json",
+      "sourceArtifactSha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "a54fe4aae0fb533ee79171aa3a1aa2bc1fbdb564a8a565243be4a996854c7bd8"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 447.78316399999994,
+      "before": {
+        "rss": 218226688,
+        "heapTotal": 150204416,
+        "heapUsed": 14839136,
+        "external": 12696334,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 227217408,
+        "heapTotal": 164700160,
+        "heapUsed": 55381216,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 84766528,
+      "observedHeapDelta": 69927392,
+      "observedMaximumRSS": 227217408,
+      "observedRSSDelta": 8990720,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 62,
+        "wire-serialized": 62,
+        "wire-stringified": 62,
+        "wire-parsed": 62,
+        "wire-decoded": 62,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 315,
+      "messages": 62,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-008.json",
+      "sourceArtifactSha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "86a635da024da79c65795ea062e70c016552caf84eeda5ab5beca10807f00de8"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 528.6971819999999,
+      "before": {
+        "rss": 218230784,
+        "heapTotal": 150466560,
+        "heapUsed": 14809040,
+        "external": 12752475,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 230187008,
+        "heapTotal": 165695488,
+        "heapUsed": 61874232,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 85010712,
+      "observedHeapDelta": 70201672,
+      "observedMaximumRSS": 230187008,
+      "observedRSSDelta": 11956224,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 64,
+        "wire-serialized": 64,
+        "wire-stringified": 64,
+        "wire-parsed": 64,
+        "wire-decoded": 64,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 325,
+      "messages": 64,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-009.json",
+      "sourceArtifactSha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "649d18bff13fe1ec4340492a2ce625178f71548e685d552154efc0115cc98413"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 460.00835800000004,
+      "before": {
+        "rss": 220205056,
+        "heapTotal": 150466560,
+        "heapUsed": 14860560,
+        "external": 12696504,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 229208064,
+        "heapTotal": 164438016,
+        "heapUsed": 55857688,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 85129880,
+      "observedHeapDelta": 70269320,
+      "observedMaximumRSS": 229208064,
+      "observedRSSDelta": 9003008,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 62,
+        "wire-serialized": 62,
+        "wire-stringified": 62,
+        "wire-parsed": 62,
+        "wire-decoded": 62,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 315,
+      "messages": 62,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-010.json",
+      "sourceArtifactSha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "b7a447ab4f9746ca9017ab08fd6b6f0bd7333c8de07e5742cff2efe3ea39a34b"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 472.7662250000003,
+      "before": {
+        "rss": 220217344,
+        "heapTotal": 150204416,
+        "heapUsed": 14829992,
+        "external": 12752387,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 230199296,
+        "heapTotal": 165433344,
+        "heapUsed": 61934688,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 84899160,
+      "observedHeapDelta": 70069168,
+      "observedMaximumRSS": 230199296,
+      "observedRSSDelta": 9981952,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 64,
+        "wire-serialized": 64,
+        "wire-stringified": 64,
+        "wire-parsed": 64,
+        "wire-decoded": 64,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 325,
+      "messages": 64,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "node-p390-00-11-011.json",
+      "sourceArtifactSha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746",
+      "synthetic": false,
+      "expected": {
+        "kind": "complete JSON.stringify bytes",
+        "sha256": "409add78723fb56ae7f85f08597b5108c211b078be956d663cb5e245ca0a0fc1"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 460.2691130000003,
+      "before": {
+        "rss": 220217344,
+        "heapTotal": 150204416,
+        "heapUsed": 14864312,
+        "external": 12696422,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 229216256,
+        "heapTotal": 164438016,
+        "heapUsed": 55537056,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 84932968,
+      "observedHeapDelta": 70068656,
+      "observedMaximumRSS": 229216256,
+      "observedRSSDelta": 8998912,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 62,
+        "wire-serialized": 62,
+        "wire-stringified": 62,
+        "wire-parsed": 62,
+        "wire-decoded": 62,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 315,
+      "messages": 62,
+      "maxChunkUnits": 65536,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    },
+    {
+      "name": "synthetic-alias-cycle",
+      "sourceArtifactSha256": null,
+      "synthetic": true,
+      "expected": {
+        "kind": "canonical graph bytes and explicit alias assertions",
+        "sha256": "29e7c42a172739514c80b7de6e2f89db0a80d763112ec1e4da8924934a08f5c4"
+      },
+      "experiment": "end-to-end",
+      "mode": "prior",
+      "elapsedMs": 0.8110800000004019,
+      "before": {
+        "rss": 220225536,
+        "heapTotal": 146010112,
+        "heapUsed": 10832320,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "after": {
+        "rss": 220225536,
+        "heapTotal": 146010112,
+        "heapUsed": 10900480,
+        "external": 9640542,
+        "arrayBuffers": 209147
+      },
+      "observedMaximumHeapUsed": 10900200,
+      "observedHeapDelta": 67880,
+      "observedMaximumRSS": 220225536,
+      "observedRSSDelta": 0,
+      "checkpointCounts": {
+        "transfer-start": 1,
+        "handle-created": 1,
+        "handle-disposed": 2,
+        "evaluate-returned": 3,
+        "wire-serialized": 3,
+        "wire-stringified": 3,
+        "wire-parsed": 3,
+        "wire-decoded": 3,
+        "transfer-finish": 1
+      },
+      "checkpointTotal": 20,
+      "messages": 3,
+      "maxChunkUnits": 390,
+      "precomputedChunks": null,
+      "precomputedWireUnits": null,
+      "decoderInspection": null,
+      "equivalence": "PASS"
+    }
+  ],
+  "processResourceUsage": {
+    "userCPUTime": 7984434,
+    "systemCPUTime": 568806,
+    "maxRSS": 241560,
+    "sharedMemorySize": 0,
+    "unsharedDataSize": 0,
+    "unsharedStackSize": 0,
+    "minorPageFault": 123239,
+    "majorPageFault": 0,
+    "swappedOut": 0,
+    "fsRead": 0,
+    "fsWrite": 32,
+    "ipcSent": 0,
+    "ipcReceived": 0,
+    "signalsCount": 0,
+    "voluntaryContextSwitches": 1760,
+    "involuntaryContextSwitches": 62
+  },
+  "maxRSSKiB": 241560,
+  "maxRSSMiB": 235.8984375
+}

@@ -1,0 +1,13 @@
+{
+  "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+  "sourceSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "instrumentedSha256": "59167112aabf46f45fb22b5724b55d28af89c6737c740933556145881aa90947",
+  "changes": [
+    "Prefix export let reviewCreatedDecoder;",
+    {
+      "old": "decoder=createIncrementalDecoder(limits);",
+      "new": "decoder=reviewCreatedDecoder=createIncrementalDecoder(limits);"
+    }
+  ],
+  "purpose": "Retain decoder closure for independent post-failure inspection; parser/transfer logic unchanged"
+}

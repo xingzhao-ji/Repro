@@ -1,0 +1,317 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "scope": "pure source partition only; browser and runtime UNRUN",
+  "frozenManifestSha256": "9299adf0dcc84668d4c5410ae98be6929728b120c918736507f1467e9d998d37",
+  "controlCount": 77,
+  "controls": [
+    {
+      "name": "frozen exact 57 occurrences validate",
+      "status": "PASS"
+    },
+    {
+      "name": "all five subsets preserve original object identities and canonical order",
+      "status": "PASS"
+    },
+    {
+      "name": "selection leaves the full manifest and plan intact",
+      "status": "PASS"
+    },
+    {
+      "name": "unknown batch cannot be selected",
+      "status": "PASS"
+    },
+    {
+      "name": "source revision and probe source additions do not rewrite frozen states",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate occurrence rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing occurrence rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "foreign occurrence rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "altered node hash rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "altered original node identity rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "altered original node text rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "altered original viewport rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "altered original state identity rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "altered selected trial rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "jointly rewritten state and plan hash rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "empty batch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate batch ID rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "batch over frozen twelve-node bound rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "rewritten maximum bound rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "mixed state batch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "occurrence order reversal rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "batch order reversal rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "state order reversal rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "full count mismatch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "declared batch count mismatch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "foreign full-manifest binding rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "altered state binding viewport rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "missing batch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "extra batch rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "changed proposed execution order rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate proposed execution job rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "per-job limit change rejected",
+      "status": "PASS"
+    },
+    {
+      "name": "aggregate budget cannot masquerade as one job",
+      "status": "PASS"
+    },
+    {
+      "name": "aggregate budget cannot claim authorization",
+      "status": "PASS"
+    },
+    {
+      "name": "completed unresolved observations satisfy source closure without becoming measured pass",
+      "status": "PASS"
+    },
+    {
+      "name": "missing final body artifact rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "changed final body digest rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "changed final body bytes reject batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "missing final selection rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "changed final selection rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "selection snapshot digest mismatch rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "started node without completed artifact rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "node harness error rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "uncompleted product checks reject batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "foreign completed row rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "duplicate completed row rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "missing assigned node rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "incomplete final state rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "second state rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "incomplete checkpoint counters reject batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "missing control artifact rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "missing browser control rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "incomplete browser controls reject batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "page error rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "unexpected request rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "browser cleanup error rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "internal budget expiry rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "global harness error rejects batch closure",
+      "status": "PASS"
+    },
+    {
+      "name": "complete external review prerequisite schema allows completed unresolved observations",
+      "status": "PASS"
+    },
+    {
+      "name": "source completion flag required for acceptance readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "external cleanup review required for acceptance readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "partial external review rejects acceptance readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "foreign external review rejects acceptance readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "artifact closure review required for acceptance readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "resource gate review required for acceptance readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "external review receipt required for acceptance readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "external review receipt hash required for acceptance readiness",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker retains all 57 unresolved observations without claiming measured pass",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker reports mixed observation outcomes without force-green",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker rejects missing batch",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker rejects duplicate batch",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker rejects unfinished final body",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker rejects missing final selection",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker rejects missing external cleanup",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker rejects partial external review",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker rejects missing review",
+      "status": "PASS"
+    },
+    {
+      "name": "actual aggregate checker rejects duplicate review",
+      "status": "PASS"
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "utc": "2026-10-15T03:21:33.285007+00:00",
+  "status": "FINDING_CONFIRMED",
+  "sourceSha256": "55bf8e96e19206a535934b2d923804ada9e01aeb4c25ab494cffed9a2d75c71d",
+  "source": "scripts/lifecycle-diagnostics.ts",
+  "method": "Single offline direct helper invocation via TSX_DISABLE_CACHE=1 node --import tsx --input-type=module; all I/O and clock callbacks injected; no /proc/browser/Docker/network.",
+  "trigger": "appendCompletion receives full completion line, retains it verbatim, then returns {bytes:Buffer.byteLength(line),error:\"EIO\"}; finish({samples:0,failure:null})",
+  "observed": {
+    "storedStatus": "complete",
+    "storedCompletionWritten": true,
+    "returnedStatus": "incomplete",
+    "returnedCompletionWritten": false,
+    "returnedIssues": [
+      "METADATA_WRITE_FAILED"
+    ]
+  },
+  "finding": "A complete-looking persisted final record can contradict the actual completion sink outcome. Before runtime acceptance, make the provisional/self-unverifiable write status explicit and ensure actual integration exposes failed completion independently; stored lifecycle.status alone cannot establish complete diagnostics.",
+  "scope": "Pre-freeze helper; not a demonstrated production/runtime defect, no source edit by reviewer."
+}

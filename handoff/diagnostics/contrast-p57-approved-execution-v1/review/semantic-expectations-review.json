@@ -1,0 +1,12 @@
+{
+  "status": "PASS_STATIC_EXPECTATION_REVIEW",
+  "checkCount": 143,
+  "semanticSha256": "e5b973ed32dbd7b1fbfb4aad71a95830c02d44134b61e82d0f044541cdba48a9",
+  "originalSemanticSha256": "79cf0dede1be5b81ecb28b837d8cabfeb94101745af0f34c4ac8b97db7e76979",
+  "inputExpectedBindingsSha256": "456fd9b0403fe82a42cc5cb016a2320823a24f4934aa8bd22ecdef0819c6139b",
+  "notes": [
+    "Frozen control descriptors and all50 checks unchanged.",
+    "All57 expected packet/text/DOM identities derive from original occurrence descriptors, packet and renderer; observed DOM must match at runtime.",
+    "Duration text uses renderer Math.round(durationMs) followed by literal ms text node; no rendering performed."
+  ]
+}

@@ -1,0 +1,28 @@
+✖ complete stored row through bounded handle transport (588.221146ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 711.383688
+
+✖ failing tests:
+
+test at .repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.test.mjs:6:1
+✖ complete stored row through bounded handle transport (588.221146ms)
+  AssertionError [ERR_ASSERTION]: full-object evaluate return is eliminated
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.test.mjs:10:9)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

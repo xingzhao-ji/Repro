@@ -1,0 +1,122 @@
+{
+  "status": "INDEPENDENT_OFFLINE_BENCHMARK_READBACK_PASS",
+  "utc": "2026-10-15T08:13:59.816518+00:00",
+  "workers": 12,
+  "cases": 156,
+  "boundSourceFiles": 31,
+  "bindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+  "commandReceiptsSha256": "658ee9baeaa765f7fa1139e2e3d26fe70f9df74b7f0c467844f3eb21160808ef",
+  "summarySha256": "5db38aab4ef70c4d25f2cf6b19b17af07daa001099f308f46b2c09037b0e84b2",
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "pairs": [
+    {
+      "experiment": "end-to-end",
+      "trial": 1,
+      "priorRSSMiB": 235.8984375,
+      "incrementalRSSMiB": 241.16015625,
+      "rssDeltaMiB": 5.26171875,
+      "priorTransferMs": 5684.540831,
+      "incrementalTransferMs": 6675.297158,
+      "elapsedDeltaMs": 990.756327,
+      "checkpointParity": true
+    },
+    {
+      "experiment": "end-to-end",
+      "trial": 2,
+      "priorRSSMiB": 235.828125,
+      "incrementalRSSMiB": 241.25,
+      "rssDeltaMiB": 5.421875,
+      "priorTransferMs": 5389.963646999999,
+      "incrementalTransferMs": 6079.771361999998,
+      "elapsedDeltaMs": 689.807714999999,
+      "checkpointParity": true
+    },
+    {
+      "experiment": "end-to-end",
+      "trial": 3,
+      "priorRSSMiB": 254.17578125,
+      "incrementalRSSMiB": 241.2265625,
+      "rssDeltaMiB": -12.94921875,
+      "priorTransferMs": 5318.229464,
+      "incrementalTransferMs": 6041.945387999998,
+      "elapsedDeltaMs": 723.7159239999983,
+      "checkpointParity": true
+    },
+    {
+      "experiment": "receiver-only",
+      "trial": 1,
+      "priorRSSMiB": 275.73046875,
+      "incrementalRSSMiB": 260.84375,
+      "rssDeltaMiB": -14.88671875,
+      "priorTransferMs": 1560.4199270000004,
+      "incrementalTransferMs": 3237.864422000002,
+      "elapsedDeltaMs": 1677.4444950000016,
+      "checkpointParity": true
+    },
+    {
+      "experiment": "receiver-only",
+      "trial": 2,
+      "priorRSSMiB": 275.734375,
+      "incrementalRSSMiB": 261.94140625,
+      "rssDeltaMiB": -13.79296875,
+      "priorTransferMs": 1568.9087759999995,
+      "incrementalTransferMs": 3003.522149999998,
+      "elapsedDeltaMs": 1434.6133739999984,
+      "checkpointParity": true
+    },
+    {
+      "experiment": "receiver-only",
+      "trial": 3,
+      "priorRSSMiB": 275.515625,
+      "incrementalRSSMiB": 262.34375,
+      "rssDeltaMiB": -13.171875,
+      "priorTransferMs": 1525.7103340000012,
+      "incrementalTransferMs": 2963.178955999998,
+      "elapsedDeltaMs": 1437.4686219999967,
+      "checkpointParity": true
+    }
+  ],
+  "conclusions": [
+    "End-to-end RSS mixed: two higher and one lower; not a consistent transport memory reduction",
+    "Receiver-only RSS lower in all three pairs; isolated decoder benefit with precomputed wire deliberately retained",
+    "Every pair slower for incremental candidate in both experiments",
+    "Checkpoint heap deltas are not total allocation or guaranteed internal peaks",
+    "No browser/IPC/cgroup measurement and no896MiB pass; candidate remains uninstalled"
+  ],
+  "scopeLimits": [
+    "Single simulated Node heap and equally retained source graph in end-to-end",
+    "Receiver-only setup/precomputed wire and forced between-row GC differ from live operation",
+    "maxRSS includes startup/setup/equality assertions; three paired trials only",
+    "One-stream implementation mechanisms established separately by source+functional tests, not inferred from RSS"
+  ],
+  "sources": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "sha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/oracle.mjs",
+      "sha256": "431cd1a29834dddf8009d6a83cfcd39781cefdac3e53be5360f86fb584318084"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks-v2.py",
+      "sha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings-v2.py",
+      "sha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/summarize.py",
+      "sha256": "f597070e7dc26d4fd2071aa6252d6d25bb5cbe9203f842c0ee1f93594474f09a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/PROTOCOL.md",
+      "sha256": "e305b7ac92d3c8432e5452f6c945b458343a5a26418bb35d7942dbb6bae3bbcf"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/failure-receipt.json",
+      "sha256": "8dc90516ea5518e6531b1c8a3207d6f82cf47262b3f160d9f36afc151a37e489"
+    }
+  ]
+}

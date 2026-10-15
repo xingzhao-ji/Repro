@@ -1,0 +1,21 @@
+{
+  "utc": "2026-10-15T04:42:12.343783+00:00",
+  "status": "DECISION_READY_PROPOSED_NOT_ADOPTED_NO_RUNTIME",
+  "commit": "daa83daf6ad00d3a60bcf72e5c4aacd1f7554095",
+  "manifestSha256": "099e6f5313593cbeb895830021a842b8205eb09c858d39b6c4ed07d4488a55a0",
+  "resultSha256": "6387da2de9f5d4f44ca6ab12412c6557d48a6d8ff64cc23ab0030cb37901453c",
+  "decisionSha256": "502b3463f7ea123ebbe5364da78f3551e26ab8ae52b413bfca7b4571fe861049",
+  "independentReviewSha256": "dc232388a8d0b530125fb74da890a38426f2accc08ab410a5a3077b590b491a7",
+  "regularFileCount": 29,
+  "totalRegularFileBytes": 291720,
+  "linkCount": 0,
+  "readback": "PASS",
+  "runtimeRuns": 0,
+  "gateChanges": false,
+  "historicalReclassification": false,
+  "staleReleaseIndexItemClosed": true,
+  "releaseComplete": false,
+  "published": false,
+  "remainingDecision": "Explicit prospective adoption of defined cleanup and90sdriver criteria, with exact fresh-reviewed five-job scope; current gates unchanged pending decision.",
+  "remainingReleaseItems": "Six browser behaviors;57 correctedCSS observations/paint uncertainty;nativezoom;actualscreenreader;finalcandidate/packageidentity/applicable validation."
+}

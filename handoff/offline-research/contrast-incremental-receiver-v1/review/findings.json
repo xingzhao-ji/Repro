@@ -1,0 +1,60 @@
+{
+  "status": "NO_OPEN_FUNCTIONAL_FINDINGS",
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "items": [
+    {
+      "id": "R1",
+      "kind": "candidate defect",
+      "status": "FIXED",
+      "firstCandidateSha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49",
+      "finding": "Uniform string-token bound incorrectly rejected protocol tag/numeric labels at maxStringUnits:1; old decoder accepted supported graphs.",
+      "reproduction": [
+        {
+          "wire": "[\"~o\",1,[[\"a\",1]]]",
+          "limits": {
+            "maxStringUnits": 1
+          },
+          "old": "accept object",
+          "firstCandidate": "TRANSPORT_STRING_LIMIT"
+        },
+        {
+          "wire": "[\"~u\"]",
+          "limits": {
+            "maxStringUnits": 1
+          },
+          "old": "accept undefined",
+          "firstCandidate": "TRANSPORT_STRING_LIMIT"
+        },
+        {
+          "wire": "[\"~n\",\"Infinity\"]",
+          "limits": {
+            "maxStringUnits": 1
+          },
+          "old": "accept Infinity",
+          "firstCandidate": "TRANSPORT_STRING_LIMIT"
+        }
+      ],
+      "resolution": "Context-specific bounded protocol tag and special-number labels2/9, actual data/key/bigint string bound unchanged; direct every-split regression passed."
+    },
+    {
+      "id": "C1",
+      "kind": "documented compatibility difference",
+      "status": "ACCEPTABLE_IN_REVIEWED_SCOPE",
+      "finding": "Frozen108 suite107pass1failure: invalid x producer fails first read BAD_JSON instead of delayed size/chunk error.",
+      "resolution": "Frozen test and logs retained. Separate one-regex-adjusted108 passes. Independent tests enforce first-read failure plus original finite-read budget on plausible unterminated string. No validation delayed or loosened."
+    },
+    {
+      "id": "T1",
+      "kind": "review test defect",
+      "status": "CORRECTED_WITH_HISTORY_PRESERVED",
+      "finding": "First new mechanism test incorrectly required at least one scalar JSON.parse call; candidate manual tokenizer uses none.",
+      "resolution": "Original streaming-first.test.mjs/stream-first-run.log retained. Corrected test permits manual tokenizer; still explicitly rejects predecessor full graph JSON.parse and verifies candidate complete output under same prohibition."
+    }
+  ],
+  "unproven": [
+    "Real Playwright integration and timing",
+    "Browser/cgroup peak below896MiB",
+    "Memory-category attribution of original pilot",
+    "Observation-only lifetime extension remains pending; not adopted"
+  ]
+}

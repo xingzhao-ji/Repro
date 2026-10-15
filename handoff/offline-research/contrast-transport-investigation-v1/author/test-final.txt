@@ -1,0 +1,15 @@
+✔ complete stored row through bounded handle transport (1017.552863ms)
+✔ all 12 complete stored rows and complete controls evidence round-trip (8527.604899ms)
+✔ aliases, cycles, own undefined, special numbers, bigint, keys and Unicode retain pinned Playwright semantics (29.445866ms)
+✔ unsupported values fail closed without invoking getters and release both handles (1.807629ms)
+✔ bounded limits reject invalid options before sampling and oversize/deep graphs without truncating (1.144182ms)
+✔ sampler, handle-open, read, corruption, disposal faults are surfaced with cleanup (1.208345ms)
+✔ falsy rejection reasons are preserved rather than swallowed (0.315525ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 9861.99566

@@ -1,0 +1,15 @@
+{
+  "status": "ROOT_RAW_METRICS_AND_PROVENANCE_REVIEW_PASS",
+  "utc": "2026-10-15T08:14:24.676536+00:00",
+  "workers": 12,
+  "cases": 156,
+  "unattemptedMeasuredWorkers": 0,
+  "sourceBindingsSha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290",
+  "summarySha256": "5db38aab4ef70c4d25f2cf6b19b17af07daa001099f308f46b2c09037b0e84b2",
+  "commandReceiptsSha256": "658ee9baeaa765f7fa1139e2e3d26fe70f9df74b7f0c467844f3eb21160808ef",
+  "allRawReceiptHashesMatched": true,
+  "allStartupFinalSourceBindingsIdentical": true,
+  "allPairCheckpointCountsAndWireCountsEqual": true,
+  "onlyMinimalChildEnvironment": true,
+  "assessment": "Retain as uninstalled offline research artifact; isolated receiver process RSS lower in all three pairs but end-to-end RSS higher in two of three, and elapsed time higher in all six pairs. No actual memory gate claim."
+}

@@ -1,0 +1,24 @@
+{
+  "utc": "2026-10-15T06:52:25.233947+00:00",
+  "status": "STOP_CONTINUATION",
+  "approvedCriteriaAdopted": true,
+  "sameApprovalRequestedAgain": false,
+  "starts": 1,
+  "remainingJobsStarted": 0,
+  "runtimeGateIssues": [
+    "COMPLETED_CLEANUP_NOT_ESTABLISHED",
+    "MEMORY_OR_HEADROOM_LIMIT"
+  ],
+  "driverSeconds": 41.72000611999829,
+  "memoryPeakBytes": 943087616,
+  "memoryGateBytes": 939524096,
+  "cleanupCriterion": "NOT_ESTABLISHED_DISTINCT_INTERVAL_ABSENT",
+  "ownedCleanup": "PASS",
+  "provisionalMeasuredPass": 12,
+  "unattempted": 45,
+  "accepted": 0,
+  "offlinePackageVerification": "PASS_REVIEWED",
+  "releaseComplete": false,
+  "permissionsChanged": false,
+  "published": false
+}

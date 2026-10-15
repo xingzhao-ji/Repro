@@ -1,0 +1,214 @@
+{
+  "status": "PASS for corrected-driver-v3 preflight repeatability only; two earlier verification-driver failures retained",
+  "totalActualAdapterExecutions": 700,
+  "acceptedMatrixExecutions": 420,
+  "earlierFailedHarnessExecutions": 280,
+  "allArtifactFilesVerified": 600,
+  "acceptedMatrixArtifactsVerified": 360,
+  "allResultFilesVerified": 700,
+  "distinctRunIds": 700,
+  "actualHarnessDigestsDistinct": {
+    "source": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+    "emitted": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+    "installed": "85796265004796f4cbb64bc1b52645080d61e7e602c8a267a90f1aa35eddf5a5"
+  },
+  "attempts": [
+    {
+      "attempt": "original",
+      "actualAdapterExecutions": 140,
+      "artifactsVerified": 120,
+      "acceptedHarnessRun": false
+    },
+    {
+      "attempt": "corrected-driver-v2",
+      "actualAdapterExecutions": 140,
+      "artifactsVerified": 120,
+      "acceptedHarnessRun": false
+    },
+    {
+      "attempt": "corrected-driver-v3",
+      "actualAdapterExecutions": 420,
+      "artifactsVerified": 360,
+      "acceptedHarnessRun": true
+    }
+  ],
+  "caseComparison": [
+    {
+      "caseId": "neighbor-remove-navigate",
+      "repetitionsPerFormat": 20,
+      "withinFormatRepeatable": true,
+      "crossFormatSemanticEquivalent": true,
+      "preservedHarnessDigests": {
+        "source": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+        "emitted": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+        "installed": "85796265004796f4cbb64bc1b52645080d61e7e602c8a267a90f1aa35eddf5a5"
+      },
+      "exactDifferingFieldsFromSource": {
+        "source": [],
+        "emitted": [
+          "harnessDigest",
+          "artifacts"
+        ],
+        "installed": [
+          "harnessDigest",
+          "artifacts"
+        ]
+      },
+      "outcome": "inconclusive",
+      "category": "verification",
+      "reason": "MISSING_STEPS: The intended failure requires navigation and both ordered search requests; the proposed experiment is incomplete."
+    },
+    {
+      "caseId": "neighbor-remove-search-alpha",
+      "repetitionsPerFormat": 20,
+      "withinFormatRepeatable": true,
+      "crossFormatSemanticEquivalent": true,
+      "preservedHarnessDigests": {
+        "source": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+        "emitted": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+        "installed": "85796265004796f4cbb64bc1b52645080d61e7e602c8a267a90f1aa35eddf5a5"
+      },
+      "exactDifferingFieldsFromSource": {
+        "source": [],
+        "emitted": [
+          "harnessDigest",
+          "artifacts"
+        ],
+        "installed": [
+          "harnessDigest",
+          "artifacts"
+        ]
+      },
+      "outcome": "inconclusive",
+      "category": "verification",
+      "reason": "MISSING_STEPS: The intended failure requires navigation and both ordered search requests; the proposed experiment is incomplete."
+    },
+    {
+      "caseId": "neighbor-remove-search-beta",
+      "repetitionsPerFormat": 20,
+      "withinFormatRepeatable": true,
+      "crossFormatSemanticEquivalent": true,
+      "preservedHarnessDigests": {
+        "source": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+        "emitted": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+        "installed": "85796265004796f4cbb64bc1b52645080d61e7e602c8a267a90f1aa35eddf5a5"
+      },
+      "exactDifferingFieldsFromSource": {
+        "source": [],
+        "emitted": [
+          "harnessDigest",
+          "artifacts"
+        ],
+        "installed": [
+          "harnessDigest",
+          "artifacts"
+        ]
+      },
+      "outcome": "inconclusive",
+      "category": "verification",
+      "reason": "MISSING_STEPS: The intended failure requires navigation and both ordered search requests; the proposed experiment is incomplete."
+    },
+    {
+      "caseId": "control-missing-beta-with-noise",
+      "repetitionsPerFormat": 20,
+      "withinFormatRepeatable": true,
+      "crossFormatSemanticEquivalent": true,
+      "preservedHarnessDigests": {
+        "source": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+        "emitted": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+        "installed": "85796265004796f4cbb64bc1b52645080d61e7e602c8a267a90f1aa35eddf5a5"
+      },
+      "exactDifferingFieldsFromSource": {
+        "source": [],
+        "emitted": [
+          "harnessDigest",
+          "artifacts"
+        ],
+        "installed": [
+          "harnessDigest",
+          "artifacts"
+        ]
+      },
+      "outcome": "inconclusive",
+      "category": "verification",
+      "reason": "MISSING_STEPS: The intended failure requires navigation and both ordered search requests; the proposed experiment is incomplete."
+    },
+    {
+      "caseId": "control-changed-oracle",
+      "repetitionsPerFormat": 20,
+      "withinFormatRepeatable": true,
+      "crossFormatSemanticEquivalent": true,
+      "preservedHarnessDigests": {
+        "source": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+        "emitted": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+        "installed": "85796265004796f4cbb64bc1b52645080d61e7e602c8a267a90f1aa35eddf5a5"
+      },
+      "exactDifferingFieldsFromSource": {
+        "source": [],
+        "emitted": [
+          "harnessDigest",
+          "artifacts"
+        ],
+        "installed": [
+          "harnessDigest",
+          "artifacts"
+        ]
+      },
+      "outcome": "inconclusive",
+      "category": "verification",
+      "reason": "IDENTITY_MISMATCH: A manifest identity does not match the trusted registered implementation."
+    },
+    {
+      "caseId": "control-undeclared-boundary",
+      "repetitionsPerFormat": 20,
+      "withinFormatRepeatable": true,
+      "crossFormatSemanticEquivalent": true,
+      "preservedHarnessDigests": {
+        "source": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+        "emitted": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+        "installed": "85796265004796f4cbb64bc1b52645080d61e7e602c8a267a90f1aa35eddf5a5"
+      },
+      "exactDifferingFieldsFromSource": {
+        "source": [],
+        "emitted": [
+          "harnessDigest",
+          "artifacts"
+        ],
+        "installed": [
+          "harnessDigest",
+          "artifacts"
+        ]
+      },
+      "outcome": "inconclusive",
+      "category": "input",
+      "reason": "MANIFEST_VALUE: The manifest differs from the registered supported contract."
+    },
+    {
+      "caseId": "control-pre-cancelled",
+      "repetitionsPerFormat": 20,
+      "withinFormatRepeatable": true,
+      "crossFormatSemanticEquivalent": true,
+      "preservedHarnessDigests": {
+        "source": "623156fff63bf70c55627e7c7e2a77bcacd521d3b67bc6f4ee629195dc65baba",
+        "emitted": "01bf6337a2df31205cbf496eb1d3f99097433e1110b35e1ffd9c65b367bf9418",
+        "installed": "85796265004796f4cbb64bc1b52645080d61e7e602c8a267a90f1aa35eddf5a5"
+      },
+      "exactDifferingFieldsFromSource": {
+        "source": [],
+        "emitted": [
+          "harnessDigest"
+        ],
+        "installed": [
+          "harnessDigest"
+        ]
+      },
+      "outcome": "cancelled",
+      "category": "cancelled",
+      "reason": "CANCELLED: The owner cancelled before run finalization."
+    }
+  ],
+  "sourceInputsUnchanged": true,
+  "browserRepeatability": "UNRUN on final startup-repair candidate",
+  "minimality": "UNVERIFIED: all three final neighbors return MISSING_STEPS, never an executed satisfying assertion",
+  "productChanges": 0
+}

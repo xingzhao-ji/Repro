@@ -1,0 +1,76 @@
+{
+  "status": "INCONCLUSIVE_MEMORY_REDUCTION",
+  "browserStarted": false,
+  "containerStarted": false,
+  "gateMiB": 896,
+  "gateChanged": false,
+  "installed": false,
+  "sourceProvenance": {
+    "finalCandidateSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+    "reconstructedPreReviewSha256": "2848ea01d0fe98dd8fb016e43d5d4b8bacd5554cf4162653d8d594152d48759b",
+    "matchesIndependentlyRetainedFirstCandidate": true,
+    "benchmarkSourceExecutionAttested": false,
+    "limitation": "Benchmark receipts did not capture source hash at child startup. Reconstruction reverses two validation fixes and one failure-propagation fix, and matches the reviewer-retained first copy; this is not execution attestation.",
+    "reviewerRetainedSha256": "2848ea01d0fe98dd8fb016e43d5d4b8bacd5554cf4162653d8d594152d48759b"
+  },
+  "results": {
+    "native": {
+      "trials": 3,
+      "rowsPerTrial": [
+        12,
+        12,
+        12
+      ],
+      "observations": 36,
+      "processMaximumRSSMiB": [
+        232.32421875,
+        231.38671875,
+        232.4140625
+      ],
+      "observedHeapDeltaMedianMiB": 67.75946044921875,
+      "observedHeapDeltaRangeMiB": [
+        43.145835876464844,
+        81.36373901367188
+      ],
+      "sumElapsedMsPerTrial": [
+        11259.725646,
+        12065.959465999997,
+        12286.071207
+      ],
+      "candidateEvaluationsPerRowRange": [
+        0,
+        0
+      ],
+      "maximumReturnedChunkUnits": 0
+    },
+    "candidate": {
+      "trials": 3,
+      "rowsPerTrial": [
+        12,
+        12,
+        12
+      ],
+      "observations": 36,
+      "processMaximumRSSMiB": [
+        240.8359375,
+        225.11328125,
+        226.48046875
+      ],
+      "observedHeapDeltaMedianMiB": 66.77096557617188,
+      "observedHeapDeltaRangeMiB": [
+        47.335716247558594,
+        68.94529724121094
+      ],
+      "sumElapsedMsPerTrial": [
+        9246.577556,
+        6165.859803,
+        6689.807326000001
+      ],
+      "candidateEvaluationsPerRowRange": [
+        62,
+        64
+      ],
+      "maximumReturnedChunkUnits": 65536
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-15T06:52:36.277555+00:00",
+  "status": "TWO_SMALL_WORDING_FINDINGS",
+  "runtimePerformed": false,
+  "findings": [
+    {
+      "file": "STATE.md",
+      "text": "its 50 controls and 12 observations reported measured-pass",
+      "issue": "Negative controls intentionally have unresolved or measured-fail expected observations. All50 must meet expected outcomes; only12 product observations are measured-pass.",
+      "suggestion": "all 50 controls met their expected outcomes and all 12 observations reported measured-pass"
+    },
+    {
+      "files": [
+        "STATE.md",
+        "evidence/RELEASE.md"
+      ],
+      "issue": "Older Current/pending-adoption prose can appear contradictory despite current adopted topsection.",
+      "suggestion": "Explicitly mark older STATE current headings as historical and superseded; put RELEASE prior unadopted sentence in checkpoint past tense."
+    }
+  ],
+  "otherFacts": "Pilot metrics, zero accepted/provisional distinction, STOP bindings,12 package commands, unchanged core vs bounded JS path transform, and cloud-only native/AT absence all match retained evidence.",
+  "bindings": {
+    "STATE.md": "d14eeb0c57d63ccc9ca2de8a547e4950f31f7518dbecd2f19b173a261b63c98f",
+    "evidence/RELEASE.md": "a9ac10b889480ba2eda704ffac9d8e262c2786dca8a25903060cacdcd29a2f40",
+    "evidence/P57-APPROVED-PILOT.md": "bf0f9bc9b65eb41edd02170ea008d19ee32199b9211c97526aeed057dbfbb340",
+    "evidence/OFFLINE-CANDIDATE-PACKAGE.md": "16bca9bdea2cd34c68ad878a8a6bc6d302d738f23888b90c7d3b9c2c31ba06cd"
+  }
+}

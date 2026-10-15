@@ -1,0 +1,102 @@
+{
+  "files": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/input/node_modules/playwright-core/lib/coreBundle.js",
+      "bytes": 3584989,
+      "sha256": "2325ca4c1c83070e89dc49fb82525508f0a68e0cf12e2a624277968da216b7e0"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/input/node_modules/playwright-core/package.json",
+      "bytes": 876,
+      "sha256": "1d6b6f80ffb0c52865af0f9fe01abf2140df019e49ae6ac134605e462d583f3a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-000.json",
+      "bytes": 3086523,
+      "sha256": "473649653c7c80def55ecdbc825eed5b603525723723b38f34ee5744f9ffec53"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-001.json",
+      "bytes": 3054600,
+      "sha256": "691c13fdbe2dd12341ab42458224eeff7a48807b16f1ed37e433bf2a7fa7a4dc"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-002.json",
+      "bytes": 3085954,
+      "sha256": "6e7507fd7648f586e3a5a7032eb246c7f6c717cead1b30c49d9ad082d37316ea"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-003.json",
+      "bytes": 3059652,
+      "sha256": "bdde9b1c6aa8c771a328eefa9d3d6d7f9726af29f6ca79cea08f5a13a75636f3"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-004.json",
+      "bytes": 3086110,
+      "sha256": "831e8547279ff69ccedee4270e02bd51366615182c0a3d8df08648137b9b9c7d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-005.json",
+      "bytes": 3059411,
+      "sha256": "9cdbf4369ab0a3fe194f975236786b22e9effe14e9b11cfcb47ddd2eb17de2fa"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-006.json",
+      "bytes": 3111559,
+      "sha256": "25de6051636aed7f0f7238701219a70e50e4ac51953c2667da65f9383053962c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-007.json",
+      "bytes": 3055792,
+      "sha256": "1f798660cf804683d4bd7703263e5c031171192798c95299d1a2bf337ba240d7"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-008.json",
+      "bytes": 3111933,
+      "sha256": "8eee1d739940368f0a3d17c4ed45d5b25f7d2f65ed92e35018ad8d9887c08164"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-009.json",
+      "bytes": 3055962,
+      "sha256": "c7f19594ad903172978324f40ad9e3392763847e0e299a3895231b4ff2859d3b"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-010.json",
+      "bytes": 3111845,
+      "sha256": "040265b1439c6f2a1cbcd408a3f59cce123c8818aeda0b8a17455dee90778f3b"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/node-p390-00-11-011.json",
+      "bytes": 3055880,
+      "sha256": "13753f8895f27c12c828994acd36b4c28a4da032247edafffc1aac9dd9d20746"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11/jobs/p390-00-11/artifacts/p390-00-11/controls-p390-00-11.json",
+      "bytes": 1780774,
+      "sha256": "7bbbc2c42e27581576ebce0664348abb4d970d342534842bd95aed9ca677fee3"
+    }
+  ],
+  "unchangedSampleTextSha256": "9cb9c70100e1657cac9b7259cb5490ca36cd177b33fedbbe12dd627c17d7a5c6",
+  "prospectiveDelta": "one import plus one product call replacement only",
+  "installed": false
+}

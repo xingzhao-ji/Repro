@@ -1,0 +1,26 @@
+{
+  "status": "REVIEW_CLEAR_OFFLINE_ONLY",
+  "candidateSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+  "independentTests": {
+    "tests": 108,
+    "passed": 108,
+    "failed": 0,
+    "skipped": 0,
+    "durationMs": 11020.452946,
+    "exitCode": 0,
+    "log": "test-final-revised-run.txt",
+    "candidateSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+  },
+  "sourceBindingsVerified": 19,
+  "sampleTextSha256": "9cb9c70100e1657cac9b7259cb5490ca36cd177b33fedbbe12dd627c17d7a5c6",
+  "archivedRowsByteAndNativeEquivalent": 12,
+  "benchmarkRecordsReviewed": 72,
+  "openCodeFindings": [],
+  "memoryReductionEstablished": false,
+  "below896MiBGateEstablished": false,
+  "browserIntegrationRun": false,
+  "runtimeAuthorized": false,
+  "candidateInstalled": false,
+  "oldPilotAcceptanceUnchanged": true,
+  "nextTechnicalInvestigation": "Bounded incremental receiver decoder avoiding the full tagged intermediate; same complete evidence and native-equivalence/failure tests required."
+}

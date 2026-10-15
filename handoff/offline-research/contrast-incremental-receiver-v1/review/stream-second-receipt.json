@@ -1,0 +1,54 @@
+{
+  "command": [
+    "node",
+    "--max-old-space-size=384",
+    "--test",
+    ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming.test.mjs"
+  ],
+  "exitCode": 0,
+  "timeoutSeconds": 45,
+  "elapsedSeconds": 23.155210383003578,
+  "bindings": {
+    "utc": "2026-10-15T08:04:30.868962+00:00",
+    "files": [
+      {
+        "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+        "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+        "bytes": 13991
+      },
+      {
+        "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming.test.mjs",
+        "sha256": "c8b17f3700d133eabe201e4de35e4c73299dc9fad4f3e6c942add2b35abb0680",
+        "bytes": 13415
+      },
+      {
+        "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/independent.test.mjs",
+        "sha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690",
+        "bytes": 10074
+      },
+      {
+        "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/native-oracle.mjs",
+        "sha256": "411033a90851d363763e2e4e59aca74aee001cee2f543444138d36d8fe8a224f",
+        "bytes": 1787
+      }
+    ]
+  },
+  "after": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+      "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming.test.mjs",
+      "sha256": "c8b17f3700d133eabe201e4de35e4c73299dc9fad4f3e6c942add2b35abb0680"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/independent.test.mjs",
+      "sha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/native-oracle.mjs",
+      "sha256": "411033a90851d363763e2e4e59aca74aee001cee2f543444138d36d8fe8a224f"
+    }
+  ]
+}

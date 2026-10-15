@@ -1,0 +1,489 @@
+{
+  "schemaVersion": 1,
+  "status": "OFFLINE_INCREMENTAL_RECEIVER_COMPLETE_END_TO_END_MEMORY_REMEDY_NOT_ESTABLISHED",
+  "utc": "2026-10-15T08:16:35.513187+00:00",
+  "candidate": {
+    "path": "author/transport.mjs",
+    "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+    "installed": false,
+    "fullIntermediateDecodedGraphRemoved": true
+  },
+  "authorTestGroups": {
+    "pass": 17,
+    "fail": 0
+  },
+  "independentTests": {
+    "frozenRegression": {
+      "tests": 108,
+      "pass": 107,
+      "fail": 1,
+      "failure": "Malformed x now fails immediately TRANSPORT_BAD_JSON instead of eventual ENCODED_LIMIT/CHUNK_LIMIT; exact original test retained"
+    },
+    "explicitlyAdjustedRegression": {
+      "tests": 108,
+      "pass": 108,
+      "fail": 0,
+      "onlyChange": "Accept early BAD_JSON in original malformed-stream bounded-failure assertion"
+    },
+    "independentStreaming": {
+      "tests": 86,
+      "pass": 86,
+      "fail": 0,
+      "deterministicMutations": 1728
+    },
+    "instrumentedCleanup": {
+      "tests": 13,
+      "pass": 13,
+      "fail": 0
+    }
+  },
+  "benchmark": {
+    "status": "OFFLINE_DESCRIPTIVE_COMPARISON",
+    "workers": 12,
+    "gateMiB": 896,
+    "gateChanged": false,
+    "gateComplianceEstablished": false,
+    "candidateInstalled": false,
+    "browserStarted": false,
+    "containerStarted": false,
+    "allPassed": true,
+    "experiments": {
+      "end-to-end": {
+        "pairs": [
+          {
+            "trial": 1,
+            "order": [
+              "prior",
+              "incremental"
+            ],
+            "prior": {
+              "processMaxRSSKiB": 241560,
+              "processMaxRSSMiB": 235.8984375,
+              "archivedRowsElapsedMs": 5684.540831,
+              "allCasesElapsedMs": 5685.351911000001,
+              "archivedObservedHeapDeltaMedianMiB": 66.82292175292969,
+              "checkpointTotals": [
+                320,
+                315,
+                320,
+                315,
+                320,
+                315,
+                325,
+                315,
+                325,
+                315,
+                325,
+                315,
+                20
+              ]
+            },
+            "incremental": {
+              "processMaxRSSKiB": 246948,
+              "processMaxRSSMiB": 241.16015625,
+              "archivedRowsElapsedMs": 6675.297158,
+              "allCasesElapsedMs": 6676.267986,
+              "archivedObservedHeapDeltaMedianMiB": 72.94612503051758,
+              "checkpointTotals": [
+                320,
+                315,
+                320,
+                315,
+                320,
+                315,
+                325,
+                315,
+                325,
+                315,
+                325,
+                315,
+                20
+              ]
+            },
+            "rssDifferenceKiBIncrementalMinusPrior": 5388,
+            "rssDifferenceMiBIncrementalMinusPrior": 5.26171875,
+            "archivedElapsedDifferenceMsIncrementalMinusPrior": 990.756327,
+            "checkpointCountsEqual": true,
+            "allEquivalenceAssertionsPassed": true
+          },
+          {
+            "trial": 2,
+            "order": [
+              "incremental",
+              "prior"
+            ],
+            "prior": {
+              "processMaxRSSKiB": 241488,
+              "processMaxRSSMiB": 235.828125,
+              "archivedRowsElapsedMs": 5389.963646999999,
+              "allCasesElapsedMs": 5390.814775999998,
+              "archivedObservedHeapDeltaMedianMiB": 66.76274108886719,
+              "checkpointTotals": [
+                320,
+                315,
+                320,
+                315,
+                320,
+                315,
+                325,
+                315,
+                325,
+                315,
+                325,
+                315,
+                20
+              ]
+            },
+            "incremental": {
+              "processMaxRSSKiB": 247040,
+              "processMaxRSSMiB": 241.25,
+              "archivedRowsElapsedMs": 6079.771361999998,
+              "allCasesElapsedMs": 6080.796572999998,
+              "archivedObservedHeapDeltaMedianMiB": 72.96963882446289,
+              "checkpointTotals": [
+                320,
+                315,
+                320,
+                315,
+                320,
+                315,
+                325,
+                315,
+                325,
+                315,
+                325,
+                315,
+                20
+              ]
+            },
+            "rssDifferenceKiBIncrementalMinusPrior": 5552,
+            "rssDifferenceMiBIncrementalMinusPrior": 5.421875,
+            "archivedElapsedDifferenceMsIncrementalMinusPrior": 689.807714999999,
+            "checkpointCountsEqual": true,
+            "allEquivalenceAssertionsPassed": true
+          },
+          {
+            "trial": 3,
+            "order": [
+              "prior",
+              "incremental"
+            ],
+            "prior": {
+              "processMaxRSSKiB": 260276,
+              "processMaxRSSMiB": 254.17578125,
+              "archivedRowsElapsedMs": 5318.229464,
+              "allCasesElapsedMs": 5319.101124000001,
+              "archivedObservedHeapDeltaMedianMiB": 66.76187896728516,
+              "checkpointTotals": [
+                320,
+                315,
+                320,
+                315,
+                320,
+                315,
+                325,
+                315,
+                325,
+                315,
+                325,
+                315,
+                20
+              ]
+            },
+            "incremental": {
+              "processMaxRSSKiB": 247016,
+              "processMaxRSSMiB": 241.2265625,
+              "archivedRowsElapsedMs": 6041.945387999998,
+              "allCasesElapsedMs": 6042.892703999998,
+              "archivedObservedHeapDeltaMedianMiB": 72.90242385864258,
+              "checkpointTotals": [
+                320,
+                315,
+                320,
+                315,
+                320,
+                315,
+                325,
+                315,
+                325,
+                315,
+                325,
+                315,
+                20
+              ]
+            },
+            "rssDifferenceKiBIncrementalMinusPrior": -13260,
+            "rssDifferenceMiBIncrementalMinusPrior": -12.94921875,
+            "archivedElapsedDifferenceMsIncrementalMinusPrior": 723.7159239999983,
+            "checkpointCountsEqual": true,
+            "allEquivalenceAssertionsPassed": true
+          }
+        ],
+        "lowerRSSPairs": 1,
+        "higherRSSPairs": 2,
+        "equalRSSPairs": 0,
+        "rssDifferenceMedianMiB": 5.26171875,
+        "rssDifferenceRangeMiB": [
+          -12.94921875,
+          5.421875
+        ]
+      },
+      "receiver-only": {
+        "pairs": [
+          {
+            "trial": 1,
+            "order": [
+              "prior",
+              "incremental"
+            ],
+            "prior": {
+              "processMaxRSSKiB": 282348,
+              "processMaxRSSMiB": 275.73046875,
+              "archivedRowsElapsedMs": 1560.4199270000004,
+              "allCasesElapsedMs": 1560.7205340000005,
+              "archivedObservedHeapDeltaMedianMiB": 54.76835632324219,
+              "checkpointTotals": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ]
+            },
+            "incremental": {
+              "processMaxRSSKiB": 267104,
+              "processMaxRSSMiB": 260.84375,
+              "archivedRowsElapsedMs": 3237.864422000002,
+              "allCasesElapsedMs": 3238.443310000002,
+              "archivedObservedHeapDeltaMedianMiB": 23.868896484375,
+              "checkpointTotals": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ]
+            },
+            "rssDifferenceKiBIncrementalMinusPrior": -15244,
+            "rssDifferenceMiBIncrementalMinusPrior": -14.88671875,
+            "archivedElapsedDifferenceMsIncrementalMinusPrior": 1677.4444950000016,
+            "checkpointCountsEqual": true,
+            "allEquivalenceAssertionsPassed": true
+          },
+          {
+            "trial": 2,
+            "order": [
+              "incremental",
+              "prior"
+            ],
+            "prior": {
+              "processMaxRSSKiB": 282352,
+              "processMaxRSSMiB": 275.734375,
+              "archivedRowsElapsedMs": 1568.9087759999995,
+              "allCasesElapsedMs": 1569.1989069999993,
+              "archivedObservedHeapDeltaMedianMiB": 55.18175506591797,
+              "checkpointTotals": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ]
+            },
+            "incremental": {
+              "processMaxRSSKiB": 268228,
+              "processMaxRSSMiB": 261.94140625,
+              "archivedRowsElapsedMs": 3003.522149999998,
+              "allCasesElapsedMs": 3004.047924999998,
+              "archivedObservedHeapDeltaMedianMiB": 23.810932159423828,
+              "checkpointTotals": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ]
+            },
+            "rssDifferenceKiBIncrementalMinusPrior": -14124,
+            "rssDifferenceMiBIncrementalMinusPrior": -13.79296875,
+            "archivedElapsedDifferenceMsIncrementalMinusPrior": 1434.6133739999984,
+            "checkpointCountsEqual": true,
+            "allEquivalenceAssertionsPassed": true
+          },
+          {
+            "trial": 3,
+            "order": [
+              "prior",
+              "incremental"
+            ],
+            "prior": {
+              "processMaxRSSKiB": 282128,
+              "processMaxRSSMiB": 275.515625,
+              "archivedRowsElapsedMs": 1525.7103340000012,
+              "allCasesElapsedMs": 1525.994928000002,
+              "archivedObservedHeapDeltaMedianMiB": 54.804351806640625,
+              "checkpointTotals": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ]
+            },
+            "incremental": {
+              "processMaxRSSKiB": 268640,
+              "processMaxRSSMiB": 262.34375,
+              "archivedRowsElapsedMs": 2963.178955999998,
+              "allCasesElapsedMs": 2963.893488999998,
+              "archivedObservedHeapDeltaMedianMiB": 23.8031005859375,
+              "checkpointTotals": [
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2,
+                2
+              ]
+            },
+            "rssDifferenceKiBIncrementalMinusPrior": -13488,
+            "rssDifferenceMiBIncrementalMinusPrior": -13.171875,
+            "archivedElapsedDifferenceMsIncrementalMinusPrior": 1437.4686219999967,
+            "checkpointCountsEqual": true,
+            "allEquivalenceAssertionsPassed": true
+          }
+        ],
+        "lowerRSSPairs": 3,
+        "higherRSSPairs": 0,
+        "equalRSSPairs": 0,
+        "rssDifferenceMedianMiB": -13.79296875,
+        "rssDifferenceRangeMiB": [
+          -14.88671875,
+          -13.171875
+        ]
+      }
+    },
+    "limitations": [
+      "Only three paired trials; no inferential or acceptance conclusion.",
+      "Fresh-process maxRSS includes fixture setup, explicit between-row GC and result assertions.",
+      "End-to-end uses one shared Node heap and equally retained source graph; final incremental output overlaps remote source while reading.",
+      "Receiver-only retains identical precomputed wire chunks in both modes and excludes live browser/transport.",
+      "Heap checkpoints are not an allocation profiler; internal peaks may be missed.",
+      "No browser process or cgroup measured; unchanged 896 MiB gate remains untested.",
+      "Three-pair order is alternated but cannot perfectly balance first positions."
+    ]
+  },
+  "allocationProfileTaken": false,
+  "recommendation": "Keep candidate uninstalled as a research artifact. Isolated receiver RSS fell in all3 pairs, while end-to-end RSS increased in2 of3 and all6 timing pairs worsened. Address parser cost and graph-lifetime overlap before any future integration proposal.",
+  "unchangedConstraints": {
+    "memoryGateMiB": 896,
+    "memoryGateBytes": 939524096,
+    "observationHold": "PENDING_NOT_ADOPTED",
+    "runtimeInstalled": false,
+    "browserStarts": 0,
+    "containerStarts": 0,
+    "published": false,
+    "permissionChanges": false
+  },
+  "historicalPilot": {
+    "stillSTOP": true,
+    "starts": 1,
+    "acceptedRows": 0,
+    "memoryPeakBytes": 943087616,
+    "memoryPeakMiB": 899.3984375,
+    "excessBytes": 3563520,
+    "distinctFirstPostCloseIntervalObserved": false
+  },
+  "preservedAdverseEvidence": [
+    "Initial implementation failures",
+    "Small-string-budget regression before fix",
+    "Original frozen regression107of108",
+    "Initial independent mechanism test correction",
+    "Initial zero-worker Node path launch failure",
+    "All six paired RSS and elapsed results"
+  ],
+  "evidence": [
+    {
+      "path": "AUTHORIZATION.json",
+      "sha256": "2bacf00ba7f871339fe433a9891e186e0d361f48b23df03d35aa6cc6fad26e1f"
+    },
+    {
+      "path": "author/RESULT.md",
+      "sha256": "9ac74cce640fa9f78c7674e810b375e0444561f73b5453fb1735653e0da70b1c"
+    },
+    {
+      "path": "author/prospective-caller.diff",
+      "sha256": "6a6210fa28c3e6a21d5a0309d7afac48b0666facad0456bb99bfc34c91f67384"
+    },
+    {
+      "path": "review/functional-clearance.json",
+      "sha256": "9ae227e51c692ea73d20d2b2e699885072d36b87bb126e8444c542f4fa176ecf"
+    },
+    {
+      "path": "review/benchmark-result-review.json",
+      "sha256": "124a10dd0d0bbb6d8327a1f65a014bf49c76fffb5874df6e8fc6bd16a4bc3f71"
+    },
+    {
+      "path": "benchmark/summary.json",
+      "sha256": "5db38aab4ef70c4d25f2cf6b19b17af07daa001099f308f46b2c09037b0e84b2"
+    },
+    {
+      "path": "benchmark/command-receipts.json",
+      "sha256": "658ee9baeaa765f7fa1139e2e3d26fe70f9df74b7f0c467844f3eb21160808ef"
+    },
+    {
+      "path": "root-metrics-review.json",
+      "sha256": "aafd8ca9983f01df519a9197e263d664636da2b69eb6dcdf12abc10837349830"
+    },
+    {
+      "path": "RESULT.md",
+      "sha256": "f22af79c1748b1192e18008a52c529135a428e05a84e59cba9f73f066699043b"
+    }
+  ]
+}

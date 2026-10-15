@@ -1,0 +1,86 @@
+{
+  "utc": "2026-10-14T20:19:29.718792+00:00",
+  "outcome": "Independent bounded nonbrowser reduction/preflight verification completed; no new product defect. Current browser acceptance blocked/unrun and real capsule minimality unverified.",
+  "head": "370ebb452f1b826d9885bcc61520d860dc9bb22e",
+  "sourceAdapterSha256": "2727f237d460b98d620d5e2620547305d6d6e4d6e1c3c093f56419b2d475ee60",
+  "sourceReducerSha256": "cc2597b309f315750a1894b916784f0e859ff8156dcbeb563898d4be01a2193e",
+  "model": {
+    "uniqueDeterministicTables": 320,
+    "uniqueControls": 32,
+    "formats": 3,
+    "freshProcessesPerFormat": 2,
+    "reducerInvocations": 2112,
+    "syntheticCallbacks": 13596,
+    "matchingSemanticTranscripts": 6,
+    "semanticTranscriptSha256": "c0bcbf8aa82196c20a99a07509adb41170a20d065fad8b32f8b39c03d8744e6a",
+    "locallyMinimalTablesLargerThanGlobalMinimum": 23,
+    "scope": "Finite deterministic model decisions only; no browser evidence."
+  },
+  "preflight": {
+    "finalPassingMatrixCalls": 420,
+    "finalMatrixArtifacts": 360,
+    "retainedFailedVerifierConfigurations": 2,
+    "retainedFailedVerifierCalls": 280,
+    "allActualAdapterCalls": 700,
+    "allResultFiles": 700,
+    "allArtifacts": 600,
+    "actualLaunchAttempts": 0,
+    "actualListenAttempts": 0,
+    "guardOnlySentinelTestCalls": {
+      "launch": 1,
+      "listen": 1
+    },
+    "assertionsExecuted": 0,
+    "scope": "Actual rejected-input/pre-cancelled paths only; no replay acceptance."
+  },
+  "independentEvidenceAuditChecks": {
+    "historical": 879,
+    "model": 50308,
+    "preflight": 5853,
+    "failedFinalChecks": 0,
+    "scope": "Evidence-audit checks, not product source tests."
+  },
+  "retainedVerifierFailures": [
+    "Model launcher missing existing Node on cleared PATH; zero child processes before correction.",
+    "Preflight original descriptor restoration failure after 140 source calls.",
+    "Preflight v2 nonconfigurable shadow deletion failure after 140 source calls.",
+    "Initial historical audit Counter bookkeeping error; initial JSON retained.",
+    "Initial root sealing collector expected a different audit manifest schema; corrected before manifest/receipt writes with no product execution."
+  ],
+  "historicalBrowserEvidence": {
+    "benchmarkRuns": 40,
+    "acceptedReductionRuns": 6,
+    "fixedReducedRun": 1,
+    "traceObservationsVerified": 47,
+    "scope": "Historical harness only; current candidate browser acceptance unrun."
+  },
+  "repositoryFilesVerified": 182,
+  "onlyChangedRepositoryFile": "STATE.md",
+  "priorStatePreserved": true,
+  "priorReportManifestEntriesVerified": 134,
+  "modelManifestEntriesVerified": 55,
+  "preflightManifestEntriesVerified": 1335,
+  "auditManifestEntriesVerified": 8,
+  "reportSha256": "6d0671abb62744737a428a49a5dfc5408cf908f574536feb4a3e975393a09347",
+  "reportManifestSha256": "83638d637a9ec0aa3a93c7a3bcb74c9d85eb17a2af779acaa108ebb91bcc1f81",
+  "reportManifestEntriesVerified": 1415,
+  "reportManifestTotalBytes": 57524801,
+  "finalPreservationSha256": "6fce4e9feb1e79c8ba9f75c246b94c8b4d87d45e8d9e4eb20c295f565e86e1fe",
+  "subtaskReceipts": {
+    "reference-model": "fa5dd3f13e52eab2dcafe5ad64a04ebf7a6569dcf5b4dcf81229dc77fd0df4d6",
+    "audit": "5a178ecc7ee80fc58000003ac96b56558f1f543054a1c1039e07857493dea1e3"
+  },
+  "preflightAuditReceiptSha256": "cd70caecfe42af304058a9806fc09be9348958d15c4a083d5e5f62e35026dfa7",
+  "newBrowserRuns": 0,
+  "newDockerOperations": 0,
+  "resourceSecurityChanges": 0,
+  "externalWrites": 0,
+  "authenticationRetries": 0,
+  "newProductEdits": 0,
+  "currentBrowserAcceptance": "BLOCKED / UNRUN",
+  "actualBrowserRepeatability": "UNRUN for final startup-repair candidate",
+  "currentCapsuleMinimality": "UNVERIFIED: every final deletion neighbor is MISSING_STEPS before assertion",
+  "remainingActions": "remaining-actions.json",
+  "runningCommands": false,
+  "nextStep": "Retain verified startup fix and local evidence. Browser work needs an evidence-backed equivalent capacity strategy within current limits. Minimality additionally needs a supported final deletion neighborhood under the unchanged relevant oracle. No new strategy is selected or boundary change authorized."
+}

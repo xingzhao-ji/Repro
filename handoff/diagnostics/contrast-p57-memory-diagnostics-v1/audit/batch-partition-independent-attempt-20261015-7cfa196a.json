@@ -1,0 +1,15 @@
+{
+  "createdUtc": "2026-10-15T02:33:16.060838+00:00",
+  "status": "INTERMEDIATE_REVIEW_ATTEMPT_FAILED_SOURCE_UPDATING",
+  "command": "node audit/batch-partition-independent-20261015-7cfa196a.mjs",
+  "exitCode": 1,
+  "observedError": "SyntaxError: The requested module './batch-partition.mjs' does not provide an export named 'assertBatchAcceptanceReady'",
+  "stage": "execFileSync of changing author batch-partition-controls.mjs after independent mutation assertions; no PASS receipt emitted",
+  "interpretation": "Controls and module were observed in different intermediate revisions during author work. Await steady source before review; not a frozen-source defect.",
+  "sourceHashesAtFailure": {
+    "batch-partition.mjs": "e6792f2774f6930cdc15397dc34bf962de6ac0b691c0eb0f9492de066874ea09",
+    "batch-partition-controls.mjs": "d1d54c2bdb54168301e6526fe6064cf4c9359a4ec054cd1e679d88339b54e677",
+    "batch-plan.json": "1b20369ecb258a59de0613dfefe7a41ddca957a5ca69590306e0c80cec0a2283"
+  },
+  "runtime": "UNRUN; no runtime or browser performed"
+}

@@ -1,0 +1,46 @@
+{
+  "head": "823c3751f1c02a834d713665fa89927b618530f2",
+  "gitStatus": " M STATE.md\n?? evidence/BROWSER-COMPILED-RUNNER.md\n?? evidence/BROWSER-INIT-DIAGNOSTIC.md\n?? evidence/BROWSER-RESOURCE-DIAGNOSIS.md\n",
+  "files": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/final-receipt.json",
+      "bytes": 4341,
+      "sha256": "97c10f818109d852804b3ab8ed0ba54d12fb38387fd5ce530f878e5d0eb101c5"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/artifact-manifest.json",
+      "bytes": 21311,
+      "sha256": "a37a8e32f938214f0727e5f75b2d408663ef7e106abb683e7bed33dfc474c20d"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+      "bytes": 13991,
+      "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.mjs",
+      "bytes": 7800,
+      "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+    },
+    {
+      "path": "STATE.md",
+      "bytes": 44521,
+      "sha256": "5ddcae79bf1e9b5c90e7661a45c4edaf9bed9c89a6ffc8f7fd70aaa3f11a76d5"
+    },
+    {
+      "path": "evidence/BROWSER-COMPILED-RUNNER.md",
+      "bytes": 6488,
+      "sha256": "2de7137160ca24da841793b0330f804936ec9ef3b4835abac255f624be7bb7a0"
+    },
+    {
+      "path": "evidence/BROWSER-INIT-DIAGNOSTIC.md",
+      "bytes": 3650,
+      "sha256": "35d9f9391ef0910158421f153c18491e528353b9ab2c25cd9549409d064ecc7b"
+    },
+    {
+      "path": "evidence/BROWSER-RESOURCE-DIAGNOSIS.md",
+      "bytes": 4035,
+      "sha256": "f4431aa1739f6546ca00b19f736ea091bdd3674a182e434fe15fa10e7d09d376"
+    }
+  ]
+}

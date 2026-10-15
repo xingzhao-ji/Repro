@@ -1,0 +1,1121 @@
+{
+  "schemaVersion": 1,
+  "status": "FOCUSED_PREPARED_SOURCE_REVIEW_PASS_NOT_EXECUTED",
+  "createdAt": "2026-10-15T02:35:43.145Z",
+  "frozenSources": {
+    "contrast-p57-memory-batch-probe.mjs": "9b8f407a554434f793bd93b7cf50cf145adfba828d6660c6b49896fe82da7053",
+    "contrast-p57-memory-batch-inputs.json": "1d3102b0d55538f50522b0e82291556ebc4098cf03b4616e31bcc6801887b08c",
+    "batch-partition.mjs": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824",
+    "batch-plan.json": "0abcd3553b3875fca305670cf6ec4e3ec0ae3af15176013df40a26479422a0dd",
+    "evidence-store.mjs": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a",
+    "selection-state.mjs": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+  },
+  "artifactManifestSha256": "9b4b3f569f433b96d75c9579b5f0015b6cd3dc4420b8c0e946af49eef2631967",
+  "artifactFiles": 68,
+  "assertions": 221,
+  "commands": [
+    {
+      "args": [
+        "--check",
+        "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/contrast-p57-memory-batch-probe.mjs"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "--check",
+        "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/selection-state.mjs"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "--check",
+        "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/batch-partition.mjs"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "args": [
+        "--check",
+        "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/evidence-store.mjs"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "partition",
+      "args": [
+        "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/batch-partition-controls.mjs",
+        "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/contrast/expansion-p57-v3/contrast-p57-v3-inputs.json"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "d7e3d5af2f83a93fdb0bb8466740dcf3e6a3dccc955bf85ab99e19aa7a0bf2bc",
+      "result": {
+        "schemaVersion": 1,
+        "status": "PASS",
+        "scope": "pure source partition only; browser and runtime UNRUN",
+        "frozenManifestSha256": "9299adf0dcc84668d4c5410ae98be6929728b120c918736507f1467e9d998d37",
+        "controlCount": 77,
+        "controls": [
+          {
+            "name": "frozen exact 57 occurrences validate",
+            "status": "PASS"
+          },
+          {
+            "name": "all five subsets preserve original object identities and canonical order",
+            "status": "PASS"
+          },
+          {
+            "name": "selection leaves the full manifest and plan intact",
+            "status": "PASS"
+          },
+          {
+            "name": "unknown batch cannot be selected",
+            "status": "PASS"
+          },
+          {
+            "name": "source revision and probe source additions do not rewrite frozen states",
+            "status": "PASS"
+          },
+          {
+            "name": "duplicate occurrence rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "missing occurrence rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "foreign occurrence rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "altered node hash rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "altered original node identity rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "altered original node text rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "altered original viewport rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "altered original state identity rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "altered selected trial rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "jointly rewritten state and plan hash rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "empty batch rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "duplicate batch ID rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "batch over frozen twelve-node bound rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "rewritten maximum bound rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "mixed state batch rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "occurrence order reversal rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "batch order reversal rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "state order reversal rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "full count mismatch rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "declared batch count mismatch rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "foreign full-manifest binding rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "altered state binding viewport rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "missing batch rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "extra batch rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "changed proposed execution order rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "duplicate proposed execution job rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "per-job limit change rejected",
+            "status": "PASS"
+          },
+          {
+            "name": "aggregate budget cannot masquerade as one job",
+            "status": "PASS"
+          },
+          {
+            "name": "aggregate budget cannot claim authorization",
+            "status": "PASS"
+          },
+          {
+            "name": "completed unresolved observations satisfy source closure without becoming measured pass",
+            "status": "PASS"
+          },
+          {
+            "name": "missing final body artifact rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "changed final body digest rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "changed final body bytes reject batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "missing final selection rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "changed final selection rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "selection snapshot digest mismatch rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "started node without completed artifact rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "node harness error rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "uncompleted product checks reject batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "foreign completed row rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "duplicate completed row rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "missing assigned node rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "incomplete final state rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "second state rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "incomplete checkpoint counters reject batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "missing control artifact rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "missing browser control rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "incomplete browser controls reject batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "page error rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "unexpected request rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "browser cleanup error rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "internal budget expiry rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "global harness error rejects batch closure",
+            "status": "PASS"
+          },
+          {
+            "name": "complete external review prerequisite schema allows completed unresolved observations",
+            "status": "PASS"
+          },
+          {
+            "name": "source completion flag required for acceptance readiness",
+            "status": "PASS"
+          },
+          {
+            "name": "external cleanup review required for acceptance readiness",
+            "status": "PASS"
+          },
+          {
+            "name": "partial external review rejects acceptance readiness",
+            "status": "PASS"
+          },
+          {
+            "name": "foreign external review rejects acceptance readiness",
+            "status": "PASS"
+          },
+          {
+            "name": "artifact closure review required for acceptance readiness",
+            "status": "PASS"
+          },
+          {
+            "name": "resource gate review required for acceptance readiness",
+            "status": "PASS"
+          },
+          {
+            "name": "external review receipt required for acceptance readiness",
+            "status": "PASS"
+          },
+          {
+            "name": "external review receipt hash required for acceptance readiness",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker retains all 57 unresolved observations without claiming measured pass",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker reports mixed observation outcomes without force-green",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker rejects missing batch",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker rejects duplicate batch",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker rejects unfinished final body",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker rejects missing final selection",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker rejects missing external cleanup",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker rejects partial external review",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker rejects missing review",
+            "status": "PASS"
+          },
+          {
+            "name": "actual aggregate checker rejects duplicate review",
+            "status": "PASS"
+          }
+        ]
+      }
+    },
+    {
+      "name": "sampler",
+      "args": [
+        "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/contrast-p57-memory-batch-probe.mjs",
+        "--self-test",
+        "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1/source/inputs/contrast-p57-memory-batch-inputs.json"
+      ],
+      "exitCode": 0,
+      "stdoutSha256": "54d263e7426ebf125d5f73ff499e294354672141c7cdf05585cb8fc9b09cea94",
+      "result": {
+        "status": "pass",
+        "legacy": {
+          "status": "pass",
+          "rectangleControls": 4900,
+          "numericalChecks": 6,
+          "identityPositiveControls": 2,
+          "identityNegativeControls": 14,
+          "math": {
+            "blackWhite": 21,
+            "identical": 1,
+            "inkWhite": 15.865809304375075,
+            "translucentBlackOnWhite": [
+              127.5,
+              127.5,
+              127.5
+            ],
+            "parsed": [
+              24,
+              35,
+              49,
+              0.5
+            ],
+            "bad": [
+              null,
+              null,
+              null,
+              null
+            ]
+          }
+        },
+        "guardControls": {
+          "status": "pass",
+          "surfaceScopePositive": 1,
+          "surfaceScopeNegative": 11,
+          "asymmetricBorderDominantPositive": 1,
+          "emptyInteriorNegative": 1,
+          "firstOpaqueEligibilityPositive": 1,
+          "firstOpaqueEligibilityNegative": 5,
+          "outsidePaintControls": [
+            {
+              "id": "no-effects",
+              "expected": true,
+              "status": "pass"
+            },
+            {
+              "id": "finite-disjoint-shadow",
+              "expected": true,
+              "status": "pass"
+            },
+            {
+              "id": "shadow-offset-crosses-raw-box-gap",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "negative-spread-still-conservative",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "blur-has-no-assumed-bound",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "unknown-shadow",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "multiple-shadow",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "inset-shadow",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "fragmented-shadow",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "filter",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "backdrop",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "mask",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "transform",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "pseudo",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "text-shadow",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "outline",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "animation",
+              "expected": false,
+              "status": "pass"
+            },
+            {
+              "id": "transition",
+              "expected": false,
+              "status": "pass"
+            }
+          ]
+        },
+        "selectionControls": [
+          {
+            "status": "pure-selection-controls-passed",
+            "expectationBasis": "independent-frozen-packet-and-original-html-source",
+            "positive": {
+              "status": "selection-identity-matched",
+              "snapshotSha256": "c4d6d853f9aed38ed04622fbc9b77d77a6768bb7be553baca642e5fbeeac9d1c",
+              "trialCount": 13
+            },
+            "negativeCount": 65,
+            "controls": [
+              {
+                "id": "wrong-root-condition",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-root",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-root",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-route",
+                "status": "rejected"
+              },
+              {
+                "id": "controls-outside-root",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-selected-job",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-job-select",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-job-select",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-selected-option",
+                "status": "rejected"
+              },
+              {
+                "id": "extra-job-option",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-job-option",
+                "status": "rejected"
+              },
+              {
+                "id": "reordered-job-options",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-job-option-label",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-job-identity",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-job-identity",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-0",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-1",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-2",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-3",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-4",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-5",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-6",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-7",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-reason",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-trial-row",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-trial-row",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-trial-label",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-trial-button",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-trial-button",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-group-order",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-row-order",
+                "status": "rejected"
+              },
+              {
+                "id": "no-pressed-button",
+                "status": "rejected"
+              },
+              {
+                "id": "multiple-pressed-buttons",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-aria-pressed",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-selected-row",
+                "status": "rejected"
+              },
+              {
+                "id": "extra-selected-row",
+                "status": "rejected"
+              },
+              {
+                "id": "extra-trial-control",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "stale-inspector-trial",
+                "status": "rejected"
+              },
+              {
+                "id": "loading-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "unavailable-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "busy-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-explanatory-notice",
+                "status": "rejected"
+              },
+              {
+                "id": "inspector-error",
+                "status": "rejected"
+              },
+              {
+                "id": "stale-actual-availability",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-inspector-outcome",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-inspector-reason",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-inspector-identity",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-inspector-identity",
+                "status": "rejected"
+              },
+              {
+                "id": "trial-identity-field-0",
+                "status": "rejected"
+              },
+              {
+                "id": "trial-identity-field-1",
+                "status": "rejected"
+              },
+              {
+                "id": "trial-identity-field-2",
+                "status": "rejected"
+              },
+              {
+                "id": "trial-identity-field-3",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-linked-run",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-linked-run",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-linked-run-id",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-0",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-1",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-2",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-3",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-4",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-5",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-linked-run-outcome",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-linked-run-reason",
+                "status": "rejected"
+              }
+            ],
+            "browserControls": "UNRUN",
+            "productObservation": "UNRUN"
+          },
+          {
+            "status": "pure-selection-controls-passed",
+            "expectationBasis": "independent-frozen-packet-and-original-html-source",
+            "positive": {
+              "status": "selection-identity-matched",
+              "snapshotSha256": "c4d6d853f9aed38ed04622fbc9b77d77a6768bb7be553baca642e5fbeeac9d1c",
+              "trialCount": 13
+            },
+            "negativeCount": 65,
+            "controls": [
+              {
+                "id": "wrong-root-condition",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-root",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-root",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-route",
+                "status": "rejected"
+              },
+              {
+                "id": "controls-outside-root",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-selected-job",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-job-select",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-job-select",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-selected-option",
+                "status": "rejected"
+              },
+              {
+                "id": "extra-job-option",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-job-option",
+                "status": "rejected"
+              },
+              {
+                "id": "reordered-job-options",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-job-option-label",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-job-identity",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-job-identity",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-0",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-1",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-2",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-3",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-4",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-5",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-6",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-field-7",
+                "status": "rejected"
+              },
+              {
+                "id": "job-identity-reason",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-trial-row",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-trial-row",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-trial-label",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-trial-button",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-trial-button",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-group-order",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-row-order",
+                "status": "rejected"
+              },
+              {
+                "id": "no-pressed-button",
+                "status": "rejected"
+              },
+              {
+                "id": "multiple-pressed-buttons",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-aria-pressed",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-selected-row",
+                "status": "rejected"
+              },
+              {
+                "id": "extra-selected-row",
+                "status": "rejected"
+              },
+              {
+                "id": "extra-trial-control",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "stale-inspector-trial",
+                "status": "rejected"
+              },
+              {
+                "id": "loading-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "unavailable-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "busy-inspector",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-explanatory-notice",
+                "status": "rejected"
+              },
+              {
+                "id": "inspector-error",
+                "status": "rejected"
+              },
+              {
+                "id": "stale-actual-availability",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-inspector-outcome",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-inspector-reason",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-inspector-identity",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-inspector-identity",
+                "status": "rejected"
+              },
+              {
+                "id": "trial-identity-field-0",
+                "status": "rejected"
+              },
+              {
+                "id": "trial-identity-field-1",
+                "status": "rejected"
+              },
+              {
+                "id": "trial-identity-field-2",
+                "status": "rejected"
+              },
+              {
+                "id": "trial-identity-field-3",
+                "status": "rejected"
+              },
+              {
+                "id": "missing-linked-run",
+                "status": "rejected"
+              },
+              {
+                "id": "duplicate-linked-run",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-linked-run-id",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-0",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-1",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-2",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-3",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-4",
+                "status": "rejected"
+              },
+              {
+                "id": "linked-run-identity-field-5",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-linked-run-outcome",
+                "status": "rejected"
+              },
+              {
+                "id": "wrong-linked-run-reason",
+                "status": "rejected"
+              }
+            ],
+            "browserControls": "UNRUN",
+            "productObservation": "UNRUN"
+          }
+        ],
+        "geometryPositiveControls": 1,
+        "geometryNegativeControls": 10,
+        "geometryContainmentChecks": 6561,
+        "textMappingPositiveControls": 1,
+        "textMappingNegativeControls": 2,
+        "identityPositiveControls": 3,
+        "identityNegativeControls": 38
+      }
+    }
+  ],
+  "auditAttempts": [
+    {
+      "attempt": 1,
+      "status": "AUDIT_REGEX_FALSE_POSITIVE",
+      "detail": "Initial no-profiler regex matched the unchanged product inspector.locator UI variable. Corrected only the audit regex to detect actual Node inspector imports/GC/profiler tokens; frozen candidate unchanged."
+    },
+    {
+      "attempt": 2,
+      "status": "PASS"
+    }
+  ],
+  "unchanged": [
+    "entire sampler and identity/paint/geometry helpers",
+    "all50 control bodies and assertions",
+    "full57 preflight",
+    "each included original per-node check",
+    "before-state and final body/style/selection checks",
+    "selection module and original pure output"
+  ],
+  "changed": [
+    "lossless immutable full-control/per-node artifact retention with compact checkpoint refs",
+    "exact five ordered subsets around original full57 inputs",
+    "provisional subset completion with separate external cleanup prerequisites",
+    "bounded own-Node memory telemetry"
+  ],
+  "pureStorageEvidence": {
+    "receipt": "lossless-retained-evidence-challenge-20261015.json",
+    "sha256": "09d80121cf7ea42e523c20c56be389fedb01427c623a81e4ec5bc435d8967de6"
+  },
+  "runtimeStatus": "UNRUN; source preparation only, no runtime staging or execution GO",
+  "limits": [
+    "Future RSS improvement and timing feasibility remain hypotheses/estimates.",
+    "Every artifact remains provisional until whole-batch final guards, integrity and independent cleanup review pass.",
+    "Acceptance/aggregate helpers validate prerequisite schemas only; they do not authenticate external review receipts or read artifact contents. The future independent verifier must bind manifest/plan/source/result hashes, verify complete file closure and terminal execution/cleanup evidence.",
+    "Legitimate completed unresolved/failed observations retain nonzero exit and cannot claim contrast PASS.",
+    "Full57 aggregate completion requires exact union of all five fully reviewed batches."
+  ],
+  "effects": {
+    "browser": false,
+    "docker": false,
+    "staging": false,
+    "sourceMutation": false,
+    "priorTaskMutation": false
+  },
+  "scriptSha256": "ef80fe46eedf4614c879ef1c60604e6a3454713d6a0d55623aac1382a2ea2502"
+}

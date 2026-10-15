@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "scope": "author offline regression; no runtime application",
+  "utc": "2026-10-15T08:06:03.509100+00:00",
+  "candidateSha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb",
+  "command": [
+    "timeout",
+    "90s",
+    "node",
+    "--max-old-space-size=256",
+    "--test",
+    "--test-concurrency=1",
+    ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs",
+    ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.test.mjs"
+  ],
+  "exitCode": 0,
+  "groups": 17,
+  "passed": 17,
+  "failed": 0,
+  "outputSha256": "ebfb85ba5342d21becc7e90851ea18593d9a0efe22f9819d8dc94c88fe08ce7a",
+  "readback": "PASS",
+  "activeAuthorWorkers": 0,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "installed": false
+}

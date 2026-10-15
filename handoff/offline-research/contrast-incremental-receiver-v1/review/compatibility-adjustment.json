@@ -1,0 +1,9 @@
+{
+  "originalFile": "independent.test.mjs",
+  "originalSha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690",
+  "adjustedFile": "compatible-regressions.test.mjs",
+  "old": "/ENCODED_LIMIT|CHUNK_LIMIT/",
+  "new": "/ENCODED_LIMIT|CHUNK_LIMIT|BAD_JSON/",
+  "reason": "Invalid x producer now fails on first read with syntax error. Do not delay rejection to exhaust wire budget. Independent tests separately assert first-read failure and valid unterminated string budget termination.",
+  "originalSuiteRetained": true
+}

@@ -1,0 +1,93 @@
+{
+  "planVersion": 1,
+  "status": "frozen-before-execution",
+  "scope": "Independent nonbrowser regression design; no test has been executed by this reviewer.",
+  "baseline": {
+    "src/adapter.ts": "2727f237d460b98d620d5e2620547305d6d6e4d6e1c3c093f56419b2d475ee60",
+    "src/reducer.ts": "cc2597b309f315750a1894b916784f0e859ff8156dcbeb563898d4be01a2193e",
+    "src/oracle.ts": "f69cf7d3585975ceaf289088c3b5ca9ffc5fa43a71ed4b4e3af88a14ac1fb4c7",
+    "src/manifest.ts": "8a2de336c676db5ee1decfd74ea7299583282676ab6681c879931e7e8f6e8e14",
+    "src/evidence-inspector.ts": "0a219a3a604615e8509fc99a0667ad28d95e38a6b388092289a1a10196d41db3",
+    "scripts/hci-case.ts": "b7be9a0a20bf870f070ceebf474c94130e1e7faf222409c496c24ab25466a64e"
+  },
+  "executionRestrictions": {
+    "maxProcessDurationMs": 120000,
+    "maxCombinedStdoutStderrBytes": 2097152,
+    "sequentialProcesses": true,
+    "allowBrowser": false,
+    "allowNetwork": false,
+    "allowDocker": false,
+    "allowAuthentication": false,
+    "allowSourceEditsByReviewer": false,
+    "preserveAllFailures": true,
+    "preserveOriginalCandidateAndReceipts": true,
+    "testExecutionRequiresRootCoordination": true
+  },
+  "guards": [
+    "Patch the actual loaded Playwright chromium.launch with a throwing counter before calling runBrowser; fail if called.",
+    "Patch node:http Server.prototype.listen with a throwing counter; fail if called.",
+    "Assert both guards remain installed before every invocation, counters remain zero afterward, and original descriptors are restored in finally.",
+    "Use unique task-owned output directories, validate immutable input and identities, record complete raw returned evidence and evidence.json hashes.",
+    "Never pass a valid full-core manifest to real runBrowser: only structurally valid unsupported deletion neighbors may enter the real adapter."
+  ],
+  "requiredCases": [
+    {
+      "id": "closure-versus-boundary",
+      "kind": "pure-validation",
+      "inputs": ["remove navigate and its transitive dependents -> []", "remove search-alpha and search-beta -> [navigate]", "remove search-beta -> [navigate, search-alpha]"],
+      "assertions": ["all three dependency-closed candidates pass validateManifest", "naive removal of navigate while preserving alpha/beta fails ACTION_DEPENDENCY", "naive removal of alpha while preserving beta fails ACTION_DEPENDENCY", "expectation, assertion digest, app identity, response schedule, and environment remain unchanged"],
+      "interpretation": "Dependency closure is necessary structural validity; it does not guarantee the registered adapter can execute the frozen experiment."
+    },
+    {
+      "id": "real-preflight-through-reducer",
+      "kind": "actual-adapter-nonbrowser",
+      "actualAdapterCalls": 3,
+      "syntheticTargetFailureCalls": 0,
+      "procedure": "For each valid deletion neighbor call reduce(candidate, guarded actual runBrowser, repetitions=2, maxExecutions=8, maxDurationMs=5000). The first inconclusive baseline stops the reduction after one actual adapter call.",
+      "assertions": ["raw baseline.reason begins MISSING_STEPS", "raw baseline has category verification, outcome inconclusive, appDigest empty, assertionCount zero, null observation, empty events, browser not-launched", "input, assertion, revision, adapter, runner, seed and harness identities are correct", "raw persisted artifact matches the returned evidence excluding its artifact index", "status inconclusive, minimality unverified, no accepted trials, unchanged candidate", "trial.runIds links the actual baseline.id", "trial.reason is the existing safe generic Runner evidence was inconclusive; the target failure is not established. rather than a false identity mismatch"],
+      "expectedBaselineFailure": "Only the final diagnostic-reason expectation fails on preserved reducer cc2597b...; the raw actual adapter rejection and all safety/semantic expectations pass.",
+      "interpretation": "A diagnostic defect is demonstrated without any invented target-failure baseline and without running an assertion or browser."
+    },
+    {
+      "id": "unchanged-oracle-controls",
+      "kind": "pure-oracle-unit",
+      "assertions": ["request 2 / beta / Beta result satisfies the frozen oracle", "request 2 / beta / Alpha result throws exact TargetFailure", "request 1 / alpha throws WRONG_OBSERVATION", "request 1 / beta throws WRONG_OBSERVATION", "request 2 / beta / empty results throws WRONG_FAILURE", "request 2 / beta / unrelated result throws WRONG_FAILURE"],
+      "interpretation": "These are explicit unit observations. An incomplete action sequence cannot be relabeled requirement-satisfied or target-failure to manufacture minimality."
+    },
+    {
+      "id": "narrow-unstarted-evidence-exception",
+      "kind": "explicit-evidence-mutation-controls",
+      "basis": "Clone an actual retained nonbrowser preflight result; label every mutation as unit evidence, never browser evidence.",
+      "assertions": ["empty appDigest is tolerated only for inconclusive/cancelled + zero assertions + null observation", "wrong nonempty appDigest remains identity mismatch", "changed manifest, assertion, app revision, adapter, runner, or seed remains identity mismatch", "changed/missing harness remains harness rejection", "empty appDigest with nonzero assertion count or nonnull observation remains identity mismatch", "conclusive labels with empty appDigest remain rejected; no target failure is accepted", "arbitrary reason text and a sentinel secret are not copied to trial.reason", "raw evidence remains available separately so registered MISSING_STEPS cause is retained"],
+      "interpretation": "The proposed exception corrects an unstarted-result classification only; conclusive acceptance requirements stay unchanged."
+    }
+  ],
+  "optionalFollowupOnlyIfRootNeedsFinalNeighborAggregationCoverage": {
+    "kind": "explicit-unit-model-baseline-with-actual-preflight-neighbors",
+    "procedure": "Use a clearly labeled model runner to provide two valid synthetic frozen target observations only for the exact full core; route all deletion candidates to actual guarded runBrowser. Preserve every model and actual result with origin labels. Never reuse historical browser evidence as a fresh baseline.",
+    "maximumCalls": 7,
+    "syntheticTargetFailureCalls": 2,
+    "actualAdapterCalls": 5,
+    "assertions": ["all final deletion neighbors remain inconclusive and unaccepted", "final manifest stays core", "minimality stays unverified", "trial reasons no longer falsely call known unstarted rejection an identity mismatch", "raw run links retain MISSING_STEPS"],
+    "claimLimit": "Reducer propagation unit coverage only, not a reproduced real baseline or real-browser minimality."
+  },
+  "existingRelevantRegressions": [
+    "tests/manifest.test.ts",
+    "tests/reducer.test.ts",
+    "tests/reducer-review.test.ts",
+    "tests/cli-output-preservation.test.ts"
+  ],
+  "historicalCompatibility": [
+    "tests/evidence-inspector.test.ts and tests/hci-case.test.ts intentionally retain older trial identity-mismatch text with raw MISSING_STEPS. Do not rewrite historical expected evidence merely to match newly corrected diagnostics.",
+    "Avoid changing public text/schema if the existing safe generic inconclusive trial reason and exact linked raw cause suffice.",
+    "Evidence-inspector tests start local HTTP listeners and are not part of this no-network reviewer plan. Root must distinguish any separate authorized existing suite execution from these fail-closed adapter calls."
+  ],
+  "remainingReleaseRequirements": [
+    "If the regression proves the narrow diagnostic defect, create a separate isolated patch and keep original startup-repair files and receipts byte-identical.",
+    "Run the frozen red regression on preserved original code, then the exact same regression on patched code; preserve commands, exit codes, logs, run results and artifacts.",
+    "Verify relevant source, emitted and installed behavior plus strict type/lint/build checks for the final patch, with no assertion or fixture changes.",
+    "Actual browser baseline repeatability, full current browser acceptance, CLI demo and installed-package browser replay remain blocked/unrun until the previously identified execution capacity/prerequisite gate is legitimately resolved.",
+    "Real-capsule minimality remains unverified even after a diagnostic fix. Any new supported deletion model or adapter boundary is a new declared experiment requiring its own independently verified observations under the unchanged relevant oracle.",
+    "No publication, authentication, permission or resource-limit change is part of this task."
+  ]
+}

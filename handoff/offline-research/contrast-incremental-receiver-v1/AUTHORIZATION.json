@@ -1,0 +1,9 @@
+{
+  "utc": "2026-10-15T07:57:13.357700+00:00",
+  "sourceThread": "01a11810-e516-712c-85d8-3a870bf43005",
+  "instruction": "Continue the local memory investigation by eliminating the receiver's full intermediate decoded graph while preserving all evidence and measurement semantics. Use archived inputs, bounded offline tests and independent review; compare allocation/RSS honestly and preserve adverse results. Keep the candidate uninstalled in runtime and the 896 MiB gate unchanged. The observation-only lifetime extension has been presented to the user and is pending approval; do not adopt it yet. No browser/container pilot, publication or permissions changes. Deliver the concrete candidate, regression evidence and recommendation when ready.",
+  "runtimeAuthorized": false,
+  "gateChangesAuthorized": false,
+  "observationHoldApproval": "PENDING_NOT_ADOPTED",
+  "candidateInstalled": false
+}

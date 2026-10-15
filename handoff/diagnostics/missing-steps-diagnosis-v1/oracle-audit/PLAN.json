@@ -1,0 +1,176 @@
+{
+  "schemaVersion": 1,
+  "scope": "Independent source diagnosis and optional deterministic Node VM model of unmodified registered buggy frontend; no browser evidence",
+  "status": "frozen-before-model-execution",
+  "inputs": [
+    {
+      "path": "src/oracle.ts",
+      "sha256": "f69cf7d3585975ceaf289088c3b5ca9ffc5fa43a71ed4b4e3af88a14ac1fb4c7",
+      "bytes": 2286
+    },
+    {
+      "path": "src/adapter.ts",
+      "sha256": "2727f237d460b98d620d5e2620547305d6d6e4d6e1c3c093f56419b2d475ee60",
+      "bytes": 21888
+    },
+    {
+      "path": "src/manifest.ts",
+      "sha256": "8a2de336c676db5ee1decfd74ea7299583282676ab6681c879931e7e8f6e8e14",
+      "bytes": 10653
+    },
+    {
+      "path": "src/reducer.ts",
+      "sha256": "cc2597b309f315750a1894b916784f0e859ff8156dcbeb563898d4be01a2193e",
+      "bytes": 13550
+    },
+    {
+      "path": "src/contracts.ts",
+      "sha256": "f6339968410e28945d1c8990b62440d8e0febb223bd81ae1b0bdbc4401553e33",
+      "bytes": 3270
+    },
+    {
+      "path": "fixtures/browser-search/buggy.js",
+      "sha256": "8ff7967b065d8c87bf22d8a7d8a922141884f171c6e23e06084ec63589af33b4",
+      "bytes": 1167
+    },
+    {
+      "path": "fixtures/browser-search/page.html",
+      "sha256": "6ff8048cfbe0fe068dfd58ca60ca93b008ecfde2c3865cd478606e2f02c7e24a",
+      "bytes": 1168
+    },
+    {
+      "path": "fixtures/browser-search/README.md",
+      "sha256": "5c035114476f91e4e3d3e037e3503511f1d96c565bcba69173ffa9c32df82243",
+      "bytes": 1871
+    },
+    {
+      "path": ".agents/skills/repro-replay-boundaries/SKILL.md",
+      "sha256": "75b5f69c1d87ee13f5114b0015d7240a6812c7f2b366158c30b13eea1f7d6907",
+      "bytes": 3628
+    },
+    {
+      "path": ".agents/skills/repro-independent-verification/SKILL.md",
+      "sha256": "f2e23adf5016701e57a3957f96678e6d902f1569b19fa1636a33ec755fa75b34",
+      "bytes": 4370
+    },
+    {
+      "path": ".agents/skills/repro-dependency-reduction/SKILL.md",
+      "sha256": "78f471f7c284516d8337526774980fd8588a095edfca5e28a47dca076afa47cd",
+      "bytes": 3846
+    }
+  ],
+  "boundaries": {
+    "browser": false,
+    "listener": false,
+    "docker": false,
+    "network": false,
+    "authentication": false,
+    "resourceChanges": false,
+    "sourceEdits": false,
+    "fixedImplementationInspected": false,
+    "writeScope": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/missing-steps-diagnosis-v1/oracle-audit"
+  },
+  "proposedExecution": {
+    "commands": 2,
+    "outerTimeoutSecondsPerCommand": 60,
+    "maximumCombinedLogBytesPerCommand": 1048576,
+    "freshVMPerCase": true,
+    "freshProcessPerCommand": true,
+    "repetitionsPerCasePerCommand": 1,
+    "frozenAssertion": "import actual src/oracle.ts using installed tsx; unchanged EXPECTATION and assertObservation",
+    "fixture": "execute exact fixtures/browser-search/buggy.js in node:vm with a deliberately minimal DOM and deferred in-memory fetch model; parse/check initial HTML state from registered page.html",
+    "cases": [
+      {
+        "id": "no-navigation",
+        "actions": [],
+        "expectation": "fixture never initialized, no observation and no oracle invocation"
+      },
+      {
+        "id": "navigation-only",
+        "actions": [
+          "navigate"
+        ],
+        "expectation": "initial id 0, query em dash, no results; actual oracle WRONG_OBSERVATION"
+      },
+      {
+        "id": "alpha-pending",
+        "actions": [
+          "navigate",
+          "alpha"
+        ],
+        "expectation": "id 1, query alpha, no results; actual oracle WRONG_OBSERVATION"
+      },
+      {
+        "id": "alpha-completed",
+        "actions": [
+          "navigate",
+          "alpha"
+        ],
+        "responses": [
+          1
+        ],
+        "expectation": "id 1, query alpha, Alpha result; actual oracle WRONG_OBSERVATION; source schedule still requires missing request 2"
+      },
+      {
+        "id": "full-before-responses",
+        "actions": [
+          "navigate",
+          "alpha",
+          "beta"
+        ],
+        "responses": [],
+        "expectation": "id 2, query beta, empty result; actual oracle WRONG_FAILURE"
+      },
+      {
+        "id": "full-after-beta",
+        "actions": [
+          "navigate",
+          "alpha",
+          "beta"
+        ],
+        "responses": [
+          2
+        ],
+        "expectation": "id 2, query beta, Beta result; oracle satisfies at this intermediate model state, but actual adapter requires completed [2,1] before assertion"
+      },
+      {
+        "id": "full-after-beta-then-alpha",
+        "actions": [
+          "navigate",
+          "alpha",
+          "beta"
+        ],
+        "responses": [
+          2,
+          1
+        ],
+        "expectation": "id 2, query beta, Alpha result; actual oracle TargetFailure"
+      },
+      {
+        "id": "beta-without-alpha",
+        "actions": [
+          "navigate",
+          "beta"
+        ],
+        "responses": [],
+        "expectation": "actual script issues requestId 1 with query beta; source allowlist rejects this route, source closure never proposes this altered dependency case; oracle WRONG_OBSERVATION"
+      }
+    ],
+    "controls": [
+      "unchanged oracle rejects altered EXPECTATION",
+      "all source bytes verified before and after",
+      "input action and response transcripts plus state checkpoints retained",
+      "no actual fixed implementation inspection",
+      "no real browser/global minimality claim",
+      "complete model outputs compared across the two process repetitions; no timing or randomized values used"
+    ]
+  },
+  "staticDiagnosis": {
+    "closure": "Correct forward dependency closure yields empty, navigate-only, or navigate+alpha final neighbors. All are structurally valid manifests.",
+    "domain": "The browser adapter and frozen oracle define a narrower executable complete-experiment domain than the generic structural reducer candidate domain.",
+    "preflight": "MISSING_STEPS is intentional fail-closed incomplete experiment rejection, corroborated by source and existing tests.",
+    "oracle": "Changing missing-step observations to requirement-satisfied would weaken the frozen oracle; schema-valid does not imply oracle-evaluable.",
+    "fixture": "No buggy fixture defect found beyond the intentional stale-response bug.",
+    "minimality": "Real capsule minimality remains unverified. No patch is justified solely to convert incomplete neighbors into non-preserving outcomes."
+  }
+}

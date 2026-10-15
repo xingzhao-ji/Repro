@@ -1,0 +1,38 @@
+{
+  "status": "PASS",
+  "createdAt": "2026-10-15T03:33:06.197Z",
+  "method": "Offline helper calls with injected I/O only; no browser, Docker, /proc or network.",
+  "sourceSha256": "3302fb8d7e71f7773f42d504449bc0a7f2ee44174925322e28d62e8c00ebae0e",
+  "scriptSha256": "0618ea419e086276b56f9e91615d3576c7c7740dcc347110022ada674dfcb5ce",
+  "checks": 7,
+  "results": [
+    {
+      "name": "successful completion remains provisional on disk and requires actual sink acknowledgement",
+      "status": "PASS"
+    },
+    {
+      "name": "completion full-with-error never self-attests successful final I/O",
+      "status": "PASS"
+    },
+    {
+      "name": "completion partial never self-attests successful final I/O",
+      "status": "PASS"
+    },
+    {
+      "name": "completion throw never self-attests successful final I/O",
+      "status": "PASS"
+    },
+    {
+      "name": "known raw failure retains exact cause while oversized completion does not emit",
+      "status": "PASS"
+    },
+    {
+      "name": "primary close rejection survives independent phase write and context-count failures",
+      "status": "PASS"
+    },
+    {
+      "name": "ordinary non-Z list changes retain every bounded process read as exact offsets",
+      "status": "PASS"
+    }
+  ]
+}

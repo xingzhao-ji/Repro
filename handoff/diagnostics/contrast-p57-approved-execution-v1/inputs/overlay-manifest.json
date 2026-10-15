@@ -1,0 +1,150 @@
+{
+  "schemaVersion": 1,
+  "status": "PREPARED_PENDING_INDEPENDENT_REVIEW_NO_RUNTIME",
+  "baseInput": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input",
+  "files": [
+    {
+      "path": "actual/study/P.html",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/actual/study/P.html",
+      "bytes": 398463,
+      "sha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f",
+      "action": "replace"
+    },
+    {
+      "path": "contrast-p57-approved-batch-inputs.json",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/contrast-p57-approved-batch-inputs.json",
+      "bytes": 95986,
+      "sha256": "0dd78a13a85e6f0290bf9917c33f2face81c1b3bea5e6e94b78e37aa798e4da2",
+      "action": "add"
+    },
+    {
+      "path": "verification-inputs/batch-partition.mjs",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824",
+      "action": "replace"
+    },
+    {
+      "path": "verification-inputs/candidate-binding.mjs",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/candidate-binding.mjs",
+      "bytes": 2096,
+      "sha256": "2b0a23499bb1bdeb33e7cd7242e968251b27c20d969c9d3a503c4bd2afc75766",
+      "action": "add"
+    },
+    {
+      "path": "verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54",
+      "action": "add"
+    },
+    {
+      "path": "verification-inputs/evidence-store.mjs",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a",
+      "action": "replace"
+    },
+    {
+      "path": "verification-inputs/lifecycle-diagnostics.mjs",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906",
+      "action": "add"
+    },
+    {
+      "path": "verification-inputs/resource-probe.mjs",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787",
+      "action": "replace"
+    },
+    {
+      "path": "verification-inputs/selection-state.mjs",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c",
+      "action": "replace"
+    }
+  ],
+  "commands": {
+    "p390-00-11": [
+      "node",
+      "--v8-pool-size=1",
+      "--import",
+      "/work/verification-inputs/resource-probe.mjs",
+      "/work/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "/work/contrast-p57-approved-batch-inputs.json",
+      "/work/.repro-runs/p390-00-11",
+      "p390-00-11"
+    ],
+    "p320-00-10": [
+      "node",
+      "--v8-pool-size=1",
+      "--import",
+      "/work/verification-inputs/resource-probe.mjs",
+      "/work/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "/work/contrast-p57-approved-batch-inputs.json",
+      "/work/.repro-runs/p320-00-10",
+      "p320-00-10"
+    ],
+    "p390-12-23": [
+      "node",
+      "--v8-pool-size=1",
+      "--import",
+      "/work/verification-inputs/resource-probe.mjs",
+      "/work/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "/work/contrast-p57-approved-batch-inputs.json",
+      "/work/.repro-runs/p390-12-23",
+      "p390-12-23"
+    ],
+    "p320-11-21": [
+      "node",
+      "--v8-pool-size=1",
+      "--import",
+      "/work/verification-inputs/resource-probe.mjs",
+      "/work/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "/work/contrast-p57-approved-batch-inputs.json",
+      "/work/.repro-runs/p320-11-21",
+      "p320-11-21"
+    ],
+    "p320-22-32": [
+      "node",
+      "--v8-pool-size=1",
+      "--import",
+      "/work/verification-inputs/resource-probe.mjs",
+      "/work/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "/work/contrast-p57-approved-batch-inputs.json",
+      "/work/.repro-runs/p320-22-32",
+      "p320-22-32"
+    ]
+  },
+  "executionOrder": [
+    "p390-00-11",
+    "p320-00-10",
+    "p390-12-23",
+    "p320-11-21",
+    "p320-22-32"
+  ],
+  "candidateHtmlSha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f",
+  "candidateStylesSha256": "06504d654ace79a91d63504e9ab7e5657ebb96a3ffef3f95adbf54d990f521a8",
+  "candidateStyleTextSha256": "e27742329295816d2a5f0f4fcbf1e15bc5db7811c4dcf937e4f8319f10162dce",
+  "originalManifestSha256": "1d3102b0d55538f50522b0e82291556ebc4098cf03b4616e31bcc6801887b08c",
+  "consumedManifestSha256": "0dd78a13a85e6f0290bf9917c33f2face81c1b3bea5e6e94b78e37aa798e4da2",
+  "packetSha256": "2931a3b104efb5410461669cc6115b457831c8ec0a20b55d8509fddd80740c42",
+  "frozenManifestSha256": "9299adf0dcc84668d4c5410ae98be6929728b120c918736507f1467e9d998d37",
+  "batchPlanSha256": "0abcd3553b3875fca305670cf6ec4e3ec0ae3af15176013df40a26479422a0dd",
+  "sourceScope": "prospective-corrected-css-p57-batch",
+  "callerPath": "verification-inputs/contrast-p57-approved-batch-probe.mjs",
+  "callerSha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54",
+  "sidecar": "<batchId>/lifecycle-source.json",
+  "limits": {
+    "internalMs": 90000,
+    "outerSeconds": 120,
+    "driverSeconds": 90,
+    "newMetadataBytes": 131072,
+    "allDiagnosticBytes": 4194304,
+    "sourceSidecarBytes": 16384
+  },
+  "baselinePreserved": "All files not listed here remain exact. Historical input JSON and historical caller remain original, unexecuted references."
+}

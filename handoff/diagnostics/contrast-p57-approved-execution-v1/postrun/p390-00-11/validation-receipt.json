@@ -1,0 +1,15 @@
+{
+  "utc": "2026-10-15T06:45:41.369811+00:00",
+  "command": [
+    "python3",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/validator/validate-approved-job.py",
+    "--runtime",
+    ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/runtime/p390-00-11",
+    "--job",
+    "p390-00-11"
+  ],
+  "exitCode": 1,
+  "validatorSha256": "83b78b9e928bc32419a84372f028a8ee7232ee256e2f8d7ff22b134b2e64e437",
+  "stdoutSha256": "d17b6fbd4c8b3e018400ebe650a00019457d73e295ecb320405238a74a6a2212",
+  "stderr": ""
+}

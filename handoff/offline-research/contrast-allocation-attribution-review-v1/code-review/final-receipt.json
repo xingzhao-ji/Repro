@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "status": "FOCUSED_REVIEW_COMPLETE_NO_EVIDENCE_BACKED_CORRECTION",
+  "utc": "2026-10-15T08:23:33.423174+00:00",
+  "review": {
+    "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/REVIEW.md",
+    "bytes": 7208,
+    "sha256": "fefb482b18870789d79b64ded0094590cd56671db0f111631018f30d8ba38cad"
+  },
+  "manifest": {
+    "path": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/artifact-manifest.json",
+    "bytes": 489,
+    "sha256": "b9f04328e7d371f962fb040e05181955da2c22d3f13e63e6a4783f150ef93d4f"
+  },
+  "sourceBindingsReadback": 11,
+  "artifactReadback": "PASS",
+  "newCandidateImplemented": false,
+  "testsRun": 0,
+  "benchmarksRun": 0,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "sealedInputsModified": false,
+  "candidateInstalled": false,
+  "frozenRegression": "107/108 preserved",
+  "gateMiB": 896,
+  "gateChanged": false,
+  "observationLifecycleExtensionAdopted": false,
+  "published": false
+}

@@ -1,0 +1,913 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-10-14T20:10:28.166491+00:00",
+  "scope": "Actual final-adapter nonbrowser rejected-input repeatability only; no browser/service/model substitute execution.",
+  "repo": "/workspace/repro-development-rv5abotj/repro",
+  "outputRoot": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/reduction-repeatability-review-v1/preflight",
+  "retainedReduction": {
+    "path": ".repro-runs/cloud-continuation/compiled-test-development-v1/frozen-v3-bounded-node-pools/jobs/core-flow/artifacts/core-flow/1238d4ae-c987-4014-a7f0-a2229fbb844c/reduction.json",
+    "sha256": "7f0fd441cc107b6afd9381c361f0fabc0740d26f79095e472735f6138d41ecd6",
+    "coreManifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+    "minimality": "unverified"
+  },
+  "coreManifest": {
+    "actions": [
+      {
+        "dependsOn": [],
+        "id": "navigate",
+        "kind": "navigate",
+        "value": "/"
+      },
+      {
+        "dependsOn": [
+          "navigate"
+        ],
+        "id": "search-alpha",
+        "kind": "search",
+        "value": "alpha"
+      },
+      {
+        "dependsOn": [
+          "search-alpha"
+        ],
+        "id": "search-beta",
+        "kind": "search",
+        "value": "beta"
+      }
+    ],
+    "adapter": {
+      "id": "synthetic-search-v1",
+      "version": "0.1.0"
+    },
+    "app": {
+      "revision": "buggy",
+      "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+    },
+    "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+    "boundary": {
+      "behavior": "frontend",
+      "database": "none",
+      "externalDependencies": [],
+      "network": "controlled-http"
+    },
+    "classification": "synthetic-training-fixture",
+    "environment": {
+      "browser": "chromium",
+      "clock": "2026-01-01T00:00:00.000Z",
+      "locale": "en-US",
+      "platform": "linux-container",
+      "seed": 1729,
+      "timeoutMs": 10000,
+      "timezoneId": "UTC",
+      "viewport": {
+        "height": 720,
+        "width": 1280
+      }
+    },
+    "expectation": {
+      "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+      "expectedResults": [
+        "Beta synthetic result"
+      ],
+      "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+      "latestQuery": "beta",
+      "latestRequestId": 2
+    },
+    "expectationBasis": "supplied-synthetic-specification",
+    "humanApproval": "not-claimed",
+    "id": "synthetic-search-stale-response-v1",
+    "responses": [
+      {
+        "requestId": 2,
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      {
+        "requestId": 1,
+        "results": [
+          "Alpha synthetic result"
+        ]
+      }
+    ],
+    "runnerVersion": "0.1.0",
+    "schemaVersion": 1
+  },
+  "cases": [
+    {
+      "id": "neighbor-remove-navigate",
+      "kind": "final-dependency-group-neighbor",
+      "removed": [
+        "navigate",
+        "search-alpha",
+        "search-beta"
+      ],
+      "manifest": {
+        "actions": [],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "expected": {
+        "outcome": "inconclusive",
+        "category": "verification",
+        "code": "MISSING_STEPS"
+      },
+      "manifestDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854"
+    },
+    {
+      "id": "neighbor-remove-search-alpha",
+      "kind": "final-dependency-group-neighbor",
+      "removed": [
+        "search-alpha",
+        "search-beta"
+      ],
+      "manifest": {
+        "actions": [
+          {
+            "dependsOn": [],
+            "id": "navigate",
+            "kind": "navigate",
+            "value": "/"
+          }
+        ],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "expected": {
+        "outcome": "inconclusive",
+        "category": "verification",
+        "code": "MISSING_STEPS"
+      },
+      "manifestDigest": "d7cdc6097616a724c232261cda8afc210f5afcce3ed8ec46f71b45e48bfd59a8"
+    },
+    {
+      "id": "neighbor-remove-search-beta",
+      "kind": "final-dependency-group-neighbor",
+      "removed": [
+        "search-beta"
+      ],
+      "manifest": {
+        "actions": [
+          {
+            "dependsOn": [],
+            "id": "navigate",
+            "kind": "navigate",
+            "value": "/"
+          },
+          {
+            "dependsOn": [
+              "navigate"
+            ],
+            "id": "search-alpha",
+            "kind": "search",
+            "value": "alpha"
+          }
+        ],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "expected": {
+        "outcome": "inconclusive",
+        "category": "verification",
+        "code": "MISSING_STEPS"
+      },
+      "manifestDigest": "1b3173e15bf031d04c51ba5e3c8dc373ee1ba0f0e9ba809d01bb6c188140ce37"
+    },
+    {
+      "id": "control-missing-beta-with-noise",
+      "kind": "missing-step-control",
+      "manifest": {
+        "actions": [
+          {
+            "dependsOn": [],
+            "id": "navigate",
+            "kind": "navigate",
+            "value": "/"
+          },
+          {
+            "id": "focus-before",
+            "kind": "noise",
+            "value": "focus",
+            "dependsOn": [
+              "navigate"
+            ]
+          },
+          {
+            "dependsOn": [
+              "navigate"
+            ],
+            "id": "search-alpha",
+            "kind": "search",
+            "value": "alpha"
+          },
+          {
+            "id": "focus-after",
+            "kind": "noise",
+            "value": "focus",
+            "dependsOn": [
+              "navigate"
+            ]
+          }
+        ],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "expected": {
+        "outcome": "inconclusive",
+        "category": "verification",
+        "code": "MISSING_STEPS"
+      },
+      "manifestDigest": "c0048d758c79475f42fcd9d1da2c194aa625e07550de7146065c33badbba071a"
+    },
+    {
+      "id": "control-changed-oracle",
+      "kind": "changed-oracle-control",
+      "manifest": {
+        "actions": [
+          {
+            "dependsOn": [],
+            "id": "navigate",
+            "kind": "navigate",
+            "value": "/"
+          },
+          {
+            "dependsOn": [
+              "navigate"
+            ],
+            "id": "search-alpha",
+            "kind": "search",
+            "value": "alpha"
+          },
+          {
+            "dependsOn": [
+              "search-alpha"
+            ],
+            "id": "search-beta",
+            "kind": "search",
+            "value": "beta"
+          }
+        ],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "0000000000000000000000000000000000000000000000000000000000000000",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "expected": {
+        "outcome": "inconclusive",
+        "category": "verification",
+        "code": "IDENTITY_MISMATCH"
+      },
+      "manifestDigest": "474f06b93a3495f6085c5e96a886f72b6fc30c9333d50467328714183105c5f3"
+    },
+    {
+      "id": "control-undeclared-boundary",
+      "kind": "undeclared-boundary-control",
+      "manifest": {
+        "actions": [
+          {
+            "dependsOn": [],
+            "id": "navigate",
+            "kind": "navigate",
+            "value": "/"
+          },
+          {
+            "dependsOn": [
+              "navigate"
+            ],
+            "id": "search-alpha",
+            "kind": "search",
+            "value": "alpha"
+          },
+          {
+            "dependsOn": [
+              "search-alpha"
+            ],
+            "id": "search-beta",
+            "kind": "search",
+            "value": "beta"
+          }
+        ],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [
+            "https://example.invalid"
+          ],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "expected": {
+        "outcome": "inconclusive",
+        "category": "input",
+        "code": "MANIFEST_VALUE"
+      },
+      "manifestDigest": "c4b26d289a95dfde51e048cc1cceac5e6d7628920f42fb3b4f2a704d0f303faa"
+    },
+    {
+      "id": "control-pre-cancelled",
+      "kind": "pre-cancelled-control",
+      "preCancelled": true,
+      "manifest": {
+        "actions": [
+          {
+            "dependsOn": [],
+            "id": "navigate",
+            "kind": "navigate",
+            "value": "/"
+          },
+          {
+            "dependsOn": [
+              "navigate"
+            ],
+            "id": "search-alpha",
+            "kind": "search",
+            "value": "alpha"
+          },
+          {
+            "dependsOn": [
+              "search-alpha"
+            ],
+            "id": "search-beta",
+            "kind": "search",
+            "value": "beta"
+          }
+        ],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "expected": {
+        "outcome": "cancelled",
+        "category": "cancelled",
+        "code": "CANCELLED"
+      },
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6"
+    }
+  ],
+  "formats": [
+    {
+      "id": "source",
+      "adapter": "src/adapter.ts",
+      "manifest": "src/manifest.ts",
+      "nodeArguments": [
+        "--import",
+        "tsx"
+      ]
+    },
+    {
+      "id": "emitted",
+      "adapter": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/src/adapter.js",
+      "manifest": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/src/manifest.js",
+      "nodeArguments": []
+    },
+    {
+      "id": "installed",
+      "adapter": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/install/node_modules/repro-local/dist/index.js",
+      "manifest": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/install/node_modules/repro-local/dist/index.js",
+      "nodeArguments": []
+    }
+  ],
+  "inputs": [
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/fixtures/browser-search/README.md",
+      "bytes": 1871,
+      "sha256": "5c035114476f91e4e3d3e037e3503511f1d96c565bcba69173ffa9c32df82243"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/fixtures/browser-search/buggy.js",
+      "bytes": 1167,
+      "sha256": "8ff7967b065d8c87bf22d8a7d8a922141884f171c6e23e06084ec63589af33b4"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/fixtures/browser-search/fixed.js",
+      "bytes": 1225,
+      "sha256": "b9579050f425aec6757274b4c007af6fcf55bee084c0a72587bf14ce761fa288"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/fixtures/browser-search/page.html",
+      "bytes": 1168,
+      "sha256": "6ff8048cfbe0fe068dfd58ca60ca93b008ecfde2c3865cd478606e2f02c7e24a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/src/adapter.js",
+      "bytes": 23087,
+      "sha256": "2fce5922c08143a706cfc3119cc8fa078f40b3930eb9c0dd9cf5d2cd35861af9"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/src/contracts.js",
+      "bytes": 329,
+      "sha256": "967511012aebb247e5ccd3492e42f5c4a7e93b0504dc39d908bdb1718e0a9f65"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/src/fixture.js",
+      "bytes": 890,
+      "sha256": "d730978e3c81031ec772164d77cdbc162310e622e7105b65eea6c0b59d15a037"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/src/manifest.js",
+      "bytes": 10948,
+      "sha256": "d03afedc36ee8acc7d02f1b65ca0a1e2d438b2a0ec657bb6171d5c1fb652229c"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/src/oracle.js",
+      "bytes": 2143,
+      "sha256": "5e0833a4e7459b4579155afab1976cc86d9743380d090cbebb132ceee0ea0a83"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/emitted/src/paths.js",
+      "bytes": 3641,
+      "sha256": "7021f67a9486465795ecea67946f8f27d1a4ceea8b0c76a1bb58a0afb41a83f0"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/install/node_modules/repro-local/dist/index.js",
+      "bytes": 70419,
+      "sha256": "e9a0fa611e38db3929563ce6df29a78bb222a11817f7ce4f20945b286719ac66"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/install/node_modules/repro-local/fixtures/browser-search/README.md",
+      "bytes": 1871,
+      "sha256": "5c035114476f91e4e3d3e037e3503511f1d96c565bcba69173ffa9c32df82243"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/install/node_modules/repro-local/fixtures/browser-search/buggy.js",
+      "bytes": 1167,
+      "sha256": "8ff7967b065d8c87bf22d8a7d8a922141884f171c6e23e06084ec63589af33b4"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/install/node_modules/repro-local/fixtures/browser-search/fixed.js",
+      "bytes": 1225,
+      "sha256": "b9579050f425aec6757274b4c007af6fcf55bee084c0a72587bf14ce761fa288"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/browser-lifetime-review-v1/nonbrowser-release/install/node_modules/repro-local/fixtures/browser-search/page.html",
+      "bytes": 1168,
+      "sha256": "6ff8048cfbe0fe068dfd58ca60ca93b008ecfde2c3865cd478606e2f02c7e24a"
+    },
+    {
+      "path": "fixtures/browser-search/README.md",
+      "bytes": 1871,
+      "sha256": "5c035114476f91e4e3d3e037e3503511f1d96c565bcba69173ffa9c32df82243"
+    },
+    {
+      "path": "fixtures/browser-search/buggy.js",
+      "bytes": 1167,
+      "sha256": "8ff7967b065d8c87bf22d8a7d8a922141884f171c6e23e06084ec63589af33b4"
+    },
+    {
+      "path": "fixtures/browser-search/fixed.js",
+      "bytes": 1225,
+      "sha256": "b9579050f425aec6757274b4c007af6fcf55bee084c0a72587bf14ce761fa288"
+    },
+    {
+      "path": "fixtures/browser-search/page.html",
+      "bytes": 1168,
+      "sha256": "6ff8048cfbe0fe068dfd58ca60ca93b008ecfde2c3865cd478606e2f02c7e24a"
+    },
+    {
+      "path": "src/adapter.ts",
+      "bytes": 21888,
+      "sha256": "2727f237d460b98d620d5e2620547305d6d6e4d6e1c3c093f56419b2d475ee60"
+    },
+    {
+      "path": "src/contracts.ts",
+      "bytes": 3270,
+      "sha256": "f6339968410e28945d1c8990b62440d8e0febb223bd81ae1b0bdbc4401553e33"
+    },
+    {
+      "path": "src/fixture.ts",
+      "bytes": 927,
+      "sha256": "2ad01becdbf8d97f07256eb19d9d41edb28e75dea237751b1a4de9c58a5917bc"
+    },
+    {
+      "path": "src/manifest.ts",
+      "bytes": 10653,
+      "sha256": "8a2de336c676db5ee1decfd74ea7299583282676ab6681c879931e7e8f6e8e14"
+    },
+    {
+      "path": "src/oracle.ts",
+      "bytes": 2286,
+      "sha256": "f69cf7d3585975ceaf289088c3b5ca9ffc5fa43a71ed4b4e3af88a14ac1fb4c7"
+    },
+    {
+      "path": "src/paths.ts",
+      "bytes": 3269,
+      "sha256": "51f96dfae8b48139f78806a28da64c166a0eb8fab4013fd458063c041086ea30"
+    }
+  ],
+  "executionPolicy": {
+    "repetitions": 20,
+    "maxRunBrowserExecutions": 420,
+    "ordering": "Formats then cases then repetitions, strictly sequential; one fresh Node process per format and fresh cloned manifest/controller/output per runBrowser call; no retries.",
+    "perFormatTimeoutSeconds": 120,
+    "totalDriverDeadlineSeconds": 360,
+    "maxCombinedLogBytesPerFormat": 2097152,
+    "browserLaunchAllowed": false,
+    "httpListenAllowed": false,
+    "networkOrDockerAllowed": false,
+    "tsxCache": "disabled"
+  },
+  "sentinels": [
+    "Patch the chromium singleton resolved from the exact adapter/library module to a throwing launch sentinel; resolve its import and require entrypoints and assert object identity.",
+    "Patch node:http Server.prototype.listen to a throwing sentinel; assert zero observed calls after every actual adapter execution.",
+    "Restore both exact original descriptors in finally; fail closed on any unexpected call and stop subsequent cases."
+  ],
+  "comparison": {
+    "withinFormat": "All complete normalized result fields and independently read normalized evidence contents must match the first repetition.",
+    "allowedNormalization": [
+      "run UUID to <RUN_ID>",
+      "startedAt and event at timestamps to <TIMESTAMP>",
+      "durationMs to <DURATION>",
+      "artifact path run UUID to <RUN_ID>; raw hash/byte count validated then compare normalized evidence hash/byte count"
+    ],
+    "crossFormat": "Require all three actual harness digests distinct. Compare semantic result while retaining harness identities in a separate explicit comparison column; differences may be harnessDigest and normalized artifact SHA256 derived from that recorded field only. Record exact differing fields, never relabel format-specific harnesses identical.",
+    "rawIntegrity": "Every evidence artifact size and SHA256 verified; JSON must equal returned result minus artifacts; no extra output files, symlinks, hardlinks or outside-scope paths."
+  },
+  "requiredObservations": [
+    "20 distinct run IDs per case/format, 420 globally distinct IDs",
+    "zero chromium.launch attempts, zero HTTP listens, zero emitted events and assertions, null observation, browser not-launched, appDigest empty (no application executed)",
+    "MISSING_STEPS remains inconclusive; precancelled remains cancelled and produces no adapter artifact",
+    "unchanged input/source bytes before and after"
+  ],
+  "limitations": [
+    "No current browser repeatability, target-failure reproduction, buggy/fixed comparison, cancellation acceptance or reduction minimality claim.",
+    "All final deletion neighbors are structurally valid but rejected as incomplete; their repeated rejection is not proof that the frozen requirement is satisfied."
+  ]
+}

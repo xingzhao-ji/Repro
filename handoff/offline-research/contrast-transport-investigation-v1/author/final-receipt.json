@@ -1,0 +1,32 @@
+{
+  "schemaVersion": 1,
+  "status": "SEALED_OFFLINE_TRANSPORT_INVESTIGATION_INCONCLUSIVE_MEMORY",
+  "utc": "2026-10-15T07:52:14.157165+00:00",
+  "candidateSha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727",
+  "resultSha256": "adfc85522c2f250a0a13bfd73944bdb0aace4349ba50b6ac295717b14dbbf004",
+  "manifestSha256": "0505d6e00c4a997f28bb305321b4c814df2cfdd9b17280c764215a953479ac99",
+  "artifactFiles": 32,
+  "sourceBindingsReadback": 19,
+  "artifactReadback": "PASS",
+  "authorTests": {
+    "groups": 7,
+    "passed": 7,
+    "failed": 0,
+    "outputSha256": "85f9440a76282452b173e196dbc80f38774405cbb90e7e80c99f0e824882bcb9"
+  },
+  "independentTestsReported": {
+    "passed": 108,
+    "failed": 0,
+    "reviewReceipt": "separately produced in sibling review after author freeze"
+  },
+  "benchmarkSourceExecutionAttested": false,
+  "benchmarkResult": "mixed RSS; no consistent memory reduction established",
+  "runtimePilotCount": 0,
+  "browserStarts": 0,
+  "containerStarts": 0,
+  "networkActions": 0,
+  "installed": false,
+  "gatesChanged": false,
+  "gateMiB": 896,
+  "published": false
+}

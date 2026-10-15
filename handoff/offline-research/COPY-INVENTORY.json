@@ -1,0 +1,1352 @@
+{
+  "scope": "Byte-identical archival copies of reviewed offline research; not active runtime or directly portable execution",
+  "sourceRoot": ".repro-runs/cloud-continuation",
+  "files": [
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/AUTHORIZATION.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/AUTHORIZATION.json",
+      "bytes": 1073,
+      "sha256": "4c38068564fc247d204b9f59b9f07ad31d31151a6e2c9a884353fdcd4055f5d8"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/RESULT.md",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/RESULT.md",
+      "bytes": 5026,
+      "sha256": "cee10dc5100317db4c612a95f7a9db07ed8fd5c2bbfe1093ed10109e38b0e0fc"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/artifact-manifest.json",
+      "bytes": 12946,
+      "sha256": "170a02707294f7104a1bc550caa7467d1f57b992d077dca4b38bc5da95c94cd9"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/RESULT.md",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/RESULT.md",
+      "bytes": 7509,
+      "sha256": "adfc85522c2f250a0a13bfd73944bdb0aace4349ba50b6ac295717b14dbbf004"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-1-candidate.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-1-candidate.json",
+      "bytes": 8440,
+      "sha256": "0661ae604ebb930cc20ea2b66f1d9223a72ad39ece5880e4ecbafa7e761e5863"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-1-candidate.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-1-candidate.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-1-native.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-1-native.json",
+      "bytes": 8301,
+      "sha256": "cc28a751ceb8387f84f78a40af68cb8babb2468a9057488f0a7377d905d3449b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-1-native.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-1-native.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-2-candidate.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-2-candidate.json",
+      "bytes": 8428,
+      "sha256": "26c6dc402f10ee20c3f8f6ae589aaae213b10de11dd5990b73bc025c89f1ffff"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-2-candidate.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-2-candidate.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-2-native.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-2-native.json",
+      "bytes": 8308,
+      "sha256": "9509f8c725c7d44edbaa7ff65774604bc7ef108bac017feb41258b465e42e78e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-2-native.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-2-native.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-3-candidate.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-3-candidate.json",
+      "bytes": 8434,
+      "sha256": "44c4a95258da987670704ee5321e2fae044f99cb0f03b3c1d93fb05af1aec47a"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-3-candidate.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-3-candidate.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-3-native.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-3-native.json",
+      "bytes": 8294,
+      "sha256": "b375f7958afe40334e64820591bd2119267f609cb1a3834b31d22af2ec6d7d70"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-3-native.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-3-native.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/allocation-summary.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/allocation-summary.json",
+      "bytes": 2103,
+      "sha256": "35df757ccc9d4c3e2a896e9690f2b901828371efdacfa381b9d39eba918f5d8f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/artifact-manifest.json",
+      "bytes": 5071,
+      "sha256": "0505d6e00c4a997f28bb305321b4c814df2cfdd9b17280c764215a953479ac99"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/baseline-invariant-failure.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/baseline-invariant-failure.txt",
+      "bytes": 951,
+      "sha256": "f0ccbe6a1e5cb7f0764f102ed49f077670126cf1e422421061bb8af7f340fa58"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/benchmark-candidate-reconstruction.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-candidate-reconstruction.mjs",
+      "bytes": 7745,
+      "sha256": "2848ea01d0fe98dd8fb016e43d5d4b8bacd5554cf4162653d8d594152d48759b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/benchmark-source-provenance.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-source-provenance.json",
+      "bytes": 637,
+      "sha256": "ed7fd721239f3e365d21ebb648a146e2d9330767112b0412a2dad5bdc844953f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "bytes": 2679,
+      "sha256": "1c47c2d5fb328b2b60d99d8e0548f26c42afee94858e3720ba26e38e414a2ee3"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/command-receipts.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/command-receipts.json",
+      "bytes": 4508,
+      "sha256": "b933516f17fe1babf71b3e9f0313fb35728d24105c0cf780c36d6b283154415e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/final-receipt.json",
+      "bytes": 1113,
+      "sha256": "c6f75cf903948e30648749600faffcfecd963f34297b7f2bce309e72e7cbfe9a"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/fixture.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/fixture.mjs",
+      "bytes": 2784,
+      "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/prospective-caller.diff",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/prospective-caller.diff",
+      "bytes": 2690,
+      "sha256": "6a6210fa28c3e6a21d5a0309d7afac48b0666facad0456bb99bfc34c91f67384"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/review-fixes.diff",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/review-fixes.diff",
+      "bytes": 2710,
+      "sha256": "42b4dfbf3dfed07d92934e43c1bc197356328ca04c917dc6e74a192488d85d45"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/run-checks.py",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/run-checks.py",
+      "bytes": 1258,
+      "sha256": "82e660154ce623bd14cb2d50bcc3e3d84a1b4143d9b7bf79b44e815daf111c5d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/seal-author.py",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/seal-author.py",
+      "bytes": 2367,
+      "sha256": "4ac753867bdaccf23aa29781262e8a64a7c25092e9c1c95c61008ca47bef0bf5"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/source-bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/source-bindings.json",
+      "bytes": 5461,
+      "sha256": "42fdf5b475d9ccfcf8f2aa49650eea37b64f9dce333705c696f00981dbc41dbd"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/test-final.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/test-final.txt",
+      "bytes": 794,
+      "sha256": "85f9440a76282452b173e196dbc80f38774405cbb90e7e80c99f0e824882bcb9"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/test-initial-implementation.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/test-initial-implementation.txt",
+      "bytes": 1516,
+      "sha256": "348183cc0440a031c4b6bbab1f55f20a1ea423e96f420801f6033488401675d9"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/test-review-fixes.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/test-review-fixes.txt",
+      "bytes": 718,
+      "sha256": "3c622fce099cf9cc64ef000181f72a2b0f50559fb67125ae394062e1746ab5d2"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/tests.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/tests.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/tests.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/tests.txt",
+      "bytes": 719,
+      "sha256": "5dc77f235ba4ac240481e4ab02e58723e9966c4c1d5a3d860f9f54b73cb15a6f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/transport.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.mjs",
+      "bytes": 7800,
+      "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/author/transport.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.test.mjs",
+      "bytes": 4454,
+      "sha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/final-receipt.json",
+      "bytes": 2015,
+      "sha256": "68092df3f62b44871b54035d5d9602f7112496805edef575e11c27e9e314eb1f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle/PROPOSAL.md",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/PROPOSAL.md",
+      "bytes": 12142,
+      "sha256": "b87d764719dc0eb7a00ed90d20d36d0ad1e4dfbb9dd03d7682753549eb1b430b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/final-receipt.json",
+      "bytes": 1707,
+      "sha256": "4a7e57165c6c22c65f5622b76c0f213548bf212f98df400433aac09dc109b053"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle/model.py",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/model.py",
+      "bytes": 7013,
+      "sha256": "3b2b83a88a4cd34a583f9b24e6ed2cd0216eacb384ba7e7f63c7e141c5a482c8"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle/source-bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/source-bindings.json",
+      "bytes": 1728,
+      "sha256": "a181664982ebff035b8c2c8943fb09b08548d224fc0bd8e158e56a9e03b4b77a"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle/test-output.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/test-output.txt",
+      "bytes": 3609,
+      "sha256": "2ab5381ab268c3e20b61ca8b5089738af48857988cd70af83cc1168f9b2dcb6b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle/test_model.py",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle/test_model.py",
+      "bytes": 8247,
+      "sha256": "c738ad1aa422d815c3289097ef8fd09d05d8ab1485c28b1c3a4982eae206862e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/RESULT.md",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/RESULT.md",
+      "bytes": 3210,
+      "sha256": "9fc5b56cebea1ab78b78c2fce7d1e5d4c5e5a7fbd76a0816b99f307a55115d0a"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/draft-findings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/draft-findings.json",
+      "bytes": 1235,
+      "sha256": "9a219ee73d8a1910db83d7b80ae0834a46220c11263d89f7cf369b0e91566642"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/final-receipt.json",
+      "bytes": 2458,
+      "sha256": "63dd4cc2cb1620d6f7be933e4fffc7c54f245a2b1a95d3f95d27739106090947"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/frozen-cleanup-tests.log",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/frozen-cleanup-tests.log",
+      "bytes": 2406,
+      "sha256": "316e396819ccb7477357d2faa1d2ca621b0a89c866928f144bfbc39e5c7317d8"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/historical-source-check.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/historical-source-check.json",
+      "bytes": 10112,
+      "sha256": "e49517f012d23982922325e2c5885ca446707b610deae22785c2cbcc463a37bd"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/independent-cleanup-tests.log",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/independent-cleanup-tests.log",
+      "bytes": 535,
+      "sha256": "dea73a89e0d0dfe0da989b327cf848955e14c7eec3172761315fff40a559e689"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/proposal-model-tests.log",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/proposal-model-tests.log",
+      "bytes": 3551,
+      "sha256": "aa061216f46acfa93c75b07455f787e7f36ddc07efa492efa510b2f137597445"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/review-result.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/review-result.json",
+      "bytes": 1553,
+      "sha256": "16cbdb3e51ad36e0f76dd767ce18cb8d8b2df37093932375989d1cb990ffb3af"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/lifecycle-review/test_independent_cleanup.py",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/lifecycle-review/test_independent_cleanup.py",
+      "bytes": 2850,
+      "sha256": "db98d014fb3cf891c867c880d99daf2ac39eba81a50ccc861a66ac91fadb562e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/prior-task-seal.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/prior-task-seal.json",
+      "bytes": 466,
+      "sha256": "3a29086979992514ef03f54823f986ca4cad776c746a925e302902eac0c50af0"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/REVIEW.md",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/REVIEW.md",
+      "bytes": 6845,
+      "sha256": "c4f3782766945e3d1f8c1e39d358ed242b9d88d15fd62ea36f0eac1c8a73b22d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/artifact-manifest.json",
+      "bytes": 2885,
+      "sha256": "71f55c918135fc5212a6b63719888f652d6e16f99bd02d8e86738dfea0e243b5"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/final-candidate-before.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-candidate-before.json",
+      "bytes": 100,
+      "sha256": "34ff3078cab8dac9538f436ea8d958e2e9a55c2ecf6e3603e04a4041c4f71fd4"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-receipt.json",
+      "bytes": 1159,
+      "sha256": "e8b059ab4f28ffe179e3ff83ca24f1de91a760b5962fa75be957827c0da01648"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/final-revised-candidate-before.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-revised-candidate-before.json",
+      "bytes": 100,
+      "sha256": "f8198676026827f0a0f0a0fb89d4c06fac1af5701bd41fe53141d79bdb311000"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/final-source-bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/final-source-bindings.json",
+      "bytes": 6720,
+      "sha256": "3cca358d1fd130c39e51ef0994e895857d21f00b6967c3500ba0c999784e5d6c"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/findings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/findings.json",
+      "bytes": 3132,
+      "sha256": "76d0a4fbdc0cf9a5467c69f324a4ecc6d8a1dacdb339584559bb3c426bbbf747"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/first-candidate-binding.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/first-candidate-binding.json",
+      "bytes": 139,
+      "sha256": "790016872e912b96dda1b11d1c2f06b7b1197db463fe9595764876b4d7f4852c"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/independent.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/independent.test.mjs",
+      "bytes": 10074,
+      "sha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/native-oracle.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/native-oracle.mjs",
+      "bytes": 1787,
+      "sha256": "411033a90851d363763e2e4e59aca74aee001cee2f543444138d36d8fe8a224f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/pilot-row-inventory.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/pilot-row-inventory.json",
+      "bytes": 13568,
+      "sha256": "39576c12011f18afde0e7092452acb135e0a4161d4a3918ab8e811f0b18dc4b8"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/preimplementation-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/preimplementation-review.json",
+      "bytes": 2682,
+      "sha256": "956e3770446b2d75544fb0b840be61bcfeb9d7be279c6b895858e3b338af8f33"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/prospective-syntax-only.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/prospective-syntax-only.mjs",
+      "bytes": 86148,
+      "sha256": "8323fddb7bcd7c7da667aa0db8ce3f5e9d444d133063de30d3f819b9a2ca3944"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/review-result.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/review-result.json",
+      "bytes": 1036,
+      "sha256": "9d5f73f1a040518b5f77146b199b80c9d0e97fef56080d6f0208b1a04b366b34"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/reviewed-first-candidate.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/reviewed-first-candidate.mjs",
+      "bytes": 7745,
+      "sha256": "2848ea01d0fe98dd8fb016e43d5d4b8bacd5554cf4162653d8d594152d48759b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/source-benchmark-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/source-benchmark-review.json",
+      "bytes": 1933,
+      "sha256": "eceade88a6c9795a7c3960c4000507a6cab7c7834a8b8871e25c198c1de608d6"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/test-falsy-failure.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/test-falsy-failure.txt",
+      "bytes": 4210,
+      "sha256": "4df5423637dca647bf3140de13d69cf60717932f36d416e2cc4599db4237d7ec"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/test-final-revised-run.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/test-final-revised-run.txt",
+      "bytes": 6927,
+      "sha256": "619e62871ec0cab42fa55dee47924cb477eb2da40b6085984905f0d28fa20cb9"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/test-final-run.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/test-final-run.txt",
+      "bytes": 6603,
+      "sha256": "e382aa7be34dd93dfc4bfcf23c528b68d28c8961a25ac0533b25d699b6018f0e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/review/test-first-run.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/review/test-first-run.txt",
+      "bytes": 7881,
+      "sha256": "4e3e8e1bb44a890fc03868b56bed80447b3cba660070b4b3ba4ce714ed243a8b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/root-baseline-after-checkpoint.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/root-baseline-after-checkpoint.json",
+      "bytes": 1197,
+      "sha256": "3a6f143ea86ed707131ba0c2327a05155b6ebd194e93edf4db9b227305913fca"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/root-final-checks.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/root-final-checks.json",
+      "bytes": 1248,
+      "sha256": "586ec87def2ae575919732a42226de8135ec6f93bf03530812785cc26ca28d67"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/root-lifecycle-readback.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/root-lifecycle-readback.json",
+      "bytes": 348,
+      "sha256": "2fc5e00fa0692aa26ba85f353fd150779e0df9e62bf0eb1b73b794abd4f126b6"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/root-preservation-check.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/root-preservation-check.json",
+      "bytes": 444,
+      "sha256": "8ae67a9455b6616c796ae4118a27caa0ed33f9def9d8ef72494900b7bd06fce7"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-transport-investigation-v1/summary.json",
+      "source": ".repro-runs/cloud-continuation/contrast-transport-investigation-v1/summary.json",
+      "bytes": 1282,
+      "sha256": "2192c3b408a97489994a836c4e8d3a41e027f6b3dd6a7354da2356165089dc4b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/AUTHORIZATION.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/AUTHORIZATION.json",
+      "bytes": 899,
+      "sha256": "2bacf00ba7f871339fe433a9891e186e0d361f48b23df03d35aa6cc6fad26e1f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/RESULT.md",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/RESULT.md",
+      "bytes": 7480,
+      "sha256": "f22af79c1748b1192e18008a52c529135a428e05a84e59cba9f73f066699043b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/artifact-manifest.json",
+      "bytes": 21311,
+      "sha256": "a37a8e32f938214f0727e5f75b2d408663ef7e106abb683e7bed33dfc474c20d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/RESULT.md",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/RESULT.md",
+      "bytes": 6391,
+      "sha256": "9ac74cce640fa9f78c7674e810b375e0444561f73b5453fb1735653e0da70b1c"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/artifact-manifest.json",
+      "bytes": 3007,
+      "sha256": "d6bb21fda9db08bf78972c41fd630ee44134da97b47036af23091572ceb0f023"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/baseline-mechanism-failure.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/baseline-mechanism-failure.txt",
+      "bytes": 3164,
+      "sha256": "f532fe944ed189062415ad3327f01192caaeeb170d96a19473490e045b35519e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/baseline-transport.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/baseline-transport.mjs",
+      "bytes": 7800,
+      "sha256": "440dddbb4c7bf6b5102ae3d366316fa9b9a768dbb53bb68c3731c65b06027727"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/candidate-freeze.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/candidate-freeze.json",
+      "bytes": 1165,
+      "sha256": "b58ab2757b9ec95854f76fdf0baaff47737990ff0a2fecc6c3981ce9105e1783"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/final-receipt.json",
+      "bytes": 1349,
+      "sha256": "5bc7e5977e2557de440f0cf91048029e9812a2c95f24522d0ec995a014d77323"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/fixture.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/fixture.mjs",
+      "bytes": 2784,
+      "sha256": "ee2e8b8ad604a50088d41bafb949ceeaaa2ad1dc7bee7bb75d1ed423aa37fcab"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/incremental.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/incremental.test.mjs",
+      "bytes": 5929,
+      "sha256": "78c02c4c2a6da2f35daa3cd374066aeec0b159d020c2b2b62553d1ad02dae1e9"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/initial-candidate.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/initial-candidate.mjs",
+      "bytes": 13663,
+      "sha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/prospective-caller.diff",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/prospective-caller.diff",
+      "bytes": 2690,
+      "sha256": "6a6210fa28c3e6a21d5a0309d7afac48b0666facad0456bb99bfc34c91f67384"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/receiver-tail.mjs.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/receiver-tail.mjs.txt",
+      "bytes": 9863,
+      "sha256": "46415bfbb4869646a6cd20aa0762f6bf34c26c0f00dbacd194eb7a3b36807873"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/regression-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/regression-receipt.json",
+      "bytes": 818,
+      "sha256": "87327855d55dbe37bfc1a26e1a4b68e188f7776aaba379521fd475f8f35ea696"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/seal-author.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/seal-author.py",
+      "bytes": 2862,
+      "sha256": "c1634cd04267b78799a3e32769c544c81aa1b91ad38bc5c12cc6dd22d770c453"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/source-bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/source-bindings.json",
+      "bytes": 6472,
+      "sha256": "6f6f7364c3ada6e1b6c0c3208fc4dd892d8a9348d924b862c15dfa1dfc65ece2"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/test-expanded.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-expanded.txt",
+      "bytes": 1764,
+      "sha256": "5fa687fd1087760d6bbc480a392429088159a7d2b2304906d2910b0f1a23ff03"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/test-final-candidate.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-final-candidate.txt",
+      "bytes": 1766,
+      "sha256": "ebfb85ba5342d21becc7e90851ea18593d9a0efe22f9819d8dc94c88fe08ce7a"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/test-first-implementation.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-first-implementation.txt",
+      "bytes": 1179,
+      "sha256": "2f256815575dd5e5c3931ffc60ad9534da7c5b20cd0592bdcb827ca3bde2079c"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/test-small-string-limit-green.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-small-string-limit-green.txt",
+      "bytes": 599,
+      "sha256": "a1da8a76fbb7fc24ac4e9c5856416a4f7fe7efcdc70b912b76fe757a87a4b38c"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/test-small-string-limit-red.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/test-small-string-limit-red.txt",
+      "bytes": 2118,
+      "sha256": "1fd1ff7ac6d8b44b9a189e8ab2427cfe66226e4293fecd89fd8523da8898bd47"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/transport.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.mjs",
+      "bytes": 13991,
+      "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/author/transport.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/author/transport.test.mjs",
+      "bytes": 4454,
+      "sha256": "ee29b2a384cff89e761a384447fb70cb90b5118c90d9b9b339326731a2e74795"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/PROTOCOL.md",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/PROTOCOL.md",
+      "bytes": 4842,
+      "sha256": "e305b7ac92d3c8432e5452f6c945b458343a5a26418bb35d7942dbb6bae3bbcf"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/RESULT.md",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/RESULT.md",
+      "bytes": 5046,
+      "sha256": "9542551f42085bd4a03373ba6a61656c228a3bd27b6226bb6a36f51038593757"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/artifact-manifest.json",
+      "bytes": 11243,
+      "sha256": "f568df3408fd4acf9ce5e9c490d2251f3ae8c214557af4f9a43b742429e74614"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings-v2.json",
+      "bytes": 14562,
+      "sha256": "89e45ff4725f762e2183a9b5310283666a20d3f245edd26e419868fbd49f1290"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/bindings.json",
+      "bytes": 14015,
+      "sha256": "cd026f77f369180b7aaa2df59fc436ad98c459d8089c59fe0b747caab7fdc514"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/command-receipts.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/command-receipts.json",
+      "bytes": 20276,
+      "sha256": "658ee9baeaa765f7fa1139e2e3d26fe70f9df74b7f0c467844f3eb21160808ef"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/create-bindings-v2.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings-v2.py",
+      "bytes": 2260,
+      "sha256": "76cdebec92447dda802acf4fdb9912f415b365149065ff851aa0b7703c15c00d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/create-bindings.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/create-bindings.py",
+      "bytes": 2251,
+      "sha256": "8c46eb3f0c7f32ae9fc84585adac833db8d607bb86158106540e34bbbc12dc04"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.startup.json",
+      "bytes": 12500,
+      "sha256": "46dbe6434558e68689b2f651e9bc8366afd6d5c5f1d6860952795291e7cfd5c3"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-incremental.stdout.json",
+      "bytes": 44946,
+      "sha256": "47d8843cdb7d27fc05e2bbb7b457b60f7935ee1ab06de25f52fb7f45609e3682"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.startup.json",
+      "bytes": 12494,
+      "sha256": "8ca5263f128940a9c7006d82ecfdf34c74858e262176ce603dc266969d4fc814"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-1-prior.stdout.json",
+      "bytes": 44855,
+      "sha256": "04b200c34fb2bcf9a6b4ae53531065463a91bd50595b96dde615b8a234cd6d94"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.startup.json",
+      "bytes": 12500,
+      "sha256": "c2b51d2a42acf76f702971e64bc690ff4f8cb024c5263f56f3915720b89abffa"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-incremental.stdout.json",
+      "bytes": 44938,
+      "sha256": "5433f0365f24718cd328f969b2d251bdb11ae36d94b1ef16d8945d5d021b0f46"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.startup.json",
+      "bytes": 12494,
+      "sha256": "63b6c4e3733a264dfaf415375f86313077f2ba2fd1901b42a6755e6fb7ca477d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-2-prior.stdout.json",
+      "bytes": 44853,
+      "sha256": "6f205664bb091aac76fa5e70684e39df547afe88ba27c891c4b722c9c868d9a5"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.startup.json",
+      "bytes": 12500,
+      "sha256": "16b3485df22f0ba3ea298b3f9c4be94ca5077f3257526506383fa673fb3fb994"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-incremental.stdout.json",
+      "bytes": 44943,
+      "sha256": "34b4fc693a66628982ba6ea186c0933f2c5c5b13456fe452296b49bd6cdeaff4"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.startup.json",
+      "bytes": 12494,
+      "sha256": "b14ced5dfa64689ed67eee212cd6a4484d11c3d2b2d3e4d85f733922f3958353"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/end-to-end-3-prior.stdout.json",
+      "bytes": 44865,
+      "sha256": "de297a4dd7a4c4b5cf205709d459be2f6b13a551b0c1a3fcccb8db60d1ecfaca"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/final-receipt.json",
+      "bytes": 1397,
+      "sha256": "f03ac2f32a056fdc693049687a1e4b6531f399708774a34004a25338436b6188"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/launch-correction.diff",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-correction.diff",
+      "bytes": 3056,
+      "sha256": "d0aa45b95b658cbdb8796147e26d7a5ca2018c7942a518e29cbb94233753e9c3"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/launch-correction.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-correction.json",
+      "bytes": 1270,
+      "sha256": "133f344d29adde892ad0bafb706b134a02d0bcc1701ae0849feea0b56a1aaa70"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/bindings.json",
+      "bytes": 14015,
+      "sha256": "cd026f77f369180b7aaa2df59fc436ad98c459d8089c59fe0b747caab7fdc514"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/failure-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/failure-receipt.json",
+      "bytes": 854,
+      "sha256": "8dc90516ea5518e6531b1c8a3207d6f82cf47262b3f160d9f36afc151a37e489"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/run-benchmarks.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/run-benchmarks.py",
+      "bytes": 2533,
+      "sha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/tool-output.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/launch-failure-v1/tool-output.txt",
+      "bytes": 1015,
+      "sha256": "06d762ca72c0009e33adba268bfdb38b963e6827e76c5b5b75de0c845a13be86"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/oracle.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/oracle.mjs",
+      "bytes": 2257,
+      "sha256": "431cd1a29834dddf8009d6a83cfcd39781cefdac3e53be5360f86fb584318084"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/readback-verification.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/readback-verification.json",
+      "bytes": 527,
+      "sha256": "744143147b7fb89063835d8274b45ac975309757e383cc107fae9abb4327772c"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.startup.json",
+      "bytes": 12503,
+      "sha256": "190ee434122d9138fe8259c76f2f8f5e9f982950a248fd4e67569ae433757a0e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-incremental.stdout.json",
+      "bytes": 44455,
+      "sha256": "dbdd916a54d3c4ea4b708b6820295ff72ed0dbae30fb01e107028b4145fee39c"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.startup.json",
+      "bytes": 12497,
+      "sha256": "fad9ae2e91243ed20bb1c2ef312f791a0b2b4f49580f34f9ca0bc7afdc62f935"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-1-prior.stdout.json",
+      "bytes": 42088,
+      "sha256": "0c80e4d64c17e471543e0133c358196fd444898c8827315a133b3300797c22d6"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.startup.json",
+      "bytes": 12503,
+      "sha256": "59afc4bc485108ae3ee0f60cc6a8add5598786974a359ba8cb57ab4090d2a77a"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-incremental.stdout.json",
+      "bytes": 44446,
+      "sha256": "222a84095335b3879a58792da800311245ffa4b4e821fde58cc16b5126a565e6"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.startup.json",
+      "bytes": 12497,
+      "sha256": "3b1e707909542c943b5c96273c7e6bfbd580ef7d3534cad21a192407128a424f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-2-prior.stdout.json",
+      "bytes": 42087,
+      "sha256": "69555aa491a7d3729be52f551bc79aa3cef66d775997cb91ff0808c9973b0e40"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.startup.json",
+      "bytes": 12503,
+      "sha256": "d8ca7e961ffb1a7831043008789bd998401cc77dbf5bcecedc7c2fdab3ffe6b3"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-incremental.stdout.json",
+      "bytes": 44460,
+      "sha256": "b6d40b702a6b35c7ce93d4e588446219fb0d972ed7648f9dfa4c438fc30028d2"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.startup.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.startup.json",
+      "bytes": 12497,
+      "sha256": "16d11e6bca4ce7e3fe11f59912b3a3a164ffb4963166b5985c8c92079d1e20d9"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.stderr.txt",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.stderr.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.stdout.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/receiver-only-3-prior.stdout.json",
+      "bytes": 42088,
+      "sha256": "23f0233548f3160c4bd88ee5e6ff0014f7b4da7e003f029352bba16ed552d16b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/run-benchmarks-v2.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks-v2.py",
+      "bytes": 2600,
+      "sha256": "65899984d78e3265578e1fef5436be5237b71681cce050b149c27865152240ac"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/run-benchmarks.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/run-benchmarks.py",
+      "bytes": 2533,
+      "sha256": "0d2a679a0908d74f475e20133e863eef1f12655da128382b8c623d5f5eb4697b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/summarize.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/summarize.py",
+      "bytes": 3354,
+      "sha256": "f597070e7dc26d4fd2071aa6252d6d25bb5cbe9203f842c0ee1f93594474f09a"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/summary.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/summary.json",
+      "bytes": 10926,
+      "sha256": "5db38aab4ef70c4d25f2cf6b19b17af07daa001099f308f46b2c09037b0e84b2"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/benchmark/worker.mjs",
+      "bytes": 5729,
+      "sha256": "b0b5d188abf92128538ca9fdb709f66a52aa6bbc25efdef30dbd386caf181f1d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/final-receipt.json",
+      "bytes": 4341,
+      "sha256": "97c10f818109d852804b3ab8ed0ba54d12fb38387fd5ce530f878e5d0eb101c5"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/preservation-readback.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/preservation-readback.json",
+      "bytes": 2405,
+      "sha256": "1cc073f28a81dec51606016f7c6e1de4e647ae8949861e565d2f50b65852c2bb"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/prior-input-bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/prior-input-bindings.json",
+      "bytes": 2003,
+      "sha256": "00a038cd23cc102908b9a173f8d5a436f6e6ace337aa86b4e8c284db942f69ef"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/REVIEW.md",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/REVIEW.md",
+      "bytes": 9271,
+      "sha256": "0a06285ff0bf434661b49f20d19d0f98fe3c2c48c38d9724d05d9bc079856554"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/artifact-manifest.json",
+      "bytes": 5136,
+      "sha256": "3c3be3a03bd8a7a8995421d805ff6db3d24213566a0fffd585bb9cb759d7886c"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/author-seal-readback.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/author-seal-readback.json",
+      "bytes": 3378,
+      "sha256": "ceca36e4ac277fe04a7c4c7ae0d0a9f3c94028abb99b9cad339dc1e84dbcde8b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/benchmark-launch-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/benchmark-launch-review.json",
+      "bytes": 1063,
+      "sha256": "d2952393aa167e1e2fb6c3ba2e5f50034ce14446be90735e2cfebb8f8903a83e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/benchmark-result-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/benchmark-result-review.json",
+      "bytes": 4913,
+      "sha256": "124a10dd0d0bbb6d8327a1f65a014bf49c76fffb5874df6e8fc6bd16a4bc3f71"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/benchmark-seal-readback.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/benchmark-seal-readback.json",
+      "bytes": 9735,
+      "sha256": "a599442bccd1db0191435a81a37ac63b66dbff2de77bb46c458b50a590a9f1b1"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/cleanup-final.log",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/cleanup-final.log",
+      "bytes": 1174,
+      "sha256": "0d0b8af5d657ad9b0fd1017c9185492b45f482e29fd2b2b45b62557cee2db735"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/cleanup.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/cleanup.test.mjs",
+      "bytes": 2802,
+      "sha256": "9b9b15252671da06eacc3909602270d236c5168e30ffbe32cf285dd25a564c14"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/compatibility-adjustment.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/compatibility-adjustment.json",
+      "bytes": 537,
+      "sha256": "eef15da3a73ae79ec7163865cb27844ab37e33058db0045c7010a0a9606fb080"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/compatible-final.log",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/compatible-final.log",
+      "bytes": 6931,
+      "sha256": "c6233b75b2b0c3862d819aee418a2217fb5b9df379e0c73008004e852776ba81"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/compatible-regressions.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/compatible-regressions.test.mjs",
+      "bytes": 10083,
+      "sha256": "98c790b823b2cf7f459172d356989529dddcc198b9bd60cb78ffc849a2497e3d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/final-command-receipts.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/final-command-receipts.json",
+      "bytes": 6630,
+      "sha256": "74b14cbd50e4bd02b3a1bce0888ca0cfbc0a05781c2db2516c907109b0f85177"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/final-receipt.json",
+      "bytes": 1856,
+      "sha256": "db9002c87dee1eebf235e775dc47209b3faf457a1a0da6fea944ffafb736ab43"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/findings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/findings.json",
+      "bytes": 2595,
+      "sha256": "f01f56f27ba4f1142890b068be2f8e09fc907082b5cba3e48343415a6c3426bd"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/first-candidate.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/first-candidate.mjs",
+      "bytes": 13663,
+      "sha256": "dcef6f562d3213e94b6b6e3bb10a9b82b3ba06950f03abd202cd127e88a53f49"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/first-test-bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/first-test-bindings.json",
+      "bytes": 960,
+      "sha256": "1617abaf319a88d7eaf478da4dee60bbbf841cac856fe59357a9abbcfb7f0b93"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/frozen-final.log",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/frozen-final.log",
+      "bytes": 8945,
+      "sha256": "d45e8959299a422956894c3b2968ec9fd709bae65c7f3381e04bf8b15164e279"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/frozen-first-run.log",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/frozen-first-run.log",
+      "bytes": 8935,
+      "sha256": "af1df5a1d100d640f81d7eb4c57e0cee213ee94dfc1c419b5dd7d0a3221e3320"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/functional-clearance.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/functional-clearance.json",
+      "bytes": 4998,
+      "sha256": "9ae227e51c692ea73d20d2b2e699885072d36b87bb126e8444c542f4fa176ecf"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/independent.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/independent.test.mjs",
+      "bytes": 10074,
+      "sha256": "2183e6e553e902cd8aca94e57dedf94afdd02b802a759ec5bdccbe52a70fe690"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/instrumentation-binding.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/instrumentation-binding.json",
+      "bytes": 608,
+      "sha256": "84280c5d07ecaefcecf3e58611537a4d0f6b9859788de8bfe9ce23afd81934e6"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/instrumented-candidate.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/instrumented-candidate.mjs",
+      "bytes": 14045,
+      "sha256": "59167112aabf46f45fb22b5724b55d28af89c6737c740933556145881aa90947"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/native-oracle.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/native-oracle.mjs",
+      "bytes": 1787,
+      "sha256": "411033a90851d363763e2e4e59aca74aee001cee2f543444138d36d8fe8a224f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/preimplementation-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/preimplementation-review.json",
+      "bytes": 2007,
+      "sha256": "b8249e9419e44af041f41955d16a534d65d58cd736e29fa1537015ef1da0010d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/prospective-syntax-only.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/prospective-syntax-only.mjs",
+      "bytes": 86148,
+      "sha256": "8323fddb7bcd7c7da667aa0db8ce3f5e9d444d133063de30d3f819b9a2ca3944"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/seal-review.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/seal-review.py",
+      "bytes": 3729,
+      "sha256": "40d8020daaec1fdc333319b4466031a8d9f712e11bc12488bb297de48e1582f8"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/second-candidate.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/second-candidate.mjs",
+      "bytes": 13991,
+      "sha256": "0b36b70a53d1eddbfb9c6fe055b8c4f8e0408ffd47910675cce348021e9f42eb"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/second-test-bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/second-test-bindings.json",
+      "bytes": 960,
+      "sha256": "0cbf6c13cbe1642d9ee3ea0662ea244224d7dba14a1c9773f4c100a1a3bd6066"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/source-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/source-review.json",
+      "bytes": 7202,
+      "sha256": "244dc4c78601d0f24952bcb52282da82957674bc4b583c799289e2d84a170317"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/stream-first-run.log",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/stream-first-run.log",
+      "bytes": 7634,
+      "sha256": "149dae0a56f984e8267d25bfd1da957e8b70bd753cf10b5b29f67058206284b5"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/stream-second-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/stream-second-receipt.json",
+      "bytes": 2106,
+      "sha256": "b5f542e92aaff96dfd3c24a890bfb3f9c0fd6a85fc05848522154500cdfcb153"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/stream-second-run.log",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/stream-second-run.log",
+      "bytes": 7212,
+      "sha256": "e65f2d99ab2c1dce010c900d61a8de5b6582a7edcabf23957ed78242c653857b"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/streaming-first.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming-first.test.mjs",
+      "bytes": 10570,
+      "sha256": "f572cb74c0e6059f19e88f8dcb1eadbb013662b68e358c63127bb19ca70b3090"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/review/streaming.test.mjs",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming.test.mjs",
+      "bytes": 13415,
+      "sha256": "c8b17f3700d133eabe201e4de35e4c73299dc9fad4f3e6c942add2b35abb0680"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/root-baseline.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-baseline.json",
+      "bytes": 1408,
+      "sha256": "86f79e1a728b5f2b98f72c1f9852cd7857c5a99282ab7f86766ab17e75f8d87d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/root-benchmark-harness-addendum.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-benchmark-harness-addendum.json",
+      "bytes": 874,
+      "sha256": "31963aff0c2d24770e20738781ece2dcdf75d10835dd126f26c11bd33cfad49f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/root-benchmark-harness-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-benchmark-harness-review.json",
+      "bytes": 1742,
+      "sha256": "fc7b1067c0f81834e5a33433d6ad3cf514fa3ba8a67efa72baa864bcf0aca6bd"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/root-benchmark-launch-correction-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-benchmark-launch-correction-review.json",
+      "bytes": 1557,
+      "sha256": "9424234586b0f93a7daefa31660b185df0777bb5f3f0723f5cfafedf29166410"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/root-metrics-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/root-metrics-review.json",
+      "bytes": 868,
+      "sha256": "aafd8ca9983f01df519a9197e263d664636da2b69eb6dcdf12abc10837349830"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/seal-task.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/seal-task.py",
+      "bytes": 3926,
+      "sha256": "4d6dd909b3c4084ef5e038c26aa0e303842e9af3ab0627df1aa9c16a642ed059"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/summary.json",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/summary.json",
+      "bytes": 15224,
+      "sha256": "f42d74722738587562cf854841b6713cfadac103359424bc2526d8590e068c29"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-incremental-receiver-v1/verify-preservation.py",
+      "source": ".repro-runs/cloud-continuation/contrast-incremental-receiver-v1/verify-preservation.py",
+      "bytes": 3361,
+      "sha256": "538fe35a0fcf1bd38bbb34297fd82071cbf7e43f7beb17854a4bdb9782619c28"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/ATTRIBUTION-PLAN.md",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/ATTRIBUTION-PLAN.md",
+      "bytes": 6530,
+      "sha256": "193bf942319668e28e7b94adcc93ffe8ea41d08c4555d74921a530dca6bea6e8"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/AUTHORIZATION.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/AUTHORIZATION.json",
+      "bytes": 1062,
+      "sha256": "a4a93d8f3f5ab37934efdd00b41fe4ced49702d18b69a351477d144b3b6f9818"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/RESULT.md",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/RESULT.md",
+      "bytes": 4105,
+      "sha256": "69504234d96aa20a9814e67d079d3d8b217c66cccacbdf4996c3f5204106f2c1"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/artifact-manifest.json",
+      "bytes": 2859,
+      "sha256": "6a4672b04415e5d5b686254a45ee389229e5f2817bdb2ea3b9694317866d217d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/baseline.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/baseline.json",
+      "bytes": 1767,
+      "sha256": "c5ef41c1c2aa0bc240c70a61a07d08e39868b475e8af191328419ea55f3f7f05"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/code-review/REVIEW.md",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/REVIEW.md",
+      "bytes": 7208,
+      "sha256": "fefb482b18870789d79b64ded0094590cd56671db0f111631018f30d8ba38cad"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/code-review/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/artifact-manifest.json",
+      "bytes": 489,
+      "sha256": "b9f04328e7d371f962fb040e05181955da2c22d3f13e63e6a4783f150ef93d4f"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/code-review/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/final-receipt.json",
+      "bytes": 1014,
+      "sha256": "12548d99cf77104faa0555950eff89b9cdf8eb3d4d33c549565e632ce596c68d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/code-review/source-bindings.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/code-review/source-bindings.json",
+      "bytes": 2530,
+      "sha256": "f9ffa2d629de43832e4ef69a5bc9d738c5f8c68525431a43c43528f68a410c7d"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/existing-evidence-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/existing-evidence-review.json",
+      "bytes": 2723,
+      "sha256": "e7fce192fcdcd5c14e579244154c8c95f2e94f97c313a28d116e8a6b939c3eca"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/final-receipt.json",
+      "bytes": 2375,
+      "sha256": "7776d162efec6076e2623a4b6a01f85100d9dd8fa0ccc19df3178f8e5bbae8c2"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/independent-review/REVIEW.md",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/REVIEW.md",
+      "bytes": 5729,
+      "sha256": "bdefbd0834b03d9d403b036006fd693a693b8e1c3e61efe1b60d4902cc52bb66"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/independent-review/artifact-manifest.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/artifact-manifest.json",
+      "bytes": 341,
+      "sha256": "1c4e2c52000bf5b1e350727db48ddcfcada9ba0e8adc4695dbdf0c24401ef1b8"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/independent-review/evidence-review.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/evidence-review.json",
+      "bytes": 4894,
+      "sha256": "edb1504e28776b1f83b5506b675e7e5ca6608475af2e7afa2f43a64b312f1121"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/independent-review/final-receipt.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/independent-review/final-receipt.json",
+      "bytes": 1754,
+      "sha256": "7fbf9fa6ee0fc45380aa0ee38732f413daabadeb6b068e35da8184a915936442"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/preservation-readback.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/preservation-readback.json",
+      "bytes": 1590,
+      "sha256": "f838b16a5981d58664864761e7fc21a91c8ca59a09cd5b4a21c19d08fce1935e"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/seal-review.py",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/seal-review.py",
+      "bytes": 6362,
+      "sha256": "26a26e1f000daa9c8dc7ca7d53b33310a7bafd0bbec81160f9b35cf44fe2dc58"
+    },
+    {
+      "destination": "handoff/offline-research/contrast-allocation-attribution-review-v1/summary.json",
+      "source": ".repro-runs/cloud-continuation/contrast-allocation-attribution-review-v1/summary.json",
+      "bytes": 1037,
+      "sha256": "4e5f1e9d30f1e7c6c85774a12cae170c726ab0abc62986ef060378f84fc1e6e8"
+    }
+  ],
+  "filesCopied": 224,
+  "bytesCopied": 1682123
+}

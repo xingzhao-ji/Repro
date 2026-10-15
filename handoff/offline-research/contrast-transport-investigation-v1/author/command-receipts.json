@@ -1,0 +1,119 @@
+[
+  {
+    "label": "tests",
+    "command": [
+      "node",
+      "--test",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/transport.test.mjs"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 10.610383922001347,
+    "stdout": "tests.txt",
+    "stdoutSha256": "5dc77f235ba4ac240481e4ab02e58723e9966c4c1d5a3d860f9f54b73cb15a6f",
+    "stderr": "tests.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timeoutSeconds": 45
+  },
+  {
+    "label": "allocation-1-native",
+    "command": [
+      "node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "native"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 12.314317463002226,
+    "stdout": "allocation-1-native.json",
+    "stdoutSha256": "cc28a751ceb8387f84f78a40af68cb8babb2468a9057488f0a7377d905d3449b",
+    "stderr": "allocation-1-native.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timeoutSeconds": 45
+  },
+  {
+    "label": "allocation-1-candidate",
+    "command": [
+      "node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "candidate"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 10.929116915998748,
+    "stdout": "allocation-1-candidate.json",
+    "stdoutSha256": "0661ae604ebb930cc20ea2b66f1d9223a72ad39ece5880e4ecbafa7e761e5863",
+    "stderr": "allocation-1-candidate.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timeoutSeconds": 45
+  },
+  {
+    "label": "allocation-2-native",
+    "command": [
+      "node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "native"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 13.35666846499953,
+    "stdout": "allocation-2-native.json",
+    "stdoutSha256": "9509f8c725c7d44edbaa7ff65774604bc7ef108bac017feb41258b465e42e78e",
+    "stderr": "allocation-2-native.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timeoutSeconds": 45
+  },
+  {
+    "label": "allocation-2-candidate",
+    "command": [
+      "node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "candidate"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 7.298114999997779,
+    "stdout": "allocation-2-candidate.json",
+    "stdoutSha256": "26c6dc402f10ee20c3f8f6ae589aaae213b10de11dd5990b73bc025c89f1ffff",
+    "stderr": "allocation-2-candidate.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timeoutSeconds": 45
+  },
+  {
+    "label": "allocation-3-native",
+    "command": [
+      "node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "native"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 13.402287647004414,
+    "stdout": "allocation-3-native.json",
+    "stdoutSha256": "b375f7958afe40334e64820591bd2119267f609cb1a3834b31d22af2ec6d7d70",
+    "stderr": "allocation-3-native.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timeoutSeconds": 45
+  },
+  {
+    "label": "allocation-3-candidate",
+    "command": [
+      "node",
+      "--max-old-space-size=384",
+      "--expose-gc",
+      "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-transport-investigation-v1/author/benchmark-worker.mjs",
+      "candidate"
+    ],
+    "exitCode": 0,
+    "elapsedSeconds": 7.9962788650009315,
+    "stdout": "allocation-3-candidate.json",
+    "stdoutSha256": "44c4a95258da987670704ee5321e2fae044f99cb0f03b3c1d93fb05af1aec47a",
+    "stderr": "allocation-3-candidate.stderr.txt",
+    "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "timeoutSeconds": 45
+  }
+]

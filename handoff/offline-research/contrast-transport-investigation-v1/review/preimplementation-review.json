@@ -1,0 +1,36 @@
+{
+  "kind": "independent-preimplementation-review",
+  "sourceBindings": [
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": ".repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    }
+  ],
+  "sourceFindings": [
+    "Product sampleText return enters Node as complete locator.evaluate result at line 795; evidence-store already archives each complete row, so repeat retention has already been addressed.",
+    "Sampler returns plain object/array/scalar graphs, including shared references: result.paint equals first step paint; witness clip aliases its step clip. Archives are JSON evidence and cannot themselves establish pre-serialization undefined presence or alias identity.",
+    "Transport proposal may bound the recursive Playwright payload but still retains browser sampler graph and encoded text plus Node reassembled string and decoded graph. No cgroup reduction follows solely from byte count."
+  ],
+  "requiredChecks": [
+    "Exact sampleText function and caller arguments preserved; old controls, witnesses, deadlines, lifecycle and evidence-store unchanged.",
+    "Archived pilot artifact JSON equivalence and complete key/order/type comparisons.",
+    "Explicit own undefined, missing keys, sparse/dense arrays, null prototype, numeric specials, strings/surrogates and shared graph identity.",
+    "Unsupported accessors/custom prototypes/symbol properties fail closed without invoking getters; no silent full-object fallback.",
+    "Bounded metadata, chunks, total encoded length, graph size, and iterative depth handling.",
+    "Handles disposed on success and every failure; disposal failures surface without suppressing primary cause.",
+    "Malformed/truncated/duplicated graph transport rejected; no prototype pollution through __proto__.",
+    "No browser/container runtime, measured 896 MiB success, or accepted product observation claim."
+  ]
+}

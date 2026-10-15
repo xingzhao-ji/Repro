@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "createdUtc": "2026-10-15T02:38:48.714844+00:00",
+  "status": "PREPARED_NOT_EXECUTED",
+  "scope": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-diagnostics-v1",
+  "manifest": {
+    "path": "artifact-manifest.json",
+    "bytes": 21823,
+    "sha256": "660225a8d686844ac6b23b0ff80acce6bc7cab13441c3a7c79553c6ef724ba49"
+  },
+  "preparationRecord": {
+    "path": "preparation-record.json",
+    "bytes": 22710,
+    "sha256": "1806c2afd33ce03647b43a4ef4da2a6356e0574e8fd47fd900742ebcd96d7e7f"
+  },
+  "result": {
+    "path": "RESULT.md",
+    "bytes": 6586,
+    "sha256": "ea6500153c81424329ba802b3bc16691ea2f917e67b428ff29b48efb4500bb00"
+  },
+  "plan": {
+    "path": "PLAN.md",
+    "bytes": 10784,
+    "sha256": "beb766eb8a30e008367eef7a32883187e54bc47a4158af2cb85e8c980f8a142c"
+  },
+  "currentAuthorization": {
+    "path": "CURRENT-AUTHORIZATION.json",
+    "bytes": 1487,
+    "sha256": "77b95c6de2266927906af127f493f433ef9239971429ec4c17fe64aec029d1f8"
+  },
+  "frozenProbe": {
+    "path": "source/contrast-p57-memory-batch-probe.mjs",
+    "bytes": 77784,
+    "sha256": "9b8f407a554434f793bd93b7cf50cf145adfba828d6660c6b49896fe82da7053"
+  },
+  "frozenBatchPlan": {
+    "path": "source/batch-plan.json",
+    "bytes": 14104,
+    "sha256": "0abcd3553b3875fca305670cf6ec4e3ec0ae3af15176013df40a26479422a0dd"
+  },
+  "independentSourceReview": {
+    "path": "audit/focused-batch-source-review-20261015.json",
+    "bytes": 35227,
+    "sha256": "39f1f0302abc4c107bd65406d6fa84fb2ede585b0a75801701e80526a2b66d58"
+  },
+  "allWritersFrozen": true,
+  "excludedSelfAndManifest": [
+    "artifact-manifest.json",
+    "final-receipt.json"
+  ],
+  "independentReadback": {
+    "reviewer": "/root/astra_repro_acceptance/prior_seal_audit",
+    "status": "PASS",
+    "exitCode": 0,
+    "invocations": 1,
+    "startedUtc": "2026-10-15T02:38:15.530783+00:00",
+    "completedUtc": "2026-10-15T02:38:15.578671+00:00",
+    "regularFiles": 112,
+    "regularBytes": 26477018,
+    "linksRecordedNotFollowed": 0,
+    "specialEntriesRecordedNotOpened": 0,
+    "directoriesObserved": 50,
+    "checksPassed": 15,
+    "checksTotal": 15,
+    "missing": [],
+    "extra": [],
+    "mismatches": [],
+    "failures": [],
+    "secondNamespaceEnumerationUnchanged": true,
+    "manifestBeforeAndAfterSha256": "660225a8d686844ac6b23b0ff80acce6bc7cab13441c3a7c79553c6ef724ba49",
+    "verifier": {
+      "path": "audit/task-final-readback-20261015.py",
+      "bytes": 10284,
+      "sha256": "261ef59b9aebed98633441e7df54996016391aafe8c70e9cd23d905ea383c9c7"
+    },
+    "finalReceiptObservedDuringReadback": null,
+    "outputsWritten": [],
+    "newBrowserRuns": 0,
+    "newDockerRuns": 0,
+    "newProductTestRuns": 0
+  },
+  "executionStatus": {
+    "runtimeStaged": false,
+    "runtimeGoIssued": false,
+    "newBrowserOrDockerRuns": 0,
+    "prepared50ControlSuite": "UNRUN",
+    "prepared57ProductOccurrences": "UNRUN",
+    "memoryImprovementAtRuntime": "UNVERIFIED"
+  },
+  "permissionAssessment": "No extra end-user/sandbox/paid-resource/security approval identified solely for five sequential unchanged-boundary jobs. No launch this preparation turn because latest scope requests this handoff and concrete runtime staging/bindings/review remain undone.",
+  "proposedWorkload": {
+    "perJobInternalSeconds": 90,
+    "perJobOuterSeconds": 120,
+    "uniqueJobs": 5,
+    "cumulativeInternalSeconds": 450,
+    "cumulativeOuterSeconds": 600,
+    "orchestrationIncluded": false,
+    "order": [
+      "p390-00-11",
+      "p320-00-10",
+      "p390-12-23",
+      "p320-11-21",
+      "p320-22-32"
+    ]
+  },
+  "priorSealedDiagnostics": {
+    "finalReceiptSha256": "49313c12a711309788ed2336e53200fd72b6c75b24d9c991e3dafa75593a108e",
+    "manifestSha256": "05897dbe57b22f43cc1353db96fc91973b245dcc4832c5976688907777f64b3b",
+    "modified": false
+  },
+  "futureExecution": "New sibling task only after concrete runtime binding review and coordinator continuation; no changes to this sealed preparation.",
+  "integrityDoesNotEstablishRuntimeOrProductAcceptance": true
+}

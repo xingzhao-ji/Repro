@@ -1,0 +1,54 @@
+{
+  "utc": "2026-10-15T04:39:02.001713+00:00",
+  "status": "PROPOSED_NOT_ADOPTED_NO_RUNTIME",
+  "currentGateContract": {
+    "allRecordedSamplesZeroZ": true,
+    "driverSecondsMaximum": 75
+  },
+  "proposedScope": "Five isolated contrast capture jobs only; not general product/recovery acceptance",
+  "proposedGateContract": {
+    "cleanup": "Normal browser.close promise settlement, zero active contexts, browser-child exit0/signalnull bound to logged PID/retained startticks without forced fallback. First naturally scheduled nonterminal census wholly after settlement and separate terminal census must each contain exactly one original init and one original Node, unchanged PID/startticks and non-Z; no unreadable/unaccounted/additional process. Every subsequent census clean; no skipped eligible census, extra wait, sampling changes or forced termination; missing evidence is NOT_ESTABLISHED. Root two-census definition controls over supporting provenance terminal-only option. If that first census is incomplete/unreadable or its post-settlement timing cannot be established, return NOT_ESTABLISHED; do not skip to a later complete census. Retain every raw Z observation unchanged.",
+    "driverSecondsMaximum": 90,
+    "acceptanceChanges": [
+      "all-samples-zero-Z to defined observed completed cleanup",
+      "driver maximum75to90"
+    ],
+    "historicalResults": "Preserve all old frozen FAILs; no retroactive reclassification"
+  },
+  "unchanged": {
+    "internalSeconds": 90,
+    "outerSeconds": 120,
+    "maximumJobs": 5,
+    "cumulativeInternalSeconds": 450,
+    "cumulativeOuterSeconds": 600,
+    "tasks": 128,
+    "memoryBytes": 1073741824,
+    "cpu": 2,
+    "kernelPeakGateBytes": 939524096,
+    "controlsPerJob": 50,
+    "originalAssertions": true,
+    "securityProfile": true,
+    "samplingCadence": true,
+    "logMetadataCaps": true,
+    "exactOwnedCleanup": true
+  },
+  "order": [
+    "p390-00-11",
+    "p320-00-10",
+    "p390-12-23",
+    "p320-11-21",
+    "p320-22-32"
+  ],
+  "freshRuntimePrerequisites": [
+    "Explicit prospective decision",
+    "Offline validator adversarial challenges",
+    "Frozen exact candidate/packet/CSP/occurrence/input and five-job validator bindings",
+    "Independent review",
+    "Single fresh first pilot only, remaining unique jobs conditional on all preceding continuation gates passing",
+    "Separate first-P320 gate",
+    "Stop on any failed gate; no additional/repeated job"
+  ],
+  "currentStrictRoute": "No evidence-backed teardown correction is ready. A10-job\u22646-occurrence partition is concrete timing fallback only, costs900/1200seconds and500controls, does not solve zeroZ or establish timing/memory.",
+  "safeReleaseItemClosed": "Correct stale R9 release index; preserve exact-source test/CLI/package results and historical matrix outcomes.",
+  "noRuntimeNoGateMutation": true
+}

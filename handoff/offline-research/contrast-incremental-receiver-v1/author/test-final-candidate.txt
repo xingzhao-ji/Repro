@@ -1,0 +1,25 @@
+✔ receiver exposes incremental graph decoder and does not join whole wire or parse tagged graph (6.2292ms)
+✔ incremental receiver matches sealed decoder through every split and one-unit chunks (20.527075ms)
+✔ incremental parser withholds graph until finish and clears state on abort/failure (0.816254ms)
+✔ all encoder bytes are identical to sealed predecessor (0.199918ms)
+✔ string budget applies to data and keys, not fixed protocol tag/special-number labels (0.494098ms)
+✔ valid scalar and graph grammar matches predecessor, including noncanonical finite JSON numeric tokens (0.919615ms)
+✔ strict JSON and tagged grammar rejects malformed input and clears partial retained state (1.173297ms)
+✔ receiver exact node/depth/string/unit budgets and failure cleanup (0.666838ms)
+✔ no final graph is returned before metadata and encoded disposal succeed (5.690685ms)
+✔ parser stack and scalar state remain bounded under one-unit streaming (1.292448ms)
+✔ complete stored row through bounded handle transport (1341.354565ms)
+✔ all 12 complete stored rows and complete controls evidence round-trip (15390.262987ms)
+✔ aliases, cycles, own undefined, special numbers, bigint, keys and Unicode retain pinned Playwright semantics (36.964438ms)
+✔ unsupported values fail closed without invoking getters and release both handles (2.555697ms)
+✔ bounded limits reject invalid options before sampling and oversize/deep graphs without truncating (1.486104ms)
+✔ sampler, handle-open, read, corruption, disposal faults are surfaced with cleanup (0.703709ms)
+✔ falsy rejection reasons are preserved rather than swallowed (0.467515ms)
+ℹ tests 17
+ℹ suites 0
+ℹ pass 17
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 17109.749553

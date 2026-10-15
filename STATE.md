@@ -1,5 +1,13 @@
 # Development state
 
+## User takeover and handoff — 2026-10-15
+
+The user requested that development, experiments and diagnostics stop and that all intended Repro work be committed and pushed for their takeover. This instruction supersedes historical autonomous-continuation directions below. This handoff performs documentation, source/evidence preservation and version-control delivery only; it does not authorize another run, release or diagnostic.
+
+Start with [HANDOFF.md](HANDOFF.md), [current status](docs/handoff/STATUS.md) and the [new-agent goal prompt](docs/handoff/GOAL-PROMPT.md). Original product requirements remain in GOAL.md and docs/ACCEPTANCE.md. The 128-task environment cap, 896 MiB contrast gate, later duration thresholds and post-close census criteria have specific diagnostic/approval provenance; they are not original product requirements. Retain historical verdicts and distinguish approved plan criteria from broader product goals.
+
+The two offline transport candidates remain uninstalled. The incremental receiver's frozen suite remains 107/108; a separate expectation-adjusted suite passed 108/108. Its complete-transfer RSS was worse in two of three pairs and every timing pair regressed. A focused independent review selected no further correction. The observation-lifetime extension and single native-transport attribution proposal remain pending and unexecuted. Reviewed source/tests/reports are preserved under `handoff/`; bulk evidence stays local with exact exclusions inventoried in `docs/handoff/EXCLUDED-LOCAL.md`.
+
 ## Current approved corrected-CSS pilot — 2026-10-15
 
 The user approved the exact prospective cleanup criterion and 90-second driver threshold at 06:26 UTC (Sentinel_c0c1a97e7fc48191b9a0be45fd712492). The criteria were adopted without renewed approval. One independently reviewed corrected-CSS pilot ran; all 50 controls met their expected outcomes and all 12 observations reported measured-pass, with source exit 0 and 41.72000612 s driver duration. Continuation STOP: kernel memory 943,087,616 B (899.3984375 MiB) exceeded the unchanged 896 MiB gate by 3,563,520 B; final close's next sample 267 was terminal, so the required separate natural post-close interval census is absent. Normal browser exit and zero-owned cleanup passed, all PID/memory/OOM events were zero, and raw Z samples 76/266 remain retained. No P320 or other remaining job started and no retry occurred. Twelve observations are provisional, 45 unattempted, zero accepted through the aggregate gate. Historical failures retain their original verdicts. Older sections below headed “Current” are retained historical checkpoints; their pending-approval wording is superseded by this adopted status.

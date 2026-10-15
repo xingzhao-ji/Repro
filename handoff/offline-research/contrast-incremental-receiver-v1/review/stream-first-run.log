@@ -1,0 +1,108 @@
+✔ all split boundaries preserve native ordinary graph graph (27.231175ms)
+✔ all split boundaries preserve native ordinary graph null (0.395903ms)
+✔ all split boundaries preserve native ordinary graph false (0.21033ms)
+✔ all split boundaries preserve native ordinary graph true (0.190621ms)
+✔ all split boundaries preserve native ordinary graph zero (0.120609ms)
+✔ all split boundaries preserve native ordinary graph negative (0.100524ms)
+✔ all split boundaries preserve native ordinary graph decimal (0.444849ms)
+✔ all split boundaries preserve native ordinary graph string (0.311347ms)
+✔ all split boundaries preserve native ordinary graph undefined (0.256168ms)
+✔ all split boundaries preserve native ordinary graph bigint (0.517916ms)
+✔ all split boundaries preserve native ordinary graph empty (0.463105ms)
+✔ all split boundaries preserve native ordinary graph emptyObject (0.41593ms)
+✔ valid JSON whitespace and numeric grammar independent of canonical encoder (2.145801ms)
+✔ strict JSON/tag grammar every boundary empty (0.930449ms)
+✔ strict JSON/tag grammar every boundary numbers (1.677803ms)
+✔ strict JSON/tag grammar every boundary literals (0.712578ms)
+✔ strict JSON/tag grammar every boundary strings (0.625104ms)
+✔ strict JSON/tag grammar every boundary separators (2.534705ms)
+✔ strict JSON/tag grammar every boundary trailing (1.464556ms)
+✔ strict JSON/tag grammar every boundary objects (0.443875ms)
+✔ strict JSON/tag grammar every boundary tags (2.391223ms)
+✔ strict JSON/tag grammar every boundary graphs (5.696923ms)
+✔ every incomplete prefix of a nested graph fails without a partial return (19.137231ms)
+✔ single-use terminal lifecycle prevents reuse or partial recovery (0.480569ms)
+✔ input and output preserve safe own names and insertion order (0.416677ms)
+✔ decoded strings bounded by decoded UTF16 units, not escape text (0.476247ms)
+✔ receiver independently enforces total wire, depth and nodes across writes (0.688596ms)
+✔ scalar number with enormous token fails within finite encoded budget (0.408724ms)
+✖ mechanism discriminator rejects predecessor whole-wire JSON parse but permits incremental scalar tokens (2.135541ms)
+✔ write rejects nonstrings and parser cannot revive after invalid input (0.280931ms)
+✔ complete archived evidence through incremental chunks controls-p390-00-11.json (707.247095ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-000.json (1061.198301ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-001.json (1005.499094ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-002.json (1029.590345ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-003.json (998.989521ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-004.json (977.243831ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-005.json (975.330128ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-006.json (1019.625786ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-007.json (981.790849ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-008.json (993.208287ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-009.json (1004.957706ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-010.json (1062.278084ms)
+✔ complete archived evidence through incremental chunks node-p390-00-11-011.json (995.004851ms)
+✔ falsy primary rejected with exactly one disposal sample/undefined (0.881134ms)
+✔ falsy primary rejected with exactly one disposal sample/null (0.096194ms)
+✔ falsy primary rejected with exactly one disposal sample/false (0.060733ms)
+✔ falsy primary rejected with exactly one disposal sample/0 (0.056572ms)
+✔ falsy primary rejected with exactly one disposal sample/ (0.059636ms)
+✔ falsy primary rejected with exactly one disposal encode/undefined (0.212812ms)
+✔ falsy primary rejected with exactly one disposal encode/null (0.117719ms)
+✔ falsy primary rejected with exactly one disposal encode/false (0.129921ms)
+✔ falsy primary rejected with exactly one disposal encode/0 (0.134446ms)
+✔ falsy primary rejected with exactly one disposal encode/ (0.093298ms)
+✔ falsy primary rejected with exactly one disposal chunk-0/undefined (0.240695ms)
+✔ falsy primary rejected with exactly one disposal chunk-0/null (0.094751ms)
+✔ falsy primary rejected with exactly one disposal chunk-0/false (0.079265ms)
+✔ falsy primary rejected with exactly one disposal chunk-0/0 (0.119425ms)
+✔ falsy primary rejected with exactly one disposal chunk-0/ (0.097742ms)
+✔ falsy primary rejected with exactly one disposal chunk-1/undefined (0.129963ms)
+✔ falsy primary rejected with exactly one disposal chunk-1/null (0.073644ms)
+✔ falsy primary rejected with exactly one disposal chunk-1/false (0.122243ms)
+✔ falsy primary rejected with exactly one disposal chunk-1/0 (0.078959ms)
+✔ falsy primary rejected with exactly one disposal chunk-1/ (0.151735ms)
+✔ falsy primary rejected with exactly one disposal metadata/undefined (0.152254ms)
+✔ falsy primary rejected with exactly one disposal metadata/null (0.109474ms)
+✔ falsy primary rejected with exactly one disposal metadata/false (0.097562ms)
+✔ falsy primary rejected with exactly one disposal metadata/0 (0.09679ms)
+✔ falsy primary rejected with exactly one disposal metadata/ (0.265393ms)
+✔ falsy cleanup rejected with exactly one attempt original/undefined (0.190423ms)
+✔ falsy cleanup rejected with exactly one attempt original/null (0.129547ms)
+✔ falsy cleanup rejected with exactly one attempt original/false (0.134183ms)
+✔ falsy cleanup rejected with exactly one attempt original/0 (0.072788ms)
+✔ falsy cleanup rejected with exactly one attempt original/ (0.064346ms)
+✔ falsy cleanup rejected with exactly one attempt encoded/undefined (0.224716ms)
+✔ falsy cleanup rejected with exactly one attempt encoded/null (0.099281ms)
+✔ falsy cleanup rejected with exactly one attempt encoded/false (0.115842ms)
+✔ falsy cleanup rejected with exactly one attempt encoded/0 (0.099967ms)
+✔ falsy cleanup rejected with exactly one attempt encoded/ (0.085082ms)
+✔ primary and falsy cleanup causes remain distinct (0.593313ms)
+✔ malformed suffix rejects after substantial partial graph and disposes handles (0.590728ms)
+ℹ tests 80
+ℹ suites 0
+ℹ pass 79
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13047.789953
+
+✖ failing tests:
+
+test at .repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming.test.mjs:43:1
+✖ mechanism discriminator rejects predecessor whole-wire JSON parse but permits incremental scalar tokens (2.135541ms)
+  AssertionError [ERR_ASSERTION]: real scalar tokenizer exercised
+      at TestContext.<anonymous> (file:///workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-incremental-receiver-v1/review/streaming.test.mjs:43:697)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: false,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

@@ -1,0 +1,23 @@
+✔ candidate verifier accepts only bound candidate with exact original full57 inventory (18.486021ms)
+✔ candidate binding rejects old HTML (3.16454ms)
+✔ candidate binding rejects other HTML (1.01149ms)
+✔ candidate binding rejects old style (1.559797ms)
+✔ candidate binding rejects other style (1.6308ms)
+✔ candidate binding rejects changed source path (1.200995ms)
+✔ candidate binding rejects changed packet (1.755105ms)
+✔ candidate binding rejects missing source (0.830754ms)
+✔ candidate binding rejects broad surface (1.179368ms)
+✔ candidate binding rejects changed route (0.953641ms)
+✔ candidate binding rejects changed occurrence (7.484433ms)
+✔ candidate binding rejects missing occurrence (5.800441ms)
+✔ candidate binding rejects larger budget (1.123456ms)
+✔ candidate binding rejects missing controls (1.137374ms)
+✔ candidate actual style-list hash equals browser allTextContents serialization binding (6.37076ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 258.021535

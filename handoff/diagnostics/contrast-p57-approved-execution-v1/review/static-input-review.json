@@ -1,0 +1,493 @@
+{
+  "status": "PASS_STATIC_ONLY",
+  "checks": [
+    {
+      "name": "overlay exact actual/study/P.html",
+      "pass": true
+    },
+    {
+      "name": "overlay exact contrast-p57-approved-batch-inputs.json",
+      "pass": true
+    },
+    {
+      "name": "overlay exact verification-inputs/batch-partition.mjs",
+      "pass": true
+    },
+    {
+      "name": "overlay exact verification-inputs/candidate-binding.mjs",
+      "pass": true
+    },
+    {
+      "name": "overlay exact verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "pass": true
+    },
+    {
+      "name": "overlay exact verification-inputs/evidence-store.mjs",
+      "pass": true
+    },
+    {
+      "name": "overlay exact verification-inputs/lifecycle-diagnostics.mjs",
+      "pass": true
+    },
+    {
+      "name": "overlay exact verification-inputs/resource-probe.mjs",
+      "pass": true
+    },
+    {
+      "name": "overlay exact verification-inputs/selection-state.mjs",
+      "pass": true
+    },
+    {
+      "name": "one style each",
+      "pass": true
+    },
+    {
+      "name": "only exact scoped shadow rule",
+      "pass": true
+    },
+    {
+      "name": "exact JavaScript and embedded packet unchanged",
+      "pass": true
+    },
+    {
+      "name": "candidate CSP style matches",
+      "pass": true
+    },
+    {
+      "name": "candidate CSP script matches",
+      "pass": true
+    },
+    {
+      "name": "HTML exact old plus rule and required CSP",
+      "pass": true
+    },
+    {
+      "name": "canonical full57 hash",
+      "pass": true
+    },
+    {
+      "name": "all canonical states/descriptors unchanged",
+      "pass": true
+    },
+    {
+      "name": "packet and other source bindings unchanged",
+      "pass": true
+    },
+    {
+      "name": "selected surface profile unchanged",
+      "pass": true
+    },
+    {
+      "name": "candidate style-array binding",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field schemaVersion",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field scope",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field file",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field packet",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field evidence",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field inventory",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field comparatorSummary",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field caseSha256",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field jobId",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field sessionId",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field route",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field maximumCharacters",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field maximumScrollPositions",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field stopAfterElapsedMs",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field states",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field supersedesSourceOnly",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field supersedesRevision",
+      "pass": true
+    },
+    {
+      "name": "frozen manifest field syntheticFixtureRevision",
+      "pass": true
+    },
+    {
+      "name": "consumed source actual/study/P.html",
+      "pass": true
+    },
+    {
+      "name": "consumed source actual/packet.json",
+      "pass": true
+    },
+    {
+      "name": "consumed source actual/study/evidence.json",
+      "pass": true
+    },
+    {
+      "name": "consumed source prior/remaining-122-inventory.json",
+      "pass": true
+    },
+    {
+      "name": "consumed source prior/comparator-summary.json",
+      "pass": true
+    },
+    {
+      "name": "consumed source verification-inputs/contrast-p57-memory-batch-probe.mjs",
+      "pass": true
+    },
+    {
+      "name": "consumed source verification-inputs/selection-state.mjs",
+      "pass": true
+    },
+    {
+      "name": "consumed source verification-inputs/evidence-store.mjs",
+      "pass": true
+    },
+    {
+      "name": "consumed source verification-inputs/batch-partition.mjs",
+      "pass": true
+    },
+    {
+      "name": "consumed source verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "pass": true
+    },
+    {
+      "name": "consumed source verification-inputs/resource-probe.mjs",
+      "pass": true
+    },
+    {
+      "name": "consumed source verification-inputs/lifecycle-diagnostics.mjs",
+      "pass": true
+    },
+    {
+      "name": "consumed source verification-inputs/candidate-binding.mjs",
+      "pass": true
+    },
+    {
+      "name": "consumed source batch-plan.json",
+      "pass": true
+    },
+    {
+      "name": "consumed source frozen-v3-inputs.json",
+      "pass": true
+    },
+    {
+      "name": "exact approved five-job order",
+      "pass": true
+    },
+    {
+      "name": "24+33 occurrences",
+      "pass": true
+    },
+    {
+      "name": "exact once 57 union and individual hashes",
+      "pass": true
+    },
+    {
+      "name": "sampler and full helper/control function bodies unchanged",
+      "pass": true
+    },
+    {
+      "name": "all 50 runtime control bodies unchanged",
+      "pass": true
+    },
+    {
+      "name": "close await unchanged return lifecycle.observeClose(label,operation,contextCount);",
+      "pass": true
+    },
+    {
+      "name": "close await unchanged deadlineTimer=setTimeout(()=>{result.internalBudgetExpired=true;lifecycleCapture.mark('dea",
+      "pass": true
+    },
+    {
+      "name": "close await unchanged } finally { await lifecycleCapture.observeClose('controls.context.close',()=>context.close",
+      "pass": true
+    },
+    {
+      "name": "close await unchanged } finally {await lifecycleCapture.observeClose('product.context.close',()=>product.close()",
+      "pass": true
+    },
+    {
+      "name": "close await unchanged if (browser) try { await lifecycleCapture.observeClose('final.browser.close',()=>browser.c",
+      "pass": true
+    },
+    {
+      "name": "100ms and terminal schedule unchanged",
+      "pass": true
+    },
+    {
+      "name": "exact original raw process read/parser",
+      "pass": true
+    },
+    {
+      "name": "no new sampler sleep kill or timeout",
+      "pass": true
+    },
+    {
+      "name": "unchanged overlay copy batch-partition.mjs",
+      "pass": true
+    },
+    {
+      "name": "unchanged overlay copy evidence-store.mjs",
+      "pass": true
+    },
+    {
+      "name": "unchanged overlay copy selection-state.mjs",
+      "pass": true
+    }
+  ],
+  "bindings": [
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/overlay-manifest.json",
+      "bytes": 6760,
+      "sha256": "124a9af10f7e3fb47508a0be9c6805f141872207df953f1ab3e1086607e568b1"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/actual/study/P.html",
+      "bytes": 398463,
+      "sha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/contrast-p57-approved-batch-inputs.json",
+      "bytes": 95986,
+      "sha256": "0dd78a13a85e6f0290bf9917c33f2face81c1b3bea5e6e94b78e37aa798e4da2"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/candidate-binding.mjs",
+      "bytes": 2096,
+      "sha256": "2b0a23499bb1bdeb33e7cd7242e968251b27c20d969c9d3a503c4bd2afc75766"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/actual/study/P.html",
+      "bytes": 398463,
+      "sha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/actual/study/P.html",
+      "bytes": 398403,
+      "sha256": "a8fa8f83540c4377901ffe305c1a1943f0a512332b4f14f7a54eec99db433646"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/contrast-p57-approved-batch-inputs.json",
+      "bytes": 95986,
+      "sha256": "0dd78a13a85e6f0290bf9917c33f2face81c1b3bea5e6e94b78e37aa798e4da2"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/frozen-v3-inputs.json",
+      "bytes": 94418,
+      "sha256": "9299adf0dcc84668d4c5410ae98be6929728b120c918736507f1467e9d998d37"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/batch-plan.json",
+      "bytes": 14104,
+      "sha256": "0abcd3553b3875fca305670cf6ec4e3ec0ae3af15176013df40a26479422a0dd"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/frozen-v3-inputs.json",
+      "bytes": 94418,
+      "sha256": "9299adf0dcc84668d4c5410ae98be6929728b120c918736507f1467e9d998d37"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/actual/study/P.html",
+      "bytes": 398463,
+      "sha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/actual/packet.json",
+      "bytes": 110557,
+      "sha256": "2931a3b104efb5410461669cc6115b457831c8ec0a20b55d8509fddd80740c42"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/actual/study/evidence.json",
+      "bytes": 110556,
+      "sha256": "b91e820b0107715efeefd9b0befe29752cf1e48863424ea676f50e8abafc51d0"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/prior/remaining-122-inventory.json",
+      "bytes": 202808,
+      "sha256": "f1d2f9aad947630e9e3329064fbebe8e76fb84e79e83d38dcc72e20e0adfa669"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/prior/comparator-summary.json",
+      "bytes": 2290275,
+      "sha256": "34ba27fcbd5a7bdc3f4cd3b5862ef13587cb6709e53e309106942ec956c5d797"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/verification-inputs/contrast-p57-memory-batch-probe.mjs",
+      "bytes": 77784,
+      "sha256": "9b8f407a554434f793bd93b7cf50cf145adfba828d6660c6b49896fe82da7053"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/lifecycle-diagnostics.mjs",
+      "bytes": 14643,
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/candidate-binding.mjs",
+      "bytes": 2096,
+      "sha256": "2b0a23499bb1bdeb33e7cd7242e968251b27c20d969c9d3a503c4bd2afc75766"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/batch-plan.json",
+      "bytes": 14104,
+      "sha256": "0abcd3553b3875fca305670cf6ec4e3ec0ae3af15176013df40a26479422a0dd"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/frozen-v3-inputs.json",
+      "bytes": 94418,
+      "sha256": "9299adf0dcc84668d4c5410ae98be6929728b120c918736507f1467e9d998d37"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/runtime/input/verification-inputs/contrast-p57-workload-lifecycle-probe.mjs",
+      "bytes": 86024,
+      "sha256": "25df13d9c37a0f9e9189556a01e593d7542662241179805244c25e548b6dafe0"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "bytes": 86082,
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/resource-probe.mjs",
+      "bytes": 8655,
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/runtime/input/verification-inputs/resource-probe.mjs",
+      "bytes": 8585,
+      "sha256": "6c710942eab9b8a86f95c85d64ebd87e64ec096ca39ecbff36bbe0bca0a02998"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/verification-inputs/batch-partition.mjs",
+      "bytes": 12140,
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/verification-inputs/evidence-store.mjs",
+      "bytes": 8155,
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1/inputs/verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+    },
+    {
+      "path": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-memory-execution-v1/runtime/p390-00-11/input/verification-inputs/selection-state.mjs",
+      "bytes": 22804,
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c"
+    }
+  ],
+  "limitations": [
+    "No browser rendering or paint acceptance from this static review.",
+    "Existing50 controls preserved; no new exact candidate/reinstated-inspector browser pair.",
+    "Original frozen plan proposal-status retained as provenance; task AUTHORIZATION governs execution."
+  ]
+}

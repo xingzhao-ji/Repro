@@ -1,0 +1,11 @@
+{
+  "task": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-p57-approved-execution-v1",
+  "commit": "823c3751f1c02a834d713665fa89927b618530f2",
+  "receiptSha256": "e815a4f74bafc02a12f8e96d66ec5e0fc2c224cc148eb7ce1acccc1b05574043",
+  "manifestSha256": "caf8344b15cf40424293bb126d564199516f0b3c371c822132fc2632277d8d17",
+  "readback": "PASS",
+  "files": 8688,
+  "bytes": 595051100,
+  "links": 23,
+  "priorPilotRemainsSTOP": true
+}

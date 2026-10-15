@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-14T20:11:32.990506+00:00",
+  "status": "pre-execution launcher failure",
+  "error": "FileNotFoundError: node not found under /usr/local/bin:/usr/bin:/bin",
+  "reducerProcessesStarted": 0,
+  "reducerInvocations": 0,
+  "actualNodePath": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "actualNodeVersion": "v24.19.0",
+  "correction": "Use the existing command-resolved absolute Node executable; no installation or environment/security change."
+}

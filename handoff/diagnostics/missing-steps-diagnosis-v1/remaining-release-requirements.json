@@ -1,0 +1,33 @@
+{
+  "utc": "2026-10-14T20:30:24.647252+00:00",
+  "taskCompleteWhen": "Separate schema patch, red/green evidence and independent review sealed; original startup candidate preserved.",
+  "requiredReleaseWork": [
+    {
+      "gate": "Integrate and package the separate schema fix",
+      "status": "Not applied to the original checkout; candidate and patch are local only.",
+      "action": "If adopted, integrate the three-file patch, run the final complete nonbrowser/code-health checks and regenerate/package/install the deliverable so shipped schemas include the fix. The schema is package-included; the prior package archive remains unchanged and therefore still carries the old schema.",
+      "evidenceAlreadyAvailable": "9 new tests, 28 relevant existing tests, strict typecheck, scoped lint, 700 retained actual result validations and patch dry-run; no runtime adapter/reducer/oracle/fixture bytes changed."
+    },
+    {
+      "gate": "Current browser behavioral acceptance and replay repeatability",
+      "status": "Blocked / unrun for final startup-repair candidate.",
+      "action": "Use an evidence-backed execution strategy preserving both required browser trees, overlap/liveness/fresh-replay assertions and all existing 128-task/sandbox constraints. Then run the complete 31-test browser matrix and at least 20 buggy / 20 fixed repetitions with declared fresh resets, schedule, seed, fixture and frozen assertion. No equivalent capacity strategy is selected by this task."
+    },
+    {
+      "gate": "Current CLI demo and installed-package browser replay/portability",
+      "status": "Unrun on the final candidate.",
+      "action": "After supported execution is feasible, run the separate end-to-end CLI demo and final installed-package capsule browser replay in the declared supported environment, recording exact artifacts, identities and outcomes."
+    },
+    {
+      "gate": "Documented usability/accessibility and research limits",
+      "status": "Separate requirements remain unverified.",
+      "action": "Complete documented native zoom, actual screen-reader use and remaining UI/accessibility checks; keep broader-case/human-research claims separate and unsupported until appropriate evidence and authorization exist."
+    }
+  ],
+  "minimality": {
+    "currentStatus": "UNVERIFIED",
+    "releaseInterpretation": "R2 and ADR 0001 allow bounded failure-preserving reduction with inconclusive final neighbors and honest unverified minimality. A 1-minimality claim is not a new mandatory release gate.",
+    "onlyIfStrongerClaimIsDesired": "Define and validate a supported reduction domain whose permitted final deletion neighbors can execute the unchanged relevant oracle; freeze budget and repetition criteria, re-establish actual baseline and evaluate final neighbors. Do not relabel MISSING_STEPS as requirement-satisfied, pin core actions retroactively to manufacture a vacuous claim, or infer real minimality from offline models."
+  },
+  "authorization": "No resource/permission/authentication changes or publication authorized or performed."
+}

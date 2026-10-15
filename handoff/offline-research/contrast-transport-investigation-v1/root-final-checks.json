@@ -1,0 +1,37 @@
+{
+  "utc": "2026-10-15T07:54:44.985294+00:00",
+  "status": "PASS",
+  "childReceipts": [
+    {
+      "subtree": "author",
+      "receiptSha256": "c6f75cf903948e30648749600faffcfecd963f34297b7f2bce309e72e7cbfe9a",
+      "filesVerified": 32,
+      "readback": "PASS"
+    },
+    {
+      "subtree": "review",
+      "receiptSha256": "e8b059ab4f28ffe179e3ff83ca24f1de91a760b5962fa75be957827c0da01648",
+      "filesVerified": 18,
+      "readback": "PASS"
+    },
+    {
+      "subtree": "lifecycle",
+      "receiptSha256": "4a7e57165c6c22c65f5622b76c0f213548bf212f98df400433aac09dc109b053",
+      "filesVerified": 5,
+      "readback": "PASS"
+    },
+    {
+      "subtree": "lifecycle-review",
+      "receiptSha256": "63dd4cc2cb1620d6f7be933e4fffc7c54f245a2b1a95d3f95d27739106090947",
+      "filesVerified": 8,
+      "readback": "PASS"
+    }
+  ],
+  "gitHead": "823c3751f1c02a834d713665fa89927b618530f2",
+  "gitStatus": " M STATE.md\n?? evidence/BROWSER-COMPILED-RUNNER.md\n?? evidence/BROWSER-INIT-DIAGNOSTIC.md\n?? evidence/BROWSER-RESOURCE-DIAGNOSIS.md\n",
+  "indexClean": true,
+  "unrelatedWorktreeHashesPreserved": true,
+  "oldPilotSealReadback": "root-preservation-check.json",
+  "runtimeStartsAdded": 0,
+  "sourceSemanticsChangedInActiveRunner": false
+}

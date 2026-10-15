@@ -1,0 +1,2805 @@
+{
+  "schemaVersion": 2,
+  "scope": "New supplemental computed-style contrast and glyph coverage measurement of exactly57 original P390/P320 axe incomplete occurrences. Raw axe statuses unchanged; no target replay, native zoom, assistive technology or full release pass claimed.",
+  "file": "actual/study/P.html",
+  "packet": "actual/packet.json",
+  "evidence": "actual/study/evidence.json",
+  "inventory": "prior/remaining-122-inventory.json",
+  "comparatorSummary": "prior/comparator-summary.json",
+  "caseSha256": "7c788f5c42087b36c373bea1dce2ac8511b6273a117f124fc37178beb9282b8a",
+  "jobId": "3c31f009-7301-45fa-acd8-b5239746588d",
+  "sessionId": "91f9a9b6-ba78-49fb-bf48-0f096347dd45",
+  "route": "#/sessions/91f9a9b6-ba78-49fb-bf48-0f096347dd45/reduction?run=3c31f009-7301-45fa-acd8-b5239746588d&trial=1",
+  "maximumCharacters": 8192,
+  "maximumScrollPositions": 12,
+  "stopAfterElapsedMs": 90000,
+  "sourceFiles": [
+    {
+      "path": "actual/study/P.html",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/hci-comparator/p57-inspector-shadow-none-20261015T031400Z-b7541c83/P.html",
+      "sha256": "a7c31a08d5a0cb23a40dbee32ccc1b928c78c80a1fd665ba5247cd15837d245f",
+      "bytes": 398463
+    },
+    {
+      "path": "actual/packet.json",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/contrast/inputs/actual/packet.json",
+      "sha256": "2931a3b104efb5410461669cc6115b457831c8ec0a20b55d8509fddd80740c42",
+      "bytes": 110557
+    },
+    {
+      "path": "actual/study/evidence.json",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/release-completion-v1/browser/contrast-followup/input/actual/study/evidence.json",
+      "sha256": "b91e820b0107715efeefd9b0befe29752cf1e48863424ea676f50e8abafc51d0",
+      "bytes": 110556
+    },
+    {
+      "path": "prior/remaining-122-inventory.json",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/contrast/analysis-v2/remaining-122-inventory.json",
+      "sha256": "f1d2f9aad947630e9e3329064fbebe8e76fb84e79e83d38dcc72e20e0adfa669",
+      "bytes": 202808
+    },
+    {
+      "path": "prior/comparator-summary.json",
+      "source": "/workspace/repro-development-rv5abotj/repro/.repro-runs/cloud-continuation/contrast-comparator-diagnostics-v1/runtime/comparator/jobs/comparator-checkpoints/artifacts/hci-comparator/verification/actual-35540f54-b69c-40af-9a50-f30a0abffc6b/summary.json",
+      "sha256": "34ba27fcbd5a7bdc3f4cd3b5862ef13587cb6709e53e309106942ec956c5d797",
+      "bytes": 2290275
+    }
+  ],
+  "states": [
+    {
+      "id": "P-reflow-390",
+      "condition": "P",
+      "auditState": "reflow-390",
+      "viewport": {
+        "width": 390,
+        "height": 900
+      },
+      "selectedTrial": 1,
+      "nodes": [
+        {
+          "sourceAuditNodeIndex": 0,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+          "rowIndex": 1,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 0,
+            "trialIndex": 0,
+            "renderedGroup": "kept",
+            "field": "reason"
+          },
+          "expectedText": "Target failure preserved in 2/2 required repetitions.",
+          "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+          "printableASCIICharacters": 47,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 222.625,
+              "y": -286.28125,
+              "width": 202,
+              "height": 34.09375
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 1,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Baseline</td>",
+          "rowIndex": 1,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 0,
+            "trialIndex": 0,
+            "renderedGroup": "kept",
+            "field": "decision"
+          },
+          "expectedText": "Baseline",
+          "expectedTextSha256": "cc9ea7f7c64e772c81eb80854c0e7db8f504943549c0675d893a983b8f545152",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 433.625,
+              "y": -324.28125,
+              "width": 70,
+              "height": 83.59375
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 2,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+          "rowIndex": 2,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 5,
+            "trialIndex": 5,
+            "renderedGroup": "kept",
+            "field": "reason"
+          },
+          "expectedText": "Target failure preserved in 2/2 required repetitions.",
+          "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+          "printableASCIICharacters": 47,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 222.625,
+              "y": -202.6875,
+              "width": 202,
+              "height": 34.09375
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 3,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Removal accepted</td>",
+          "rowIndex": 2,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 5,
+            "trialIndex": 5,
+            "renderedGroup": "kept",
+            "field": "decision"
+          },
+          "expectedText": "Removal accepted",
+          "expectedTextSha256": "b62d17e67b8b11f5a07a195a6cdc5a7f1903aa3b7f0ea5d26370e656772a934e",
+          "printableASCIICharacters": 15,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 433.625,
+              "y": -240.6875,
+              "width": 70,
+              "height": 83.59375
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 4,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+          "rowIndex": 3,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 9,
+            "trialIndex": 9,
+            "renderedGroup": "kept",
+            "field": "reason"
+          },
+          "expectedText": "Target failure preserved in 2/2 required repetitions.",
+          "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+          "printableASCIICharacters": 47,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 222.625,
+              "y": -119.09375,
+              "width": 202,
+              "height": 34.09375
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 5,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Removal accepted</td>",
+          "rowIndex": 3,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 9,
+            "trialIndex": 9,
+            "renderedGroup": "kept",
+            "field": "decision"
+          },
+          "expectedText": "Removal accepted",
+          "expectedTextSha256": "b62d17e67b8b11f5a07a195a6cdc5a7f1903aa3b7f0ea5d26370e656772a934e",
+          "printableASCIICharacters": 15,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 433.625,
+              "y": -157.09375,
+              "width": 70,
+              "height": 83.59375
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 6,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 2,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 2,
+            "trialIndex": 2,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 313.5,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 7,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 2,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 2,
+            "trialIndex": 2,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 275.5,
+              "width": 70,
+              "height": 100.5625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 8,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 3,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 3,
+            "trialIndex": 3,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 414.0625,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 9,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 3,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 3,
+            "trialIndex": 3,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 376.0625,
+              "width": 70,
+              "height": 222.90625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 10,
+          "target": [
+            "tr:nth-child(4) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 4,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 4,
+            "trialIndex": 4,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 636.96875,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 11,
+          "target": [
+            "tr:nth-child(4) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 4,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 4,
+            "trialIndex": 4,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 598.96875,
+              "width": 70,
+              "height": 100.5625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 12,
+          "target": [
+            "tr:nth-child(5) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 5,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 6,
+            "trialIndex": 6,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 737.53125,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 13,
+          "target": [
+            "tr:nth-child(5) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 5,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 6,
+            "trialIndex": 6,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 699.53125,
+              "width": 70,
+              "height": 182.125
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 14,
+          "target": [
+            "tr:nth-child(6) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 6,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 7,
+            "trialIndex": 7,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 919.65625,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 15,
+          "target": [
+            "tr:nth-child(6) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 6,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 7,
+            "trialIndex": 7,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 881.65625,
+              "width": 70,
+              "height": 100.5625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 16,
+          "target": [
+            "tr:nth-child(7) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 7,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 8,
+            "trialIndex": 8,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 1020.21875,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 17,
+          "target": [
+            "tr:nth-child(7) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 7,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 8,
+            "trialIndex": 8,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 982.21875,
+              "width": 70,
+              "height": 182.125
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 18,
+          "target": [
+            "tr:nth-child(8) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 8,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 10,
+            "trialIndex": 10,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 1202.34375,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 19,
+          "target": [
+            "tr:nth-child(8) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 8,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 10,
+            "trialIndex": 10,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 1164.34375,
+              "width": 70,
+              "height": 141.34375
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 20,
+          "target": [
+            "tr:nth-child(9) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 9,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 11,
+            "trialIndex": 11,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 1343.6875,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 21,
+          "target": [
+            "tr:nth-child(9) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 9,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 11,
+            "trialIndex": 11,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 1305.6875,
+              "width": 70,
+              "height": 100.5625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 22,
+          "target": [
+            "tr:nth-child(10) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 10,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 12,
+            "trialIndex": 12,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 229.8125,
+              "y": 1444.25,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 23,
+          "target": [
+            "tr:nth-child(10) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 10,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 12,
+            "trialIndex": 12,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 2,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 440.8125,
+              "y": 1406.25,
+              "width": 70,
+              "height": 98.640625
+            },
+            "viewport": {
+              "width": 390,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 324
+              }
+            ]
+          }
+        }
+      ],
+      "predictedScrollPositions": 48
+    },
+    {
+      "id": "P-reflow-320",
+      "condition": "P",
+      "auditState": "reflow-320",
+      "viewport": {
+        "width": 320,
+        "height": 900
+      },
+      "selectedTrial": 1,
+      "nodes": [
+        {
+          "sourceAuditNodeIndex": 0,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+          "rowIndex": 1,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 0,
+            "trialIndex": 0,
+            "renderedGroup": "kept",
+            "field": "reason"
+          },
+          "expectedText": "Target failure preserved in 2/2 required repetitions.",
+          "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+          "printableASCIICharacters": 47,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 218.625,
+              "y": -2741.375,
+              "width": 202,
+              "height": 34.09375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 1,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(1) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Baseline</td>",
+          "rowIndex": 1,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 0,
+            "trialIndex": 0,
+            "renderedGroup": "kept",
+            "field": "decision"
+          },
+          "expectedText": "Baseline",
+          "expectedTextSha256": "cc9ea7f7c64e772c81eb80854c0e7db8f504943549c0675d893a983b8f545152",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 429.625,
+              "y": -2779.375,
+              "width": 70,
+              "height": 83.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 2,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+          "rowIndex": 2,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 5,
+            "trialIndex": 5,
+            "renderedGroup": "kept",
+            "field": "reason"
+          },
+          "expectedText": "Target failure preserved in 2/2 required repetitions.",
+          "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+          "printableASCIICharacters": 47,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 218.625,
+              "y": -2657.78125,
+              "width": 202,
+              "height": 34.09375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 3,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Removal accepted</td>",
+          "rowIndex": 2,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 5,
+            "trialIndex": 5,
+            "renderedGroup": "kept",
+            "field": "decision"
+          },
+          "expectedText": "Removal accepted",
+          "expectedTextSha256": "b62d17e67b8b11f5a07a195a6cdc5a7f1903aa3b7f0ea5d26370e656772a934e",
+          "printableASCIICharacters": 15,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 429.625,
+              "y": -2695.78125,
+              "width": 70,
+              "height": 83.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 4,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Target failure preserved in 2/2 required repetitions.</p>",
+          "rowIndex": 3,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 9,
+            "trialIndex": 9,
+            "renderedGroup": "kept",
+            "field": "reason"
+          },
+          "expectedText": "Target failure preserved in 2/2 required repetitions.",
+          "expectedTextSha256": "c51be7fb3d683cd2bc6b3c6fa86107ace81806fcbac1ffd52887b7c0fd4da8ef",
+          "printableASCIICharacters": 47,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 218.625,
+              "y": -2574.1875,
+              "width": 202,
+              "height": 34.09375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 5,
+          "target": [
+            ".panel-body > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Removal accepted</td>",
+          "rowIndex": 3,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 9,
+            "trialIndex": 9,
+            "renderedGroup": "kept",
+            "field": "decision"
+          },
+          "expectedText": "Removal accepted",
+          "expectedTextSha256": "b62d17e67b8b11f5a07a195a6cdc5a7f1903aa3b7f0ea5d26370e656772a934e",
+          "printableASCIICharacters": 15,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 429.625,
+              "y": -2612.1875,
+              "width": 70,
+              "height": 83.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 0,
+                "scrollTop": 0,
+                "scrollWidth": 471,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 6,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">4 ms</span>",
+          "rowIndex": 2,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 2,
+            "trialIndex": 2,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "4 ms",
+          "expectedTextSha256": "b37a0e0b82b3f391c02dc5dd352bbc0244f82b63d2c8b2eb4aef19cbff454a35",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -2124.09375,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 7,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 2,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 2,
+            "trialIndex": 2,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -2141.59375,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 8,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(2) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 2,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 2,
+            "trialIndex": 2,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -2179.59375,
+              "width": 70,
+              "height": 100.5625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 9,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">2 ms</span>",
+          "rowIndex": 3,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 3,
+            "trialIndex": 3,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "2 ms",
+          "expectedTextSha256": "318242e3df2f9ee96c1834d99d55a7bce0db60f66c13e840a251f03020f35120",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -2023.53125,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 10,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 3,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 3,
+            "trialIndex": 3,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -2041.03125,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 11,
+          "target": [
+            ".rejected-trials > .table-scroll[aria-label=\"Reduction trials\"][role=\"region\"] > table > tbody > tr:nth-child(3) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 3,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 3,
+            "trialIndex": 3,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -2079.03125,
+              "width": 70,
+              "height": 222.90625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 12,
+          "target": [
+            "tr:nth-child(4) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">2 ms</span>",
+          "rowIndex": 4,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 4,
+            "trialIndex": 4,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "2 ms",
+          "expectedTextSha256": "318242e3df2f9ee96c1834d99d55a7bce0db60f66c13e840a251f03020f35120",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -1800.625,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 13,
+          "target": [
+            "tr:nth-child(4) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 4,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 4,
+            "trialIndex": 4,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -1818.125,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 14,
+          "target": [
+            "tr:nth-child(4) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 4,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 4,
+            "trialIndex": 4,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -1856.125,
+              "width": 70,
+              "height": 100.5625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 15,
+          "target": [
+            "tr:nth-child(5) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">2 ms</span>",
+          "rowIndex": 5,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 6,
+            "trialIndex": 6,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "2 ms",
+          "expectedTextSha256": "318242e3df2f9ee96c1834d99d55a7bce0db60f66c13e840a251f03020f35120",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -1700.0625,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 16,
+          "target": [
+            "tr:nth-child(5) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 5,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 6,
+            "trialIndex": 6,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -1717.5625,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 17,
+          "target": [
+            "tr:nth-child(5) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 5,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 6,
+            "trialIndex": 6,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -1755.5625,
+              "width": 70,
+              "height": 182.125
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 18,
+          "target": [
+            "tr:nth-child(6) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">2 ms</span>",
+          "rowIndex": 6,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 7,
+            "trialIndex": 7,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "2 ms",
+          "expectedTextSha256": "318242e3df2f9ee96c1834d99d55a7bce0db60f66c13e840a251f03020f35120",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -1517.9375,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 19,
+          "target": [
+            "tr:nth-child(6) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 6,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 7,
+            "trialIndex": 7,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -1535.4375,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 20,
+          "target": [
+            "tr:nth-child(6) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 6,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 7,
+            "trialIndex": 7,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -1573.4375,
+              "width": 70,
+              "height": 100.5625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 21,
+          "target": [
+            "tr:nth-child(7) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">2 ms</span>",
+          "rowIndex": 7,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 8,
+            "trialIndex": 8,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "2 ms",
+          "expectedTextSha256": "318242e3df2f9ee96c1834d99d55a7bce0db60f66c13e840a251f03020f35120",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -1417.375,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 22,
+          "target": [
+            "tr:nth-child(7) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 7,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 8,
+            "trialIndex": 8,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -1434.875,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 23,
+          "target": [
+            "tr:nth-child(7) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 7,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 8,
+            "trialIndex": 8,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -1472.875,
+              "width": 70,
+              "height": 182.125
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 24,
+          "target": [
+            "tr:nth-child(8) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">2 ms</span>",
+          "rowIndex": 8,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 10,
+            "trialIndex": 10,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "2 ms",
+          "expectedTextSha256": "318242e3df2f9ee96c1834d99d55a7bce0db60f66c13e840a251f03020f35120",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -1235.25,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 25,
+          "target": [
+            "tr:nth-child(8) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 8,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 10,
+            "trialIndex": 10,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -1252.75,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 26,
+          "target": [
+            "tr:nth-child(8) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 8,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 10,
+            "trialIndex": 10,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -1290.75,
+              "width": 70,
+              "height": 141.34375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 27,
+          "target": [
+            "tr:nth-child(9) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">2 ms</span>",
+          "rowIndex": 9,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 11,
+            "trialIndex": 11,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "2 ms",
+          "expectedTextSha256": "318242e3df2f9ee96c1834d99d55a7bce0db60f66c13e840a251f03020f35120",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -1093.90625,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 28,
+          "target": [
+            "tr:nth-child(9) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 9,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 11,
+            "trialIndex": 11,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -1111.40625,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 29,
+          "target": [
+            "tr:nth-child(9) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 9,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 11,
+            "trialIndex": 11,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -1149.40625,
+              "width": 70,
+              "height": 100.5625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 30,
+          "target": [
+            "tr:nth-child(10) > td:nth-child(1) > .trial-cost.muted.small"
+          ],
+          "originalHtml": "<span class=\"small muted trial-cost\">2 ms</span>",
+          "rowIndex": 10,
+          "field": "duration",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 12,
+            "trialIndex": 12,
+            "renderedGroup": "rejected",
+            "field": "duration"
+          },
+          "expectedText": "2 ms",
+          "expectedTextSha256": "318242e3df2f9ee96c1834d99d55a7bce0db60f66c13e840a251f03020f35120",
+          "printableASCIICharacters": 3,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(89, 101, 119)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": -2,
+              "y": -993.34375,
+              "width": 99.8125,
+              "height": 18.59375
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 31,
+          "target": [
+            "tr:nth-child(10) > td:nth-child(3) > .trial-reason"
+          ],
+          "originalHtml": "<p class=\"trial-reason\">Run evidence does not match the frozen input, assertion, application, or execution identity.</p>",
+          "rowIndex": 10,
+          "field": "reason",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 12,
+            "trialIndex": 12,
+            "renderedGroup": "rejected",
+            "field": "reason"
+          },
+          "expectedText": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "expectedTextSha256": "6fd8f1dec59000f68cc16342ecd071a73306c4c356b5fafebfbfdb92872cc6a8",
+          "printableASCIICharacters": 80,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "11px",
+            "opacity": "1",
+            "rect": {
+              "x": 185.8125,
+              "y": -1010.84375,
+              "width": 202,
+              "height": 51.140625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        },
+        {
+          "sourceAuditNodeIndex": 32,
+          "target": [
+            "tr:nth-child(10) > td:nth-child(4)"
+          ],
+          "originalHtml": "<td>Restored</td>",
+          "rowIndex": 10,
+          "field": "decision",
+          "packetBinding": {
+            "collection": "job.result.trials",
+            "arrayIndex": 12,
+            "trialIndex": 12,
+            "renderedGroup": "rejected",
+            "field": "decision"
+          },
+          "expectedText": "Restored",
+          "expectedTextSha256": "5d561a1e3f1707d65de64ec5e49c6134aa1bccd58949ffb4d7d1ffc98fd3e65a",
+          "printableASCIICharacters": 8,
+          "predictedScrollPositions": 3,
+          "retainedRendering": {
+            "color": "rgb(24, 35, 49)",
+            "backgroundColor": "rgba(0, 0, 0, 0)",
+            "fontSize": "12px",
+            "opacity": "1",
+            "rect": {
+              "x": 396.8125,
+              "y": -1048.84375,
+              "width": 70,
+              "height": 98.640625
+            },
+            "viewport": {
+              "width": 320,
+              "height": 900
+            },
+            "scrollContainers": [
+              {
+                "role": "region",
+                "label": "Reduction trials",
+                "scrollLeft": 40,
+                "scrollTop": 0,
+                "scrollWidth": 478,
+                "clientWidth": 262
+              }
+            ]
+          }
+        }
+      ],
+      "predictedScrollPositions": 99
+    }
+  ],
+  "revision": "p57-memory-batch-v1",
+  "supersedesSourceOnly": {
+    "revision": "p57",
+    "probeSha256": "ece62f18c7c20877dd012fe7eb027d2d8ed438732a8b3b2664fb9c79b28458c7",
+    "manifestSha256": "cbee2299f9e40b5283e6283c9e47bc54dd8a64546362ee92a30d02fe39c20957",
+    "execution": "UNRUN"
+  },
+  "paintScope": {
+    "stylesSha256": "06504d654ace79a91d63504e9ab7e5657ebb96a3ffef3f95adbf54d990f521a8",
+    "scope": "Exact approved corrected-CSS P HTML and unchanged completed selected job/trial state. Only inspector shadow:none and required CSP/style identity differ. State-wide inventory scans all elements/pseudos before rectangle prefilter; per-step recomputation of all effect/focus/hover candidates. No generic blurred shadow extent accepted.",
+    "surface": {
+      "kind": "frozen-P-panel",
+      "selector": ".reduction-workspace > section.panel:not(.trial-inspector)",
+      "profile": {
+        "tag": "SECTION",
+        "className": "panel",
+        "backgroundColor": "rgb(255, 255, 255)",
+        "radii": [
+          "10px",
+          "10px",
+          "10px",
+          "10px"
+        ],
+        "borders": [
+          "1px",
+          "1px",
+          "1px",
+          "1px"
+        ],
+        "boxShadow": "rgba(24, 35, 49, 0.02) 0px 2px 6px 0px"
+      }
+    }
+  },
+  "probeSources": [
+    {
+      "path": "verification-inputs/contrast-p57-memory-batch-probe.mjs",
+      "sha256": "9b8f407a554434f793bd93b7cf50cf145adfba828d6660c6b49896fe82da7053",
+      "bytes": 77784
+    },
+    {
+      "path": "verification-inputs/selection-state.mjs",
+      "sha256": "536743e80a5b32b4730fdc320761fcd3d950fe6a1b88447847c45a428dbb1b5c",
+      "bytes": 22804
+    },
+    {
+      "path": "verification-inputs/evidence-store.mjs",
+      "sha256": "69f612126ed86aa550d14ffc0eac7161671b7a34ee701405a553e0298743b03a",
+      "bytes": 8155
+    },
+    {
+      "path": "verification-inputs/batch-partition.mjs",
+      "sha256": "0ee6786b54abf7344c700c3a5099da25b2c1891f05851b8bc9123fdd58f7b824",
+      "bytes": 12140
+    },
+    {
+      "path": "verification-inputs/contrast-p57-approved-batch-probe.mjs",
+      "sha256": "ba670e41acca925ba9c6b27c3b36f6a7d34ed5a2d4f5a8af422b8d382f996b54",
+      "bytes": 86082
+    },
+    {
+      "path": "verification-inputs/resource-probe.mjs",
+      "sha256": "2e90427eab81564e62b1907950ea7073d6fe6ab61c0c18e6bb406cb7049e3787",
+      "bytes": 8655
+    },
+    {
+      "path": "verification-inputs/lifecycle-diagnostics.mjs",
+      "sha256": "4cd8ee773dc50d132ce490095b60e674d36cc85edf4f60499c972c9987609906",
+      "bytes": 14643
+    },
+    {
+      "path": "verification-inputs/candidate-binding.mjs",
+      "sha256": "2b0a23499bb1bdeb33e7cd7242e968251b27c20d969c9d3a503c4bd2afc75766",
+      "bytes": 2096
+    }
+  ],
+  "supersedesRevision": {
+    "revision": "p57-v2",
+    "probeSha256": "9732f76781f28f60d61d9456bece047a1d44d659345dc980b0599425a37012b4",
+    "manifestSha256": "a8debded66eb57fe24ac2bfc928c4c299903f8f7de72f41ec971dd636e9b91b9",
+    "runtimeOutcome": "browser-control-failure; product measurements unattempted",
+    "independentFailureReceipt": "audit-astra/p57-v2-runtime-control-failure-20261015.json",
+    "independentFailureReceiptSha256": "ec1fc6c66f4d3c1281005353d2f29a74fd0fe58818e7ebb9c77b4e773bbdb9f5",
+    "rawSummarySha256": "db5aa2a4828cc8be5e9fb5d0c9ca6539ad6320162e77fe6fc111ffb753d85b68"
+  },
+  "syntheticFixtureRevision": {
+    "longTextWidthPx": 960,
+    "retainedTightEdgeWidthPx": 760,
+    "existingBrowserControls": 49,
+    "addedNegativeControls": 1,
+    "totalBrowserControls": 50,
+    "sampler": "byte-identical to frozen v2",
+    "rejectedRangeCapture": "new negative control only, at unchanged final sampling scroll; no historical overflow magnitude claimed"
+  },
+  "batchPlan": "batch-plan.json",
+  "frozenManifest": "frozen-v3-inputs.json",
+  "batchInputFiles": [
+    {
+      "path": "batch-plan.json",
+      "sha256": "0abcd3553b3875fca305670cf6ec4e3ec0ae3af15176013df40a26479422a0dd",
+      "bytes": 14104
+    },
+    {
+      "path": "frozen-v3-inputs.json",
+      "sha256": "9299adf0dcc84668d4c5410ae98be6929728b120c918736507f1467e9d998d37",
+      "bytes": 94418
+    }
+  ]
+}
