@@ -1,0 +1,96 @@
+{
+  "checkedAt": "2026-10-15T21:01:40.239410+00:00",
+  "commit": "f60a3f5fff2926cf4f3e66880ab148c7c8ee6bff",
+  "classification": "release-evidence-revalidation-not-test-rerun",
+  "sourceInputHashesMatch": 27,
+  "mainArtifactHashesMatch": 9,
+  "commandLogs": [
+    {
+      "name": "unit",
+      "hashMatches": true,
+      "reportedExitCode": 0
+    },
+    {
+      "name": "browser",
+      "hashMatches": true,
+      "reportedExitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "hashMatches": true,
+      "reportedExitCode": 0
+    },
+    {
+      "name": "lint",
+      "hashMatches": true,
+      "reportedExitCode": 0
+    },
+    {
+      "name": "build",
+      "hashMatches": true,
+      "reportedExitCode": 0
+    },
+    {
+      "name": "kit",
+      "hashMatches": true,
+      "reportedExitCode": 0
+    }
+  ],
+  "mainUiLogHashMatches": true,
+  "recordedUnitPasses": 204,
+  "recordedBrowserPasses": 39,
+  "recordedMainUiPasses": 8,
+  "packageCommandReceiptsChecked": 11,
+  "packageUniqueAssertionRunIds": 12,
+  "separatePostCloseCensusesInReceipts": 11,
+  "linuxActualTestLogChecked": true,
+  "linuxFrozenPairIdentitiesMatch": true,
+  "sourceArchiveMatchesReceipt": true,
+  "privateOriginMainMatches": true,
+  "cleanWorktreeAtCheck": true,
+  "capabilities": {
+    "browserProviders": [],
+    "nativeChromeApplicationListed": true,
+    "screenReaderOperationAndSpeechObservation": "No dedicated supported capability exposed; AX snapshots are not actual screen-reader evidence.",
+    "deniedNavigationRetried": false
+  },
+  "remainingRequiredGates": [
+    "Native 200% browser zoom after provider legitimately resolves the recorded loopback navigation restriction.",
+    "Actual screen-reader workflow with supported operation and observation."
+  ],
+  "preservedAuditCheckFailure": {
+    "exitCode": 1,
+    "error": "AssertionError: ('unit', 'pass')",
+    "cause": "Audit expected TAP # prefix; actual retained Node spec reporter uses \u2139. Raw log tails inspected; corrected exact count-line parsing accepts either documented reporter prefix. No product test failed or reran."
+  },
+  "limitations": [
+    "Revalidates retained evidence, not fresh runtime executions.",
+    "No complete release or participant-usability claim.",
+    "Historical absent raw-evidence link remains preserved in HCI materials receipt."
+  ],
+  "independentAudit": {
+    "reviewer": "final_release_audit",
+    "kind": "read-only agent evidence/source audit",
+    "additionalUnfinishedSupportedReleaseItems": 0,
+    "reviewedGates": [
+      "R0",
+      "R1",
+      "R2",
+      "R3",
+      "R4",
+      "R5",
+      "R6",
+      "R7",
+      "R8",
+      "R9",
+      "R10"
+    ],
+    "additionalEvidence": [
+      "All 14 exported/build/executed Linux payload files rehashed and equal.",
+      "All 11 raw package process censuses occur after child close, without census errors or observed survivors.",
+      "Both retained benchmark summaries include all 40 planned observations.",
+      "Authored mobile screenshot inspected; all 10 HCI material hashes match."
+    ],
+    "limits": "Not human approval, a new runtime test execution, or actual native zoom/screen-reader evaluation."
+  }
+}

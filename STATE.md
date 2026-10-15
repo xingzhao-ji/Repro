@@ -1,3 +1,13 @@
+# Release blocked on two accessibility prerequisites
+
+2026-10-15 UTC. Final independent R0–R10 audit at source `f60a3f5fff2926cf4f3e66880ab148c7c8ee6bff` identified no additional unfinished work in the supported release scope. Root revalidated 27 source hashes, nine main build artifacts, seven retained command/UI logs, the package observations, Linux assertion/harness identity and current private origin/main/source archive. Independent review additionally rehashed all 14 exported/build/executed Linux payload files and checked all 11 raw post-close process censuses. This is evidence revalidation, not fresh execution. [Audit and exact remaining prerequisites](evidence/RELEASE-BLOCKERS.md), [receipt](evidence/release-blocked-audit.json).
+
+The same native-zoom and actual screen-reader blockers remained through authored delivery, HCI-materials correction and this audit. All independent authorized work found by the audit is delivered. Mark the persistent goal blocked, not complete; resume when the legitimate browser provider permits the exact loopback origin and an actual assistive-technology operation/observation surface is available. No denied navigation, alternate-control bypass, protection change or participant collection was attempted. The owned VM remains stopped; no unchanged expensive suite needs another run solely for this audit.
+
+Git source/history is the current handoff. The latest source archive at `.repro-runs/hci-materials-v2/delivery/` identifies f60a3f5; the audit/state supplement is delivered in Git separately. No newer Library upload, runtime package, Linux image or deployment is implied. Root owns integration; inspect Git and the gate-audit delivery receipt before resuming. Do not erase historical evidence or the retained authored-workflow worktree.
+
+## Preserved HCI materials checkpoint
+
 # Current continuation — HCI materials correction
 
 2026-10-15 UTC. Root corrected an independently identified R10 preparation gap after delivering the authored workflow. Protocol 0.2 and blank materials v2 preserve both assigned blocks, expected task/claim slots, original attempts, explicit endings and independent six-concept coding/adjudication. Static P/L inspection keys now ask only for evidence in the frozen historical schema-1 projection; live formative extensions remain separate. See [HCI-MATERIALS](evidence/HCI-MATERIALS.md) and its final structural/review receipt. No product runtime, analyzer, dependencies or frozen evidence changed; earlier test counts remain historical observations at their recorded builds.
