@@ -1,5 +1,15 @@
 # Private source delivery
 
+## October 15 release candidate
+
+The current release is described in [RELEASE.md](RELEASE.md). Its reviewed source/history uses the existing private repository and non-force delivery authorization. The exact final commit, push result, remote HEAD/main readback and repository visibility belong to `.repro-runs/release-candidate/delivery/github.json`, generated after the final commit. Check that receipt or the actual remote refs before claiming a particular revision was published. No GitHub Actions workflow is configured, and no remote CI pass or hosted runtime is implied.
+
+The current source handoff archive and file inventory are recorded in `.repro-runs/release-candidate/delivery/source-bundle.json`; final npm/source/offline artifacts are recorded in `final-artifacts.json` beside it. The source archive excludes local configuration, credentials, Git internals, build output, installed dependencies, caches, VM data and raw run evidence. The separately acquired Linux image intentionally includes its runtime dependencies and is documented in [OFFLINE.md](../docs/OFFLINE.md).
+
+No new Library upload is claimed. The available Page upload tool requires a writable destination that is not supplied for this handoff. The earlier Library artifact below remains historical; the current local archive and private Git repository are the source continuity paths.
+
+## Historical October 13 delivery
+
 On 2026-10-13 at 19:56 UTC, the explicitly approved reviewed source, tests, assets, documentation and existing history were pushed to the private [xingzhao-ji/Repro repository](https://github.com/xingzhao-ji/Repro).
 
 - Branch: `main`; exact commit: `9399a6c7405aa7599d7b4e35d86152069a23906a`.

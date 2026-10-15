@@ -1,0 +1,170 @@
+{
+  "schemaVersion": 1,
+  "classification": "local-synthetic-alpha-release-candidate",
+  "date": "2026-10-15",
+  "runtimeInputs": {
+    "files": 26,
+    "aggregateAlgorithm": "SHA-256 of JSON.stringify(source-hashes.json parsed object); paths are sorted",
+    "aggregateSha256": "2210dd4dc2ef59f6b0401262bbdea59f5c52ee438e46f3f9497970410cf6ca99",
+    "unchangedDuringRun": true,
+    "matchedWorkingTreeWhenReportWritten": true,
+    "inventory": ".repro-runs/release-candidate/package/run-dol3gD/source-hashes.json"
+  },
+  "environment": {
+    "node": "v26.7.0",
+    "npm": "11.19.0",
+    "platform": "darwin-arm64",
+    "browser": "156.0.8078.4 (pinned Chromium)"
+  },
+  "checks": [
+    {
+      "command": "npm ci --ignore-scripts --no-audit --no-fund",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/setup/npm-ci.log",
+      "sha256": "54a86bb26117b37ed3bcb05a9fbfdcd2d6ac39b284fdefcf1d8dd4837d5c9fbb",
+      "bytes": 235,
+      "modifiedAt": "2026-10-15T19:41:42.932Z"
+    },
+    {
+      "command": "PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers npx --no-install playwright install chromium --only-shell",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/setup/browser-install.log",
+      "sha256": "25ebcd25e4d36cb4aaead442af142fdf3440decc3fc89d6341ba213c87a8736e",
+      "bytes": 4570,
+      "modifiedAt": "2026-10-15T19:42:07.020Z"
+    },
+    {
+      "command": "npm run check:kit",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/final-kit.log",
+      "sha256": "1fdfc8900d52c820f06e6ba48ee525430540914e6a3f4cf62a8b1d1134a69f53",
+      "bytes": 1094,
+      "modifiedAt": "2026-10-15T19:49:48.770Z"
+    },
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/final-typecheck.log",
+      "sha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4",
+      "bytes": 47,
+      "modifiedAt": "2026-10-15T19:49:48.937Z"
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/final-lint.log",
+      "sha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23",
+      "bytes": 63,
+      "modifiedAt": "2026-10-15T19:49:52.654Z"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/final-build.log",
+      "sha256": "e72c7ae118b13edfce9f09d41f28217c3e90a948d924bbeb538157e981a0aee7",
+      "bytes": 53,
+      "modifiedAt": "2026-10-15T19:49:44.754Z"
+    },
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/final-unit.log",
+      "sha256": "631fbb8fc846d18829d0469d7509f980469e437e607f65ff539eeea6c1aa3357",
+      "bytes": 16576,
+      "modifiedAt": "2026-10-15T19:50:06.754Z"
+    },
+    {
+      "command": "npm run test:browser",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/final-browser.log",
+      "sha256": "6267e89e65198988c6311322fd4c8a00fce30b0267169f9a9c8e9d7fe39ca78c",
+      "bytes": 3423,
+      "modifiedAt": "2026-10-15T19:50:18.763Z"
+    },
+    {
+      "command": "npm run demo",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/final-demo.log",
+      "sha256": "7c3e3ab606089d9d865fe3769f5b197d407b0726e38e33861253b673cb197739",
+      "bytes": 7495,
+      "modifiedAt": "2026-10-15T19:50:53.116Z"
+    },
+    {
+      "command": "npm audit --json",
+      "exitCode": 0,
+      "log": ".repro-runs/release-candidate/setup/npm-audit-all.json",
+      "sha256": "0a9f7023b07d1adbd51838296fe047c5582449c0421e955d878a7d6c94e846a5",
+      "bytes": 363,
+      "modifiedAt": "2026-10-15T19:50:41.307Z"
+    }
+  ],
+  "counts": {
+    "unit": {
+      "passed": 179,
+      "failed": 0,
+      "skipped": 0
+    },
+    "browser": {
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0
+    },
+    "kitFixtures": {
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0
+    },
+    "syntheticBenchmark": {
+      "planned": 40,
+      "executed": 40,
+      "matchedExpected": 40,
+      "unexpected": 0,
+      "skipped": 0,
+      "unrun": 0
+    }
+  },
+  "demo": {
+    "status": "passed",
+    "rawSummary": ".repro-runs/demo/1e1e3394-fd07-4e4e-ba5a-faa28f03912e/summary.json",
+    "originalActions": [
+      "navigate",
+      "focus-before",
+      "search-alpha",
+      "search-beta",
+      "focus-after"
+    ],
+    "retainedActions": [
+      "navigate",
+      "search-alpha",
+      "search-beta"
+    ],
+    "executions": 16,
+    "minimality": "unverified",
+    "reason": "Search completed, but inconclusive or unstable final neighbors leave dependency-group minimality unverified.",
+    "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+    "reducedManifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6"
+  },
+  "packageReport": "evidence/release-candidate-package.json",
+  "limitations": [
+    "One supplied synthetic application; arbitrary apps and expected-behavior authoring are unsupported.",
+    "Native 200% zoom blocked; actual screen-reader operation unrun.",
+    "Cached npm installation requires acquired packages/browser; the separate acquired Linux image was imported into the existing owned Docker daemon. Independent clean-host archive import remains untested.",
+    "Historical raw October13/contrast-pilot artifacts were absent at takeover; tracked reports and new red/green failures retained.",
+    "Benchmark repeats one family; no historical bugs, real users, human approval, universal determinism or production-readiness claim."
+  ],
+  "accessibilityReport": "evidence/release-candidate-accessibility.json",
+  "linuxReport": "evidence/release-candidate-linux.json",
+  "offlineImage": {
+    "path": ".repro-runs/release-candidate/delivery/repro-linux-arm64-offline.tar.gz",
+    "bytes": 547548184,
+    "sha256": "1e1da4deffec9f5415dcc9df7672538795264cd9e2a60a04c489546616588740",
+    "imageId": "sha256:52ca25c19ba791c95aa24c4b95a26a6c6e892d3fd8a0f3d29badb0856b009aaa",
+    "platform": "linux/arm64"
+  },
+  "deliveryReceipts": {
+    "sourceArchive": ".repro-runs/release-candidate/delivery/source-bundle.json",
+    "finalArtifacts": ".repro-runs/release-candidate/delivery/final-artifacts.json",
+    "privateGitHub": ".repro-runs/release-candidate/delivery/github.json",
+    "scope": "Receipts generated after committing reviewed source. Establish publication only from a successful push and exact remote readback; no remote CI pass or new Library upload is implied."
+  }
+}

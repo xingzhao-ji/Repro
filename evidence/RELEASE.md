@@ -1,3 +1,62 @@
+# Repro local alpha release candidate — October 15, 2026
+
+The supported synthetic workflow is working on this Mac: capture with consent → reproduce → reduce → compare the fixed revision with the unchanged assertion → export → inspect → standalone replay. **179 unit/contract tests and 31 real-browser tests pass, with zero failures or skips.** Clean dependency installation, build, typecheck, lint, kit checks, executable demo, installed package and cached offline capsule checks also pass. This is a local synthetic alpha release candidate, not a general recorder or production-readiness claim.
+
+**Remaining accessibility gates:** native 200% Chrome zoom is blocked/unverified; actual screen-reader operation is unrun. The historical provider denial was not retried or bypassed, and the current supported tool inventory exposes no browser-control or screen-reader observation surface for those checks. Keyboard, Axe, semantic snapshots and CSS reflow are separate evidence. [Native gate](NATIVE-ZOOM-GATE.md).
+
+## Current evidence
+
+| Check | Actual result | Authoritative evidence |
+| --- | --- | --- |
+| Fresh setup | npm ci installed 116 packages; pinned Chromium acquired; build passed | [Setup logs](../.repro-runs/release-candidate/setup/), [build log](../.repro-runs/release-candidate/final-build.log) |
+| Static/kit | Strict typecheck, lint, 7 supplied model fixtures and kit structure passed | [Machine-readable command/log hashes](release-candidate-summary.json) |
+| Unit/contract | 179 passed, 0 failed/skipped, including malicious inputs and new evidence-preservation regressions | [Final unit log](../.repro-runs/release-candidate/final-unit.log) |
+| Real browser | 31 passed, 0 failed/skipped; full UI, interrupted-process recovery, cancellation, network boundary, wrong failures, inspector/history | [Final browser log](../.repro-runs/release-candidate/final-browser.log) |
+| Repeatability sample | 20 buggy and 20 fixed runs matched the frozen expected behavior | [All 40 retained observations](../.repro-runs/benchmark/5fdc8526-d59b-4cce-834b-f6b8b1553273/summary.json); one synthetic family |
+| CLI journey | Demo passed; 5 actions reduced to 3 with 16 executions; buggy reproduced, fixed satisfied, exported capsule replayed | [Demo summary](../.repro-runs/demo/1e1e3394-fd07-4e4e-ba5a-faa28f03912e/summary.json); minimality remains **unverified**, because final neighbors were inconclusive |
+| Installed/offline package | 15 commands and 8 actual assertions passed; installed record/export/inspect/replay/verify and conventional test | [Portable package report](release-candidate-package.json); offline installation uses populated npm cache and separately acquired Chromium |
+| Reduced Linux replay | Actual 3-action capsule passed buggy/fixed assertions in a fresh Linux arm64 image/container/volume; all 14 payload files matched | [Linux report](release-candidate-linux.json); network none, approved policy, browser sandbox enabled |
+| Acquired offline image | Saved archive verified, loaded at the expected image identity, and replayed in another fresh container/volume | [Offline instructions](../docs/OFFLINE.md); import used the existing owned Docker daemon, not a second physical host |
+| Process cleanup | Separate post-close census after every package command found zero observed owned survivors; real abrupt-process recovery passed | [Package report](release-candidate-package.json), browser recovery tests; ancestry sampled every 100 ms, not an exhaustive kernel audit |
+| Accessibility | Keyboard regressions and full flow pass; sampled Axe checks and responsive screenshots reviewed | [Accessibility report](release-candidate-accessibility.json); native zoom and screen reader remain separate open gates |
+| Dependency advisories | npm audit reported 0 known vulnerabilities across runtime and development dependencies at this check | [Audit response](../.repro-runs/release-candidate/setup/npm-audit-all.json); not a guarantee of absence of vulnerabilities |
+
+Commands are the README development checks, plus `npm run demo` and `REPRO_PACKAGE_SMOKE_ROOT=.repro-runs/release-candidate/package node scripts/package-smoke.mjs`. Npm setup used empty task-owned user/global configuration, the official npm registry and a project cache. Host: macOS arm64, Node 26.7.0, npm 11.19.0, Playwright 1.64.0, pinned Chromium 156.0.8078.4. No dependency versions or frozen assertion were changed.
+
+The 26-file build-input aggregate is `2210dd4dc2ef59f6b0401262bbdea59f5c52ee438e46f3f9497970410cf6ca99`, defined and checked in the package report. Source TypeScript, bundled CLI and conventional bundled test have different executable harness hashes; each buggy/fixed comparison checks equality within its own unchanged harness. The frozen assertion is always `fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711`.
+
+The reduced Linux image is `sha256:52ca25c19ba791c95aa24c4b95a26a6c6e892d3fd8a0f3d29badb0856b009aaa`. Both executions observed stale Alpha for beta on the buggy revision and Beta for beta on the fixed revision, with distinct run IDs and one frozen assertion per revision. The compressed image is **547,548,184 bytes**, SHA-256 `1e1da4deffec9f5415dcc9df7672538795264cd9e2a60a04c489546616588740`. Gzip integrity, OCI blobs and all nine decompressed layer identities were verified. It contains acquired runtime dependencies and excludes runtime evidence volumes and host profiles. Replay needed no download, original app service, viewer or LLM. Docker acquisition and independent second-host archive import were not tested offline.
+
+Actual VM listener checks found that Colima's `--port-forwarder none` alone still forwarded guest DNS on restart. The owned VM was stopped before reduced replay, and a task-only first-priority ignore rule disabled that forwarding. Pre/post checks then found no owned TCP listeners or UDP sockets; the exact container restrictions remained unchanged. The first unreduced sample's VM no-forwarding boundary remains unverified. The final VM is **Stopped**, its observed hostagent exited, and no containers were running at shutdown. [Setup correction](../CLOUD-SETUP.md), [preserved diagnostics and boundary evidence](release-candidate-linux.json).
+
+## Defects repaired and failures preserved
+
+- CLI output reuse overwrote previous input/result files. An atomic new-directory claim now rejects repeated/concurrent output reuse before execution, preserving partial and completed history. Three red regressions became green. Commit `c8cd87f`.
+- Reducer repetition accepted the same run ID twice. Reused IDs now yield INCONCLUSIVE and cannot accept deletion. Two model regressions failed before the fix and pass afterward. Commit `cb4438d`.
+- Dark-sidebar keyboard focus measured 2.46:1 against its surroundings. Its scoped focus token now measures 8.82:1. Starting capture also lost focus when its button unmounted; focus now continues in the evidence workspace. Both keyboard regressions pass, along with the existing historical-selector focus check. Commit `352f48b`.
+- Package smoke previously omitted installed replay/verification, cached offline installation and a distinct post-close census. Those checks now validate actual observations, identities and cleanup. Commit `a0b327c`.
+
+Independent agent reviews covered architecture, oracle identity, reducer semantics, trust boundaries, packaging and UI states. The package reviewer independently reran 28 CLI/reducer tests in a copied task-owned workspace. These are software-agent reviews, not human approval. Red logs remain under `.repro-runs/release-candidate/setup/cli-output-red.log`, `review/reducer-red.log`, and `accessibility-*-red.log`. The accessibility probe also retains a failed cleanup assertion that counted its still-running tsx/esbuild helper; a separate post-script census establishes its exit without rewriting that failure. A post-fix test-locator error and the Linux setup diagnostics are likewise retained.
+
+## Contrast diagnostic decision
+
+The historical pilot remains **50 passing controls, 12 provisional passing measurements, 45 unattempted observations**, stopped at **899.40 MiB** against **896 MiB**, with no distinct post-close census. Those are user-supplied historical observations; the raw packet was absent at takeover. This release does not complete or relabel that pilot.
+
+The 896 MiB cap is a diagnostic engineering choice, not the original product definition. Combined test-loader/Axe/transport/browser RSS cannot by itself establish product leakage. We retained the old result, used bounded workflow checks with separate cleanup evidence, and made no native peak-memory claim. No memory-transport prototype was installed; no original test or approved container resource limit was weakened. [Decision and alternatives](../docs/adr/0002-release-candidate-evidence.md).
+
+## Remaining limits
+
+1. Native 200% zoom needs the legitimate browser provider to resolve the recorded access restriction and expose a usable native zoom surface.
+2. Actual screen-reader behavior needs supported assistive-technology operation and observation; semantic snapshots are not that evidence.
+3. Only the registered synthetic frontend and supplied expectation are supported. Arbitrary app adapters, arbitrary expectation authoring, PostgreSQL, historical bugs, human-study outcomes and hostile/public execution remain outside the implemented release scope.
+4. The acquired Linux arm64 image supports offline replay on a compatible Docker host. Docker itself is a prerequisite, and archive import on a separate clean host remains untested. Debian system-package repositories are not snapshot-pinned, so bit-for-bit OS image rebuilds are not claimed.
+
+The original R0–R10 contract is unchanged. Technical R0–R4/R6/R7 checks pass within the stated fixture boundary; R5/R10 remain incomplete for actual native zoom and assistive technology, and R8 remains synthetic-only. HCI research preparation is preserved; participant study, comparator research and broad effectiveness claims are not release results. No hosted runtime or CI pass is implied by local checks.
+
+## Historical release report — preserved
+
+The report below describes the earlier October 13 checkpoint. Its counts, source hashes, local evidence availability and delivery state are historical and are superseded by the current report above where they differ. The original raw historical run directory was absent in this checkout; tracked reports and history were preserved.
+
 # Local release evidence
 
 The selected-run evidence inspector is implemented and technically verified for the registered synthetic stale-response frontend. Inspector checkpoint checks: **101 unit/contract tests, 29 browser tests**, build, kit, strict typecheck, lint and installed-package smoke passed with zero failures/skips. The final exported capsule is byte-identical to the fresh Linux image that passed buggy/fixed assertions under the approved policy. The VM is stopped. [Detailed HCI evidence](HCI-INSPECTOR.md), [portable check index](hci-inspector-summary.json), [Linux evidence](LINUX-PACKAGED.md).

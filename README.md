@@ -2,15 +2,15 @@
 
 Repro records a registered synthetic browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench uses the same real runner as the CLI. The buggy and fixed search implementations are evaluated with the same frozen expected behavior in fresh browser state.
 
-This is a local synthetic alpha. Native Chromium replay and the trusted Linux arm64 capsule pass with the exact explicitly approved container policy. Native 200% Chrome zoom and actual screen-reader usability remain unverified. See [release evidence](evidence/RELEASE.md) for actual checks and open gates. Arbitrary websites, real-user recording, PostgreSQL adapters, historical-bug validation and public execution are outside this version's supported scope.
+This is a local synthetic alpha release candidate. Native Chromium replay and the trusted Linux arm64 capsule pass with the exact explicitly approved container policy. Native 200% Chrome zoom and actual screen-reader usability remain unverified. See [release evidence](evidence/RELEASE.md) for actual checks and open gates. Arbitrary websites, real-user recording, PostgreSQL adapters, historical-bug validation and public execution are outside this version's supported scope.
 
 ## Run locally
 
 Use Node 24 or newer, npm, and a supported Chromium host. Development was tested on macOS arm64 with Node 26.7.0.
 
 ```sh
-npm ci --ignore-scripts
-PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers npx playwright install chromium --only-shell
+npm ci --ignore-scripts --cache .repro-cache/npm
+PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers npx --no-install playwright install chromium --only-shell
 npm run build
 npm run repro -- doctor
 npm run dev
@@ -24,6 +24,10 @@ npm run benchmark
 ```
 
 The demo performs capture, reduction, verification, export, import and capsule replay. The package smoke check runs the conventional exported test. The benchmark retains all twenty buggy and twenty fixed repetitions; it measures one synthetic failure family, not forty independent bugs. [Usage](docs/USAGE.md) documents individual commands, exit codes, cancellation and recovery.
+
+Each CLI execution needs a new output directory. Reusing `--output` returns `OUTPUT_EXISTS` (`EXPORT_EXISTS` for export) and preserves prior evidence; the workbench deliberately reopens its persisted state. An intended buggy replay exits **1**, a satisfied assertion exits **0**, and an inconclusive run exits **2**.
+
+Initial installation needs network access. Once npm dependencies and Chromium have been acquired, the registered replay needs only controlled loopback HTTP. `npm run test:package` checks both a fresh installed package and a separate capsule installed with `npm ci --offline` from the populated npm cache. For replay without acquiring npm/browser dependencies on the receiving machine, use the verified [Linux arm64 offline image](docs/OFFLINE.md).
 
 ## Evidence and boundaries
 

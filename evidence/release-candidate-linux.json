@@ -1,0 +1,530 @@
+{
+  "schemaVersion": 1,
+  "status": "passed-with-stated-scope",
+  "classification": "synthetic-training-fixture",
+  "reportedAt": "2026-10-15T20:05:43.495583+00:00",
+  "scope": "Actual reduced supplied synthetic browser capsule in fresh Linux arm64 image/container/named volume, followed by saved-archive import and new container/volume replay. No arbitrary application, historical defect corpus, hostile capsule or production-readiness claim.",
+  "reduction": {
+    "sourceDemoSummary": ".repro-runs/demo/1e1e3394-fd07-4e4e-ba5a-faa28f03912e/summary.json",
+    "sourceCapsule": ".repro-runs/demo/1e1e3394-fd07-4e4e-ba5a-faa28f03912e/capsule",
+    "originalActions": [
+      "navigate",
+      "focus-before",
+      "search-alpha",
+      "search-beta",
+      "focus-after"
+    ],
+    "retainedActions": [
+      "navigate",
+      "search-alpha",
+      "search-beta"
+    ],
+    "executions": 16,
+    "testedMinimality": "unverified",
+    "reason": "Search completed, but inconclusive or unstable final neighbors leave dependency-group minimality unverified.",
+    "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+    "frozenAssertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+    "assertionUnchanged": true
+  },
+  "reducedLinuxReplay": {
+    "outcome": "passed",
+    "verifiedAt": "2026-10-15T19:58:19.540Z",
+    "rawSummary": ".repro-runs/release-candidate/linux-reduced/summary.json",
+    "imageId": "sha256:52ca25c19ba791c95aa24c4b95a26a6c6e892d3fd8a0f3d29badb0856b009aaa",
+    "container": "repro-rc-397f0076-fd18-4f2b-acf6-ccba51c0487e",
+    "evidenceVolume": "repro-rc-397f0076-fd18-4f2b-acf6-ccba51c0487e-evidence",
+    "conventionalTest": "node --test replay.test.mjs",
+    "containerState": {
+      "status": "exited",
+      "pid": 0,
+      "exitCode": 0,
+      "oomKilled": false
+    },
+    "observations": [
+      {
+        "revision": "buggy",
+        "runId": "e134675a-ed6a-4358-a2c8-2e30db56eda5",
+        "outcome": "target-failure",
+        "observation": {
+          "latestRequestId": 2,
+          "query": "beta",
+          "results": [
+            "Alpha synthetic result"
+          ]
+        },
+        "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "harnessDigest": "aade6ab69e988f13f1cdd37e3737908b4a502ddd84057856bd8f24a5422eb794",
+        "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+        "assertionCount": 1,
+        "environment": {
+          "platform": "linux-arm64",
+          "node": "v26.7.0",
+          "browser": "156.0.8078.4 (pinned Chromium)",
+          "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+        },
+        "durationMs": 412,
+        "artifacts": [
+          {
+            "path": "evidence.json",
+            "sha256": "fc105d419f23b4cb422f99c0e764a34c89c73864d505ceb57021d3c154c6e249",
+            "bytes": 3177
+          },
+          {
+            "path": "observation.png",
+            "sha256": "d5bab12067d221106cc1a81ed1345b1c75aee5af6dad086950515c7dc213df61",
+            "bytes": 39461
+          },
+          {
+            "path": "trace.zip",
+            "sha256": "31a2c61e2225fa5456455adb247fc8cc744174f5759df527cc8f9bc71c661958",
+            "bytes": 146444
+          }
+        ]
+      },
+      {
+        "revision": "fixed",
+        "runId": "cc529a79-39ec-4c3a-8458-a0830ac430ce",
+        "outcome": "requirement-satisfied",
+        "observation": {
+          "latestRequestId": 2,
+          "query": "beta",
+          "results": [
+            "Beta synthetic result"
+          ]
+        },
+        "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "harnessDigest": "aade6ab69e988f13f1cdd37e3737908b4a502ddd84057856bd8f24a5422eb794",
+        "appDigest": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09",
+        "assertionCount": 1,
+        "environment": {
+          "platform": "linux-arm64",
+          "node": "v26.7.0",
+          "browser": "156.0.8078.4 (pinned Chromium)",
+          "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+        },
+        "durationMs": 353,
+        "artifacts": [
+          {
+            "path": "evidence.json",
+            "sha256": "54b2eba3560c8988d2e23f61a60a7bd4754599ea66a996263644e9dd65ca14d9",
+            "bytes": 3169
+          },
+          {
+            "path": "observation.png",
+            "sha256": "e9c3eb54cdd5982d23b502ab872cd2fc543f8ba064aad4f4855c02c550e1cd60",
+            "bytes": 39189
+          },
+          {
+            "path": "trace.zip",
+            "sha256": "ded14bb89c268ac5437e1070b64bc7a88c7491f54c748b09ba0900ec7442132c",
+            "bytes": 116020
+          }
+        ]
+      }
+    ],
+    "executedPayloadEqualsFinalCurrentCapsule": true,
+    "payloadFiles": 14,
+    "contentHashes": ".repro-runs/release-candidate/linux-reduced/final-content-hashes.json",
+    "containerInspectionBefore": ".repro-runs/release-candidate/linux-reduced/container-before.stdout.log",
+    "containerInspectionAfter": ".repro-runs/release-candidate/linux-reduced/container-after.stdout.log",
+    "testOutput": ".repro-runs/release-candidate/linux-reduced/container-start.stdout.log",
+    "assertionInspection": "Each copied evidence.json was independently checked against the current trusted oracle, manifest, assertion, harness and app identities; the actual DOM observation is stale Alpha for beta on buggy and Beta for beta on fixed. Exactly one assertion per revision, distinct run IDs and observed completion order 2 then 1 were required."
+  },
+  "offlineArchiveReplay": {
+    "outcome": "passed",
+    "verifiedAt": "2026-10-15T20:02:54.199Z",
+    "rawSummary": ".repro-runs/release-candidate/linux-reduced/archive-replay/summary.json",
+    "imageId": "sha256:52ca25c19ba791c95aa24c4b95a26a6c6e892d3fd8a0f3d29badb0856b009aaa",
+    "container": "repro-rc-5988f059-e47c-4364-bfd0-23831a122dd7",
+    "evidenceVolume": "repro-rc-5988f059-e47c-4364-bfd0-23831a122dd7-evidence",
+    "conventionalTest": "node --test replay.test.mjs",
+    "containerState": {
+      "status": "exited",
+      "pid": 0,
+      "exitCode": 0,
+      "oomKilled": false
+    },
+    "observations": [
+      {
+        "revision": "buggy",
+        "runId": "0d1eb726-ce36-4586-bf89-0a772dabd795",
+        "outcome": "target-failure",
+        "observation": {
+          "latestRequestId": 2,
+          "query": "beta",
+          "results": [
+            "Alpha synthetic result"
+          ]
+        },
+        "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "harnessDigest": "aade6ab69e988f13f1cdd37e3737908b4a502ddd84057856bd8f24a5422eb794",
+        "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+        "assertionCount": 1,
+        "environment": {
+          "platform": "linux-arm64",
+          "node": "v26.7.0",
+          "browser": "156.0.8078.4 (pinned Chromium)",
+          "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+        },
+        "durationMs": 405,
+        "artifacts": [
+          {
+            "path": "evidence.json",
+            "sha256": "5aee9afdc447b23d16d08adab7e019e1fbe938f2c3e78e907a6176992944c6ef",
+            "bytes": 3177
+          },
+          {
+            "path": "observation.png",
+            "sha256": "d5bab12067d221106cc1a81ed1345b1c75aee5af6dad086950515c7dc213df61",
+            "bytes": 39461
+          },
+          {
+            "path": "trace.zip",
+            "sha256": "75c022504690c22ce981c84f0552ab58d6f086eaf826575c2f0a11d1a9fa7ea1",
+            "bytes": 146980
+          }
+        ]
+      },
+      {
+        "revision": "fixed",
+        "runId": "47de971a-245e-4920-b7af-fe5bc5bcb984",
+        "outcome": "requirement-satisfied",
+        "observation": {
+          "latestRequestId": 2,
+          "query": "beta",
+          "results": [
+            "Beta synthetic result"
+          ]
+        },
+        "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "harnessDigest": "aade6ab69e988f13f1cdd37e3737908b4a502ddd84057856bd8f24a5422eb794",
+        "appDigest": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09",
+        "assertionCount": 1,
+        "environment": {
+          "platform": "linux-arm64",
+          "node": "v26.7.0",
+          "browser": "156.0.8078.4 (pinned Chromium)",
+          "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+        },
+        "durationMs": 355,
+        "artifacts": [
+          {
+            "path": "evidence.json",
+            "sha256": "62898239c0a70cc419916b7f491bc5d7ec13332971dc6d91e810d166b47102f3",
+            "bytes": 3169
+          },
+          {
+            "path": "observation.png",
+            "sha256": "e9c3eb54cdd5982d23b502ab872cd2fc543f8ba064aad4f4855c02c550e1cd60",
+            "bytes": 39189
+          },
+          {
+            "path": "trace.zip",
+            "sha256": "6fcc496a9e7859d44d9c32550769e6a29570a985914a2647bb705114cd3ce770",
+            "bytes": 130525
+          }
+        ]
+      }
+    ],
+    "executedPayloadEqualsFinalCurrentCapsule": true,
+    "payloadFiles": 14,
+    "contentHashes": ".repro-runs/release-candidate/linux-reduced/archive-replay/final-content-hashes.json",
+    "containerInspectionBefore": ".repro-runs/release-candidate/linux-reduced/archive-replay/container-before.stdout.log",
+    "containerInspectionAfter": ".repro-runs/release-candidate/linux-reduced/archive-replay/container-after.stdout.log",
+    "testOutput": ".repro-runs/release-candidate/linux-reduced/archive-replay/container-start.stdout.log",
+    "assertionInspection": "Each copied evidence.json was independently checked against the current trusted oracle, manifest, assertion, harness and app identities; the actual DOM observation is stale Alpha for beta on buggy and Beta for beta on fixed. Exactly one assertion per revision, distinct run IDs and observed completion order 2 then 1 were required.",
+    "archiveLoadReceipt": ".repro-runs/release-candidate/linux-reduced/archive-load.json",
+    "loadedImageIdConfirmed": true,
+    "freshContainerAndVolume": true,
+    "importedIntoExistingOwnedDaemon": true,
+    "independentPhysicalCleanHostImportTested": false,
+    "downloadOrBuildDuringImportReplay": false
+  },
+  "offlineArchive": {
+    "outcome": "passed",
+    "verifiedAt": "2026-10-15T20:02:42.918819+00:00",
+    "path": ".repro-runs/release-candidate/delivery/repro-linux-arm64-offline.tar.gz",
+    "bytes": 547548184,
+    "sha256": "1e1da4deffec9f5415dcc9df7672538795264cd9e2a60a04c489546616588740",
+    "gzipIntegrity": "passed (gzip -t before rename; full stream and nested layer decompression verified here)",
+    "format": "Docker save OCI image layout with compatibility manifest.json",
+    "imageId": "sha256:52ca25c19ba791c95aa24c4b95a26a6c6e892d3fd8a0f3d29badb0856b009aaa",
+    "configDigest": "sha256:ac9cb1e9bdeb2af2a7f80d2636ebacbe42d9525541824c2a6a242db4b2aebae4",
+    "platform": "linux/arm64",
+    "user": "node",
+    "command": [
+      "node",
+      "--test",
+      "replay.test.mjs"
+    ],
+    "compressedLayerCount": 9,
+    "allBlobDigestsVerified": true,
+    "allLayerUncompressedDiffIdsVerified": true,
+    "dockerReportedImageBytes": 550836665,
+    "checksumSidecar": ".repro-runs/release-candidate/delivery/repro-linux-arm64-offline.tar.gz.sha256"
+  },
+  "containerBoundary": {
+    "inspectedBeforeEveryExecution": true,
+    "network": "none",
+    "readOnlyRootFilesystem": true,
+    "user": "node",
+    "chromiumSandboxEnabled": true,
+    "privileged": false,
+    "dropCapabilities": [
+      "ALL"
+    ],
+    "addedCapabilities": [],
+    "noNewPrivileges": true,
+    "seccompPolicy": "security/repro-chromium-seccomp.json",
+    "seccompSha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+    "appliedSeccompJsonEqualsApprovedPolicy": true,
+    "pidsLimit": 128,
+    "memoryBytes": 1073741824,
+    "nanoCpus": 2000000000,
+    "tmpfs": {
+      "/tmp": "rw,nosuid,size=256m"
+    },
+    "sharedMemoryBytes": 268435456,
+    "bindMounts": [],
+    "publishedPorts": [],
+    "mounts": [
+      {
+        "type": "fresh named volume",
+        "destination": "/work/.repro-runs",
+        "purpose": "run evidence"
+      }
+    ],
+    "command": [
+      "node",
+      "--test",
+      "replay.test.mjs"
+    ],
+    "workingDirectory": "/work",
+    "replayPublicNetworkRequired": false
+  },
+  "vmBoundary": {
+    "profile": "r",
+    "runtime": "Docker29.5.2 in Colima0.10.3/Lima2.2.1 VZ Linux arm64",
+    "taskColimaHome": ".repro-cache/c",
+    "taskLimaHome": ".repro-cache/c/_lima",
+    "taskDockerConfig": ".repro-cache/docker-config",
+    "cpus": 2,
+    "memoryBytes": 3221225472,
+    "dataDiskBytes": 12884901888,
+    "rootDiskBytes": 8589934592,
+    "hostMounts": [],
+    "sshAgentForwarding": false,
+    "loadHostSshPublicKeys": false,
+    "sshConfigWriting": false,
+    "activateDockerContext": false,
+    "template": false,
+    "commandLinePortForwarder": "none",
+    "effectiveTaskOverride": {
+      "guestIPMustBeZero": false,
+      "guestIP": "0.0.0.0",
+      "guestPortRange": [
+        1,
+        65535
+      ],
+      "hostIP": "127.0.0.1",
+      "hostPortRange": [
+        1,
+        65535
+      ],
+      "proto": "any",
+      "ignore": true
+    },
+    "overrideFile": ".repro-runs/release-candidate/linux-reduced/task-lima-override.yaml",
+    "runtimeUnixSockets": "Task-owned Docker/containerd Unix socket transport retained; neither is mounted into the replay container.",
+    "preflight": {
+      "evidence": ".repro-runs/release-candidate/linux-reduced/restriction-preflight.json",
+      "ownedHostAgentAndDescendantPids": [
+        13898
+      ],
+      "tcpListeners": [],
+      "udpSockets": [],
+      "guestHostShareMounts": []
+    },
+    "postflight": {
+      "evidence": ".repro-runs/release-candidate/linux-reduced/restriction-postflight.json",
+      "ownedHostAgentAndDescendantPids": [
+        13898
+      ],
+      "tcpListeners": [],
+      "udpSockets": [],
+      "runningContainers": []
+    },
+    "guestMountEvidence": ".repro-runs/release-candidate/linux-reduced/guest-mounts-restricted.json",
+    "guestListenerEvidence": ".repro-runs/release-candidate/linux-reduced/guest-listeners.txt",
+    "shutdown": {
+      "outcome": "passed",
+      "verifiedAt": "2026-10-15T20:03:45.798649+00:00",
+      "profile": "r",
+      "status": "Stopped",
+      "ownedHostAgentPid": 13898,
+      "ownedHostAgentStillPresent": false,
+      "imagesContainersVolumesPreserved": true
+    }
+  },
+  "payloadEquivalence": {
+    "executedCapsuleFileCount": 14,
+    "reducedImageAndImportedArchivePayloadEqualFinalCurrentExport": true,
+    "capsuleIntegritySha256": "719ce416704e709d954e58100c0401d8f230db57dfcfc32908d486730fd47019",
+    "fileHashes": [
+      {
+        "path": "integrity.json",
+        "sha256": "719ce416704e709d954e58100c0401d8f230db57dfcfc32908d486730fd47019",
+        "bytes": 1705
+      },
+      {
+        "path": ".dockerignore",
+        "sha256": "0e451b78978090ed43ed96e7808c962b61ce1244dffc8e490c369b16286605a5",
+        "bytes": 38
+      },
+      {
+        "path": "dist/cli.js",
+        "sha256": "a5abe51a8a5c28571028f19dcc0f6566e1c160d482bb228caee3c85736376835",
+        "bytes": 125059
+      },
+      {
+        "path": "dist/index.js",
+        "sha256": "6a78a9018e329c67ba12ecc01b3235685ab429b5d5d9468d80acce026be2f901",
+        "bytes": 70448
+      },
+      {
+        "path": "Dockerfile",
+        "sha256": "1add3bac6224e251d18868a63c006236561199aa9664e9ce295524f4ee0ada22",
+        "bytes": 517
+      },
+      {
+        "path": "fixtures/browser-search/buggy.js",
+        "sha256": "8ff7967b065d8c87bf22d8a7d8a922141884f171c6e23e06084ec63589af33b4",
+        "bytes": 1167
+      },
+      {
+        "path": "fixtures/browser-search/fixed.js",
+        "sha256": "b9579050f425aec6757274b4c007af6fcf55bee084c0a72587bf14ce761fa288",
+        "bytes": 1225
+      },
+      {
+        "path": "fixtures/browser-search/page.html",
+        "sha256": "6ff8048cfbe0fe068dfd58ca60ca93b008ecfde2c3865cd478606e2f02c7e24a",
+        "bytes": 1168
+      },
+      {
+        "path": "manifest.json",
+        "sha256": "ee296d983c16408eeb565270949d36d9ed54a083d8659c5ff3d48a3c724c5ee1",
+        "bytes": 1406
+      },
+      {
+        "path": "package-lock.json",
+        "sha256": "64c15457c56e7ae34d9b08122959f90f461c84858b274a05f86638106f04fc96",
+        "bytes": 69508
+      },
+      {
+        "path": "package.json",
+        "sha256": "0581200a58b54636af549d3efd9bbfae6f6734e40ffd0b78db2e7a33e8f454b6",
+        "bytes": 1603
+      },
+      {
+        "path": "README.md",
+        "sha256": "0d8a36d407095b7d8eb8602172d93298c1370a441a922fc1b8ecbccc31e846d0",
+        "bytes": 7447
+      },
+      {
+        "path": "replay.test.mjs",
+        "sha256": "e3c1bbd15079c02cf99365a9a952887f0d085ccfbfea76a23b54daeb411a6ad8",
+        "bytes": 1310
+      },
+      {
+        "path": "security/repro-chromium-seccomp.json",
+        "sha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+        "bytes": 10601
+      }
+    ],
+    "buildInputs": "Exported capsule allowlist only: compiled runner/CLI, locked runtime package recipe, synthetic fixture assets, readable test, manifest, security policy and recipe documentation. Build context excludes node_modules and run/cache directories. Runtime evidence named volumes are absent from the saved image."
+  },
+  "historicalUnreducedSample": {
+    "rawSummary": ".repro-runs/release-candidate/linux/summary.json",
+    "actionCount": 5,
+    "imageId": "sha256:fbc339d2b1933d6a8c0dd51905bc70753950e147cecc923a80ae5e661b82e3ac",
+    "containerBehaviorAndInspectedRestrictions": "passed",
+    "observedOutcomes": [
+      {
+        "revision": "buggy",
+        "outcome": "target-failure",
+        "runId": "fce18f3e-89d6-4712-a3df-f78b557d49bd"
+      },
+      {
+        "revision": "fixed",
+        "outcome": "requirement-satisfied",
+        "runId": "fdc0e66d-4a95-450b-8694-27e8e16c74c2"
+      }
+    ],
+    "vmNoForwarding": "unverified: no owned listener census was retained for this first sample; the same CLI setting later proved insufficient on restart. Absence of forwarding log lines is not proof of absence. This sample is not the reduced portability evidence.",
+    "rawEvidencePreserved": true
+  },
+  "historicalSetupIssues": [
+    {
+      "issue": "Initial nonexistent COLIMA_HOME was ignored by Colima; the new task r was created under the default Colima location.",
+      "response": "Integrator stopped and deleted only the newly created task r before any Repro image build/replay. Initial profile list had been empty. Corrected setup precreated task-owned config directories and explicitly set LIMA_HOME. No existing user VM or home credential/config contents were inspected.",
+      "evidence": [
+        ".repro-runs/release-candidate/linux/vm-start.log",
+        ".repro-runs/release-candidate/linux/vm-stop-path-correction.log",
+        ".repro-runs/release-candidate/linux/vm-remove-mislocated.log",
+        ".repro-runs/release-candidate/linux/task-vm-start.log"
+      ]
+    },
+    {
+      "issue": "The isolated Docker CLI lacked buildx, so --progress=plain was unsupported.",
+      "response": "Preserved failed attempt; used the supported legacy builder with the same capsule and limits.",
+      "evidence": [
+        ".repro-runs/release-candidate/linux/build-unsupported-progress.log",
+        ".repro-runs/release-candidate/linux/build.log"
+      ]
+    },
+    {
+      "issue": "On the first reduced-sample VM restart, --port-forwarder none left an actual owned hostagent TCP *:53 listener. The generated ignore rule matched only zero guest IP after Lima defaulting.",
+      "response": "Stopped only the owned VM before reduced build/replay. Read official Lima2.2.1 config and forwarding logic, applied task-only first-priority full-range ignore with guestIPMustBeZero:false, validated configuration, restarted with unchanged resource/mount/security limits, and independently observed no owned TCP/UDP listeners before and after both reduced replays.",
+      "evidence": [
+        ".repro-runs/release-candidate/linux-reduced/owned-vm-listeners.json",
+        ".repro-runs/release-candidate/linux-reduced/vm-start.log",
+        ".repro-runs/release-candidate/linux-reduced/vm-after-unexpected-forward.json",
+        ".repro-runs/release-candidate/linux-reduced/task-lima-override.yaml",
+        ".repro-runs/release-candidate/linux-reduced/lima-validation.log",
+        ".repro-runs/release-candidate/linux-reduced/vm-start-restricted.log",
+        ".repro-runs/release-candidate/linux-reduced/restriction-preflight.json",
+        ".repro-runs/release-candidate/linux-reduced/restriction-postflight.json"
+      ],
+      "officialSources": [
+        "https://raw.githubusercontent.com/lima-vm/lima/v2.2.1/pkg/limayaml/defaults.go",
+        "https://raw.githubusercontent.com/lima-vm/lima/v2.2.1/pkg/portfwd/forward.go",
+        "https://github.com/lima-vm/lima/blob/v2.2.1/templates/default.yaml"
+      ]
+    },
+    {
+      "issue": "Initial read-only archive checker assumed classic config-digest image identity/uncompressed layers, and the first load-output assertion expected Loaded image: instead of Loaded image ID:.",
+      "response": "Preserved archive unchanged and documented both checker assumptions. Validated actual OCI manifest/config/descriptor/blob hashes and decompressed layer diff IDs; confirmed the exact returned and inspected image identity. No duplicate save, reload, rebuild or test restart was needed.",
+      "evidence": [
+        ".repro-runs/release-candidate/linux-reduced/offline-validation-attempt1.json",
+        ".repro-runs/release-candidate/linux-reduced/offline-archive.json",
+        ".repro-runs/release-candidate/linux-reduced/archive-load.json"
+      ]
+    }
+  ],
+  "limitations": [
+    "Controlled registered synthetic local HTTP frontend only; no historical-bug, arbitrary-site, backend-fix or hostile-code isolation evidence.",
+    "Dependency and OS image acquisition used network. Reduced build reused acquired layers; both reduced replay containers had network none.",
+    "Two buggy/fixed pairs on fresh containers/volumes establish these Linux and archive-use samples, not broad determinism or flake-rate estimates.",
+    "Archive import used the existing owned Docker daemon with shared image storage. No independent physical clean-host import was performed.",
+    "Debian repositories are not snapshot-pinned; byte-identical OS rebuilds are not claimed.",
+    "The reduction retained three actions but tested minimality remains unverified.",
+    "These checks establish no native zoom or screen-reader result.",
+    "Raw evidence and the 547548184-byte archive remain local ignored artifacts; portable summaries contain relative references."
+  ],
+  "offlineRunInstructions": "docs/OFFLINE.md"
+}

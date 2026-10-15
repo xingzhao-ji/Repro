@@ -1,0 +1,352 @@
+{
+  "schemaVersion": 1,
+  "reviewedAt": "2026-10-15T19:54:26.730104+00:00",
+  "classification": "software-agent technical and pixel review; trusted synthetic local alpha",
+  "status": "bounded technical review passed; native zoom blocked and actual screen-reader usability unrun",
+  "scope": {
+    "runtime": "v26.7.0",
+    "browser": "156.0.8078.4",
+    "uiFixCommit": "352f48bb446cc7060ad1ae4bc8852f24dc7cf453",
+    "method": "Opened all listed PNGs with view_image; inspected existing final test output and bounded raw reports. No new browser run was needed for this read-only final review.",
+    "newVisualBlockersObserved": [],
+    "rawArtifacts": "Repository-relative .repro-runs paths are local-only and excluded from published source bundles."
+  },
+  "finalBrowserSuite": {
+    "command": "npm run test:browser",
+    "log": ".repro-runs/release-candidate/final-browser.log",
+    "tests": 31,
+    "passed": 31,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "sourceOfResult": "Complete current output inspected; integration owner executed the suite."
+  },
+  "repairs": [
+    {
+      "issue": "Insufficient dark-sidebar keyboard focus contrast",
+      "beforeRatio": 2.4611193078458506,
+      "afterRatio": 8.81665694392942,
+      "minimumTestedRatio": 3,
+      "workspaceRatio": 5.965004540434527,
+      "change": "Scope the existing pale-blue focus token to the sidebar.",
+      "regression": "tests/ui-focus.browser.ts",
+      "redLog": ".repro-runs/release-candidate/accessibility-focus-red.log",
+      "finalSamples": ".repro-runs/ui-focus/de1131e3-8279-40ec-9f46-6a2fc60dfd1e/samples.json",
+      "targets": [
+        "brand",
+        "current section",
+        "other section",
+        "workspace task"
+      ],
+      "preservedHarnessFailure": ".repro-runs/release-candidate/accessibility-focus-green.log had a locator error using aria-hidden section numbers; corrected separately."
+    },
+    {
+      "issue": "Capture unmounted its focused start control and dropped focus onto BODY",
+      "change": "Focus the persistent evidence main element after successful capture navigation; next Tab reaches Establish failure.",
+      "regression": "tests/ui-focus.browser.ts",
+      "redLog": ".repro-runs/release-candidate/accessibility-capture-focus-red.log",
+      "greenLog": ".repro-runs/release-candidate/accessibility-capture-focus-green.log",
+      "finalSuiteIncludesRegression": true,
+      "historyFocusPreserved": {
+        "evidence": ".repro-runs/hci-increment/selection-focus-dded1d45-578f-4f88-84cd-0ca8db780152/summary.json",
+        "duringLoad": "job",
+        "afterLoad": "job",
+        "scope": "Native select character typeahead; arrow-menu behavior is not established."
+      }
+    }
+  ],
+  "finalAxeSamples": [
+    {
+      "evidence": ".repro-runs/ui-review/ec732ce9-1494-419e-adae-164cfa5ee063/accessibility.json",
+      "sampleCount": 8,
+      "violations": 0,
+      "incomplete": 0,
+      "states": [
+        "empty-desktop",
+        "timeline-desktop",
+        "comparison-desktop",
+        "comparison-768",
+        "comparison-390",
+        "comparison-320",
+        "disconnected-evidence",
+        "reconnected-timeline"
+      ]
+    },
+    {
+      "evidence": ".repro-runs/hci-increment/investigation-3e6699b7-4a04-43b3-aa19-83169ff7a70e/summary.json",
+      "sampleCount": 7,
+      "violations": 0,
+      "incomplete": 0,
+      "states": [
+        "captured-timeline",
+        "accepted-trial",
+        "accepted-trial-1024",
+        "rejected-trial",
+        "missing-linked-evidence",
+        "comparison-keyboard",
+        "cancelled-keyboard"
+      ],
+      "workflowAssertions": 156,
+      "keyboardTargets": 41,
+      "fixtureAdjustment": {
+        "originalTimeoutMs": 10000,
+        "reductionTimeoutMs": 1500,
+        "reason": "Owned synthetic UI fixture bound; actual browser, reducer, oracle and all outcomes preserved."
+      }
+    }
+  ],
+  "limitations": [
+    "Axe, accessibility trees, screenshots and keyboard samples are not actual screen-reader usability or a WCAG conformance certificate.",
+    "These are repeated synthetic workflow samples, not independent users or bugs.",
+    "The opened 200% image uses CSS layout zoom; native Chrome 200% remains unverified.",
+    "This review does not establish every interaction state, every contrast combination, or accessibility on every platform."
+  ],
+  "nativeZoom": {
+    "status": "blocked-unverified",
+    "historicalError": "net::ERR_BLOCKED_BY_CLIENT",
+    "evidence": "evidence/NATIVE-ZOOM-GATE.md",
+    "currentObservation": "Read-only CUA inventory in this review listed native Chrome running but browsers: [].",
+    "retryOrBypassPerformed": false,
+    "requiredNextStep": "Legitimate provider resolution of the original browser restriction, followed by actual native 200% zoom evidence."
+  },
+  "screenReader": {
+    "status": "unrun",
+    "observation": "No actual screen-reader speech or announcement result was available. Supported accessibility-tree observation establishes semantics only.",
+    "systemSettingsChanged": false,
+    "voiceOverEnabled": false
+  },
+  "historicalContrastPilot": {
+    "source": "User-supplied release brief; historical raw packet absent from this checkout.",
+    "passingControls": 50,
+    "provisionalPassingMeasurements": 12,
+    "unattemptedObservations": 45,
+    "stoppedAtMiB": 899.4,
+    "diagnosticThresholdMiB": 896,
+    "distinctPostCloseCensus": "missing",
+    "classification": "Incomplete historical pilot; reported observations retained, neither independently reverified nor disproven.",
+    "relevance": "896 MiB is a diagnostic harness choice, not a GOAL.md/R5/R10 product memory requirement. The overrun alone does not prove a product leak.",
+    "memoryTransportPrototypes": "Uninstalled, mixed results; not adopted."
+  },
+  "separateBoundedProbeCleanup": {
+    "summary": ".repro-runs/release-candidate/accessibility/summary.json",
+    "rawStatusRetained": "failed",
+    "classification": "Harness cleanup assertion counted the expected tsx/esbuild helper before script exit.",
+    "maxDiscreteSampleMiB": 869.125,
+    "afterBrowserAndServerCloseMiB": 308.578125,
+    "browserAndServerClose": "Both fulfilled; sampled browser children absent after close.",
+    "postExitCensus": ".repro-runs/release-candidate/accessibility/post-exit-census.json",
+    "postExitOutcome": "all sampled owned processes exited",
+    "postExitPsExitCode": 1,
+    "postExitPsOutputEmpty": true,
+    "limits": "Discrete owned-process RSS samples, not continuous peak measurements or a rerun of the historical contrast matrix."
+  },
+  "pixelReview": {
+    "manifest": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/screenshots.json",
+    "openedImages": 20,
+    "workflowImages": 19,
+    "focusImages": 1,
+    "findings": "No additional visible overlap or page-wide clipping found in the opened images. Local code-block overflow remains intentionally scrollable. Errors, cancellation, uncertain input and unverified minimality remain explicit.",
+    "screenshots": [
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/empty-desktop.png",
+        "sha256": "77cc223f5a736592fea606cc9ee20ff43ccf21120345014adf1c70a862da6007",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Consent, capture scope and disabled start control are visible; no overlap observed."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/timeline-desktop.png",
+        "sha256": "e1d7125d4f1dedb1a6d83df5c6778cfba2853bffa4515eb36ef5deb9e0357976",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Selected event and its inspector remain distinct; filter and sequence labels are visible."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/overview-desktop.png",
+        "sha256": "6df9698cafd78cbf0fd99ab3e10786999f597669a5c13039ab80c208fb2be643",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Observed failure, assertion count and declared replay boundary remain visible in separate panels."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/dependencies-desktop.png",
+        "sha256": "1b8144d4a218e42d4bb228d56cddc2cfee3ac5393adcbfa763e6e7788d4d8291",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Ordered dependencies and controlled response order are readable without overlap."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/dependencies-390.png",
+        "sha256": "838635dcf4d4776a53b26ecab8f1195eced483a5206d91c45da29d60b489c2b4",
+        "viewportCssPixels": [
+          390,
+          844
+        ],
+        "zoom": "100%",
+        "observed": "Dependency list, response order and boundary stack within the narrow page."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/reduction-active-desktop.png",
+        "sha256": "f8bd0a73f81fb21b9c7dd97dd39606636cdb4db8fe48ccfca0ddcf69ebc1e38c",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Active state, disabled operations, cancellation and unverified evidence are explicit."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/reduction-desktop.png",
+        "sha256": "e7bb6927616b5ed011bfaebed698723abe13a6195db75754baba393efcb0b4b1",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Retained actions, accepted trials, rejected-trial disclosure and unverified minimality remain visible."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/comparison-desktop.png",
+        "sha256": "c6c01d9b822ffea4df78743fac128a3f8e2265e74be896d1d59440cedf02de3a",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Original and candidate observations are side by side with different text outcome labels."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/identity-expanded-desktop.png",
+        "sha256": "4375dd0897a31d6e0f5125c49d5c99a8a6615e28f7a48ddd47ab5181424f3f59",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Expanded assertion/harness/application identity remains readable; JSON stays in its local scroll container."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/identity-expanded-390.png",
+        "sha256": "d58977060ec44f3c3aa8b0d9cd7c97af926cbb36b1471f466e5a15fb68ae307c",
+        "viewportCssPixels": [
+          390,
+          844
+        ],
+        "zoom": "100%",
+        "observed": "Expanded identifiers wrap and JSON is locally scrollable; comparison stacks without page-wide clipping."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/comparison-1024.png",
+        "sha256": "cef0365afc011ba32c2d29acc0ea50a5239413fcc0c8dcf59d8c6ce91915f729",
+        "viewportCssPixels": [
+          1024,
+          768
+        ],
+        "zoom": "100%",
+        "observed": "Both evidence columns remain readable and operation controls fit within the workspace."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/comparison-768.png",
+        "sha256": "680209199d976c15d3b257c270eba00084b28110fdc8a1f9c9394a9caa9e8e7e",
+        "viewportCssPixels": [
+          768,
+          1024
+        ],
+        "zoom": "100%",
+        "observed": "Comparison stacks into one column and operation controls wrap deliberately."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/comparison-390.png",
+        "sha256": "be76bc16c5cd8f46cc6a8a6e53760d19974106ab5e8779185a112649fc835911",
+        "viewportCssPixels": [
+          390,
+          844
+        ],
+        "zoom": "100%",
+        "observed": "Sidebar navigation, task links and evidence stack; full text labels remain visible."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/comparison-320.png",
+        "sha256": "83130b8bc8f81332db074fbde54c164fb018121444a4e72ae70f5d411ea37c33",
+        "viewportCssPixels": [
+          320,
+          844
+        ],
+        "zoom": "100%",
+        "observed": "Narrowest sample wraps session controls, header and evidence without overlapping content."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/comparison-zoom-200.png",
+        "sha256": "cff457714ddfe65ef8983110ae844a7d3578ae288743c1b6be320a05259e1a29",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "200% CSS layout zoom",
+        "observed": "CSS-layout zoom sample remains readable; this is not native browser zoom evidence."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/export-desktop.png",
+        "sha256": "d187cc6dac0eca1d74a1d0ce38dc7f642eb1be5031f595ea9e62cfa270ed16c0",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Saved local directory, validated-file count and export-versus-upload boundary are visible."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/cancelled-desktop.png",
+        "sha256": "2269054a7b04b3a0ac6842f4e4bf53131a2d778c47ec3a9f3e362e1faa3215a9",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Cancelled state, retained actions, zero-assertion run and unverified minimality are explicit."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/missing-session-error.png",
+        "sha256": "9807ed2dbbb6ae14bfbb5b3faea485f2b0ba787522b8475c3276b307e9bae4f1",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "INCONCLUSIVE alert identifies missing session and exposes recovery control; no stale success evidence appears."
+      },
+      {
+        "path": ".repro-runs/ui/browser-5bcf81a1-375d-4390-9ea4-8bc26634d15d/long-event-mobile.png",
+        "sha256": "02b7a3ae1da9adcbf32124f5b829dee6136a545bcf933069db8d711acb095394",
+        "viewportCssPixels": [
+          390,
+          844
+        ],
+        "zoom": "100%",
+        "observed": "Explicitly synthetic QA event and inspector message wrap within the mobile page."
+      },
+      {
+        "path": ".repro-runs/ui-focus/de1131e3-8279-40ec-9f46-6a2fc60dfd1e/brand.png",
+        "sha256": "2929d507e5379349aebe2fbe2f56125bc818efcb9d799381954137be738b566e",
+        "viewportCssPixels": [
+          1440,
+          900
+        ],
+        "zoom": "100%",
+        "observed": "Pale blue keyboard focus outline is clearly visible against the dark sidebar."
+      }
+    ]
+  }
+}
