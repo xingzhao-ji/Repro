@@ -1,0 +1,323 @@
+{
+  "schemaVersion": 1,
+  "classification": "synthetic-technical-fidelity",
+  "reportedAt": "2026-10-15T20:39:00.656851+00:00",
+  "sourceCommit": "15a82252b46b870f120faa448fbd55bec11333a4",
+  "sourceFiles": 27,
+  "factsPerCondition": 74,
+  "records": 5,
+  "sourceProjectionEquivalence": {
+    "classification": "synthetic-technical-fidelity",
+    "sourceCommit": "15a82252b46b870f120faa448fbd55bec11333a4",
+    "sourceFiles": 27,
+    "facts": 74,
+    "rawSourceCaseDigest": "ce97da7680ee440371f94ae9051bb3359387b933b292bf6b007cb37e25b6d90c",
+    "projectedCaseDigest": "ce97da7680ee440371f94ae9051bb3359387b933b292bf6b007cb37e25b6d90c",
+    "fullCaseEqual": true,
+    "factParity": "passed",
+    "participantSessions": 0
+  },
+  "sourceProjectionEvidence": ".repro-runs/hci-fidelity/checks/source-projection-equivalence-frozen.json",
+  "unit": {
+    "passed": 13,
+    "failed": 0,
+    "skipped": 0,
+    "log": ".repro-runs/hci-fidelity/checks/frozen-model-green.log"
+  },
+  "browser": {
+    "classification": "synthetic-technical-fidelity",
+    "status": "passed",
+    "browser": "156.0.8078.4",
+    "participantSessions": 0,
+    "observations": [
+      {
+        "condition": "P",
+        "accessibleFacts": 74,
+        "audits": [
+          {
+            "width": 1440,
+            "violations": [],
+            "incomplete": []
+          },
+          {
+            "width": 390,
+            "violations": [],
+            "incomplete": []
+          }
+        ],
+        "externalRequests": [],
+        "pageErrors": [],
+        "keyboardRecovery": "passed"
+      },
+      {
+        "condition": "L",
+        "accessibleFacts": 74,
+        "audits": [
+          {
+            "width": 1440,
+            "violations": [],
+            "incomplete": []
+          },
+          {
+            "width": 390,
+            "violations": [],
+            "incomplete": []
+          }
+        ],
+        "externalRequests": [],
+        "pageErrors": [],
+        "keyboardRecovery": "passed"
+      }
+    ]
+  },
+  "browserSummary": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/summary.json",
+  "browserLog": ".repro-runs/hci-fidelity/checks/browser-final.log",
+  "staticChecks": {
+    "projectTypecheck": {
+      "exitCode": 0,
+      "log": ".repro-runs/hci-fidelity/checks/typecheck-final.log"
+    },
+    "scopedLint": {
+      "exitCode": 0,
+      "log": ".repro-runs/hci-fidelity/checks/lint-final.log"
+    }
+  },
+  "cli": {
+    "rawSourceGeneration": ".repro-runs/hci-fidelity/checks/source-generation-frozen.log",
+    "projectionGeneration": ".repro-runs/hci-fidelity/checks/projection-generation-frozen.log",
+    "priorOutputReuse": {
+      "exitCode": 1,
+      "expected": "structured rejection",
+      "log": ".repro-runs/hci-fidelity/checks/output-reuse-rejected.log",
+      "priorOutputPreserved": ".repro-runs/hci-fidelity/checks/output-preserved.log",
+      "scope": "Earlier generated snapshot; output ownership implementation unchanged."
+    }
+  },
+  "scope": {
+    "participantSessions": 0,
+    "humanReview": "not claimed",
+    "independentReview": "Independent software-agent technical closure; integration owner review remains separate.",
+    "nativeZoom": "unverified; prior provider gate preserved",
+    "screenReader": "unrun",
+    "productRuntimeChanged": false,
+    "analysisFixtureChanged": false,
+    "sourceIndexAuthenticity": "not established by hashes"
+  },
+  "visualReview": {
+    "author": "software agent",
+    "finalImages": 10,
+    "finalImagesOpenedDirectly": 7,
+    "identicalPreviouslyOpenedImages": 3,
+    "findings": "Readable wrapping and visible sampled focus; no observed page clipping in inspected images. Full report is long at 390px.",
+    "images": [
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/L-initial-1440.png",
+        "sha256": "d91dd4e1c9f35d534b7e0528af00bc17e0db86e59d685afe6d576ebecc0badc4"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/L-reduction-1440.png",
+        "sha256": "927342c86c794019e4497f62e38227bedf78258933f11ef5fe2db4a9ba0cf63c"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/L-reduction-390.png",
+        "sha256": "2e39368642cbad24487a8a7ba21eed7102507b58c68a103d1ed6c59c9d68362b"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/L-viewport-1440.png",
+        "sha256": "d601dd841d2ccac4ca70b079caffcb57e73b70be9efd5be66a02e5e0cba30cd6"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/L-viewport-390.png",
+        "sha256": "8a525a9cb2449ad414a8252ba30e2edca1b47f80f167073c84d73f8e80d9c5f2"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/P-initial-1440.png",
+        "sha256": "0e5aedea35993c7588100d09036548b416cd55d4663a381d9a036d341b38a46a"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/P-reduction-1440.png",
+        "sha256": "f598f10c41053314aae7005035a9fa52facebeefee5b2bc2a2280ddba8e26ce3"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/P-reduction-390.png",
+        "sha256": "d5942ebb7463d0b7793516bc67bc16687ae909edb57eb8c9b8d6487d1a45476d"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/P-viewport-1440.png",
+        "sha256": "12ca583367aafbf0b8ccff4ce75598e5f3e78a25491fcfb82846277a85ccf577"
+      },
+      {
+        "path": ".repro-runs/hci-fidelity/browser-da0ae983-920d-4e0f-bbb7-13d31f048a43/P-viewport-390.png",
+        "sha256": "046bfa89bd6c7d5a4c4035d319f945900551146834d8ec74ab60c1b16bd9f80d"
+      }
+    ],
+    "finalRendererPagesEqualReviewedPages": true,
+    "equivalenceMethod": "SHA-256 of final P.html/L.html equals the pages used for retained author-inspected screenshots."
+  },
+  "files": {
+    "scripts/hci-fidelity.ts": {
+      "sha256": "e8cbb02bf7127bdb8563fb1ebed95bea50e98f781814df54452b60b6590825ee",
+      "bytes": 27759
+    },
+    "tests/hci-fidelity.test.ts": {
+      "sha256": "aa41ddd1a2a62601a13d517fcc8672b33dfbe655a236ce1a1b247ec165b96cdd",
+      "bytes": 8942
+    },
+    "tests/hci-fidelity.browser.ts": {
+      "sha256": "889005778872c72eca7c1c6a32b4cb509f4df9ac92a8cee6b6a824c5d75ff657",
+      "bytes": 7252
+    },
+    "research/hci/FIDELITY-CONTRACT.md": {
+      "sha256": "53eaf93629b5c749f03662d64a4c120afb19bf447717ade4d4ec046cc5ba38c5",
+      "bytes": 5727
+    },
+    "research/hci/fidelity-source-15a8225.json": {
+      "sha256": "d7f698c2316349b4f777c0af515065273abe2f84eeda57f8009eb7154588fd0c",
+      "bytes": 14986
+    },
+    "research/hci/fidelity-projection-15a8225.json": {
+      "sha256": "0ad41da1396041ac34050d9a98e0badbce204c0e4e02188c99e448f0f01254b6",
+      "bytes": 43814
+    }
+  },
+  "targetedPostChangeBrowser": {
+    "reason": "Cross-platform ControlOrMeta+A replaces the Mac-only search-clearing shortcut; research renderer/compiler unchanged.",
+    "log": ".repro-runs/hci-fidelity/checks/browser-portable-shortcut.log",
+    "summary": ".repro-runs/hci-fidelity/browser-34cf3005-3aab-4d7e-a3d7-875c58603cfa/summary.json",
+    "result": {
+      "classification": "synthetic-technical-fidelity",
+      "status": "passed",
+      "browser": "156.0.8078.4",
+      "participantSessions": 0,
+      "observations": [
+        {
+          "condition": "P",
+          "accessibleFacts": 74,
+          "audits": [
+            {
+              "width": 1440,
+              "violations": [],
+              "incomplete": []
+            },
+            {
+              "width": 390,
+              "violations": [],
+              "incomplete": []
+            }
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "keyboardRecovery": "passed"
+        },
+        {
+          "condition": "L",
+          "accessibleFacts": 74,
+          "audits": [
+            {
+              "width": 1440,
+              "violations": [],
+              "incomplete": []
+            },
+            {
+              "width": 390,
+              "violations": [],
+              "incomplete": []
+            }
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "keyboardRecovery": "passed"
+        }
+      ]
+    }
+  },
+  "postIndependentReview": {
+    "findings": [
+      "Unsupported conclusive minimality could render despite inconclusive neighbors.",
+      "Unconstrained record IDs could break inline script markup.",
+      "Unknown trial/result explanations could expose private source strings."
+    ],
+    "red": ".repro-runs/hci-fidelity/checks/independent-review-red.log",
+    "unit": {
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "log": ".repro-runs/hci-fidelity/checks/frozen-model-green.log"
+    },
+    "browserLog": ".repro-runs/hci-fidelity/checks/browser-frozen-final.log",
+    "browserSummary": ".repro-runs/hci-fidelity/browser-f65de30a-7a94-44b4-80d3-6171c46e4915/summary.json",
+    "browserResult": {
+      "classification": "synthetic-technical-fidelity",
+      "status": "passed",
+      "browser": "156.0.8078.4",
+      "participantSessions": 0,
+      "observations": [
+        {
+          "condition": "P",
+          "accessibleFacts": 74,
+          "audits": [
+            {
+              "width": 1440,
+              "violations": [],
+              "incomplete": []
+            },
+            {
+              "width": 390,
+              "violations": [],
+              "incomplete": []
+            }
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "keyboardRecovery": "passed"
+        },
+        {
+          "condition": "L",
+          "accessibleFacts": 74,
+          "audits": [
+            {
+              "width": 1440,
+              "violations": [],
+              "incomplete": []
+            },
+            {
+              "width": 390,
+              "violations": [],
+              "incomplete": []
+            }
+          ],
+          "externalRequests": [],
+          "pageErrors": [],
+          "keyboardRecovery": "passed"
+        }
+      ]
+    },
+    "staticChecks": {
+      "projectTypecheck": {
+        "exitCode": 0,
+        "log": ".repro-runs/hci-fidelity/checks/typecheck-frozen-final.log"
+      },
+      "scopedLint": {
+        "exitCode": 0,
+        "log": ".repro-runs/hci-fidelity/checks/lint-frozen-final.log"
+      }
+    },
+    "fixVerification": "Independent software-agent closure: original and follow-up mutations rejected; no remaining findings in declared single-case scope.",
+    "frozenBoundaryRed": ".repro-runs/hci-fidelity/checks/frozen-model-red.log",
+    "frozenBoundary": "The complete canonical model identity is checked at compiler return and renderer entry; arbitrary case rendering is unsupported."
+  },
+  "rawEvidenceBase": ".repro-runs/expectation-authoring/worktree",
+  "canonicalFrozenModelSha256": "7aa12eb57804c1a9d9ee5e452e543e61a6bba9e740bfbc19d4eba60c38466c07",
+  "independentReview": {
+    "reviewer": "authored_contract_review software agent",
+    "method": "Read-only source/provenance review and in-memory mutation probes reported to the integration owner.",
+    "originalSourcesChecked": 27,
+    "projectedPrimitiveValuesMatched": 784,
+    "compileMutationsRejected": 10,
+    "modelPrimitiveLeavesChecked": 730,
+    "renderMutationCasesRejected": 1460,
+    "unalteredConditionsRender": true,
+    "remainingFindings": [],
+    "scope": "Technical single-case closure only; not human review, participants or the full study-condition fidelity gate."
+  }
+}

@@ -1,0 +1,1337 @@
+{
+  "classification": "synthetic-evidence-projection",
+  "sourceIndexSha256": "d7f698c2316349b4f777c0af515065273abe2f84eeda57f8009eb7154588fd0c",
+  "notice": "Allowlisted projection of actual synthetic records for portable research tests; not raw replay evidence or participant data. Raw source verification is a separate local check.",
+  "documents": {
+    "record-manifest": {
+      "actions": [
+        {
+          "dependsOn": [],
+          "id": "navigate",
+          "kind": "navigate",
+          "value": "/"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "focus-before",
+          "kind": "noise",
+          "value": "focus"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "search-alpha",
+          "kind": "search",
+          "value": "alpha"
+        },
+        {
+          "dependsOn": [
+            "search-alpha"
+          ],
+          "id": "search-beta",
+          "kind": "search",
+          "value": "beta"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "focus-after",
+          "kind": "noise",
+          "value": "focus"
+        }
+      ],
+      "adapter": {
+        "id": "synthetic-search-v1",
+        "version": "0.1.0"
+      },
+      "app": {
+        "revision": "buggy",
+        "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+      },
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "boundary": {
+        "behavior": "frontend",
+        "database": "none",
+        "externalDependencies": [],
+        "network": "controlled-http"
+      },
+      "classification": "synthetic-training-fixture",
+      "environment": {
+        "browser": "chromium",
+        "clock": "2026-01-01T00:00:00.000Z",
+        "locale": "en-US",
+        "platform": "linux-container",
+        "seed": 1729,
+        "timeoutMs": 10000,
+        "timezoneId": "UTC",
+        "viewport": {
+          "height": 720,
+          "width": 1280
+        }
+      },
+      "expectation": {
+        "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+        "expectedResults": [
+          "Beta synthetic result"
+        ],
+        "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+        "latestQuery": "beta",
+        "latestRequestId": 2
+      },
+      "expectationBasis": "supplied-synthetic-specification",
+      "humanApproval": "not-claimed",
+      "id": "synthetic-search-stale-response-v1",
+      "responses": [
+        {
+          "requestId": 2,
+          "results": [
+            "Beta synthetic result"
+          ]
+        },
+        {
+          "requestId": 1,
+          "results": [
+            "Alpha synthetic result"
+          ]
+        }
+      ],
+      "runnerVersion": "0.1.0",
+      "schemaVersion": 1
+    },
+    "record-result": {
+      "id": "0bfa5334-b764-426c-88e4-880f297bce8d",
+      "outcome": "target-failure",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 1,
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "events": [
+        {
+          "type": "response-completed",
+          "message": "HTTP response 2 completed in the frontend."
+        },
+        {
+          "type": "response-completed",
+          "message": "HTTP response 1 completed in the frontend."
+        }
+      ]
+    },
+    "reduction-manifest": {
+      "actions": [
+        {
+          "dependsOn": [],
+          "id": "navigate",
+          "kind": "navigate",
+          "value": "/"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "focus-before",
+          "kind": "noise",
+          "value": "focus"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "search-alpha",
+          "kind": "search",
+          "value": "alpha"
+        },
+        {
+          "dependsOn": [
+            "search-alpha"
+          ],
+          "id": "search-beta",
+          "kind": "search",
+          "value": "beta"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "focus-after",
+          "kind": "noise",
+          "value": "focus"
+        }
+      ],
+      "adapter": {
+        "id": "synthetic-search-v1",
+        "version": "0.1.0"
+      },
+      "app": {
+        "revision": "buggy",
+        "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+      },
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "boundary": {
+        "behavior": "frontend",
+        "database": "none",
+        "externalDependencies": [],
+        "network": "controlled-http"
+      },
+      "classification": "synthetic-training-fixture",
+      "environment": {
+        "browser": "chromium",
+        "clock": "2026-01-01T00:00:00.000Z",
+        "locale": "en-US",
+        "platform": "linux-container",
+        "seed": 1729,
+        "timeoutMs": 10000,
+        "timezoneId": "UTC",
+        "viewport": {
+          "height": 720,
+          "width": 1280
+        }
+      },
+      "expectation": {
+        "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+        "expectedResults": [
+          "Beta synthetic result"
+        ],
+        "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+        "latestQuery": "beta",
+        "latestRequestId": 2
+      },
+      "expectationBasis": "supplied-synthetic-specification",
+      "humanApproval": "not-claimed",
+      "id": "synthetic-search-stale-response-v1",
+      "responses": [
+        {
+          "requestId": 2,
+          "results": [
+            "Beta synthetic result"
+          ]
+        },
+        {
+          "requestId": 1,
+          "results": [
+            "Alpha synthetic result"
+          ]
+        }
+      ],
+      "runnerVersion": "0.1.0",
+      "schemaVersion": 1
+    },
+    "reduction-result": {
+      "manifest": {
+        "actions": [
+          {
+            "dependsOn": [],
+            "id": "navigate",
+            "kind": "navigate",
+            "value": "/"
+          },
+          {
+            "dependsOn": [
+              "navigate"
+            ],
+            "id": "search-alpha",
+            "kind": "search",
+            "value": "alpha"
+          },
+          {
+            "dependsOn": [
+              "search-alpha"
+            ],
+            "id": "search-beta",
+            "kind": "search",
+            "value": "beta"
+          }
+        ],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "trials": [
+        {
+          "index": 0,
+          "inputDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+          "seed": 1729,
+          "removed": [],
+          "outcome": "target-failure",
+          "reason": "Target failure preserved in 2/2 required repetitions.",
+          "accepted": true,
+          "runIds": [
+            "ca50522c-1c14-4b36-84e4-6feb149c9359",
+            "3ade36c0-585a-4575-8feb-af84569e135e"
+          ]
+        },
+        {
+          "index": 1,
+          "inputDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+          "seed": 1729,
+          "removed": [
+            "navigate",
+            "focus-before",
+            "search-alpha",
+            "search-beta",
+            "focus-after"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "ca2b5b4e-1cc2-40ac-977d-f3e0eadfb663"
+          ]
+        },
+        {
+          "index": 2,
+          "inputDigest": "663c12cbfb8bf2bade5dcdaf9342ee3f412a40f291ef7cc80af4851adbf0a99d",
+          "seed": 1729,
+          "removed": [
+            "search-beta",
+            "focus-after"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "7995be04-8f5a-412f-89d0-507629506b80"
+          ]
+        },
+        {
+          "index": 3,
+          "inputDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+          "seed": 1729,
+          "removed": [
+            "navigate",
+            "focus-before",
+            "search-alpha",
+            "search-beta",
+            "focus-after"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "a3468092-0bb8-46dc-a242-959460a734d1"
+          ]
+        },
+        {
+          "index": 4,
+          "inputDigest": "c6049f0f3807d1b9bb464c435508fe2f15f06ebadeb9a8c767f23464deb64fd8",
+          "seed": 1729,
+          "removed": [
+            "search-alpha",
+            "search-beta"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "732cfc44-aacf-49f4-b02c-2994b20dfbf8"
+          ]
+        },
+        {
+          "index": 5,
+          "inputDigest": "904987571373c0ea20b66b7835c046cac6d78f0dd77c28afc69c352fc4e3beed",
+          "seed": 1729,
+          "removed": [
+            "focus-after"
+          ],
+          "outcome": "target-failure",
+          "reason": "Target failure preserved in 2/2 required repetitions.",
+          "accepted": true,
+          "runIds": [
+            "d80f985a-ead4-4600-9d86-46e53a4cba17",
+            "f619514f-eb6b-496e-a4a3-d957b1c5c3bc"
+          ]
+        },
+        {
+          "index": 6,
+          "inputDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+          "seed": 1729,
+          "removed": [
+            "navigate",
+            "focus-before",
+            "search-alpha",
+            "search-beta"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "6542e311-fa0b-4da6-8be0-2ca19c641ea0"
+          ]
+        },
+        {
+          "index": 7,
+          "inputDigest": "b9a80c5523f6ddb2398305d8e9b2006d10b3d68e77c496ac3c1a10a692c5daae",
+          "seed": 1729,
+          "removed": [
+            "search-alpha",
+            "search-beta"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "bd9d79ec-bbe3-4e70-8822-e810a16b100c"
+          ]
+        },
+        {
+          "index": 8,
+          "inputDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+          "seed": 1729,
+          "removed": [
+            "navigate",
+            "focus-before",
+            "search-alpha",
+            "search-beta"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "6205bd9d-8ee2-419d-9850-4c8e27078442"
+          ]
+        },
+        {
+          "index": 9,
+          "inputDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+          "seed": 1729,
+          "removed": [
+            "focus-before"
+          ],
+          "outcome": "target-failure",
+          "reason": "Target failure preserved in 2/2 required repetitions.",
+          "accepted": true,
+          "runIds": [
+            "dcbbb8c5-e396-4378-96c8-0245ac4c7536",
+            "e1771848-92de-4ec3-b8e0-cb512edcbf7d"
+          ]
+        },
+        {
+          "index": 10,
+          "inputDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+          "seed": 1729,
+          "removed": [
+            "navigate",
+            "search-alpha",
+            "search-beta"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "f891637c-debc-49a7-a6c6-8e54897f7417"
+          ]
+        },
+        {
+          "index": 11,
+          "inputDigest": "d7cdc6097616a724c232261cda8afc210f5afcce3ed8ec46f71b45e48bfd59a8",
+          "seed": 1729,
+          "removed": [
+            "search-alpha",
+            "search-beta"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "052e0c0b-8cff-4983-ab42-d2626adecd76"
+          ]
+        },
+        {
+          "index": 12,
+          "inputDigest": "1b3173e15bf031d04c51ba5e3c8dc373ee1ba0f0e9ba809d01bb6c188140ce37",
+          "seed": 1729,
+          "removed": [
+            "search-beta"
+          ],
+          "outcome": "inconclusive",
+          "reason": "Run evidence does not match the frozen input, assertion, application, or execution identity.",
+          "accepted": false,
+          "runIds": [
+            "b149d5cb-f43b-44f3-b131-bd209d4db2da"
+          ]
+        }
+      ],
+      "baseline": {
+        "id": "ca50522c-1c14-4b36-84e4-6feb149c9359",
+        "outcome": "target-failure",
+        "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+        "appRevision": "buggy",
+        "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+        "adapterVersion": "0.1.0",
+        "runnerVersion": "0.1.0",
+        "seed": 1729,
+        "assertionCount": 1,
+        "observation": {
+          "latestRequestId": 2,
+          "query": "beta",
+          "results": [
+            "Alpha synthetic result"
+          ]
+        },
+        "events": [
+          {
+            "type": "response-completed",
+            "message": "HTTP response 2 completed in the frontend."
+          },
+          {
+            "type": "response-completed",
+            "message": "HTTP response 1 completed in the frontend."
+          }
+        ]
+      },
+      "status": "complete",
+      "minimality": "unverified",
+      "reason": "Search completed, but inconclusive or unstable final neighbors leave dependency-group minimality unverified."
+    },
+    "reduction-run-ca50522c-1c14-4b36-84e4-6feb149c9359": {
+      "id": "ca50522c-1c14-4b36-84e4-6feb149c9359",
+      "outcome": "target-failure",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 1,
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "events": [
+        {
+          "type": "response-completed",
+          "message": "HTTP response 2 completed in the frontend."
+        },
+        {
+          "type": "response-completed",
+          "message": "HTTP response 1 completed in the frontend."
+        }
+      ]
+    },
+    "reduction-run-3ade36c0-585a-4575-8feb-af84569e135e": {
+      "id": "3ade36c0-585a-4575-8feb-af84569e135e",
+      "outcome": "target-failure",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 1,
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "events": [
+        {
+          "type": "response-completed",
+          "message": "HTTP response 2 completed in the frontend."
+        },
+        {
+          "type": "response-completed",
+          "message": "HTTP response 1 completed in the frontend."
+        }
+      ]
+    },
+    "reduction-run-ca2b5b4e-1cc2-40ac-977d-f3e0eadfb663": {
+      "id": "ca2b5b4e-1cc2-40ac-977d-f3e0eadfb663",
+      "outcome": "inconclusive",
+      "manifestDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-7995be04-8f5a-412f-89d0-507629506b80": {
+      "id": "7995be04-8f5a-412f-89d0-507629506b80",
+      "outcome": "inconclusive",
+      "manifestDigest": "663c12cbfb8bf2bade5dcdaf9342ee3f412a40f291ef7cc80af4851adbf0a99d",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-a3468092-0bb8-46dc-a242-959460a734d1": {
+      "id": "a3468092-0bb8-46dc-a242-959460a734d1",
+      "outcome": "inconclusive",
+      "manifestDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-732cfc44-aacf-49f4-b02c-2994b20dfbf8": {
+      "id": "732cfc44-aacf-49f4-b02c-2994b20dfbf8",
+      "outcome": "inconclusive",
+      "manifestDigest": "c6049f0f3807d1b9bb464c435508fe2f15f06ebadeb9a8c767f23464deb64fd8",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-d80f985a-ead4-4600-9d86-46e53a4cba17": {
+      "id": "d80f985a-ead4-4600-9d86-46e53a4cba17",
+      "outcome": "target-failure",
+      "manifestDigest": "904987571373c0ea20b66b7835c046cac6d78f0dd77c28afc69c352fc4e3beed",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 1,
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "events": [
+        {
+          "type": "response-completed",
+          "message": "HTTP response 2 completed in the frontend."
+        },
+        {
+          "type": "response-completed",
+          "message": "HTTP response 1 completed in the frontend."
+        }
+      ]
+    },
+    "reduction-run-f619514f-eb6b-496e-a4a3-d957b1c5c3bc": {
+      "id": "f619514f-eb6b-496e-a4a3-d957b1c5c3bc",
+      "outcome": "target-failure",
+      "manifestDigest": "904987571373c0ea20b66b7835c046cac6d78f0dd77c28afc69c352fc4e3beed",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 1,
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "events": [
+        {
+          "type": "response-completed",
+          "message": "HTTP response 2 completed in the frontend."
+        },
+        {
+          "type": "response-completed",
+          "message": "HTTP response 1 completed in the frontend."
+        }
+      ]
+    },
+    "reduction-run-6542e311-fa0b-4da6-8be0-2ca19c641ea0": {
+      "id": "6542e311-fa0b-4da6-8be0-2ca19c641ea0",
+      "outcome": "inconclusive",
+      "manifestDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-bd9d79ec-bbe3-4e70-8822-e810a16b100c": {
+      "id": "bd9d79ec-bbe3-4e70-8822-e810a16b100c",
+      "outcome": "inconclusive",
+      "manifestDigest": "b9a80c5523f6ddb2398305d8e9b2006d10b3d68e77c496ac3c1a10a692c5daae",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-6205bd9d-8ee2-419d-9850-4c8e27078442": {
+      "id": "6205bd9d-8ee2-419d-9850-4c8e27078442",
+      "outcome": "inconclusive",
+      "manifestDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-dcbbb8c5-e396-4378-96c8-0245ac4c7536": {
+      "id": "dcbbb8c5-e396-4378-96c8-0245ac4c7536",
+      "outcome": "target-failure",
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 1,
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "events": [
+        {
+          "type": "response-completed",
+          "message": "HTTP response 2 completed in the frontend."
+        },
+        {
+          "type": "response-completed",
+          "message": "HTTP response 1 completed in the frontend."
+        }
+      ]
+    },
+    "reduction-run-e1771848-92de-4ec3-b8e0-cb512edcbf7d": {
+      "id": "e1771848-92de-4ec3-b8e0-cb512edcbf7d",
+      "outcome": "target-failure",
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 1,
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "events": [
+        {
+          "type": "response-completed",
+          "message": "HTTP response 2 completed in the frontend."
+        },
+        {
+          "type": "response-completed",
+          "message": "HTTP response 1 completed in the frontend."
+        }
+      ]
+    },
+    "reduction-run-f891637c-debc-49a7-a6c6-8e54897f7417": {
+      "id": "f891637c-debc-49a7-a6c6-8e54897f7417",
+      "outcome": "inconclusive",
+      "manifestDigest": "1c061d1b7ef3d837009072a7575755acbc847560e6c73dc50d2a92c8eba49854",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-052e0c0b-8cff-4983-ab42-d2626adecd76": {
+      "id": "052e0c0b-8cff-4983-ab42-d2626adecd76",
+      "outcome": "inconclusive",
+      "manifestDigest": "d7cdc6097616a724c232261cda8afc210f5afcce3ed8ec46f71b45e48bfd59a8",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "reduction-run-b149d5cb-f43b-44f3-b131-bd209d4db2da": {
+      "id": "b149d5cb-f43b-44f3-b131-bd209d4db2da",
+      "outcome": "inconclusive",
+      "manifestDigest": "1b3173e15bf031d04c51ba5e3c8dc373ee1ba0f0e9ba809d01bb6c188140ce37",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    },
+    "comparison-manifest": {
+      "actions": [
+        {
+          "dependsOn": [],
+          "id": "navigate",
+          "kind": "navigate",
+          "value": "/"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "search-alpha",
+          "kind": "search",
+          "value": "alpha"
+        },
+        {
+          "dependsOn": [
+            "search-alpha"
+          ],
+          "id": "search-beta",
+          "kind": "search",
+          "value": "beta"
+        }
+      ],
+      "adapter": {
+        "id": "synthetic-search-v1",
+        "version": "0.1.0"
+      },
+      "app": {
+        "revision": "buggy",
+        "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+      },
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "boundary": {
+        "behavior": "frontend",
+        "database": "none",
+        "externalDependencies": [],
+        "network": "controlled-http"
+      },
+      "classification": "synthetic-training-fixture",
+      "environment": {
+        "browser": "chromium",
+        "clock": "2026-01-01T00:00:00.000Z",
+        "locale": "en-US",
+        "platform": "linux-container",
+        "seed": 1729,
+        "timeoutMs": 10000,
+        "timezoneId": "UTC",
+        "viewport": {
+          "height": 720,
+          "width": 1280
+        }
+      },
+      "expectation": {
+        "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+        "expectedResults": [
+          "Beta synthetic result"
+        ],
+        "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+        "latestQuery": "beta",
+        "latestRequestId": 2
+      },
+      "expectationBasis": "supplied-synthetic-specification",
+      "humanApproval": "not-claimed",
+      "id": "synthetic-search-stale-response-v1",
+      "responses": [
+        {
+          "requestId": 2,
+          "results": [
+            "Beta synthetic result"
+          ]
+        },
+        {
+          "requestId": 1,
+          "results": [
+            "Alpha synthetic result"
+          ]
+        }
+      ],
+      "runnerVersion": "0.1.0",
+      "schemaVersion": 1
+    },
+    "comparison-result": {
+      "outcome": "requirement-satisfied",
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "original": {
+        "id": "8f34d076-358d-4b01-97ab-1422e479d20a",
+        "outcome": "target-failure",
+        "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+        "appRevision": "buggy",
+        "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+        "adapterVersion": "0.1.0",
+        "runnerVersion": "0.1.0",
+        "seed": 1729,
+        "assertionCount": 1,
+        "observation": {
+          "latestRequestId": 2,
+          "query": "beta",
+          "results": [
+            "Alpha synthetic result"
+          ]
+        },
+        "events": [
+          {
+            "type": "response-completed",
+            "message": "HTTP response 2 completed in the frontend."
+          },
+          {
+            "type": "response-completed",
+            "message": "HTTP response 1 completed in the frontend."
+          }
+        ]
+      },
+      "candidate": {
+        "id": "6e4e8352-4020-437a-a7c9-38cf8f662fe6",
+        "outcome": "requirement-satisfied",
+        "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+        "appRevision": "fixed",
+        "appDigest": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09",
+        "adapterVersion": "0.1.0",
+        "runnerVersion": "0.1.0",
+        "seed": 1729,
+        "assertionCount": 1,
+        "observation": {
+          "latestRequestId": 2,
+          "query": "beta",
+          "results": [
+            "Beta synthetic result"
+          ]
+        },
+        "events": [
+          {
+            "type": "response-completed",
+            "message": "HTTP response 2 completed in the frontend."
+          },
+          {
+            "type": "response-completed",
+            "message": "HTTP response 1 completed in the frontend."
+          }
+        ]
+      }
+    },
+    "export-manifest": {
+      "actions": [
+        {
+          "dependsOn": [],
+          "id": "navigate",
+          "kind": "navigate",
+          "value": "/"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "search-alpha",
+          "kind": "search",
+          "value": "alpha"
+        },
+        {
+          "dependsOn": [
+            "search-alpha"
+          ],
+          "id": "search-beta",
+          "kind": "search",
+          "value": "beta"
+        }
+      ],
+      "adapter": {
+        "id": "synthetic-search-v1",
+        "version": "0.1.0"
+      },
+      "app": {
+        "revision": "buggy",
+        "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+      },
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "boundary": {
+        "behavior": "frontend",
+        "database": "none",
+        "externalDependencies": [],
+        "network": "controlled-http"
+      },
+      "classification": "synthetic-training-fixture",
+      "environment": {
+        "browser": "chromium",
+        "clock": "2026-01-01T00:00:00.000Z",
+        "locale": "en-US",
+        "platform": "linux-container",
+        "seed": 1729,
+        "timeoutMs": 10000,
+        "timezoneId": "UTC",
+        "viewport": {
+          "height": 720,
+          "width": 1280
+        }
+      },
+      "expectation": {
+        "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+        "expectedResults": [
+          "Beta synthetic result"
+        ],
+        "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+        "latestQuery": "beta",
+        "latestRequestId": 2
+      },
+      "expectationBasis": "supplied-synthetic-specification",
+      "humanApproval": "not-claimed",
+      "id": "synthetic-search-stale-response-v1",
+      "responses": [
+        {
+          "requestId": 2,
+          "results": [
+            "Beta synthetic result"
+          ]
+        },
+        {
+          "requestId": 1,
+          "results": [
+            "Alpha synthetic result"
+          ]
+        }
+      ],
+      "runnerVersion": "0.1.0",
+      "schemaVersion": 1
+    },
+    "export-result": {
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "files": 14
+    },
+    "cancelled-manifest": {
+      "actions": [
+        {
+          "dependsOn": [],
+          "id": "navigate",
+          "kind": "navigate",
+          "value": "/"
+        },
+        {
+          "dependsOn": [
+            "navigate"
+          ],
+          "id": "search-alpha",
+          "kind": "search",
+          "value": "alpha"
+        },
+        {
+          "dependsOn": [
+            "search-alpha"
+          ],
+          "id": "search-beta",
+          "kind": "search",
+          "value": "beta"
+        }
+      ],
+      "adapter": {
+        "id": "synthetic-search-v1",
+        "version": "0.1.0"
+      },
+      "app": {
+        "revision": "buggy",
+        "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+      },
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "boundary": {
+        "behavior": "frontend",
+        "database": "none",
+        "externalDependencies": [],
+        "network": "controlled-http"
+      },
+      "classification": "synthetic-training-fixture",
+      "environment": {
+        "browser": "chromium",
+        "clock": "2026-01-01T00:00:00.000Z",
+        "locale": "en-US",
+        "platform": "linux-container",
+        "seed": 1729,
+        "timeoutMs": 10000,
+        "timezoneId": "UTC",
+        "viewport": {
+          "height": 720,
+          "width": 1280
+        }
+      },
+      "expectation": {
+        "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+        "expectedResults": [
+          "Beta synthetic result"
+        ],
+        "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+        "latestQuery": "beta",
+        "latestRequestId": 2
+      },
+      "expectationBasis": "supplied-synthetic-specification",
+      "humanApproval": "not-claimed",
+      "id": "synthetic-search-stale-response-v1",
+      "responses": [
+        {
+          "requestId": 2,
+          "results": [
+            "Beta synthetic result"
+          ]
+        },
+        {
+          "requestId": 1,
+          "results": [
+            "Alpha synthetic result"
+          ]
+        }
+      ],
+      "runnerVersion": "0.1.0",
+      "schemaVersion": 1
+    },
+    "cancelled-result": {
+      "manifest": {
+        "actions": [
+          {
+            "dependsOn": [],
+            "id": "navigate",
+            "kind": "navigate",
+            "value": "/"
+          },
+          {
+            "dependsOn": [
+              "navigate"
+            ],
+            "id": "search-alpha",
+            "kind": "search",
+            "value": "alpha"
+          },
+          {
+            "dependsOn": [
+              "search-alpha"
+            ],
+            "id": "search-beta",
+            "kind": "search",
+            "value": "beta"
+          }
+        ],
+        "adapter": {
+          "id": "synthetic-search-v1",
+          "version": "0.1.0"
+        },
+        "app": {
+          "revision": "buggy",
+          "sourceDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a"
+        },
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "boundary": {
+          "behavior": "frontend",
+          "database": "none",
+          "externalDependencies": [],
+          "network": "controlled-http"
+        },
+        "classification": "synthetic-training-fixture",
+        "environment": {
+          "browser": "chromium",
+          "clock": "2026-01-01T00:00:00.000Z",
+          "locale": "en-US",
+          "platform": "linux-container",
+          "seed": 1729,
+          "timeoutMs": 10000,
+          "timezoneId": "UTC",
+          "viewport": {
+            "height": 720,
+            "width": 1280
+          }
+        },
+        "expectation": {
+          "description": "A response belonging to an older search request must not replace results for the most recently issued request.",
+          "expectedResults": [
+            "Beta synthetic result"
+          ],
+          "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+          "latestQuery": "beta",
+          "latestRequestId": 2
+        },
+        "expectationBasis": "supplied-synthetic-specification",
+        "humanApproval": "not-claimed",
+        "id": "synthetic-search-stale-response-v1",
+        "responses": [
+          {
+            "requestId": 2,
+            "results": [
+              "Beta synthetic result"
+            ]
+          },
+          {
+            "requestId": 1,
+            "results": [
+              "Alpha synthetic result"
+            ]
+          }
+        ],
+        "runnerVersion": "0.1.0",
+        "schemaVersion": 1
+      },
+      "trials": [
+        {
+          "index": 0,
+          "inputDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+          "seed": 1729,
+          "removed": [],
+          "outcome": "cancelled",
+          "reason": "Reduction cancelled during execution.",
+          "accepted": false,
+          "runIds": [
+            "45fe4d68-1ff8-4d05-8841-d43f6770ffe8"
+          ]
+        }
+      ],
+      "baseline": {
+        "id": "45fe4d68-1ff8-4d05-8841-d43f6770ffe8",
+        "outcome": "cancelled",
+        "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+        "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+        "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+        "appRevision": "buggy",
+        "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+        "adapterVersion": "0.1.0",
+        "runnerVersion": "0.1.0",
+        "seed": 1729,
+        "assertionCount": 0,
+        "observation": null,
+        "events": []
+      },
+      "status": "cancelled",
+      "minimality": "unverified",
+      "reason": "Baseline was not established under the repetition rule. Reduction cancelled during execution."
+    },
+    "cancelled-run-45fe4d68-1ff8-4d05-8841-d43f6770ffe8": {
+      "id": "45fe4d68-1ff8-4d05-8841-d43f6770ffe8",
+      "outcome": "cancelled",
+      "manifestDigest": "1d73378b0b1dd8b9c0e20a155c88d1c27e85910f144dcd1085ddb0f6d3214db6",
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "harnessDigest": "0fc37a90b44c3f3e0833e0674e655ec5128c6529e9a6135fb844bcdc985f4159",
+      "appRevision": "buggy",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "adapterVersion": "0.1.0",
+      "runnerVersion": "0.1.0",
+      "seed": 1729,
+      "assertionCount": 0,
+      "observation": null,
+      "events": []
+    }
+  }
+}
