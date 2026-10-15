@@ -2,6 +2,8 @@
 
 The caller-declared expectation extension is verified: **204 unit/contract and 39 browser tests pass**, plus installed/offline package and a fresh restricted Linux replay. See [the current release supplement](AUTHORED-RELEASE.md), [machine-readable summary](authored-release-summary.json) and [HCI fidelity preparation](HCI-FIDELITY.md). Native zoom and actual screen-reader checks remain open.
 
+Documentation-only continuation: [HCI materials v2](HCI-MATERIALS.md) reconciles study schedules, timing/coding forms and static inspection keys. No runtime or frozen-case changes, participant observations or new runtime verification are implied.
+
 The following report is preserved for checkpoint `15a8225`; its hashes, counts and offline archive describe that earlier schema-1 build.
 
 # Repro local alpha release candidate — October 15, 2026

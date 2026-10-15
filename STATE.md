@@ -1,3 +1,15 @@
+# Current continuation — HCI materials correction
+
+2026-10-15 UTC. Root corrected an independently identified R10 preparation gap after delivering the authored workflow. Protocol 0.2 and blank materials v2 preserve both assigned blocks, expected task/claim slots, original attempts, explicit endings and independent six-concept coding/adjudication. Static P/L inspection keys now ask only for evidence in the frozen historical schema-1 projection; live formative extensions remain separate. See [HCI-MATERIALS](evidence/HCI-MATERIALS.md) and its final structural/review receipt. No product runtime, analyzer, dependencies or frozen evidence changed; earlier test counts remain historical observations at their recorded builds.
+
+The user-confirmed Impeccable context remains `docs/PRODUCT.md`, with `buildPath: code` in `.impeccable/config.json`; both installed plugins are available. No reinitialization, replacement installation or design change is needed.
+
+This continuation rechecked the supported computer-use inventory: native Chrome appears as an app but browser providers remain empty, and there is no actual screen-reader speech-observation surface. Do not use the native app or another tool to evade the recorded loopback navigation denial. The active goal is incomplete for native 200% zoom and actual screen-reader workflow. No authorized product defect remains identified after this bounded materials correction; continue the two gates only when legitimate capabilities change. Human study authorization and broader research remain separately scoped, not permission to manufacture observations or add arbitrary product support.
+
+Root owns integration. Inspect actual Git status and delivery receipt before resuming; non-force private origin/main delivery is already authorized. Documentation-only source handoff receipts belong under `.repro-runs/hci-materials-v2/delivery/`; no new npm package, Linux image, hosted deployment, remote CI or Library upload is implied. Keep the retained authored-workflow worktree and historical raw evidence intact.
+
+## Preserved authored expectation checkpoint
+
 # Current development state — authored expectation extension
 
 2026-10-15 UTC. Continue the unchanged GOAL.md and acceptance contract. The missing explicit expected-behavior input is now implemented through CLI/API/UI schema 2, with unchanged schema-1 compatibility. The core and integration were independently reviewed; actual buggy/fixed observations and immutable assertion/harness identities were checked. Current report: [AUTHORED-RELEASE](evidence/AUTHORED-RELEASE.md), [summary](evidence/authored-release-summary.json). The active goal remains incomplete; do not mark complete or paused.

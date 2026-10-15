@@ -65,10 +65,25 @@ Here `censored` specifically means administrative timeout, not a survival-model 
 
 Task summaries separate inspection from formative workflow. `completedTime` includes only independent/assisted completions with measured time and is explicitly a completed-only descriptive statistic. `activeTime` includes measured time for all endings and is not completion time. Ending counts, administrative censor/timeout counts and per-slot records keep incomplete and missing work visible. First-correct-evidence times must fit measured task time; absent times remain missing. Recovery event time requires observed recovery success and must fit task time; success with missing time remains allowed, and recovery failure/unknown counts stay visible. No missing time becomes zero. No survival estimator or speed-benefit conclusion is supplied.
 
-## Existing blank forms and remaining work
+## Version 2 blank forms and field correspondence
 
-The CSV forms remain preparation materials; this instrument does not import them. Their single condition/case columns can map to block metadata, but the session template does not yet represent both assigned blocks. A separate frozen expected-slot schedule is required to distinguish omitted rows from unassigned items. The forms also need block/attempt identity and explicit ending reason; the existing `censored` description needs reconciliation with this narrower administrative-timeout convention before human use.
+[Materials version 2](README.md) represents two assigned blocks, independently frozen task/claim schedules, original attempt identities, explicit endings and separate concept/coder/adjudication records. The templates remain blank preparation materials. Their version is independent of this instrument's unchanged input schema 1. There is **no CSV importer or human-data mode**; do not label participant observations `synthetic-analysis-test` to feed this script.
 
-`understanding_score` does not preserve six separate concept scores, coder identity per score or two independent coding passes. Coding agreement, adjudication, experience effects, error/help/navigation measures and a human-data storage workflow are not implemented here. Preregistered uncertainty intervals, exclusions, stopping rules, confirmatory power, task-family validity, comparator parity and human study approvals remain separate unfinished work. No p-values, inferential intervals or interface-effectiveness decisions are generated.
+For a separately authored nonparticipant arithmetic fixture, the correspondence is:
+
+| Materials field | Instrument field / rule |
+| --- | --- |
+| Manifest `participantCode` / CSV `participant_code` | Synthetic `units[].unitId`; do not copy actual participant codes or answers into a test fixture. |
+| Manifest `blocks[]` | `blockId`, `condition`, `order`, `caseSet`, `caseId` map to the same fields. Build/provenance/approval fields remain preparation metadata, not accepted instrument fields. |
+| Task schedule | `task_slot_id` → `slotId`, `task_id` → `taskId`, `module` → `module`, `limit_seconds` → `limitSeconds`; preserve scheduled slots even when unanswered. `task_order` orders the schedule but has no schema-1 field. |
+| Claim schedule | `claim_slot_id` → `slotId`, `task_slot_id` → `taskSlotId`, `claim_id` → `claimId`, `key_id` → `keyId`, `claim_order` → `order`. |
+| Frozen private key | Case/claim/key identities and Boolean `supported` correspond to `claimKeys`; truth must come from separately verified evidence, not observed answers. |
+| Task results, attempt 1 | `participant_code`, `block_id`, `task_slot_id` → `unitId`, `blockId`, `slotId`; `completion`, `censored` retain names; `elapsed_seconds`, `ending_reason`, `time_to_first_correct_evidence_seconds`, `recovery_success`, `recovery_seconds` → their camelCase counterparts (`firstCorrectEvidenceSeconds` for the first-evidence time). |
+| Claim results for task attempt 1 | `participant_code`, `block_id`, `claim_slot_id` → `unitId`, `blockId`, `slotId`; `answer` retains its name; `support_probability_percent` → `supportProbabilityPercent`. |
+| Blank observations | Missing scheduled row remains absent; an observed blank permitted measurement/answer becomes null, never zero/no. CSV numeric/Boolean text would require explicit parsing and validation in any future importer. |
+
+The proposed materials policy selects the original task attempt and its claim judgments, never a better retry; it must be approved and frozen before collection. Later attempts stay in the source records. A missing attempt-1 row is not replaced with attempt 2. Schema 1 accepts only one observation per scheduled slot and does not accept attempt fields, reasons, coding rows or other extra metadata. This table documents correspondence only; it does not implement conversion, authorize human data or validate a study design.
+
+Understanding sheets now retain U1–U6, response-packet identity, coder/pass, individual score/rationale and separate adjudication links. Agreement calculations, adjudication, experience effects, error/help/navigation measures and a human-data storage workflow remain unimplemented in the engine. Preregistered uncertainty intervals, exclusions, stopping rules, confirmatory power, task-family validity, comparator parity and human study approvals remain separate unfinished work. No p-values, inferential intervals or interface-effectiveness decisions are generated.
 
 The independent regression author and instrument author share a filesystem. Tests are independently authored engineering regressions, not an access-isolated holdout. Synthetic inputs verify the instrument only; they are not fabricated participant observations or evidence that the study hypothesis holds.

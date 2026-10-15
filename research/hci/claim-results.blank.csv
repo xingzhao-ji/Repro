@@ -1,1 +1,1 @@
-participant_code,condition,case_set,case_id,task_id,claim_id,claim_order,answer,support_probability_percent,reason,evidence_reference,missing_reason
+materials_version,participant_code,block_id,claim_slot_id,attempt_number,answer,support_probability_percent,reason,evidence_reference,missing_reason,deviation

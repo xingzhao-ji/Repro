@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "checkedAt": "2026-10-15T20:57:17.009755+00:00",
+  "classification": "blank-preparation-materials-check",
+  "baseCommit": "1db23ea223341d39ef20ec318c6641124ac60461",
+  "materialsVersion": "2",
+  "protocolVersion": "0.2",
+  "forms": [
+    {
+      "file": "research/hci/claim-results.blank.csv",
+      "columns": 11,
+      "dataRows": 0
+    },
+    {
+      "file": "research/hci/claim-schedule.blank.csv",
+      "columns": 8,
+      "dataRows": 0
+    },
+    {
+      "file": "research/hci/task-results.blank.csv",
+      "columns": 21,
+      "dataRows": 0
+    },
+    {
+      "file": "research/hci/task-schedule.blank.csv",
+      "columns": 8,
+      "dataRows": 0
+    },
+    {
+      "file": "research/hci/understanding-adjudications.blank.csv",
+      "columns": 12,
+      "dataRows": 0
+    },
+    {
+      "file": "research/hci/understanding-codes.blank.csv",
+      "columns": 12,
+      "dataRows": 0
+    }
+  ],
+  "manifestUnassignedBlocks": 2,
+  "unresolvedApprovalsPreserved": true,
+  "localMarkdownLinksChecked": 14,
+  "runtimeChanges": false,
+  "fileSha256": {
+    "research/hci/README.md": "cb18cddcdb180d913a5988cc45bca8c0a93e79de9fcdb5fa5df8a88e548a5d34",
+    "research/hci/ANALYSIS-CONTRACT.md": "60a7d92443f60e92150531892d9f9ee109124f23c381fb8208d3634f4993754a",
+    "docs/HCI-STUDY-PROTOCOL.md": "58a04090977b5c6c35b42c70a70f66a2152bb0dc6d04e6c486e5664ead1a059d",
+    "research/hci/session-manifest.template.json": "b3eec79179715a91a79f7832cc6de5bb8f9e0eb51eb97788cf2dbe7c4b2655d6",
+    "research/hci/claim-results.blank.csv": "4c2602c70d31b26095b836bf314701b49a6dcd9a67b9c186326ee023096af7b9",
+    "research/hci/claim-schedule.blank.csv": "b796363fa3972fcee3454c6298ebf5789fdd175fe71b361bd35d7e2fa49de75b",
+    "research/hci/task-results.blank.csv": "a705bb7efc0b607fcb94d31910282287757c05b7b9726d62d5a107901d3c7f33",
+    "research/hci/task-schedule.blank.csv": "e2328699f8056dfe79b338de54f86ddeac4758ff7c5879dce213b0b895b9613d",
+    "research/hci/understanding-adjudications.blank.csv": "4492ba7344bf9bd9e4bac4f22d8b24e7e2cbbbf5ec57e235f766c8b3ffd0beb6",
+    "research/hci/understanding-codes.blank.csv": "2825b672e7f7a104842510b88f60d1165cc29fd6aba954933a8c0d46df877e1e"
+  },
+  "review": {
+    "kind": "independent-agent-source-review",
+    "reviewer": "hci_materials_review",
+    "materialFindings": 0,
+    "scope": [
+      "block/task/claim/attempt identity and missingness",
+      "timeout and ending rules against analyzer",
+      "original attempts and preserved retries",
+      "independent concept codes and separate adjudication",
+      "static T2\u2013T6 scoring against frozen renderer",
+      "human-data authorization and synthetic-only restrictions"
+    ],
+    "clarificationApplied": "Distinct T5F/T6F identifiers for live formative extensions; participant manifest wording aligns with the one-manifest-per-participant contract.",
+    "limits": "No human approval, participant evaluation, browser action or study-validity claim."
+  },
+  "checks": [
+    "Python json decoder with duplicate-key rejection",
+    "Python csv strict parse; one header row only; unique identifiers",
+    "Unassigned manifest blocks and unresolved participant/approval/runtime fields",
+    "Relative Markdown targets exist",
+    "git diff --check",
+    "Tracked diff restricted to materials, protocol and report/state pointers"
+  ],
+  "limits": [
+    "No CSV importer or form validator implemented.",
+    "No runtime suite or assistive-technology workflow rerun for this documentation-only change.",
+    "No participant data or populated observations."
+  ],
+  "supplementalVerification": {
+    "checkedAt": "2026-10-15T20:58:03.505587+00:00",
+    "materialHashesMatch": true,
+    "newStateAndReportLinksChecked": 7,
+    "newLinksResolve": true,
+    "preservedSupplementalFailure": {
+      "command": "Python hash/link check over full STATE.md, evidence/RELEASE.md and evidence/HCI-MATERIALS.md",
+      "exitCode": 1,
+      "firstError": "AssertionError: ('evidence/RELEASE.md', '../.repro-runs/hci-increment/final-capsule-equivalence-e12c8561a6ee/final-content-hashes.json')",
+      "finding": "Historical raw-evidence links in the preserved earlier release report are absent locally. New links and material identities pass; original links/reports were not rewritten or claimed repaired.",
+      "allAbsentHistoricalLinks": [
+        {
+          "file": "evidence/RELEASE.md",
+          "target": "../.repro-runs/hci-increment/final-capsule-equivalence-e12c8561a6ee/final-content-hashes.json"
+        }
+      ]
+    }
+  }
+}
