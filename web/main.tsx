@@ -274,6 +274,9 @@ function App() {
     try {
       const { session } = await api<{ session: Session }>('/api/sessions', token, { consent: true });
       location.hash = href(session.id, 'timeline');
+      // The capture form unmounts on this route change. Keep keyboard focus in
+      // the persistent evidence workspace instead of dropping it onto the body.
+      document.getElementById('main')?.focus();
       pending.current = false;
       await perform('record', session.id);
     } catch (cause) { setError(cause instanceof Error ? cause.message : 'Capture could not start.'); }
