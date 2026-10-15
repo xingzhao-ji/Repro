@@ -76,7 +76,14 @@
       ]
     },
     "appDigest": {
-      "$ref": "#/$defs/sha256"
+      "anyOf": [
+        {
+          "$ref": "#/$defs/sha256"
+        },
+        {
+          "const": ""
+        }
+      ]
     },
     "adapterVersion": {
       "const": "0.1.0"
@@ -152,6 +159,31 @@
     }
   },
   "allOf": [
+    {
+      "if": {
+        "properties": {
+          "appDigest": {
+            "const": ""
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "outcome": {
+            "enum": [
+              "inconclusive",
+              "cancelled"
+            ]
+          },
+          "assertionCount": {
+            "const": 0
+          },
+          "observation": {
+            "type": "null"
+          }
+        }
+      }
+    },
     {
       "if": {
         "properties": {
