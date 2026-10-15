@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-10-15T20:43:50.460Z",
+  "outcome": "passed-with-explained-build-path-difference",
+  "originalExactEqualityCheck": "failed for frontend bundle and source map; preserved below",
+  "sourceAggregate": "8ae0b607943fd851e841165ae63952be752b6085cec85211f80f8e2ad3529755",
+  "sourceHashesEqual": true,
+  "exactMatchingArtifacts": [
+    "dist/cli.js",
+    "dist/cli.js.map",
+    "dist/index.js",
+    "dist/index.js.map",
+    "dist/package-lock.json",
+    "dist/web.css",
+    "dist/web.css.map"
+  ],
+  "differences": [
+    "dist/web.js",
+    "dist/web.js.map"
+  ],
+  "explanation": "Worktree node_modules is a symlink to the main checkout. Only dependency module-path labels in the frontend bundle and sources paths in its map differ. Replacing the exact path prefixes makes complete strings/JSON equal. CLI/index runtime artifacts are byte-identical.",
+  "verifiedWorktreeHashes": {
+    "dist/cli.js": "2a41455b315a0102f6651dfec11876be4e7cbf4ce748646eb4944c1004ccbc99",
+    "dist/cli.js.map": "19cefd6132e5534b7ae6b99b96cd9cb4598adeced6d641ec4e029f7ef612bfe3",
+    "dist/index.js": "aca20166f7c64b6aa07303304eec95ea483ab61d6403ce86bdfc9d0ba681ef2d",
+    "dist/index.js.map": "b144a2fa8880d0c49df1c9d742301ed4975b489bf078372f1bf0f3bb9a46bf93",
+    "dist/package-lock.json": "64c15457c56e7ae34d9b08122959f90f461c84858b274a05f86638106f04fc96",
+    "dist/web.css": "312d95775db123a6c338d9ce636a3f819375d9e61066ccb5d79a5cfa617b6d16",
+    "dist/web.css.map": "c378ed34b5f4117bfae68ab68f6308d50ef7ee9f86a0f5023fcb990b6322c8df",
+    "dist/web.js": "40438f5dc02b05ec9367d0ddc666ed41b5edc2980f1b60383bc4174966165093",
+    "dist/web.js.map": "8be4c479397199cfd9a2cafc61576d7f21faf3496dd393ed514228310e6a8be9"
+  },
+  "mainBuildHashes": {
+    "dist/cli.js": "2a41455b315a0102f6651dfec11876be4e7cbf4ce748646eb4944c1004ccbc99",
+    "dist/cli.js.map": "19cefd6132e5534b7ae6b99b96cd9cb4598adeced6d641ec4e029f7ef612bfe3",
+    "dist/index.js": "aca20166f7c64b6aa07303304eec95ea483ab61d6403ce86bdfc9d0ba681ef2d",
+    "dist/index.js.map": "b144a2fa8880d0c49df1c9d742301ed4975b489bf078372f1bf0f3bb9a46bf93",
+    "dist/package-lock.json": "64c15457c56e7ae34d9b08122959f90f461c84858b274a05f86638106f04fc96",
+    "dist/web.css": "312d95775db123a6c338d9ce636a3f819375d9e61066ccb5d79a5cfa617b6d16",
+    "dist/web.css.map": "c378ed34b5f4117bfae68ab68f6308d50ef7ee9f86a0f5023fcb990b6322c8df",
+    "dist/web.js": "2950ca39f836d90af78ddc33ba6559dad2d725e082f37be0f18ae91967f056fe",
+    "dist/web.js.map": "222b196134c531b83ddf4b3b9b1b5b5d4602d2a6411b2c38d9b29d57774c1ff5"
+  },
+  "mainCheckoutUI": {
+    "passed": 8,
+    "failed": 0,
+    "skipped": 0,
+    "log": ".repro-runs/expectation-authoring/delivery/main-ui.log",
+    "logBase": "main checkout",
+    "logSha256": "402a3b440b17a37e5530f24db6cb8e9add4dc9a6b03c8a32a1e9c5a8f598097a"
+  }
+}

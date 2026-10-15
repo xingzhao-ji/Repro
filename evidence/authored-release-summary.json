@@ -113,5 +113,12 @@
     "Minimality remains unverified when final neighbors are inconclusive.",
     "Previous offline archive is schema 1; no new schema-2 image archive.",
     "No remote CI, public deployment or new Library upload claimed."
-  ]
+  ],
+  "mainCheckoutIntegration": {
+    "receipt": "authored-main-build.json",
+    "affectedUIPassed": 8,
+    "sourceUnchanged": true,
+    "cliAndCapsuleArtifactsByteIdentical": true,
+    "frontendDependencyPathLabelsDiffer": true
+  }
 }
