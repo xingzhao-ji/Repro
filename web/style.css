@@ -26,6 +26,7 @@ code { font: 12px/1.7 var(--font-mono); overflow-wrap: anywhere; }
 .skip:focus { clip-path: none; opacity: 1; pointer-events: auto; }
 .shell { display: grid; grid-template-columns: 220px minmax(0,1fr); min-height: 100vh; }
 .sidebar { background: var(--nav); color: #c5cedb; padding: 26px 16px; min-width: 0; }
+.sidebar :focus-visible { outline-color: #a8bfff; }
 .brand { display: flex; align-items: center; gap: 9px; color: white; text-decoration: none; font-size: 28px; font-weight: 720; letter-spacing: -1px; padding: 0 10px; }
 .brand svg { width: 31px; height: 31px; fill: none; stroke: #a8bfff; stroke-width: 1.6; stroke-linejoin: round; }
 .brand small { margin-left: 2px; padding-top: 5px; color: #a8b7cf; font-size: 10px; letter-spacing: 1px; }
