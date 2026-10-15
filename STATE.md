@@ -1,5 +1,13 @@
 # Development state
 
+## Current P57 correction preparation — 2026-10-15
+
+The narrow trial-inspector shadow removal is recorded locally in `b48c69672f35d4b51db3325eb2d7a212ec68bcc6`. Study-builder tests pass 15/15 and a separate frozen candidate preserves the scripts, evidence and all 57 static occurrence identities. No new rendered contrast pass is claimed; all 57 need fresh candidate verification. The original pilot remains sealed at 12 unresolved, 45 unattempted and zero accepted occurrences, with its zero-observed-zombie gate failed.
+
+Bounded lifecycle diagnostics are implemented separately, with 43/43 focused helper regressions, 16/16 mocked caller checks, strict typecheck and scoped lint passing. Read-only phase/context-count and first-zombie thread observations preserve original sampling and close operations in task-owned caller copies. Metadata stays within 128 KiB and the original shared 4 MiB ceiling; completion is explicitly provisional until final I/O and external exit are verified. The 417-sample offline replay preserves raw bytes and the zombie observation, using synthetic supplemental timing/task fixtures. It does not establish live timing overhead or lifecycle correctness.
+
+Read `evidence/P57-CORRECTION-PREPARATION.md` and `.repro-runs/cloud-continuation/contrast-p57-correction-preparation-v1/RESULT.md` for exact provenance, review and receipts. No evidence-backed lifecycle correction or valid runtime path has been established, so another acceptance sequence remains blocked. Resolve that condition and review the new candidate bindings before any newly authorized runtime. No browser/Docker run, publication, credential/security change or resource increase occurred in this preparation. All existing frozen acceptance and release gates remain unchanged; prior uncommitted state and original evidence are preserved.
+
 ## Local commit checkpoint — 2026-10-14
 
 The previously uncommitted comparator/redaction source is now recorded locally as `8d0536729b799129b560eea99e985631707969a1` on `cloud/hci-comparator-redaction`. Its isolated staged tree built, typechecked and passed all 227 comparator contract tests. The subsequent local CLI checkpoint records diagnostics, exclusive run/evidence output and cancellation handling, with the tests and evidence reports below. Original history and migration/handoff archives are preserved. These local commits are not a release or a GitHub push.
