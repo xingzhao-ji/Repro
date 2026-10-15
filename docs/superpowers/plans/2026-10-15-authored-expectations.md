@@ -32,11 +32,11 @@ Owner: core implementer. Files: src/contracts.ts, new src/search-contract.ts, sr
 
 Interfaces: `createAuthoredManifest(input: unknown): ManifestV2` from manifest.ts. `searchContract(manifest: Manifest): FrozenSearchContract` and `expectationEstablished(manifest: Manifest): boolean` from search-contract.ts. Contract exposes `searchOrder`, `expected` and `stale` observations, `responses`, `assertionDigest`. Legacy oracle API remains usable by existing consumers.
 
-- [ ] Write and observe failing tests for schema2 validation, explicit caller expectation, two orders/different identities, invalid fields, provenance and frozen reduction inputs.
-- [ ] Implement discriminated contracts, registered rule identity, immutable scenario derivation and schema-specific validation.
-- [ ] Write and observe failing real-browser reversed-order tests, then implement exact routes/request numbering and dynamic independent assertion.
-- [ ] Extend reducer/export to preserve frozen identity and check actual dynamic observations in the conventional test.
-- [ ] Run relevant unit/browser checks; provide red/green logs and commit owned files after integration agrees.
+- [x] Write and observe failing tests for schema2 validation, explicit caller expectation, two orders/different identities, invalid fields, provenance and frozen reduction inputs.
+- [x] Implement discriminated contracts, registered rule identity, immutable scenario derivation and schema-specific validation.
+- [x] Write and observe failing real-browser reversed-order tests, then implement exact routes/request numbering and dynamic independent assertion.
+- [x] Extend reducer/export to preserve frozen identity and check actual dynamic observations in the conventional test.
+- [x] Run relevant unit/browser checks; provide red/green logs and commit owned files after integration agrees.
 
 ### Task 2: User input and persisted evidence
 
@@ -44,20 +44,20 @@ Owner: root. Files: src/cli.ts, src/server.ts, src/ledger.ts, src/evidence-inspe
 
 Consumes Task1 factory/contract. Produces record --experiment FILE and optional POST /api/sessions experiment. Read JSON through existing bounded regular-file reader. Default absence preserves v1 flow.
 
-- [ ] Write and observe failing CLI/API tests for authored input, missing fields, unsafe file and contradictory expectations.
-- [ ] Add CLI/API factory use and prevent ledger.updateManifest from changing frozen expectation/scenario/provenance.
-- [ ] Expose explicit labeled declaration controls before capture, display source and frozen observation, create a new session for edits.
-- [ ] Write and observe failing reversed-order selected-job inspection and keyboard capture-to-export workflow tests.
-- [ ] Implement contract-aware inspector and UI while preserving historical focus, refresh, cancellation and neutral uncertainty.
-- [ ] Run relevant checks and integrate with Task1; record deviations in ignored progress ledger.
+- [x] Write and observe failing CLI/API tests for authored input, missing fields, unsafe file and contradictory expectations.
+- [x] Add CLI/API factory use and prevent ledger.updateManifest from changing frozen expectation/scenario/provenance.
+- [x] Expose explicit labeled declaration controls before capture, display source and frozen observation, create a new session for edits.
+- [x] Write and observe failing reversed-order selected-job inspection and keyboard capture-to-export workflow tests.
+- [x] Implement contract-aware inspector and UI while preserving historical focus, refresh, cancellation and neutral uncertainty.
+- [x] Run relevant checks and integrate with Task1; record deviations in ignored progress ledger.
 
 ### Task 3: Full validation and delivery
 
 Owner: root plus independent reviewers. Files: usage/scope/design docs, release/STATE and portable evidence.
 
-- [ ] Run full unit/browser/static/build checks on integrated final source; inspect actual artifacts and screenshots.
-- [ ] Validate installed CLI and standalone exported v2 test; run new v2 Linux capsule under exact approved policy and stop owned VM.
-- [ ] Independently review oracle identity, authoring provenance, reduction semantics, privacy and UI states; fix evidenced defects with red/green tests.
-- [ ] Update supported workflow/docs/reports without rewriting prior evidence. Commit coherent changes, integrate reviewed branch and perform authorized non-force private delivery with exact remote readback.
+- [x] Run full unit/browser/static/build checks on integrated final source; inspect actual artifacts and screenshots.
+- [x] Validate installed CLI and standalone exported v2 test; run new v2 Linux capsule under exact approved policy and stop owned VM.
+- [x] Independently review oracle identity, authoring provenance, reduction semantics, privacy and UI states; fix evidenced defects with red/green tests.
+- [ ] Final delivery: docs/reports and coherent implementation commits are prepared. Integrate the reviewed branch and perform authorized non-force private delivery; use the post-commit receipt under main `.repro-runs/expectation-authoring/delivery/` for exact remote readback. All implementation and validation steps above are complete.
 
 Separate work: research-only HCI condition preparation may use frozen 15a8225 evidence and distinct files. It cannot change product runtime or fabricate participant observations.

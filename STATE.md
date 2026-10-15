@@ -1,3 +1,21 @@
+# Current development state — authored expectation extension
+
+2026-10-15 UTC. Continue the unchanged GOAL.md and acceptance contract. The missing explicit expected-behavior input is now implemented through CLI/API/UI schema 2, with unchanged schema-1 compatibility. The core and integration were independently reviewed; actual buggy/fixed observations and immutable assertion/harness identities were checked. Current report: [AUTHORED-RELEASE](evidence/AUTHORED-RELEASE.md), [summary](evidence/authored-release-summary.json). The active goal remains incomplete; do not mark complete or paused.
+
+Final checks: 204 unit/contract and 39 browser tests pass with zero failed/skipped/cancelled; static/build and seven kit fixtures pass. Installed package: 11 commands, 12 unique assertions, separate zero-observed-survivor censuses. Rebuilt artifacts exactly equal the tested package. New three-action schema-2 capsule passed in a fresh restricted Linux image/container/volume; exact payload, two actual assertions, container/VM restrictions and stopped VM verified. Tested minimality remains unverified. Source aggregate: `8ae0b607943fd851e841165ae63952be752b6085cec85211f80f8e2ad3529755`.
+
+Research-only P/L inspection pages now have 74 matched facts from five actual historical synthetic records, portable fixtures, technical rehearsal and closed independent source review. This is not participant evidence or a frozen/approved human-study comparison. Broader task families, human study, native zoom and actual screen-reader checks remain separate limitations.
+
+Commits: `4352290` plan/spec, `fe738ba` frozen authored core, `a96a260` user input/persistence/package workflow, `ddf8d18` research fidelity. Final documentation/delivery commit is identified by Git and the post-commit delivery receipt. Root owns integration; main checkout and the retained isolated worktree must be inspected before further changes. All raw extension evidence is under `.repro-runs/expectation-authoring/worktree/.repro-runs/`; original reports and failures remain intact. Do not delete this worktree or its untracked node_modules symlink as cleanup that could remove evidence.
+
+The user already selected existing docs plus the updated goal for Impeccable context and code-first for future interfaces. The existing workbench design was preserved. The detector's two pre-existing accent-border warnings were recorded without an unrelated redesign.
+
+The user authorizes non-force delivery to the existing private origin/main. Final delivery receipts belong under main `.repro-runs/expectation-authoring/delivery/`. No remote CI or new Library upload is implied. The previous offline image archive remains schema 1; the new schema-2 package and local Linux image are separately documented.
+
+Remaining release gates: native 200% zoom still requires a legitimately available native browser surface after the recorded ERR_BLOCKED_BY_CLIENT denial; actual screen-reader workflow needs supported assistive-technology operation and observation. Do not bypass the denial or substitute CSS/Axe for these checks. Do not rerun unchanged expensive checks merely to change hosts. A second physical host is an untested extension, not an added release gate. Preserve the exact approved VM/security constraints below if new runtime changes justify new Linux verification; profile r is stopped.
+
+## Preserved earlier checkpoint — 15a8225
+
 # Development state
 
 2026-10-15 UTC. A working local synthetic alpha release candidate is prepared from the existing Repro implementation. The user’s active release goal remains incomplete for native 200% zoom and actual screen-reader verification. Do not mark the goal complete or paused, restart the implementation, or replace the supplied expectation. The current evidence is [RELEASE.md](evidence/RELEASE.md) and [release-candidate-summary.json](evidence/release-candidate-summary.json); the October 13 reports and Git history remain preserved as historical observations.

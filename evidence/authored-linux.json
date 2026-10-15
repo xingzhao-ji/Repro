@@ -1,0 +1,254 @@
+{
+  "schemaVersion": 1,
+  "outcome": "passed-with-stated-scope",
+  "completedAt": "2026-10-15T20:34:47.804Z",
+  "scope": "Reduced caller-authored reversed search experiment in a fresh Linux arm64 image/container/named volume, using the existing approved stopped-then-restarted task VM. Not an independent host or arbitrary application test.",
+  "rawRoot": ".repro-runs/expectation-authoring/linux",
+  "sourcePackageReceipt": ".repro-runs/expectation-authoring/package/run-CtRXOL/summary.json",
+  "sourceIdentity": {
+    "sourceAggregate": "8ae0b607943fd851e841165ae63952be752b6085cec85211f80f8e2ad3529755",
+    "sourceHashes": {
+      "fixtures/browser-search/README.md": "5c035114476f91e4e3d3e037e3503511f1d96c565bcba69173ffa9c32df82243",
+      "fixtures/browser-search/buggy.js": "8ff7967b065d8c87bf22d8a7d8a922141884f171c6e23e06084ec63589af33b4",
+      "fixtures/browser-search/fixed.js": "b9579050f425aec6757274b4c007af6fcf55bee084c0a72587bf14ce761fa288",
+      "fixtures/browser-search/page.html": "6ff8048cfbe0fe068dfd58ca60ca93b008ecfde2c3865cd478606e2f02c7e24a",
+      "package-lock.json": "64c15457c56e7ae34d9b08122959f90f461c84858b274a05f86638106f04fc96",
+      "package.json": "0581200a58b54636af549d3efd9bbfae6f6734e40ffd0b78db2e7a33e8f454b6",
+      "scripts/build.mjs": "b6f1782b6864ef994b539219887098868e99e62dc262c6f31f084fa8b85f2167",
+      "security/repro-chromium-seccomp.json": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+      "src/adapter.ts": "6c8e90723f9e5e9a9905dcc05e5ce69ccc9a6b143420f03e1ab6447e35932215",
+      "src/assets.d.ts": "da5bf71d48cf909584a01c80b445f730507068f5b34c920f352e2bfcf0315e4c",
+      "src/capsule.ts": "a5e8a3c81c08c3556da7c57aaf736df837fc0404f7390c615f2c36202b31a7f5",
+      "src/cli.ts": "a6eebb1a689d94ae48b00fcbc268750dd0b11730f915206b876deef4917f5c76",
+      "src/contracts.ts": "10d31ed8346be7198f89eaf3c2159f965d40aaf5daadb5ef259c915715e72212",
+      "src/evidence-inspector.ts": "b4c36bc0815ef8fe58fa2050c16bbd8e58bea5064e8c05c47744654d85bfac8d",
+      "src/fixture.ts": "2ad01becdbf8d97f07256eb19d9d41edb28e75dea237751b1a4de9c58a5917bc",
+      "src/index.ts": "f18ace53b1f8be833dacc6fb38090ce7ec594f46a20a473d0b4f22bb3894fe6f",
+      "src/input.ts": "ff529ffe993ab9e57af8468e63a31705e8571e26c4af5b0b191ec8f73a6124e7",
+      "src/ledger.ts": "a08f1d9b528e6381da2ae62b7b413fd7ad0ec7b38a9c2d7863f3ce2fecf92fe2",
+      "src/manifest.ts": "0ae06b29bf73862fa3a312f7009299545e6332322f6f6ce23ffe0978f2cadc84",
+      "src/oracle.ts": "98433b32bfb3cbb6ff208e6a7f78cfdcf66e392efa3421e9b4d764db3f9b5906",
+      "src/paths.ts": "ad8e2cff846ef53fd5edd7274c233b3fcfd7b47648256157e078d9fe6d58103d",
+      "src/reducer.ts": "9de0ce191ec82c7a85deed0a4e369285e0a38107c3c1473b0ccb329bacb615e4",
+      "src/search-contract.ts": "4af95974d42375f14f9165d56662bbf461f5b85f8bdbb82200b912f2f2a5e3be",
+      "src/server.ts": "c19a62fb35f6aaee47acf1641010d9204016db5e3facb5cbf791464c6733b815",
+      "src/service.ts": "f1934baf2d444d142ae86a62c05c936c56993917ecdf08584be7914cffa47325",
+      "web/main.tsx": "ff52401175f66ba971d1d31bb065314a301738eba3163688cba0f2332855e428",
+      "web/style.css": "7d5dff84b592ea37fd144387d0297b7c9471c4486319914a4b7f64bc74a6fe63"
+    },
+    "artifactHashes": {
+      "dist/cli.js": "2a41455b315a0102f6651dfec11876be4e7cbf4ce748646eb4944c1004ccbc99",
+      "dist/cli.js.map": "19cefd6132e5534b7ae6b99b96cd9cb4598adeced6d641ec4e029f7ef612bfe3",
+      "dist/index.js": "aca20166f7c64b6aa07303304eec95ea483ab61d6403ce86bdfc9d0ba681ef2d",
+      "dist/index.js.map": "b144a2fa8880d0c49df1c9d742301ed4975b489bf078372f1bf0f3bb9a46bf93",
+      "dist/package-lock.json": "64c15457c56e7ae34d9b08122959f90f461c84858b274a05f86638106f04fc96",
+      "dist/web.css": "312d95775db123a6c338d9ce636a3f819375d9e61066ccb5d79a5cfa617b6d16",
+      "dist/web.css.map": "c378ed34b5f4117bfae68ab68f6308d50ef7ee9f86a0f5023fcb990b6322c8df",
+      "dist/web.js": "40438f5dc02b05ec9367d0ddc666ed41b5edc2980f1b60383bc4174966165093",
+      "dist/web.js.map": "8be4c479397199cfd9a2cafc61576d7f21faf3496dd393ed514228310e6a8be9"
+    },
+    "rebuiltArtifactsEqualVerifiedPackage": true,
+    "sourceAndBuildHashesCheckedBeforeAndAfterExecution": true,
+    "combinedSourceAndArtifactAggregate": "66c0fcb8aa7d4a7a44722a143e290c79e39d9e58ac1937458dc7b489d6df9909"
+  },
+  "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+  "frozenAssertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+  "image": "sha256:ebda1e9d82c636d61d702487399b20f721b8b77792a5c5ed2bd5c1c5bceacd8a",
+  "container": "repro-authored-v2-697f11b4-89c6-47c5-b0ed-a622b48fc94a",
+  "evidenceVolume": "repro-authored-v2-697f11b4-89c6-47c5-b0ed-a622b48fc94a-evidence",
+  "capsule": {
+    "source": ".repro-runs/expectation-authoring/package/run-CtRXOL/install/.repro-runs/standalone-capsule",
+    "payloadFileCount": 14,
+    "executedBytesMatchExportedPayload": true,
+    "payloadHashesReceipt": ".repro-runs/expectation-authoring/linux/final-content-hashes.json"
+  },
+  "conventionalTest": {
+    "command": [
+      "node",
+      "--test",
+      "replay.test.mjs"
+    ],
+    "executedTests": 1,
+    "passed": 1,
+    "failed": 0,
+    "skipped": 0,
+    "stdout": ".repro-runs/expectation-authoring/linux/container-start.stdout.log"
+  },
+  "observations": [
+    {
+      "revision": "buggy",
+      "runId": "3f57d49d-f3eb-48dc-be46-02eefbeec6dc",
+      "outcome": "target-failure",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "f4970f738cd972dd52a1e5507487003c33077e9748bd9217f1ab1dc310594f31",
+      "appDigest": "a81479664d26fb060c8ad5a9136f32777a75b3e4049fbf14fde479549ec3b38a",
+      "assertionCount": 1,
+      "environment": {
+        "platform": "linux-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      },
+      "durationMs": 419,
+      "artifacts": [
+        {
+          "path": "evidence.json",
+          "sha256": "924e6314a0ff5d02ead0a449af5c64f2fe4ee6dace37343ee4b98181bdd2322c",
+          "bytes": 3177
+        },
+        {
+          "path": "observation.png",
+          "sha256": "966effd936b934b58a352e4bcc587b3f4a986b14e7389b1c93fa756e019bc9a9",
+          "bytes": 39665
+        },
+        {
+          "path": "trace.zip",
+          "sha256": "16beeb549172b788aae3ec07366b552a10c5fd3cd3b24e7146af8bbdc93ce799",
+          "bytes": 161720
+        }
+      ]
+    },
+    {
+      "revision": "fixed",
+      "runId": "211363ed-8699-4038-aaa3-0d6aef1ae6ba",
+      "outcome": "requirement-satisfied",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "f4970f738cd972dd52a1e5507487003c33077e9748bd9217f1ab1dc310594f31",
+      "appDigest": "62dc6cf692d2c26d821ee5f6cde9fdf8660bed810a5726deeddf5b6771c7ba09",
+      "assertionCount": 1,
+      "environment": {
+        "platform": "linux-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      },
+      "durationMs": 315,
+      "artifacts": [
+        {
+          "path": "evidence.json",
+          "sha256": "37cf3a2f60d18d45267a51791d34dbd0d5c2871eaef01d26e590ea936bbfe214",
+          "bytes": 3171
+        },
+        {
+          "path": "observation.png",
+          "sha256": "c688587d4fdf347bf5cea14e3a61d004f29731d556aec96cab8115877f09949d",
+          "bytes": 39938
+        },
+        {
+          "path": "trace.zip",
+          "sha256": "32ab55daa25779953d81c07c995ee1525dd05a9eec971f99a7d65bc9fd0be1b1",
+          "bytes": 131174
+        }
+      ]
+    }
+  ],
+  "isolation": {
+    "user": "node",
+    "network": "none",
+    "readOnlyRootfs": true,
+    "capDrop": [
+      "ALL"
+    ],
+    "capAdd": null,
+    "privileged": false,
+    "noNewPrivileges": true,
+    "seccompSha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+    "pidsLimit": 128,
+    "memoryBytes": 1073741824,
+    "nanoCpus": 2000000000,
+    "tmpfs": {
+      "/tmp": "rw,nosuid,size=256m"
+    },
+    "shmBytes": 268435456,
+    "mountType": "volume",
+    "mounts": [
+      {
+        "Type": "volume",
+        "Name": "repro-authored-v2-697f11b4-89c6-47c5-b0ed-a622b48fc94a-evidence",
+        "Destination": "/work/.repro-runs"
+      }
+    ],
+    "hostBinds": [],
+    "portBindings": {},
+    "chromiumSandboxEnabled": true
+  },
+  "vm": {
+    "profile": "r",
+    "vmType": "vz",
+    "arch": "aarch64",
+    "cpus": 2,
+    "memoryBytes": 3221225472,
+    "rootDiskBytes": 8589934592,
+    "dataDiskBytes": 12884901888,
+    "noHostMountsInEffectiveConfigOrObservedGuestMounts": true,
+    "fullRangeIgnoreRuleHash": "827963429429a7cfacedaa34f9269933ae92c09818c9f573d93773ee28ded3b6",
+    "listenerObservations": {
+      "before": {
+        "observedAt": "2026-10-15T20:34:39.984Z",
+        "hostAgent": 23682,
+        "ownedPids": [
+          23682
+        ],
+        "tcp": {
+          "status": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        "udp": {
+          "status": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        "method": "Actual owned VM hostagent and numeric descendants; TCP listener and UDP socket observations"
+      },
+      "after": {
+        "observedAt": "2026-10-15T20:34:45.578Z",
+        "hostAgent": 23682,
+        "ownedPids": [
+          23682
+        ],
+        "tcp": {
+          "status": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        "udp": {
+          "status": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        "method": "Actual owned VM hostagent and numeric descendants; TCP listener and UDP socket observations"
+      }
+    },
+    "statusAfter": "Stopped",
+    "hostagentExited": true,
+    "runningContainersBeforeStop": [],
+    "shutdownReceipt": ".repro-runs/expectation-authoring/linux/workflow.json"
+  },
+  "retainedResources": "Exited test container, named evidence volume and cached local image retained in stopped owned VM; no new offline archive was generated.",
+  "limitations": [
+    "Trusted caller-authored registered synthetic fixture only; no arbitrary website or hostile capsule coverage.",
+    "Image rebuilt with network-none using previously acquired cached dependency layers; replay container network was none.",
+    "One buggy/fixed pair establishes this portability sample, not broad repeatability.",
+    "Debian repositories are not snapshot-pinned; byte-for-byte OS image reproducibility is not claimed.",
+    "The prior offline archive contains historical schema 1 payload; this sample does not establish a schema 2 offline archive.",
+    "Actual before/after listener observations do not establish continuous absence between samples."
+  ],
+  "rawEvidenceBase": ".repro-runs/expectation-authoring/worktree"
+}

@@ -1,0 +1,531 @@
+{
+  "outcome": "passed",
+  "scope": "Already-built artifacts packed and installed offline from populated npm cache; reversed caller-authored CLI record/reduce/verify/export/inspect/replay; separate capsule cached installation and actual conventional browser test. Existing host Chromium explicitly reused; no build-source equivalence, clean-host offline or Linux portability claim.",
+  "startedAt": "2026-10-15T20:30:04.298Z",
+  "finishedAt": "2026-10-15T20:30:12.285Z",
+  "node": "v26.7.0",
+  "platform": "darwin-arm64",
+  "directory": ".repro-runs/expectation-authoring/package/run-CtRXOL",
+  "package": {
+    "filename": "repro-local-0.1.0.tgz",
+    "integrity": "sha512-QKREd8QRRAE9EPdcXpNuAwzrBv9H/2TEJlb5bbcVM+JrNfpLbxDsRJedGbK2uxTp7zTrHuVYJU85qhfSH+AVUA=="
+  },
+  "declaration": {
+    "searchOrder": [
+      "beta",
+      "alpha"
+    ],
+    "expectation": {
+      "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+      "latestRequestId": 2,
+      "latestQuery": "alpha",
+      "expectedResults": [
+        "Alpha synthetic result"
+      ]
+    },
+    "expectationBasis": "independent-contract"
+  },
+  "reduction": {
+    "actionsBefore": 5,
+    "actionsAfter": 3,
+    "executions": 16,
+    "status": "complete",
+    "minimality": "unverified"
+  },
+  "checks": [
+    {
+      "name": "pack-current-dist",
+      "executable": "npm",
+      "args": [
+        "pack",
+        "--ignore-scripts",
+        "--json",
+        "--pack-destination",
+        ".repro-runs/expectation-authoring/package/run-CtRXOL"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/worktree",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "install-cached-package",
+      "executable": "npm",
+      "args": [
+        "install",
+        "--offline",
+        "--ignore-scripts",
+        "--no-audit",
+        "--no-fund",
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/repro-local-0.1.0.tgz"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-authored-record",
+      "executable": "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "args": [
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/node_modules/repro-local/dist/cli.js",
+        "record",
+        "--consent",
+        "--experiment",
+        ".repro-runs/experiment.json",
+        "--output",
+        ".repro-runs/record"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install",
+      "status": 1,
+      "expectedStatus": 1,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-authored-reduce",
+      "executable": "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "args": [
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/node_modules/repro-local/dist/cli.js",
+        "reduce",
+        "--manifest",
+        ".repro-runs/record/manifest.json",
+        "--budget",
+        "50",
+        "--output",
+        ".repro-runs/reduce"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-authored-verify",
+      "executable": "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "args": [
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/node_modules/repro-local/dist/cli.js",
+        "verify",
+        "--manifest",
+        ".repro-runs/reduce/reduced.manifest.json",
+        "--output",
+        ".repro-runs/verify"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-authored-export",
+      "executable": "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "args": [
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/node_modules/repro-local/dist/cli.js",
+        "export",
+        "--manifest",
+        ".repro-runs/reduce/reduced.manifest.json",
+        "--output",
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/.repro-runs/standalone-capsule"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-authored-inspect",
+      "executable": "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "args": [
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/node_modules/repro-local/dist/cli.js",
+        "inspect",
+        "--capsule",
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/.repro-runs/standalone-capsule"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-authored-replay",
+      "executable": "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "args": [
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/node_modules/repro-local/dist/cli.js",
+        "replay",
+        "--capsule",
+        ".repro-runs/expectation-authoring/package/run-CtRXOL/install/.repro-runs/standalone-capsule",
+        "--output",
+        ".repro-runs/replay"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install",
+      "status": 1,
+      "expectedStatus": 1,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "standalone-cached-install",
+      "executable": "npm",
+      "args": [
+        "ci",
+        "--offline",
+        "--ignore-scripts",
+        "--omit=dev",
+        "--no-audit",
+        "--no-fund"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install/.repro-runs/standalone-capsule",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "standalone-dependency-resolution",
+      "executable": "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "args": [
+        "--input-type=module",
+        "-e",
+        "console.log(JSON.stringify(Object.fromEntries([\"playwright\", \"react\", \"react-dom\"].map(name => [name, import.meta.resolve(name)]))))"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install/.repro-runs/standalone-capsule",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "standalone-readable-test",
+      "executable": "/opt/homebrew/Cellar/node/26.7.0/bin/node",
+      "args": [
+        "--test",
+        "replay.test.mjs"
+      ],
+      "cwd": ".repro-runs/expectation-authoring/package/run-CtRXOL/install/.repro-runs/standalone-capsule",
+      "status": 0,
+      "expectedStatus": 0,
+      "timedOut": false,
+      "overLimit": false,
+      "postCloseOwnedCount": 0
+    }
+  ],
+  "observations": [
+    {
+      "name": "installed-authored-record",
+      "id": "78b6f096-8d14-4eee-ba5e-6b65607e95cd",
+      "outcome": "target-failure",
+      "manifestDigest": "b0d85658207d4b7f6f042f1d63ffcc629e81a7b9e6d5d2e8c4b55f3c703a9bb1",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "installed-reduction-baseline",
+      "id": "4b469103-9c7b-43bd-bca9-2e4d5e6d1f62",
+      "outcome": "target-failure",
+      "manifestDigest": "b0d85658207d4b7f6f042f1d63ffcc629e81a7b9e6d5d2e8c4b55f3c703a9bb1",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "accepted-trial-0-1",
+      "id": "4b469103-9c7b-43bd-bca9-2e4d5e6d1f62",
+      "outcome": "target-failure",
+      "manifestDigest": "b0d85658207d4b7f6f042f1d63ffcc629e81a7b9e6d5d2e8c4b55f3c703a9bb1",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "accepted-trial-0-2",
+      "id": "80660226-70db-4522-898e-9aec1bb384a2",
+      "outcome": "target-failure",
+      "manifestDigest": "b0d85658207d4b7f6f042f1d63ffcc629e81a7b9e6d5d2e8c4b55f3c703a9bb1",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "accepted-trial-5-7",
+      "id": "2a9fce88-2224-44dd-ad5f-8b1dc5a72853",
+      "outcome": "target-failure",
+      "manifestDigest": "50ac50486b0eb62226dcbc9d13e4c824250c6768cf4da197f104bcb155a770ab",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "accepted-trial-5-8",
+      "id": "2ad866af-3406-4019-8a9c-da70485116ca",
+      "outcome": "target-failure",
+      "manifestDigest": "50ac50486b0eb62226dcbc9d13e4c824250c6768cf4da197f104bcb155a770ab",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "accepted-trial-9-12",
+      "id": "7496cb48-98cf-4ee6-a8b9-5a27de453b0c",
+      "outcome": "target-failure",
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "accepted-trial-9-13",
+      "id": "4846542c-66d2-403c-a514-4e3e1ba8724b",
+      "outcome": "target-failure",
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "installed-verify-original",
+      "id": "715db036-3c99-4de6-83db-fc329fac6583",
+      "outcome": "target-failure",
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "installed-verify-candidate",
+      "id": "4b595fd8-f6af-4c1c-91af-51150fdeb75c",
+      "outcome": "requirement-satisfied",
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "fixed",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "installed-authored-replay",
+      "id": "bd8e93ed-4050-4e70-9582-0f349d880095",
+      "outcome": "target-failure",
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "950c4f93dc973f56d2859db9c7759606055595076c89d19660208e752fa6bb23",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "standalone-readable-buggy",
+      "id": "3e4f3ada-34b4-419d-82aa-22162df41c32",
+      "outcome": "target-failure",
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "f4970f738cd972dd52a1e5507487003c33077e9748bd9217f1ab1dc310594f31",
+      "assertionCount": 1,
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Beta synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    },
+    {
+      "name": "standalone-readable-fixed",
+      "id": "3318a26b-e9f4-4446-b136-496197b1e1ec",
+      "outcome": "requirement-satisfied",
+      "manifestDigest": "676bfc9dc2eccd568dbc9668af701b4752c62439e55464bf80fe7c22e0eb1cfd",
+      "assertionDigest": "89cf2d702c450ce47a8aa87dd2602fc361a7e9c37214451c79edd6a4c5c010fd",
+      "harnessDigest": "f4970f738cd972dd52a1e5507487003c33077e9748bd9217f1ab1dc310594f31",
+      "assertionCount": 1,
+      "appRevision": "fixed",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "alpha",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      },
+      "environment": {
+        "platform": "darwin-arm64",
+        "node": "v26.7.0",
+        "browser": "156.0.8078.4 (pinned Chromium)",
+        "isolation": "registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox"
+      }
+    }
+  ],
+  "rawEvidenceBase": ".repro-runs/expectation-authoring/worktree",
+  "sourceBuildEquivalence": "authored-build.json"
+}

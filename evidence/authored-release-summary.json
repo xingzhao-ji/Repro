@@ -1,0 +1,117 @@
+{
+  "schemaVersion": 1,
+  "reportedAt": "2026-10-15T20:41:18.689Z",
+  "scope": "Caller-declared expected behavior for the registered synthetic search app; research-only frozen P/L technical rehearsal. Not arbitrary app/assertion support or human research.",
+  "rawEvidenceBase": ".repro-runs/expectation-authoring/worktree",
+  "sourceAggregate": "8ae0b607943fd851e841165ae63952be752b6085cec85211f80f8e2ad3529755",
+  "sourceInputs": 27,
+  "sourceAndVerifiedPackageEquivalent": true,
+  "commands": [
+    {
+      "name": "unit",
+      "command": "npm test",
+      "exitCode": 0,
+      "passed": 204,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "log": ".repro-runs/expectation-authoring/final-unit.log",
+      "logSha256": "883ec23b77d05aeb6975a7cad1f2dcb74adb607e40d6589d36916a40ce3dee1a"
+    },
+    {
+      "name": "browser",
+      "command": "npm run test:browser",
+      "exitCode": 0,
+      "passed": 39,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "log": ".repro-runs/expectation-authoring/final-browser.log",
+      "logSha256": "b1a1b900f296a50917196c78fcabc5755e9deb040caa9bc6381f34ebff57e580"
+    },
+    {
+      "name": "typecheck",
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": ".repro-runs/expectation-authoring/final-typecheck.log",
+      "logSha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4"
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": ".repro-runs/expectation-authoring/final-lint.log",
+      "logSha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23"
+    },
+    {
+      "name": "build",
+      "command": "npm run build",
+      "exitCode": 0,
+      "log": ".repro-runs/expectation-authoring/build-final.log",
+      "logSha256": "e72c7ae118b13edfce9f09d41f28217c3e90a948d924bbeb538157e981a0aee7"
+    },
+    {
+      "name": "kit",
+      "command": "npm run check:kit",
+      "exitCode": 0,
+      "log": ".repro-runs/expectation-authoring/kit.log",
+      "logSha256": "c29a85d014f544dd48ce8955dc36d17590a1eef36502bfa6b4f119dfcef3a5aa"
+    }
+  ],
+  "package": {
+    "receipt": "authored-package.json",
+    "commands": 11,
+    "uniqueExecutedAssertions": 12,
+    "allPostCloseObservedSurvivorsZero": true,
+    "processSamplingMs": 100
+  },
+  "linux": {
+    "receipt": "authored-linux.json",
+    "executedConventionalTests": 1,
+    "executedAssertions": 2,
+    "matchingPayloadFiles": 14,
+    "vmStopped": true
+  },
+  "ui": {
+    "inspectedCaptureBatch": ".repro-runs/authored-ui/0e0955a3-5726-4c5d-acd0-8be5d414bdf3",
+    "inspectedHistoricalBatch": ".repro-runs/authored-ui/6903cf72-619d-4399-8ae7-c2a05261080b",
+    "manualDetector": ".repro-runs/expectation-authoring/impeccable-detect.json",
+    "detectorWarnings": 2,
+    "detectorDisposition": "Existing accent borders retained to preserve user-directed workbench design; no new detector warning introduced.",
+    "finalKeyboardWorkflow": "passed in full-browser.log"
+  },
+  "hci": {
+    "receipt": "hci-fidelity-summary.json",
+    "facts": 74,
+    "records": 5,
+    "participantSessions": 0
+  },
+  "preservedFailures": {
+    "initialIntegratedUnit": {
+      "passed": 200,
+      "failed": 0
+    },
+    "initialIntegratedBrowser": {
+      "passed": 36,
+      "failed": 3,
+      "log": ".repro-runs/expectation-authoring/full-browser.log"
+    },
+    "affectedUIAfterCorrections": {
+      "passed": 8,
+      "failed": 0,
+      "log": ".repro-runs/expectation-authoring/ui-regressions-final.log"
+    },
+    "redLogs": "All original core/input/UI/HCI red logs retained under rawEvidenceBase. Portable receipt-generation guards also caught a scoped-outcome label mismatch and an unnormalized cache path before writing reports."
+  },
+  "remainingGates": [
+    "Native 200% zoom: recorded provider denial not retried or bypassed; no usable native browser provider.",
+    "Actual screen-reader workflow: no supported operation/speech observation surface."
+  ],
+  "limitations": [
+    "One synthetic failure family and bounded alpha/beta vocabulary only.",
+    "Human approval, historical-bug validation and human study results are not claimed.",
+    "Minimality remains unverified when final neighbors are inconclusive.",
+    "Previous offline archive is schema 1; no new schema-2 image archive.",
+    "No remote CI, public deployment or new Library upload claimed."
+  ]
+}

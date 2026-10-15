@@ -1,3 +1,5 @@
+> This archive is the preserved schema-1 checkpoint `15a8225`. The newer caller-declared schema-2 workflow has separate [package and Linux evidence](../evidence/AUTHORED-RELEASE.md); no new schema-2 image archive is claimed.
+
 # Offline Linux replay
 
 The release includes a compressed Docker image containing the actual reduced synthetic capsule, Node, its locked npm runtime packages, Chromium and Linux browser libraries. Once this image has been acquired, replay needs no registry/CDN access, original application service, proprietary viewer or LLM. A compatible Linux arm64 Docker host remains a prerequisite. This is a trusted synthetic development image, not a hostile-code sandbox.

@@ -16,7 +16,7 @@ npm run repro -- doctor
 npm run dev
 ```
 
-Open `http://127.0.0.1:4318`. Capture requires opt-in and runs only the declared synthetic alpha/beta search scenario. No account, API key, proprietary viewer or LLM is required. All generated sessions, traces, screenshots, reports and exports stay beneath ignored `.repro-runs/`; downloaded tools and caches use `.repro-cache/`.
+Open `http://127.0.0.1:4318`. Capture requires opt-in. Use the supplied example or explicitly declare either supported alpha/beta search order and its expected result; see [expected-behavior input](docs/AUTHORED-EXPECTATIONS.md). No account, API key, proprietary viewer or LLM is required. All generated sessions, traces, screenshots, reports and exports stay beneath ignored `.repro-runs/`; downloaded tools and caches use `.repro-cache/`.
 
 ```sh
 npm run demo
@@ -36,10 +36,10 @@ Initial installation needs network access. Once npm dependencies and Chromium ha
 - [Implementation decision](docs/adr/0001-local-experiment-boundary.md): why this vertical slice is deliberately narrow.
 - [Independent integration review](evidence/INDEPENDENT-REVIEW.md): defects found, reproductions and repairs; automated review is not human approval.
 - [Deployment plan](docs/DEPLOYMENT-PLAN.md): authorized private source delivery and separate hosted-runtime prerequisites.
-- [HCI research](docs/HCI-RESEARCH.md) and [study protocol](docs/HCI-STUDY-PROTOCOL.md): reviewed drafts and blank materials; candidate interaction/comparator work and human validation remain pending.
+- [HCI research](docs/HCI-RESEARCH.md) and [study protocol](docs/HCI-STUDY-PROTOCOL.md): reviewed drafts, blank materials and a [synthetic P/L fidelity rehearsal](evidence/HCI-FIDELITY.md); human validation remains pending.
 - [Portable setup](CLOUD-SETUP.md): source-bundle verification and fresh-environment instructions.
 
-The expectation basis is the supplied synthetic specification. A source digest establishes identity, not author trust or correctness. An exported directory is not itself proof of successful clean-machine replay. Timeouts, unsupported state, missing dependencies and wrong failures remain INCONCLUSIVE. Reduction reports its tested neighborhood and budget; it does not claim global minimality.
+The default expectation basis is the supplied synthetic specification. Caller declarations are checked against the registered rule and frozen in a new session; neither path claims human approval. A source digest establishes identity, not author trust or correctness. An exported directory is not itself proof of successful clean-machine replay. Timeouts, unsupported state, missing dependencies and wrong failures remain INCONCLUSIVE. Reduction reports its tested neighborhood and budget; it does not claim global minimality.
 
 ## Development checks
 

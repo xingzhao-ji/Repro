@@ -1,3 +1,9 @@
+# Current release evidence
+
+The caller-declared expectation extension is verified: **204 unit/contract and 39 browser tests pass**, plus installed/offline package and a fresh restricted Linux replay. See [the current release supplement](AUTHORED-RELEASE.md), [machine-readable summary](authored-release-summary.json) and [HCI fidelity preparation](HCI-FIDELITY.md). Native zoom and actual screen-reader checks remain open.
+
+The following report is preserved for checkpoint `15a8225`; its hashes, counts and offline archive describe that earlier schema-1 build.
+
 # Repro local alpha release candidate — October 15, 2026
 
 The supported synthetic workflow is working on this Mac: capture with consent → reproduce → reduce → compare the fixed revision with the unchanged assertion → export → inspect → standalone replay. **179 unit/contract tests and 31 real-browser tests pass, with zero failures or skips.** Clean dependency installation, build, typecheck, lint, kit checks, executable demo, installed package and cached offline capsule checks also pass. This is a local synthetic alpha release candidate, not a general recorder or production-readiness claim.
