@@ -28,6 +28,7 @@ Commands:
 
 Options: --output DIRECTORY (under .repro-runs), --revision buggy|fixed,
          --budget COUNT (reduce), --port PORT (serve), --help
+Each execution needs a new output directory; serve reopens its workbench state.
 Browser install: PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers npx playwright install chromium --only-shell
 Use the same PLAYWRIGHT_BROWSERS_PATH when invoking Repro.
 Scope: trusted, explicitly registered synthetic frontend only. No human approval claimed.
@@ -80,7 +81,7 @@ async function main(): Promise<void> {
   if (command === 'inspect') { console.log(JSON.stringify(manifest, null, 2)); return; }
   const budget = Number(options.budget ?? '50');
   if (command === 'reduce' && (!Number.isInteger(budget) || budget < 1 || budget > 200)) throw new ReproError('input', 'BUDGET', 'Execution budget must be 1–200.');
-  const output = command === 'export' ? resolve(options.output ?? `.repro-runs/export-${Date.now()}`) : ownedDirectory(options.output ?? `.repro-runs/${command}-${Date.now()}`);
+  const output = command === 'export' ? resolve(options.output ?? `.repro-runs/export-${Date.now()}`) : ownedDirectory(options.output ?? `.repro-runs/${command}-${Date.now()}`, { exclusive: true });
   const controller = new AbortController();
   const cancel = () => controller.abort(); process.once('SIGINT', cancel); process.once('SIGTERM', cancel);
   let result: unknown;

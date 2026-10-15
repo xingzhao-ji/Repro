@@ -4,12 +4,22 @@ import { isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { ReproError } from './contracts.js';
 
 /** Refuse symlinks before creating or writing task-owned output. Local workspace is trusted, not a concurrent hostile filesystem sandbox. */
-export function ownedDirectory(value: string): string {
+export function ownedDirectory(value: string, options: { exclusive?: boolean } = {}): string {
   const target = resolve(value); const root = resolve('.repro-runs'); const local = relative(root, target);
   if (!local || local === '..' || local.startsWith(`..${sep}`) || isAbsolute(local)) throw new ReproError('input', 'OUTPUT_BOUNDARY', 'Generated output must be in a child directory of .repro-runs.');
   let current = process.cwd();
   for (const part of relative(current, target).split(sep)) {
     current = join(current, part);
+    if (current === target && options.exclusive) {
+      try { mkdirSync(current, { mode: 0o700 }); }
+      catch (cause) {
+        if (cause instanceof Error && 'code' in cause && cause.code === 'EEXIST') {
+          throw new ReproError('input', 'OUTPUT_EXISTS', 'Run output already exists. Choose a new directory under .repro-runs to preserve earlier evidence.', { cause });
+        }
+        throw new ReproError('input', 'OUTPUT_CREATE', 'Run output could not be created safely.', { cause });
+      }
+      continue;
+    }
     let stat;
     try { stat = lstatSync(current); }
     catch (error) {
