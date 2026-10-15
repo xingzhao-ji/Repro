@@ -31,7 +31,7 @@ function structuralRun(): RunResult {
 test('v1 JSON Schema fields and required fields track the actual TypeScript interfaces', async () => {
   const source = ts.createSourceFile('contracts.ts', await readFile(new URL('../src/contracts.ts', import.meta.url), 'utf8'), ts.ScriptTarget.Latest, true);
   const mappings = [
-    ['Manifest', manifestSchema], ['Action', manifestSchema.$defs?.action], ['Expectation', manifestSchema.properties?.expectation],
+    ['ManifestV1', manifestSchema], ['Action', manifestSchema.$defs?.action], ['ExpectationV1', manifestSchema.properties?.expectation],
     ['RunResult', resultSchema], ['RunEvent', resultSchema.$defs?.event],
   ] as const;
   for (const [name, schema] of mappings) {

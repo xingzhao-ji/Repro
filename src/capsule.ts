@@ -93,7 +93,7 @@ function integrity(input: unknown): Integrity {
 
 const README = `# Repro portable synthetic failure capsule
 
-This is a trusted local synthetic training fixture, not a recording of a user or an independently discovered historical bug. Its expectation comes from the supplied synthetic specification; human approval is not claimed. Only the registered stale-response frontend adapter is supported. No database, credentials, original application service, proprietary viewer or LLM is required.
+This is a trusted local synthetic training fixture, not a recording of a user or an independently discovered historical bug. Schema 1 uses the supplied synthetic expectation. Schema 2 preserves a caller-supplied expectation mechanically checked against the registered synthetic rule; this is not independent review or human approval. See manifest.json for the exact source and frozen declaration. Only the registered stale-response frontend adapter is supported. No database, credentials, original application service, proprietary viewer or LLM is required.
 
 ## Inspect and replay
 
@@ -156,21 +156,33 @@ Import validates schema, app/runner/adapter/assertion identity, artifact allowli
 const READABLE_TEST = `import test from 'node:test';
 import assert from 'node:assert/strict';
 import { fileURLToPath } from 'node:url';
-import { importCapsule, runBrowser } from './dist/index.js';
+import { importCapsule, runBrowser, digest, fixtureDigest } from './dist/index.js';
 
 test('frozen latest-search requirement distinguishes buggy and fixed revisions', async () => {
   const manifest = await importCapsule(fileURLToPath(new URL('.', import.meta.url)));
+  const order = manifest.schemaVersion === 1 ? ['alpha', 'beta'] : manifest.scenario.searchOrder;
+  const results = { alpha: 'Alpha synthetic result', beta: 'Beta synthetic result' };
+  const expected = { latestRequestId: 2, query: order[1], results: [results[order[1]]] };
+  const stale = { latestRequestId: 2, query: order[1], results: [results[order[0]]] };
+  assert.equal(manifest.expectation.latestRequestId, 2);
+  assert.equal(manifest.expectation.latestQuery, expected.query);
+  assert.deepEqual(manifest.expectation.expectedResults, expected.results);
   const original = await runBrowser(manifest, { artifactDir: '.repro-runs/readable-buggy', revision: 'buggy' });
   const candidate = await runBrowser(manifest, { artifactDir: '.repro-runs/readable-fixed', revision: 'fixed' });
+  assert.notEqual(original.id, candidate.id, 'the candidate needs a separate fresh execution');
+  assert.equal(original.manifestDigest, digest(manifest));
+  assert.equal(candidate.manifestDigest, digest(manifest));
+  assert.equal(original.appDigest, fixtureDigest('buggy'));
+  assert.equal(candidate.appDigest, fixtureDigest('fixed'));
   assert.equal(original.assertionCount, 1, 'the original assertion must execute');
   assert.equal(candidate.assertionCount, 1, 'the same candidate assertion must execute');
   assert.equal(original.assertionDigest, manifest.assertionDigest);
   assert.equal(candidate.assertionDigest, manifest.assertionDigest);
   assert.equal(original.harnessDigest, candidate.harnessDigest);
   assert.equal(original.outcome, 'target-failure');
-  assert.deepEqual(original.observation, { latestRequestId: 2, query: 'beta', results: ['Alpha synthetic result'] });
+  assert.deepEqual(original.observation, stale);
   assert.equal(candidate.outcome, 'requirement-satisfied');
-  assert.deepEqual(candidate.observation, { latestRequestId: 2, query: 'beta', results: ['Beta synthetic result'] });
+  assert.deepEqual(candidate.observation, expected);
 });
 `;
 

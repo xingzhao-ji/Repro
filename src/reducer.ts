@@ -4,6 +4,7 @@ import { ReproError } from './contracts.js';
 import type { Manifest, Outcome, ReductionOptions, ReductionResult, RunFunction, RunResult, Trial } from './contracts.js';
 import { digest, validateManifest } from './manifest.js';
 import { assertObservation, TargetFailure } from './oracle.js';
+import { searchContract, expectationEstablished } from './search-contract.js';
 
 type Stop = 'budget-exhausted' | 'cancelled';
 interface Evaluation { trial: Trial; results: RunResult[]; conclusive: boolean; stop?: Stop }
@@ -53,7 +54,7 @@ function evidenceProblem(result: RunResult, manifest: Manifest, inputDigest: str
   if (result.outcome === 'target-failure' || result.outcome === 'requirement-satisfied') {
     if (!result.observation) return 'No observation establishes the declared outcome.';
     let observedOutcome: Outcome = 'requirement-satisfied';
-    try { assertObservation(result.observation, manifest.expectation); }
+    try { assertObservation(result.observation, manifest.expectation, searchContract(manifest)); }
     catch (error) {
       if (error instanceof TargetFailure) observedOutcome = 'target-failure';
       else return 'Observation does not establish the intended failure or requirement satisfaction.';
@@ -172,7 +173,7 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
   };
 
   try {
-    if (original.expectationBasis !== 'supplied-synthetic-specification') {
+    if (!expectationEstablished(original)) {
       baseline = noRun(original, 'inconclusive', 'An independently established expectation is required before reduction.');
       return finish('inconclusive', baseline.reason);
     }

@@ -5,11 +5,12 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { chromium, type Browser, type BrowserContext, type Page } from 'playwright';
-import { ADAPTER, VERSION, ReproError, type Manifest, type RunFunction, type RunResult } from './contracts.js';
+import { ADAPTER, VERSION, ReproError, type Manifest, type RunFunction, type RunResult, type SearchOrder } from './contracts.js';
 import { fixtureSource, fixtureDigest } from './fixture.js';
-import { ASSERTION_DIGEST, EXPECTATION, ORACLE_ARTIFACT_DIGEST, assertObservation, TargetFailure, type Observation } from './oracle.js';
+import { ASSERTION_DIGEST, ORACLE_ARTIFACT_DIGEST, assertObservation, TargetFailure, type Observation } from './oracle.js';
 import { digest, validateManifest } from './manifest.js';
 import { ownedDirectory } from './paths.js';
+import { searchContract, expectationEstablished, SEARCH_CONTRACT_ARTIFACT_DIGEST, SEARCH_CONTRACT_DIGEST } from './search-contract.js';
 
 const EXECUTABLE_ARTIFACT_DIGEST = createHash('sha256').update(readFileSync(new URL(import.meta.url))).digest('hex');
 
@@ -25,10 +26,11 @@ async function collectArtifacts(directory: string, id: string, result: RunResult
 
 /** Registered synthetic code only. Browser processes cannot write the Node oracle. */
 function validateBoundary(manifest: Manifest): void {
-  if (manifest.schemaVersion !== 1 || manifest.adapter.id !== ADAPTER || manifest.adapter.version !== VERSION || manifest.runnerVersion !== VERSION) {
-    throw new ReproError('unsupported', 'VERSION_MISMATCH', 'This runner requires schema 1 and the installed registered adapter and runner versions.');
+  if ((manifest.schemaVersion !== 1 && manifest.schemaVersion !== 2) || manifest.adapter.id !== ADAPTER || manifest.adapter.version !== VERSION || manifest.runnerVersion !== VERSION) {
+    throw new ReproError('unsupported', 'VERSION_MISMATCH', 'This runner requires schema 1 or 2 and the installed registered adapter and runner versions.');
   }
-  if (manifest.assertionDigest !== ASSERTION_DIGEST || !isDeepStrictEqual(manifest.expectation, EXPECTATION)) {
+  const contract = searchContract(manifest);
+  if (manifest.assertionDigest !== contract.assertionDigest) {
     throw new ReproError('verification', 'ORACLE_CHANGED', 'The assertion identity differs from the supplied frozen baseline.');
   }
   if (manifest.app.sourceDigest !== fixtureDigest(manifest.app.revision)) {
@@ -53,20 +55,20 @@ function validateBoundary(manifest: Manifest): void {
       if (action.kind !== 'noise') kinds.push(`${action.kind}:${action.value}`);
     } else throw new ReproError('unsupported', 'UNSUPPORTED_ACTION', 'The registered adapter accepts only local navigation, input focus, and synthetic alpha/beta searches.');
   }
-  if (!isDeepStrictEqual(kinds, ['navigate:/', 'search:alpha', 'search:beta'])) throw new ReproError('verification', 'MISSING_STEPS', 'The intended failure requires navigation and both ordered search requests; the proposed experiment is incomplete.');
-  if (!isDeepStrictEqual(manifest.responses, [{ requestId: 2, results: ['Beta synthetic result'] }, { requestId: 1, results: ['Alpha synthetic result'] }])) throw new ReproError('verification', 'RESPONSE_SCHEDULE', 'The supplied specification requires beta then alpha with the original synthetic response bodies.');
+  if (!isDeepStrictEqual(kinds, ['navigate:/', ...contract.searchOrder.map(query => `search:${query}`)])) throw new ReproError('verification', 'MISSING_STEPS', 'The intended failure requires navigation and both ordered search requests; the proposed experiment is incomplete.');
+  if (!isDeepStrictEqual(manifest.responses, contract.responses)) throw new ReproError('verification', 'RESPONSE_SCHEDULE', 'The frozen scenario requires response 2 then 1 with its registered synthetic result bodies.');
 }
 
-function isAllowedRequest(rawUrl: string, origin: string, method: string): boolean {
+function isAllowedRequest(rawUrl: string, origin: string, method: string, searchOrder: SearchOrder = ['alpha', 'beta']): boolean {
   const url = new URL(rawUrl);
   if (url.origin !== origin || method !== 'GET' || url.username || url.password || url.hash) return false;
   return url.pathname === '/' && !url.search || url.pathname === '/favicon.ico' && !url.search || url.pathname === '/api/search' &&
-    (url.search === '?requestId=1&query=alpha' || url.search === '?requestId=2&query=beta');
+    (url.search === `?requestId=1&query=${searchOrder[0]}` || url.search === `?requestId=2&query=${searchOrder[1]}`);
 }
 
-export async function installNetworkBoundary(context: BrowserContext, origin: string, reject: (error: ReproError) => void): Promise<void> {
+export async function installNetworkBoundary(context: BrowserContext, origin: string, reject: (error: ReproError) => void, searchOrder: SearchOrder = ['alpha', 'beta']): Promise<void> {
   await context.route('**/*', async route => {
-    if (!isAllowedRequest(route.request().url(), origin, route.request().method())) {
+    if (!isAllowedRequest(route.request().url(), origin, route.request().method(), searchOrder)) {
       reject(new ReproError('unsupported', 'NETWORK_BOUNDARY', 'The browser attempted a request outside the declared origin and routes.'));
       await route.abort('blockedbyclient'); return;
     }
@@ -84,7 +86,7 @@ export const runBrowser: RunFunction = async (manifest, options) => {
   const revision = options.revision ?? manifest.app.revision;
   const result: RunResult = {
     id, outcome: 'inconclusive', reason: 'The assertion has not executed.',
-    manifestDigest: digest(manifest), assertionDigest: ASSERTION_DIGEST, harnessDigest: harnessDigest(),
+    manifestDigest: digest(manifest), assertionDigest: manifest.assertionDigest, harnessDigest: harnessDigest(),
     appRevision: revision, appDigest: '', adapterVersion: VERSION, runnerVersion: VERSION,
     seed: manifest.environment.seed, startedAt: new Date(started).toISOString(), durationMs: 0,
     assertionCount: 0, observation: null, events: [], artifacts: [],
@@ -116,10 +118,11 @@ export const runBrowser: RunFunction = async (manifest, options) => {
   const remaining = (): number => Math.max(1, manifest.environment.timeoutMs - (Date.now() - started));
   let origin = '';
   let source = '';
+  let frozenOrder: SearchOrder = ['alpha', 'beta'];
   let scriptHash = '';
   const server = createServer((request, response) => {
     const rawUrl = `${origin}${request.url ?? ''}`;
-    if (!isAllowedRequest(rawUrl, origin, request.method ?? '')) {
+    if (!isAllowedRequest(rawUrl, origin, request.method ?? '', frozenOrder)) {
       fault = new ReproError('unsupported', 'NETWORK_BOUNDARY', 'An HTTP request crossed the declared loopback allowlist.');
       response.writeHead(403); response.end('Undeclared request'); return;
     }
@@ -147,6 +150,8 @@ export const runBrowser: RunFunction = async (manifest, options) => {
     artifactWritable = true;
     manifest = validateManifest(manifest);
     validateBoundary(manifest);
+    const contract = searchContract(manifest);
+    frozenOrder = contract.searchOrder;
     if (revision !== 'buggy' && revision !== 'fixed') throw new ReproError('unsupported', 'UNREGISTERED_REVISION', 'Only registered synthetic revisions can execute.');
     const channel = process.env['REPRO_BROWSER_CHANNEL'];
     if (channel !== undefined && channel !== 'chrome') throw new ReproError('unsupported', 'BROWSER_CHANNEL', 'REPRO_BROWSER_CHANNEL supports only the explicitly selected installed chrome channel; omit it for pinned Chromium.');
@@ -167,7 +172,7 @@ export const runBrowser: RunFunction = async (manifest, options) => {
     context = await browser.newContext({ viewport: manifest.environment.viewport, locale: 'en-US', timezoneId: 'UTC', serviceWorkers: 'block', acceptDownloads: false, colorScheme: 'light' });
     check();
     context.setDefaultTimeout(remaining());
-    await installNetworkBoundary(context, origin, error => { fault = error; });
+    await installNetworkBoundary(context, origin, error => { fault = error; }, frozenOrder);
     await context.exposeBinding('__reproObservedInput', (_source, type: unknown, value: unknown) => {
       if ((type === 'input' || type === 'submit') && (value === 'alpha' || value === 'beta')) emit('browser-input', `Observed trusted ${type} event for synthetic query ${value}.`);
     });
@@ -190,6 +195,7 @@ export const runBrowser: RunFunction = async (manifest, options) => {
     // The registered app uses no timers or performance clock. Freeze Date while
     // retaining browser animation frames needed for real input actionability.
     await page.clock.setFixedTime(new Date(manifest.environment.clock));
+    let issuedRequests = 0;
     for (const action of manifest.actions) {
       check();
       if (action.kind === 'navigate') {
@@ -200,7 +206,7 @@ export const runBrowser: RunFunction = async (manifest, options) => {
         await page.getByRole('textbox', { name: 'Search' }).focus({ timeout: remaining() });
         emit('action-executed', 'Focused the search input.', action.id);
       } else {
-        const requestId = action.value === 'alpha' ? 1 : 2;
+        const requestId = ++issuedRequests;
         const requested = new Promise<void>(resolve => { requestWaiters.set(requestId, resolve); });
         await page.getByRole('textbox', { name: 'Search' }).fill(action.value, { timeout: remaining() });
         await page.getByRole('button', { name: 'Search', exact: true }).click({ timeout: remaining() });
@@ -228,9 +234,9 @@ export const runBrowser: RunFunction = async (manifest, options) => {
     result.observation = observation;
     await page.screenshot({ path: join(directory, 'observation.png'), fullPage: true, timeout: remaining() });
     check();
-    if (manifest.expectationBasis !== 'supplied-synthetic-specification') throw new ReproError('verification', 'PROVISIONAL_EXPECTATION', 'The expectation is proposed and unconfirmed; no passing or failure-verification claim is available.');
+    if (!expectationEstablished(manifest)) throw new ReproError('verification', 'PROVISIONAL_EXPECTATION', 'The expectation is proposed and unconfirmed; no passing or failure-verification claim is available.');
     result.assertionCount = 1;
-    assertObservation(observation, manifest.expectation);
+    assertObservation(observation, manifest.expectation, contract);
     result.outcome = 'requirement-satisfied'; result.reason = 'The frozen latest-response assertion passed after both controlled HTTP responses completed.';
     emit('assertion', result.reason);
   };
@@ -279,5 +285,5 @@ export const runBrowser: RunFunction = async (manifest, options) => {
 
 /** Binds the actually loaded executable functions, not merely a version label. */
 export function harnessDigest(): string {
-  return digest({ executableArtifact: EXECUTABLE_ARTIFACT_DIGEST, oracleArtifact: ORACLE_ARTIFACT_DIGEST, runner: runBrowser.toString(), boundary: validateBoundary.toString(), network: isAllowedRequest.toString(), networkInstallation: installNetworkBoundary.toString(), assertion: assertObservation.toString(), targetFailure: TargetFailure.toString(), assertionDigest: ASSERTION_DIGEST, version: VERSION });
+  return digest({ executableArtifact: EXECUTABLE_ARTIFACT_DIGEST, oracleArtifact: ORACLE_ARTIFACT_DIGEST, runner: runBrowser.toString(), boundary: validateBoundary.toString(), network: isAllowedRequest.toString(), networkInstallation: installNetworkBoundary.toString(), assertion: assertObservation.toString(), targetFailure: TargetFailure.toString(), assertionDigest: ASSERTION_DIGEST, searchContractArtifact: SEARCH_CONTRACT_ARTIFACT_DIGEST, registeredContract: SEARCH_CONTRACT_DIGEST, version: VERSION });
 }

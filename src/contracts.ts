@@ -13,20 +13,20 @@ export interface Action {
   value: string;
   dependsOn: string[];
 }
-export interface Expectation {
+export interface ExpectationV1 {
   invariantId: 'LATEST_SEARCH_RESPONSE_WINS';
   description: string;
   latestRequestId: 2;
   latestQuery: 'beta';
   expectedResults: ['Beta synthetic result'];
 }
-export interface Manifest {
+export interface ManifestV1 {
   schemaVersion: 1;
   id: string;
   classification: 'synthetic-training-fixture';
   adapter: { id: typeof ADAPTER; version: string };
   runnerVersion: string;
-  expectation: Expectation;
+  expectation: ExpectationV1;
   assertionDigest: string;
   expectationBasis: 'supplied-synthetic-specification' | 'proposed-unconfirmed';
   humanApproval: 'not-claimed';
@@ -39,6 +39,28 @@ export interface Manifest {
   };
   boundary: { behavior: 'frontend'; network: 'controlled-http'; database: 'none'; externalDependencies: string[] };
   app: { revision: 'buggy' | 'fixed'; sourceDigest: string };
+}
+export type SearchQuery = 'alpha' | 'beta';
+export type SearchOrder = ['alpha', 'beta'] | ['beta', 'alpha'];
+export interface Expectation {
+  invariantId: 'LATEST_SEARCH_RESPONSE_WINS';
+  description: string;
+  latestRequestId: 2;
+  latestQuery: SearchQuery;
+  expectedResults: [string];
+}
+export interface ManifestV2 extends Omit<ManifestV1, 'schemaVersion' | 'expectation' | 'expectationBasis'> {
+  schemaVersion: 2;
+  scenario: { searchOrder: SearchOrder };
+  expectation: Expectation;
+  expectationBasis: 'independent-contract' | 'proposed-unconfirmed';
+  expectationSource: { kind: 'caller-supplied'; contractId: 'registered-search-latest-response-v1'; contractDigest: string };
+}
+export type Manifest = ManifestV1 | ManifestV2;
+export interface AuthoredExperimentDeclaration {
+  searchOrder: SearchOrder;
+  expectation: Omit<Expectation, 'description'>;
+  expectationBasis: ManifestV2['expectationBasis'];
 }
 export interface RunEvent { seq: number; at: string; type: string; message: string; actionId?: string }
 export interface RunResult {
