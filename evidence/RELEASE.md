@@ -1,6 +1,14 @@
 # Local release evidence
 
-## Current verification status — 2026-10-15
+## Current approved pilot and package status — 2026-10-15
+
+**Release remains incomplete; the approved five-job contrast sequence stopped after its first pilot.** The user approved and the run adopted the prospective completed-cleanup criterion and 90-second driver threshold. Source execution completed 50 controls and 12 corrected-CSS measured-pass observations in 41.72000612 seconds, but memory peaked at 899.3984375 MiB against the unchanged 896 MiB gate, and the required distinct natural post-close interval census was absent. A clean terminal census and normal browser exit do not satisfy the two-census requirement. Exact input integrity and zero-owned cleanup passed. The 12 observations remain provisional, 45 occurrences remain unattempted and no further job or retry ran. Read the [approved pilot result](P57-APPROVED-PILOT.md).
+
+Safe independent work verified a fresh [offline candidate package](OFFLINE-CANDIDATE-PACKAGE.md): 12 bounded command checks, exact archive/install binding, unchanged 62 original raw emissions, 14 capsule files and 260 runtime dependency entries. The intended CSS change and bounded web module-path differences remain explicit. This closes the offline candidate identity item without converting prior 464/464 source/emitted or installed-browser observations into fresh runs. Packaged documents reflect their staging cutoff and require final delivery reconciliation.
+
+The original browser matrix stays 24 passed / 6 failed / 1 started-interrupted. Remaining requirements include the pilot's headroom/observation gaps, candidate contrast and paint scope, six original browser behaviors, native 200% zoom and actual screen-reader verification. No new native control/AT surface is exposed by this cloud tool catalog; the earlier native-navigation denial was not retried or bypassed. The prior decision report below is historical preparation; its criteria are now adopted prospectively. No publication or permission change occurred.
+
+## Historical verification status before the approved pilot — 2026-10-15
 
 **Not all release gates are met.** Later evidence supersedes the older “Current” notices and gate table below; those sections retain their original source/build scope. No generic cloud sandbox denial currently prevents the approved trusted diagnostic workload. Native Chrome zoom has a separate unresolved supported-surface denial.
 
@@ -12,7 +20,7 @@ The one workload-matched lifecycle diagnostic completed 50 controls and 12 unres
 
 Remaining technical acceptance includes the six original capture/cancellation/UI failures, final-candidate browser/CLI/package identity and applicable validation, 57 new-CSS measurements with bounded paint evidence, native 200% zoom and actual screen-reader usability. Bounded reduction with `minimality=unverified` remains permitted by R2 / ADR 0001; stronger minimality is unclaimed. Broader historical/HCI research remains separately scoped, and actual human participation requires its own authorization; local synthetic-alpha status does not establish those research claims. No remote CI, deployment or publication is claimed by this continuation.
 
-Read the [prospective completion decision](COMPLETION-DECISION.md) and [detailed checklist with hash-bound sources](../.repro-runs/cloud-continuation/completion-decision-v1/release-checklist/RELEASE-CHECKLIST.md). The two proposed continuation changes have not been adopted. All earlier observations below remain historical evidence, not current aggregate gate passes.
+Read the [prospective completion decision](COMPLETION-DECISION.md) and [detailed checklist with hash-bound sources](../.repro-runs/cloud-continuation/completion-decision-v1/release-checklist/RELEASE-CHECKLIST.md). At that checkpoint the two proposed continuation changes had not yet been adopted; their current adopted status is recorded above. All earlier observations below remain historical evidence, not current aggregate gate passes.
 
 ## Historical application increment — 2026-10-14
 
