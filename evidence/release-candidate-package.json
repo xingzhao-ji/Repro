@@ -1,0 +1,299 @@
+{
+  "schemaVersion": 1,
+  "classification": "synthetic-release-verification",
+  "outcome": "passed-for-recorded-snapshot",
+  "scope": "Local macOS arm64 package installation, installed CLI behavior, cached offline capsule installation and real pinned-Chromium replay.",
+  "startedAt": "2026-10-15T19:51:30.457Z",
+  "finishedAt": "2026-10-15T19:51:40.067Z",
+  "environment": {
+    "node": "v26.7.0",
+    "npm": "11.19.0",
+    "platform": "darwin-arm64",
+    "browser": "156.0.8078.4 (pinned Chromium)"
+  },
+  "command": "REPRO_PACKAGE_SMOKE_ROOT=.repro-runs/release-candidate/package node scripts/package-smoke.mjs",
+  "results": {
+    "commands": 15,
+    "expectedStatusesMatched": true,
+    "browserRuns": 8,
+    "executedAssertions": 8,
+    "failed": 0,
+    "skipped": 0,
+    "timeouts": 0,
+    "postCloseObservedOwnedSurvivors": 0
+  },
+  "workflowChecks": [
+    {
+      "name": "build",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "pack",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "install",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-help",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-bin",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-record",
+      "status": 1,
+      "expectedStatus": 1,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-export",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-inspect",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-replay",
+      "status": 1,
+      "expectedStatus": 1,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "installed-verify",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "standalone-export",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "cached-offline-install",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "capsule-dependency-resolution",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "cached-offline-verify",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    },
+    {
+      "name": "exported-readable-test",
+      "status": 0,
+      "expectedStatus": 0,
+      "postCloseOwnedCount": 0
+    }
+  ],
+  "package": {
+    "file": ".repro-runs/release-candidate/package/run-dol3gD/repro-local-0.1.0.tgz",
+    "integrity": "sha512-NZYBYd2en9J1lb17I/iU67qw+3E6owpK+YB1HDQUGU3WffhLT+RCqZ7lOm9lbBAphjwGtx2+cOM+wjXucwAlKw=="
+  },
+  "capsule": {
+    "directory": ".repro-runs/release-candidate/package/run-dol3gD/standalone-capsule",
+    "integritySha256": "e04f83c94634ce8ee96d9d2157fa0da0c232e175573d0b1bc7b36a58f2984481"
+  },
+  "runtimeInputs": {
+    "files": 26,
+    "aggregateAlgorithm": "SHA-256 of JSON.stringify(source-hashes.json parsed object); paths are sorted",
+    "aggregateSha256": "2210dd4dc2ef59f6b0401262bbdea59f5c52ee438e46f3f9497970410cf6ca99",
+    "unchangedDuringRun": true,
+    "matchedWorkingTreeWhenReportWritten": true,
+    "inventory": ".repro-runs/release-candidate/package/run-dol3gD/source-hashes.json"
+  },
+  "observations": [
+    {
+      "name": "installed-record",
+      "id": "03088fd3-92b5-429d-99e2-4dbf88a32e44",
+      "outcome": "target-failure",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "harnessDigest": "289302e1d754e14ee90c2338d8e44dc566af76c349499e2d41b72bcf9256efac",
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      }
+    },
+    {
+      "name": "installed-replay",
+      "id": "777e8b36-5224-475e-b866-2b367bcb1e9d",
+      "outcome": "target-failure",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "harnessDigest": "289302e1d754e14ee90c2338d8e44dc566af76c349499e2d41b72bcf9256efac",
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      }
+    },
+    {
+      "name": "installed-verify-original",
+      "id": "3414b540-b8f9-4cc1-b804-79bb81c58add",
+      "outcome": "target-failure",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "harnessDigest": "289302e1d754e14ee90c2338d8e44dc566af76c349499e2d41b72bcf9256efac",
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      }
+    },
+    {
+      "name": "installed-verify-candidate",
+      "id": "8ff0f7ac-5eac-43a4-ae6d-e3552a52dfec",
+      "outcome": "requirement-satisfied",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "harnessDigest": "289302e1d754e14ee90c2338d8e44dc566af76c349499e2d41b72bcf9256efac",
+      "appRevision": "fixed",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Beta synthetic result"
+        ]
+      }
+    },
+    {
+      "name": "cached-offline-original",
+      "id": "d70886df-8d9b-459b-bfc7-ed4875c81fe8",
+      "outcome": "target-failure",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "harnessDigest": "289302e1d754e14ee90c2338d8e44dc566af76c349499e2d41b72bcf9256efac",
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      }
+    },
+    {
+      "name": "cached-offline-candidate",
+      "id": "af2cd428-9cdc-4fa0-8984-172d5d809ecb",
+      "outcome": "requirement-satisfied",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "harnessDigest": "289302e1d754e14ee90c2338d8e44dc566af76c349499e2d41b72bcf9256efac",
+      "appRevision": "fixed",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Beta synthetic result"
+        ]
+      }
+    },
+    {
+      "name": "readable-buggy",
+      "id": "5514c26d-9900-4015-b432-5639cc8b4d6e",
+      "outcome": "target-failure",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "harnessDigest": "aade6ab69e988f13f1cdd37e3737908b4a502ddd84057856bd8f24a5422eb794",
+      "appRevision": "buggy",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Alpha synthetic result"
+        ]
+      }
+    },
+    {
+      "name": "readable-fixed",
+      "id": "f48c4082-6d49-4602-a40a-15b9b97ee792",
+      "outcome": "requirement-satisfied",
+      "assertionCount": 1,
+      "assertionDigest": "fd86f0acbf1b63d4cd8d301878700a7d45ee7a3b2d2367bd5a5202cf52467711",
+      "manifestDigest": "34ad9e500f0aff099e263defea0d34e471578ec3b561055c507884e2e7c9dec8",
+      "harnessDigest": "aade6ab69e988f13f1cdd37e3737908b4a502ddd84057856bd8f24a5422eb794",
+      "appRevision": "fixed",
+      "observation": {
+        "latestRequestId": 2,
+        "query": "beta",
+        "results": [
+          "Beta synthetic result"
+        ]
+      }
+    }
+  ],
+  "cleanup": {
+    "method": "100 ms numeric process ancestry sampling with PID/start-time matching and a distinct census after each command closes.",
+    "evidencePattern": ".repro-runs/release-candidate/package/run-dol3gD/*.processes.json",
+    "limitation": "Reports observed descendants; not an exhaustive kernel-level process audit. Forced-stop and inherited-pipe paths were not exercised."
+  },
+  "independentReview": {
+    "scope": "Automated independent CLI/reducer review; package author follow-up after peer review",
+    "focusedNonbrowserTests": {
+      "passed": 28,
+      "failed": 0,
+      "skipped": 0
+    },
+    "summary": ".repro-runs/release-candidate/package/independent-review-0XvI3y/summary.json",
+    "log": ".repro-runs/release-candidate/package/independent-review-0XvI3y/review-tests.log"
+  },
+  "preservedPriorEvidence": [
+    ".repro-runs/release-candidate/package/run-s1qi9C/summary.json",
+    ".repro-runs/release-candidate/package/run-0lYFww/summary.json",
+    ".repro-runs/release-candidate/setup/cli-output-red.log",
+    ".repro-runs/release-candidate/review/reducer-red.log"
+  ],
+  "rawSummary": ".repro-runs/release-candidate/package/run-dol3gD/summary.json",
+  "limits": [
+    "npm --offline reused a populated project cache; Chromium was acquired separately and reused. This is not a self-contained clean-host offline bundle.",
+    "Replay runs the registered synthetic frontend only, with fresh browser state and controlled loopback HTTP. No real-user or historical-bug validation is claimed.",
+    "Local package results do not establish Linux-container replay, native zoom, screen-reader usability, hostile-code isolation or production readiness.",
+    "The package records the documentation available at packing time. Any later documentation-only package must separately establish unchanged runtime bytes."
+  ]
+}
