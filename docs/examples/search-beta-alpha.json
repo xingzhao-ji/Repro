@@ -1,0 +1,10 @@
+{
+  "searchOrder": ["beta", "alpha"],
+  "expectation": {
+    "invariantId": "LATEST_SEARCH_RESPONSE_WINS",
+    "latestRequestId": 2,
+    "latestQuery": "alpha",
+    "expectedResults": ["Alpha synthetic result"]
+  },
+  "expectationBasis": "independent-contract"
+}

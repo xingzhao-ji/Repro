@@ -2,7 +2,7 @@ import { createServer, type IncomingMessage, type ServerResponse } from 'node:ht
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { ReproError } from './contracts.js';
-import { createManifest } from './manifest.js';
+import { createAuthoredManifest, createManifest } from './manifest.js';
 import { Coordinator, publicError } from './service.js';
 import { Ledger, type Operation } from './ledger.js';
 import { inspectJobInput, inspectTrial } from './evidence-inspector.js';
@@ -54,7 +54,7 @@ export async function serve(options: { port: number; root: string }) {
     }
     const url = new URL(request.url ?? '/', origin); const path = url.pathname;
     if (request.method === 'GET') {
-      if (path === '/api/config') { json(response, 200, { token, scope: 'Registered synthetic search only. Scripted capture; supplied synthetic expectation, no human approval claimed. Linux-container portability requires a separately verified run.' }); return; }
+      if (path === '/api/config') { json(response, 200, { token, scope: 'Registered synthetic search only. Scripted capture with a supplied or caller-declared expectation checked against the registered contract; no human approval claimed. Linux-container portability requires a separately verified run.' }); return; }
       if (path === '/api/sessions') { json(response, 200, { sessions: ledger.sessions() }); return; }
       const session = /^\/api\/sessions\/([a-zA-Z0-9_-]{1,100})$/.exec(path);
       if (session?.[1]) { json(response, 200, { session: ledger.getSession(session[1]), jobs: ledger.jobs(session[1]) }); return; }
@@ -73,7 +73,12 @@ export async function serve(options: { port: number; root: string }) {
       }
     } else {
       const input = await body(request);
-      if (path === '/api/sessions') { keys(input, ['consent']); const session = ledger.createSession(createManifest(), input.consent === true); json(response, 201, { session }); return; }
+      if (path === '/api/sessions') {
+        keys(input, ['consent', 'experiment']);
+        const manifest = Object.hasOwn(input, 'experiment') ? createAuthoredManifest(input.experiment) : createManifest();
+        const session = ledger.createSession(manifest, input.consent === true);
+        json(response, 201, { session }); return;
+      }
       const jobs = /^\/api\/sessions\/([a-zA-Z0-9_-]{1,100})\/jobs$/.exec(path);
       if (jobs?.[1]) {
         keys(input, ['operation', 'requestKey']);

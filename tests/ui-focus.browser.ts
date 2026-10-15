@@ -77,6 +77,9 @@ test('starting capture moves keyboard focus into the new evidence workspace', { 
     await page.keyboard.press('Enter');
     assert.equal(await page.evaluate(() => document.activeElement?.id), 'main');
     await page.keyboard.press('Tab');
+    assert.equal(await page.getByRole('combobox', { name: 'Expectation input', exact: true }).evaluate(element => element === document.activeElement), true);
+    await page.keyboard.press('Tab');
+    assert.equal(await page.getByRole('checkbox').evaluate(element => element === document.activeElement), true);
     await page.keyboard.press('Space');
     await page.keyboard.press('Tab');
     assert.equal(await page.getByRole('button', { name: 'Start synthetic capture', exact: true }).evaluate(element => element === document.activeElement), true);

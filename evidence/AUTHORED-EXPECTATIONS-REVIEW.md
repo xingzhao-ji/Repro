@@ -1,0 +1,13 @@
+# Authored-expectation integration review
+
+2026-10-15. An agent independent of the implementation reviewed the schema, oracle, adapter, reducer, capsule, CLI/API input, ledger persistence, evidence inspector and capture UI. This is automated source and evidence review, not human approval.
+
+The core review found a provenance validation defect: `String(expectationBasis)` allowed a JSON array such as `["independent-contract"]` through validation even though execution treated it as unconfirmed. The implementer added failing factory and manifest regressions and required actual strings at both boundaries. The reviewer independently verified arrays, nested arrays, objects, null and numbers now fail with structured errors. The original schema-1 assertion hash remains unchanged. Core implementation and fix are in `fe738ba`.
+
+The reviewer reconstructed all 16 reduction executions in `.repro-runs/expectation-authoring/core/774a0b5c-7355-4450-b512-2e9647bc05f9`, checking candidate manifests, frozen assertion/harness identities, six accepted exact stale observations and distinct original/candidate runs. Three actions remained; tested minimality was correctly unverified. The exported conventional test's log recorded one executed passing test.
+
+For integration, the reviewer inspected persisted job input and all 13 reduction trials in UI batch `6903cf72-619d-4399-8ae7-c2a05261080b`. Capture/reduction inputs retained five actions; verification/export inputs retained three; all preserved the reversed declaration. Inspector projection exposed the actual reversed observation and suppressed unrelated artifact fields. Source review found no additional defect in the bounded file reader, API consent/token/origin checks, immutable provenance or selected-run association.
+
+Desktop, mobile and historical-selection screenshots were inspected. A missing mobile heading space was repaired after a browser regression demonstrated it. The initial screenshot batch used programmatic history selection; the later authored UI test uses actual keyboard selection and waits for each selected-run transition. Final execution counts and evidence are reported separately in the authored release supplement.
+
+The reviewer did not independently rerun the full browser suite, installed package or Linux sample. Forward schema-2 browser execution was added after the initial core review and is verified by the CLI suite. Native zoom and actual screen-reader output remain unverified. HCI research-only P/L code has its own review and evidence; this report does not establish research effectiveness or independent historical-bug coverage.

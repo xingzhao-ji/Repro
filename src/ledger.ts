@@ -2,6 +2,7 @@ import { DatabaseSync } from 'node:sqlite';
 import { mkdirSync, readFileSync, writeFileSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
+import { isDeepStrictEqual } from 'node:util';
 import { ReproError, type Manifest, type RunEvent } from './contracts.js';
 import { validateManifest } from './manifest.js';
 import { ownedDirectory, regularOwnedFile } from './paths.js';
@@ -75,7 +76,18 @@ export class Ledger {
     if (!row) throw new ReproError('input', 'NOT_FOUND', 'Session not found');
     return this.sessionRow(row);
   }
-  updateManifest(id: string, manifest: Manifest): void { this.db.prepare('UPDATE sessions SET manifest=? WHERE id=?').run(JSON.stringify(validateManifest(manifest)), validId(id)); }
+  updateManifest(id: string, manifest: Manifest): void {
+    const updated = validateManifest(manifest);
+    const current = this.getSession(id).manifest;
+    const frozen = (value: Manifest) => ({
+      schemaVersion: value.schemaVersion, expectation: value.expectation,
+      assertionDigest: value.assertionDigest, expectationBasis: value.expectationBasis,
+      humanApproval: value.humanApproval,
+      ...(value.schemaVersion === 2 ? { scenario: value.scenario, expectationSource: value.expectationSource } : {}),
+    });
+    if (!isDeepStrictEqual(frozen(current), frozen(updated))) throw new ReproError('verification', 'FROZEN_EXPECTATION', 'The session expectation and scenario are frozen. Create a new session to declare different expected behavior.');
+    this.db.prepare('UPDATE sessions SET manifest=? WHERE id=?').run(JSON.stringify(updated), validId(id));
+  }
   startJob(sessionId: string, operation: Operation, requestKey: string): Job {
     validId(requestKey); this.getSession(sessionId);
     return this.transaction(() => {

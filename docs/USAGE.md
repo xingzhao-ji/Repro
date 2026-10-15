@@ -12,7 +12,7 @@ npm run repro -- doctor
 npm run dev
 ```
 
-The workbench binds to `http://127.0.0.1:4318`. Open that exact URL; a different Host or Origin is intentionally rejected. Capture requires opt-in and executes only the registered synthetic search scenario. Review the frozen expectation and capture surfaces before starting. Runs, events, traces, screenshots and exports stay under `.repro-runs/`.
+The workbench binds to `http://127.0.0.1:4318`. Open that exact URL; a different Host or Origin is intentionally rejected. Capture requires opt-in and executes only the registered synthetic search scenario. Use the supplied example or choose **Specify expected behavior** to declare a supported search order and expected result before capture. See [declaration format and CLI example](AUTHORED-EXPECTATIONS.md). Review the frozen expectation and capture surfaces before starting. Runs, events, traces, screenshots and exports stay under `.repro-runs/`.
 
 Pinned Chromium passed the latest local browser tests. Early installation/probe failures and the explicitly selected installed Chrome investigation are retained in development logs. If troubleshooting locally, `REPRO_BROWSER_CHANNEL=chrome` explicitly selects a fresh installed Chrome profile; there is no automatic fallback and the actual browser version is recorded. Local browser results do not establish Linux portability.
 

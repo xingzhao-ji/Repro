@@ -6,7 +6,7 @@ import { spawnSync } from 'node:child_process';
 import { chromium, type Browser } from 'playwright';
 import { ReproError, VERSION, type Manifest, type RunResult } from './contracts.js';
 import { createManifest } from './manifest.js';
-import { readManifest } from './input.js';
+import { readExperiment, readManifest } from './input.js';
 import { importCapsule, exportCapsule } from './capsule.js';
 import { runBrowser } from './adapter.js';
 import { reduce } from './reducer.js';
@@ -18,6 +18,7 @@ const help = `Repro ${VERSION} — local synthetic failure compiler
 Commands:
   doctor                             Inspect browser and Linux container prerequisites
   record --consent                    Capture the registered synthetic browser scenario
+  record --consent --experiment FILE  Freeze a declared search order and expected result
   replay --manifest FILE              Replay a validated manifest
   replay --capsule DIRECTORY          Validate bundle integrity before replay
   reduce --manifest FILE              Reduce browser actions with a bounded budget
@@ -53,11 +54,12 @@ export async function doctor() {
 }
 async function main(): Promise<void> {
   const parsed = parseArgs({ allowPositionals: true, strict: true, options: {
-    help: { type: 'boolean' }, consent: { type: 'boolean' }, manifest: { type: 'string' }, capsule: { type: 'string' }, output: { type: 'string' }, revision: { type: 'string' }, budget: { type: 'string' }, port: { type: 'string' }
+    help: { type: 'boolean' }, consent: { type: 'boolean' }, manifest: { type: 'string' }, capsule: { type: 'string' }, experiment: { type: 'string' }, output: { type: 'string' }, revision: { type: 'string' }, budget: { type: 'string' }, port: { type: 'string' }
   } });
   const command = parsed.positionals[0]; const options = parsed.values;
   if (options.help || !command) { console.log(help); return; }
   if (parsed.positionals.length !== 1) throw new ReproError('input', 'ARGUMENTS', 'Expected one command. Use --help.');
+  if (options.experiment !== undefined && (command !== 'record' || options.manifest !== undefined || options.capsule !== undefined)) throw new ReproError('input', 'ARGUMENTS', 'Use --experiment only with record, without --manifest or --capsule.');
   if (command === 'doctor') { console.log(JSON.stringify(await doctor(), null, 2)); return; }
   if (command === 'serve') {
     const port = Number(options.port ?? '4318');
@@ -72,7 +74,8 @@ async function main(): Promise<void> {
   if (command === 'record' && !options.consent) throw new ReproError('input', 'CONSENT_REQUIRED', 'Use --consent to opt in to capture of the registered synthetic fixture only.');
   if (options.manifest && options.capsule) throw new ReproError('input', 'ARGUMENTS', 'Choose either --manifest or --capsule.');
   let manifest: Manifest;
-  if (options.capsule) manifest = await importCapsule(resolve(options.capsule));
+  if (options.experiment !== undefined) manifest = await readExperiment(resolve(options.experiment));
+  else if (options.capsule) manifest = await importCapsule(resolve(options.capsule));
   else if (options.manifest) {
     manifest = await readManifest(resolve(options.manifest));
   } else if (command === 'record') manifest = createManifest();

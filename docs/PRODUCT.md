@@ -12,7 +12,7 @@ Repro is a local failure compiler and evidence workbench. Its mechanism is to pr
 
 ## Operating Context
 
-The user works in an owned local development repository through the CLI or loopback web workbench. The first supported application is the included synthetic JavaScript stale-response frontend; arbitrary app registration and arbitrary expected-behavior authoring are not implemented. Package and browser acquisition are declared setup steps. Linux container replay is a separate portability check with an explicitly approved isolation policy. Preserve the existing implementation, historical evidence and user changes during release work.
+The user works in an owned local development repository through the CLI or loopback web workbench. The first supported application is the included synthetic JavaScript stale-response frontend; developers can declare either supported search order and its expected result before capture. Arbitrary app registration and arbitrary assertion code are not implemented. Package and browser acquisition are declared setup steps. Linux container replay is a separate portability check with an explicitly approved isolation policy. Preserve the existing implementation, historical evidence and user changes during release work.
 
 ## User and job
 Primary user: a developer or maintainer of a self-hostable web application who receives a stateful browser bug that another person cannot reproduce. The product reduces the work of transferring and maintaining a reproduction. It does not diagnose every bug, certify arbitrary patches, or replace requirements.

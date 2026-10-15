@@ -1,10 +1,12 @@
 import { constants } from 'node:fs';
 import { lstat, open } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
 import { ReproError, type Manifest, type Outcome, type RunResult, type Trial } from './contracts.js';
 import { type Job, type Ledger, validId } from './ledger.js';
 import { digest, validateManifest } from './manifest.js';
 import { assertObservation, TargetFailure } from './oracle.js';
+import { expectationEstablished, searchContract } from './search-contract.js';
 
 export type PublicRun = Omit<RunResult, 'events' | 'artifacts'>;
 export interface JobInputEvidence {
@@ -134,17 +136,19 @@ function publicRun(value: unknown, id: string, candidate: Manifest, expectedHarn
     || typeof environment['node'] !== 'string' || !/^v\d+\.\d+\.\d+$/.test(environment['node'])
     || typeof environment['browser'] !== 'string' || !/^(not-launched|\d+\.\d+\.\d+\.\d+( \(pinned Chromium\)| \(explicit installed Chrome channel\))?)$/.test(environment['browser'])
     || environment['isolation'] !== 'registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox') problem('RUN_ENVIRONMENT', 'Run environment is outside the registered public evidence contract.');
+  const contract = searchContract(candidate);
   let observation: RunResult['observation'] = null;
   if (run['observation'] !== null) {
     const observed = record(run['observation']);
-    if (observed['latestRequestId'] !== 2 || observed['query'] !== 'beta' || !Array.isArray(observed['results']) || observed['results'].length !== 1 || typeof observed['results'][0] !== 'string' || !['Alpha synthetic result', 'Beta synthetic result'].includes(observed['results'][0])) problem('RUN_OBSERVATION', 'Run observation is outside the registered synthetic evidence contract.');
-    observation = { latestRequestId: 2, query: 'beta', results: [observed['results'][0]] };
+    const projected = { latestRequestId: observed['latestRequestId'], query: observed['query'], results: observed['results'] };
+    if (!isDeepStrictEqual(projected, contract.expected) && !isDeepStrictEqual(projected, contract.stale)) problem('RUN_OBSERVATION', 'Run observation is outside the registered synthetic evidence contract.');
+    observation = { latestRequestId: 2, query: contract.expected.query, results: [...observed['results'] as string[]] };
   }
   const outcome = run['outcome'] as Outcome;
   if (outcome === 'target-failure' || outcome === 'requirement-satisfied') {
-    if (run['assertionCount'] !== 1 || !observation || candidate.expectationBasis !== 'supplied-synthetic-specification') problem('RUN_ASSERTION', 'A conclusive outcome requires exactly one frozen assertion and its observation.');
+    if (run['assertionCount'] !== 1 || !observation || !expectationEstablished(candidate)) problem('RUN_ASSERTION', 'A conclusive outcome requires exactly one frozen assertion and its observation.');
     let actual: Outcome = 'requirement-satisfied';
-    try { assertObservation(observation, candidate.expectation); }
+    try { assertObservation(observation, candidate.expectation, contract); }
     catch (error) { if (error instanceof TargetFailure) actual = 'target-failure'; else problem('RUN_OBSERVATION', 'The observation does not establish the recorded outcome.'); }
     if (actual !== outcome || run['category'] !== undefined && run['category'] !== 'target-failure') problem('RUN_OUTCOME_MISMATCH', 'The recorded run outcome contradicts its assertion observation or category.');
   }
@@ -158,6 +162,7 @@ function publicReason(reason: string): string {
   // Explanations are text, not proof. Suppress unfamiliar text before rendering rather than exposing arbitrary artifact strings.
   const known = [
     'LATEST_SEARCH_RESPONSE_WINS: stale alpha results replaced the latest beta results.',
+    'LATEST_SEARCH_RESPONSE_WINS: stale beta results replaced the latest alpha results.',
     'The frozen latest-response assertion passed after both controlled HTTP responses completed.',
     'MISSING_STEPS: The intended failure requires navigation and both ordered search requests; the proposed experiment is incomplete.',
     'The assertion has not executed.', 'Candidate has not executed.',
