@@ -1,5 +1,13 @@
 # Development state
 
+## Current original-workload lifecycle capture — 2026-10-15
+
+One independently reviewed diagnostic capture reproduced the original P390 workload with all 50 controls and 12 complete but unresolved observations. It recorded Z in samples 500 and 501, and the driver took 76.879408 seconds against the unchanged 75-second continuation threshold. The external validator reports `ZERO_Z_FAIL` and `DRIVER_GATE`; no artifact/input/telemetry/workload/cleanup issue was reported. All 3,612 files and ten confined links matched before/after, all owned containers/volumes were removed, and no retry or acceptance cycle ran.
+
+The new causal evidence is a leader Z / worker R / leader Z sequence with stable observed leader identity after product-context close settled and before final browser-close invocation. A second Z lies inside final browser close. This supports intermediate thread-group teardown; it does not identify a missed wait, ownership defect, actual reaper or justified product fix. Browser close completed normally, and the next interval plus terminal sample contain only init and Node. The valid sampled-Z failures remain failures. Memory peaked at 871.8203125 MiB with zero resource events; no limit or security change occurred.
+
+Read `evidence/LIFECYCLE-WORKLOAD-DIAGNOSTIC.md` and `.repro-runs/cloud-continuation/lifecycle-workload-diagnostic-v1/RESULT.md`. Preparation passed 39 source checks, 22 telemetry challenges and 35 independent workload-evidence cases. Under the current strict contract, the next concrete completion step is an evidence-backed lifecycle and work-budget proposal satisfying both unchanged gates; none is established here. Retaining this contract needs no renewed approval. A cleanup-based criterion is only an optional prospective alternative requiring an explicit separate decision and fresh evidence; neither historical failure is relabelled. No product lifecycle change is supported; all 57 corrected-CSS occurrences remain unmeasured. There is no external access/permission blocker, and no publication or paid service occurred.
+
 ## Current minimal lifecycle diagnostic — 2026-10-15
 
 One authorized real browser/context/inert-page lifecycle passed the unchanged sampled zero-zombie criterion under the existing limits: five samples, zero Z, source and external exit 0, normal browser close, 70-task peak and 157,011,968-byte kernel memory peak. The driver took 0.909027 seconds. All 178 inputs matched before/after and all owned containers/volumes were removed. No rendering acceptance cases or retries ran.
