@@ -1,4 +1,14 @@
-# Current work — practical beta verification, native htmx cleanup unresolved
+# Current work — htmx teardown instrumented; cleanup causes unresolved
+
+Continuation from clean verified `1ecca68` is on `task/htmx-cleanup-investigation`; `bcc67d2` adds opt-in monotonic teardown and owned-process observations with regressions. The original failed fixed repetition 15, its profile, and all prior logs remain preserved. Budgets/security/acceptance criteria are unchanged. Accessibility remains deferred/unverified. No release, merge, push, container operation, denied-route retry or completion claim occurred.
+
+Fresh checks: 318/318 ordinary tests, types/lint/build/kit, and one bounded 40-command htmx diagnostic sequence with 20 expected buggy failures and 20 fixed successes. Independent audit found no discrepancies. Those 40 are diagnostics, not acceptance; the original close failure did not recur, so no causal lifecycle repair is established.
+
+The affected native adapter/fault selection passed 14/15 and exposed a separate 100 ms morphdom startup-deadline `PROFILE_CLEANUP_FAILED`. Its profile and failed receipt remain. The test compiler also retained 13 TMPDIR entries; process censuses were empty. One separately bounded startup probe returned `DEADLINE` with profile absent and showed launch rejection/removal preceding Node child-exit delivery. It did not reproduce the deletion errno, establish kernel liveness at deletion, or replace the failed test.
+
+Missing evidence remains an instrumented failing htmx teardown (helper branch, eventual settlement, lifecycle/process/profile correlation), plus the separate failed startup deletion's errno/timeline. No speculative repair or new 20-pair acceptance rerun was performed. Repaired-build native acceptance and affected fresh-environment verification remain unexecuted. This is not a current tool/service denial or a new permission request. See [investigation](evidence/HTMX-CLEANUP-INVESTIGATION.md) and [exact receipt](evidence/htmx-cleanup-investigation.json); raw task evidence stays under ignored `.repro-runs/htmx-cleanup-investigation/`.
+
+## Preserved practical-beta checkpoint at 1ecca68
 
 The owner clarified that no-retry is not a blanket pause. The prior beta-wide hold at `921f14c:STATE.md:11` was a project interpretation, not an observed beta service denial, and is superseded. The historical Chrome CUA `net::ERR_BLOCKED_BY_CLIENT` restriction remains respected: no retry, probe, alternate route or security change occurred. Accessibility is deferred/unverified. Existing scoped approval of policy `949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b` covers the three pinned cases under the unchanged frozen controls.
 

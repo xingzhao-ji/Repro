@@ -1,0 +1,359 @@
+{
+  "classification": "Incomplete cleanup investigation; diagnostic observations are not acceptance",
+  "baselineCommit": "1ecca68deed4bfd8d12d6feac8a8a10b1a879176",
+  "implementationCommit": "bcc67d2b68438eb35fe96364217e7c4b0c8f9f3a",
+  "branch": "task/htmx-cleanup-investigation",
+  "rootCause": "unresolved",
+  "causalLifecycleRepair": false,
+  "practicalBetaComplete": false,
+  "accessibility": "deferred/unverified",
+  "budgetsUnchanged": {
+    "contextCloseMs": 2000,
+    "executionDrainMs": 1000,
+    "nativeNormalCleanupMs": 5000,
+    "nativeStopCleanupMs": 8000,
+    "htmxCommandWatchdogMs": 40000
+  },
+  "securityProfile": {
+    "path": "security/repro-chromium-seccomp.json",
+    "bytes": 10601,
+    "sha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b"
+  },
+  "protocol": {
+    "path": "benchmarks/PRACTICAL-BETA-PROTOCOL.md",
+    "bytes": 7720,
+    "sha256": "175d5e8f1fe84d07de8da969a1252c63ed561979d645ea1af345a555a9fc9c90"
+  },
+  "sourceAndBuild": [
+    {
+      "path": "src/case-adapter.ts",
+      "bytes": 20530,
+      "sha256": "882ed45b92f2977acc34502334f7691cadc714c51e5c864153ceab95e0d712cc"
+    },
+    {
+      "path": "src/contracts.ts",
+      "bytes": 6454,
+      "sha256": "5b9ca2a79f6c4f9e52408d0960a02e7aad9e453a4c13f540c16b9ef851d76ba5"
+    },
+    {
+      "path": "scripts/measure-beta.mjs",
+      "bytes": 19935,
+      "sha256": "30a33dd5a63497866ca3129014f7c2e467ce27ba7b089f002d9ee200a58ed470"
+    },
+    {
+      "path": "tests/case-teardown-diagnostics.test.ts",
+      "bytes": 7702,
+      "sha256": "b9ce754745b757232d0422cdd0d3f6742102f07a6605013908de2949a10679ac"
+    },
+    {
+      "path": "tests/beta-measurement.test.ts",
+      "bytes": 20709,
+      "sha256": "134777b361595edf561f07954489a57e7afd3ed96344a7468b33e24c317aa35d"
+    },
+    {
+      "path": "dist/index.js",
+      "bytes": 130539,
+      "sha256": "719fcac3090a03e0acf7f726f0546142971f9fb9cf4dda3fb9c7da3db4a7fe9b"
+    },
+    {
+      "path": "dist/cli.js",
+      "bytes": 192638,
+      "sha256": "5364f719e10d59bc78c356fa8fa5f287cf10c75f0ccb547fd6b637e9a58c8bc2"
+    },
+    {
+      "path": "node_modules/playwright-core/lib/coreBundle.js",
+      "bytes": 3584989,
+      "sha256": "2325ca4c1c83070e89dc49fb82525508f0a68e0cf12e2a624277968da216b7e0"
+    }
+  ],
+  "verification": {
+    "ordinary": {
+      "passed": 318,
+      "failed": 0,
+      "log": {
+        "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/unit.log",
+        "bytes": 30902,
+        "sha256": "89d5c68504238e624d0728b393b2803aa7ad0481d20d6c1d61e4758d15b9dce4"
+      }
+    },
+    "teardown": {
+      "passed": 6,
+      "subsetOfOrdinary": true,
+      "log": {
+        "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/green-reviewed.log",
+        "bytes": 731,
+        "sha256": "8e39bd5b3a7e53c2fe1380fa519b13d0ef1c5a497a32b07c955ac6dd7a6d5ff9"
+      },
+      "redLogs": [
+        {
+          "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/red.log",
+          "bytes": 3982,
+          "sha256": "e50a8855e15bc2d91a22f3844e630e9f4c625940b791d92178e5b4d7d6b4510e"
+        },
+        {
+          "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/timer-red.log",
+          "bytes": 921,
+          "sha256": "5bf2bbb2d84ba5eaf2a1f66efc583a094ea113f08a11910efc331175efb69270"
+        },
+        {
+          "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/execution-red.log",
+          "bytes": 940,
+          "sha256": "cb2d1ecdfac0a4c476790ac5b5ba4d148304604d6d69c763e37ad4da3cd7cbda"
+        }
+      ]
+    },
+    "measurement": {
+      "passed": 12,
+      "subsetOfOrdinary": true,
+      "log": {
+        "path": ".repro-runs/htmx-cleanup-investigation/observer/full-measurement.log",
+        "bytes": 1470,
+        "sha256": "fcc19f9d6a5bab023a35ebf5cbe87aeb51015d5161b54c175245566318dfb3d0"
+      },
+      "redLog": {
+        "path": ".repro-runs/htmx-cleanup-investigation/observer/red.log",
+        "bytes": 1935,
+        "sha256": "917a4c75a947f8ee19b49ee3238a12e14f3915e659c8b87beb584b5679125867"
+      }
+    },
+    "checks": {
+      "typecheck": {
+        "outcome": "passed",
+        "log": {
+          "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/typecheck.log",
+          "bytes": 47,
+          "sha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4"
+        }
+      },
+      "lint": {
+        "outcome": "passed",
+        "log": {
+          "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/lint.log",
+          "bytes": 63,
+          "sha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23"
+        }
+      },
+      "build": {
+        "outcome": "passed",
+        "log": {
+          "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/build.log",
+          "bytes": 53,
+          "sha256": "e72c7ae118b13edfce9f09d41f28217c3e90a948d924bbeb538157e981a0aee7"
+        }
+      },
+      "kit": {
+        "outcome": "passed",
+        "log": {
+          "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/kit.log",
+          "bytes": 1087,
+          "sha256": "53738af6d5173c583662f1d97ea332004d8ac510311d145e8ab72758c8d733c8"
+        }
+      },
+      "export": {
+        "outcome": "passed",
+        "log": {
+          "path": ".repro-runs/htmx-cleanup-investigation/instrumentation/export.log",
+          "bytes": 338,
+          "sha256": "be290368c2655cda1e78450539287b943294405cd18f0e25c421ad056488f1e5"
+        }
+      }
+    },
+    "childObserverCalibration": {
+      "passed": 3,
+      "classification": "ordinary Node children, not browser evidence",
+      "files": [
+        {
+          "path": ".repro-runs/htmx-cleanup-investigation/observer/owned-child-calibration.json",
+          "bytes": 2149,
+          "sha256": "73824a02f6295524b481520738015bca24bff849d8ea5409a6c7b1031e33a65e"
+        },
+        {
+          "path": ".repro-runs/htmx-cleanup-investigation/observer/owned-child-calibration.log",
+          "bytes": 87,
+          "sha256": "ca9245dbc48cee1f7814f7da919f05d93c5c59ecde4b298e466909ac2abb8676"
+        },
+        {
+          "path": ".repro-runs/htmx-cleanup-investigation/observer/owned-child-final-green.log",
+          "bytes": 458,
+          "sha256": "2fc6074e31540cead1d9971b2533610f1fe29e47f97d46835ddab9104debdfe7"
+        },
+        {
+          "path": ".repro-runs/htmx-cleanup-investigation/observer/owned-child-green.log",
+          "bytes": 455,
+          "sha256": "063bd39e65d7740e5abd8fccf517c7212fc7991191e3febb646abc35d22d4eb6"
+        },
+        {
+          "path": ".repro-runs/htmx-cleanup-investigation/observer/owned-child-red.log",
+          "bytes": 3217,
+          "sha256": "83c0d8652bdf469b202f08236e88271b8007426d3694b6fb24b3320a6b828e08"
+        }
+      ]
+    },
+    "naturalHtmx": {
+      "classification": "diagnostic only",
+      "attempted": 40,
+      "expectedBuggy": 20,
+      "expectedFixed": 20,
+      "unexpected": 0,
+      "unattempted": 0,
+      "closeRejected": 0,
+      "closeTimedOut": 0,
+      "lateSettlementObserved": 0,
+      "summary": {
+        "path": ".repro-runs/htmx-cleanup-investigation/natural-v1/summary.json",
+        "bytes": 68534,
+        "sha256": "8a1a19b7f58802d71dfd2948c06e6ff4c06afe8c84fa6a32eb03ebc2f3e7f181"
+      },
+      "identities": {
+        "path": ".repro-runs/htmx-cleanup-investigation/natural-v1/input-identities.json",
+        "bytes": 17238,
+        "sha256": "07aff3fdc251b30bdea52309206053d2df9ec46db530566e2763d2550c6f1f3a"
+      },
+      "ranges": {
+        "commandMs": {
+          "minimum": 549.6487500000221,
+          "maximum": 756.960417
+        },
+        "productMs": {
+          "minimum": 222.38049999999998,
+          "maximum": 439.45608400000003
+        },
+        "closeEventMs": {
+          "minimum": 4.563625,
+          "maximum": 8.223
+        },
+        "disconnectMs": {
+          "minimum": 4.769042,
+          "maximum": 8.485917
+        },
+        "closeSettledMs": {
+          "minimum": 13.316334,
+          "maximum": 22.396667
+        },
+        "closeReturnedMs": {
+          "minimum": 13.449209,
+          "maximum": 22.511792
+        },
+        "terminalAfterCommandExitMs": {
+          "minimum": 5000.072916999998,
+          "maximum": 5024.413916999998
+        },
+        "peakRssBytes": {
+          "minimum": 419299328,
+          "maximum": 531169280
+        },
+        "exitAfterCloseCallMs": {
+          "minimum": 12.39075,
+          "maximum": 21.386708
+        },
+        "closeAfterCloseCallMs": {
+          "minimum": 12.535709,
+          "maximum": 21.593792
+        },
+        "exitAfterDisconnectedMs": {
+          "minimum": 7.235709,
+          "maximum": 15.0745
+        },
+        "settlementAfterChildCloseMs": {
+          "minimum": 0.714125,
+          "maximum": 1.039083
+        }
+      },
+      "audit": {
+        "path": ".repro-runs/htmx-cleanup-investigation/audit/natural-independent.json",
+        "bytes": 133616,
+        "sha256": "4f6f53a57bc3acbfb663231f7d91363cc516151cb6ef06e324cea361ecc04dfc"
+      },
+      "auditFindings": []
+    },
+    "affectedBrowser": {
+      "passed": 14,
+      "failed": 1,
+      "receipt": {
+        "path": ".repro-runs/htmx-cleanup-investigation/affected-browser/receipt.json",
+        "bytes": 50073,
+        "sha256": "bd50dc0479b627b4236c4a9b36f4407b0d03ab1d286d189b2e88b4b9bbd0c817"
+      },
+      "stdout": {
+        "path": ".repro-runs/htmx-cleanup-investigation/affected-browser/stdout.log",
+        "bytes": 2790,
+        "sha256": "b2c46473b4d0afc8a4eeb98c060df8d7a2ce99bc6518c1133e447a696582d80e"
+      },
+      "failure": "100 ms morphdom startup deadline returned PROFILE_CLEANUP_FAILED",
+      "productEvidence": {
+        "path": ".repro-runs/practical-beta/case-faults/982d5356-b918-4407-b2ae-2d38af40d0c2/deadline/60feccef-38c2-4045-a61c-ac4eb5643920/evidence.json",
+        "bytes": 1300,
+        "sha256": "208d843c6bdc5d9b08cf31b208e4d07bb629765fd86bdf5ddaa037e565f5bc05"
+      },
+      "retainedProfile": ".repro-runs/practical-beta/case-faults/982d5356-b918-4407-b2ae-2d38af40d0c2/deadline/60feccef-38c2-4045-a61c-ac4eb5643920/.profile",
+      "profileContentsNotRead": true,
+      "supervisorProcessCleanup": true,
+      "supervisorTemporaryCleanup": false,
+      "retainedCompilerCacheEntries": 13,
+      "rerun": false
+    },
+    "startupDiagnostic": {
+      "classification": "one separate diagnostic, not replacement acceptance",
+      "attempted": 1,
+      "result": "inconclusive",
+      "reasonCode": "DEADLINE",
+      "assertionCount": 0,
+      "durationMs": 115.174208,
+      "profileRemoved": true,
+      "deletionErrorReproduced": false,
+      "launchRejectedToChildExitDeliveryMs": 10.480459,
+      "profileRemovedToChildExitDeliveryMs": 3.663875,
+      "limitation": "Event delivery is not exact kernel exit; no claim of kernel liveness at removal or of previous deletion errno",
+      "plan": {
+        "path": ".repro-runs/htmx-cleanup-investigation/startup-deadline-plan.json",
+        "bytes": 1229,
+        "sha256": "ef8ddcafc32163ceacc4a1498155c274008fbba65d398f330a0eb2d6e219761c"
+      },
+      "events": {
+        "path": ".repro-runs/htmx-cleanup-investigation/startup-deadline-v1/child-events.jsonl",
+        "bytes": 3673,
+        "sha256": "0d2ecb39fe78da55ebddc486bcddc31be447130ca06c8f8fd1bca8696d944925"
+      },
+      "receipt": {
+        "path": ".repro-runs/htmx-cleanup-investigation/startup-deadline-v1/receipt.json",
+        "bytes": 12994,
+        "sha256": "da550a33df7558b073ca9bc3611287ddb9ed8ff87613eb61bde08df149ac2016"
+      },
+      "audit": {
+        "path": ".repro-runs/htmx-cleanup-investigation/audit/startup-independent.json",
+        "bytes": 8684,
+        "sha256": "309fcc91de246855c12c9810c06c74ac5cc2734457e869eb052257a7b04af352"
+      }
+    }
+  },
+  "preservedOriginalFailure": {
+    "id": "202a6e1c-caea-4f7b-a079-1b087e7dd846",
+    "outcome": "inconclusive",
+    "reasonCode": "CLEANUP_FAILED",
+    "profileDirectoryStillExists": true,
+    "profileContentsNotRead": true,
+    "currentProfileMetadata": {
+      "ino": 65851690,
+      "mtimeMs": 1792122190477.924,
+      "size": 96
+    }
+  },
+  "notRun": [
+    "Causal historical-cleanup regression and repair (cause not identified)",
+    "New complete repaired-build native htmx20buggy/fixed-pair acceptance",
+    "Affected repaired-candidate fresh Linux/package acceptance",
+    "Full functional browser selection",
+    "Accessibility/denied Chrome route"
+  ],
+  "missingEvidence": [
+    "Instrumented failing htmx helper branch, eventual promise outcome, close/disconnect/owned exit and profile timeline",
+    "Separate failed startup deletion errno and correlated launch/context/process timeline"
+  ],
+  "newContainerOperations": 0,
+  "releaseOrPushOrMerge": false,
+  "evidenceInventory": {
+    "path": ".repro-runs/htmx-cleanup-investigation/evidence-inventory.json",
+    "bytes": 81026,
+    "sha256": "b995d4dd53d4a1ebff45f96e9a4bb4aeb9e3f18dbd86dfa3efd3756e90ee372e"
+  }
+}
