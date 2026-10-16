@@ -59,6 +59,7 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
   };
   let context: BrowserContext | undefined;
   let launching: Promise<BrowserContext> | undefined;
+  let launchAttempted = false;
   let page: Page | undefined;
   let directory: string | undefined;
   let profile: string | undefined;
@@ -146,6 +147,7 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
     check();
     emit('reset', 'Starting a new owned browser profile and pinned local application.');
     // A five-second startup bound also limits cancellation while launch is pending.
+    launchAttempted = true;
     launching = chromium.launchPersistentContext(profile, { headless: true, chromiumSandbox: true, timeout: Math.min(5000, remaining()),
       // Chromium helpers (including fontconfig) also write outside userDataDir.
       // Keep their home/cache inside the same owned cleanup boundary.
@@ -249,6 +251,11 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
     stopped = true; if (timer) clearTimeout(timer);
     options.signal?.removeEventListener('abort', abort);
     if (!context && launching) context = await launching.catch(() => undefined);
+    // A rejected launch can race Playwright's still-pending process cleanup.
+    // Only an acquired context gives this adapter a scoped close acknowledgment;
+    // launch rejection (including cancellation/timeout) never authorizes deletion.
+    const launchCleanupUnacknowledged = launchAttempted && !context;
+    if (launchCleanupUnacknowledged) cleanupFailed = true;
     // Join acquisition even when cancellation wins before the listening event.
     await listening?.catch(() => undefined);
     trace('server-close', { event: 'call' });
@@ -271,7 +278,12 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
     }
     if (fault && result.outcome !== 'cancelled') { result.outcome = 'inconclusive'; result.category = fault.category; result.reason = `${fault.code}: ${fault.message}`; }
     if (options.signal?.aborted) { result.outcome = 'cancelled'; result.category = 'cancelled'; result.reason = 'CANCELLED: The owner cancelled the run. Start a new run to retry.'; }
-    if (cleanupFailed) { result.outcome = options.signal?.aborted ? 'cancelled' : 'inconclusive'; result.category = 'environment'; result.reason = 'CLEANUP_FAILED: Browser shutdown was not acknowledged within the cleanup budget. The owned .profile directory is retained; inspect this run and stop its owned runtime before retrying.'; }
+    if (cleanupFailed) {
+      result.outcome = options.signal?.aborted ? 'cancelled' : 'inconclusive'; result.category = 'environment';
+      result.reason = launchCleanupUnacknowledged
+        ? `CLEANUP_FAILED: Browser launch failed without a shutdown acknowledgment. The owned .profile directory is retained; verify this run’s owned runtime has stopped before removing it or retrying. Previous outcome: ${result.reason}`
+        : 'CLEANUP_FAILED: Browser shutdown was not acknowledged within the cleanup budget. The owned .profile directory is retained; inspect this run and stop its owned runtime before retrying.';
+    }
     result.durationMs = performance.now() - started;
   }
   if (directory) {
