@@ -1,8 +1,9 @@
 import { createServer, type IncomingMessage, type ServerResponse } from 'node:http';
 import { randomBytes, timingSafeEqual } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
-import { ReproError } from './contracts.js';
+import { ReproError, type BrowserCaseExpectation } from './contracts.js';
 import { createAuthoredManifest, createManifest } from './manifest.js';
+import { createCaseManifest, listRegisteredCases } from './browser-case.js';
 import { Coordinator, publicError } from './service.js';
 import { Ledger, type Operation } from './ledger.js';
 import { inspectJobInput, inspectTrial } from './evidence-inspector.js';
@@ -24,6 +25,17 @@ async function body(request: IncomingMessage): Promise<Record<string, unknown>> 
   return value as Record<string, unknown>;
 }
 function keys(value: Record<string, unknown>, allowed: string[]) { if (Object.keys(value).some(key => !allowed.includes(key))) throw new ReproError('input', 'UNKNOWN_FIELD', 'Unknown request field; arbitrary origins, paths and commands are unsupported.'); }
+function declaredManifest(input: unknown) {
+  if (input && typeof input === 'object' && !Array.isArray(input) && Object.hasOwn(input, 'caseId')) {
+    const declaration = input as Record<string, unknown>;
+    keys(declaration, ['caseId', 'expectation']);
+    if (typeof declaration.caseId !== 'string' || !Object.hasOwn(declaration, 'expectation') || !declaration.expectation || typeof declaration.expectation !== 'object' || Array.isArray(declaration.expectation)) {
+      throw new ReproError('input', 'CASE_EXPECTATION_REQUIRED', 'Choose a registered case and explicitly review its expected behavior before starting capture.');
+    }
+    return createCaseManifest(declaration.caseId, declaration.expectation as BrowserCaseExpectation);
+  }
+  return createAuthoredManifest(input);
+}
 export async function serve(options: { port: number; root: string }) {
   const ledger = new Ledger(options.root); const coordinator = new Coordinator(ledger);
   const token = randomBytes(32).toString('hex'); let origin = '';
@@ -54,7 +66,10 @@ export async function serve(options: { port: number; root: string }) {
     }
     const url = new URL(request.url ?? '/', origin); const path = url.pathname;
     if (request.method === 'GET') {
-      if (path === '/api/config') { json(response, 200, { token, scope: 'Registered synthetic search only. Scripted capture with a supplied or caller-declared expectation checked against the registered contract; no human approval claimed. Linux-container portability requires a separately verified run.' }); return; }
+      if (path === '/api/config') {
+        const cases = listRegisteredCases().map(registered => ({ id: registered.id, title: registered.title, expectation: registered.expectation, issue: registered.issue, contractUrls: registered.expectationUrls, repository: registered.repository }));
+        json(response, 200, { token, cases, scope: 'Registered public repository cases and the synthetic search example. Scripted capture freezes an explicit supported expectation; no human approval claimed. Fresh-environment portability requires a separately verified run. Accessibility remains deferred and unverified.' }); return;
+      }
       if (path === '/api/sessions') { json(response, 200, { sessions: ledger.sessions() }); return; }
       const session = /^\/api\/sessions\/([a-zA-Z0-9_-]{1,100})$/.exec(path);
       if (session?.[1]) { json(response, 200, { session: ledger.getSession(session[1]), jobs: ledger.jobs(session[1]) }); return; }
@@ -75,7 +90,7 @@ export async function serve(options: { port: number; root: string }) {
       const input = await body(request);
       if (path === '/api/sessions') {
         keys(input, ['consent', 'experiment']);
-        const manifest = Object.hasOwn(input, 'experiment') ? createAuthoredManifest(input.experiment) : createManifest();
+        const manifest = Object.hasOwn(input, 'experiment') ? declaredManifest(input.experiment) : createManifest();
         const session = ledger.createSession(manifest, input.consent === true);
         json(response, 201, { session }); return;
       }
