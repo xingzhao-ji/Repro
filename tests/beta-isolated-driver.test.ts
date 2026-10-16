@@ -25,6 +25,7 @@ test('container plan preserves the approved resource and security boundary witho
   const args = driver.containerArguments({ name: 'repro-beta-test', owner: 'test', volume: 'repro-beta-data-test', image: `sha256:${'a'.repeat(64)}`, policyPath: '/reviewed/policy.json', worker: 'reviewed worker', operation: { name: 'readable-buggy', revision: 'buggy', kind: 'readable', watchdogMs: 40000, expectedExit: 1, maximumMs: 30000 } });
   for (const [flag, value] of [['--user', 'node'], ['--network', 'none'], ['--cap-drop', 'ALL'], ['--pids-limit', '128'], ['--memory', '1g'], ['--cpus', '2'], ['--shm-size', '256m'], ['--cgroupns', 'private']]) assert.equal(args[args.indexOf(flag) + 1], value);
   assert.ok(args.includes('--read-only'));
+  assert.ok(args.includes('--init'), 'Docker must reap orphaned browser descendants through its standard init.');
   assert.ok(args.includes('no-new-privileges'));
   assert.ok(args.includes('seccomp=/reviewed/policy.json'));
   assert.ok(args.includes('type=volume,source=repro-beta-data-test,target=/work/.repro-runs'));
@@ -34,8 +35,27 @@ test('container plan preserves the approved resource and security boundary witho
 });
 
 function receipt() {
-  return { schemaVersion: 1, operation: 'readable-buggy', command: { exitCode: 1, exitSignal: null, launchFailed: false }, durationMs: 1500, stopReason: null, measurementErrors: [], logsTruncated: false, memory: { before: { peakBytes: 1000000, maxBytes: 1073741824, pidsMax: 128, cpuMax: '200000 100000', events: { oom: 0, oom_kill: 0 }, pidsEvents: { max: 0 } }, after: { peakBytes: 50000000, maxBytes: 1073741824, pidsMax: 128, cpuMax: '200000 100000', events: { oom: 0, oom_kill: 0 }, pidsEvents: { max: 0 } } }, cleanup: { initial: { elapsedMs: 0, owned: [] }, first: { elapsedMs: 1501, owned: [] }, terminal: { elapsedMs: 6502, owned: [] }, commandExitedAtMs: 1500, firstTemporaryFiles: [], firstProfiles: [], firstInventoryAtMs: 1505, temporaryFiles: [], profiles: [], terminalInventoryAtMs: 6505 } };
+  const infrastructure = () => ({ init: { pid: 1, ppid: 0, pgid: 1, startTicks: 100, state: 'S', executable: '/sbin/docker-init' }, observer: { pid: 7, ppid: 1, pgid: 1, startTicks: 110, state: 'R' } });
+  return { schemaVersion: 1, operation: 'readable-buggy', command: { exitCode: 1, exitSignal: null, launchFailed: false }, durationMs: 1500, stopReason: null, measurementErrors: [], logsTruncated: false, memory: { before: { peakBytes: 1000000, maxBytes: 1073741824, pidsMax: 128, cpuMax: '200000 100000', events: { oom: 0, oom_kill: 0 }, pidsEvents: { max: 0 } }, after: { peakBytes: 50000000, maxBytes: 1073741824, pidsMax: 128, cpuMax: '200000 100000', events: { oom: 0, oom_kill: 0 }, pidsEvents: { max: 0 } } }, cleanup: { initial: { elapsedMs: 0, owned: [], infrastructure: infrastructure() }, first: { elapsedMs: 1501, owned: [], infrastructure: infrastructure() }, terminal: { elapsedMs: 6502, owned: [], infrastructure: infrastructure() }, commandExitedAtMs: 1500, firstTemporaryFiles: [], firstProfiles: [], firstInventoryAtMs: 1505, temporaryFiles: [], profiles: [], terminalInventoryAtMs: 6505 } };
 }
+
+test('receipt requires verified stable init and observer identities in every census', () => {
+  const operation = { name: 'readable-buggy', expectedExit: 1, maximumMs: 30000 };
+  assert.deepEqual(driver.receiptProblems(receipt(), operation), []);
+  const mutations = [
+    (value: ReturnType<typeof receipt>) => { Reflect.deleteProperty(value.cleanup.initial, 'infrastructure'); },
+    (value: ReturnType<typeof receipt>) => { value.cleanup.first.infrastructure.init.executable = '/usr/local/bin/node'; },
+    (value: ReturnType<typeof receipt>) => { value.cleanup.terminal.infrastructure.init.startTicks++; },
+    (value: ReturnType<typeof receipt>) => { value.cleanup.terminal.infrastructure.observer.startTicks++; },
+    (value: ReturnType<typeof receipt>) => { value.cleanup.terminal.infrastructure.observer.ppid = 8; },
+    (value: ReturnType<typeof receipt>) => { value.cleanup.first.infrastructure.init.state = 'Z'; },
+    (value: ReturnType<typeof receipt>) => { Object.assign(value, { processes: { samples: [{ elapsedMs: 1000, owned: [] }] } }); },
+  ];
+  for (const mutate of mutations) {
+    const value = receipt(); mutate(value);
+    assert.ok(driver.receiptProblems(value, operation).includes('CENSUS_INFRASTRUCTURE'), 'Unverified or changed infrastructure cannot be silently excluded.');
+  }
+});
 
 test('kernel and cleanup gates reject missing, forced, over-budget and infrastructure evidence', () => {
   const operation = { name: 'readable-buggy', expectedExit: 1, maximumMs: 30000 };

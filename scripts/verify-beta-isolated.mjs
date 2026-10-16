@@ -39,7 +39,7 @@ export function operationPlan(repetitions = 20) {
 
 export function containerArguments({ name, owner, volume, image, policyPath, worker, operation }) {
   return ['create', '--name', name, '--label', `io.repro.beta.owner=${owner}`, '--platform', 'linux/arm64',
-    '--user', 'node', '--workdir', '/work', '--network', 'none', '--read-only', '--cap-drop', 'ALL',
+    '--init', '--user', 'node', '--workdir', '/work', '--network', 'none', '--read-only', '--cap-drop', 'ALL',
     '--security-opt', 'no-new-privileges', '--security-opt', `seccomp=${policyPath}`,
     '--pids-limit', '128', '--memory', '1g', '--cpus', '2', '--tmpfs', '/tmp:rw,nosuid,size=256m', '--shm-size', '256m', '--cgroupns', 'private',
     '--mount', `type=volume,source=${volume},target=/work/.repro-runs`, '--env', `REPRO_REVISION=${operation.revision}`,
@@ -64,6 +64,17 @@ export function receiptProblems(receipt, operation) {
   if (receipt.memory?.after?.peakBytes < receipt.memory?.before?.peakBytes) problems.push('CGROUP_PEAK_REGRESSION');
   const cleanup = receipt.cleanup;
   const timestamp = value => Number.isFinite(value) && value >= 0;
+  const infrastructure = cleanup?.initial?.infrastructure;
+  const identity = row => row && [row.pid, row.ppid, row.pgid, row.startTicks].every(Number.isSafeInteger)
+    && row.pid > 0 && row.ppid >= 0 && row.pgid > 0 && row.startTicks > 0 && /^[RSDTWKPI]$/.test(row.state);
+  const same = (left, right) => left && right && ['pid', 'ppid', 'pgid', 'startTicks'].every(key => left[key] === right[key]);
+  const verifiedInfrastructure = point => {
+    const current = point?.infrastructure;
+    return identity(current?.init) && current.init.pid === 1 && current.init.ppid === 0 && current.init.executable === '/sbin/docker-init'
+      && identity(current?.observer) && current.observer.pid > 1 && current.observer.ppid === 1
+      && same(current.init, infrastructure?.init) && same(current.observer, infrastructure?.observer);
+  };
+  if (![cleanup?.initial, cleanup?.first, ...(Array.isArray(receipt.processes?.samples) ? receipt.processes.samples : []), cleanup?.terminal].every(verifiedInfrastructure)) problems.push('CENSUS_INFRASTRUCTURE');
   if (!cleanup || !Array.isArray(cleanup.initial?.owned) || cleanup.initial.owned.length || !Array.isArray(cleanup.first?.owned) || !Array.isArray(cleanup.terminal?.owned)) problems.push('CENSUS_INCOMPLETE');
   else {
     if (cleanup.terminal.owned.length) problems.push('OWNED_SURVIVORS');
@@ -102,11 +113,44 @@ export function runEvidenceProblems(manifest, result, revision, trusted) {
   return problems;
 }
 
+/** Read every namespace process; exclude only the verified init and this observer. */
+export async function containerCensus(filesystem, processIdentity, expectedInfrastructure) {
+  const fail = () => { throw new Error('INIT_IDENTITY: The observer requires the unchanged Docker init parent and stable process identities.'); };
+  const same = (left, right) => left && right && ['pid', 'ppid', 'pgid', 'startTicks'].every(key => left[key] === right[key]);
+  const alive = row => row && !['Z', 'X', 'x'].includes(row.state);
+  const read = async pid => {
+    const raw = await filesystem.readFile(`/proc/${pid}/stat`, 'utf8');
+    if (!raw.startsWith(`${pid} (`) || raw.lastIndexOf(')') < 0) fail();
+    const fields = raw.slice(raw.lastIndexOf(')') + 2).trim().split(/\s+/);
+    const row = { pid, ppid: Number(fields[1]), pgid: Number(fields[2]), startTicks: Number(fields[19]), state: fields[0] };
+    if (![row.pid, row.ppid, row.pgid, row.startTicks].every(Number.isSafeInteger)
+      || row.pid <= 0 || row.ppid < 0 || row.pgid <= 0 || row.startTicks <= 0 || !/^[RSDZTWXxKPI]$/.test(row.state)) fail();
+    return row;
+  };
+  if (!Number.isSafeInteger(processIdentity.pid) || processIdentity.pid <= 1 || processIdentity.ppid !== 1) fail();
+  const executable = await filesystem.readlink('/proc/1/exe');
+  const firstInit = await read(1);
+  if (executable !== '/sbin/docker-init' || firstInit.ppid !== 0 || !alive(firstInit)) fail();
+  const rows = [];
+  for (const name of await filesystem.readdir('/proc')) {
+    if (!/^\d+$/.test(name)) continue;
+    try { rows.push(await read(Number(name))); }
+    catch (error) { if (error.code !== 'ENOENT' && error.code !== 'ESRCH') throw error; }
+  }
+  const lastInit = await read(1), lastExecutable = await filesystem.readlink('/proc/1/exe');
+  const init = rows.find(row => row.pid === 1), observer = rows.find(row => row.pid === processIdentity.pid);
+  if (!same(firstInit, init) || !same(firstInit, lastInit) || lastExecutable !== executable || !alive(init) || !alive(lastInit)
+    || !observer || observer.ppid !== processIdentity.ppid || !alive(observer)) fail();
+  const infrastructure = { init: { ...init, executable }, observer };
+  if (expectedInfrastructure && (!same(init, expectedInfrastructure.init) || executable !== expectedInfrastructure.init?.executable || !same(observer, expectedInfrastructure.observer))) fail();
+  return { infrastructure, owned: rows.filter(row => !same(row, init) && !same(row, observer)).sort((a, b) => a.pid - b.pid) };
+}
+
 // This function is serialized verbatim, reviewed and hashed, then supplied as a Node argument.
 // It is a measurement supervisor, never an alternative oracle or capsule implementation.
 async function isolatedWorker() {
   const { spawn } = await import('node:child_process');
-  const { mkdir, readFile, readdir, lstat, writeFile, rmdir } = await import('node:fs/promises');
+  const { mkdir, readFile, readdir, readlink, lstat, writeFile, rmdir } = await import('node:fs/promises');
   const { join } = await import('node:path');
   const { performance } = await import('node:perf_hooks');
   const { createHash } = await import('node:crypto');
@@ -118,19 +162,12 @@ async function isolatedWorker() {
   const errors = [], observed = new Map(), samples = [], interventions = [];
   const scratch = '/tmp/repro-tmp', home = '/tmp/repro-home';
   await mkdir(scratch); await mkdir(home);
+  let infrastructure;
   async function census() {
-    const owned = [];
-    for (const name of await readdir('/proc')) {
-      if (!/^\d+$/.test(name) || Number(name) === process.pid) continue;
-      try {
-        const raw = await readFile(`/proc/${name}/stat`, 'utf8');
-        const fields = raw.slice(raw.lastIndexOf(')') + 2).trim().split(/\s+/);
-        const row = { pid: Number(name), ppid: Number(fields[1]), pgid: Number(fields[2]), startTicks: Number(fields[19]), state: fields[0] };
-        if (![row.pid, row.ppid, row.pgid, row.startTicks].every(Number.isSafeInteger)) throw new Error('format');
-        owned.push(row); observed.set(`${row.pid}:${row.startTicks}`, row);
-      } catch (error) { if (error.code !== 'ENOENT' && error.code !== 'ESRCH') throw error; }
-    }
-    return { elapsedMs: elapsed(), owned: owned.sort((a, b) => a.pid - b.pid) };
+    const snapshot = await containerCensus({ readdir, readFile, readlink }, { pid: process.pid, ppid: process.ppid }, infrastructure);
+    infrastructure ??= snapshot.infrastructure;
+    snapshot.owned.forEach(row => observed.set(`${row.pid}:${row.startTicks}`, row));
+    return { elapsedMs: elapsed(), ...snapshot };
   }
   async function kernel() {
     const values = {};
@@ -233,11 +270,11 @@ async function isolatedWorker() {
   process.exit(stopReason || errors.length || launchFailed || exitCode !== operation.expectedExit || logsTruncated || terminal?.owned.length || temporaryFiles.length || profiles.length ? 2 : 0);
 }
 
-export function workerSource() { return `(${isolatedWorker.toString()})().catch(() => { console.error('OBSERVER_INCOMPLETE: Preserve this container receipt and inspect the approved environment before retrying.'); process.exitCode = 2; });\n`; }
+export function workerSource() { return `${containerCensus.toString()}\n(${isolatedWorker.toString()})().catch(() => { console.error('OBSERVER_INCOMPLETE: Preserve this container receipt and inspect the approved environment before retrying.'); process.exitCode = 2; });\n`; }
 
 export function inspectProblems(inspect, volume, policyBytes) {
   const problems = [], config = inspect?.Config, host = inspect?.HostConfig;
-  if (config?.User !== 'node' || config?.WorkingDir !== '/work' || !host || host.Privileged !== false || host.ReadonlyRootfs !== true || host.NetworkMode !== 'none'
+  if (config?.User !== 'node' || config?.WorkingDir !== '/work' || !host || host.Init !== true || host.Privileged !== false || host.ReadonlyRootfs !== true || host.NetworkMode !== 'none'
     || host.PidsLimit !== 128 || host.Memory !== MEMORY_LIMIT || host.NanoCpus !== 2000000000 || host.ShmSize !== 268435456 || host.CgroupnsMode !== 'private') problems.push('CONTAINER_BOUNDARY');
   if (JSON.stringify(host?.CapDrop) !== '["ALL"]' || host?.CapAdd?.length || host?.Binds?.length || host?.Devices?.length || host?.DeviceRequests?.length || host?.PidMode || host?.IpcMode === 'host'
     || Object.keys(host?.PortBindings ?? {}).length || host?.PublishAllPorts) problems.push('CONTAINER_HOST_ACCESS');
