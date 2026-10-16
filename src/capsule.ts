@@ -13,7 +13,7 @@ const TOTAL_LIMIT = 32 * 1024 * 1024;
 const GENERATED = new Set(['node_modules', '.repro-runs', '.repro-cache']);
 const POLICY_PATH = 'security/repro-chromium-seccomp.json';
 const POLICY_SHA256 = '949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b';
-const FILES = ['.dockerignore', 'Dockerfile', 'README.md', 'dist/cli.js', 'dist/index.js', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', 'manifest.json', 'package-lock.json', 'package.json', 'replay.test.mjs', POLICY_PATH] as const;
+const FILES = ['.dockerignore', 'Dockerfile', 'README.md', 'dist/cli.js', 'dist/index.js', 'dist/case-worker.js', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', 'manifest.json', 'package-lock.json', 'package.json', 'replay.test.mjs', POLICY_PATH] as const;
 type Artifact = { path: string; sha256: string; bytes: number };
 type Integrity = { format: 'repro-directory-v1'; schemaVersion: 1; manifestDigest: string; files: Artifact[] };
 export interface ExportProgress { phase: 'staging' | 'artifact-written' | 'validated'; completed: number; total: number; path?: string }
@@ -289,7 +289,7 @@ async function trustedArtifacts(manifest: Manifest): Promise<Map<string, Buffer>
     registeredHashes.set(`${root}/fixed.js`, repositoryCase.revisions.fixed.sourceDigest);
     registeredHashes.set(`${root}/page.html`, repositoryCase.wrapperDigest);
   }
-  for (const file of ['dist/cli.js', 'dist/index.js', 'package.json', 'package-lock.json', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', POLICY_PATH, ...(repositoryCase?.assetPaths ?? [])]) {
+  for (const file of ['dist/cli.js', 'dist/index.js', 'dist/case-worker.js', 'package.json', 'package-lock.json', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', POLICY_PATH, ...(repositoryCase?.assetPaths ?? [])]) {
     try {
       let source = join(ROOT, file);
       if (file === 'package-lock.json') {

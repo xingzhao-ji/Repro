@@ -12,10 +12,13 @@ The synthetic alpha below remains supported. The beta adds three registered publ
 | Export | Readable conventional single-revision Node test, locked dependencies, selected source/provenance/licenses and integrity-checked runner | Public prerequisite acquisition needed; no LLM, key, proprietary viewer or original workspace needed |
 | Platform evidence | Three fresh Linux arm64 workflows and 20 buggy/fixed exported pairs each passed; native macOS arm64 workflows passed | Native htmx stability failed on close acknowledgement; no Linux amd64/other physical host claim |
 | Linux boundary | Fresh owned VM/daemon, capsule-only no-cache builds, no host binds/credentials/runtime external network, unprivileged user, verified init, sandbox enabled, unchanged approved policy and limits | Ordinary containers are not hostile-code isolation; receiving hosts need their own legitimate scoped permission |
+| Startup cleanup | Parent finalization requires timely natural worker completion plus either a sealed zero-creation-attempt receipt or an acquired context’s fresh close acknowledgment | A real failed launch with any creation attempt and no fresh acquired-context acknowledgment retains its profile; trusted pinned-browser lifecycle handling is not general descendant containment or reaping |
 | Privacy and failures | Registered public projection only; secret sentinels, cancellation/deadlines, missing/tampered dependencies, malformed input and user-file preservation tested | General redaction/private-data support unestablished; fault-injection evidence is native/unit, not a Linux fault suite |
 | UI | Functional case selection, expectation confirmation, observed failure, reduction/trials, comparison, export and historical inspection tested | Accessibility, native 200% zoom and actual screen-reader workflows deferred/unverified |
 
 Node ≥24 is declared; the measured runtime is Node 26.7.0, Playwright 1.64.0 and Chromium 156.0.8078.4. The Linux recipe targets arm64 and pins the Node Debian base digest, but system repositories are not snapshotted. Native development uses existing dependencies/browser and is not a clean-machine observation. Final case packages and exact metric/audit identities are linked in the current report.
+
+The startup cleanup implementation is described in [the boundary record](STARTUP-OWNER-BOUNDARY.md), with current verification status in [STATE](../STATE.md). The recorded platform results above retain their original candidate identities; they do not automatically verify the new worker implementation. Late completion cannot revise a cleanup failure or remove its retained profile.
 
 ## Retained synthetic alpha boundary
 

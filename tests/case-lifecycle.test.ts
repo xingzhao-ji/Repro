@@ -1,13 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { Server } from 'node:http';
 import crypto, { randomUUID } from 'node:crypto';
 import { syncBuiltinESMExports } from 'node:module';
 import { access, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { join, resolve, sep } from 'node:path';
-import { chromium } from 'playwright';
 import { createCaseManifest } from '../src/browser-case.js';
 import { runCaseBrowser } from '../src/case-adapter.js';
+import { installCaseWorkerFixture } from './helpers/case-worker-control.js';
 
 test('browser home and font caches stay owned when launch fails after creating files', async t => {
   const root = resolve('.repro-runs/practical-beta/browser-home', randomUUID());
@@ -19,19 +18,12 @@ test('browser home and font caches stay owned when launch fails after creating f
   await writeFile(join(callerHome, 'user-file.txt'), 'Keep the caller home.');
   await writeFile(join(callerCache, 'existing-cache'), 'Keep the caller cache.');
   const originalHome = process.env['HOME'], originalCache = process.env['XDG_CACHE_HOME'];
-  let profile: string | undefined, environment: NodeJS.ProcessEnv | undefined, generated: string | undefined;
-  t.mock.method(chromium, 'launchPersistentContext', async (directory: string, options: Parameters<typeof chromium.launchPersistentContext>[1]) => {
-    profile = directory; environment = options?.env;
-    const browserHome = environment?.['HOME'] ?? callerHome;
-    const browserCache = environment?.['XDG_CACHE_HOME'] ?? join(browserHome, '.cache');
-    assert.ok(browserHome.startsWith(`${root}${sep}`) && browserCache.startsWith(`${root}${sep}`), 'The fake may write only task-owned directories.');
-    const fontCache = join(browserCache, 'fontconfig');
-    await mkdir(fontCache, { recursive: true });
-    generated = join(fontCache, 'generated-browser-cache');
-    await writeFile(generated, 'Browser-created cache.');
-    throw new Error('Simulated startup failure after font cache creation.');
-  });
+  const fixture = installCaseWorkerFixture(t, { suite: 'lifecycle', mode: 'cache-only-rejection', directory: root, callerHome });
   const result = await runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: join(root, 'runs') });
+  const written = fixture.messages.find(message => message.type === 'cache-written');
+  const profile = written?.['profile'] as string | undefined;
+  const environment = written?.['environment'] as NodeJS.ProcessEnv | undefined;
+  const generated = written?.['generated'] as string | undefined;
   assert.ok(generated, 'The fake launch must actually create a cache file before failing.');
   assert.equal(result.outcome, 'inconclusive');
   assert.match(result.reason, /RUNNER_ERROR/);
@@ -68,24 +60,41 @@ test('a run ID collision preserves the preexisting profile and user output', asy
 
 test('cancelling while the owned HTTP server acquires its port closes the late acquired server', async t => {
   const controller = new AbortController();
-  const nativeListen = Server.prototype.listen;
-  const servers: Server[] = [];
-  t.mock.method(Server.prototype, 'listen', function(this: Server, ...args: unknown[]) {
-    servers.push(this);
-    setTimeout(() => controller.abort(), 5);
-    setTimeout(() => { Reflect.apply(nativeListen, this, args); }, 35);
-    return this;
-  });
+  const root = resolve('.repro-runs/practical-beta/lifecycle', randomUUID());
+  const fixture = installCaseWorkerFixture(t, { suite: 'lifecycle', mode: 'late-server', directory: root });
   try {
-    const result = await runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: `.repro-runs/practical-beta/lifecycle/${randomUUID()}`, signal: controller.signal });
+    const pending = runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: root, signal: controller.signal });
+    // Source-worker bootstrap competes with the full suite; this readiness
+    // bound is test coordination, not the product operation/cleanup deadline.
+    await fixture.waitFor('cancel-server-startup', 1, 5000);
+    controller.abort();
+    const result = await pending;
     assert.equal(result.outcome, 'cancelled');
     assert.equal(result.assertionCount, 0);
-    const owned = servers[0];
-    assert.ok(owned, 'test must reach actual asynchronous server acquisition');
-    assert.equal(owned.listening, false, 'Late server acquisition must not escape the owner cleanup boundary.');
+    const owned = fixture.messages.find(message => message.type === 'server-closed');
+    assert.ok(fixture.messages.some(message => message.type === 'server-created'), 'test must reach actual asynchronous server acquisition');
+    assert.ok(owned, 'The worker must observe the owned server close.');
+    assert.equal(owned['listening'], false, 'Late server acquisition must not escape the owner cleanup boundary.');
   } finally {
-    // The red regression must not leak its deliberately delayed owned server.
-    const owned = servers[0];
-    if (owned?.listening) await new Promise<void>(resolve => owned!.close(() => resolve()));
+    controller.abort();
+    fixture.restore();
   }
+});
+
+
+test('cancellation during reset acknowledgment stops before attempting browser acquisition', async t => {
+  const root = resolve('.repro-runs/practical-beta/lifecycle', randomUUID());
+  const callerHome = join(root, 'caller-home');
+  const controller = new AbortController();
+  const fixture = installCaseWorkerFixture(t, { suite: 'lifecycle', mode: 'cache-only-rejection', directory: root, callerHome });
+  const result = await runCaseBrowser(createCaseManifest('morphdom-textarea'), {
+    artifactDir: root,
+    signal: controller.signal,
+    onEvent(event) { if (event.type === 'reset') controller.abort(); },
+  });
+  assert.equal(result.outcome, 'cancelled');
+  assert.equal(result.assertionCount, 0);
+  assert.equal(fixture.messages.some(message => message.type === 'cache-written'), false,
+    'The browser launch API must not be called after the reset callback cancels.');
+  await assert.rejects(access(join(root, result.id, '.profile')), { code: 'ENOENT' });
 });

@@ -1,3 +1,23 @@
+# Startup cleanup repair — implementation under verification
+
+The October 16 repair uses a fixed trusted Node worker for each registered browser-case execution. The parent owns evidence and profile deletion. The earlier architecture review is preserved below as historical analysis; a native helper, Linux subreaper, and macOS Endpoint Security integration have **not** been installed or established as necessary prerequisites for this narrower implementation.
+
+The supported completion paths are distinct:
+
+- **No process-creation attempt occurred:** the worker installs a creation fence before loading Playwright, exposes the run identity to browser execution only after the fence is active, completes its execution work, seals future creation, and sends a bounded identity-bound receipt. The parent must then observe that exact worker's natural successful close within the existing owner budget. Zero attempts plus sealed creation and actual worker completion permits cleanup after a cache-only launch rejection; rejection by itself never does.
+- **A browser context was acquired:** the existing supported Playwright close contract remains required, together with actual timely worker completion. An already-closed context or disconnected browser cannot contribute a fresh close acknowledgment. This is trusted registered Chromium lifecycle handling, not a claim that Node observes native descendants or contains arbitrary applications.
+- **Any process creation occurred without an acquired, acknowledged context:** cleanup remains uncertified. The parent returns `CLEANUP_FAILED` and retains the profile. Launcher exit, absent process group, quiet observation, diagnostics, and late completion do not change that decision.
+
+The fence covers Node child-process creation functions and the ChildProcess spawn method, Worker construction, native addon loading, and exec replacement. It is installed before dependency import, then activated before browser execution receives the profile identity. It is a trusted-runtime accounting boundary, not an operating-system sandbox. It does not adopt or reap native Chromium descendants. Captured creator exports remain wrapped, the creation methods cannot be replaced after activation, and sealing prevents later creation through those interfaces.
+
+Browser work still stops at the declared operation deadline. Acquisition may finish within the existing cleanup window so the owner can close it, with no actions executed after stopping. Acquisition, close acknowledgment, and parent-observed worker completion share the 2,000 ms ownership deadline. The existing 1,000 ms execution drain cannot extend deletion authority. A late close is best-effort cleanup only; it cannot rewrite the returned verdict or delete retained evidence.
+
+Explicitly configured empty/missing browser caches are rejected before profile allocation. The worker uses a fixed source or packaged executable, a narrow runtime-prerequisite environment, and an authenticated 128 KiB frame limit with exact registered input, result, observation, event, and diagnostic schemas. Caller preloads and arbitrary credentials are not inherited. Source harness identity binds all six new worker execution dependencies; the bundled worker is shipped, hashed, and independently verified in capsules.
+
+The original three cleanup assertions and detached-writer tests remain requirements. Fault injection now runs inside controlled test workers, with exact child joins and unrelated sentinels. New regressions cover reset-callback cancellation, immutable output ownership, bundled dependency import order, already-disconnected contexts, and malformed/foreign worker receipts. Final prerequisites pass:382/382 ordinary and50/50 functional browser checks, plus TypeScript/lint/build/kit; [the receipt](../evidence/startup-cleanup-verification.json) binds their exact inputs and logs. Fresh native/Linux/installed acceptance is still pending. The original htmx shutdown failure is separate and unresolved; this startup repair is not evidence of its cause or resolution. Accessibility remains deferred.
+
+## Preserved architecture review at 49d162a
+
 # Startup owner boundary — architecture required, not installed
 
 This review continues `51ee29a` / `e67b573`. Their profile-retention guard remains unchanged. The three failed cleanup assertions remain requirements. No new owner is installed, and startup cleanup is not complete. The original htmx close failure remains a separate unresolved failure.

@@ -1,3 +1,19 @@
+# Current work — startup worker repair under verification
+
+October 16, 2026. Working on `task/startup-owner-boundary`, from the initially clean `49d162a`. Only Repro resources are in scope; the separately running game session must remain untouched. No shared service, unrelated process, native security helper, credential, security setting, publication, or deployment has been changed.
+
+Implemented a fixed per-run browser worker, parent-owned profile finalization, a sealed no-process completion path, short-deadline acquisition joining, and explicit missing-cache prerequisites. Worker source/bundle identity is included in the independent harness and capsule checks. Any attempted process creation without an acquired/acknowledged browser context still retains its profile as cleanup failure. This is not native descendant containment. See [current boundary implementation and preserved review](docs/STARTUP-OWNER-BOUNDARY.md).
+
+Fresh baseline reproduced the three original failing cleanup assertions: focused 11/12 and affected browser 13/15. The safe parent-revision comparison showed the old deadline test could pass its immediate deletion assertion while the profile later reappeared. Logs and original profiles remain under ignored `.repro-runs/startup-repair-20261016/`; no historical failure was replaced. Initial worker integration passed startup12/12, diagnostics6/6, lifecycle3/3 and packaging48/48. The first full ordinary run was368/369: a test-only source-worker readiness wait expired under parallel load. Its log is preserved as `ordinary-worker-v1.log`.
+
+Independent review subsequently found and reproduced the output-path mutation race, cancellation after reset acknowledgment, bundled Playwright import before the creation fence, acquired already-disconnected context acceptance, and client request/receipt/liveness gaps. Repairs and focused failing-before/passing-after evidence are being integrated. These interim counts do not establish final prerequisite or acceptance completion. Rebuild and rerun all final prerequisites on stable bytes before freezing fresh acceptance.
+
+Final prerequisites now pass on unchanged execution inputs: **382/382 ordinary tests, 15/15 affected browser tests and 35/35 remaining functional browser tests**, plus full TypeScript, lint, build and kit checks. See [the repair checkpoint](evidence/STARTUP-CLEANUP-REPAIR.md) and [exact input/log hashes](evidence/startup-cleanup-verification.json). The earlier interim failures above remain preserved.
+
+Root owns integration. Fresh native workflow/stability, installed schema3 package checks, Linux arm64 verification and original htmx stage diagnostics are being prepared under distinct ignored paths. Do not run the historical drivers unchanged or reuse their output directories. Preserve the existing thresholds, approved policy SHA256, owner-only resource controls, all failed runs, and accessibility deferral. The original htmx fixed repetition15 remains unresolved; a new green sample alone cannot establish its cause or repair. No fresh acceptance has yet run on this candidate, and no full deployment is claimed.
+
+## Preserved startup-boundary checkpoint
+
 # Current work — complete startup ownership requires a stronger platform boundary
 
 Continued from clean `51ee29a` / `e67b573` on `task/startup-owner-boundary`. The safety repair and all product/cleanup/security requirements remain unchanged. Installed API and supervisor review found no complete native macOS descendant-completion authority: direct-child handles, launcher exit, group disappearance and sampled ancestry can miss a detached descendant. Four new deterministic process-boundary/fixture tests pass, including a writable surviving descendant after launcher close and group disappearance, deadline/rejection retention, late completion, confirmed controlled shutdown/deletion, unrelated-process isolation and failed fixture readiness. They do not implement a complete startup owner.

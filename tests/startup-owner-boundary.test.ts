@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawn, type ChildProcess } from 'node:child_process';
-import { EventEmitter } from 'node:events';
 import { randomUUID } from 'node:crypto';
 import { request } from 'node:http';
 import fs from 'node:fs/promises';
@@ -9,9 +8,9 @@ import { syncBuiltinESMExports } from 'node:module';
 import { join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { setTimeout as delay } from 'node:timers/promises';
-import { chromium } from 'playwright';
 import { runCaseBrowser } from '../src/case-adapter.js';
 import { createCaseManifest } from '../src/browser-case.js';
+import { installCaseWorkerFixture, type FixtureMessage } from './helpers/case-worker-control.js';
 
 const fixture = fileURLToPath(new URL('./helpers/startup-owner-fixture.cjs', import.meta.url));
 
@@ -79,36 +78,47 @@ async function controlledOwner(directory: string, detachedDescendant: boolean, c
   })() };
 }
 
+function fixtureOwner(message: FixtureMessage) {
+  const { pid, port, token, profile, launcherPid, launcherExitCode } = message as unknown as {
+    pid: number; port: number; token: string; profile: string; launcherPid: number; launcherExitCode: number | null;
+  };
+  assert.ok(Number.isSafeInteger(pid) && pid > 0 && Number.isSafeInteger(port) && port > 0);
+  const call = (route: 'probe' | 'stop') => new Promise<string>((accept, reject) => {
+    const operation = request({ hostname: '127.0.0.1', port, path: `/${route}`, method: 'POST', agent: false,
+      signal: AbortSignal.timeout(1000), headers: { authorization: `Bearer ${token}` } }, response => {
+      let body = ''; response.setEncoding('utf8');
+      response.on('data', (chunk: string) => { body += chunk; });
+      response.once('error', reject); response.once('end', () => accept(body));
+    });
+    operation.once('error', reject); operation.end();
+  });
+  let stopped: Promise<void> | undefined;
+  return { pid, profile, launcherPid, launcherExitCode, probe: () => call('probe'), stop: () => stopped ??= (async () => {
+    if (exists(pid)) assert.equal(await call('stop'), 'stopping');
+    await untilAbsent(pid);
+  })() };
+}
+
 for (const boundary of ['rejection', 'deadline'] as const) test(`launcher completion and absent process group do not authorize profile deletion after ${boundary}`, {
   timeout: 10_000, skip: process.platform === 'win32',
 }, async t => {
   const root = resolve('.repro-runs/startup-owner-boundary/tests', randomUUID());
   const sentinel = await controlledOwner(join(root, 'unrelated'), false);
-  let owner: Awaited<ReturnType<typeof controlledOwner>> | undefined;
-  let profile = '';
-  let ready!: () => void, release!: () => void;
-  const prepared = new Promise<void>(accept => { ready = accept; });
-  const rejected = new Promise<void>(accept => { release = accept; });
+  const fixture = installCaseWorkerFixture(t, { suite: 'startup', mode: boundary === 'deadline' ? 'detached-deadline' : 'detached-rejection', directory: root });
+  let owner: ReturnType<typeof fixtureOwner> | undefined;
+  let profile: string;
   const manifest = createCaseManifest('morphdom-textarea');
-  if (boundary === 'deadline') t.mock.timers.enable({ apis: ['setTimeout'] });
-  t.mock.method(chromium, 'launchPersistentContext', async (directory: string) => {
-    profile = directory; owner = await controlledOwner(profile, true);
-    await owner.closed;
-    assert.equal(owner.child.exitCode, 0);
-    assert.ok(owner.child.pid);
-    assert.equal(exists(-owner.child.pid), false, 'The original launcher process group has no remaining members.');
-    assert.equal(await owner.probe(), 'used', 'A detached descendant still actively uses the profile.');
-    ready(); await rejected;
-    throw new Error('controlled rejected launch');
-  });
   try {
     const pending = runCaseBrowser(manifest, { artifactDir: join(root, 'artifacts') });
-    await prepared;
+    owner = fixtureOwner(await fixture.waitFor('profile-ready')); profile = owner.profile;
+    assert.equal(owner.launcherExitCode, 0); assert.ok(owner.launcherPid);
+    assert.equal(exists(-owner.launcherPid), false, 'The original launcher process group has no remaining members.');
+    assert.equal(await owner.probe(), 'used', 'A detached descendant still actively uses the profile.');
     if (boundary === 'deadline') {
-      t.mock.timers.tick(manifest.environment.timeoutMs + 1);
-      await new Promise<void>(accept => setImmediate(accept));
+      fixture.command('expire-deadline', { ms: manifest.environment.timeoutMs + 1 });
+      await fixture.waitFor('deadline-expired');
     }
-    release();
+    fixture.command('release-launch');
     const result = await pending;
     assert.ok(owner); assert.equal(result.outcome, 'inconclusive'); assert.match(result.reason, /CLEANUP_FAILED/);
     if (boundary === 'deadline') assert.match(result.reason, /DEADLINE/);
@@ -120,25 +130,19 @@ for (const boundary of ['rejection', 'deadline'] as const) test(`launcher comple
     assert.equal(JSON.stringify(result), original, 'Late descendant completion must not revise the returned failure.');
     assert.equal(await sentinel.probe(), 'used');
   } finally {
-    release(); t.mock.restoreAll(); t.mock.timers.reset();
-    try { await owner?.stop(); } finally { await sentinel.stop(); }
+    try { fixture.command('release-launch'); } catch { /* The completed worker has closed its test channel. */ }
+    try { await owner?.stop(); await fixture.dispose(); }
+    finally { fixture.restore(); t.mock.restoreAll(); await sentinel.stop(); }
   }
 });
 
 test('confirmed controlled owner completion permits profile deletion without stopping an unrelated owner', { timeout: 10_000 }, async t => {
   const root = resolve('.repro-runs/startup-owner-boundary/tests', randomUUID());
   const sentinel = await controlledOwner(join(root, 'unrelated'), false);
-  let owner: Awaited<ReturnType<typeof controlledOwner>> | undefined;
+  const fixture = installCaseWorkerFixture(t, { suite: 'startup', mode: 'confirmed', directory: root });
+  let owner: ReturnType<typeof fixtureOwner> | undefined;
   let profile = '', ownerWasAliveAtRemoval = false;
   const controller = new AbortController();
-  const context = Object.assign(new EventEmitter(), {
-    browser: () => null,
-    close: async () => { await owner!.stop(); await owner!.closed; },
-  });
-  t.mock.method(chromium, 'launchPersistentContext', async (directory: string) => {
-    profile = directory; owner = await controlledOwner(profile, false);
-    controller.abort(); return context;
-  });
   const remove = fs.rm;
   t.mock.method(fs, 'rm', async (...args: Parameters<typeof fs.rm>) => {
     if (args[0] === profile && owner) ownerWasAliveAtRemoval = exists(owner.pid);
@@ -146,13 +150,54 @@ test('confirmed controlled owner completion permits profile deletion without sto
   });
   syncBuiltinESMExports();
   try {
-    const result = await runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: join(root, 'artifacts'), signal: controller.signal });
-    assert.ok(owner); assert.equal(owner.child.exitCode, 0); assert.equal(ownerWasAliveAtRemoval, false);
+    const pending = runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: join(root, 'artifacts'), signal: controller.signal });
+    owner = fixtureOwner(await fixture.waitFor('profile-ready')); profile = owner.profile;
+    controller.abort(); fixture.command('release-launch');
+    const result = await pending;
+    assert.ok(owner); assert.equal((await fixture.waitFor('owner-launcher-closed')).code, 0); assert.equal(ownerWasAliveAtRemoval, false);
     assert.equal(result.outcome, 'cancelled'); assert.doesNotMatch(result.reason, /CLEANUP_FAILED/);
     await assert.rejects(fs.access(profile), { code: 'ENOENT' }); assert.equal(await sentinel.probe(), 'used');
   } finally {
-    t.mock.restoreAll(); syncBuiltinESMExports();
-    try { await owner?.stop(); } finally { await sentinel.stop(); }
+    controller.abort();
+    try { await owner?.stop(); await fixture.dispose(); }
+    finally { fixture.restore(); t.mock.restoreAll(); syncBuiltinESMExports(); await sentinel.stop(); }
+  }
+});
+
+test('an acquired disconnected context cannot certify a detached writer has stopped', { timeout: 10_000, skip: process.platform === 'win32' }, async t => {
+  const root = resolve('.repro-runs/startup-owner-boundary/tests', randomUUID());
+  const sentinel = await controlledOwner(join(root, 'unrelated'), false);
+  const fixture = installCaseWorkerFixture(t, { suite: 'startup', mode: 'acquired-disconnected', directory: root });
+  let owner: ReturnType<typeof fixtureOwner> | undefined;
+  let ownerWasAliveAtRemoval = false;
+  const remove = fs.rm;
+  t.mock.method(fs, 'rm', async (...args: Parameters<typeof fs.rm>) => {
+    if (owner && args[0] === owner.profile) ownerWasAliveAtRemoval = exists(owner.pid);
+    return remove(...args);
+  });
+  syncBuiltinESMExports();
+  try {
+    const pending = runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: join(root, 'artifacts') });
+    owner = fixtureOwner(await fixture.waitFor('profile-ready'));
+    assert.equal(owner.launcherExitCode, 0);
+    assert.equal(exists(-owner.launcherPid), false, 'The original launcher group has already disappeared.');
+    assert.equal(await owner.probe(), 'used');
+    fixture.command('release-launch');
+    const result = await pending;
+    await fixture.waitFor('context-disconnected');
+    assert.equal(result.environment.browser, '123.0.0.0 (pinned Chromium)', 'The accepted worker receipt must reach the cleanup decision; a protocol rejection cannot satisfy this regression.');
+    assert.equal(fixture.messages.filter(message => message.type === 'close-called').length, 1,
+      'Still make one scoped close request even when the context already reports closed.');
+    assert.equal(ownerWasAliveAtRemoval, false, 'An idempotent close after disconnection must not delete a live detached writer’s profile.');
+    assert.equal(result.outcome, 'inconclusive'); assert.match(result.reason, /CLEANUP_FAILED/); assert.equal(result.assertionCount, 0);
+    await fs.access(owner.profile); assert.equal(await owner.probe(), 'used'); assert.equal(await sentinel.probe(), 'used');
+    const original = JSON.stringify(result);
+    await owner.stop(); await fs.access(owner.profile);
+    assert.equal(JSON.stringify(result), original, 'Late descendant completion cannot rewrite an unacknowledged cleanup failure.');
+    assert.equal(await sentinel.probe(), 'used');
+  } finally {
+    try { await owner?.stop(); await fixture.dispose(); }
+    finally { fixture.restore(); t.mock.restoreAll(); syncBuiltinESMExports(); await sentinel.stop(); }
   }
 });
 

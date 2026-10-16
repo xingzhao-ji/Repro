@@ -16,6 +16,14 @@ Protect host files, credentials, network services, source confidentiality, revie
 - Keep oracle/harness immutable relative to candidate code, verify identities, and reject skipped/empty/altered assertions. Prompts and logs never authorize tools or weaken the harness.
 - Use cancellation-safe, owner-scoped cleanup. An unrelated browser, Docker container, database or process must never be terminated by broad name matching.
 
+## Registered browser-case cleanup boundary
+
+The fixed local worker installs a creation fence before loading browser dependencies and activates accounting before execution receives the run identity. Its sealed zero-attempt receipt is usable only after execution work finishes and the parent observes that exact worker's natural successful close within the existing budget. This accounts for trusted runtime interfaces; it is not an OS sandbox, native descendant observer or reaper. No native security helper is installed by this implementation.
+
+Any process-creation attempt without an acquired context's fresh close acknowledgment leaves cleanup uncertified and the profile retained. Fresh supported Playwright close acknowledgment plus timely worker completion handles the trusted registered pinned-browser lifecycle, not arbitrary native process trees. Transport disconnect, launcher exit, absent process groups, quiet polling and diagnostics cannot substitute for acknowledgment. Late completion cannot rewrite a failure or authorize delayed profile deletion.
+
+The worker entry is fixed, runtime prerequisites use an environment allowlist, and IPC is bounded, nonce-bound and schema-checked. Caller preloads and arbitrary credentials are not inherited. Executable identity checks include the worker bundle. These controls do not broaden support to hostile capsules or change the existing browser sandbox, container policy, resource limits or approval boundaries. See [implementation and limits](STARTUP-OWNER-BOUNDARY.md).
+
 ## Adversarial tests
 Path traversal; symlink escape; overlarge bundle; process timeout; huge stdout; attempted unexpected egress; malicious script in log/viewer content; candidate edits to assertions; wrong failure signature; missing dependency mistaken for reproduction; fixture privacy sentinel leakage; cancellation during export; crashed runner before final ledger write.
 

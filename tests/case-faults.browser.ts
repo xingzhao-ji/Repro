@@ -7,10 +7,11 @@ import { promisify } from 'node:util';
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { chromium, type BrowserContext } from 'playwright';
+import { chromium } from 'playwright';
 import { createCaseManifest } from '../src/browser-case.js';
 import { runExperiment } from '../src/runner.js';
 import type { RunEvent, RunResult } from '../src/contracts.js';
+import { installCaseWorkerFixture } from './helpers/case-worker-control.js';
 
 const root = resolve('.repro-runs/practical-beta/case-faults', randomUUID());
 const execute = promisify(execFile);
@@ -40,14 +41,7 @@ function childEnvironment(temporary: string, browsers: string): NodeJS.ProcessEn
 test('cancellation after real navigation closes only the owned browser and fresh replay recovers', { timeout: 20_000 }, async t => {
   const directory = await workspace('cancel');
   const unrelated = await chromium.launch({ headless: true, chromiumSandbox: true });
-  const owned: BrowserContext[] = [];
-  const closed: BrowserContext[] = [];
-  const launch = chromium.launchPersistentContext.bind(chromium);
-  t.mock.method(chromium, 'launchPersistentContext', async (...args: Parameters<typeof launch>) => {
-    const context = await launch(...args); owned.push(context);
-    context.on('close', () => closed.push(context));
-    return context;
-  });
+  const fixture = installCaseWorkerFixture(t, { suite: 'browser', mode: 'observe-lifecycle', directory });
   try {
     const sentinelPage = await unrelated.newPage();
     assert.equal(await sentinelPage.evaluate(() => 6 * 7), 42);
@@ -64,22 +58,23 @@ test('cancellation after real navigation closes only the owned browser and fresh
     assert.equal(result.assertionCount, 0);
     assert.equal(result.observation, null);
     assert.match(result.reason, /new run|fresh output/i);
-    assert.equal(owned.length, 1);
-    assert.equal(closed.includes(owned[0]!), true);
+    let lifecycle = await fixture.observations();
+    assert.equal(lifecycle.contextsOpened.length, 1);
+    assert.equal(lifecycle.contextsClosed.includes(lifecycle.contextsOpened[0]!), true);
     assert.equal(await sentinelPage.evaluate(() => 6 * 7), 42, 'Unrelated Chromium remains alive.');
     await assertOwnedCleanup(directory, result);
     const recovered = await runExperiment(createCaseManifest('morphdom-textarea'), { artifactDir: directory });
     assert.equal(recovered.outcome, 'target-failure', recovered.reason);
     assert.equal(recovered.assertionCount, 1);
     assert.notEqual(result.id, recovered.id);
-    assert.equal(owned.length, 2);
-    assert.equal(closed.includes(owned[1]!), true);
+    lifecycle = await fixture.observations();
+    assert.equal(lifecycle.contextsOpened.length, 2);
+    assert.equal(lifecycle.contextsClosed.includes(lifecycle.contextsOpened[1]!), true);
     assert.equal(await sentinelPage.evaluate(() => 6 * 7), 42);
     await assertOwnedCleanup(directory, recovered);
   } finally {
-    t.mock.restoreAll();
-    await Promise.all(owned.map(context => context.close()));
-    await unrelated.close();
+    try { await fixture.dispose(); }
+    finally { fixture.restore(); await unrelated.close(); }
   }
 });
 
@@ -147,26 +142,11 @@ test('a CSP-blocked unexpected fetch with fake URL header and body secrets is in
   await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
   const address = server.address(); assert.ok(address && typeof address === 'object');
   const destination = `http://127.0.0.1:${address.port}/capture?token=${secret}`;
-  const violations: string[] = [];
   const events: RunEvent[] = [];
-  const owned: BrowserContext[] = [];
-  const launch = chromium.launchPersistentContext.bind(chromium);
-  t.mock.method(chromium, 'launchPersistentContext', async (...args: Parameters<typeof launch>) => {
-    const context = await launch(...args); owned.push(context);
-    await context.exposeBinding('__reproTestCsp', (_source, directive: unknown) => { if (typeof directive === 'string') violations.push(directive); });
-    await context.addInitScript(({ destination, secret }) => {
-      document.addEventListener('securitypolicyviolation', event => {
-        const report = (globalThis as unknown as { __reproTestCsp: (directive: string) => Promise<void> }).__reproTestCsp;
-        void report(event.effectiveDirective);
-      });
-      document.addEventListener('DOMContentLoaded', () => {
-        void fetch(destination, { method: 'POST', headers: { Authorization: `Bearer ${secret}`, 'content-type': 'application/json' }, body: JSON.stringify({ private: secret }) }).catch(() => undefined);
-      });
-    }, { destination, secret });
-    return context;
-  });
+  const fixture = installCaseWorkerFixture(t, { suite: 'browser', mode: 'network-secrets', directory, destination, secret });
   try {
     const result = await runExperiment(createCaseManifest('morphdom-textarea'), { artifactDir: directory, onEvent: event => events.push(event) });
+    const { violations } = await fixture.observations();
     await writeFile(join(directory, 'injection.json'), JSON.stringify({ hits, violations, outcome: result.outcome, category: result.category, assertionCount: result.assertionCount }, null, 2));
     assert.equal(hits, 0, 'The owned unrelated endpoint must receive no attempted request.');
     assert.ok(violations.includes('connect-src'), 'The browser must actually report the injected fetch blocked by CSP.');
@@ -178,68 +158,27 @@ test('a CSP-blocked unexpected fetch with fake URL header and body secrets is in
     assert.equal(result.category, 'unsupported');
     assert.match(result.reason, /NETWORK_BOUNDARY|CONTENT_SECURITY_POLICY|CSP_BOUNDARY/);
   } finally {
-    t.mock.restoreAll();
-    await Promise.all(owned.map(context => context.close()));
-    await new Promise<void>(resolve => server.close(() => resolve()));
+    try { await fixture.dispose(); }
+    finally { fixture.restore(); await new Promise<void>(resolve => server.close(() => resolve())); }
   }
 });
 
 for (const phase of ['final-action', 'observation-read'] as const) {
   test(`a CSP violation during ${phase} cannot disappear during verdict finalization`, { timeout: 20_000 }, async t => {
     const directory = await workspace(`csp-${phase}`);
-    let hits = 0; let violations = 0; let attempts = 0;
+    let hits = 0;
     const server = createServer((_request, response) => { hits++; response.writeHead(204); response.end(); });
     await new Promise<void>(resolve => server.listen(0, '127.0.0.1', resolve));
     const address = server.address(); assert.ok(address && typeof address === 'object');
     const destination = `http://127.0.0.1:${address.port}/undeclared`;
-    const owned: BrowserContext[] = [];
-    const launch = chromium.launchPersistentContext.bind(chromium);
-    t.mock.method(chromium, 'launchPersistentContext', async (...args: Parameters<typeof launch>) => {
-      const context = await launch(...args); owned.push(context);
-      await context.exposeBinding('__reproTimingViolation', () => { violations++; });
-      await context.exposeBinding('__reproTimingAttempt', () => { attempts++; });
-      await context.addInitScript(({ destination, phase }) => {
-        const bindings = globalThis as unknown as { __reproTimingViolation: () => Promise<void>; __reproTimingAttempt: () => Promise<void> };
-        document.addEventListener('securitypolicyviolation', () => { void bindings.__reproTimingViolation(); });
-        if (phase === 'final-action') document.addEventListener('DOMContentLoaded', () => {
-          document.querySelector('#editor')!.addEventListener('input', event => {
-            if ((event.currentTarget as HTMLTextAreaElement).value !== 'second edit') return;
-            void bindings.__reproTimingAttempt();
-            void fetch(destination).catch(() => undefined);
-          });
-        });
-      }, { destination, phase });
-      if (phase === 'observation-read') {
-        const page = context.pages()[0]!;
-        const evaluate = page.evaluate.bind(page);
-        t.mock.method(page, 'evaluate', async (...args: Parameters<typeof evaluate>) => {
-          // Interpose only immediately before the real declared projection read.
-          // Its getter still returns the actual native value; it also attempts a
-          // forbidden fetch in that same browser task, without a timer or sleep.
-          if (Array.isArray(args[1]) && args[1][0]?.selector === '#editor') {
-            await evaluate(destination => {
-              const editor = document.querySelector('#editor')!;
-              const native = Object.getOwnPropertyDescriptor(HTMLTextAreaElement.prototype, 'value')!;
-              Object.defineProperty(editor, 'value', {
-                configurable: true,
-                get() {
-                  void (globalThis as unknown as { __reproTimingAttempt: () => Promise<void> }).__reproTimingAttempt();
-                  void fetch(destination).catch(() => undefined);
-                  return native.get!.call(this);
-                },
-                set(value: string) { native.set!.call(this, value); },
-              });
-            }, destination);
-          }
-          return evaluate(...args);
-        });
-      }
-      return context;
-    });
+    const fixture = installCaseWorkerFixture(t, { suite: 'browser', mode: `csp-${phase}`, directory, destination });
     try {
       for (let repetition = 0; repetition < 5; repetition++) {
-        const priorAttempts = attempts; const priorViolations = violations;
+        const before = await fixture.observations();
+        const priorAttempts = before.attempts; const priorViolations = before.violations.length;
         const result = await runExperiment(createCaseManifest('morphdom-textarea'), { artifactDir: directory });
+        const observed = await fixture.observations();
+        const attempts = observed.attempts; const violations = observed.violations.length;
         await writeFile(join(directory, `timing-${repetition}.json`), JSON.stringify({ phase, repetition, hits, attempts: attempts - priorAttempts, violations: violations - priorViolations, outcome: result.outcome, category: result.category, assertionCount: result.assertionCount }, null, 2));
         assert.equal(hits, 0);
         assert.ok(attempts > priorAttempts, 'The real browser must execute the injected fetch at the selected phase.');
@@ -250,9 +189,8 @@ for (const phase of ['final-action', 'observation-read'] as const) {
         await assertOwnedCleanup(directory, result);
       }
     } finally {
-      t.mock.restoreAll();
-      await Promise.all(owned.map(context => context.close()));
-      await new Promise<void>(resolve => server.close(() => resolve()));
+      try { await fixture.dispose(); }
+      finally { fixture.restore(); await new Promise<void>(resolve => server.close(() => resolve())); }
     }
   });
 }

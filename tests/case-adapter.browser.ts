@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { createCaseManifest } from '../src/browser-case.js';
 import { runExperiment } from '../src/runner.js';
+import { installCaseWorkerFixture } from './helpers/case-worker-control.js';
 
 const root = '.repro-runs/practical-beta/adapter-tests';
 
@@ -58,41 +59,25 @@ for (const caseId of ['htmx-checkbox', 'marked-empty-heading']) {
 }
 
 test('a lost browser close acknowledgement returns an actionable inconclusive result within the cleanup budget', { timeout: 8000 }, async t => {
-  const { chromium } = await import('playwright');
-  const launch = chromium.launchPersistentContext.bind(chromium);
-  t.mock.method(chromium, 'launchPersistentContext', async (...args: Parameters<typeof launch>) => {
-    const context = await launch(...args);
-    const close = context.close.bind(context);
-    t.mock.method(context, 'close', async () => { await close(); await new Promise<void>(() => {}); });
-    return context;
-  });
+  const directory = join(root, randomUUID());
+  const fixture = installCaseWorkerFixture(t, { suite: 'browser', mode: 'lost-close-ack', directory });
+  t.after(async () => { try { await fixture.dispose(); } finally { fixture.restore(); } });
   const began = performance.now();
-  const result = await runExperiment(createCaseManifest('morphdom-textarea'), { artifactDir: join(root, randomUUID()) });
+  const result = await runExperiment(createCaseManifest('morphdom-textarea'), { artifactDir: directory });
   assert.equal(result.outcome, 'inconclusive');
   assert.match(result.reason, /CLEANUP_FAILED/);
   assert.ok(performance.now() - began < 8000, 'Missing close acknowledgement must not hang the caller.');
+  const lifecycle = await fixture.observations();
+  assert.equal(lifecycle.contextsOpened.length, 1, 'The actual owned browser must reach the injected close path.');
+  assert.equal(lifecycle.contextsClosed.includes(lifecycle.contextsOpened[0]!), true, 'Only the close acknowledgement is lost; the actual browser closes.');
 });
 
 for (const mode of ['unrelated-dom', 'wrong-observation', 'exception'] as const) {
   test(`secret sentinel in ${mode} never reaches recorded browser-case evidence`, async t => {
-    const { chromium } = await import('playwright');
-    const launch = chromium.launchPersistentContext.bind(chromium);
     const secret = 'privacy-sentinel-fake-bearer-do-not-persist';
-    t.mock.method(chromium, 'launchPersistentContext', async (...args: Parameters<typeof launch>) => {
-      const context = await launch(...args);
-      await context.addInitScript(({ mode, secret }) => {
-        document.addEventListener('DOMContentLoaded', () => {
-          const aside = document.createElement('aside'); aside.textContent = secret; document.body.append(aside);
-          console.log(secret);
-          if (mode === 'exception') throw new Error(secret);
-        });
-        if (mode === 'wrong-observation') document.addEventListener('input', () => queueMicrotask(() => {
-          const element = document.querySelector<HTMLInputElement>('#editor'); if (element) element.value = secret;
-        }));
-      }, { mode, secret });
-      return context;
-    });
     const directory = join(root, randomUUID());
+    const fixture = installCaseWorkerFixture(t, { suite: 'browser', mode: `privacy-${mode}`, directory, secret });
+    t.after(async () => { try { await fixture.dispose(); } finally { fixture.restore(); } });
     const result = await runExperiment(createCaseManifest('morphdom-textarea'), { artifactDir: directory });
     assert.equal(result.outcome, mode === 'unrelated-dom' ? 'target-failure' : 'inconclusive');
     if (mode === 'wrong-observation') assert.equal(result.assertionCount, 1, 'The executed but unrelated assertion failure must retain its execution count.');

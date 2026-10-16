@@ -1,0 +1,93 @@
+{
+  "status": "prerequisites-passed-acceptance-pending",
+  "baseCommit": "49d162a947e0bf7a6220eb065d63220ec7f1a254",
+  "branch": "task/startup-owner-boundary",
+  "checks": [
+    {
+      "check": "ordinary",
+      "passed": 382,
+      "failed": 0,
+      "log": ".repro-runs/startup-repair-20261016/ordinary-worker-v2.log",
+      "sha256": "8844afbd7907724c5cd218dbf27e3607e9cb6c1dc7e99eab6f857c4a57b0f1d1"
+    },
+    {
+      "check": "affected-browser",
+      "passed": 15,
+      "failed": 0,
+      "log": ".repro-runs/startup-repair-20261016/affected-browser-worker-v1.log",
+      "sha256": "50a49e0210aab999f8af387ac5cfdbe1cd03f21de262090329b2c7856ee181d4"
+    },
+    {
+      "check": "remaining-functional-browser",
+      "passed": 35,
+      "failed": 0,
+      "log": ".repro-runs/startup-repair-20261016/remaining-functional-browser-v1.log",
+      "sha256": "f7290f9cdb0d5e2cfea6267f6b2e6c1054b8e01743628ef05349261aaaf36bd1"
+    },
+    {
+      "check": "typecheck",
+      "exitCode": 0,
+      "log": ".repro-runs/startup-repair-20261016/typecheck-worker-final-v1.log",
+      "sha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4"
+    },
+    {
+      "check": "lint",
+      "exitCode": 0,
+      "log": ".repro-runs/startup-repair-20261016/lint-worker-final-v1.log",
+      "sha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23"
+    },
+    {
+      "check": "kit",
+      "exitCode": 0,
+      "log": ".repro-runs/startup-repair-20261016/kit-worker-final-v1.log",
+      "sha256": "6268b684c03fa0ac29546a2ef2eeef3fa40f7f58e3b8c69ffeb6956e12fbe930"
+    },
+    {
+      "check": "build",
+      "exitCode": 0,
+      "log": ".repro-runs/startup-repair-20261016/build-worker-v2.log",
+      "sha256": "e72c7ae118b13edfce9f09d41f28217c3e90a948d924bbeb538157e981a0aee7"
+    }
+  ],
+  "executionInputs": {
+    "src/case-adapter.ts": "24185b84189171fa57e013ab3b00d7877507f0ade23bd06b024c8546aab728a2",
+    "src/case-execution.ts": "cd4442aaa5bdb804566d13821ac0c378b0cae167dfe36ed689e37327a6c401ea",
+    "src/case-worker.ts": "7cff65ae8d2f33ef9c9594bb90bd7b41fb6382b3e3a92df592e60eee6eebd0f4",
+    "src/case-worker-client.ts": "f8d02f9576288f102b85c71c2930d93b703c518ef4b9d2625c074191ff863f79",
+    "src/case-worker-protocol.ts": "28ae10b3f64d83cdc0ea29e359ded708f650c9d7ff3554d597da9aa0fcd4cce0",
+    "src/case-process-fence.ts": "9eea90564ac4f9c41078fd5cd7cfaf1d2dacf31b057b034a63284dbea2987dd3",
+    "src/browser-prerequisite.ts": "c39d156ea889c5625ce0b7384127e89b8fb8cc4cbea5800955a24a8839af9814",
+    "dist/cli.js": "18897037211905cc5aa9ae4757c36119e9f6ae3bbe101bdd0043456646f23f05",
+    "dist/index.js": "a444d7e944071a8e3af1349f374ad5347bd1814e7a4788d4b6129b20f7f3e35d",
+    "dist/case-worker.js": "0f567faaa10a713d733c91cd807c9a8423d51fa5a811eb088d2af6ea42eb80da",
+    "scripts/build.mjs": "964a455c92bee844ac3f264d90c8e10a39a21f407f8ba3c470ffcdfaf0e09b24",
+    "scripts/verify-beta-isolated.mjs": "cf5a45a1e100c868a1932cf3dc685e150b22fa68282791d6c6409fb6f9ece1e9"
+  },
+  "historicalResults": {
+    "initialOrdinary": {
+      "passed": 326,
+      "total": 327
+    },
+    "initialAffectedBrowser": {
+      "passed": 13,
+      "total": 15
+    },
+    "firstWorkerOrdinary": {
+      "passed": 368,
+      "total": 369,
+      "log": ".repro-runs/startup-repair-20261016/ordinary-worker-v1.log"
+    }
+  },
+  "acceptance": {
+    "native": "unrun",
+    "installedPackage": "unrun",
+    "linuxArm64": "unrun",
+    "originalHtmxCause": "unresolved",
+    "accessibility": "deferred-unverified"
+  },
+  "claims": {
+    "nativeDescendantContainment": false,
+    "deployment": false,
+    "remotePublication": false
+  }
+}

@@ -98,9 +98,10 @@ export function receiptProblems(receipt, operation) {
   return [...new Set(problems)];
 }
 
-export function harnessForArtifact(manifest, bytes, trusted) {
+export function harnessForArtifact(manifest, bytes, trusted, workerBytes) {
+  if (!Buffer.isBuffer(workerBytes) || !workerBytes.length) throw new DriverError('BETA_WORKER_IDENTITY', 'Read the exact worker executable from the validated capsule before reconstructing its harness identity.');
   const definition = trusted.getRegisteredCase(manifest.caseId), artifact = hash(bytes);
-  return trusted.digest({ executable: artifact, oracleExecutable: artifact, contract: definition.contractDigest, wrapper: definition.wrapperDigest, version: trusted.VERSION });
+  return trusted.digest({ executable: artifact, oracleExecutable: artifact, workerExecutable: hash(workerBytes), contract: definition.contractDigest, wrapper: definition.wrapperDigest, version: trusted.VERSION });
 }
 
 export function runEvidenceProblems(manifest, result, revision, trusted) {
@@ -513,7 +514,7 @@ export async function verifyIsolated(options) {
     return { record, evidence };
   }
   function checkRun(manifest, result, revision, artifact) {
-    const evaluator = artifact ? { ...trusted, experimentHarnessDigest: value => harnessForArtifact(value, artifact, trusted) } : trusted;
+    const evaluator = artifact ? { ...trusted, experimentHarnessDigest: value => harnessForArtifact(value, artifact.parent, trusted, artifact.worker) } : trusted;
     const problems = runEvidenceProblems(manifest, result, revision, evaluator);
     if (runIds.has(result?.id)) problems.push('REUSED_RUN');
     if (problems.length) throw new DriverError('BETA_BEHAVIOR_UNVERIFIED', problems.join(', '));
@@ -553,11 +554,13 @@ export async function verifyIsolated(options) {
     const workflowVolume = await volume('workflow');
     const capture = await execute(plan.workflow[0], inputImage, workflowVolume);
     const cliBytes = await readFile(join(output, 'input-context', 'dist/cli.js'));
+    const caseWorkerBytes = await readFile(join(output, 'input-context', 'dist/case-worker.js'));
+    const cliArtifacts = { parent: cliBytes, worker: caseWorkerBytes };
     original = trusted.validateManifest(await jsonFile(join(capture.evidence, 'capture', 'manifest.json')));
     if (trusted.digest(original) !== trusted.digest(trusted.createCaseManifest(input.manifest.caseId))) throw new DriverError('BETA_CAPTURE_DECLARATION', 'Capture did not preserve the complete registered declaration.');
-    checkRun(original, await jsonFile(join(capture.evidence, 'capture', 'result.json')), 'buggy', cliBytes);
+    checkRun(original, await jsonFile(join(capture.evidence, 'capture', 'result.json')), 'buggy', cliArtifacts);
     const replay = await execute(plan.workflow[1], inputImage, workflowVolume);
-    checkRun(original, await jsonFile(join(replay.evidence, 'replay', 'result.json')), 'buggy', cliBytes);
+    checkRun(original, await jsonFile(join(replay.evidence, 'replay', 'result.json')), 'buggy', cliArtifacts);
     const reduction = await execute(plan.workflow[2], inputImage, workflowVolume);
     reduced = trusted.validateManifest(await jsonFile(join(reduction.evidence, 'reduce', 'reduced.manifest.json')));
     const result = await jsonFile(join(reduction.evidence, 'reduce', 'result.json'));
@@ -576,7 +579,7 @@ export async function verifyIsolated(options) {
       trialExecutions += trial.runIds.length;
       for (const id of trial.runIds) {
         const run = reductionRuns.get(id);
-        if (!run || boundRuns.has(id) || run.manifestDigest !== trial.inputDigest || run.assertionDigest !== original.assertionDigest || run.harnessDigest !== harnessForArtifact(candidate, cliBytes, trusted)
+        if (!run || boundRuns.has(id) || run.manifestDigest !== trial.inputDigest || run.assertionDigest !== original.assertionDigest || run.harnessDigest !== harnessForArtifact(candidate, cliBytes, trusted, caseWorkerBytes)
           || run.appDigest !== trusted.revisionDigest(candidate, 'buggy') || run.appRevision !== 'buggy' || run.adapterVersion !== candidate.adapter.version || run.runnerVersion !== candidate.runnerVersion || run.seed !== candidate.environment.seed) throw new DriverError('BETA_REDUCTION_IDENTITY', 'A reduction execution does not match its independent trial identity.');
         boundRuns.add(id); runIds.add(id);
         if (run.outcome === 'target-failure' || run.outcome === 'requirement-satisfied') {

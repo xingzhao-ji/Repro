@@ -122,9 +122,13 @@ test('CLI and readable harness identities independently bind their actual distin
   const definition = getRegisteredCase(manifest.caseId);
   const trusted = { digest, getRegisteredCase, VERSION };
   const bytes = Buffer.from('the CLI artifact');
+  const worker = Buffer.from('the browser worker artifact');
   const sha256 = createHash('sha256').update(bytes).digest('hex');
-  assert.equal(driver.harnessForArtifact(manifest, bytes, trusted), digest({ executable: sha256, oracleExecutable: sha256, contract: definition.contractDigest, wrapper: definition.wrapperDigest, version: VERSION }));
-  assert.notEqual(driver.harnessForArtifact(manifest, bytes, trusted), driver.harnessForArtifact(manifest, Buffer.from('the index artifact'), trusted));
+  const workerSha256 = createHash('sha256').update(worker).digest('hex');
+  assert.equal(driver.harnessForArtifact(manifest, bytes, trusted, worker), digest({ executable: sha256, oracleExecutable: sha256, workerExecutable: workerSha256, contract: definition.contractDigest, wrapper: definition.wrapperDigest, version: VERSION }));
+  assert.notEqual(driver.harnessForArtifact(manifest, bytes, trusted, worker), driver.harnessForArtifact(manifest, Buffer.from('the index artifact'), trusted, worker));
+  assert.notEqual(driver.harnessForArtifact(manifest, bytes, trusted, worker), driver.harnessForArtifact(manifest, bytes, trusted, Buffer.from('a different worker artifact')));
+  assert.throws(() => driver.harnessForArtifact(manifest, bytes, trusted), /BETA_WORKER_IDENTITY/);
 });
 
 test('a late clean terminal census cannot erase a survivor present past the cleanup deadline', () => {

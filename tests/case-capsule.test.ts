@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { spawnSync } from 'node:child_process';
-import { mkdir, mkdtemp, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { createCaseManifest, getRegisteredCase } from '../src/browser-case.js';
 import { exportCapsule, importCapsule } from '../src/capsule.js';
@@ -34,6 +34,43 @@ for (const caseId of [CASE_ID, 'htmx-checkbox', 'marked-empty-heading']) test(`$
   assert.match(readme, /--init/);
   assert.match(readme, /no existing workspace or caches/i);
   assert.deepEqual(await readdir(join(output, 'fixtures/repository-cases')), [caseId], 'Only the selected real case is exported');
+});
+
+test('repository capsule ships the exact trusted browser worker as a required executable artifact', async () => {
+  const parent = await workspace(); const output = join(parent, 'bundle');
+  const manifest = createCaseManifest(CASE_ID);
+  await exportCapsule(manifest, output);
+  const path = 'dist/case-worker.js';
+  const bytes = await readFile(join(output, path));
+  assert.deepEqual(bytes, await readFile(path));
+  const index = JSON.parse(await readFile(join(output, 'integrity.json'), 'utf8'));
+  assert.deepEqual(index.files.find((entry: { path: string }) => entry.path === path), {
+    path, bytes: bytes.length, sha256: createHash('sha256').update(bytes).digest('hex'),
+  });
+  assert.deepEqual(await importCapsule(output), manifest);
+});
+
+for (const mutation of ['missing', 'changed', 'reindexed'] as const) test(`repository capsule rejects a ${mutation} browser worker before executing it`, async () => {
+  const parent = await workspace(); const output = join(parent, 'bundle');
+  await exportCapsule(createCaseManifest(CASE_ID), output);
+  const path = 'dist/case-worker.js';
+  const original = await readFile(join(output, path));
+  const marker = 'untrusted-worker-must-never-execute';
+  if (mutation === 'missing') await rm(join(output, path));
+  else {
+    const bytes = Buffer.concat([original, Buffer.from(`\nthrow new Error('${marker}');\n`)]);
+    await writeFile(join(output, path), bytes);
+    if (mutation === 'reindexed') {
+      const indexPath = join(output, 'integrity.json');
+      const index = JSON.parse(await readFile(indexPath, 'utf8'));
+      const entry = index.files.find((entry: { path: string }) => entry.path === path);
+      assert.ok(entry, 'The worker must be required by the original trusted integrity inventory.');
+      entry.bytes = bytes.length; entry.sha256 = createHash('sha256').update(bytes).digest('hex');
+      await writeFile(indexPath, JSON.stringify(index));
+    }
+  }
+  const code = mutation === 'missing' ? 'CAPSULE_INCOMPLETE' : mutation === 'changed' ? 'CAPSULE_HASH' : 'CAPSULE_TRUST';
+  await assert.rejects(importCapsule(output), (error: unknown) => error instanceof ReproError && error.code === code && !error.message.includes(marker));
 });
 
 test('repository capsule rejects changed registered bytes even after recomputed self-integrity', async () => {

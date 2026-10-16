@@ -18,6 +18,14 @@ Use an explicit interface with: `validateConfig`, `prepare`, `reset`, `start`, `
 
 Actions have stable IDs, semantic locators, supported inputs, and dependency IDs. Credentials and raw authentication tokens are forbidden in exported actions. Selector confidence is not a substitute for checking that the intended element was reached.
 
+## Implemented registered browser-case worker
+
+Schema 3 runs use a fixed local Node worker per execution so the parent can join completion before finalizing the owned profile. This is a lifecycle boundary, not a distributed-workload service. The parent snapshots the request and absolute output identity, validates bounded run-bound messages, and alone writes final evidence and authorizes profile deletion. Source execution uses `src/case-worker.ts`; packaged execution ships `dist/case-worker.js`, whose bytes are bound into the harness and capsule identity.
+
+For a launch rejection with zero process-creation attempts, cleanup requires completed execution work, sealed future creation through the instrumented runtime interfaces, and the exact worker's natural successful close within the existing budget. If creation was attempted, deletion additionally requires an acquired browser context's fresh close acknowledgment. A previously closed context or disconnected browser cannot supply that acknowledgment. Acquisition, close and worker completion share the existing ownership deadline; the execution-drain allowance cannot extend deletion authority.
+
+This handles the trusted registered browser lifecycle. It does not establish general native descendant containment or reaping. Any uncertified completion retains the profile, and later completion cannot rewrite the returned failure or remove retained evidence. The implementation and historical native-helper proposal are distinguished in [the startup boundary record](STARTUP-OWNER-BOUNDARY.md).
+
 ## Storage
 Persist runs, trial records, artifact digests, outcome categories, seeds, adapter/runner versions, and cancellation state. Use transactional updates and monotonic event sequence IDs so refresh/reconnect cannot display stale completion over a newer failure. Artifacts are content-addressed under project-owned directories. Use atomic output finalization; incomplete bundles are unmistakable and cannot be replayed as valid exports.
 

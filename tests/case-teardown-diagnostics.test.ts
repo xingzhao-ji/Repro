@@ -1,12 +1,19 @@
-import test from 'node:test';
+import test, { type TestContext } from 'node:test';
 import assert from 'node:assert/strict';
-import { EventEmitter } from 'node:events';
 import { randomUUID } from 'node:crypto';
 import { access, mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { chromium } from 'playwright';
 import { createCaseManifest } from '../src/browser-case.js';
 import { runCaseBrowser } from '../src/case-adapter.js';
+import { installCaseWorkerFixture } from './helpers/case-worker-control.js';
+
+function diagnosticFixture(t: TestContext, directory: string, mode: string) {
+  t.mock.method(chromium, 'launchPersistentContext', async () => {
+    throw new Error('Diagnostics must execute in the controlled fixed worker.');
+  });
+  return installCaseWorkerFixture(t, { suite: 'diagnostics', mode, directory });
+}
 
 type Event = { phase: string; event: string; outcome?: string; late?: boolean; seq: number; runId: string;
   elapsedMs: number; monotonicNs: string; profileProbeCompletedMonotonicNs: string; profileState: string; budgetMs?: number; deadlineElapsedMs?: number };
@@ -17,29 +24,16 @@ for (const mode of ['resolve', 'reject', 'late-resolve', 'late-reject'] as const
     await mkdir(root, { recursive: true });
     await writeFile(join(root, 'user.txt'), 'Keep user bytes');
     const events: Event[] = [];
-    const browser = Object.assign(new EventEmitter(), { version: () => 'test-browser' });
-    let finish!: () => void;
-    const lifecycle = () => { context.emit('close'); browser.emit('disconnected'); };
-    const lateWork = new Promise<void>((resolve, reject) => { finish = () => {
-      lifecycle();
-      if (mode === 'late-reject') reject(new Error('fake-private-rejection-secret')); else resolve();
-    }; });
-    const context = Object.assign(new EventEmitter(), {
-      browser: () => browser,
-      // Stop before page execution, but exercise real owned server/profile
-      // acquisition and the production teardown state machine.
-      route: async () => { throw new Error('fake-private-setup-secret'); },
-      close: () => {
-        if (mode.startsWith('late-')) return lateWork;
-        lifecycle();
-        return mode === 'reject' ? Promise.reject(new Error('fake-private-rejection-secret')) : Promise.resolve();
-      },
-    });
-    t.mock.method(chromium, 'launchPersistentContext', async () => context);
+    const fixture = diagnosticFixture(t, root, mode);
     const options = { artifactDir: root, onTeardown: (event: Event) => events.push(event) };
     const result = await runCaseBrowser(createCaseManifest('htmx-checkbox'), options);
+    assert.equal(fixture.workers.length, 1, 'The production adapter must execute the controlled fixed worker.');
     const beforeLate = JSON.stringify(result);
-    if (mode.startsWith('late-')) { finish(); await lateWork.catch(() => undefined); await new Promise<void>(resolve => setImmediate(resolve)); }
+    if (mode.startsWith('late-')) {
+      fixture.command('fixture-finish-close');
+      await fixture.waitFor('fixture-close-settled');
+    }
+    await Promise.all(fixture.workers.map(worker => worker.closed));
     assert.ok(events.length > 0, 'The requested diagnostic must observe the actual teardown branches.');
     const start = events.find(e => e.phase === 'context-close' && e.event === 'wait-start');
     const returned = events.find(e => e.phase === 'context-close' && e.event === 'wait-return');
@@ -82,14 +76,12 @@ for (const mode of ['resolve', 'reject', 'late-resolve', 'late-reject'] as const
 
 test('a throwing teardown observer cannot alter the product outcome or expose observer text', async t => {
   const root = resolve('.repro-runs/htmx-cleanup-investigation/instrumentation-tests', randomUUID());
-  const context = Object.assign(new EventEmitter(), {
-    browser: () => Object.assign(new EventEmitter(), { version: () => 'test-browser' }),
-    route: async () => { throw new Error('setup'); }, close: async () => {},
-  });
-  t.mock.method(chromium, 'launchPersistentContext', async () => context);
+  const fixture = diagnosticFixture(t, root, 'resolve');
   let calls = 0;
   const result = await runCaseBrowser(createCaseManifest('htmx-checkbox'), { artifactDir: root,
     ...{ onTeardown: () => { calls++; throw new Error('fake-private-observer-secret'); } } });
+  assert.equal(fixture.workers.length, 1, 'The production adapter must execute the controlled fixed worker.');
+  await Promise.all(fixture.workers.map(worker => worker.closed));
   assert.equal(calls, 1, 'Disable a broken optional observer without repeatedly invoking it.');
   assert.equal(result.outcome, 'inconclusive'); assert.match(result.reason, /RUNNER_ERROR/);
   assert.equal(JSON.stringify(result).includes('fake-private-observer-secret'), false);
@@ -98,19 +90,15 @@ test('a throwing teardown observer cannot alter the product outcome or expose ob
 
 test('the cleanup timer is registered before a diagnostic sink can delay its start', async t => {
   const root = resolve('.repro-runs/htmx-cleanup-investigation/instrumentation-tests', randomUUID());
-  const context = Object.assign(new EventEmitter(), {
-    browser: () => Object.assign(new EventEmitter(), { version: () => 'test-browser' }),
-    route: async () => { throw new Error('setup'); }, close: async () => {},
-  });
-  t.mock.method(chromium, 'launchPersistentContext', async () => context);
-  const original = globalThis.setTimeout;
-  let registered = false, registeredBeforeObservation = false;
-  t.mock.method(globalThis, 'setTimeout', (...args: Parameters<typeof setTimeout>) => {
-    if (args[1] === 2000) registered = true;
-    return original(...args);
-  });
+  const fixture = diagnosticFixture(t, root, 'timer-registration');
+  let observed = false;
   await runCaseBrowser(createCaseManifest('htmx-checkbox'), { artifactDir: root, onTeardown: event => {
-    if (event.phase === 'context-close' && event.event === 'wait-start') registeredBeforeObservation = registered;
+    if (event.phase === 'context-close' && event.event === 'wait-start') observed = true;
   } });
+  assert.equal(fixture.workers.length, 1, 'The production adapter must execute the controlled fixed worker.');
+  await Promise.all(fixture.workers.map(worker => worker.closed));
+  const registration = await fixture.waitFor('timer-before-observation');
+  assert.equal(observed, true, 'The actual diagnostic sink must receive the cleanup wait observation.');
+  const registeredBeforeObservation = registration.registered;
   assert.equal(registeredBeforeObservation, true, 'The sink must run inside the unchanged cleanup window, not postpone it.');
 });
