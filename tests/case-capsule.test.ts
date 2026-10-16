@@ -30,8 +30,8 @@ for (const caseId of [CASE_ID, 'htmx-checkbox', 'marked-empty-heading']) test(`$
   const readme = await readFile(join(output, 'README.md'), 'utf8');
   assert.match(readme, /REPRO_REVISION=buggy node --test replay\.test\.mjs/);
   assert.match(readme, /REPRO_REVISION=fixed node --test replay\.test\.mjs/);
-  assert.match(readme, /synthetic-only/);
-  assert.match(readme, /pending/);
+  assert.match(readme, /scoped approval/);
+  assert.match(readme, /--init/);
   assert.match(readme, /no existing workspace or caches/i);
   assert.deepEqual(await readdir(join(output, 'fixtures/repository-cases')), [caseId], 'Only the selected real case is exported');
 });

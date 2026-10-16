@@ -107,6 +107,9 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
     emit('reset', 'Starting a new owned browser profile and pinned local application.');
     // A five-second startup bound also limits cancellation while launch is pending.
     launching = chromium.launchPersistentContext(profile, { headless: true, chromiumSandbox: true, timeout: Math.min(5000, remaining()),
+      // Chromium helpers (including fontconfig) also write outside userDataDir.
+      // Keep their home/cache inside the same owned cleanup boundary.
+      env: { ...process.env, HOME: profile, XDG_CACHE_HOME: join(profile, '.cache') },
       viewport: manifest.environment.viewport, locale: 'en-US', timezoneId: 'UTC', serviceWorkers: 'block', acceptDownloads: false,
       colorScheme: 'light', ...(channel === 'chrome' ? { channel: 'chrome' } : {}) });
     context = await launching; check();
