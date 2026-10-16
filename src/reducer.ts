@@ -3,8 +3,7 @@ import { performance } from 'node:perf_hooks';
 import { ReproError } from './contracts.js';
 import type { Manifest, Outcome, ReductionOptions, ReductionResult, RunFunction, RunResult, Trial } from './contracts.js';
 import { digest, validateManifest } from './manifest.js';
-import { assertObservation, TargetFailure } from './oracle.js';
-import { searchContract, expectationEstablished } from './search-contract.js';
+import { evaluateObservation, establishedExpectation } from './runner.js';
 
 type Stop = 'budget-exhausted' | 'cancelled';
 interface Evaluation { trial: Trial; results: RunResult[]; conclusive: boolean; stop?: Stop }
@@ -23,7 +22,7 @@ function without(manifest: Manifest, selected: string[]): { candidate: Manifest;
   // Manifest validation requires prerequisites to precede dependents.
   for (const action of manifest.actions) if (action.dependsOn.some(id => removed.has(id))) removed.add(action.id);
   return {
-    candidate: { ...manifest, actions: manifest.actions.filter(action => !removed.has(action.id)) },
+    candidate: { ...manifest, actions: manifest.actions.filter(action => !removed.has(action.id)) } as Manifest,
     removed: manifest.actions.filter(action => removed.has(action.id)).map(action => action.id),
   };
 }
@@ -53,14 +52,13 @@ function evidenceProblem(result: RunResult, manifest: Manifest, inputDigest: str
     && result.assertionCount !== 1) return 'Exactly one executed frozen assertion must establish this outcome.';
   if (result.outcome === 'target-failure' || result.outcome === 'requirement-satisfied') {
     if (!result.observation) return 'No observation establishes the declared outcome.';
-    let observedOutcome: Outcome = 'requirement-satisfied';
-    try { assertObservation(result.observation, manifest.expectation, searchContract(manifest)); }
-    catch (error) {
-      if (error instanceof TargetFailure) observedOutcome = 'target-failure';
-      else return 'Observation does not establish the intended failure or requirement satisfaction.';
-    }
+    let observedOutcome: Outcome;
+    try { observedOutcome = evaluateObservation(manifest, result.observation); }
+    catch { return 'Observation does not establish the intended failure or requirement satisfaction.'; }
     if (observedOutcome !== result.outcome) return 'Run label contradicts independent evaluation of its observation.';
-    if (result.category && result.category !== 'target-failure') return 'Conclusive run has a contradictory error category.';
+    if (result.category !== undefined && (result.outcome !== 'target-failure' || result.category !== 'target-failure')) {
+      return 'Conclusive run has a contradictory error category.';
+    }
   }
   return undefined;
 }
@@ -173,7 +171,7 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
   };
 
   try {
-    if (!expectationEstablished(original)) {
+    if (!establishedExpectation(original)) {
       baseline = noRun(original, 'inconclusive', 'An independently established expectation is required before reduction.');
       return finish('inconclusive', baseline.reason);
     }

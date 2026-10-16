@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Morphdom textarea case</title></head>
+<body>
+<h1>Morphdom textarea live value</h1>
+<label for="editor">Text</label><textarea id="editor"></textarea>
+<output id="status">loading</output>
+<script>var module = { exports: {} };</script>
+<script src="/app.js"></script>
+<script>
+(() => {
+'use strict';
+const morphdom = module.exports;
+if (typeof morphdom !== 'function') throw new Error('Registered application did not load.');
+const editor = document.querySelector('#editor');
+const status = document.querySelector('#status');
+editor.addEventListener('input', function (event) {
+  const next = document.createElement('textarea');
+  next.id = 'editor';
+  next.innerHTML = 'Hello World';
+  morphdom(event.currentTarget, next);
+  status.textContent = 'rendered';
+});
+status.textContent = 'ready';
+})();
+</script>
+</body></html>

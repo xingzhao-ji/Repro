@@ -4,7 +4,8 @@ import { randomUUID } from 'node:crypto';
 import { mkdir, mkdtemp, writeFile, readFile, unlink, symlink, link, rename } from 'node:fs/promises';
 import { join } from 'node:path';
 import { serve } from '../src/server.js';
-import { createManifest, digest } from '../src/manifest.js';
+import { createAuthoredManifest, createManifest, digest } from '../src/manifest.js';
+import { createCaseManifest } from '../src/browser-case.js';
 import { harnessDigest } from '../src/adapter.js';
 import { type Manifest, type RunResult, type Trial } from '../src/contracts.js';
 import { type JobInputEvidence, type TrialEvidence } from '../src/evidence-inspector.js';
@@ -45,6 +46,109 @@ function makeRun(manifest: Manifest): RunResult {
 }
 async function read<T>(url: string): Promise<T> { // JSON response boundary, asserted below.
   const response = await fetch(url); assert.equal(response.status, 200); return response.json() as Promise<T>;
+}
+
+// Constructed ledger evidence exercises inspection bounds, not browser behavior
+// or a claim that a registered case actually needs this many reduction trials.
+async function boundedHistory(manifest: Manifest, executions: number) {
+  await mkdir('.repro-runs/tests', { recursive: true });
+  const service = await serve({ port: 0, root: await mkdtemp('.repro-runs/tests/inspector-budget-') });
+  const session = service.ledger.createSession(manifest, true);
+  const job = service.ledger.startJob(session.id, 'reduce', 'budget');
+  const directory = join(service.ledger.root, 'artifacts', job.id);
+  await mkdir(directory, { recursive: true });
+  await writeFile(join(directory, 'manifest.json'), JSON.stringify(manifest));
+  const candidate: Manifest = { ...manifest, actions: [] };
+  const trials: Trial[] = [];
+  const runs: RunResult[] = [];
+  for (let index = 0; index < executions - 1; index++) {
+    const input = index === 0 ? manifest : candidate;
+    const runIds: string[] = [];
+    for (let repetition = 0; repetition < (index === 0 ? 2 : 1); repetition++) {
+      const run = makeRun(input);
+      if (manifest.schemaVersion === 3) {
+        run.harnessDigest = 'b'.repeat(64);
+        run.observation = { kind: 'browser-case', values: ['second edit', 'rendered'] };
+        run.reason = 'The frozen browser-case assertion observed the registered failure.';
+        run.environment.isolation = 'registered public browser library; fresh owned profile; Chromium sandbox enabled; loopback asset allowlist; not a hostile-code sandbox';
+      }
+      if (index !== 0) {
+        Object.assign(run, { outcome: 'inconclusive', category: 'verification', appDigest: '', assertionCount: 0, observation: null, reason: 'The assertion has not executed.' });
+        run.environment.browser = 'not-launched';
+      }
+      runs.push(run); runIds.push(run.id);
+      const runDirectory = join(directory, `execution-${String(runs.length).padStart(6, '0')}`, run.id);
+      await mkdir(runDirectory, { recursive: true });
+      await writeFile(join(runDirectory, 'evidence.json'), JSON.stringify(run));
+    }
+    const trial: Trial = { index, inputDigest: digest(input), seed: input.environment.seed,
+      removed: index === 0 ? [] : manifest.actions.map(action => action.id),
+      outcome: index === 0 ? 'target-failure' : 'inconclusive', accepted: index === 0,
+      reason: index === 0 ? 'Target failure preserved in 2/2 required repetitions.' : 'Runner evidence was inconclusive; the target failure is not established.', durationMs: 10, runIds };
+    trials.push(trial);
+    service.ledger.event(job.id, 'trial', JSON.stringify(trial));
+  }
+  service.ledger.finish(job.id, 'complete', { manifest, trials, baseline: runs[0], status: 'budget-exhausted', minimality: 'unverified', reason: 'Constructed inspector fixture.', executions, durationMs: executions * 10 });
+  return { service, session, job, trials, runs, baseUrl: `${service.url}/api/jobs/${job.id}` };
+}
+
+test('repository trial inspection reads later history through execution 80 using the frozen input budget', async () => {
+  const f = await boundedHistory(createCaseManifest('morphdom-textarea'), 80);
+  try {
+    // A current session manifest must not substitute for this historical input.
+    f.service.ledger.updateManifest(f.session.id, { ...createCaseManifest('morphdom-textarea'), actions: [] });
+    const input = await read<JobInputEvidence>(`${f.baseUrl}/input`);
+    assert.equal(input.outcome, 'verified-input');
+    assert.equal(input.manifest?.schemaVersion, 3);
+    const evidence = await read<TrialEvidence>(`${f.baseUrl}/trials/78`);
+    assert.equal(evidence.availability, 'available');
+    assert.equal(evidence.outcome, 'inconclusive');
+    assert.equal(evidence.trial?.index, 78);
+    assert.deepEqual(evidence.candidate?.actions, []);
+    assert.deepEqual(evidence.runs.map(run => run.runId), [f.runs[79]!.id]);
+    assert.equal(evidence.runs[0]!.result?.assertionCount, 0);
+    assert.equal(evidence.runs[0]!.result?.observation, null);
+    assert.equal((await fetch(`${f.baseUrl}/trials/81`)).status, 404);
+  } finally { await f.service.close(); }
+});
+
+function historyManifest(version: 1 | 2 | 3): Manifest {
+  if (version === 3) return createCaseManifest('morphdom-textarea');
+  if (version === 1) return createManifest();
+  return createAuthoredManifest({ searchOrder: ['alpha', 'beta'], expectationBasis: 'independent-contract',
+    expectation: { invariantId: 'LATEST_SEARCH_RESPONSE_WINS', latestRequestId: 2, latestQuery: 'beta', expectedResults: ['Beta synthetic result'] } });
+}
+
+for (const [version, limit] of [[1, 50], [2, 50], [3, 80]] as const) {
+  test(`v${version} trial inspection rejects execution ${limit + 1} without increasing its budget`, async () => {
+    const f = await boundedHistory(historyManifest(version), limit + 1);
+    try {
+      const allowed = await read<TrialEvidence>(`${f.baseUrl}/trials/${limit - 2}`);
+      assert.equal(allowed.availability, 'available');
+      assert.deepEqual(allowed.runs.map(run => run.runId), [f.runs[limit - 1]!.id]);
+      const rejected = await read<TrialEvidence>(`${f.baseUrl}/trials/${limit - 1}`);
+      assert.equal(rejected.availability, 'unavailable');
+      assert.equal(rejected.outcome, 'inconclusive');
+      assert.equal(rejected.code, 'TRIAL_DECISION_MISMATCH');
+      assert.equal(rejected.candidate, null);
+      assert.deepEqual(rejected.runs, []);
+      assert.equal((await fetch(`${f.baseUrl}/trials/${limit + 1}`)).status, 404);
+    } finally { await f.service.close(); }
+  });
+}
+
+for (const [version, limit] of [[1, 50], [2, 50], [3, 80]] as const) {
+  test(`v${version} oversized trial history remains unavailable`, async () => {
+    const f = await boundedHistory(historyManifest(version), limit + 3);
+    try {
+      const input = await read<JobInputEvidence>(`${f.baseUrl}/input`);
+      assert.equal(input.availability, 'unavailable');
+      assert.equal(input.code, 'EVIDENCE_LIMIT');
+      const trial = await read<TrialEvidence>(`${f.baseUrl}/trials/0`);
+      assert.equal(trial.availability, 'unavailable');
+      assert.equal(trial.code, 'EVIDENCE_LIMIT');
+    } finally { await f.service.close(); }
+  });
 }
 
 test('selected job input stays frozen after session reduction, and exact trial exposes only its candidate and owned runs', async () => {
@@ -183,6 +287,28 @@ test('recorded inconclusive trial keeps its exact unstarted run and missing appl
   } finally { await f.service.close(); }
 });
 
+test('a satisfied assertion with target-failure category cannot establish a conclusive trial', async () => {
+  const f = await fixture(trials => {
+    trials[1]!.outcome = 'requirement-satisfied';
+    trials[1]!.accepted = false;
+    trials[1]!.runIds = trials[1]!.runIds.slice(0, 1);
+    trials[1]!.reason = 'Frozen requirement was satisfied; target failure was not reproduced.';
+  });
+  try {
+    const run = JSON.parse(await readFile(f.runPath, 'utf8')) as RunResult;
+    run.outcome = 'requirement-satisfied';
+    run.observation = { latestRequestId: 2, query: 'beta', results: ['Beta synthetic result'] };
+    run.reason = 'The frozen latest-response assertion passed after both controlled HTTP responses completed.';
+    assert.equal(run.category, 'target-failure');
+    await writeFile(f.runPath, JSON.stringify(run));
+    const evidence = await read<TrialEvidence>(f.trialUrl);
+    assert.equal(evidence.availability, 'unavailable');
+    assert.equal(evidence.outcome, 'inconclusive');
+    assert.equal(evidence.runs[0]!.code, 'RUN_OUTCOME_MISMATCH');
+    assert.equal(evidence.runs[0]!.result, null);
+  } finally { await f.service.close(); }
+});
+
 test('public projection withholds arbitrary text and ignores raw private fields', async () => {
   const f = await fixture();
   try {
@@ -227,7 +353,7 @@ test('trial reconstruction advances only from accepted candidates across exact r
       const accepted = index !== 1; const runIds: string[] = [];
       for (let repetition = 0; repetition < (accepted ? 2 : 1); repetition++) {
         const run = makeRun(candidate);
-        if (!accepted) { run.outcome = 'requirement-satisfied'; delete run.category; run.observation!.results = ['Beta synthetic result']; run.reason = 'The frozen latest-response assertion passed after both controlled HTTP responses completed.'; }
+        if (!accepted) { run.outcome = 'requirement-satisfied'; delete run.category; assert.ok(run.observation && 'results' in run.observation); run.observation.results = ['Beta synthetic result']; run.reason = 'The frozen latest-response assertion passed after both controlled HTTP responses completed.'; }
         runs.push(run); runIds.push(run.id);
         const runDir = join(directory, `execution-${String(runs.length).padStart(6, '0')}`, run.id);
         await mkdir(runDir, { recursive: true }); await writeFile(join(runDir, 'evidence.json'), JSON.stringify({ ...run, artifacts: undefined }));

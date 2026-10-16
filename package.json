@@ -18,6 +18,7 @@
     "evidence",
     "schemas",
     "fixtures/browser-search",
+    "fixtures/repository-cases",
     "security"
   ],
   "scripts": {

@@ -6,8 +6,10 @@ import { dirname, join, resolve } from 'node:path';
 
 const moduleUrl = new URL('../scripts/package-inputs.mjs', import.meta.url).href;
 const inputs = ['package.json', 'package-lock.json', 'tsconfig.json', 'assets/tokens.css',
-  'scripts/build.mjs', 'scripts/package-inputs.mjs', 'scripts/package-smoke.mjs', 'scripts/authored-package-smoke.mjs',
-  'src/index.ts', 'web/main.tsx', 'web/style.css', 'fixtures/browser-search/buggy.js', 'security/policy.json', 'dist/cli.js'];
+  'scripts/build.mjs', 'scripts/build-repository-cases.mjs', 'scripts/package-inputs.mjs', 'scripts/package-smoke.mjs', 'scripts/authored-package-smoke.mjs',
+  'src/index.ts', 'web/main.tsx', 'web/style.css', 'fixtures/browser-search/buggy.js',
+  'fixtures/repository-cases/example/buggy.js', 'fixtures/repository-cases/example/provenance.json',
+  'security/policy.json', 'dist/cli.js'];
 
 async function fixture() {
   const parent = resolve('.repro-runs/package-input-provenance/fixtures');
@@ -36,7 +38,7 @@ function snapshot(root: string, includeDist: boolean): Record<string, string> {
 
 for (const includeDist of [false, true]) {
   const mode = includeDist ? 'authored package' : 'package';
-  for (const path of ['assets/tokens.css', 'tsconfig.json', 'src/index.ts']) {
+  for (const path of ['assets/tokens.css', 'tsconfig.json', 'src/index.ts', 'scripts/build-repository-cases.mjs', 'fixtures/repository-cases/example/buggy.js', 'fixtures/repository-cases/example/provenance.json']) {
     test(`${mode} source guard detects changes to ${path}`, async () => {
       const root = await fixture();
       const before = snapshot(root, includeDist);

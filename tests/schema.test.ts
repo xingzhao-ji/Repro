@@ -112,6 +112,6 @@ test('run schema rejects unknown fields, wrong outcomes, missing executed assert
   for (const path of ['../outside', '/absolute', 'a\\b', 'a//b', './a', 'a/../b']) {
     const run = structuralRun(); run.artifacts[0]!.path = path; assert.equal(resultValid(run), false, path);
   }
-  const altered = structuralRun(); altered.observation!.results = ['Other results'];
+  const altered = structuralRun(); assert.ok(altered.observation && 'results' in altered.observation); altered.observation.results = ['Other results'];
   assert.equal(resultValid(altered), true, 'Schema structure is not the frozen semantic oracle.');
 });

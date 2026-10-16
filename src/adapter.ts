@@ -5,7 +5,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 import { chromium, type Browser, type BrowserContext, type Page } from 'playwright';
-import { ADAPTER, VERSION, ReproError, type Manifest, type RunFunction, type RunResult, type SearchOrder } from './contracts.js';
+import { ADAPTER, VERSION, ReproError, type SyntheticManifest, type RunFunction, type RunResult, type SearchOrder } from './contracts.js';
 import { fixtureSource, fixtureDigest } from './fixture.js';
 import { ASSERTION_DIGEST, ORACLE_ARTIFACT_DIGEST, assertObservation, TargetFailure, type Observation } from './oracle.js';
 import { digest, validateManifest } from './manifest.js';
@@ -25,7 +25,7 @@ async function collectArtifacts(directory: string, id: string, result: RunResult
 }
 
 /** Registered synthetic code only. Browser processes cannot write the Node oracle. */
-function validateBoundary(manifest: Manifest): void {
+function validateBoundary(manifest: SyntheticManifest): void {
   if ((manifest.schemaVersion !== 1 && manifest.schemaVersion !== 2) || manifest.adapter.id !== ADAPTER || manifest.adapter.version !== VERSION || manifest.runnerVersion !== VERSION) {
     throw new ReproError('unsupported', 'VERSION_MISMATCH', 'This runner requires schema 1 or 2 and the installed registered adapter and runner versions.');
   }
@@ -80,7 +80,9 @@ export async function installNetworkBoundary(context: BrowserContext, origin: st
   });
 }
 
-export const runBrowser: RunFunction = async (manifest, options) => {
+export const runBrowser: RunFunction = async (input, options) => {
+  if (input.schemaVersion === 3) throw new ReproError('unsupported', 'CASE_ADAPTER_REQUIRED', 'Use runExperiment for registered public repository cases.');
+  let manifest = input;
   const id = randomUUID();
   const started = Date.now();
   const revision = options.revision ?? manifest.app.revision;
@@ -148,7 +150,9 @@ export const runBrowser: RunFunction = async (manifest, options) => {
     check();
     directory = ownedDirectory(join(ownedDirectory(options.artifactDir), id));
     artifactWritable = true;
-    manifest = validateManifest(manifest);
+    const validated = validateManifest(manifest);
+    if (validated.schemaVersion === 3) throw new ReproError('unsupported', 'CASE_ADAPTER_REQUIRED', 'Use runExperiment for registered public repository cases.');
+    manifest = validated;
     validateBoundary(manifest);
     const contract = searchContract(manifest);
     frozenOrder = contract.searchOrder;

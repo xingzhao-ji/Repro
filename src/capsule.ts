@@ -5,6 +5,7 @@ import { basename, dirname, isAbsolute, join, relative, resolve, sep } from 'nod
 import { fileURLToPath } from 'node:url';
 import { ReproError, VERSION, type Manifest } from './contracts.js';
 import { canonicalJson, digest, validateManifest } from './manifest.js';
+import { getRegisteredCase } from './browser-case.js';
 
 const ROOT = fileURLToPath(new URL('../', import.meta.url));
 const LIMIT = 16 * 1024 * 1024;
@@ -24,9 +25,13 @@ function cancelled(signal?: AbortSignal): void {
 
 function hash(bytes: Uint8Array): string { return createHash('sha256').update(bytes).digest('hex'); }
 
-function safeArtifactPath(path: unknown): asserts path is typeof FILES[number] {
+function artifactPaths(manifest: Manifest): Set<string> {
+  return new Set<string>([...FILES, ...(manifest.schemaVersion === 3 ? getRegisteredCase(manifest.caseId).assetPaths : [])]);
+}
+
+function safeArtifactPath(path: unknown, allowed: ReadonlySet<string>): asserts path is string {
   if (typeof path !== 'string' || isAbsolute(path) || path.includes('\\') || path.includes('\0')
-      || path.split('/').some((part) => part === '.' || part === '..' || part === '') || !FILES.includes(path as typeof FILES[number])) {
+      || path.split('/').some((part) => part === '.' || part === '..' || part === '') || !allowed.has(path)) {
     throw new ReproError('input', 'CAPSULE_PATH', 'Capsule contains an unsafe or unapproved artifact path.');
   }
 }
@@ -65,14 +70,14 @@ function parseJson(bytes: Buffer): unknown {
   catch (cause) { throw new ReproError('input', 'CAPSULE_JSON', 'A capsule JSON artifact is malformed.', { cause }); }
 }
 
-function integrity(input: unknown): Integrity {
+function integrity(input: unknown, allowed: ReadonlySet<string>): Integrity {
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new ReproError('input', 'CAPSULE_INTEGRITY', 'Capsule integrity metadata is malformed.');
   const record = input as Record<string, unknown>;
   const keys = Object.keys(record);
   if (keys.length !== 4 || keys.some((key) => !['format', 'schemaVersion', 'manifestDigest', 'files'].includes(key))
       || record['format'] !== 'repro-directory-v1' || record['schemaVersion'] !== 1
       || typeof record['manifestDigest'] !== 'string' || !/^[a-f0-9]{64}$/.test(record['manifestDigest'])
-      || !Array.isArray(record['files']) || record['files'].length !== FILES.length) {
+      || !Array.isArray(record['files']) || record['files'].length !== allowed.size) {
     throw new ReproError('input', 'CAPSULE_INTEGRITY', 'Capsule integrity metadata is incompatible or incomplete.');
   }
   const seen = new Set<string>(); let total = 0;
@@ -80,7 +85,7 @@ function integrity(input: unknown): Integrity {
     if (!value || typeof value !== 'object' || Array.isArray(value)) throw new ReproError('input', 'CAPSULE_INTEGRITY', 'Capsule artifact metadata is malformed.');
     const artifact = value as Record<string, unknown>;
     if (Object.keys(artifact).length !== 3 || Object.keys(artifact).some((key) => !['path', 'sha256', 'bytes'].includes(key))) throw new ReproError('input', 'CAPSULE_INTEGRITY', 'Capsule artifact metadata has unapproved fields.');
-    safeArtifactPath(artifact['path']);
+    safeArtifactPath(artifact['path'], allowed);
     if (seen.has(artifact['path']) || typeof artifact['sha256'] !== 'string' || !/^[a-f0-9]{64}$/.test(artifact['sha256'])
         || typeof artifact['bytes'] !== 'number' || !Number.isSafeInteger(artifact['bytes']) || artifact['bytes'] < 0 || artifact['bytes'] > LIMIT) {
       throw new ReproError('input', 'CAPSULE_INTEGRITY', 'Capsule artifact metadata has duplicate, invalid or oversized entries.');
@@ -186,6 +191,78 @@ test('frozen latest-search requirement distinguishes buggy and fixed revisions',
 });
 `;
 
+const CASE_README = `# Repro portable public repository regression
+
+This capsule executes the actual pinned source of one registered public repository case through a small independent browser integration page. It is a public development case, not a held-out benchmark or coverage of the entire upstream application. manifest.json records the issue-derived expected behavior, source revision, actions and frozen assertion identity. The case directory includes exact upstream source, provenance and license information. No account, API key, LLM, proprietary viewer, database or original workspace is required.
+
+## Inspect, install and run
+
+Use an independently obtained trusted Repro runner to inspect this directory before execution: \`repro inspect --capsule /path/to/capsule\`. Hashes establish integrity, not trust. Unknown or hostile capsules must not execute on the host. Only explicitly reviewed registered source is supported.
+
+Prerequisites: Node >=24, npm, exact package-lock.json dependencies, the pinned Playwright Chromium and its operating-system libraries. Acquisition needs the public npm registry and official browser/system package sources; replay uses container or host loopback only. Fresh verification must use no existing workspace or caches, user profile, credentials, host application service or implicit dependency fallback. Install from this capsule in a fresh approved environment:
+
+\`\`\`sh
+npm ci --ignore-scripts --omit=dev
+npx --no-install playwright install --with-deps chromium
+node dist/cli.js inspect --capsule .
+REPRO_REVISION=buggy node --test replay.test.mjs
+REPRO_REVISION=fixed node --test replay.test.mjs
+node dist/cli.js verify --capsule . --output .repro-runs/comparison
+\`\`\`
+
+The single-revision test requires an explicit buggy or fixed selection. On the buggy revision it must fail with TARGET_ASSERTION after exactly one frozen behavioral assertion executes. On the fixed revision that unchanged assertion must pass. A dependency failure, timeout, wrong observation or changed identity instead fails with a diagnostic that cannot count as reproduction. The separate verify command compares both revisions; a successful comparison is distinct from the intentionally failing buggy regression test. Run each command from a fresh owned state and preserve its actual outcome.
+
+The declared values and selectors are readable in manifest.json. replay.test.mjs independently checks the returned observation against the frozen contract and expected values. It never prints arbitrary target values or exception text. Missing prerequisites require reinstalling the declared dependencies/browser; missing or modified source requires restoring this exact capsule. A new output directory preserves previous evidence.
+
+## Container scope remains pending
+
+The Dockerfile is a preparation recipe, not proof of portability or permission to run broader source. Its pinned Node 26.7.0 Debian image targets Linux arm64; Playwright 1.64.0 and Chromium system libraries are acquired explicitly. macOS arm64 development and isolated Linux arm64 are prospective beta verification platforms; consult the case's actual evidence before claiming either passed. Other architectures are unverified. System repositories are not snapshotted, so bit-identical OS rebuilds are not claimed.
+
+The inert policy file \`${POLICY_PATH}\` has SHA-256 \`${POLICY_SHA256}\`. Its historical approval was synthetic-only. Approval to apply that policy to these public repository cases is pending; exporting or importing this capsule grants no new approval. Do not disable the browser sandbox, modify syscalls, add capabilities or widen mounts/network to make a run succeed. Review the exact source and runtime boundary and obtain the necessary scoped decision before applying any policy beyond its approved scope.
+
+The intended runtime preserves an unprivileged user, enabled Chromium sandbox, no external network, read-only root, all capabilities dropped, no-new-privileges, 2 CPUs, 128 tasks, 1 GiB memory, 256 MiB /tmp, 256 MiB shared memory and a fresh task-owned evidence volume. It needs no host bind mounts, Docker socket, credentials, public ports or privileged mode. Set REPRO_REVISION explicitly for conventional tests. Ordinary containers are a development boundary, not a hostile-code sandbox. Retain evidence before removing only inventoried owned containers and scratch volumes.
+
+## Included data
+
+Only the selected registered case's exact source/integration/provenance assets, the trusted runner, baseline synthetic assets required by that runner, locked dependencies, inert policy, manifest and readable test are included. Browser profiles, screenshots, traces, logs, cookies, credentials and neighboring files are excluded. Inputs and approved observations use public fixture values; this is not a general secret-redaction guarantee.
+
+Import checks exact artifact paths, sizes, hashes, the frozen registered contract, and executable/source equality with the independently installed trusted runner. Recomputed self-declared hashes cannot authorize changed code. Generated top-level node_modules, .repro-runs and .repro-cache directories are excluded from artifact attestation; acquire their contents afresh. Incomplete exports never finalize. Accessibility remains deferred and unverified.
+`;
+
+const CASE_READABLE_TEST = `import test from 'node:test';
+import assert from 'node:assert/strict';
+import { fileURLToPath } from 'node:url';
+import { importCapsule, runExperiment, digest, revisionDigest, experimentHarnessDigest, evaluateObservation } from './dist/index.js';
+
+test('the selected repository revision satisfies the frozen expected behavior', { timeout: 40000 }, async () => {
+  const revision = process.env.REPRO_REVISION;
+  assert.ok(revision === 'buggy' || revision === 'fixed', 'Choose REPRO_REVISION=buggy or REPRO_REVISION=fixed before running this test.');
+  let manifest;
+  try { manifest = await importCapsule(fileURLToPath(new URL('.', import.meta.url))); }
+  catch { assert.fail('CAPSULE_INVALID: Inspect with an independently installed trusted Repro runner and restore missing or changed capsule files.'); }
+  assert.ok(manifest.schemaVersion === 3, 'This regression requires a registered repository-case manifest.');
+  let result;
+  try { result = await runExperiment(manifest, { artifactDir: '.repro-runs/readable-' + revision, revision }); }
+  catch { assert.fail('RUNNER_UNAVAILABLE: Install the declared dependencies and browser in an approved environment, then retry with fresh owned output.'); }
+  assert.ok(result.manifestDigest === digest(manifest), 'Manifest identity changed.');
+  assert.ok(result.assertionDigest === manifest.assertionDigest, 'Frozen assertion identity changed.');
+  assert.ok(result.harnessDigest === experimentHarnessDigest(manifest), 'Independent harness identity changed.');
+  assert.ok(result.appRevision === revision && result.appDigest === revisionDigest(manifest, revision), 'Selected upstream revision identity changed.');
+  assert.ok(result.adapterVersion === manifest.adapter.version && result.runnerVersion === manifest.runnerVersion && result.seed === manifest.environment.seed, 'Declared execution identity changed.');
+  assert.ok(result.assertionCount === 1, 'ASSERTION_UNAVAILABLE: Exactly one frozen assertion must execute. Check dependency installation, readiness and the declared deadline; retry from fresh state.');
+  assert.ok(result.outcome === 'target-failure' || result.outcome === 'requirement-satisfied', 'RUN_INCONCLUSIVE: Check approved runtime prerequisites and retry from fresh state; this is not a reproduced failure.');
+  let observed;
+  try { observed = evaluateObservation(manifest, result.observation); }
+  catch { assert.fail('OBSERVATION_UNVERIFIED: The observation does not establish this registered failure. Check source identity, setup and readiness before retrying.'); }
+  assert.ok(result.outcome === observed, 'The reported verdict contradicts independent observation evaluation.');
+  assert.ok(result.category === (observed === 'target-failure' ? 'target-failure' : undefined), 'The error category contradicts the behavioral verdict.');
+  // Assert booleans to avoid printing arbitrary target values in Node's diff.
+  const expected = manifest.expectation.checks.map(check => check.expected);
+  const matches = result.observation?.kind === 'browser-case' && JSON.stringify(result.observation.values) === JSON.stringify(expected);
+  assert.ok(observed === 'requirement-satisfied' && matches, 'TARGET_ASSERTION: ' + manifest.expectation.invariantId + ' did not satisfy its unchanged expected behavior.');
+});
+`;
+
 const DOCKERFILE = `# Linux portability recipe; execution evidence is tracked separately.
 FROM node:26.7.0-bookworm-slim@sha256:4db36457f406501e6f608802e5da617e5fbd0e80b75901b6a09de1ae5a667d32
 WORKDIR /work
@@ -198,13 +275,21 @@ USER node
 CMD ["node", "--test", "replay.test.mjs"]
 `;
 
-async function trustedArtifacts(): Promise<Map<string, Buffer>> {
+async function trustedArtifacts(manifest: Manifest): Promise<Map<string, Buffer>> {
+  const repositoryCase = manifest.schemaVersion === 3 ? getRegisteredCase(manifest.caseId) : undefined;
   const files = new Map<string, Buffer>([
     ['.dockerignore', Buffer.from('node_modules\n.repro-runs\n.repro-cache\n')],
-    ['README.md', Buffer.from(README)], ['Dockerfile', Buffer.from(DOCKERFILE)],
-    ['replay.test.mjs', Buffer.from(READABLE_TEST)],
+    ['README.md', Buffer.from(repositoryCase ? CASE_README : README)], ['Dockerfile', Buffer.from(DOCKERFILE)],
+    ['replay.test.mjs', Buffer.from(repositoryCase ? CASE_READABLE_TEST : READABLE_TEST)],
   ]);
-  for (const file of ['dist/cli.js', 'dist/index.js', 'package.json', 'package-lock.json', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', POLICY_PATH]) {
+  const registeredHashes = new Map<string, string>();
+  if (repositoryCase) {
+    const root = `fixtures/repository-cases/${repositoryCase.id}`;
+    registeredHashes.set(`${root}/buggy.js`, repositoryCase.revisions.buggy.sourceDigest);
+    registeredHashes.set(`${root}/fixed.js`, repositoryCase.revisions.fixed.sourceDigest);
+    registeredHashes.set(`${root}/page.html`, repositoryCase.wrapperDigest);
+  }
+  for (const file of ['dist/cli.js', 'dist/index.js', 'package.json', 'package-lock.json', 'fixtures/browser-search/page.html', 'fixtures/browser-search/buggy.js', 'fixtures/browser-search/fixed.js', POLICY_PATH, ...(repositoryCase?.assetPaths ?? [])]) {
     try {
       let source = join(ROOT, file);
       if (file === 'package-lock.json') {
@@ -218,17 +303,19 @@ async function trustedArtifacts(): Promise<Map<string, Buffer>> {
       }
       const content = await readBounded(source);
       if (file === POLICY_PATH && hash(content) !== POLICY_SHA256) throw new ReproError('verification', 'CAPSULE_POLICY', 'The installed container policy differs from the specifically approved profile.');
+      const registeredHash = registeredHashes.get(file);
+      if (registeredHash && hash(content) !== registeredHash) throw new ReproError('verification', 'CASE_SOURCE_CHANGED', 'Registered source or integration bytes differ from their pinned identity. Restore the installed case before exporting.');
       files.set(file, content);
     }
     catch (cause) {
-      if (cause instanceof ReproError && cause.code === 'CAPSULE_POLICY') throw cause;
+      if (cause instanceof ReproError && (cause.code === 'CAPSULE_POLICY' || cause.code === 'CASE_SOURCE_CHANGED')) throw cause;
       throw new ReproError('environment', 'CAPSULE_BUILD_REQUIRED', 'Build the trusted runner and install its lockfile before importing or exporting capsules.', { cause });
     }
   }
   return files;
 }
 
-async function scanDirectory(directory: string, prefix = ''): Promise<Set<string>> {
+async function scanDirectory(directory: string, allowed: ReadonlySet<string>, prefix = ''): Promise<Set<string>> {
   const result = new Set<string>();
   const entries = await readdir(directory, { withFileTypes: true });
   if (entries.length > 32) throw new ReproError('input', 'CAPSULE_FILES', 'Capsule contains excessive directory entries.');
@@ -238,10 +325,10 @@ async function scanDirectory(directory: string, prefix = ''): Promise<Set<string
     if (!prefix && GENERATED.has(entry.name) && stat.isDirectory()) continue;
     const local = prefix ? `${prefix}/${entry.name}` : entry.name;
     if (stat.isDirectory()) {
-      if (!['dist', 'fixtures', 'fixtures/browser-search', 'security'].includes(local)) throw new ReproError('input', 'CAPSULE_DIRECTORY', 'Capsule contains an unapproved directory.');
-      for (const child of await scanDirectory(path, local)) result.add(child);
+      if (![...allowed].some(file => file.startsWith(`${local}/`))) throw new ReproError('input', 'CAPSULE_DIRECTORY', 'Capsule contains an unapproved directory.');
+      for (const child of await scanDirectory(path, allowed, local)) result.add(child);
     } else {
-      if (local !== 'integrity.json') safeArtifactPath(local);
+      if (local !== 'integrity.json') safeArtifactPath(local, allowed);
       if (!stat.isFile() || stat.nlink !== 1) throw new ReproError('input', 'CAPSULE_LINK', 'Only regular single-link artifact files are supported.');
       result.add(local);
     }
@@ -257,21 +344,27 @@ async function validateDirectory(directory: string, allowPartial: boolean): Prom
     if (!stat.isDirectory()) throw new ReproError('unsupported', 'CAPSULE_FORMAT', 'Only unpacked capsule directories are supported; archives are never extracted.');
     if (!allowPartial && basename(fullPath).includes('.partial-')) throw new ReproError('input', 'CAPSULE_INCOMPLETE', 'A partial capsule cannot be imported.');
     if (await realpath(fullPath) !== fullPath) throw new ReproError('input', 'CAPSULE_LINK', 'Capsule path must not traverse a symbolic link.');
-    const actual = await scanDirectory(fullPath);
-    if (actual.size !== FILES.length + 1 || !actual.has('integrity.json') || FILES.some((file) => !actual.has(file))) throw new ReproError('input', 'CAPSULE_INCOMPLETE', 'Capsule is missing finalized artifacts.');
-    const index = integrity(parseJson(await readBounded(join(fullPath, 'integrity.json'), 32_768)));
-    const trusted = await trustedArtifacts();
-    let manifest: Manifest | undefined;
+    // Read only the bounded fixed-name manifest before choosing its exact
+    // registered allowlist. No capsule-provided source is imported or run.
+    const manifestBytes = await readBounded(join(fullPath, 'manifest.json'), 65_536);
+    const manifest = validateManifest(parseJson(manifestBytes));
+    const allowed = artifactPaths(manifest);
+    const actual = await scanDirectory(fullPath, allowed);
+    if (actual.size !== allowed.size + 1 || !actual.has('integrity.json') || [...allowed].some(file => !actual.has(file))) throw new ReproError('input', 'CAPSULE_INCOMPLETE', 'Capsule is missing finalized artifacts.');
+    const index = integrity(parseJson(await readBounded(join(fullPath, 'integrity.json'), 32_768)), allowed);
+    const trusted = await trustedArtifacts(manifest);
     for (const artifact of index.files) {
       const content = await readBounded(join(fullPath, artifact.path), artifact.path === 'manifest.json' ? 65_536 : LIMIT);
       if (content.length !== artifact.bytes || hash(content) !== artifact.sha256) throw new ReproError('verification', 'CAPSULE_HASH', 'Capsule artifact integrity verification failed.');
-      if (artifact.path === 'manifest.json') manifest = validateManifest(parseJson(content));
+      if (artifact.path === 'manifest.json') {
+        if (!content.equals(manifestBytes)) throw new ReproError('verification', 'CAPSULE_MANIFEST_CHANGED', 'Capsule manifest changed during validation.');
+      }
       else {
         const expected = trusted.get(artifact.path);
         if (!expected || hash(expected) !== artifact.sha256) throw new ReproError('verification', 'CAPSULE_TRUST', 'Capsule artifact differs from the installed trusted runner or registered fixture.');
       }
     }
-    if (!manifest || digest(manifest) !== index.manifestDigest) throw new ReproError('verification', 'CAPSULE_MANIFEST_HASH', 'Capsule manifest identity verification failed.');
+    if (digest(manifest) !== index.manifestDigest) throw new ReproError('verification', 'CAPSULE_MANIFEST_HASH', 'Capsule manifest identity verification failed.');
     return manifest;
   } catch (cause) {
     if (cause instanceof ReproError) throw cause;
@@ -301,7 +394,8 @@ async function ownedOutput(output: string): Promise<string> {
 
 export async function exportCapsule(input: unknown, outputDirectory: string, options: ExportOptions = {}): Promise<{ path: string; manifestDigest: string; files: number }> {
   const manifest = validateManifest(input); cancelled(options.signal);
-  const artifacts = await trustedArtifacts(); cancelled(options.signal);
+  const artifacts = await trustedArtifacts(manifest); cancelled(options.signal);
+  const allowed = artifactPaths(manifest);
   artifacts.set('manifest.json', Buffer.from(`${canonicalJson(manifest)}\n`));
   const output = await ownedOutput(outputDirectory);
   const lock = `${output}.export-lock`; const temporary = join(dirname(output), `.${basename(output)}.partial-${randomUUID()}`);
@@ -318,7 +412,7 @@ export async function exportCapsule(input: unknown, outputDirectory: string, opt
     const files: Artifact[] = [];
     progress({ phase: 'staging', completed: 0, total: artifacts.size });
     for (const [path, content] of [...artifacts].sort(([a], [b]) => a.localeCompare(b))) {
-      cancelled(options.signal); safeArtifactPath(path);
+      cancelled(options.signal); safeArtifactPath(path, allowed);
       await mkdir(dirname(join(temporary, path)), { recursive: true });
       await writeFile(join(temporary, path), content, { flag: 'wx', mode: 0o600 });
       files.push({ path, sha256: hash(content), bytes: content.length });

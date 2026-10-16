@@ -8,17 +8,19 @@ import { ReproError, VERSION, type Manifest, type RunResult } from './contracts.
 import { createManifest } from './manifest.js';
 import { readExperiment, readManifest } from './input.js';
 import { importCapsule, exportCapsule } from './capsule.js';
-import { runBrowser } from './adapter.js';
+import { runExperiment } from './runner.js';
+import { getRegisteredCase, listRegisteredCases } from './browser-case.js';
 import { reduce } from './reducer.js';
 import { verify, publicError } from './service.js';
 import { ownedDirectory, regularOwnedFile, writeOwnedFile } from './paths.js';
 
-const help = `Repro ${VERSION} — local synthetic failure compiler
+const help = `Repro ${VERSION} — local failure compiler
 
 Commands:
   doctor                             Inspect browser and Linux container prerequisites
+  cases [--case ID]                  Inspect registered public cases / explicit declaration
   record --consent                    Capture the registered synthetic browser scenario
-  record --consent --experiment FILE  Freeze a declared search order and expected result
+  record --consent --experiment FILE  Freeze an explicit registered-case or search expectation
   replay --manifest FILE              Replay a validated manifest
   replay --capsule DIRECTORY          Validate bundle integrity before replay
   reduce --manifest FILE              Reduce browser actions with a bounded budget
@@ -32,7 +34,7 @@ Options: --output DIRECTORY (under .repro-runs), --revision buggy|fixed,
 Each execution needs a new output directory; serve reopens its workbench state.
 Browser install: PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers npx playwright install chromium --only-shell
 Use the same PLAYWRIGHT_BROWSERS_PATH when invoking Repro.
-Scope: trusted, explicitly registered synthetic frontend only. No human approval claimed.
+Scope: registered public browser-library cases and the synthetic frontend. No human approval claimed.
 `;
 export async function doctor() {
   let browser: { available: boolean; version?: string; reason?: string };
@@ -50,16 +52,22 @@ export async function doctor() {
   } catch { browser = { available: false, reason: 'Browser could not complete a sandboxed click and screenshot. Install the pinned browser, or explicitly select an installed Chrome with REPRO_BROWSER_CHANNEL=chrome for local development.' }; }
   finally { await instance?.close(); }
   const container = spawnSync('docker', ['info', '--format', '{{.ServerVersion}}'], { encoding: 'utf8', timeout: 5000, maxBuffer: 4096 });
-  return { runnerVersion: VERSION, node: process.version, platform: `${process.platform}-${process.arch}`, browser, linuxContainer: container.status === 0 ? { available: true, version: container.stdout.trim() } : { available: false, reason: 'Docker engine unavailable; fresh Linux-container replay remains unverified.' }, scope: 'Trusted registered synthetic fixture; no arbitrary capsule execution, credentials, or LLM required.' };
+  return { runnerVersion: VERSION, node: process.version, platform: `${process.platform}-${process.arch}`, browser, linuxContainer: container.status === 0 ? { available: true, version: container.stdout.trim() } : { available: false, reason: 'Docker engine unavailable; fresh Linux-container replay remains unverified.' }, scope: 'Registered public browser-library cases and synthetic fixture; no arbitrary capsule execution, credentials, or LLM required.' };
 }
 async function main(): Promise<void> {
   const parsed = parseArgs({ allowPositionals: true, strict: true, options: {
-    help: { type: 'boolean' }, consent: { type: 'boolean' }, manifest: { type: 'string' }, capsule: { type: 'string' }, experiment: { type: 'string' }, output: { type: 'string' }, revision: { type: 'string' }, budget: { type: 'string' }, port: { type: 'string' }
+    help: { type: 'boolean' }, case: { type: 'string' }, consent: { type: 'boolean' }, manifest: { type: 'string' }, capsule: { type: 'string' }, experiment: { type: 'string' }, output: { type: 'string' }, revision: { type: 'string' }, budget: { type: 'string' }, port: { type: 'string' }
   } });
   const command = parsed.positionals[0]; const options = parsed.values;
   if (options.help || !command) { console.log(help); return; }
   if (parsed.positionals.length !== 1) throw new ReproError('input', 'ARGUMENTS', 'Expected one command. Use --help.');
   if (options.experiment !== undefined && (command !== 'record' || options.manifest !== undefined || options.capsule !== undefined)) throw new ReproError('input', 'ARGUMENTS', 'Use --experiment only with record, without --manifest or --capsule.');
+  if (options.case !== undefined && command !== 'cases') throw new ReproError('input', 'ARGUMENTS', 'Use --case with cases to inspect a declaration; record with --experiment FILE.');
+  if (command === 'cases') {
+    const cases = options.case ? [getRegisteredCase(options.case)] : listRegisteredCases();
+    const declarations = cases.map(item => ({ caseId: item.id, expectation: item.expectation }));
+    console.log(JSON.stringify(options.case ? declarations[0] : declarations, null, 2)); return;
+  }
   if (command === 'doctor') { console.log(JSON.stringify(await doctor(), null, 2)); return; }
   if (command === 'serve') {
     const port = Number(options.port ?? '4318');
@@ -71,7 +79,7 @@ async function main(): Promise<void> {
     process.once('SIGINT', shutdown); process.once('SIGTERM', shutdown); return;
   }
   if (!['record', 'replay', 'reduce', 'verify', 'export', 'inspect'].includes(command)) throw new ReproError('unsupported', 'COMMAND_UNSUPPORTED', `Unsupported command: ${command}`);
-  if (command === 'record' && !options.consent) throw new ReproError('input', 'CONSENT_REQUIRED', 'Use --consent to opt in to capture of the registered synthetic fixture only.');
+  if (command === 'record' && !options.consent) throw new ReproError('input', 'CONSENT_REQUIRED', 'Use --consent to opt in to the declared registered case capture.');
   if (options.manifest && options.capsule) throw new ReproError('input', 'ARGUMENTS', 'Choose either --manifest or --capsule.');
   let manifest: Manifest;
   if (options.experiment !== undefined) manifest = await readExperiment(resolve(options.experiment));
@@ -82,7 +90,7 @@ async function main(): Promise<void> {
   else throw new ReproError('input', 'MANIFEST_REQUIRED', 'Provide --manifest FILE or --capsule DIRECTORY.');
   if (options.revision && !['buggy', 'fixed'].includes(options.revision)) throw new ReproError('unsupported', 'REVISION_UNSUPPORTED', 'Only registered buggy and fixed revisions are supported.');
   if (command === 'inspect') { console.log(JSON.stringify(manifest, null, 2)); return; }
-  const budget = Number(options.budget ?? '50');
+  const budget = Number(options.budget ?? (manifest.schemaVersion === 3 ? '80' : '50'));
   if (command === 'reduce' && (!Number.isInteger(budget) || budget < 1 || budget > 200)) throw new ReproError('input', 'BUDGET', 'Execution budget must be 1–200.');
   const output = command === 'export' ? resolve(options.output ?? `.repro-runs/export-${Date.now()}`) : ownedDirectory(options.output ?? `.repro-runs/${command}-${Date.now()}`, { exclusive: true });
   const controller = new AbortController();
@@ -95,11 +103,11 @@ async function main(): Promise<void> {
       for (const leaf of ['manifest.json', 'result.json', ...(command === 'reduce' ? ['reduced.manifest.json'] : [])]) regularOwnedFile(join(output, leaf));
       await writeOwnedFile(join(output, 'manifest.json'), JSON.stringify(manifest, null, 2));
       if (command === 'reduce') {
-        const reduced = await reduce(manifest, runBrowser, { artifactDir: output, maxExecutions: budget, maxDurationMs: 120_000, repetitions: 2, signal: controller.signal });
+        const reduced = await reduce(manifest, runExperiment, { artifactDir: output, maxExecutions: budget, maxDurationMs: manifest.schemaVersion === 3 ? 300_000 : 120_000, repetitions: 2, signal: controller.signal });
         result = reduced;
         await writeOwnedFile(join(output, 'reduced.manifest.json'), JSON.stringify(reduced.manifest, null, 2));
       } else if (command === 'verify') result = await verify(manifest, output, controller.signal);
-      else result = await runBrowser(manifest, { artifactDir: output, signal: controller.signal, ...(options.revision ? { revision: options.revision as 'buggy' | 'fixed' } : {}) });
+      else result = await runExperiment(manifest, { artifactDir: output, signal: controller.signal, ...(options.revision ? { revision: options.revision as 'buggy' | 'fixed' } : {}) });
       await writeOwnedFile(join(output, 'result.json'), JSON.stringify(result, null, 2));
     }
     console.log(JSON.stringify({ output, result }, null, 2));

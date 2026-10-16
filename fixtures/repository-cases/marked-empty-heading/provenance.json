@@ -1,0 +1,321 @@
+{
+  "schemaVersion": 1,
+  "project": "markedjs/marked",
+  "issue": "https://github.com/markedjs/marked/issues/3048",
+  "fixedCommit": "https://github.com/markedjs/marked/commit/a1034e6dd1ddbc2f723627f271bba29486005c1a",
+  "revisions": {
+    "buggy": "39cee771b659ea0eba49bd69dba10817403550d6",
+    "fixed": "a1034e6dd1ddbc2f723627f271bba29486005c1a"
+  },
+  "acquiredAt": "2026-10-16T01:21:20.042464+00:00",
+  "sourceSelection": "Exact upstream source and metadata at parent/fix revisions; no reimplementation; no runtime execution during intake",
+  "license": "MIT",
+  "fixedSourceInspected": false,
+  "files": [
+    {
+      "path": "upstream/buggy/src/Hooks.ts",
+      "upstreamPath": "src/Hooks.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/Hooks.ts",
+      "bytes": 533,
+      "sha256": "0cd271de88bfc0bbfde040f978114d337c69c477491c4c731c8f491b9533d086"
+    },
+    {
+      "path": "upstream/buggy/src/Instance.ts",
+      "upstreamPath": "src/Instance.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/Instance.ts",
+      "bytes": 11295,
+      "sha256": "8acaa748e31c72fdebde6700d288b2fea32dac386f871874447356bf9b9e7fc6"
+    },
+    {
+      "path": "upstream/buggy/src/Lexer.ts",
+      "upstreamPath": "src/Lexer.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/Lexer.ts",
+      "bytes": 13995,
+      "sha256": "e10bc41e0be40c80ef4da46a771ef91863778dd38ca3c59556f4d29a9bfcd281"
+    },
+    {
+      "path": "upstream/buggy/src/MarkedOptions.ts",
+      "upstreamPath": "src/MarkedOptions.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/MarkedOptions.ts",
+      "bytes": 4402,
+      "sha256": "caaedada06f47a4e3d3db21d0412d49459e5181f6befef5c866f2a2e3db23d37"
+    },
+    {
+      "path": "upstream/buggy/src/Parser.ts",
+      "upstreamPath": "src/Parser.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/Parser.ts",
+      "bytes": 9077,
+      "sha256": "eb03f9839b367f7757a0c4a1e0946cdeb96f7d172e16823a6e82dbb69492272c"
+    },
+    {
+      "path": "upstream/buggy/src/Renderer.ts",
+      "upstreamPath": "src/Renderer.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/Renderer.ts",
+      "bytes": 3401,
+      "sha256": "c677746e994ad63db9d8c03cb8d601cd6d6282b7136031f14c39a516f2bb39df"
+    },
+    {
+      "path": "upstream/buggy/src/TextRenderer.ts",
+      "upstreamPath": "src/TextRenderer.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/TextRenderer.ts",
+      "bytes": 626,
+      "sha256": "0c3300738e651fdaf4046959269f4b254248343afba045f8d963f93b05e44081"
+    },
+    {
+      "path": "upstream/buggy/src/Tokenizer.ts",
+      "upstreamPath": "src/Tokenizer.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/Tokenizer.ts",
+      "bytes": 22904,
+      "sha256": "dc5c18698ae25559d3109d00618a36289cc2f131146b83a5d0716658a2f95ed7"
+    },
+    {
+      "path": "upstream/buggy/src/Tokens.ts",
+      "upstreamPath": "src/Tokens.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/Tokens.ts",
+      "bytes": 3870,
+      "sha256": "a7b17c62fb08fddf64ba3381ea9d50d436609326513cf942389a0707aae1c950"
+    },
+    {
+      "path": "upstream/buggy/src/defaults.ts",
+      "upstreamPath": "src/defaults.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/defaults.ts",
+      "bytes": 501,
+      "sha256": "b4f86abcab528d16d686a849683c419b02ba9f4dd00ff1d22ea3e9142dbd3188"
+    },
+    {
+      "path": "upstream/buggy/src/helpers.ts",
+      "upstreamPath": "src/helpers.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/helpers.ts",
+      "bytes": 4302,
+      "sha256": "6b8303bd390a2217119fdf23c52cd0d4013bbff73aabb030a435e9958d6018e5"
+    },
+    {
+      "path": "upstream/buggy/src/marked.ts",
+      "upstreamPath": "src/marked.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/marked.ts",
+      "bytes": 3485,
+      "sha256": "c026156520ea36ce9e270659acf36b614984e4b1052813c1051918f29efa8521"
+    },
+    {
+      "path": "upstream/buggy/src/rules.ts",
+      "upstreamPath": "src/rules.ts",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/src/rules.ts",
+      "bytes": 13697,
+      "sha256": "158038d379a2960d278111f43d129c81934e69bb9ae9875766200b3926a1dadf"
+    },
+    {
+      "path": "upstream/buggy/LICENSE.md",
+      "upstreamPath": "LICENSE.md",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/LICENSE.md",
+      "bytes": 2942,
+      "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+    },
+    {
+      "path": "upstream/buggy/README.md",
+      "upstreamPath": "README.md",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/README.md",
+      "bytes": 2860,
+      "sha256": "b16275e6636c8ed75148efe19e9e735165a1c7d9c959cab364fa628712a6bf5b"
+    },
+    {
+      "path": "upstream/buggy/package.json",
+      "upstreamPath": "package.json",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/package.json",
+      "bytes": 3268,
+      "sha256": "2183c583c5c205f6abead4f147fe3bfd6912f8b42033750bf400df5c7502f573"
+    },
+    {
+      "path": "upstream/buggy/package-lock.json",
+      "upstreamPath": "package-lock.json",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/package-lock.json",
+      "bytes": 360566,
+      "sha256": "29affc37139ee5cb17b30b606aaf5ffd608d985e5b6b6047c8bf5f5edd09e819"
+    },
+    {
+      "path": "upstream/buggy/rollup.config.js",
+      "upstreamPath": "rollup.config.js",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/rollup.config.js",
+      "bytes": 1438,
+      "sha256": "982c200a2dec26b7af55cc2a393103f0f1a2cd6262581498967f840f8ad4593e"
+    },
+    {
+      "path": "upstream/buggy/tsconfig.json",
+      "upstreamPath": "tsconfig.json",
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/39cee771b659ea0eba49bd69dba10817403550d6/tsconfig.json",
+      "bytes": 360,
+      "sha256": "156700f7e4ee26f5b4d03c567c147025a21903eb79788f4204d96434f4a6cda7"
+    },
+    {
+      "path": "upstream/fixed/src/Hooks.ts",
+      "upstreamPath": "src/Hooks.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/Hooks.ts",
+      "bytes": 533,
+      "sha256": "0cd271de88bfc0bbfde040f978114d337c69c477491c4c731c8f491b9533d086"
+    },
+    {
+      "path": "upstream/fixed/src/Instance.ts",
+      "upstreamPath": "src/Instance.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/Instance.ts",
+      "bytes": 11295,
+      "sha256": "8acaa748e31c72fdebde6700d288b2fea32dac386f871874447356bf9b9e7fc6"
+    },
+    {
+      "path": "upstream/fixed/src/Lexer.ts",
+      "upstreamPath": "src/Lexer.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/Lexer.ts",
+      "bytes": 13995,
+      "sha256": "e10bc41e0be40c80ef4da46a771ef91863778dd38ca3c59556f4d29a9bfcd281"
+    },
+    {
+      "path": "upstream/fixed/src/MarkedOptions.ts",
+      "upstreamPath": "src/MarkedOptions.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/MarkedOptions.ts",
+      "bytes": 4402,
+      "sha256": "caaedada06f47a4e3d3db21d0412d49459e5181f6befef5c866f2a2e3db23d37"
+    },
+    {
+      "path": "upstream/fixed/src/Parser.ts",
+      "upstreamPath": "src/Parser.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/Parser.ts",
+      "bytes": 9077,
+      "sha256": "eb03f9839b367f7757a0c4a1e0946cdeb96f7d172e16823a6e82dbb69492272c"
+    },
+    {
+      "path": "upstream/fixed/src/Renderer.ts",
+      "upstreamPath": "src/Renderer.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/Renderer.ts",
+      "bytes": 3401,
+      "sha256": "c677746e994ad63db9d8c03cb8d601cd6d6282b7136031f14c39a516f2bb39df"
+    },
+    {
+      "path": "upstream/fixed/src/TextRenderer.ts",
+      "upstreamPath": "src/TextRenderer.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/TextRenderer.ts",
+      "bytes": 626,
+      "sha256": "0c3300738e651fdaf4046959269f4b254248343afba045f8d963f93b05e44081"
+    },
+    {
+      "path": "upstream/fixed/src/Tokenizer.ts",
+      "upstreamPath": "src/Tokenizer.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/Tokenizer.ts",
+      "bytes": 22904,
+      "sha256": "dc5c18698ae25559d3109d00618a36289cc2f131146b83a5d0716658a2f95ed7"
+    },
+    {
+      "path": "upstream/fixed/src/Tokens.ts",
+      "upstreamPath": "src/Tokens.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/Tokens.ts",
+      "bytes": 3870,
+      "sha256": "a7b17c62fb08fddf64ba3381ea9d50d436609326513cf942389a0707aae1c950"
+    },
+    {
+      "path": "upstream/fixed/src/defaults.ts",
+      "upstreamPath": "src/defaults.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/defaults.ts",
+      "bytes": 501,
+      "sha256": "b4f86abcab528d16d686a849683c419b02ba9f4dd00ff1d22ea3e9142dbd3188"
+    },
+    {
+      "path": "upstream/fixed/src/helpers.ts",
+      "upstreamPath": "src/helpers.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/helpers.ts",
+      "bytes": 4302,
+      "sha256": "6b8303bd390a2217119fdf23c52cd0d4013bbff73aabb030a435e9958d6018e5"
+    },
+    {
+      "path": "upstream/fixed/src/marked.ts",
+      "upstreamPath": "src/marked.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/marked.ts",
+      "bytes": 3485,
+      "sha256": "c026156520ea36ce9e270659acf36b614984e4b1052813c1051918f29efa8521"
+    },
+    {
+      "path": "upstream/fixed/src/rules.ts",
+      "upstreamPath": "src/rules.ts",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/src/rules.ts",
+      "bytes": 13721,
+      "sha256": "ae046847c693772946ce68a9c5dc407eea73b4fafa70b10bdcc913694049fe8d"
+    },
+    {
+      "path": "upstream/fixed/LICENSE.md",
+      "upstreamPath": "LICENSE.md",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/LICENSE.md",
+      "bytes": 2942,
+      "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c"
+    },
+    {
+      "path": "upstream/fixed/README.md",
+      "upstreamPath": "README.md",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/README.md",
+      "bytes": 2860,
+      "sha256": "b16275e6636c8ed75148efe19e9e735165a1c7d9c959cab364fa628712a6bf5b"
+    },
+    {
+      "path": "upstream/fixed/package.json",
+      "upstreamPath": "package.json",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/package.json",
+      "bytes": 3268,
+      "sha256": "2183c583c5c205f6abead4f147fe3bfd6912f8b42033750bf400df5c7502f573"
+    },
+    {
+      "path": "upstream/fixed/package-lock.json",
+      "upstreamPath": "package-lock.json",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/package-lock.json",
+      "bytes": 360566,
+      "sha256": "29affc37139ee5cb17b30b606aaf5ffd608d985e5b6b6047c8bf5f5edd09e819"
+    },
+    {
+      "path": "upstream/fixed/rollup.config.js",
+      "upstreamPath": "rollup.config.js",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/rollup.config.js",
+      "bytes": 1438,
+      "sha256": "982c200a2dec26b7af55cc2a393103f0f1a2cd6262581498967f840f8ad4593e"
+    },
+    {
+      "path": "upstream/fixed/tsconfig.json",
+      "upstreamPath": "tsconfig.json",
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "url": "https://raw.githubusercontent.com/markedjs/marked/a1034e6dd1ddbc2f723627f271bba29486005c1a/tsconfig.json",
+      "bytes": 360,
+      "sha256": "156700f7e4ee26f5b4d03c567c147025a21903eb79788f4204d96434f4a6cda7"
+    }
+  ],
+  "caseId": "marked-empty-heading"
+}

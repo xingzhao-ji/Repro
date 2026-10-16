@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>htmx delegated checkbox reproduction</title>
+</head>
+<body>
+  <h1>Delegated click and native checkbox behavior</h1>
+  <label><input id="check" type="checkbox"> Select this checkbox</label>
+  <form hx-trigger="click from:body"></form>
+  <p id="status">loading</p>
+  <p id="click-status">not clicked</p>
+  <script src="/app.js"></script>
+  <script>
+    document.getElementById('check').addEventListener('click', function () {
+      document.getElementById('click-status').textContent = 'clicked';
+    });
+    htmx.onLoad(function (element) {
+      if (element === document.body) {
+        document.getElementById('status').textContent = 'ready';
+      }
+    });
+  </script>
+</body>
+</html>

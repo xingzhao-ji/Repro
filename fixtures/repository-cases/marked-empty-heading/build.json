@@ -1,0 +1,114 @@
+{
+  "schemaVersion": 1,
+  "caseId": "marked-empty-heading",
+  "mode": "esbuild",
+  "buildScript": {
+    "path": "scripts/build-repository-cases.mjs",
+    "sha256": "f036352905a77d1f2f42bec5ff1886e8e99bf7a14f441ed0271fcd049f74b4f6"
+  },
+  "compiler": {
+    "name": "esbuild",
+    "version": "0.28.2"
+  },
+  "settings": {
+    "bundle": true,
+    "platform": "browser",
+    "target": "es2022",
+    "format": "iife",
+    "globalName": "ReproMarked",
+    "charset": "utf8",
+    "legalComments": "inline",
+    "minify": false,
+    "sourcemap": false,
+    "treeShaking": true
+  },
+  "variants": {
+    "buggy": {
+      "revision": "39cee771b659ea0eba49bd69dba10817403550d6",
+      "entryPoint": "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/marked.ts",
+      "sourceHashes": {
+        "upstream/buggy/LICENSE.md": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c",
+        "upstream/buggy/README.md": "b16275e6636c8ed75148efe19e9e735165a1c7d9c959cab364fa628712a6bf5b",
+        "upstream/buggy/package-lock.json": "29affc37139ee5cb17b30b606aaf5ffd608d985e5b6b6047c8bf5f5edd09e819",
+        "upstream/buggy/package.json": "2183c583c5c205f6abead4f147fe3bfd6912f8b42033750bf400df5c7502f573",
+        "upstream/buggy/rollup.config.js": "982c200a2dec26b7af55cc2a393103f0f1a2cd6262581498967f840f8ad4593e",
+        "upstream/buggy/src/Hooks.ts": "0cd271de88bfc0bbfde040f978114d337c69c477491c4c731c8f491b9533d086",
+        "upstream/buggy/src/Instance.ts": "8acaa748e31c72fdebde6700d288b2fea32dac386f871874447356bf9b9e7fc6",
+        "upstream/buggy/src/Lexer.ts": "e10bc41e0be40c80ef4da46a771ef91863778dd38ca3c59556f4d29a9bfcd281",
+        "upstream/buggy/src/MarkedOptions.ts": "caaedada06f47a4e3d3db21d0412d49459e5181f6befef5c866f2a2e3db23d37",
+        "upstream/buggy/src/Parser.ts": "eb03f9839b367f7757a0c4a1e0946cdeb96f7d172e16823a6e82dbb69492272c",
+        "upstream/buggy/src/Renderer.ts": "c677746e994ad63db9d8c03cb8d601cd6d6282b7136031f14c39a516f2bb39df",
+        "upstream/buggy/src/TextRenderer.ts": "0c3300738e651fdaf4046959269f4b254248343afba045f8d963f93b05e44081",
+        "upstream/buggy/src/Tokenizer.ts": "dc5c18698ae25559d3109d00618a36289cc2f131146b83a5d0716658a2f95ed7",
+        "upstream/buggy/src/Tokens.ts": "a7b17c62fb08fddf64ba3381ea9d50d436609326513cf942389a0707aae1c950",
+        "upstream/buggy/src/defaults.ts": "b4f86abcab528d16d686a849683c419b02ba9f4dd00ff1d22ea3e9142dbd3188",
+        "upstream/buggy/src/helpers.ts": "6b8303bd390a2217119fdf23c52cd0d4013bbff73aabb030a435e9958d6018e5",
+        "upstream/buggy/src/marked.ts": "c026156520ea36ce9e270659acf36b614984e4b1052813c1051918f29efa8521",
+        "upstream/buggy/src/rules.ts": "158038d379a2960d278111f43d129c81934e69bb9ae9875766200b3926a1dadf",
+        "upstream/buggy/tsconfig.json": "156700f7e4ee26f5b4d03c567c147025a21903eb79788f4204d96434f4a6cda7"
+      },
+      "bundledInputs": [
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/Hooks.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/Instance.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/Lexer.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/Parser.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/Renderer.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/TextRenderer.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/Tokenizer.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/defaults.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/helpers.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/marked.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/buggy/src/rules.ts"
+      ],
+      "output": {
+        "path": "fixtures/repository-cases/marked-empty-heading/buggy.js",
+        "bytes": 72616,
+        "sha256": "193fcfd78cac1f95ac35e22608799fb9a727b7479e9c00b51fc67b2fe3d9c66c"
+      }
+    },
+    "fixed": {
+      "revision": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+      "entryPoint": "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/marked.ts",
+      "sourceHashes": {
+        "upstream/fixed/LICENSE.md": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c",
+        "upstream/fixed/README.md": "b16275e6636c8ed75148efe19e9e735165a1c7d9c959cab364fa628712a6bf5b",
+        "upstream/fixed/package-lock.json": "29affc37139ee5cb17b30b606aaf5ffd608d985e5b6b6047c8bf5f5edd09e819",
+        "upstream/fixed/package.json": "2183c583c5c205f6abead4f147fe3bfd6912f8b42033750bf400df5c7502f573",
+        "upstream/fixed/rollup.config.js": "982c200a2dec26b7af55cc2a393103f0f1a2cd6262581498967f840f8ad4593e",
+        "upstream/fixed/src/Hooks.ts": "0cd271de88bfc0bbfde040f978114d337c69c477491c4c731c8f491b9533d086",
+        "upstream/fixed/src/Instance.ts": "8acaa748e31c72fdebde6700d288b2fea32dac386f871874447356bf9b9e7fc6",
+        "upstream/fixed/src/Lexer.ts": "e10bc41e0be40c80ef4da46a771ef91863778dd38ca3c59556f4d29a9bfcd281",
+        "upstream/fixed/src/MarkedOptions.ts": "caaedada06f47a4e3d3db21d0412d49459e5181f6befef5c866f2a2e3db23d37",
+        "upstream/fixed/src/Parser.ts": "eb03f9839b367f7757a0c4a1e0946cdeb96f7d172e16823a6e82dbb69492272c",
+        "upstream/fixed/src/Renderer.ts": "c677746e994ad63db9d8c03cb8d601cd6d6282b7136031f14c39a516f2bb39df",
+        "upstream/fixed/src/TextRenderer.ts": "0c3300738e651fdaf4046959269f4b254248343afba045f8d963f93b05e44081",
+        "upstream/fixed/src/Tokenizer.ts": "dc5c18698ae25559d3109d00618a36289cc2f131146b83a5d0716658a2f95ed7",
+        "upstream/fixed/src/Tokens.ts": "a7b17c62fb08fddf64ba3381ea9d50d436609326513cf942389a0707aae1c950",
+        "upstream/fixed/src/defaults.ts": "b4f86abcab528d16d686a849683c419b02ba9f4dd00ff1d22ea3e9142dbd3188",
+        "upstream/fixed/src/helpers.ts": "6b8303bd390a2217119fdf23c52cd0d4013bbff73aabb030a435e9958d6018e5",
+        "upstream/fixed/src/marked.ts": "c026156520ea36ce9e270659acf36b614984e4b1052813c1051918f29efa8521",
+        "upstream/fixed/src/rules.ts": "ae046847c693772946ce68a9c5dc407eea73b4fafa70b10bdcc913694049fe8d",
+        "upstream/fixed/tsconfig.json": "156700f7e4ee26f5b4d03c567c147025a21903eb79788f4204d96434f4a6cda7"
+      },
+      "bundledInputs": [
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/Hooks.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/Instance.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/Lexer.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/Parser.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/Renderer.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/TextRenderer.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/Tokenizer.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/defaults.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/helpers.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/marked.ts",
+        "fixtures/repository-cases/marked-empty-heading/upstream/fixed/src/rules.ts"
+      ],
+      "output": {
+        "path": "fixtures/repository-cases/marked-empty-heading/fixed.js",
+        "bytes": 72640,
+        "sha256": "ccac5cd37a1a779c2cf7923794000658783de203e7a353ac0d477f7ad7e42299"
+      }
+    }
+  },
+  "claim": "Source acquisition and deterministic compilation only; no execution or buggy/fixed outcome is claimed."
+}

@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { isDeepStrictEqual } from 'node:util';
-import { ReproError, type Manifest, type SearchOrder } from './contracts.js';
+import { ReproError, type Manifest, type SyntheticManifest, type SearchOrder } from './contracts.js';
 import { ASSERTION_DIGEST, EXPECTATION, type Observation } from './oracle.js';
 
 export const SEARCH_CONTRACT_ARTIFACT_DIGEST = createHash('sha256').update(readFileSync(new URL(import.meta.url))).digest('hex');
@@ -21,7 +21,7 @@ export interface FrozenSearchContract {
 }
 
 /** Derive only from the immutable scenario, never from reducible actions. */
-export function searchContract(manifest: Manifest): FrozenSearchContract {
+export function searchContract(manifest: SyntheticManifest): FrozenSearchContract {
   const order: SearchOrder = manifest.schemaVersion === 1 ? ['alpha', 'beta'] : manifest.scenario?.searchOrder;
   if (!isDeepStrictEqual(order, ['alpha', 'beta']) && !isDeepStrictEqual(order, ['beta', 'alpha'])) {
     throw new ReproError('input', 'SEARCH_ORDER', 'The frozen scenario requires the two distinct registered queries.');

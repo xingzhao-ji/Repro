@@ -226,7 +226,8 @@ test('keyboard investigation joins immutable job input and actual trial evidence
     const acceptedText = await inspector.innerText();
     for (const runId of accepted.runIds) {
       const actual = storedRuns.get(runId)!;
-      check(`Accepted execution ${runId} actual observation`, acceptedText.includes(actual.observation!.results[0]!), true);
+      assert.ok(actual.observation && 'results' in actual.observation);
+      check(`Accepted execution ${runId} actual observation`, acceptedText.includes(actual.observation.results[0]!), true);
       check(`Accepted execution ${runId} frozen assertion identity`, acceptedText.includes(actual.assertionDigest), true);
       check(`Accepted execution ${runId} independent harness identity`, acceptedText.includes(actual.harnessDigest), true);
     }
@@ -250,6 +251,7 @@ test('keyboard investigation joins immutable job input and actual trial evidence
     check('Rejected removal is not accepted', /Not accepted|not accepted|Rejected/.test(rejectedText), true);
     for (const runId of rejected.runIds) {
       const actual = storedRuns.get(runId)!;
+      assert.ok(actual.observation && 'results' in actual.observation);
       check(`Rejected execution ${runId} preserves the actual reason`, rejectedText.includes(actual.reason), true);
       check(`Rejected execution ${runId} did not execute the assertion`, actual.assertionCount, 0);
     }

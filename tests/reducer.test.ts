@@ -4,6 +4,7 @@ import type { Action, Manifest, Outcome, ReductionOptions, RunFunction, RunResul
 import { ReproError } from '../src/contracts.js';
 import { createManifest, digest } from '../src/manifest.js';
 import { reduce } from '../src/reducer.js';
+import { createCaseManifest, getRegisteredCase } from '../src/browser-case.js';
 
 const core: Action[] = [
   { id: 'navigate', kind: 'navigate', value: '/', dependsOn: [] },
@@ -94,6 +95,31 @@ test('wrong failures and missing state never preserve the failure or establish m
   assert.ok(reduced.trials.filter(trial => trial.removed.length).every(trial => !trial.accepted));
   assert.match(reduced.reason, /inconclusive/i);
 });
+
+for (const caseId of ['synthetic', 'morphdom-textarea', 'htmx-checkbox', 'marked-empty-heading']) {
+  test(`${caseId}: a satisfied neighbor carrying a target-failure category cannot establish minimality`, async () => {
+    const input = caseId === 'synthetic' ? fixture([]) : createCaseManifest(caseId);
+    const registered = input.schemaVersion === 3 ? getRegisteredCase(input.caseId) : undefined;
+    let calls = 0;
+    const run: RunFunction = async manifest => {
+      const outcome = manifest.actions.length === input.actions.length ? 'target-failure' : 'requirement-satisfied';
+      const observation = registered ? {
+        kind: 'browser-case' as const,
+        values: outcome === 'target-failure' ? registered.intendedFailures.at(-1)! : registered.expectation.checks.map(check => check.expected),
+      } : undefined;
+      return result(manifest, outcome, ++calls, {
+        category: 'target-failure', ...(observation ? { observation } : {}),
+      });
+    };
+    const reduced = await reduce(input, run, options);
+    assert.equal(reduced.trials[0]!.accepted, true, 'A matching baseline category remains valid.');
+    assert.deepEqual(reduced.manifest, input);
+    assert.equal(reduced.minimality, 'unverified', 'Contradictory error categories cannot establish final-neighbor conclusions.');
+    assert.ok(reduced.trials.slice(1).length > 0);
+    assert.ok(reduced.trials.slice(1).every(trial => trial.outcome === 'inconclusive' && !trial.accepted));
+    assert.ok(reduced.trials.slice(1).every(trial => /contradictory error category/.test(trial.reason)));
+  });
+}
 
 test('an unstable candidate fails the baseline repeatability rule', async () => {
   const input = fixture(['one']); const occurrences = new Map<string, number>();

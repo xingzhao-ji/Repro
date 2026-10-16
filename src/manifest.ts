@@ -1,8 +1,9 @@
 import { createHash } from 'node:crypto';
-import { ADAPTER, VERSION, ReproError, type Manifest, type ManifestV1, type ManifestV2 } from './contracts.js';
+import { ADAPTER, VERSION, ReproError, type Manifest, type SyntheticManifest, type ManifestV1, type ManifestV2 } from './contracts.js';
 import { EXPECTATION, ASSERTION_DIGEST } from './oracle.js';
 import { fixtureDigest } from './fixture.js';
 import { searchContract, SEARCH_CONTRACT_ID, SEARCH_CONTRACT_DIGEST } from './search-contract.js';
+import { validateCaseManifest } from './browser-case.js';
 
 const MAX_MANIFEST_BYTES = 64 * 1024;
 const HASH = /^[a-f0-9]{64}$/;
@@ -96,7 +97,8 @@ export function validateManifest(input: unknown): Manifest {
   const value: unknown = JSON.parse(encoded);
   if (!value || typeof value !== 'object' || Array.isArray(value)) invalid('MANIFEST_TYPE', 'Expected a manifest object.');
   const version = (value as Record<string, unknown>)['schemaVersion'];
-  if (version !== 1 && version !== 2) throw new ReproError('unsupported', 'SCHEMA_VERSION', 'Only manifest schema versions 1 and 2 are supported.');
+  if (version === 3) return validateCaseManifest(value);
+  if (version !== 1 && version !== 2) throw new ReproError('unsupported', 'SCHEMA_VERSION', 'Only manifest schema versions 1, 2 and 3 are supported.');
   const manifest = object(value, ['schemaVersion', 'id', 'classification', 'adapter', 'runnerVersion', 'expectation', 'assertionDigest', 'expectationBasis', 'humanApproval', 'actions', 'responses', 'environment', 'boundary', 'app', ...(version === 2 ? ['scenario', 'expectationSource'] : [])]);
   identifier(manifest['id']);
   equal(manifest['classification'], 'synthetic-training-fixture');
@@ -111,7 +113,7 @@ export function validateManifest(input: unknown): Manifest {
     equal(source['kind'], 'caller-supplied'); equal(source['contractId'], SEARCH_CONTRACT_ID);
     hash(source['contractDigest'], SEARCH_CONTRACT_DIGEST);
   }
-  const contract = searchContract(value as Manifest);
+  const contract = searchContract(value as SyntheticManifest);
   hash(manifest['assertionDigest'], version === 1 ? ASSERTION_DIGEST : contract.assertionDigest);
   if (typeof manifest['expectationBasis'] !== 'string' || !(version === 1 ? ['supplied-synthetic-specification', 'proposed-unconfirmed'] : ['independent-contract', 'proposed-unconfirmed']).includes(manifest['expectationBasis'])) invalid('EXPECTATION_BASIS', 'Expectation provenance is unsupported.');
   equal(manifest['humanApproval'], 'not-claimed');

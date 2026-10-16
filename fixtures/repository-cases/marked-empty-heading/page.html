@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Marked empty heading reproduction</title>
+</head>
+<body>
+  <h1>Render a Markdown document</h1>
+  <label for="markdown">Markdown</label>
+  <textarea id="markdown"></textarea>
+  <button id="render" type="button">Render</button>
+  <div id="result"></div>
+  <p id="status">loading</p>
+  <p id="render-status">not rendered</p>
+  <script src="/app.js"></script>
+  <script>
+    if (typeof ReproMarked.parse !== 'function') {
+      throw new Error('The pinned Marked browser bundle did not expose parse.');
+    }
+    document.getElementById('render').addEventListener('click', function () {
+      const markdown = document.getElementById('markdown').value;
+      document.getElementById('result').innerHTML = ReproMarked.parse(markdown);
+      document.getElementById('render-status').textContent = 'rendered';
+    });
+    document.getElementById('status').textContent = 'ready';
+  </script>
+</body>
+</html>

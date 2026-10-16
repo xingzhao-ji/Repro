@@ -1,14 +1,22 @@
 import { constants } from 'node:fs';
 import { lstat, open } from 'node:fs/promises';
-import { ReproError, type Manifest } from './contracts.js';
+import { ReproError, type Manifest, type BrowserCaseExpectation } from './contracts.js';
 import { createAuthoredManifest, validateManifest } from './manifest.js';
+import { createCaseManifest } from './browser-case.js';
 
 export async function readManifest(path: string): Promise<Manifest> {
   return validateManifest(await readDocument(path, 'MANIFEST', 'Manifest'));
 }
 
 export async function readExperiment(path: string): Promise<Manifest> {
-  return createAuthoredManifest(await readDocument(path, 'EXPERIMENT', 'Experiment'));
+  const input = await readDocument(path, 'EXPERIMENT', 'Experiment');
+  if (input && typeof input === 'object' && !Array.isArray(input) && 'caseId' in input) {
+    if (Object.keys(input).length !== 2 || !('expectation' in input) || typeof input.caseId !== 'string') {
+      throw new ReproError('input', 'CASE_DECLARATION', 'Provide only caseId and an explicit expectation. Run cases --case ID to inspect the supported declaration.');
+    }
+    return createCaseManifest(input.caseId, input.expectation as BrowserCaseExpectation);
+  }
+  return createAuthoredManifest(input);
 }
 
 async function readDocument(path: string, code: string, label: string): Promise<unknown> {

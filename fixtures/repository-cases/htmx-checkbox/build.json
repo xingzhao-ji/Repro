@@ -1,0 +1,46 @@
+{
+  "schemaVersion": 1,
+  "caseId": "htmx-checkbox",
+  "mode": "exact-copy",
+  "buildScript": {
+    "path": "scripts/build-repository-cases.mjs",
+    "sha256": "f036352905a77d1f2f42bec5ff1886e8e99bf7a14f441ed0271fcd049f74b4f6"
+  },
+  "compiler": null,
+  "settings": null,
+  "variants": {
+    "buggy": {
+      "revision": "7388d0c0573b6d6bab43baa1f66fd7e59385bcea",
+      "entryPoint": "fixtures/repository-cases/htmx-checkbox/upstream/buggy/src/htmx.js",
+      "sourceHashes": {
+        "upstream/buggy/LICENSE": "d3d2456f76414f2456104660ebd65aff1c04cd7966b942bdabd63f3cdb316a38",
+        "upstream/buggy/README.md": "3f76acad2c16d749ce7481cc3464cf2889d81450f70273ff9f8a8c7ebb5faf9c",
+        "upstream/buggy/package.json": "4d6d09707cd870f7400f43c679e7b105bd61583a79ef717b787b2b0dfa3d6f6c",
+        "upstream/buggy/src/htmx.js": "1e8bcfaf8ef91b5f5c96591b3a6262b74b8a736824c6c047332d4e131c9f365c"
+      },
+      "bundledInputs": [],
+      "output": {
+        "path": "fixtures/repository-cases/htmx-checkbox/buggy.js",
+        "bytes": 166913,
+        "sha256": "1e8bcfaf8ef91b5f5c96591b3a6262b74b8a736824c6c047332d4e131c9f365c"
+      }
+    },
+    "fixed": {
+      "revision": "c9e2bea954efaf61d02b2f8639e31820e7632773",
+      "entryPoint": "fixtures/repository-cases/htmx-checkbox/upstream/fixed/src/htmx.js",
+      "sourceHashes": {
+        "upstream/fixed/LICENSE": "d3d2456f76414f2456104660ebd65aff1c04cd7966b942bdabd63f3cdb316a38",
+        "upstream/fixed/README.md": "3f76acad2c16d749ce7481cc3464cf2889d81450f70273ff9f8a8c7ebb5faf9c",
+        "upstream/fixed/package.json": "4d6d09707cd870f7400f43c679e7b105bd61583a79ef717b787b2b0dfa3d6f6c",
+        "upstream/fixed/src/htmx.js": "5870bceb3f21e208fabff278b8d418147565caabc5fa198a91611e97e44e8621"
+      },
+      "bundledInputs": [],
+      "output": {
+        "path": "fixtures/repository-cases/htmx-checkbox/fixed.js",
+        "bytes": 167088,
+        "sha256": "5870bceb3f21e208fabff278b8d418147565caabc5fa198a91611e97e44e8621"
+      }
+    }
+  },
+  "claim": "Source acquisition and deterministic compilation only; no execution or buggy/fixed outcome is claimed."
+}

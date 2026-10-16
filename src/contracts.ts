@@ -56,7 +56,39 @@ export interface ManifestV2 extends Omit<ManifestV1, 'schemaVersion' | 'expectat
   expectationBasis: 'independent-contract' | 'proposed-unconfirmed';
   expectationSource: { kind: 'caller-supplied'; contractId: 'registered-search-latest-response-v1'; contractDigest: string };
 }
-export type Manifest = ManifestV1 | ManifestV2;
+export type SyntheticManifest = ManifestV1 | ManifestV2;
+export interface BrowserCaseAction {
+  id: string;
+  kind: 'navigate' | 'click' | 'fill' | 'focus';
+  target: string;
+  value: string;
+  dependsOn: string[];
+}
+export interface BrowserCaseExpectation {
+  invariantId: string;
+  description: string;
+  checks: { selector: string; property: 'value' | 'textContent' | 'checked' | 'innerHTML'; expected: string }[];
+}
+export interface BrowserCaseObservation { kind: 'browser-case'; values: string[] }
+export interface ManifestV3 {
+  schemaVersion: 3;
+  id: string;
+  caseId: string;
+  classification: 'public-repository-development-case';
+  adapter: { id: 'registered-browser-v1'; version: string };
+  runnerVersion: string;
+  expectation: BrowserCaseExpectation;
+  assertionDigest: string;
+  expectationBasis: 'independent-contract' | 'proposed-unconfirmed';
+  humanApproval: 'not-claimed';
+  expectationSource: { kind: 'public-issue'; url: string; contractUrls: string[]; contractDigest: string };
+  actions: BrowserCaseAction[];
+  responses: [];
+  environment: ManifestV1['environment'];
+  boundary: { behavior: 'frontend'; network: 'local-assets-only'; database: 'none'; externalDependencies: [] };
+  app: { revision: 'buggy' | 'fixed'; sourceDigest: string; repository: string; commit: string };
+}
+export type Manifest = SyntheticManifest | ManifestV3;
 export interface AuthoredExperimentDeclaration {
   searchOrder: SearchOrder;
   expectation: Omit<Expectation, 'description'>;
@@ -68,7 +100,7 @@ export interface RunResult {
   manifestDigest: string; assertionDigest: string; harnessDigest: string;
   appRevision: string; appDigest: string; adapterVersion: string; runnerVersion: string;
   seed: number; startedAt: string; durationMs: number; assertionCount: number;
-  observation: { latestRequestId: number; query: string; results: string[] } | null;
+  observation: { latestRequestId: number; query: string; results: string[] } | BrowserCaseObservation | null;
   events: RunEvent[]; artifacts: { path: string; sha256: string; bytes: number }[];
   environment: { platform: string; node: string; browser: string; isolation: string };
 }

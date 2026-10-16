@@ -1,7 +1,6 @@
 import { mkdir, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import { runBrowser, harnessDigest } from './adapter.js';
-import { fixtureDigest } from './fixture.js';
+import { runExperiment, experimentHarnessDigest, revisionDigest, evaluateObservation } from './runner.js';
 import { exportCapsule } from './capsule.js';
 import { ReproError, type Manifest, type RunResult } from './contracts.js';
 import { Ledger, type Job, type Operation } from './ledger.js';
@@ -11,12 +10,15 @@ import { ownedDirectory } from './paths.js';
 
 export async function verify(manifest: Manifest, artifactDir: string, signal?: AbortSignal, onEvent?: (message: string) => void) {
   onEvent?.('Running original in fresh state');
-  const original = await runBrowser(manifest, { artifactDir, ...(signal ? { signal } : {}) });
+  const original = await runExperiment(manifest, { artifactDir, ...(signal ? { signal } : {}) });
   onEvent?.('Running candidate in separate fresh state');
-  const candidate = await runBrowser(manifest, { artifactDir, revision: 'fixed', ...(signal ? { signal } : {}) });
-  const identity = [original, candidate].every(result => result.manifestDigest === digest(manifest) && result.assertionDigest === manifest.assertionDigest && result.harnessDigest === harnessDigest() && result.seed === manifest.environment.seed && result.assertionCount === 1 && result.runnerVersion === manifest.runnerVersion && result.adapterVersion === manifest.adapter.version)
-    && original.appRevision === manifest.app.revision && original.appDigest === manifest.app.sourceDigest && candidate.appRevision === 'fixed' && candidate.appDigest === fixtureDigest('fixed') && original.id !== candidate.id;
-  const confirmed = identity && original.outcome === 'target-failure' && candidate.outcome === 'requirement-satisfied';
+  const candidate = await runExperiment(manifest, { artifactDir, revision: 'fixed', ...(signal ? { signal } : {}) });
+  const identity = [original, candidate].every(result => result.manifestDigest === digest(manifest) && result.assertionDigest === manifest.assertionDigest && result.harnessDigest === experimentHarnessDigest(manifest) && result.seed === manifest.environment.seed && result.assertionCount === 1 && result.runnerVersion === manifest.runnerVersion && result.adapterVersion === manifest.adapter.version)
+    && original.appRevision === manifest.app.revision && original.appDigest === manifest.app.sourceDigest && candidate.appRevision === 'fixed' && candidate.appDigest === revisionDigest(manifest, 'fixed') && original.id !== candidate.id;
+  let confirmed = false;
+  try { confirmed = identity && original.outcome === 'target-failure' && candidate.outcome === 'requirement-satisfied'
+    && evaluateObservation(manifest, original.observation) === original.outcome && evaluateObservation(manifest, candidate.observation) === candidate.outcome; }
+  catch { /* Invalid observations cannot establish a successful comparison. */ }
   return { outcome: signal?.aborted ? 'cancelled' : confirmed ? 'requirement-satisfied' : 'inconclusive', reason: confirmed ? 'Original failure reproduced; candidate satisfies the same bounded frontend assertion.' : 'Comparison did not establish original failure and candidate satisfaction with identical assertion and harness.', manifestDigest: digest(manifest), original, candidate };
 }
 export function publicError(error: unknown): { outcome: 'inconclusive' | 'cancelled'; category: string; code: string; reason: string } {
@@ -53,11 +55,11 @@ export class Coordinator {
       const event = (message: string) => this.ledger.event(job.id, 'progress', message);
       let result: unknown;
       if (job.operation === 'record' || job.operation === 'replay') {
-        result = await runBrowser(manifest, { artifactDir, signal, onEvent: e => this.ledger.event(job.id, e.type, e.message, e.actionId) });
+        result = await runExperiment(manifest, { artifactDir, signal, onEvent: e => this.ledger.event(job.id, e.type, e.message, e.actionId) });
       } else if (job.operation === 'verify') {
         result = await verify(manifest, artifactDir, signal, event);
       } else if (job.operation === 'reduce') {
-        const reduction = await reduce(manifest, runBrowser, { artifactDir, signal, maxExecutions: 50, maxDurationMs: 120_000, repetitions: 2, onTrial: trial => this.ledger.event(job.id, 'trial', JSON.stringify(trial)) });
+        const reduction = await reduce(manifest, runExperiment, { artifactDir, signal, maxExecutions: manifest.schemaVersion === 3 ? 80 : 50, maxDurationMs: manifest.schemaVersion === 3 ? 300_000 : 120_000, repetitions: 2, onTrial: trial => this.ledger.event(job.id, 'trial', JSON.stringify(trial)) });
         if (reduction.status !== 'inconclusive') this.ledger.updateManifest(job.sessionId, reduction.manifest);
         result = reduction;
       } else {

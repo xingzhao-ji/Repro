@@ -1,0 +1,79 @@
+{
+  "id": "htmx-checkbox",
+  "title": "htmx delegated click preserves native checkbox behavior",
+  "repository": "https://github.com/bigskysoftware/htmx",
+  "issue": "https://github.com/bigskysoftware/htmx/issues/2755",
+  "expectation": {
+    "invariantId": "htmx-2755-native-checkbox-click",
+    "description": "Clicking an unchecked checkbox checks it even when a form observes click events from body.",
+    "checks": [
+      {
+        "selector": "#check",
+        "property": "checked",
+        "expected": "true"
+      },
+      {
+        "selector": "#click-status",
+        "property": "textContent",
+        "expected": "clicked"
+      }
+    ]
+  },
+  "actions": [
+    {
+      "id": "open",
+      "kind": "navigate",
+      "target": "/",
+      "value": "",
+      "dependsOn": []
+    },
+    {
+      "id": "check",
+      "kind": "click",
+      "target": "#check",
+      "value": "",
+      "dependsOn": [
+        "open"
+      ]
+    }
+  ],
+  "ready": {
+    "selector": "#status",
+    "value": "ready"
+  },
+  "intendedFailures": [
+    [
+      "false",
+      "clicked"
+    ]
+  ],
+  "revisions": {
+    "buggy": {
+      "commit": "7388d0c0573b6d6bab43baa1f66fd7e59385bcea",
+      "sourceDigest": "1e8bcfaf8ef91b5f5c96591b3a6262b74b8a736824c6c047332d4e131c9f365c"
+    },
+    "fixed": {
+      "commit": "c9e2bea954efaf61d02b2f8639e31820e7632773",
+      "sourceDigest": "5870bceb3f21e208fabff278b8d418147565caabc5fa198a91611e97e44e8621"
+    }
+  },
+  "assetPaths": [
+    "fixtures/repository-cases/htmx-checkbox/README.md",
+    "fixtures/repository-cases/htmx-checkbox/buggy.js",
+    "fixtures/repository-cases/htmx-checkbox/build.json",
+    "fixtures/repository-cases/htmx-checkbox/fixed.js",
+    "fixtures/repository-cases/htmx-checkbox/page.html",
+    "fixtures/repository-cases/htmx-checkbox/provenance.json",
+    "fixtures/repository-cases/htmx-checkbox/upstream/buggy/LICENSE",
+    "fixtures/repository-cases/htmx-checkbox/upstream/buggy/README.md",
+    "fixtures/repository-cases/htmx-checkbox/upstream/buggy/package.json",
+    "fixtures/repository-cases/htmx-checkbox/upstream/buggy/src/htmx.js",
+    "fixtures/repository-cases/htmx-checkbox/upstream/fixed/LICENSE",
+    "fixtures/repository-cases/htmx-checkbox/upstream/fixed/README.md",
+    "fixtures/repository-cases/htmx-checkbox/upstream/fixed/package.json",
+    "fixtures/repository-cases/htmx-checkbox/upstream/fixed/src/htmx.js"
+  ],
+  "expectationUrls": [
+    "https://github.com/bigskysoftware/htmx/issues/2755"
+  ]
+}

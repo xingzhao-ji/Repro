@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "project": "bigskysoftware/htmx",
+  "issue": "https://github.com/bigskysoftware/htmx/issues/2755",
+  "fixedCommit": "https://github.com/bigskysoftware/htmx/commit/c9e2bea954efaf61d02b2f8639e31820e7632773",
+  "revisions": {
+    "buggy": "7388d0c0573b6d6bab43baa1f66fd7e59385bcea",
+    "fixed": "c9e2bea954efaf61d02b2f8639e31820e7632773"
+  },
+  "acquiredAt": "2026-10-16T01:21:18.993303+00:00",
+  "sourceSelection": "Exact upstream source and metadata at parent/fix revisions; no reimplementation; no runtime execution during intake",
+  "license": "0BSD",
+  "fixedSourceInspected": false,
+  "files": [
+    {
+      "path": "upstream/buggy/src/htmx.js",
+      "upstreamPath": "src/htmx.js",
+      "revision": "7388d0c0573b6d6bab43baa1f66fd7e59385bcea",
+      "url": "https://raw.githubusercontent.com/bigskysoftware/htmx/7388d0c0573b6d6bab43baa1f66fd7e59385bcea/src/htmx.js",
+      "bytes": 166913,
+      "sha256": "1e8bcfaf8ef91b5f5c96591b3a6262b74b8a736824c6c047332d4e131c9f365c"
+    },
+    {
+      "path": "upstream/buggy/LICENSE",
+      "upstreamPath": "LICENSE",
+      "revision": "7388d0c0573b6d6bab43baa1f66fd7e59385bcea",
+      "url": "https://raw.githubusercontent.com/bigskysoftware/htmx/7388d0c0573b6d6bab43baa1f66fd7e59385bcea/LICENSE",
+      "bytes": 642,
+      "sha256": "d3d2456f76414f2456104660ebd65aff1c04cd7966b942bdabd63f3cdb316a38"
+    },
+    {
+      "path": "upstream/buggy/README.md",
+      "upstreamPath": "README.md",
+      "revision": "7388d0c0573b6d6bab43baa1f66fd7e59385bcea",
+      "url": "https://raw.githubusercontent.com/bigskysoftware/htmx/7388d0c0573b6d6bab43baa1f66fd7e59385bcea/README.md",
+      "bytes": 3757,
+      "sha256": "3f76acad2c16d749ce7481cc3464cf2889d81450f70273ff9f8a8c7ebb5faf9c"
+    },
+    {
+      "path": "upstream/buggy/package.json",
+      "upstreamPath": "package.json",
+      "revision": "7388d0c0573b6d6bab43baa1f66fd7e59385bcea",
+      "url": "https://raw.githubusercontent.com/bigskysoftware/htmx/7388d0c0573b6d6bab43baa1f66fd7e59385bcea/package.json",
+      "bytes": 3485,
+      "sha256": "4d6d09707cd870f7400f43c679e7b105bd61583a79ef717b787b2b0dfa3d6f6c"
+    },
+    {
+      "path": "upstream/fixed/src/htmx.js",
+      "upstreamPath": "src/htmx.js",
+      "revision": "c9e2bea954efaf61d02b2f8639e31820e7632773",
+      "url": "https://raw.githubusercontent.com/bigskysoftware/htmx/c9e2bea954efaf61d02b2f8639e31820e7632773/src/htmx.js",
+      "bytes": 167088,
+      "sha256": "5870bceb3f21e208fabff278b8d418147565caabc5fa198a91611e97e44e8621"
+    },
+    {
+      "path": "upstream/fixed/LICENSE",
+      "upstreamPath": "LICENSE",
+      "revision": "c9e2bea954efaf61d02b2f8639e31820e7632773",
+      "url": "https://raw.githubusercontent.com/bigskysoftware/htmx/c9e2bea954efaf61d02b2f8639e31820e7632773/LICENSE",
+      "bytes": 642,
+      "sha256": "d3d2456f76414f2456104660ebd65aff1c04cd7966b942bdabd63f3cdb316a38"
+    },
+    {
+      "path": "upstream/fixed/README.md",
+      "upstreamPath": "README.md",
+      "revision": "c9e2bea954efaf61d02b2f8639e31820e7632773",
+      "url": "https://raw.githubusercontent.com/bigskysoftware/htmx/c9e2bea954efaf61d02b2f8639e31820e7632773/README.md",
+      "bytes": 3757,
+      "sha256": "3f76acad2c16d749ce7481cc3464cf2889d81450f70273ff9f8a8c7ebb5faf9c"
+    },
+    {
+      "path": "upstream/fixed/package.json",
+      "upstreamPath": "package.json",
+      "revision": "c9e2bea954efaf61d02b2f8639e31820e7632773",
+      "url": "https://raw.githubusercontent.com/bigskysoftware/htmx/c9e2bea954efaf61d02b2f8639e31820e7632773/package.json",
+      "bytes": 3485,
+      "sha256": "4d6d09707cd870f7400f43c679e7b105bd61583a79ef717b787b2b0dfa3d6f6c"
+    }
+  ],
+  "caseId": "htmx-checkbox"
+}

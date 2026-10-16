@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "project": "patrick-steele-idem/morphdom",
+  "issue": "https://github.com/patrick-steele-idem/morphdom/issues/19",
+  "fixedCommit": "https://github.com/patrick-steele-idem/morphdom/commit/b72ddd5f21a759d235d70c92d3a37a990499c22f",
+  "revisions": {
+    "buggy": "8221ace412be8dc1f519f2dc77393f0940134648",
+    "fixed": "b72ddd5f21a759d235d70c92d3a37a990499c22f"
+  },
+  "acquiredAt": "2026-10-16T01:20:13.701896+00:00",
+  "sourceSelection": "Exact raw upstream lib/index.js at parent/fix revisions; no reimplementation; no runtime execution during intake",
+  "license": "ISC declared in pinned package.json and README.md; no standalone LICENSE in pinned tree",
+  "fixedSourceInspected": false,
+  "files": [
+    {
+      "path": "upstream/buggy/lib/index.js",
+      "upstreamPath": "lib/index.js",
+      "revision": "8221ace412be8dc1f519f2dc77393f0940134648",
+      "url": "https://raw.githubusercontent.com/patrick-steele-idem/morphdom/8221ace412be8dc1f519f2dc77393f0940134648/lib/index.js",
+      "bytes": 13303,
+      "sha256": "960acd3dbf500df2cd54341881f7b5a31c08ab4052b2608d7abb753a22a05011"
+    },
+    {
+      "path": "upstream/buggy/README.md",
+      "upstreamPath": "README.md",
+      "revision": "8221ace412be8dc1f519f2dc77393f0940134648",
+      "url": "https://raw.githubusercontent.com/patrick-steele-idem/morphdom/8221ace412be8dc1f519f2dc77393f0940134648/README.md",
+      "bytes": 17111,
+      "sha256": "effb685f49aed5126f8d003aa8a5a992654f151aee551e7b50e7c9b3a5113294"
+    },
+    {
+      "path": "upstream/buggy/package.json",
+      "upstreamPath": "package.json",
+      "revision": "8221ace412be8dc1f519f2dc77393f0940134648",
+      "url": "https://raw.githubusercontent.com/patrick-steele-idem/morphdom/8221ace412be8dc1f519f2dc77393f0940134648/package.json",
+      "bytes": 1492,
+      "sha256": "5563e4a27ef3f68feb8dfcd9cd7039c33c7a9ad4dbd03a8f0f391549148b8a63"
+    },
+    {
+      "path": "upstream/fixed/lib/index.js",
+      "upstreamPath": "lib/index.js",
+      "revision": "b72ddd5f21a759d235d70c92d3a37a990499c22f",
+      "url": "https://raw.githubusercontent.com/patrick-steele-idem/morphdom/b72ddd5f21a759d235d70c92d3a37a990499c22f/lib/index.js",
+      "bytes": 13917,
+      "sha256": "aa9404d21525b61fe6b79489b2ad32fd9bae565d705aaf8067a83bbfd3da3b7f"
+    },
+    {
+      "path": "upstream/fixed/README.md",
+      "upstreamPath": "README.md",
+      "revision": "b72ddd5f21a759d235d70c92d3a37a990499c22f",
+      "url": "https://raw.githubusercontent.com/patrick-steele-idem/morphdom/b72ddd5f21a759d235d70c92d3a37a990499c22f/README.md",
+      "bytes": 17111,
+      "sha256": "effb685f49aed5126f8d003aa8a5a992654f151aee551e7b50e7c9b3a5113294"
+    },
+    {
+      "path": "upstream/fixed/package.json",
+      "upstreamPath": "package.json",
+      "revision": "b72ddd5f21a759d235d70c92d3a37a990499c22f",
+      "url": "https://raw.githubusercontent.com/patrick-steele-idem/morphdom/b72ddd5f21a759d235d70c92d3a37a990499c22f/package.json",
+      "bytes": 1492,
+      "sha256": "5563e4a27ef3f68feb8dfcd9cd7039c33c7a9ad4dbd03a8f0f391549148b8a63"
+    }
+  ],
+  "wrapper": {
+    "path": "page.html",
+    "sha256": "d764f523c83b85d9d880087130404235afa25f6d7e1a98f909bcf0ab78692807",
+    "basis": "Independent implementation of the public issue 19 input handler, with separate readiness/completion markers. Unchanged wrapper for buggy and fixed revisions. Harness initialization is scoped in an IIFE to avoid colliding with upstream global declarations."
+  },
+  "captureSurfaces": [
+    "Registered public action identifiers and values",
+    "Allowlisted textarea live value and completion text",
+    "Source, manifest, assertion and harness identities",
+    "Sanitized lifecycle events"
+  ],
+  "excludedSurfaces": [
+    "Raw trace",
+    "Screenshot",
+    "Console text",
+    "Cookies",
+    "Storage",
+    "Headers",
+    "Arbitrary URLs",
+    "User files"
+  ],
+  "expectationUrls": [
+    "https://github.com/patrick-steele-idem/morphdom/issues/19"
+  ]
+}

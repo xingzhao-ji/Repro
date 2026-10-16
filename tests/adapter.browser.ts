@@ -5,7 +5,7 @@ import { readFile, mkdir, symlink, readdir } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { createServer } from 'node:http';
 import { chromium } from 'playwright';
-import { ADAPTER, VERSION, type Manifest } from '../src/contracts.js';
+import { ADAPTER, VERSION, type SyntheticManifest as Manifest } from '../src/contracts.js';
 import { runBrowser, installNetworkBoundary } from '../src/adapter.js';
 import { EXPECTATION, ASSERTION_DIGEST, assertObservation, TargetFailure } from '../src/oracle.js';
 import { fixtureDigest } from '../src/fixture.js';

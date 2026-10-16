@@ -84,6 +84,7 @@ export class Ledger {
       assertionDigest: value.assertionDigest, expectationBasis: value.expectationBasis,
       humanApproval: value.humanApproval,
       ...(value.schemaVersion === 2 ? { scenario: value.scenario, expectationSource: value.expectationSource } : {}),
+      ...(value.schemaVersion === 3 ? { caseId: value.caseId, expectationSource: value.expectationSource, app: value.app, boundary: value.boundary, environment: value.environment, adapter: value.adapter, runnerVersion: value.runnerVersion } : {}),
     });
     if (!isDeepStrictEqual(frozen(current), frozen(updated))) throw new ReproError('verification', 'FROZEN_EXPECTATION', 'The session expectation and scenario are frozen. Create a new session to declare different expected behavior.');
     this.db.prepare('UPDATE sessions SET manifest=? WHERE id=?').run(JSON.stringify(updated), validId(id));

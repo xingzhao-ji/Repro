@@ -5,8 +5,8 @@ import { join } from 'node:path';
 // Inventory only the repository inputs used by the trusted package checks.
 export async function packageInputHashes(root, includeDist = false) {
   const paths = ['package.json', 'package-lock.json', 'tsconfig.json', 'assets/tokens.css',
-    'scripts/build.mjs', 'scripts/package-inputs.mjs', 'scripts/package-smoke.mjs', 'scripts/authored-package-smoke.mjs'];
-  const folders = ['src', 'web', 'fixtures/browser-search', 'security'];
+    'scripts/build.mjs', 'scripts/build-repository-cases.mjs', 'scripts/package-inputs.mjs', 'scripts/package-smoke.mjs', 'scripts/authored-package-smoke.mjs'];
+  const folders = ['src', 'web', 'fixtures/browser-search', 'fixtures/repository-cases', 'security'];
   if (includeDist) folders.push('dist');
   for (const folder of folders) {
     for (const path of await readdir(join(root, folder), { recursive: true })) {
