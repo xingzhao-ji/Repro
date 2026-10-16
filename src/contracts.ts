@@ -95,6 +95,18 @@ export interface AuthoredExperimentDeclaration {
   expectationBasis: ManifestV2['expectationBasis'];
 }
 export interface RunEvent { seq: number; at: string; type: string; message: string; actionId?: string }
+/** Optional case-adapter diagnostics, separate from product evidence. No target data or exception text. */
+export interface TeardownEvent {
+  seq: number; runId: string; elapsedMs: number; monotonicNs: string;
+  profileProbeCompletedMonotonicNs: string;
+  profileState: 'not-created' | 'present' | 'absent' | 'unavailable';
+  phase: 'run' | 'server-close' | 'context-close' | 'execution-work' | 'execution-drain' | 'profile-cleanup';
+  event: 'start' | 'call' | 'wait-start' | 'wait-settled' | 'wait-timeout' | 'wait-return' |
+    'context-close-event' | 'browser-disconnected' | 'retained' | 'removed' | 'return';
+  outcome?: 'resolved' | 'rejected' | 'timeout';
+  late?: boolean; budgetMs?: number; deadlineElapsedMs?: number;
+  causeKind?: 'error' | 'non-error';
+}
 export interface RunResult {
   id: string; outcome: Outcome; reason: string; category?: ErrorCategory;
   manifestDigest: string; assertionDigest: string; harnessDigest: string;
@@ -107,6 +119,8 @@ export interface RunResult {
 export interface RunOptions {
   artifactDir: string; signal?: AbortSignal; revision?: 'buggy' | 'fixed';
   onEvent?: (event: RunEvent) => void;
+  /** Best-effort synchronous diagnostic sink. A throwing sink is disabled; callers must validate coverage. */
+  onTeardown?: (event: TeardownEvent) => void;
 }
 export type RunFunction = (manifest: Manifest, options: RunOptions) => Promise<RunResult>;
 export interface Trial {

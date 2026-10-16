@@ -1,19 +1,41 @@
 import { randomUUID, createHash } from 'node:crypto';
 import { createServer } from 'node:http';
-import { readFileSync } from 'node:fs';
+import { lstatSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import { chromium, type BrowserContext, type Page } from 'playwright';
-import { VERSION, ReproError, type ManifestV3, type RunOptions, type RunResult, type BrowserCaseObservation } from './contracts.js';
+import { VERSION, ReproError, type ManifestV3, type RunOptions, type RunResult, type BrowserCaseObservation, type TeardownEvent } from './contracts.js';
 import { getRegisteredCase, caseSource, caseRevisionDigest, evaluateCaseObservation, BROWSER_CASE_ARTIFACT_DIGEST } from './browser-case.js';
 import { digest, validateManifest } from './manifest.js';
 import { ownedDirectory } from './paths.js';
 
 const EXECUTABLE_DIGEST = createHash('sha256').update(readFileSync(new URL(import.meta.url))).digest('hex');
-async function settlesWithin(work: Promise<unknown>, timeoutMs: number): Promise<boolean> {
+type WaitEvent = Pick<TeardownEvent, 'event' | 'outcome' | 'late' | 'budgetMs' | 'causeKind'>;
+type DiagnosticClock = { performanceMs: number; monotonicNs: string };
+async function settlesWithin(work: Promise<unknown>, timeoutMs: number, observe?: (event: WaitEvent, clock?: DiagnosticClock) => void): Promise<boolean> {
   let timer: NodeJS.Timeout | undefined;
+  let returned = false;
   try {
-    return await Promise.race([work.then(() => true, () => false), new Promise<boolean>(resolve => { timer = setTimeout(() => resolve(false), timeoutMs); })]);
+    const outcome = await Promise.race([
+      work.then(() => {
+        observe?.({ event: 'wait-settled', outcome: 'resolved', late: returned });
+        return 'resolved' as const;
+      }, cause => {
+        observe?.({ event: 'wait-settled', outcome: 'rejected', late: returned, causeKind: cause instanceof Error ? 'error' : 'non-error' });
+        return 'rejected' as const;
+      }),
+      new Promise<'timeout'>(resolve => {
+        const clock = observe ? { performanceMs: performance.now(), monotonicNs: process.hrtime.bigint().toString() } : undefined;
+        timer = setTimeout(() => {
+          observe?.({ event: 'wait-timeout', outcome: 'timeout' }); resolve('timeout');
+        }, timeoutMs);
+        // Start the existing timer before filesystem observation or the sink.
+        observe?.({ event: 'wait-start', budgetMs: timeoutMs }, clock);
+      }),
+    ]);
+    returned = true;
+    observe?.({ event: 'wait-return', outcome });
+    return outcome === 'resolved';
   } finally { if (timer) clearTimeout(timer); }
 }
 export function caseHarnessDigest(manifest: ManifestV3): string {
@@ -47,6 +69,24 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
   let cleanupFailed = false;
   let origin = '';
   let assets = new Map<string, Buffer>();
+  let teardownObserver = options.onTeardown;
+  let teardownSequence = 0;
+  const trace = (phase: TeardownEvent['phase'], event: WaitEvent, clock?: DiagnosticClock) => {
+    if (!teardownObserver) return;
+    const monotonicNs = clock?.monotonicNs ?? process.hrtime.bigint().toString();
+    const elapsedMs = (clock?.performanceMs ?? performance.now()) - started;
+    let profileState: TeardownEvent['profileState'] = 'not-created';
+    if (profile) {
+      try { lstatSync(profile); profileState = 'present'; }
+      catch (cause) { profileState = (cause as NodeJS.ErrnoException).code === 'ENOENT' ? 'absent' : 'unavailable'; }
+    }
+    const diagnostic: TeardownEvent = { ...event, seq: ++teardownSequence, runId: id, phase, elapsedMs, monotonicNs,
+      profileState, profileProbeCompletedMonotonicNs: process.hrtime.bigint().toString(),
+      ...(event.event === 'wait-start' && event.budgetMs !== undefined ? { deadlineElapsedMs: elapsedMs + event.budgetMs } : {}) };
+    // Diagnostics cannot change an assertion verdict or expose the sink's exception.
+    try { teardownObserver(diagnostic); } catch { teardownObserver = undefined; }
+  };
+  const observeWait = (phase: TeardownEvent['phase']) => teardownObserver ? (event: WaitEvent, clock?: DiagnosticClock) => trace(phase, event, clock) : undefined;
   const remaining = () => Math.max(1, input.environment.timeoutMs - (performance.now() - started));
   const check = () => {
     if (options.signal?.aborted) throw new ReproError('cancelled', 'CANCELLED', 'Capture was cancelled. Start a new run with a new output directory to retry.');
@@ -112,7 +152,12 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
       env: { ...process.env, HOME: profile, XDG_CACHE_HOME: join(profile, '.cache') },
       viewport: manifest.environment.viewport, locale: 'en-US', timezoneId: 'UTC', serviceWorkers: 'block', acceptDownloads: false,
       colorScheme: 'light', ...(channel === 'chrome' ? { channel: 'chrome' } : {}) });
-    context = await launching; check();
+    context = await launching;
+    if (teardownObserver) {
+      context.once('close', () => trace('context-close', { event: 'context-close-event' }));
+      context.browser()?.once('disconnected', () => trace('context-close', { event: 'browser-disconnected' }));
+    }
+    check();
     result.environment.browser = `${context.browser()?.version() ?? 'unknown'} (${channel === 'chrome' ? 'explicit installed Chrome channel' : 'pinned Chromium'})`;
     await context.route('**/*', async route => {
       if (!allowed(route.request().url(), route.request().method())) {
@@ -183,6 +228,10 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
   };
   try {
     executing = work();
+    if (teardownObserver) void executing.then(
+      () => trace('execution-work', { event: 'wait-settled', outcome: 'resolved' }),
+      cause => trace('execution-work', { event: 'wait-settled', outcome: 'rejected', causeKind: cause instanceof Error ? 'error' : 'non-error' }),
+    );
     const deadline = new Promise<never>((_resolve, reject) => { timer = setTimeout(() => reject(new ReproError('environment', 'DEADLINE', 'The declared replay deadline expired. Check setup and retry a new run.')), remaining()); });
     await Promise.race([executing, cancellation, deadline]);
   } catch (cause) {
@@ -196,18 +245,29 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
         : 'RUNNER_ERROR: Browser or owned server setup failed. Check prerequisites and writable task output, then retry.';
     }
   } finally {
+    trace('run', { event: 'start' });
     stopped = true; if (timer) clearTimeout(timer);
     options.signal?.removeEventListener('abort', abort);
     if (!context && launching) context = await launching.catch(() => undefined);
     // Join acquisition even when cancellation wins before the listening event.
     await listening?.catch(() => undefined);
+    trace('server-close', { event: 'call' });
     server.closeAllConnections();
     await new Promise<void>(resolve => { if (server.listening) server.close(() => resolve()); else resolve(); });
-    if (context && !await settlesWithin(context.close(), 2000)) cleanupFailed = true;
-    if (executing && !await settlesWithin(executing.catch(() => undefined), 1000)) cleanupFailed = true;
+    trace('server-close', { event: 'wait-settled', outcome: 'resolved' });
+    if (context) {
+      trace('context-close', { event: 'call' });
+      if (!await settlesWithin(context.close(), 2000, observeWait('context-close'))) cleanupFailed = true;
+    }
+    // The drain intentionally handles work rejection; execution-work above
+    // observes its original settlement separately without changing that decision.
+    if (executing && !await settlesWithin(executing.catch(() => undefined), 1000, observeWait('execution-drain'))) cleanupFailed = true;
     if (profile && !cleanupFailed) {
-      try { await rm(profile, { recursive: true, force: true }); }
-      catch { result.outcome = result.outcome === 'cancelled' ? 'cancelled' : 'inconclusive'; result.category = 'environment'; result.reason = 'PROFILE_CLEANUP_FAILED: The owned temporary profile remains. Remove only this run’s .profile directory after inspecting it.'; }
+      trace('profile-cleanup', { event: 'call' });
+      try { await rm(profile, { recursive: true, force: true }); trace('profile-cleanup', { event: 'removed', outcome: 'resolved' }); }
+      catch { trace('profile-cleanup', { event: 'retained', outcome: 'rejected' }); result.outcome = result.outcome === 'cancelled' ? 'cancelled' : 'inconclusive'; result.category = 'environment'; result.reason = 'PROFILE_CLEANUP_FAILED: The owned temporary profile remains. Remove only this run’s .profile directory after inspecting it.'; }
+    } else if (profile) {
+      trace('profile-cleanup', { event: 'retained' });
     }
     if (fault && result.outcome !== 'cancelled') { result.outcome = 'inconclusive'; result.category = fault.category; result.reason = `${fault.code}: ${fault.message}`; }
     if (options.signal?.aborted) { result.outcome = 'cancelled'; result.category = 'cancelled'; result.reason = 'CANCELLED: The owner cancelled the run. Start a new run to retry.'; }
@@ -221,5 +281,6 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
       result.artifacts.push({ path: `${id}/evidence.json`, sha256: createHash('sha256').update(content).digest('hex'), bytes: content.length });
     } catch { result.outcome = 'inconclusive'; result.category = 'environment'; result.reason = 'EVIDENCE_FAILED: Evidence could not be saved. Check writable output and retry in a new directory.'; }
   }
+  trace('run', { event: 'return' });
   return result;
 }

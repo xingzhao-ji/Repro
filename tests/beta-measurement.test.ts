@@ -4,6 +4,7 @@ import { createHash } from 'node:crypto';
 import { spawn } from 'node:child_process';
 import { mkdir, mkdtemp, readFile, readdir, symlink, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
 
 const supervisor = resolve('scripts/measure-beta.mjs');
 async function workspace() {
@@ -33,15 +34,87 @@ async function ready(path: string, closed: Promise<unknown>) {
     closed.then(() => { throw new Error('Measurement supervisor exited before the owned command became ready'); }),
   ]);
 }
-async function withSentinel(run: () => Promise<void>) {
+async function withSentinel(run: (sentinelPid: number) => Promise<void>) {
   const sentinel = spawn(process.execPath, ['-e', 'setInterval(() => {}, 1000)'], { stdio: 'ignore' });
   const closed = new Promise<void>(resolve => sentinel.once('close', () => resolve()));
   try {
-    await run();
+    assert.ok(sentinel.pid);
+    await run(sentinel.pid);
     assert.equal(sentinel.exitCode, null, 'Unrelated process must remain alive');
     assert.ok(sentinel.pid); process.kill(sentinel.pid, 0);
   } finally { sentinel.kill(); await closed; }
 }
+
+test('opt-in native diagnostics preserve owned identities and monotonic census and command boundaries', { timeout: 15000 }, async () => {
+  await withSentinel(async sentinelPid => {
+    const root = await workspace(), output = join(root, 'measurement'), marker = join(root, 'descendant.pid');
+    const { measureCommand } = await import(pathToFileURL(supervisor).href);
+    type Row = { pid: number; ppid: number; pgid: number; startedAt: string; rssBytes: number };
+    type Event = { kind: string; censusKind?: string; monotonicNs: string; completedMonotonicNs?: string; elapsedMs: number; completedAtMs?: number; owned?: Row[]; error?: string | null; exitCode?: number | null; exitSignal?: string | null };
+    const events: Event[] = [];
+    const before = process.hrtime.bigint();
+    const result = await measureCommand({ output, timeoutMs: 40000, expectedExit: 0,
+      command: [process.execPath, '-e', `const{spawn}=require('node:child_process');const child=spawn(process.execPath,['-e','setTimeout(()=>{},400)'],{stdio:'ignore'});require('node:fs').writeFileSync(${JSON.stringify(marker)},String(child.pid));child.once('close',()=>process.exit(0));`],
+      onDiagnostic: (event: Event) => { events.push(event); },
+    });
+    const after = process.hrtime.bigint();
+    const descendantPid = Number(await readFile(marker, 'utf8'));
+    const censuses = events.filter(event => event.kind === 'process-census');
+    assert.equal(censuses.length, result.receipt.memory.samples.length, 'Every existing census needs its identities for disappearance correlation');
+    assert.ok(censuses.length > 2);
+    assert.equal(censuses[0]?.censusKind, 'startup');
+    assert.ok(censuses.some(event => event.censusKind === 'sample' && event.owned?.some(row => row.pid === descendantPid)));
+    assert.ok(censuses.some(event => event.censusKind === 'first-post-exit'));
+    assert.equal(censuses.at(-1)?.censusKind, 'terminal');
+    assert.deepEqual(censuses.at(-1)?.owned, []);
+    let lastTime = before;
+    for (const event of events) {
+      assert.ok(['process-census', 'command-exit', 'command-close'].includes(event.kind));
+      assert.match(event.monotonicNs, /^\d+$/);
+      const timestamp = BigInt(event.monotonicNs);
+      assert.ok(timestamp >= lastTime && timestamp <= after); lastTime = timestamp;
+      assert.ok(Number.isFinite(event.elapsedMs));
+      if (event.kind !== 'process-census') continue;
+      assert.ok(event.completedMonotonicNs);
+      assert.ok(BigInt(event.completedMonotonicNs) >= timestamp && BigInt(event.completedMonotonicNs) <= after);
+      assert.ok(event.completedAtMs !== undefined && event.completedAtMs >= event.elapsedMs);
+      assert.equal(event.error, null);
+      for (const row of event.owned ?? []) {
+        assert.notEqual(row.pid, sentinelPid, 'Unrelated process identity must not enter diagnostics');
+        assert.deepEqual(Object.keys(row).sort(), ['pgid', 'pid', 'ppid', 'rssBytes', 'startedAt']);
+        assert.ok(Number.isSafeInteger(row.pid) && Number.isSafeInteger(row.ppid) && Number.isSafeInteger(row.pgid));
+        assert.equal(typeof row.startedAt, 'string');
+        assert.ok(Number.isSafeInteger(row.rssBytes));
+      }
+    }
+    assert.equal(events.filter(event => event.kind === 'command-exit').length, 1);
+    assert.equal(events.filter(event => event.kind === 'command-close').length, 1);
+    assert.equal(events.find(event => event.kind === 'command-exit')?.exitCode, 0);
+    assert.equal(events.find(event => event.kind === 'command-exit')?.exitSignal, null);
+    assert.equal(result.receipt.outcome, 'completed');
+    assert.equal(result.receipt.cleanup.passed, true);
+    assert.deepEqual(result.receipt.interventions, []);
+    assert.equal('diagnostics' in result.receipt, false, 'Opt-in events must not change the ordinary receipt schema');
+  });
+});
+
+test('a failed native diagnostic consumer preserves command cleanup but invalidates the diagnostic measurement safely', { timeout: 15000 }, async () => {
+  const root = await workspace(), output = join(root, 'measurement');
+  const { measureCommand } = await import(pathToFileURL(supervisor).href);
+  let calls = 0;
+  const result = await measureCommand({ output, timeoutMs: 40000, expectedExit: 0,
+    command: [process.execPath, '-e', 'setTimeout(()=>process.exit(0),100)'],
+    onDiagnostic: () => { calls++; throw new Error('sensitive diagnostic destination'); },
+  });
+  assert.equal(calls, 1, 'A failed consumer must not be invoked indefinitely');
+  assert.equal(result.receipt.command.exitCode, 0);
+  assert.equal(result.receipt.cleanup.passed, true);
+  assert.deepEqual(result.receipt.interventions, []);
+  assert.equal(result.receipt.stopReason, null);
+  assert.equal(result.receipt.outcome, 'failed');
+  assert.deepEqual(result.receipt.measurementErrors, ['MEASUREMENT_DIAGNOSTIC_FAILED']);
+  assert.doesNotMatch(await readFile(result.path, 'utf8'), /sensitive diagnostic destination/);
+});
 
 test('an early timer callback cannot end native cleanup observation before its absolute cutoff', { timeout: 15000 }, async () => {
   const root = await workspace(), output = join(root, 'measurement');

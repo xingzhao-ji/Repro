@@ -86,7 +86,13 @@ async function temporaryInventory(root, prefix = '', entries = []) {
   return entries;
 }
 
-/** Measures an explicitly supplied trusted command; it is not a sandbox or redactor. */
+/**
+ * Measures an explicitly supplied trusted command; it is not a sandbox or redactor.
+ * Optional onDiagnostic is a synchronous observer of existing census/command
+ * boundaries. Its closed-vocabulary events contain only owned numeric process
+ * identities, start times, resource counts and monotonic timestamps. It must not
+ * block; no additional census, wait or intervention is performed for diagnostics.
+ */
 export async function measureCommand(options) {
   const output = await claimOutput(options.output);
   const scratch = join(output, 'tmp'); await mkdir(scratch, { mode: 0o700 });
@@ -98,6 +104,17 @@ export async function measureCommand(options) {
   const began = performance.now(), startedAt = new Date().toISOString();
   const elapsed = () => performance.now() - began;
   const observed = new Map(), samples = [], interventions = [], measurementErrors = [];
+  let diagnostic = options.onDiagnostic;
+  function emitDiagnostic(event) {
+    if (diagnostic === undefined) return;
+    try { diagnostic(event); }
+    catch {
+      // A broken evidence sink cannot produce an accepted measurement. Retain
+      // normal command/cleanup behavior and never expose its exception contents.
+      diagnostic = undefined;
+      measurementErrors.push('MEASUREMENT_DIAGNOSTIC_FAILED');
+    }
+  }
   const logs = { stdout: [], stderr: [] }, logBytes = { stdout: 0, stderr: 0 };
   let recordedLogBytes = 0, outputTruncated = false, peakRssBytes = 0;
   let child, processGroup, first, terminal, firstTemporaryFiles = [], terminalTemporaryFiles = [];
@@ -125,14 +142,21 @@ export async function measureCommand(options) {
     return [...owned.values()];
   }
   function sample(kind = 'sample') {
+    const monotonicNs = diagnostic === undefined ? undefined : process.hrtime.bigint().toString();
     const census = { kind, at: new Date().toISOString(), elapsedMs: elapsed(), owned: [], error: null };
     try { census.owned = ownRows(processSnapshot()); }
     catch (error) { census.error = error.code ?? 'CENSUS_FAILED'; if (!measurementErrors.includes(census.error)) measurementErrors.push(census.error); }
     census.completedAtMs = elapsed();
+    const completedMonotonicNs = diagnostic === undefined ? undefined : process.hrtime.bigint().toString();
     census.rssBytes = census.owned.reduce((total, row) => total + row.rssBytes, 0);
     peakRssBytes = Math.max(peakRssBytes, census.rssBytes);
     if (samples.length < MAX_SAMPLES) samples.push({ elapsedMs: census.elapsedMs, completedAtMs: census.completedAtMs, rssBytes: census.rssBytes, ownedCount: census.owned.length, error: census.error });
     else if (!measurementErrors.includes('SAMPLE_LIMIT')) measurementErrors.push('SAMPLE_LIMIT');
+    if (diagnostic !== undefined) emitDiagnostic({
+      kind: 'process-census', censusKind: kind, monotonicNs, completedMonotonicNs,
+      elapsedMs: census.elapsedMs, completedAtMs: census.completedAtMs, error: census.error,
+      owned: census.owned.map(({ pid, ppid, pgid, startedAt, rssBytes }) => ({ pid, ppid, pgid, startedAt, rssBytes })),
+    });
     return census;
   }
   function signalOwned(signal) {
@@ -186,16 +210,22 @@ export async function measureCommand(options) {
     closed = new Promise(accept => {
       child.once('error', () => {
         launchFailed = true; measurementErrors.push('COMMAND_UNAVAILABLE');
+        if (diagnostic !== undefined) emitDiagnostic({ kind: 'command-launch-error', monotonicNs: process.hrtime.bigint().toString(), elapsedMs: elapsed(), code: 'COMMAND_UNAVAILABLE' });
         clearTimeout(watchdog);
         if (exitAtMs === undefined) { exitAtMs = elapsed(); recordFirstCensus('first-post-launch-error'); scheduleTerminal(); }
       });
       child.once('exit', (code, signal) => {
         exitAtMs = elapsed(); exitCode = code; exitSignal = signal;
+        if (diagnostic !== undefined) emitDiagnostic({ kind: 'command-exit', monotonicNs: process.hrtime.bigint().toString(), elapsedMs: exitAtMs, exitCode, exitSignal });
         clearTimeout(watchdog);
         recordFirstCensus();
         scheduleTerminal();
       });
-      child.once('close', () => { closedAtMs = elapsed(); accept(); });
+      child.once('close', () => {
+        closedAtMs = elapsed();
+        if (diagnostic !== undefined) emitDiagnostic({ kind: 'command-close', monotonicNs: process.hrtime.bigint().toString(), elapsedMs: closedAtMs, exitCode, exitSignal });
+        accept();
+      });
     });
     for (const [name, stream] of [['stdout', child.stdout], ['stderr', child.stderr]]) {
       stream.on('data', bytes => {
