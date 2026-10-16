@@ -1,4 +1,12 @@
-# Current work — unsafe startup deletion guarded; cleanup acceptance still fails
+# Current work — complete startup ownership requires a stronger platform boundary
+
+Continued from clean `51ee29a` / `e67b573` on `task/startup-owner-boundary`. The safety repair and all product/cleanup/security requirements remain unchanged. Installed API and supervisor review found no complete native macOS descendant-completion authority: direct-child handles, launcher exit, group disappearance and sampled ancestry can miss a detached descendant. Four new deterministic process-boundary/fixture tests pass, including a writable surviving descendant after launcher close and group disappearance, deadline/rejection retention, late completion, confirmed controlled shutdown/deletion, unrelated-process isolation and failed fixture readiness. They do not implement a complete startup owner.
+
+The [concrete architecture note](docs/STARTUP-OWNER-BOUNDARY.md) describes a per-launch native owner outside a sealed Playwright worker: a verified Linux subreaper/all-child join, and a separate supported macOS descendant-tracking capability. The macOS candidate requires legitimate entitlement/signing, a suitable SDK and compatibility/event-completeness verification; no new permission/API probe or security change occurred. No material alternative was installed. This is an implementation/platform prerequisite, not a current tool/service denial.
+
+Final fresh checks: 326/327 ordinary, 13/15 affected browser with diagnostics disabled, types/lint/build/kit and fixture syntax passed. The same three profile-removal assertions remain failed. A test-fixture readiness regression was observed red (launcher exit 0 rather than 1) and repaired; all attempts remain in `.repro-runs/startup-owner-boundary/`. Fresh acceptance was not started because prerequisite checks fail. Original htmx repetition 15 stays separately unresolved; accessibility stays deferred/unverified. No completion claim, release, merge, push, container run or broad diagnostic cohort occurred.
+
+## Preserved partial startup safety checkpoint at e67b573
 
 Continuation from verified `bcc67d2` / `3e1b2b7` is on `task/startup-cleanup-ownership`. Commit `51ee29a` fixes a deterministic unsafe-deletion path: rejected browser launch could remove a profile while a controlled real owner could still write it. The adapter now retains profiles when failed launch provides no shutdown acknowledgment. Deadlines, security controls, ownership checks and existing cleanup assertions are unchanged. This is a partial safety repair, not completed cleanup.
 
