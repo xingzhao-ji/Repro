@@ -1,6 +1,6 @@
 # Package input inventory correction
 
-2026-10-15 UTC. A resumed independent audit found that both package checks omitted `assets/tokens.css` and `tsconfig.json` from their before/after source hashes. The stylesheet imports the tokens, and the build uses the TypeScript configuration. A persistent edit to either could escape the existing equality guard. The earlier 27-entry build receipt records those listed files; it was not a complete inventory of build inputs.
+2026-10-15 (America/Los_Angeles). A resumed independent audit found that both package checks omitted `assets/tokens.css` and `tsconfig.json` from their before/after source hashes. The stylesheet imports the tokens, and the build uses the TypeScript configuration. A persistent edit to either could escape the existing equality guard. The earlier 27-entry build receipt records those listed files; it was not a complete inventory of build inputs.
 
 Both scripts now use a small shared inventory including the two missing files and the inventory/driver scripts. The ordinary check records 32 source entries; the authored check additionally records nine built artifacts. Required-file deletion fails instead of producing an incomplete successful snapshot. Generated run/cache data remains excluded. Runtime code, frozen assertions, cleanup, dependencies, security policy and build artifacts did not change.
 
