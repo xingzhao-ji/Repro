@@ -1,3 +1,17 @@
+# Current work — startup repair and fresh native acceptance passed
+
+October 16, 2026. Implementation commit `9aec7fe` on `task/startup-owner-boundary` repairs the original three cleanup assertions while retaining profiles whenever completion cannot be certified. The fixed worker requires sealed execution and actual timely natural completion; acquired browser contexts also require a fresh supported close acknowledgment. This is trusted pinned-browser lifecycle handling, not arbitrary native descendant containment. All previous work, failures and retained profiles remain preserved.
+
+Final prerequisites passed on stable bytes: **382/382 ordinary tests and 50/50 selected functional browser tests**, plus types, lint, build and kit. Fresh package smoke passed **15 commands**; installed schema-3 v2 passed **18 operations**; native workflows passed **15 measurements / 30 browser executions**; native stability passed **120/120** (20 alternating buggy/fixed pairs for each of the three pinned cases). The independent audit checked **150 unique native run IDs, 132 frozen inputs and 854 records**, with no timing findings. A final builder revalidated 1,253 files. See [fresh native acceptance and remaining blockers](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md) and [the exact receipt](evidence/startup-cleanup-native-acceptance.json).
+
+The first installed schema-3 cohort remains failed: 4 passed, 1 reporter-format failure, 13 unattempted. Its readable buggy result was correct; Node 26 defaulted to the spec reporter while the driver expected TAP. A separately calibrated driver explicitly selected TAP for the fresh v2 cohort. Product bytes, assertions, budgets and historical denominators were unchanged.
+
+The original htmx fixed repetition-15 cleanup failure remains causally unresolved. Two separate passive diagnostic runs had complete lifecycle coverage and expected outcomes: close promises settled in 14.580/16.739 ms, with 0.734/0.769 ms after direct-child close; profile removal followed actual worker close. This did not reproduce the old failure or establish a causal repair. The old runner merges close rejection and timeout, and its census did not retain descendant executable names or per-PID timelines. Do not extend green diagnostics or label the historical cause fixed without new supporting evidence.
+
+Fresh Linux acceptance is **unrun, pending explicit approval** to start the new Repro-only Colima profile `e` under `.repro-cache/pb`, including automatic guest SSH host-key generation. The existing client identity would be reused under unchanged 2 CPU / 3 GiB, no-host-mount, no-agent, no-public-port controls and the approved policy hash. No VM startup or credential generation occurred in this continuation; no approval denial was reported. Eight accessibility-focused or mixed browser scenarios, native zoom and actual screen-reader evaluation remain deferred/unverified. The historical denied browser route was not retried. No other session, shared service, security setting, publication, remote CI or deployment was changed. Practical-beta completion is not claimed.
+
+## Preserved implementation and prerequisite checkpoint
+
 # Current work — startup worker repair under verification
 
 October 16, 2026. Working on `task/startup-owner-boundary`, from the initially clean `49d162a`. Only Repro resources are in scope; the separately running game session must remain untouched. No shared service, unrelated process, native security helper, credential, security setting, publication, or deployment has been changed.
