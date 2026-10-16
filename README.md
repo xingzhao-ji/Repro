@@ -1,8 +1,8 @@
 # Repro — local failure compiler
 
-Repro records a registered synthetic browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench uses the same real runner as the CLI. The buggy and fixed search implementations are evaluated with the same frozen expected behavior in fresh browser state.
+Repro captures an explicitly declared browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench and CLI share the same runner. Registered buggy and fixed revisions execute against the same frozen expected behavior in fresh browser state.
 
-This is a local synthetic alpha. Recorded native Chromium replay and trusted Linux arm64 capsule checks passed with the exact explicitly approved container policy. The owner has deferred native 200% Chrome zoom and actual screen-reader verification for this milestone; both remain unverified. See [release evidence](evidence/RELEASE.md) for actual results and limits. Arbitrary websites, real-user recording, PostgreSQL adapters, historical-bug validation and public execution are outside this version's supported scope.
+The completed synthetic alpha is the baseline. This branch is developing a practical beta using three pinned public repository bugs: morphdom textarea updates, htmx delegated checkbox events, and Marked empty headings. These are selected development cases using actual upstream library source and small integration pages, not a held-out effectiveness study or support for arbitrary websites. Native workflows and 20 buggy/fixed exported-test pairs per case completed; fresh Linux verification remains unrun and held for manual review. The beta is incomplete. See [verification status](evidence/PRACTICAL-BETA-PROGRESS.md) and the [frozen evaluation protocol](benchmarks/PRACTICAL-BETA-PROTOCOL.md). Earlier [release evidence](evidence/RELEASE.md) belongs to the synthetic alpha. Accessibility remains explicitly deferred and unverified. Real-user recording, PostgreSQL adapters and public untrusted execution remain unsupported.
 
 ## Run locally
 
@@ -17,6 +17,23 @@ npm run dev
 ```
 
 Open `http://127.0.0.1:4318`. Capture requires opt-in. Use the supplied example or explicitly declare either supported alpha/beta search order and its expected result; see [expected-behavior input](docs/AUTHORED-EXPECTATIONS.md). No account, API key, proprietary viewer or LLM is required. All generated sessions, traces, screenshots, reports and exports stay beneath ignored `.repro-runs/`; downloaded tools and caches use `.repro-cache/`.
+
+For a repository case, choose it in the workbench, review its linked expected-behavior contract, and confirm capture. Inspect the observed values, reduce the actions, compare the fixed revision, then export. The new adapter retains only registered input and observation values; it does not capture arbitrary DOM, screenshots, traces, console or request bodies.
+
+The same workflow is available from the CLI. Read the generated declaration before opting in; each operation needs a fresh output directory:
+
+```sh
+mkdir -p .repro-runs/my-case
+node dist/cli.js cases --case morphdom-textarea > .repro-runs/my-case/expectation.json
+export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
+node dist/cli.js record --consent --experiment .repro-runs/my-case/expectation.json --output .repro-runs/my-case/capture
+node dist/cli.js replay --manifest .repro-runs/my-case/capture/manifest.json --output .repro-runs/my-case/replay
+node dist/cli.js reduce --manifest .repro-runs/my-case/capture/manifest.json --output .repro-runs/my-case/reduction
+node dist/cli.js verify --manifest .repro-runs/my-case/reduction/reduced.manifest.json --output .repro-runs/my-case/comparison
+node dist/cli.js export --manifest .repro-runs/my-case/reduction/reduced.manifest.json --output .repro-runs/my-case/capsule
+```
+
+Buggy capture and replay deliberately exit 1 when the declared failure is observed. Other registered case IDs are `htmx-checkbox` and `marked-empty-heading`. The capsule's README explains clean installation and its conventional single-revision test: select `REPRO_REVISION=buggy` to observe the failing assertion or `REPRO_REVISION=fixed` to test the fixed source. A missing dependency or unrelated failure does not establish the bug. Reduction can leave the sequence unchanged; inconclusive deletions keep minimality unverified.
 
 ```sh
 npm run demo

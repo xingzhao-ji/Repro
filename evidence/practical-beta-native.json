@@ -1,0 +1,225 @@
+{
+  "status": "incomplete",
+  "baseline": "88fedc530152b786fdb8ac76a867ddbcd8229201",
+  "branch": "task/practical-beta",
+  "implementationCommits": [
+    "6632bee",
+    "c0320f4",
+    "ee827a2",
+    "30cba87"
+  ],
+  "platform": "darwin-arm64",
+  "node": "v26.7.0",
+  "playwright": "1.64.0",
+  "browser": "Chromium 156.0.8078.4; recorded per run",
+  "environmentLimit": "Native development uses existing workspace dependencies and browser; these results are not fresh-environment portability evidence.",
+  "memoryMethod": "100 ms sampled sum of owned process RSS; approximate, shared pages can be counted more than once, supervisor excluded; no Linux kernel peak measured.",
+  "thresholds": "benchmarks/PRACTICAL-BETA-PROTOCOL.md",
+  "cases": [
+    {
+      "caseId": "morphdom-textarea",
+      "repository": "https://github.com/patrick-steele-idem/morphdom",
+      "issue": "https://github.com/patrick-steele-idem/morphdom/issues/19",
+      "revisions": {
+        "buggy": {
+          "commit": "8221ace412be8dc1f519f2dc77393f0940134648",
+          "sourceDigest": "960acd3dbf500df2cd54341881f7b5a31c08ab4052b2608d7abb753a22a05011"
+        },
+        "fixed": {
+          "commit": "b72ddd5f21a759d235d70c92d3a37a990499c22f",
+          "sourceDigest": "aa9404d21525b61fe6b79489b2ad32fd9bae565d705aaf8067a83bbfd3da3b7f"
+        }
+      },
+      "assertionDigest": "8ec0310e16a14eb7b0bdd530fce211881a7a3db2933705b18eb07ccce35f4aef",
+      "original": {
+        "actions": 3,
+        "actionBytes": 276
+      },
+      "reduced": {
+        "actions": 2,
+        "actionBytes": 175
+      },
+      "minimality": "unverified",
+      "executions": 7,
+      "trials": 5,
+      "bothExecutedVariantBytes": 27220,
+      "upstreamArchiveBytes": 64426,
+      "exportBytes": 514006,
+      "measurements": {
+        "capture": {
+          "durationMs": 605.8262500000001,
+          "approximatePeakRssBytes": 350748672
+        },
+        "replay": {
+          "durationMs": 343.94916699999976,
+          "approximatePeakRssBytes": 458063872
+        },
+        "reduce": {
+          "durationMs": 2012.6037919999999,
+          "approximatePeakRssBytes": 463257600
+        },
+        "verify": {
+          "durationMs": 1543.0484169999982,
+          "approximatePeakRssBytes": 377126912
+        },
+        "export": {
+          "durationMs": 203.37737500000003,
+          "approximatePeakRssBytes": 97976320
+        }
+      },
+      "stability": {
+        "buggy": 20,
+        "fixed": 20,
+        "unexpected": 0,
+        "maximumDurationMs": 459.8381669999944,
+        "approximatePeakRssBytes": 509804544
+      }
+    },
+    {
+      "caseId": "htmx-checkbox",
+      "repository": "https://github.com/bigskysoftware/htmx",
+      "issue": "https://github.com/bigskysoftware/htmx/issues/2755",
+      "revisions": {
+        "buggy": {
+          "commit": "7388d0c0573b6d6bab43baa1f66fd7e59385bcea",
+          "sourceDigest": "1e8bcfaf8ef91b5f5c96591b3a6262b74b8a736824c6c047332d4e131c9f365c"
+        },
+        "fixed": {
+          "commit": "c9e2bea954efaf61d02b2f8639e31820e7632773",
+          "sourceDigest": "5870bceb3f21e208fabff278b8d418147565caabc5fa198a91611e97e44e8621"
+        }
+      },
+      "assertionDigest": "8639bce5f7ec8de44b13cd0aa8d04916c76491d7328de6058a13bf5ebcb9d5b7",
+      "original": {
+        "actions": 2,
+        "actionBytes": 152
+      },
+      "reduced": {
+        "actions": 2,
+        "actionBytes": 152
+      },
+      "minimality": "unverified",
+      "executions": 4,
+      "trials": 3,
+      "bothExecutedVariantBytes": 334001,
+      "upstreamArchiveBytes": 349769,
+      "exportBytes": 1108365,
+      "measurements": {
+        "capture": {
+          "durationMs": 457.66491699999824,
+          "approximatePeakRssBytes": 450904064
+        },
+        "replay": {
+          "durationMs": 573.3917920000022,
+          "approximatePeakRssBytes": 447545344
+        },
+        "reduce": {
+          "durationMs": 959.5471250000046,
+          "approximatePeakRssBytes": 459423744
+        },
+        "verify": {
+          "durationMs": 639.5665829999998,
+          "approximatePeakRssBytes": 449544192
+        },
+        "export": {
+          "durationMs": 203.5975830000025,
+          "approximatePeakRssBytes": 99696640
+        }
+      },
+      "stability": {
+        "buggy": 20,
+        "fixed": 20,
+        "unexpected": 0,
+        "maximumDurationMs": 1260.1697920000297,
+        "approximatePeakRssBytes": 532135936
+      }
+    },
+    {
+      "caseId": "marked-empty-heading",
+      "repository": "https://github.com/markedjs/marked",
+      "issue": "https://github.com/markedjs/marked/issues/3048",
+      "revisions": {
+        "buggy": {
+          "commit": "39cee771b659ea0eba49bd69dba10817403550d6",
+          "sourceDigest": "193fcfd78cac1f95ac35e22608799fb9a727b7479e9c00b51fc67b2fe3d9c66c"
+        },
+        "fixed": {
+          "commit": "a1034e6dd1ddbc2f723627f271bba29486005c1a",
+          "sourceDigest": "ccac5cd37a1a779c2cf7923794000658783de203e7a353ac0d477f7ad7e42299"
+        }
+      },
+      "assertionDigest": "5db74a0d773d607c1f615de4c4d68371734fe41d8eefcbd8036114f065c5ebca",
+      "original": {
+        "actions": 3,
+        "actionBytes": 294
+      },
+      "reduced": {
+        "actions": 3,
+        "actionBytes": 294
+      },
+      "minimality": "unverified",
+      "executions": 7,
+      "trials": 6,
+      "bothExecutedVariantBytes": 145256,
+      "upstreamArchiveBytes": 927068,
+      "exportBytes": 1520605,
+      "measurements": {
+        "capture": {
+          "durationMs": 385.5396660000042,
+          "approximatePeakRssBytes": 452640768
+        },
+        "replay": {
+          "durationMs": 373.3077090000006,
+          "approximatePeakRssBytes": 455409664
+        },
+        "reduce": {
+          "durationMs": 2093.1450420000037,
+          "approximatePeakRssBytes": 453722112
+        },
+        "verify": {
+          "durationMs": 541.779291999992,
+          "approximatePeakRssBytes": 471711744
+        },
+        "export": {
+          "durationMs": 211.2978749999893,
+          "approximatePeakRssBytes": 98975744
+        }
+      },
+      "stability": {
+        "buggy": 20,
+        "fixed": 20,
+        "unexpected": 0,
+        "maximumDurationMs": 912.2130410000682,
+        "approximatePeakRssBytes": 540147712
+      }
+    }
+  ],
+  "completed": {
+    "ordinaryUnitTests": 278,
+    "caseUiTests": 4,
+    "legacyAdapterAndHistoryTests": 11,
+    "caseFaultTests": 7,
+    "nativeExportedExecutions": 120,
+    "nativeExportedBuggyTargetFailures": 60,
+    "nativeExportedFixedPasses": 60,
+    "isolatedPrepareCases": 3
+  },
+  "neverRunForThisCandidate": [
+    "Docker capsule image builds",
+    "Linux case capture/replay/reduction/export",
+    "Linux exported-test repetitions",
+    "Linux kernel memory/pids/cleanup evaluation",
+    "Fresh isolated dependency/browser acquisition for the beta exports",
+    "npm run test:package",
+    "Accessibility verification"
+  ],
+  "heldStep": "Fresh Linux verification stopped by latest owner direction; no retry or security-policy change. Prior three-case policy approval was followed by this hold before any Docker payload execution.",
+  "audit": {
+    "path": ".repro-runs/practical-beta/native-evidence-audit.json",
+    "sha256": "08c6b43f708989e62332f84f6031b2e62d702cc708c4f67e1a2a446d12a8766e",
+    "records": 297,
+    "uniqueRunIds": 150
+  },
+  "rawEvidence": "Task-owned .repro-runs/practical-beta and .repro-runs/readable-{buggy,fixed}; excluded from Git. A clone containing this summary alone does not reverify raw evidence.",
+  "accessibility": "deferred/unverified"
+}
