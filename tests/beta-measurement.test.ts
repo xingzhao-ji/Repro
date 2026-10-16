@@ -72,6 +72,98 @@ globalThis.setTimeout = (callback, delay, ...args) => {
   assert.deepEqual(receipt.interventions, []);
 });
 
+for (const late of ['process', 'temporary-file', 'process-census'] as const) {
+  test(`a late clean ${late} observation cannot pass the native cleanup cutoff`, { timeout: 15000 }, async () => {
+    const root = await workspace(), output = join(root, 'measurement');
+    const preload = join(root, 'late-observation.mjs');
+    await writeFile(preload, `import fs from 'node:fs/promises';
+import childProcess from 'node:child_process';
+import { syncBuiltinESMExports } from 'node:module';
+import { join } from 'node:path';
+const schedule = globalThis.setTimeout;
+let delayNextTerminal = true;
+globalThis.setTimeout = (callback, delay, ...args) => {
+  if (delayNextTerminal && delay >= 4000 && delay <= 5000) {
+    delayNextTerminal = false;
+    return schedule(callback, delay + 700, ...args);
+  }
+  return schedule(callback, delay, ...args);
+};
+if (${JSON.stringify(late)} === 'temporary-file') {
+  const spawn = childProcess.spawn, readdir = fs.readdir;
+  childProcess.spawn = (...args) => {
+    const child = spawn(...args);
+    child.once('exit', () => schedule(() => { void fs.unlink(join(${JSON.stringify(output)}, 'tmp', 'late.tmp')); }, 5100));
+    return child;
+  };
+  let firstInventory = true;
+  fs.readdir = async (...args) => {
+    if (firstInventory && args[0] === join(${JSON.stringify(output)}, 'tmp')) {
+      firstInventory = false;
+      await new Promise(accept => schedule(accept, 5300));
+    }
+    return readdir(...args);
+  };
+  syncBuiltinESMExports();
+}
+if (${JSON.stringify(late)} === 'process-census') {
+  const spawn = childProcess.spawn, spawnSync = childProcess.spawnSync;
+  let commandExited = false, delayFirstPostExit = true;
+  childProcess.spawn = (...args) => {
+    const child = spawn(...args);
+    child.once('exit', () => { commandExited = true; });
+    return child;
+  };
+  childProcess.spawnSync = (...args) => {
+    if (commandExited && delayFirstPostExit && args[0] === 'ps') {
+      delayFirstPostExit = false;
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 5100);
+    }
+    return spawnSync(...args);
+  };
+  syncBuiltinESMExports();
+}
+`);
+    const code = late === 'process'
+      ? `const{spawn}=require('node:child_process');const child=spawn(process.execPath,['-e','setTimeout(()=>process.exit(0),5300)'],{stdio:'ignore'});child.unref();setTimeout(()=>process.exit(0),100);`
+      : late === 'temporary-file'
+        ? `require('node:fs').writeFileSync(require('node:path').join(process.env.TMPDIR,'late.tmp'),'owned temporary bytes');`
+        : 'process.exit(0)';
+    const result = await launch(output, code, 40000, 0, process.execPath, preload).closed;
+    const receipt = JSON.parse(await readFile(join(output, 'receipt.json'), 'utf8'));
+    assert.equal(receipt.command.exitCode, 0);
+    assert.deepEqual(receipt.cleanup.terminal.owned, []);
+    assert.deepEqual(receipt.temporaryFiles.terminal, []);
+    assert.ok(receipt.cleanup.terminal.elapsedMs > receipt.durationMs + 5000);
+    if (late === 'process') {
+      assert.ok(receipt.cleanup.first.owned.length > 0);
+      assert.equal(receipt.memory.samples.some((sample: { elapsedMs: number; ownedCount: number; error: string | null }) =>
+        sample.elapsedMs >= receipt.durationMs && sample.elapsedMs <= receipt.durationMs + 5000 && sample.error === null && sample.ownedCount === 0), false);
+    } else {
+      assert.deepEqual(receipt.cleanup.first.owned, []);
+      assert.deepEqual(receipt.temporaryFiles.first, []);
+    }
+    assert.equal(result.code, 2, 'Clean observations obtained only after the deadline must not pass');
+    assert.equal(receipt.cleanup.passed, false);
+    assert.equal(receipt.outcome, 'failed');
+    assert.deepEqual(receipt.interventions, []);
+    if (late === 'process') {
+      assert.equal(receipt.cleanup.processCleanByCutoff, false);
+      assert.equal(receipt.cleanup.temporaryFilesCleanByCutoff, true);
+    }
+    if (late === 'temporary-file') {
+      assert.ok(receipt.temporaryFiles.firstCompletedAtMs > receipt.durationMs + 5000);
+      assert.equal(receipt.cleanup.processCleanByCutoff, true);
+      assert.equal(receipt.cleanup.temporaryFilesCleanByCutoff, false);
+    }
+    if (late === 'process-census') {
+      assert.ok(receipt.cleanup.first.elapsedMs <= receipt.durationMs + 5000);
+      assert.ok(receipt.cleanup.first.completedAtMs > receipt.durationMs + 5000);
+      assert.equal(receipt.cleanup.processCleanByCutoff, false);
+    }
+  });
+}
+
 test('native measurement records real descendant RSS and distinct cleanup censuses without changing user files', { timeout: 20000 }, async () => {
   await withSentinel(async () => {
     const root = await workspace(); const output = join(root, 'measurement');

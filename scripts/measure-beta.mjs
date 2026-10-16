@@ -102,6 +102,7 @@ export async function measureCommand(options) {
   let recordedLogBytes = 0, outputTruncated = false, peakRssBytes = 0;
   let child, processGroup, first, terminal, firstTemporaryFiles = [], terminalTemporaryFiles = [];
   let firstTemporaryCensus, temporaryCensusFailed = false;
+  let firstTemporaryCompletedAtMs, terminalTemporaryCompletedAtMs;
   let exitAtMs, closedAtMs, stopAtMs, stopReason, exitCode = null, exitSignal = null, launchFailed = false;
   let watchdog, polling, terminalTimer, killTimer;
   let terminalReady;
@@ -127,9 +128,10 @@ export async function measureCommand(options) {
     const census = { kind, at: new Date().toISOString(), elapsedMs: elapsed(), owned: [], error: null };
     try { census.owned = ownRows(processSnapshot()); }
     catch (error) { census.error = error.code ?? 'CENSUS_FAILED'; if (!measurementErrors.includes(census.error)) measurementErrors.push(census.error); }
+    census.completedAtMs = elapsed();
     census.rssBytes = census.owned.reduce((total, row) => total + row.rssBytes, 0);
     peakRssBytes = Math.max(peakRssBytes, census.rssBytes);
-    if (samples.length < MAX_SAMPLES) samples.push({ elapsedMs: census.elapsedMs, rssBytes: census.rssBytes, ownedCount: census.owned.length, error: census.error });
+    if (samples.length < MAX_SAMPLES) samples.push({ elapsedMs: census.elapsedMs, completedAtMs: census.completedAtMs, rssBytes: census.rssBytes, ownedCount: census.owned.length, error: census.error });
     else if (!measurementErrors.includes('SAMPLE_LIMIT')) measurementErrors.push('SAMPLE_LIMIT');
     return census;
   }
@@ -161,8 +163,10 @@ export async function measureCommand(options) {
   }
   function recordFirstCensus(kind = 'first-post-exit') {
     first = sample(kind);
-    firstTemporaryCensus = temporaryInventory(scratch).then(entries => { firstTemporaryFiles = entries; }, error => {
-      temporaryCensusFailed = true; measurementErrors.push(error.code ?? 'TEMP_INVENTORY_FAILED');
+    firstTemporaryCensus = temporaryInventory(scratch).then(entries => {
+      firstTemporaryFiles = entries; firstTemporaryCompletedAtMs = elapsed();
+    }, error => {
+      firstTemporaryCompletedAtMs = elapsed(); temporaryCensusFailed = true; measurementErrors.push(error.code ?? 'TEMP_INVENTORY_FAILED');
     });
   }
   function stop(reason) {
@@ -213,6 +217,7 @@ export async function measureCommand(options) {
     clearInterval(polling); clearTimeout(watchdog); clearTimeout(killTimer);
     try { terminalTemporaryFiles = await temporaryInventory(scratch); }
     catch (error) { temporaryCensusFailed = true; measurementErrors.push(error.code ?? 'TEMP_INVENTORY_FAILED'); }
+    terminalTemporaryCompletedAtMs = elapsed();
     // The fixed-cutoff census above is immutable. Later emergency cleanup
     // cannot turn a missed cleanup criterion into a successful observation.
     let afterIntervention;
@@ -228,7 +233,10 @@ export async function measureCommand(options) {
     if (closedAtMs === undefined) { measurementErrors.push('COMMAND_STREAMS_OPEN'); child.stdout.destroy(); child.stderr.destroy(); }
     if (!terminalTemporaryFiles.length && !temporaryCensusFailed) await rmdir(scratch);
     const cleanupDeadline = stopAtMs === undefined ? exitAtMs + NORMAL_CLEANUP_MS : stopAtMs + STOP_CLEANUP_MS;
-    const cleanupPassed = first !== undefined && first.error === null && terminal.error === null && terminal.elapsedMs >= cleanupDeadline && terminal.owned.length === 0 && terminalTemporaryFiles.length === 0 && !temporaryCensusFailed;
+    const processCleanByCutoff = samples.some(point => point.elapsedMs >= exitAtMs && point.completedAtMs <= cleanupDeadline && point.error === null && point.ownedCount === 0);
+    const temporaryFilesCleanByCutoff = [[firstTemporaryFiles, firstTemporaryCompletedAtMs], [terminalTemporaryFiles, terminalTemporaryCompletedAtMs]]
+      .some(([entries, completedAtMs]) => entries.length === 0 && completedAtMs >= exitAtMs && completedAtMs <= cleanupDeadline);
+    const cleanupPassed = first !== undefined && first.error === null && terminal.error === null && terminal.elapsedMs >= cleanupDeadline && terminal.owned.length === 0 && terminalTemporaryFiles.length === 0 && !temporaryCensusFailed && processCleanByCutoff && temporaryFilesCleanByCutoff;
     const commandPassed = !launchFailed && exitCode === options.expectedExit && exitSignal === null;
     const outcome = stopReason === 'owner-cancelled' ? 'cancelled' : !stopReason && commandPassed && cleanupPassed && !outputTruncated && !measurementErrors.length ? 'completed' : 'failed';
     const artifacts = [];
@@ -245,8 +253,8 @@ export async function measureCommand(options) {
       limits: { watchdogMs: options.timeoutMs, sampleMs: SAMPLE_MS, normalCleanupMs: NORMAL_CLEANUP_MS, stoppedCleanupMs: STOP_CLEANUP_MS, killAfterMs: KILL_AFTER_MS, combinedLogBytes: LOG_LIMIT },
       memory: { peakRssBytes, method: '100 ms sampled sum of owned process RSS; approximate, may count shared pages more than once; not a kernel/cgroup peak; supervisor excluded', samples },
       processes: { processGroup: processGroup ?? null, observed: [...observed.values()], method: 'Dedicated process group plus observed descendants and PID/start-time matching; short-lived escaped processes may be missed' },
-      cleanup: { passed: cleanupPassed, first: first ?? null, terminal, afterIntervention: afterIntervention ?? null },
-      temporaryFiles: { scope: 'Command TMPDIR only; product-specific profile/output cleanup needs its own evidence', first: firstTemporaryFiles, terminal: terminalTemporaryFiles, directoryRemoved: terminalTemporaryFiles.length === 0 && !temporaryCensusFailed },
+      cleanup: { passed: cleanupPassed, cutoffAtMs: cleanupDeadline, processCleanByCutoff, temporaryFilesCleanByCutoff, first: first ?? null, terminal, afterIntervention: afterIntervention ?? null },
+      temporaryFiles: { scope: 'Command TMPDIR only; product-specific profile/output cleanup needs its own evidence', first: firstTemporaryFiles, firstCompletedAtMs: firstTemporaryCompletedAtMs ?? null, terminal: terminalTemporaryFiles, terminalCompletedAtMs: terminalTemporaryCompletedAtMs, directoryRemoved: terminalTemporaryFiles.length === 0 && !temporaryCensusFailed },
       interventions, measurementErrors, logs: { receivedBytes: logBytes, truncated: outputTruncated, privacy: 'Bounded output of the explicitly supplied trusted command; not a general secret-redaction guarantee', artifacts },
       claims: 'Command execution and sampled native resource/cleanup evidence only. A matching exit code is not proof of the product behavioral assertion or fresh-environment portability.',
     };
