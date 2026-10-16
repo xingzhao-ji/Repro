@@ -1,4 +1,10 @@
-# Current work — htmx teardown instrumented; cleanup causes unresolved
+# Current work — unsafe startup deletion guarded; cleanup acceptance still fails
+
+Continuation from verified `bcc67d2` / `3e1b2b7` is on `task/startup-cleanup-ownership`. Commit `51ee29a` fixes a deterministic unsafe-deletion path: rejected browser launch could remove a profile while a controlled real owner could still write it. The adapter now retains profiles when failed launch provides no shutdown acknowledgment. Deadlines, security controls, ownership checks and existing cleanup assertions are unchanged. This is a partial safety repair, not completed cleanup.
+
+Fresh results: new regressions 5/5 after two intended red failures; ordinary tests 322/323; affected browser tests 13/15 with diagnostics disabled; types/lint/build/kit passed. The three remaining failures require profile removal after failed launch; profiles and failed logs are preserved. No fresh acceptance cohort ran because these prerequisite checks failed. The missing per-launch completion boundary is an implementation gap, not a current service denial or permission hold. Original htmx repetition 15 remains separately unresolved; accessibility remains deferred/unverified. See [source evidence, results and remaining checks](evidence/STARTUP-CLEANUP-OWNERSHIP.md). Raw new evidence is under `.repro-runs/startup-cleanup-ownership/`; prior logs and profiles are unchanged.
+
+## Preserved htmx teardown checkpoint at 3e1b2b7
 
 Continuation from clean verified `1ecca68` is on `task/htmx-cleanup-investigation`; `bcc67d2` adds opt-in monotonic teardown and owned-process observations with regressions. The original failed fixed repetition 15, its profile, and all prior logs remain preserved. Budgets/security/acceptance criteria are unchanged. Accessibility remains deferred/unverified. No release, merge, push, container operation, denied-route retry or completion claim occurred.
 
