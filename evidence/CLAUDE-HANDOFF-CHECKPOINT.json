@@ -1,0 +1,171 @@
+{
+  "schemaVersion": 1,
+  "recordedAt": "2026-10-16T23:27:31.749272+00:00",
+  "status": "safe-partial-Claude-handoff",
+  "reason": "Owner requested handoff; finish the already-running Linux case and start no further implementation or verification cohorts.",
+  "source": {
+    "branch": "task/startup-owner-boundary",
+    "preHandoffCommit": "f72c722edce05f34837e8df3b524f991ae8313d1",
+    "testedImplementationCommit": "9aec7fe8d8513a30da30705b0619072a6c056302",
+    "remote": "https://github.com/xingzhao-ji/Repro",
+    "remotePrivate": true,
+    "remoteMainBeforePush": "88fedc530152b786fdb8ac76a867ddbcd8229201",
+    "unpublishedCommitsBeforeHandoff": 22,
+    "publication": "Current branch commit/push authorized. Final SHA and remote readback are recorded after commit in the delivery manifest; this receipt does not claim publication by itself."
+  },
+  "prerequisites": {
+    "ordinaryPassed": 382,
+    "ordinaryTotal": 382,
+    "selectedFunctionalBrowserPassed": 50,
+    "selectedFunctionalBrowserTotal": 50,
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "kit": "passed",
+    "receipt": {
+      "path": "evidence/startup-cleanup-verification.json",
+      "bytes": 3639,
+      "sha256": "6d6bfd38f7f03a40b57b4e5dfe9b77c4ca16e922c0afbd1cfdd9b2e3d6b7ce6a"
+    }
+  },
+  "native": {
+    "packageSmokeCommands": 15,
+    "installedSchema3V1": {
+      "passed": 4,
+      "failed": 1,
+      "unattempted": 13,
+      "reason": "Reporter-format mismatch; preserved"
+    },
+    "installedSchema3V2Passed": 18,
+    "workflowMeasurements": 15,
+    "workflowExecutions": 30,
+    "stabilityPassed": 120,
+    "independentAuditRunIds": 150,
+    "frozenInputs": 132,
+    "auditedRecords": 854,
+    "receipt": {
+      "path": "evidence/startup-cleanup-native-acceptance.json",
+      "bytes": 12583,
+      "sha256": "94ff5613ea096576ebe4b2e5a2f9220be778e9af5d77fef5106d333db40137f9"
+    }
+  },
+  "linux": {
+    "cases": [
+      {
+        "case": "morphdom-textarea",
+        "status": "passed",
+        "operations": 44,
+        "actualExecutions": 49,
+        "readableTests": 40,
+        "maximumKernelPeakBytes": 363134976,
+        "summary": {
+          "path": ".repro-runs/startup-repair-20261016/acceptance-v1/linux-arm64/morphdom-textarea/summary.json",
+          "bytes": 31882,
+          "sha256": "202c67a308fd4f80ef60a091901ef21e0f905d788658a29bdb0f97cc2cf8c712"
+        }
+      },
+      {
+        "case": "htmx-checkbox",
+        "status": "passed",
+        "operations": 44,
+        "actualExecutions": 46,
+        "readableTests": 40,
+        "maximumKernelPeakBytes": 429580288,
+        "summary": {
+          "path": ".repro-runs/startup-repair-20261016/acceptance-v1/linux-arm64/htmx-checkbox/summary.json",
+          "bytes": 34696,
+          "sha256": "1e232d2e5a2910047d7c6b672455e1366800ab1b4edd15a468e6fb57229a4a9e"
+        }
+      }
+    ],
+    "completedOperations": 88,
+    "actualExecutions": 95,
+    "readableTests": 80,
+    "fullPlannedOperations": 132,
+    "unrunCase": "marked-empty-heading",
+    "unrunOperations": 44,
+    "fullLinuxAcceptance": false,
+    "partialAudit": {
+      "path": ".repro-runs/startup-repair-20261016/acceptance-v1/audit-handoff-partial-v1.json",
+      "bytes": 1202392,
+      "sha256": "45a3d47bb839e017a8f497ced9f58d6a789fa0950f2c85117c938fece531cc8e"
+    },
+    "partialAuditRecords": 4575,
+    "partialAuditContainers": 88,
+    "daemonId": "ad0afe52-788a-48f2-ba68-4ae79926c51b",
+    "policySha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+    "isolation": {
+      "path": ".repro-runs/startup-repair-20261016/acceptance-v1/vm-e/isolation.json",
+      "bytes": 26391,
+      "sha256": "02b16c1d2758c4af7b5841a4d0db68b04c29fa7c362866cf4d4c4f7d9726da95"
+    }
+  },
+  "resources": {
+    "profile": "e",
+    "state": "Stopped",
+    "terminalContainers": [],
+    "terminalVolumes": [],
+    "originalHostagentPid": 58483,
+    "originalProcess": "absent",
+    "dockerSocket": "absent",
+    "disksRetained": [
+      {
+        "path": ".repro-cache/pb/l/colima-e/disk",
+        "device": 16777231,
+        "inode": 66917556,
+        "bytes": 8589934592,
+        "mode": "0o644",
+        "mtimeNs": 1792192989043359997
+      },
+      {
+        "path": ".repro-cache/pb/l/_disks/colima-e/datadisk",
+        "device": 16777231,
+        "inode": 66917656,
+        "bytes": 12884901888,
+        "mode": "0o644",
+        "mtimeNs": 1792192988969057288
+      }
+    ],
+    "imagesRetainedInDataDisk": [
+      "sha256:4db36457f406501e6f608802e5da617e5fbd0e80b75901b6a09de1ae5a667d32"
+    ],
+    "terminalReceipt": {
+      "path": ".repro-runs/startup-repair-20261016/acceptance-v1/vm-e/handoff-terminal-daemon.json",
+      "bytes": 7146,
+      "sha256": "00dafa71c3378729eec5b73e01b01663b35f183a85f6193b954e2efaf4efabdc"
+    },
+    "firstStopVerification": {
+      "path": ".repro-runs/startup-repair-20261016/acceptance-v1/vm-e/handoff-stop-verification.json",
+      "bytes": 15187,
+      "sha256": "c0ddc72d94b43d7b9a3325dd73a90888fb1500d91f84059ec6c144b56d609d55"
+    },
+    "firstStopVerificationOutcome": "Stop exited0, Lima Stopped, originalPID absent; checker rejected Docker JSON empty-string unavailable-endpoint stdout. Failed receipt preserved.",
+    "resolution": {
+      "path": ".repro-runs/startup-repair-20261016/acceptance-v1/vm-e/handoff-stop-resolution.json",
+      "bytes": 17441,
+      "sha256": "43c20d37b40c7e1e625337aef077ded564b5a7d32f58678f42bedafa4bb9fd80"
+    },
+    "resolutionOutcome": "Read-only checks confirm stopped VM, absent original process/socket and retained disks. No repeated stop.",
+    "excludedFromShutdown": "Task-local shared usernet; no manual signals or shared-service shutdown."
+  },
+  "remaining": {
+    "originalHtmxShutdownCause": "unresolved",
+    "freshMarkedLinux": "intentionally unrun for handoff",
+    "accessibility": "8 focused or mixed browser scenarios plus native zoom and actual screen-reader workflows deferred/unverified",
+    "historicalDeniedBrowserRoute": "not retried",
+    "fullPracticalBetaAcceptance": false,
+    "deploymentClaimed": false
+  },
+  "preservation": {
+    "rawRoot": ".repro-runs/startup-repair-20261016/",
+    "historicalFailureProfile": ".repro-runs/readable-fixed/202a6e1c-caea-4f7b-a079-1b087e7dd846/.profile",
+    "originalHtmxStageAnalysis": {
+      "path": ".repro-runs/startup-repair-20261016/htmx-stage-v1/initial-v1-stage-analysis.json",
+      "bytes": 17267,
+      "sha256": "f692b7438d86dcaf8c8bf435fadd207ec8c017d9bac1886e358a062bb7044df3"
+    },
+    "allHistoricalFailures": "preserved",
+    "gameSession": "out of scope and untouched",
+    "transfer": "Source Git tree plus explicitly reviewed companion evidence only. Credentials, profiles, cache, VM disks, dependencies and Git internals remain local."
+  }
+}

@@ -1,3 +1,17 @@
+# Current work — Claude handoff at a safe partial Linux checkpoint
+
+October 16, 2026. The owner changed priority to transferring Repro to Claude and authorized committing/pushing the current branch to the existing private GitHub repository. After the already-running htmx Linux case finished, no new implementation or test cohort started. See [the self-contained handoff](CLAUDE_HANDOFF.md), [takeover prompt](CLAUDE_TAKEOVER_PROMPT.md), and [exact checkpoint receipt](evidence/CLAUDE-HANDOFF-CHECKPOINT.json). Final publication SHA/readback is recorded separately in the delivery manifest after this commit; no main merge, force push, visibility change or deployment is authorized.
+
+The preserved implementation is `9aec7fe`, with native acceptance recorded at `f72c722`: 382/382 ordinary and 50/50 selected functional browser tests; types/lint/build/kit; 15 package smoke commands; 18/18 installed schema-3 v2 operations; 30 native workflow executions and 120/120 native stability runs. Earlier failed cohorts and retained profiles remain intact. These are retained results, not fresh executions after the documentation-only handoff.
+
+The owner explicitly approved isolated Repro Colima profile `e`, including automatic guest SSH host-key generation, after the historical approval-pending section below. Fresh Linux morphdom and htmx each passed 44 operations, totaling **88 operations /95 distinct executions /80 readable stability tests**. Independent read-only partial audit found no discrepancies across 88 containers and 4,575 immutable file records. **Marked's 44 operations remain unrun by the handoff priority change**; full fresh Linux and practical-beta acceptance remain incomplete. The older profile-d cohort cannot fill this gap.
+
+Only profile `e` was stopped after exact ownership/birth/daemon and empty container/volume checks. Stop exited0; Lima reported Stopped and the original hostagent was absent. The first verifier then rejected Docker's JSON empty-string unavailable-endpoint response; that failure is preserved. A separate read-only resolution confirmed stopped status, absent original process and Docker socket, and retained root/data disks. No stop was repeated. Task-local shared usernet was excluded from manual shutdown. No game-session resource or shared service was touched.
+
+Original native htmx shutdown cause remains unresolved; later passing runs are not a causal repair. Eight accessibility-focused or mixed browser scenarios, native zoom and actual screen-reader evaluation remain deferred/unverified. The historical denied browser route remains untried. All acceptance/security thresholds are unchanged. The handoff bundle includes only reviewed source/docs and explicitly listed evidence; profiles, credentials, caches and VM disks stay local.
+
+## Preserved native acceptance checkpoint
+
 # Current work — startup repair and fresh native acceptance passed
 
 October 16, 2026. Implementation commit `9aec7fe` on `task/startup-owner-boundary` repairs the original three cleanup assertions while retaining profiles whenever completion cannot be certified. The fixed worker requires sealed execution and actual timely natural completion; acquired browser contexts also require a fresh supported close acknowledgment. This is trusted pinned-browser lifecycle handling, not arbitrary native descendant containment. All previous work, failures and retained profiles remain preserved.
