@@ -2,7 +2,7 @@
 
 Repro records a registered synthetic browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench uses the same real runner as the CLI. The buggy and fixed search implementations are evaluated with the same frozen expected behavior in fresh browser state.
 
-This is a local synthetic alpha release candidate. Native Chromium replay and the trusted Linux arm64 capsule pass with the exact explicitly approved container policy. Native 200% Chrome zoom and actual screen-reader usability remain unverified. See [release evidence](evidence/RELEASE.md) for actual checks and open gates. Arbitrary websites, real-user recording, PostgreSQL adapters, historical-bug validation and public execution are outside this version's supported scope.
+This is a local synthetic alpha. Recorded native Chromium replay and trusted Linux arm64 capsule checks passed with the exact explicitly approved container policy. The owner has deferred native 200% Chrome zoom and actual screen-reader verification for this milestone; both remain unverified. See [release evidence](evidence/RELEASE.md) for actual results and limits. Arbitrary websites, real-user recording, PostgreSQL adapters, historical-bug validation and public execution are outside this version's supported scope.
 
 ## Run locally
 

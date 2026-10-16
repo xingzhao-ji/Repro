@@ -1,5 +1,7 @@
 # Release completion audit and remaining blockers
 
+Owner update, October 15, 2026: the remaining accessibility checks are deferred for the current local synthetic alpha milestone. The native-zoom and screen-reader conditions below remain unverified, but are no longer current-milestone blockers. The original denial and its restrictions remain in force. [Current acceptance scope](../docs/ACCEPTANCE.md).
+
 Subsequent audit correction: [package input provenance](PACKAGE-INPUT-PROVENANCE.md) identifies and repairs an input-inventory omission missed by this audit. Its fresh focused/unit/static results and retained runtime identities are separate. The report below remains the historical audit at its stated commit; its no-additional-work conclusion is superseded by that finding and repair.
 
 2026-10-15 UTC. The supported synthetic release candidate is implemented and delivered to the private repository. **Full completion remains unproven because native 200% zoom and actual screen-reader workflow are unverified.** A fresh independent R0–R10 audit identified no additional unfinished item in the currently supported release scope. It did not rerun expensive suites or grant human approval.

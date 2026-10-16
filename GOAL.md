@@ -1,6 +1,10 @@
 /goal
 Build Repro, a professionally engineered portable failure compiler, in this repository. Deliver a real local product, not a mock dashboard or an AI-generated marketing site. Use the accompanying assets, fixtures, specifications, and skills as the starting contract. This is a single launch instruction for an iterative engineering process, not a request to guess the final implementation in one pass.
 
+## Owner update — accessibility deferred, October 15, 2026
+
+The owner instructed: “lets ignore the accessibility part for now, /goal resume”. The remaining accessibility acceptance work, including native 200% zoom and actual screen-reader workflows, is deferred for the current local synthetic alpha milestone. Preserve these checks as unverified and the existing technical evidence as scoped observations; do not label them passed, remove accessibility behavior, retry denied routes or weaken protections. Continue all other authorized requirements. This prospective exception supersedes earlier instructions to keep the goal blocked solely on these checks; the original criteria and historical verdicts below remain preserved.
+
 ## Product outcome
 A developer working on a supported self-hostable web app records a failure, supplies an explicit expected behavior, and obtains a reduced, dependency-explicit capsule that reproduces the same failure on a clean supported machine. The same frozen assertion can evaluate a different application revision. Export conventional readable tests and a documented bundle; execution must not require a proprietary viewer or LLM.
 

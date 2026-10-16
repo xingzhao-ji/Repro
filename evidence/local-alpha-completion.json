@@ -1,0 +1,181 @@
+{
+  "checkedAt": "2026-10-16T00:44:22.330Z",
+  "auditedSourceBase": "f18d94ff00b0c76371e360f5f1c96a07730aabbc",
+  "classification": "owner-scoped local synthetic alpha acceptance audit; retained runtime evidence, no new runtime execution",
+  "ownerInstruction": "lets ignore the accessibility part for now, /goal resume",
+  "deferredUnverified": [
+    "Remaining accessibility acceptance including native 200% zoom",
+    "Actual screen-reader workflow"
+  ],
+  "applicability": "Accessibility deferral applies to the current local alpha milestone. Original criteria, historical failures and security restrictions remain preserved.",
+  "identities": {
+    "correctedCodeAndTests": 4,
+    "correctedSourceInventory": 32,
+    "originalRecordedInputs": 27,
+    "mainBuildArtifacts": 9,
+    "hciMaterials": 10,
+    "hciFidelityFiles": 6
+  },
+  "checkedLogs": [
+    {
+      "file": ".repro-runs/package-input-provenance/red.log",
+      "sha256": "86d9e93efca3f4523a11049e7752969637962318ad0386669e0e52d904b8ce4e",
+      "classification": "preserved expected regression failure"
+    },
+    {
+      "file": ".repro-runs/package-input-provenance/green.log",
+      "sha256": "2c8e9539e9f238753d338b4faa23c65386ffb350cf4a619a1b28d765af7cf314",
+      "classification": "retained successful execution"
+    },
+    {
+      "file": ".repro-runs/package-input-provenance/unit.log",
+      "sha256": "070727fe95a29f220b0617085846da10dd61af1f8a274d941aa2e97c24ecbf45",
+      "classification": "retained successful execution"
+    },
+    {
+      "file": ".repro-runs/package-input-provenance/typecheck.log",
+      "sha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4",
+      "classification": "retained successful execution"
+    },
+    {
+      "file": ".repro-runs/package-input-provenance/lint.log",
+      "sha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23",
+      "classification": "retained successful execution"
+    },
+    {
+      "file": ".repro-runs/package-input-provenance/syntax.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "classification": "retained successful execution"
+    },
+    {
+      "file": ".repro-runs/expectation-authoring/worktree/.repro-runs/expectation-authoring/final-unit.log",
+      "sha256": "883ec23b77d05aeb6975a7cad1f2dcb74adb607e40d6589d36916a40ce3dee1a",
+      "classification": "retained execution"
+    },
+    {
+      "file": ".repro-runs/expectation-authoring/worktree/.repro-runs/expectation-authoring/final-browser.log",
+      "sha256": "b1a1b900f296a50917196c78fcabc5755e9deb040caa9bc6381f34ebff57e580",
+      "classification": "retained execution"
+    },
+    {
+      "file": ".repro-runs/expectation-authoring/worktree/.repro-runs/expectation-authoring/final-typecheck.log",
+      "sha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4",
+      "classification": "retained execution"
+    },
+    {
+      "file": ".repro-runs/expectation-authoring/worktree/.repro-runs/expectation-authoring/final-lint.log",
+      "sha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23",
+      "classification": "retained execution"
+    },
+    {
+      "file": ".repro-runs/expectation-authoring/worktree/.repro-runs/expectation-authoring/build-final.log",
+      "sha256": "e72c7ae118b13edfce9f09d41f28217c3e90a948d924bbeb538157e981a0aee7",
+      "classification": "retained execution"
+    },
+    {
+      "file": ".repro-runs/expectation-authoring/worktree/.repro-runs/expectation-authoring/kit.log",
+      "sha256": "c29a85d014f544dd48ce8955dc36d17590a1eef36502bfa6b4f119dfcef3a5aa",
+      "classification": "retained execution"
+    }
+  ],
+  "mainUiLogHashMatches": true,
+  "recordedTests": {
+    "unitContract": 214,
+    "browser": 39,
+    "mainBuildUi": 8,
+    "failed": 0,
+    "skipped": 0,
+    "cancelled": 0,
+    "note": "Counts are distinct retained execution scopes and are not added. No suite was rerun for these document changes."
+  },
+  "changedTrackedFiles": [
+    "GOAL.md",
+    "README.md",
+    "STATE.md",
+    "docs/ACCEPTANCE.md",
+    "docs/DESIGN.md",
+    "evidence/RELEASE-BLOCKERS.md",
+    "evidence/RELEASE.md"
+  ],
+  "noExecutableChanges": true,
+  "forbiddenActionsPerformed": [],
+  "retainedLimitations": [
+    "One registered synthetic family; not arbitrary apps, manual capture, PostgreSQL or historical-bug effectiveness.",
+    "Minimality remains unverified when final neighbors are inconclusive.",
+    "Historical contrast pilot remains incomplete with 12 provisional measurements and 45 unattempted.",
+    "No participant findings, full accessibility validation, production readiness, public deployment, new Library upload or remote CI is claimed.",
+    "Historical handoff archives absent from this checkout are not reconstructed or claimed reverified."
+  ],
+  "independentReviews": [
+    {
+      "reviewer": "audit_current_release",
+      "kind": "software-agent source and retained-raw-evidence audit",
+      "gates": [
+        "R0",
+        "R1",
+        "R2",
+        "R3",
+        "R4",
+        "R6",
+        "R7",
+        "R8",
+        "R9"
+      ],
+      "blockingFindings": 0,
+      "checks": {
+        "uniquePackageAssertedRunIds": 12,
+        "packageObservationEntries": 13,
+        "acceptedReductionTrials": 3,
+        "acceptedTrialAssertions": 6,
+        "linuxPayloadFiles": 14,
+        "payloadLocationsCompared": 3,
+        "linuxPayloadHashComparisons": 42,
+        "linuxRunArtifactHashes": 6,
+        "postCloseCensusesWithZeroObservedSurvivors": 11,
+        "benchmarkBatches": 2,
+        "observationsPerBatch": 40,
+        "buggyPerBatch": 20,
+        "fixedPerBatch": 20,
+        "artifactHashesPerBatch": 120
+      },
+      "limits": "Retained executions revalidated; no fresh VM status or product test execution. Audit helpers initially misread a result wrapper, duplicated a run-id path, and requested a nonexistent VM-status log; transcript-only errors were not product failures."
+    },
+    {
+      "reviewer": "audit_ui_handoff_scope",
+      "kind": "software-agent source, retained evidence and screenshot audit",
+      "gates": [
+        "R5",
+        "R10"
+      ],
+      "blockingFindings": 0,
+      "documentationFinding": "Stale comparator-pending sentence in docs/DESIGN.md corrected to distinguish delivered technical adaptation from pending human-study freeze/evaluation.",
+      "checks": {
+        "materialHashes": 10,
+        "fidelityFileHashes": 6,
+        "browserPassesInRetainedLog": 39,
+        "mainUiPassesInRetainedLog": 8,
+        "openedScreenshots": 2
+      },
+      "limits": "No participants or actual assistive-technology observation; accessibility deferred by owner, not passed."
+    }
+  ],
+  "gateDisposition": {
+    "R0": "satisfied within documented synthetic local-alpha scope using retained evidence",
+    "R1": "satisfied within documented synthetic local-alpha scope using retained evidence",
+    "R2": "satisfied within documented synthetic local-alpha scope using retained evidence",
+    "R3": "satisfied within documented synthetic local-alpha scope using retained evidence",
+    "R4": "satisfied within documented synthetic local-alpha scope using retained evidence",
+    "R6": "satisfied within documented synthetic local-alpha scope using retained evidence",
+    "R7": "satisfied within documented synthetic local-alpha scope using retained evidence",
+    "R8": "satisfied within documented synthetic local-alpha scope using retained evidence",
+    "R5": "Functional UI evidence satisfied; remaining accessibility owner-deferred/unverified",
+    "R9": "Evidence prepared; exact final source delivery confirmed by post-commit receipt",
+    "R10": "Design/research preparation satisfied; remaining accessibility owner-deferred; human study separately scoped"
+  },
+  "documentationReview": {
+    "reviewer": "audit_ui_handoff_scope",
+    "scope": "Actual owner-deferral documentation diff and both completion audit files",
+    "acceptanceOrHistoryFindings": 0,
+    "temporalFinding": "Delivery receipt directory did not exist during review. Text now describes post-commit receipts prospectively; final delivery must be verified before goal completion."
+  }
+}

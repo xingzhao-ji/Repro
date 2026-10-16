@@ -1,4 +1,12 @@
-# Current state — release blocked on accessibility capabilities
+# Current state — local alpha verified with accessibility deferred
+
+The owner instructed “lets ignore the accessibility part for now, /goal resume”. That prospective scope change supersedes the accessibility-only blocked state below. The original native-zoom and screen-reader criteria remain deferred/unverified; do not mark them passed or retry the denied route. [Current completion audit](evidence/LOCAL-ALPHA-COMPLETION.md) maps R0–R10 to actual evidence and the explicit exception. All other supported local-alpha requirements were independently audited with no remaining blocker.
+
+This increment changes only goal/acceptance, README, design and evidence/state documentation. Current code and artifact identities still match the reviewed inventory correction, 214-unit result, 39-browser result, installed package and Linux payload. Those are retained results, not fresh executions. The bounded comparator is delivered; human-study freeze/evaluation, broad app support and pending diagnostics remain separately scoped. Historical failures and absent handoff material are preserved as disclosed.
+
+Root owns final integration. The audited implementation baseline is `f18d94ff00b0c76371e360f5f1c96a07730aabbc`; `task/defer-accessibility` contains this owner-directed documentation update. Final commit, private origin/main readback and scanned source archive identities are recorded after commit under `.repro-runs/accessibility-deferred/delivery/`; verify those receipts for delivery status. No runtime deployment, new package/image, remote CI or Library upload is implied. Keep the retained worktree and all useful excluded evidence. Future accessibility work requires the owner's decision to resume it and legitimate supported operation/observation, not another automatic capability-poll loop.
+
+## Preserved blocked checkpoint
 
 The resumed goal reached the blocked threshold after three consecutive goal turns with the same unavailable native-browser and screen-reader capabilities. The first turn also repaired and delivered the package-input guard; the next two read-only inventories confirmed no capability change. The preceding continuation was no progress, not a live-process wait. Independent reviews are complete, with no remaining actionable finding. No denied navigation, tests, builds or diagnostics were repeated during the final two checks. Resume only after legitimate tool access changes; the goal is not complete.
 

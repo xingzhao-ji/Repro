@@ -1,5 +1,7 @@
 # Current release evidence
 
+The [owner-scoped local-alpha completion audit](LOCAL-ALPHA-COMPLETION.md) verifies the remaining supported milestone requirements. The owner has deferred the outstanding accessibility work for now; native 200% zoom and actual screen-reader workflows remain unverified. This documentation-only update changes no runtime bytes and claims no new test execution. Earlier blocked verdicts below are preserved historical states, superseded only for the current owner-directed acceptance scope.
+
 Development-script correction: [package input provenance](PACKAGE-INPUT-PROVENANCE.md) fixes omitted token/config inputs in both package checks. Fresh unit/contract count is **214/214**, plus typecheck/lint/syntax checks; product runtime bytes are unchanged. Browser/package/Linux results below are retained observations, not new runs. Native zoom and actual screen-reader checks remain open.
 
 The caller-declared expectation extension is verified: **204 unit/contract and 39 browser tests pass**, plus installed/offline package and a fresh restricted Linux replay. See [the current release supplement](AUTHORED-RELEASE.md), [machine-readable summary](authored-release-summary.json) and [HCI fidelity preparation](HCI-FIDELITY.md). Native zoom and actual screen-reader checks remain open.

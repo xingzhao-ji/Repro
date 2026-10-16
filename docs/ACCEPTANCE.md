@@ -1,5 +1,9 @@
 # Release gates
 
+## Current owner-directed scope
+
+On October 15, 2026, the owner deferred the remaining accessibility work for the current local synthetic alpha milestone. Native 200% zoom and actual screen-reader workflow remain **DEFERRED / UNVERIFIED**, not passing requirements. They no longer block this milestone; all other requirements below still apply. Existing keyboard, focus, contrast, reflow and semantic observations keep their original scope. The original R5/R10 criteria are retained for future accessibility work, and this exception authorizes no security bypass, participant work or deployment. See the owner update in [GOAL.md](../GOAL.md).
+
 ## R0 — kit and provenance
 Supplied synthetic checks pass. The agent identifies which files are starter assets versus product code and records package/runtime sources. Synthetic fixture human approval remains pending until actually confirmed; no fabricated human review. Local development may use the supplied synthetic specification as its explicit expectation basis, without labeling it human-approved. This does not authorize real-user assertion approval.
 
