@@ -35,7 +35,7 @@ test('container plan preserves the approved resource and security boundary witho
 });
 
 function receipt() {
-  const infrastructure = () => ({ init: { pid: 1, ppid: 0, pgid: 1, startTicks: 100, state: 'S', executable: '/sbin/docker-init' }, observer: { pid: 7, ppid: 1, pgid: 1, startTicks: 110, state: 'R' } });
+  const infrastructure = () => ({ init: { pid: 1, ppid: 0, pgid: 1, startTicks: 100, state: 'S', executable: '/sbin/docker-init', canonicalExecutable: '/sbin/docker-init' }, observer: { pid: 7, ppid: 1, pgid: 1, startTicks: 110, state: 'R' } });
   return { schemaVersion: 1, operation: 'readable-buggy', command: { exitCode: 1, exitSignal: null, launchFailed: false }, durationMs: 1500, stopReason: null, measurementErrors: [], logsTruncated: false, memory: { before: { peakBytes: 1000000, maxBytes: 1073741824, pidsMax: 128, cpuMax: '200000 100000', events: { oom: 0, oom_kill: 0 }, pidsEvents: { max: 0 } }, after: { peakBytes: 50000000, maxBytes: 1073741824, pidsMax: 128, cpuMax: '200000 100000', events: { oom: 0, oom_kill: 0 }, pidsEvents: { max: 0 } } }, cleanup: { initial: { elapsedMs: 0, owned: [], infrastructure: infrastructure() }, first: { elapsedMs: 1501, owned: [], infrastructure: infrastructure() }, terminal: { elapsedMs: 6502, owned: [], infrastructure: infrastructure() }, commandExitedAtMs: 1500, firstTemporaryFiles: [], firstProfiles: [], firstInventoryAtMs: 1505, temporaryFiles: [], profiles: [], terminalInventoryAtMs: 6505 } };
 }
 
@@ -45,6 +45,9 @@ test('receipt requires verified stable init and observer identities in every cen
   const mutations = [
     (value: ReturnType<typeof receipt>) => { Reflect.deleteProperty(value.cleanup.initial, 'infrastructure'); },
     (value: ReturnType<typeof receipt>) => { value.cleanup.first.infrastructure.init.executable = '/usr/local/bin/node'; },
+    (value: ReturnType<typeof receipt>) => { Reflect.deleteProperty(value.cleanup.first.infrastructure.init, 'canonicalExecutable'); },
+    (value: ReturnType<typeof receipt>) => { value.cleanup.first.infrastructure.init.canonicalExecutable = '/usr/sbin/docker-init'; },
+    (value: ReturnType<typeof receipt>) => { value.cleanup.first.infrastructure.init.canonicalExecutable = value.cleanup.first.infrastructure.init.executable = '/usr/sbin/docker-init'; },
     (value: ReturnType<typeof receipt>) => { value.cleanup.terminal.infrastructure.init.startTicks++; },
     (value: ReturnType<typeof receipt>) => { value.cleanup.terminal.infrastructure.observer.startTicks++; },
     (value: ReturnType<typeof receipt>) => { value.cleanup.terminal.infrastructure.observer.ppid = 8; },
@@ -55,6 +58,15 @@ test('receipt requires verified stable init and observer identities in every cen
     const value = receipt(); mutate(value);
     assert.ok(driver.receiptProblems(value, operation).includes('CENSUS_INFRASTRUCTURE'), 'Unverified or changed infrastructure cannot be silently excluded.');
   }
+});
+
+test('receipts accept a stable canonical merged usr init and reject an arbitrary canonical executable', () => {
+  const operation = { name: 'readable-buggy', expectedExit: 1, maximumMs: 30000 };
+  const value = receipt();
+  for (const point of [value.cleanup.initial, value.cleanup.first, value.cleanup.terminal]) point.infrastructure.init.executable = point.infrastructure.init.canonicalExecutable = '/usr/sbin/docker-init';
+  assert.deepEqual(driver.receiptProblems(value, operation), []);
+  for (const point of [value.cleanup.initial, value.cleanup.first, value.cleanup.terminal]) point.infrastructure.init.executable = point.infrastructure.init.canonicalExecutable = '/usr/local/bin/node';
+  assert.ok(driver.receiptProblems(value, operation).includes('CENSUS_INFRASTRUCTURE'));
 });
 
 test('kernel and cleanup gates reject missing, forced, over-budget and infrastructure evidence', () => {

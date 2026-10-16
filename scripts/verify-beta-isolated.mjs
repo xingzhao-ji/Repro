@@ -70,7 +70,9 @@ export function receiptProblems(receipt, operation) {
   const same = (left, right) => left && right && ['pid', 'ppid', 'pgid', 'startTicks'].every(key => left[key] === right[key]);
   const verifiedInfrastructure = point => {
     const current = point?.infrastructure;
-    return identity(current?.init) && current.init.pid === 1 && current.init.ppid === 0 && current.init.executable === '/sbin/docker-init'
+    return identity(current?.init) && current.init.pid === 1 && current.init.ppid === 0
+      && ['/sbin/docker-init', '/usr/sbin/docker-init'].includes(current.init.canonicalExecutable) && current.init.executable === current.init.canonicalExecutable
+      && current.init.executable === infrastructure?.init?.executable && current.init.canonicalExecutable === infrastructure?.init?.canonicalExecutable
       && identity(current?.observer) && current.observer.pid > 1 && current.observer.ppid === 1
       && same(current.init, infrastructure?.init) && same(current.observer, infrastructure?.observer);
   };
@@ -115,42 +117,70 @@ export function runEvidenceProblems(manifest, result, revision, trusted) {
 
 /** Read every namespace process; exclude only the verified init and this observer. */
 export async function containerCensus(filesystem, processIdentity, expectedInfrastructure) {
-  const fail = () => { throw new Error('INIT_IDENTITY: The observer requires the unchanged Docker init parent and stable process identities.'); };
+  const fail = code => { throw Object.assign(new Error(`INIT_IDENTITY: ${code}. Inspect Docker init and namespace process identity under the unchanged controls before retrying.`), { code }); };
   const same = (left, right) => left && right && ['pid', 'ppid', 'pgid', 'startTicks'].every(key => left[key] === right[key]);
   const alive = row => row && !['Z', 'X', 'x'].includes(row.state);
-  const read = async pid => {
-    const raw = await filesystem.readFile(`/proc/${pid}/stat`, 'utf8');
-    if (!raw.startsWith(`${pid} (`) || raw.lastIndexOf(')') < 0) fail();
+  const read = async (pid, mayVanish = false) => {
+    let raw;
+    try { raw = await filesystem.readFile(`/proc/${pid}/stat`, 'utf8'); }
+    catch (error) { if (mayVanish && ['ENOENT', 'ESRCH'].includes(error.code)) return; fail('CENSUS_PROCESS_STAT_UNAVAILABLE'); }
+    if (!raw.startsWith(`${pid} (`) || raw.lastIndexOf(')') < 0) fail('CENSUS_PROCESS_STAT_INVALID');
     const fields = raw.slice(raw.lastIndexOf(')') + 2).trim().split(/\s+/);
     const row = { pid, ppid: Number(fields[1]), pgid: Number(fields[2]), startTicks: Number(fields[19]), state: fields[0] };
     if (![row.pid, row.ppid, row.pgid, row.startTicks].every(Number.isSafeInteger)
-      || row.pid <= 0 || row.ppid < 0 || row.pgid <= 0 || row.startTicks <= 0 || !/^[RSDZTWXxKPI]$/.test(row.state)) fail();
+      || row.pid <= 0 || row.ppid < 0 || row.pgid <= 0 || row.startTicks <= 0 || !/^[RSDZTWXxKPI]$/.test(row.state)) fail('CENSUS_PROCESS_STAT_INVALID');
     return row;
   };
-  if (!Number.isSafeInteger(processIdentity.pid) || processIdentity.pid <= 1 || processIdentity.ppid !== 1) fail();
-  const executable = await filesystem.readlink('/proc/1/exe');
+  const canonical = async () => {
+    let path;
+    try { path = await filesystem.realpath('/sbin/docker-init'); } catch { fail('CENSUS_INIT_CANONICAL_UNAVAILABLE'); }
+    if (!['/sbin/docker-init', '/usr/sbin/docker-init'].includes(path)) fail('CENSUS_INIT_CANONICAL_UNEXPECTED');
+    return path;
+  };
+  const actual = async () => {
+    try { return await filesystem.readlink('/proc/1/exe'); } catch { fail('CENSUS_INIT_EXECUTABLE_UNAVAILABLE'); }
+  };
+  if (!Number.isSafeInteger(processIdentity.pid) || processIdentity.pid <= 1 || processIdentity.ppid !== 1) fail('CENSUS_OBSERVER_PARENT');
+  const canonicalExecutable = await canonical(), executable = await actual();
   const firstInit = await read(1);
-  if (executable !== '/sbin/docker-init' || firstInit.ppid !== 0 || !alive(firstInit)) fail();
+  if (executable !== canonicalExecutable) fail('CENSUS_INIT_EXECUTABLE_MISMATCH');
+  if (firstInit.ppid !== 0 || !alive(firstInit)) fail('CENSUS_INIT_IDENTITY');
   const rows = [];
-  for (const name of await filesystem.readdir('/proc')) {
+  let names;
+  try { names = await filesystem.readdir('/proc'); } catch { fail('CENSUS_PROCESS_DIRECTORY_UNAVAILABLE'); }
+  for (const name of names) {
     if (!/^\d+$/.test(name)) continue;
-    try { rows.push(await read(Number(name))); }
-    catch (error) { if (error.code !== 'ENOENT' && error.code !== 'ESRCH') throw error; }
+    const row = await read(Number(name), true);
+    if (row) rows.push(row);
   }
-  const lastInit = await read(1), lastExecutable = await filesystem.readlink('/proc/1/exe');
+  const lastInit = await read(1), lastExecutable = await actual(), lastCanonical = await canonical();
   const init = rows.find(row => row.pid === 1), observer = rows.find(row => row.pid === processIdentity.pid);
-  if (!same(firstInit, init) || !same(firstInit, lastInit) || lastExecutable !== executable || !alive(init) || !alive(lastInit)
-    || !observer || observer.ppid !== processIdentity.ppid || !alive(observer)) fail();
-  const infrastructure = { init: { ...init, executable }, observer };
-  if (expectedInfrastructure && (!same(init, expectedInfrastructure.init) || executable !== expectedInfrastructure.init?.executable || !same(observer, expectedInfrastructure.observer))) fail();
+  if (!same(firstInit, init) || !same(firstInit, lastInit) || lastExecutable !== executable || lastCanonical !== canonicalExecutable || !alive(init) || !alive(lastInit)) fail('CENSUS_INIT_IDENTITY');
+  if (!observer || observer.ppid !== processIdentity.ppid || !alive(observer)) fail('CENSUS_OBSERVER_IDENTITY');
+  const infrastructure = { init: { ...init, executable, canonicalExecutable }, observer };
+  if (expectedInfrastructure && (!same(init, expectedInfrastructure.init) || executable !== expectedInfrastructure.init?.executable
+    || canonicalExecutable !== expectedInfrastructure.init?.canonicalExecutable || !same(observer, expectedInfrastructure.observer))) fail('CENSUS_INFRASTRUCTURE_CHANGED');
   return { infrastructure, owned: rows.filter(row => !same(row, init) && !same(row, observer)).sort((a, b) => a.pid - b.pid) };
+}
+
+/** Export only fixed diagnostic codes, never filesystem errors or arbitrary thrown values. */
+export function measurementFailureCode(error) {
+  return ['CENSUS_PROCESS_STAT_UNAVAILABLE', 'CENSUS_PROCESS_STAT_INVALID', 'CENSUS_INIT_CANONICAL_UNAVAILABLE',
+    'CENSUS_INIT_CANONICAL_UNEXPECTED', 'CENSUS_INIT_EXECUTABLE_UNAVAILABLE', 'CENSUS_OBSERVER_PARENT',
+    'CENSUS_INIT_EXECUTABLE_MISMATCH', 'CENSUS_INIT_IDENTITY', 'CENSUS_PROCESS_DIRECTORY_UNAVAILABLE',
+    'CENSUS_OBSERVER_IDENTITY', 'CENSUS_INFRASTRUCTURE_CHANGED'].includes(error?.code) ? error.code : 'MEASUREMENT_CAUSE_UNAVAILABLE';
+}
+
+/** Timers may fire early; only the monotonic clock establishes the absolute cutoff. */
+export async function waitUntilDeadline(deadline, now, delay) {
+  for (let remaining = deadline - now(); remaining > 0; remaining = deadline - now()) await delay(Math.ceil(remaining));
 }
 
 // This function is serialized verbatim, reviewed and hashed, then supplied as a Node argument.
 // It is a measurement supervisor, never an alternative oracle or capsule implementation.
 async function isolatedWorker() {
   const { spawn } = await import('node:child_process');
-  const { mkdir, readFile, readdir, readlink, lstat, writeFile, rmdir } = await import('node:fs/promises');
+  const { mkdir, readFile, readdir, readlink, realpath, lstat, writeFile, rmdir } = await import('node:fs/promises');
   const { join } = await import('node:path');
   const { performance } = await import('node:perf_hooks');
   const { createHash } = await import('node:crypto');
@@ -160,11 +190,12 @@ async function isolatedWorker() {
   const began = performance.now(), elapsed = () => performance.now() - began;
   const delay = ms => new Promise(accept => setTimeout(accept, ms));
   const errors = [], observed = new Map(), samples = [], interventions = [];
+  const measurementFailed = (phase, error) => { for (const code of [phase, measurementFailureCode(error)]) if (!errors.includes(code)) errors.push(code); };
   const scratch = '/tmp/repro-tmp', home = '/tmp/repro-home';
   await mkdir(scratch); await mkdir(home);
   let infrastructure;
   async function census() {
-    const snapshot = await containerCensus({ readdir, readFile, readlink }, { pid: process.pid, ppid: process.ppid }, infrastructure);
+    const snapshot = await containerCensus({ readdir, readFile, readlink, realpath }, { pid: process.pid, ppid: process.ppid }, infrastructure);
     infrastructure ??= snapshot.infrastructure;
     snapshot.owned.forEach(row => observed.set(`${row.pid}:${row.startTicks}`, row));
     return { elapsedMs: elapsed(), ...snapshot };
@@ -185,7 +216,7 @@ async function isolatedWorker() {
     return entries;
   }
   let before, after, initial, first, terminal, firstTemporaryFiles = [], firstProfiles = [], temporaryFiles = [], profiles = [], firstInventoryAtMs, terminalInventoryAtMs;
-  try { before = await kernel(); initial = await census(); } catch { errors.push('INITIAL_MEASUREMENT_UNAVAILABLE'); }
+  try { before = await kernel(); initial = await census(); } catch (error) { measurementFailed('INITIAL_MEASUREMENT_UNAVAILABLE', error); }
   if (operation.kind === 'capture') {
     const { getRegisteredCase } = await import('/work/dist/index.js');
     const selected = getRegisteredCase(operation.caseId);
@@ -221,7 +252,7 @@ async function isolatedWorker() {
   let pendingSample;
   const polling = setInterval(() => {
     if (pendingSample) return;
-    pendingSample = census().then(snapshot => { if (samples.length < 10000) samples.push(snapshot); else if (!errors.includes('SAMPLE_LIMIT')) errors.push('SAMPLE_LIMIT'); }).catch(() => { if (!errors.includes('CENSUS_UNAVAILABLE')) errors.push('CENSUS_UNAVAILABLE'); }).finally(() => { pendingSample = undefined; });
+    pendingSample = census().then(snapshot => { if (samples.length < 10000) samples.push(snapshot); else if (!errors.includes('SAMPLE_LIMIT')) errors.push('SAMPLE_LIMIT'); }).catch(error => measurementFailed('CENSUS_UNAVAILABLE', error)).finally(() => { pendingSample = undefined; });
   }, 100);
   child = spawn(process.execPath, args, { cwd: '/work', detached: true, stdio: ['ignore', 'pipe', 'pipe'], env: { PATH: '/usr/local/bin:/usr/bin:/bin', HOME: home, TMPDIR: scratch, PLAYWRIGHT_BROWSERS_PATH: '/opt/playwright', REPRO_REVISION: operation.revision } });
   group = child.pid;
@@ -240,9 +271,9 @@ async function isolatedWorker() {
     firstTemporaryFiles = await inventory('/tmp', '', local => local !== 'repro-tmp' && local !== 'repro-home');
     firstProfiles = await inventory(base, '', (local, name) => name === '.profile' || local.split('/').includes('.profile'));
     firstInventoryAtMs = elapsed();
-  } catch { errors.push('FIRST_CENSUS_UNAVAILABLE'); }
+  } catch (error) { measurementFailed('FIRST_CENSUS_UNAVAILABLE', error); }
   const deadline = (stopAtMs ?? commandExitedAtMs) + (stopReason ? 8000 : 5000);
-  await delay(Math.max(0, deadline - elapsed()));
+  await waitUntilDeadline(deadline, elapsed, delay);
   clearInterval(polling); await pendingSample;
   try {
     terminal = await census();
@@ -250,7 +281,7 @@ async function isolatedWorker() {
     profiles = await inventory(base, '', (local, name) => name === '.profile' || local.split('/').includes('.profile'));
     terminalInventoryAtMs = elapsed();
     after = await kernel();
-  } catch { errors.push('TERMINAL_MEASUREMENT_UNAVAILABLE'); }
+  } catch (error) { measurementFailed('TERMINAL_MEASUREMENT_UNAVAILABLE', error); }
   // Preserve the original failed census. Container removal is the final containment boundary.
   if (terminal?.owned.length) signal('SIGKILL');
   if (!temporaryFiles.length) { await rmdir(scratch); await rmdir(home); }
@@ -270,7 +301,7 @@ async function isolatedWorker() {
   process.exit(stopReason || errors.length || launchFailed || exitCode !== operation.expectedExit || logsTruncated || terminal?.owned.length || temporaryFiles.length || profiles.length ? 2 : 0);
 }
 
-export function workerSource() { return `${containerCensus.toString()}\n(${isolatedWorker.toString()})().catch(() => { console.error('OBSERVER_INCOMPLETE: Preserve this container receipt and inspect the approved environment before retrying.'); process.exitCode = 2; });\n`; }
+export function workerSource() { return `${containerCensus.toString()}\n${measurementFailureCode.toString()}\n${waitUntilDeadline.toString()}\n(${isolatedWorker.toString()})().catch(() => { console.error('OBSERVER_INCOMPLETE: Preserve this container receipt and inspect the approved environment before retrying.'); process.exitCode = 2; });\n`; }
 
 export function inspectProblems(inspect, volume, policyBytes) {
   const problems = [], config = inspect?.Config, host = inspect?.HostConfig;
