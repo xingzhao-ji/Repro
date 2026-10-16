@@ -109,6 +109,21 @@ test('late disappearance of profile and temporary files cannot pass the earlier 
   assert.ok(driver.receiptProblems(value, { name: 'readable-buggy', expectedExit: 1, maximumMs: 30000 }).includes('FILE_CLEANUP_CUTOFF_UNVERIFIED'));
 });
 
+const malformedReceipts: Array<[string, (value: ReturnType<typeof receipt>) => void]> = [
+  ['missing terminal timestamp', value => { Reflect.deleteProperty(value.cleanup.terminal, 'elapsedMs'); }],
+  ['text instead of a terminal timestamp', value => { Object.assign(value.cleanup.terminal, { elapsedMs: '6502' }); }],
+  ['missing initial timestamp', value => { Reflect.deleteProperty(value.cleanup.initial, 'elapsedMs'); }],
+  ['file inventory taken before command exit', value => { value.cleanup.firstInventoryAtMs = 1499; }],
+  ['text instead of kernel peak bytes', value => { Object.assign(value.memory.after, { peakBytes: '50000000' }); }],
+  ['decreasing kernel lifetime peak', value => { value.memory.before.peakBytes = 60000000; }],
+];
+for (const [name, mutate] of malformedReceipts) {
+  test(`receipt rejects ${name} without weakening the cleanup deadline`, () => {
+    const value = receipt(); mutate(value);
+    assert.notDeepEqual(driver.receiptProblems(value, { name: 'readable-buggy', expectedExit: 1, maximumMs: 30000 }), []);
+  });
+}
+
 test('prepare copies only the validated real capsule format and never needs Docker approval or execution', async () => {
   const root = `.repro-runs/beta-isolated-unit-${randomUUID()}`;
   const capsule = `${root}/capsule`;

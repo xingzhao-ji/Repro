@@ -56,24 +56,32 @@ export function receiptProblems(receipt, operation) {
   if (receipt.logsTruncated !== false) problems.push('LOGS_INCOMPLETE');
   for (const point of ['before', 'after']) {
     const memory = receipt.memory?.[point];
-    if (!memory || !(memory.peakBytes > 0 && memory.peakBytes <= MEMORY_LIMIT) || memory.maxBytes !== MEMORY_LIMIT || memory.pidsMax !== 128) problems.push('CGROUP_LIMITS');
-    const cpu = memory?.cpuMax?.split(' ').map(Number);
+    if (!memory || !Number.isSafeInteger(memory.peakBytes) || memory.peakBytes <= 0 || memory.peakBytes > MEMORY_LIMIT || memory.maxBytes !== MEMORY_LIMIT || memory.pidsMax !== 128) problems.push('CGROUP_LIMITS');
+    const cpu = typeof memory?.cpuMax === 'string' ? memory.cpuMax.split(' ').map(Number) : undefined;
     if (!cpu || cpu.length !== 2 || !cpu.every(Number.isFinite) || cpu[0] !== 2 * cpu[1] || cpu[1] <= 0) problems.push('CGROUP_CPU');
     if (memory?.events?.oom !== 0 || memory?.events?.oom_kill !== 0 || memory?.pidsEvents?.max !== 0) problems.push('CGROUP_DENIAL');
   }
+  if (receipt.memory?.after?.peakBytes < receipt.memory?.before?.peakBytes) problems.push('CGROUP_PEAK_REGRESSION');
   const cleanup = receipt.cleanup;
+  const timestamp = value => Number.isFinite(value) && value >= 0;
   if (!cleanup || !Array.isArray(cleanup.initial?.owned) || cleanup.initial.owned.length || !Array.isArray(cleanup.first?.owned) || !Array.isArray(cleanup.terminal?.owned)) problems.push('CENSUS_INCOMPLETE');
   else {
     if (cleanup.terminal.owned.length) problems.push('OWNED_SURVIVORS');
-    if (!Number.isFinite(cleanup.commandExitedAtMs) || cleanup.first.elapsedMs < cleanup.commandExitedAtMs || cleanup.terminal.elapsedMs - cleanup.commandExitedAtMs < 5000 || cleanup.terminal.elapsedMs <= cleanup.first.elapsedMs) problems.push('CENSUS_TIMING');
+    if (![cleanup.commandExitedAtMs, cleanup.initial.elapsedMs, cleanup.first.elapsedMs, cleanup.terminal.elapsedMs].every(timestamp)
+      || cleanup.initial.elapsedMs > cleanup.commandExitedAtMs || cleanup.first.elapsedMs < cleanup.commandExitedAtMs
+      || cleanup.terminal.elapsedMs - cleanup.commandExitedAtMs < 5000 || cleanup.terminal.elapsedMs <= cleanup.first.elapsedMs) problems.push('CENSUS_TIMING');
     const cutoff = cleanup.commandExitedAtMs + 5000;
-    const censuses = [cleanup.first, ...(receipt.processes?.samples ?? []), cleanup.terminal];
-    if (!censuses.some(point => point.elapsedMs >= cleanup.commandExitedAtMs && point.elapsedMs <= cutoff && Array.isArray(point.owned) && point.owned.length === 0)) problems.push('CLEANUP_CUTOFF_UNVERIFIED');
+    const censuses = [cleanup.first, ...(Array.isArray(receipt.processes?.samples) ? receipt.processes.samples : []), cleanup.terminal];
+    if (!censuses.some(point => timestamp(point?.elapsedMs) && point.elapsedMs >= cleanup.commandExitedAtMs && point.elapsedMs <= cutoff && Array.isArray(point.owned) && point.owned.length === 0)) problems.push('CLEANUP_CUTOFF_UNVERIFIED');
   }
   if (!Array.isArray(cleanup?.temporaryFiles) || cleanup.temporaryFiles.length || !Array.isArray(cleanup?.profiles) || cleanup.profiles.length) problems.push('TEMPORARY_SURVIVORS');
   const fileCutoff = cleanup?.commandExitedAtMs + 5000;
-  if (!(Array.isArray(cleanup?.firstTemporaryFiles) && !cleanup.firstTemporaryFiles.length && Array.isArray(cleanup.firstProfiles) && !cleanup.firstProfiles.length && cleanup.firstInventoryAtMs <= fileCutoff)
-    && !(Array.isArray(cleanup?.temporaryFiles) && !cleanup.temporaryFiles.length && Array.isArray(cleanup.profiles) && !cleanup.profiles.length && cleanup.terminalInventoryAtMs <= fileCutoff)) problems.push('FILE_CLEANUP_CUTOFF_UNVERIFIED');
+  const firstInventoryValid = timestamp(cleanup?.firstInventoryAtMs) && cleanup.firstInventoryAtMs >= cleanup.commandExitedAtMs && cleanup.firstInventoryAtMs >= cleanup.first?.elapsedMs;
+  const terminalInventoryValid = timestamp(cleanup?.terminalInventoryAtMs) && cleanup.terminalInventoryAtMs >= cleanup.commandExitedAtMs
+    && cleanup.terminalInventoryAtMs >= cleanup.terminal?.elapsedMs && cleanup.terminalInventoryAtMs >= cleanup.firstInventoryAtMs;
+  if (!firstInventoryValid || !terminalInventoryValid) problems.push('FILE_INVENTORY_TIMING');
+  if (!(firstInventoryValid && Array.isArray(cleanup?.firstTemporaryFiles) && !cleanup.firstTemporaryFiles.length && Array.isArray(cleanup.firstProfiles) && !cleanup.firstProfiles.length && cleanup.firstInventoryAtMs <= fileCutoff)
+    && !(terminalInventoryValid && Array.isArray(cleanup?.temporaryFiles) && !cleanup.temporaryFiles.length && Array.isArray(cleanup.profiles) && !cleanup.profiles.length && cleanup.terminalInventoryAtMs <= fileCutoff)) problems.push('FILE_CLEANUP_CUTOFF_UNVERIFIED');
   return [...new Set(problems)];
 }
 
@@ -345,15 +353,12 @@ export async function verifyIsolated(options) {
     if (!cleanup && cancelled) throw new DriverError('BETA_CANCELLED', 'Owner cancellation stopped this batch. Evidence is preserved.');
     if (!cleanup && performance.now() - began > plan.batchWatchdogMs) throw new DriverError('BETA_BATCH_TIMEOUT', 'The predeclared batch watchdog expired; preserve incomplete results.');
     const logBase = join(output, `${String(++sequence).padStart(3, '0')}-${name}`), chunks = { stdout: [], stderr: [] };
-    let total = 0, truncated = false, timedOut = false, signalSent = false;
+    let total = 0, truncated = false;
     const commandBegan = performance.now();
     const child = spawn('docker', args, { env: dockerEnvironment, shell: false, detached: true, stdio: ['ignore', 'pipe', 'pipe'] });
-    const signal = signal => { if (child.pid) { try { process.kill(-child.pid, signal); } catch (error) { if (error.code !== 'ESRCH') failures.push('DOCKER_CLIENT_SIGNAL'); } } };
-    const watchdog = setTimeout(() => { timedOut = true; signal('SIGTERM'); setTimeout(() => signal('SIGKILL'), 1000).unref(); }, maximumMs);
-    const cancelling = setInterval(() => { if (cancelled && !cleanup && !signalSent) { signalSent = true; signal('SIGTERM'); setTimeout(() => signal('SIGKILL'), 1000).unref(); } }, 100);
     for (const stream of ['stdout', 'stderr']) child[stream].on('data', bytes => { const keep = bytes.subarray(0, Math.max(0, 10 * 1024 * 1024 - total)); if (keep.length) { chunks[stream].push(keep); total += keep.length; } if (keep.length < bytes.length) truncated = true; });
-    const result = await new Promise(accept => { child.once('error', () => accept({ code: null, launchFailed: true })); child.once('close', (code, signal) => accept({ code, signal, launchFailed: false })); });
-    clearTimeout(watchdog); clearInterval(cancelling);
+    const result = await watchDockerClient(child, { maximumMs, isCancelled: () => cancelled, cleanup, onSignalError: () => failures.push('DOCKER_CLIENT_SIGNAL') });
+    const { timedOut, cancelled: signalSent } = result;
     const stdout = Buffer.concat(chunks.stdout), stderr = Buffer.concat(chunks.stderr), durationMs = performance.now() - commandBegan;
     await writeFile(`${logBase}.stdout.log`, stdout, { flag: 'wx', mode: 0o600 }); await writeFile(`${logBase}.stderr.log`, stderr, { flag: 'wx', mode: 0o600 });
     await writeJson(`${logBase}.json`, { command: args[0], argumentsSha256: hash(JSON.stringify(args)), ...result, durationMs, timedOut, cancelled: signalSent, truncated,
@@ -581,7 +586,7 @@ export async function verifyIsolated(options) {
     } catch { failures.push('CONTEXT_RECHECK_FAILED'); }
     process.removeListener('SIGTERM', cancel); process.removeListener('SIGINT', cancel);
   }
-  if (failures.length && status !== 'cancelled') status = 'inconclusive';
+  status = finalBatchStatus(status, failures, cancelled);
   const summary = { schemaVersion: 1, status, acceptance: status === 'passed', acceptanceScope: 'This case isolated capture, replay, bounded reduction, export, 20 alternating readable pairs, cgroup and per-operation cleanup gates; fault suite and accessibility excluded', output, caseId: input.manifest.caseId, platform: 'linux-arm64', policySha256: POLICY_SHA256, driverSha256, protocolSha256, owner, session,
     repetitionsPlanned: plan.repetitions, completedOperations: receipts.map(item => ({ name: item.operation.name, revision: item.operation.revision, durationMs: item.receipt.durationMs, kernelPeakBytes: item.receipt.memory?.after?.peakBytes, problems: item.problems })),
     setupDurationMs, setupMaximumMs: SETUP_LIMIT_MS, batchDurationMs: performance.now() - began, batchWatchdogMs: plan.batchWatchdogMs, size, images,
@@ -589,6 +594,59 @@ export async function verifyIsolated(options) {
     limitations: ['Same task-owned Linux arm64 VM, not another physical machine or Linux amd64; exact public base layers acquired in this cohort may be reused, npm and browser installation executes anew without build cache for every image', 'Public registered development cases, not hostile arbitrary code', 'Sentinel is a separate unrelated Node process/container, not an unrelated browser; dedicated cancellation/fault cases require their separate recorded checks'] };
   await writeJson(join(output, 'summary.json'), summary);
   return summary;
+}
+
+/** Host-side Docker client supervision only; this never signals a container process directly. */
+export async function watchDockerClient(child, { maximumMs, isCancelled, cleanup, onSignalError }) {
+  let timedOut = false, signalSent = false, exited = false, settled = false, escalation, drainDeadline, exitResult;
+  const processGroup = child.pid;
+  const signal = signal => {
+    if (exited || settled || !processGroup) return;
+    try { process.kill(-processGroup, signal); } catch (error) { if (error.code !== 'ESRCH') onSignalError(); }
+  };
+  let finish;
+  const completed = new Promise(accept => { finish = accept; });
+  function stopSignaling() { exited = true; clearTimeout(escalation); }
+  function complete(result) {
+    if (settled) return;
+    settled = true; stopSignaling(); clearInterval(cancelling); clearTimeout(watchdog); clearTimeout(drainDeadline);
+    finish({ ...result, timedOut, cancelled: signalSent });
+  }
+  function incompleteStdio() {
+    complete({ ...exitResult, launchFailed: false, stdioIncomplete: true });
+    child.stdout?.destroy(); child.stderr?.destroy();
+  }
+  function escalate() {
+    if (exited || settled || escalation !== undefined) return;
+    signal('SIGTERM');
+    escalation = setTimeout(() => signal('SIGKILL'), 1000); escalation.unref();
+  }
+  const watchdog = setTimeout(() => {
+    timedOut = true;
+    if (exited) {
+      // The process identity has ended. Bound a stuck stdio drain without signaling its old group.
+      incompleteStdio();
+    } else escalate();
+  }, maximumMs);
+  const cancelling = setInterval(() => {
+    if (isCancelled() && !cleanup && !signalSent) {
+      signalSent = true;
+      if (exited) incompleteStdio(); else escalate();
+    }
+  }, 100);
+  child.once('exit', (code, signal) => {
+    exitResult = { code, signal }; stopSignaling();
+    if ((timedOut || signalSent) && !settled) drainDeadline = setTimeout(incompleteStdio, 0);
+  });
+  child.once('error', () => complete({ code: null, launchFailed: true }));
+  child.once('close', (code, signal) => complete({ code, signal, launchFailed: false }));
+  return completed;
+}
+
+/** The final decision is made after cleanup so its errors remain part of the receipt. */
+export function finalBatchStatus(status, failures, cancelled) {
+  if (cancelled) return 'cancelled';
+  return failures.length && status !== 'cancelled' ? 'inconclusive' : status;
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
