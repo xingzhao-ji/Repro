@@ -26,6 +26,8 @@ test('selected run expectation persists alongside actual captured evidence', { t
     assert.equal(await page.evaluate(() => document.activeElement?.textContent), 'Skip to evidence');
     await page.keyboard.press('Enter');
     await page.keyboard.press('Tab');
+    assert.equal(await page.getByRole('combobox', { name: 'Application case', exact: true }).evaluate(element => element === document.activeElement), true);
+    await page.keyboard.press('Tab');
     assert.equal(await page.getByRole('combobox', { name: 'Expectation input', exact: true }).evaluate(element => element === document.activeElement), true);
     await page.keyboard.press('Tab');
     assert.equal(await page.evaluate(() => (document.activeElement as HTMLInputElement).type), 'checkbox');
