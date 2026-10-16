@@ -1,9 +1,9 @@
 import assert from 'node:assert/strict';
 import { spawn, spawnSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
-import { lstat, mkdir, mkdtemp, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, readdir, writeFile } from 'node:fs/promises';
 import { isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { packageInputHashes } from './package-inputs.mjs';
 
 // Authored-workflow receipt from already built artifacts. No build, Linux or clean-host claim.
 const repository = process.cwd();
@@ -33,14 +33,7 @@ const observations = [];
 let trustedIdentity;
 const startedAt = new Date().toISOString();
 async function inputHashes() {
-  const paths = ['package.json', 'package-lock.json', 'scripts/build.mjs', 'scripts/authored-package-smoke.mjs'];
-  for (const folder of ['src', 'web', 'fixtures/browser-search', 'security', 'dist']) {
-    for (const path of await readdir(folder, { recursive: true })) {
-      const local = join(folder, path);
-      if ((await lstat(local)).isFile()) paths.push(local);
-    }
-  }
-  return Object.fromEntries(await Promise.all(paths.sort().map(async path => [path, createHash('sha256').update(await readFile(path)).digest('hex')])));
+  return packageInputHashes(repository, true);
 }
 let sourceHashes;
 

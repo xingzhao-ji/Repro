@@ -1,0 +1,192 @@
+{
+  "checkedAt": "2026-10-16T00:31:52.764Z",
+  "baseCommit": "9fbfe62b35640c8e7625f5a2e57e67c0e9316b7e",
+  "classification": "development-script correction with fresh filesystem/unit/static checks; retained runtime evidence revalidation",
+  "changedFileHashes": {
+    "scripts/package-inputs.mjs": "7bd2158263c56052200e73a458f6d7bfaffb16be5c8d022b2d8924d3fd66bbe6",
+    "scripts/package-smoke.mjs": "5b3dfed6c6b05ad87cdbc60f9adfd1926d13f063b6c75cf6afb118c713002f42",
+    "scripts/authored-package-smoke.mjs": "a30f0ea1030e587496299a0dbb5974316abcdb56bcfd84f94e14b28795de75d9",
+    "tests/package-inputs.test.ts": "e1e89a549d64a0fa3a98e73b6163b44546d521613e0d2cc19b2c95e541267da5"
+  },
+  "commands": [
+    {
+      "name": "red",
+      "command": "node --import tsx --test tests/package-inputs.test.ts",
+      "exitCode": 1,
+      "passed": 4,
+      "failed": 6,
+      "cancelled": 0,
+      "skipped": 0,
+      "log": ".repro-runs/package-input-provenance/red.log",
+      "logSha256": "86d9e93efca3f4523a11049e7752969637962318ad0386669e0e52d904b8ce4e"
+    },
+    {
+      "name": "green",
+      "command": "node --import tsx --test tests/package-inputs.test.ts",
+      "exitCode": 0,
+      "passed": 10,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "log": ".repro-runs/package-input-provenance/green.log",
+      "logSha256": "2c8e9539e9f238753d338b4faa23c65386ffb350cf4a619a1b28d765af7cf314"
+    },
+    {
+      "name": "unit",
+      "command": "npm test",
+      "exitCode": 0,
+      "passed": 214,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "log": ".repro-runs/package-input-provenance/unit.log",
+      "logSha256": "070727fe95a29f220b0617085846da10dd61af1f8a274d941aa2e97c24ecbf45"
+    },
+    {
+      "name": "typecheck",
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "log": ".repro-runs/package-input-provenance/typecheck.log",
+      "logSha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4"
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "exitCode": 0,
+      "log": ".repro-runs/package-input-provenance/lint.log",
+      "logSha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23"
+    },
+    {
+      "name": "syntax",
+      "command": "node --check scripts/package-inputs.mjs && node --check scripts/package-smoke.mjs && node --check scripts/authored-package-smoke.mjs",
+      "exitCode": 0,
+      "log": ".repro-runs/package-input-provenance/syntax.log",
+      "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "correctedInventory": {
+    "sourceEntries": 32,
+    "builtEntries": 41,
+    "sourceHashes": {
+      "assets/tokens.css": "af768ba5d1ae984c25e0d8b6f525700d6485db24881f347ca35b83893d2d540d",
+      "fixtures/browser-search/README.md": "5c035114476f91e4e3d3e037e3503511f1d96c565bcba69173ffa9c32df82243",
+      "fixtures/browser-search/buggy.js": "8ff7967b065d8c87bf22d8a7d8a922141884f171c6e23e06084ec63589af33b4",
+      "fixtures/browser-search/fixed.js": "b9579050f425aec6757274b4c007af6fcf55bee084c0a72587bf14ce761fa288",
+      "fixtures/browser-search/page.html": "6ff8048cfbe0fe068dfd58ca60ca93b008ecfde2c3865cd478606e2f02c7e24a",
+      "package-lock.json": "64c15457c56e7ae34d9b08122959f90f461c84858b274a05f86638106f04fc96",
+      "package.json": "0581200a58b54636af549d3efd9bbfae6f6734e40ffd0b78db2e7a33e8f454b6",
+      "scripts/authored-package-smoke.mjs": "a30f0ea1030e587496299a0dbb5974316abcdb56bcfd84f94e14b28795de75d9",
+      "scripts/build.mjs": "b6f1782b6864ef994b539219887098868e99e62dc262c6f31f084fa8b85f2167",
+      "scripts/package-inputs.mjs": "7bd2158263c56052200e73a458f6d7bfaffb16be5c8d022b2d8924d3fd66bbe6",
+      "scripts/package-smoke.mjs": "5b3dfed6c6b05ad87cdbc60f9adfd1926d13f063b6c75cf6afb118c713002f42",
+      "security/repro-chromium-seccomp.json": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+      "src/adapter.ts": "6c8e90723f9e5e9a9905dcc05e5ce69ccc9a6b143420f03e1ab6447e35932215",
+      "src/assets.d.ts": "da5bf71d48cf909584a01c80b445f730507068f5b34c920f352e2bfcf0315e4c",
+      "src/capsule.ts": "a5e8a3c81c08c3556da7c57aaf736df837fc0404f7390c615f2c36202b31a7f5",
+      "src/cli.ts": "a6eebb1a689d94ae48b00fcbc268750dd0b11730f915206b876deef4917f5c76",
+      "src/contracts.ts": "10d31ed8346be7198f89eaf3c2159f965d40aaf5daadb5ef259c915715e72212",
+      "src/evidence-inspector.ts": "b4c36bc0815ef8fe58fa2050c16bbd8e58bea5064e8c05c47744654d85bfac8d",
+      "src/fixture.ts": "2ad01becdbf8d97f07256eb19d9d41edb28e75dea237751b1a4de9c58a5917bc",
+      "src/index.ts": "f18ace53b1f8be833dacc6fb38090ce7ec594f46a20a473d0b4f22bb3894fe6f",
+      "src/input.ts": "ff529ffe993ab9e57af8468e63a31705e8571e26c4af5b0b191ec8f73a6124e7",
+      "src/ledger.ts": "a08f1d9b528e6381da2ae62b7b413fd7ad0ec7b38a9c2d7863f3ce2fecf92fe2",
+      "src/manifest.ts": "0ae06b29bf73862fa3a312f7009299545e6332322f6f6ce23ffe0978f2cadc84",
+      "src/oracle.ts": "98433b32bfb3cbb6ff208e6a7f78cfdcf66e392efa3421e9b4d764db3f9b5906",
+      "src/paths.ts": "ad8e2cff846ef53fd5edd7274c233b3fcfd7b47648256157e078d9fe6d58103d",
+      "src/reducer.ts": "9de0ce191ec82c7a85deed0a4e369285e0a38107c3c1473b0ccb329bacb615e4",
+      "src/search-contract.ts": "4af95974d42375f14f9165d56662bbf461f5b85f8bdbb82200b912f2f2a5e3be",
+      "src/server.ts": "c19a62fb35f6aaee47acf1641010d9204016db5e3facb5cbf791464c6733b815",
+      "src/service.ts": "f1934baf2d444d142ae86a62c05c936c56993917ecdf08584be7914cffa47325",
+      "tsconfig.json": "b6f6cebb93a5ef4f37815f56ede17ffd66d027728a6bf83ab06295a329193994",
+      "web/main.tsx": "ff52401175f66ba971d1d31bb065314a301738eba3163688cba0f2332855e428",
+      "web/style.css": "7d5dff84b592ea37fd144387d0297b7c9471c4486319914a4b7f64bc74a6fe63"
+    },
+    "sourceAggregate": "f8f6255c1540e4be82ae8ad8619bbf26ed7e1ff300de9f9e8f060b158e942af1"
+  },
+  "retainedRuntimeEvidence": {
+    "recordedSourceEntriesMatched": 27,
+    "mainBuildArtifactsMatched": 9,
+    "commandLogs": [
+      {
+        "name": "unit",
+        "matches": true
+      },
+      {
+        "name": "browser",
+        "matches": true
+      },
+      {
+        "name": "typecheck",
+        "matches": true
+      },
+      {
+        "name": "lint",
+        "matches": true
+      },
+      {
+        "name": "build",
+        "matches": true
+      },
+      {
+        "name": "kit",
+        "matches": true
+      }
+    ],
+    "mainUiLogMatches": true,
+    "browserTests": 39,
+    "newBrowserExecutions": 0,
+    "newPackageInstallations": 0,
+    "newLinuxExecutions": 0
+  },
+  "recoveredInputEvidence": {
+    "tokensSha256": "af768ba5d1ae984c25e0d8b6f525700d6485db24881f347ca35b83893d2d540d",
+    "tokenSources": [
+      {
+        "map": "dist/web.css.map",
+        "mapSha256": "c378ed34b5f4117bfae68ab68f6308d50ef7ee9f86a0f5023fcb990b6322c8df",
+        "embeddedTokensEqualCurrentFile": true
+      },
+      {
+        "map": ".repro-runs/expectation-authoring/worktree/dist/web.css.map",
+        "mapSha256": "c378ed34b5f4117bfae68ab68f6308d50ef7ee9f86a0f5023fcb990b6322c8df",
+        "embeddedTokensEqualCurrentFile": true
+      }
+    ],
+    "tsconfigSha256": "b6f6cebb93a5ef4f37815f56ede17ffd66d027728a6bf83ab06295a329193994",
+    "tsconfigEqualsRetainedWorktreeAndCommittedSource": true,
+    "limitation": "Configuration agreement is a current file/Git comparison, not a recovered execution-time configuration seal. The original 27-entry receipt omitted tokens and tsconfig."
+  },
+  "capabilities": {
+    "browserProviders": [],
+    "nativeChromeApplicationListed": true,
+    "actualScreenReaderOutput": "No supported operation/output-observation surface exposed",
+    "deniedNavigationRetried": false
+  },
+  "remainingRequiredGates": [
+    "Native 200% browser zoom through the legitimately restored original provider",
+    "Actual screen-reader workflow operation and observation"
+  ],
+  "preservedDiscrepancies": [
+    "The handoff cites a scoped inspector shadow removal absent from this checkout and available CSS history. Current sampled contrast evidence does not establish a defect; no speculative CSS change was made. Referenced docs/handoff and offline-research archives are absent here."
+  ],
+  "limitations": [
+    "Historical contrast pilot remains incomplete: 12 provisional, 45 unattempted, zero aggregate acceptance.",
+    "No runtime test rerun, package repack, release completion, new Library upload, remote CI or deployment is implied.",
+    "The explicit inventory must be updated if future build inputs are introduced; it is not a general dependency discovery system.",
+    "Before/after equality establishes endpoint stability, not continuous immutability or build-source equivalence.",
+    "Inventory assumes a trusted local checkout; it is not an adversarial filesystem reader."
+  ],
+  "independentReview": {
+    "kind": "software-agent source and filesystem regression review",
+    "reviewer": "review_package_guard",
+    "actionableFindings": 0,
+    "focusedPassed": 10,
+    "focusedFailed": 0,
+    "focusedSkipped": 0,
+    "log": ".repro-runs/package-input-provenance/review-focused.log",
+    "logSha256": "5b0dfed7b23f2143590e34f3aeada113a1e8dc5b16af44d7fac623647af83c21",
+    "scope": "Helper/callers/test reviewed; no package/browser/Linux execution; not human review.",
+    "supplementReviewed": true,
+    "revalidation": "Reviewer independently rehashed 4 changed files, 32 corrected entries, 27 original entries, 9 main artifacts, 6 fresh logs, 7 retained command/UI logs and both CSS maps; all matched. No additional finding."
+  }
+}

@@ -1,4 +1,12 @@
-# Release blocked on two accessibility prerequisites
+# Current continuation — package input inventory correction
+
+2026-10-15 UTC. The resumed audit found and repaired a concrete omission in the two package-check source inventories: imported `assets/tokens.css` and build `tsconfig.json` were absent. Both callers now share the corrected explicit inventory. Six red mutation/missing-file cases became green; focused checks pass 10/10, and fresh unit/contract checks pass 214/214 with typecheck, lint and script syntax checks. Independent code review found no actionable defect and reran the focused checks. [Correction and limits](evidence/PACKAGE-INPUT-PROVENANCE.md), [exact receipt](evidence/package-input-provenance.json).
+
+All 27 previously recorded source entries, nine main build artifacts and seven retained command/UI logs still match. Tokens additionally match both CSS maps. No browser/package/Linux workflow was rerun and no old receipt was expanded retroactively. The guard compares endpoint hashes in a trusted checkout, not continuous immutability. Existing failures, original contrast-pilot limits and missing historical archives remain preserved as reported.
+
+Root owns integration; `task/package-input-provenance` identifies the correction branch. Inspect current Git and `.repro-runs/package-input-provenance/delivery/` for the final delivery state. Keep the retained expectation-authoring worktree and all generated evidence. The goal remains active and incomplete. Fresh supported inventory again has no browser provider or actual screen-reader output observation; native 200% zoom and actual assistive-technology workflows remain unavailable. Do not bypass the original denial or restart unapproved diagnostics. Resume these gates only when the legitimate capabilities change; do not rerun unchanged suites for a newer timestamp.
+
+## Preserved prior audit — two accessibility prerequisites
 
 2026-10-15 UTC. Final independent R0–R10 audit at source `f60a3f5fff2926cf4f3e66880ab148c7c8ee6bff` identified no additional unfinished work in the supported release scope. Root revalidated 27 source hashes, nine main build artifacts, seven retained command/UI logs, the package observations, Linux assertion/harness identity and current private origin/main/source archive. Independent review additionally rehashed all 14 exported/build/executed Linux payload files and checked all 11 raw post-close process censuses. This is evidence revalidation, not fresh execution. [Audit and exact remaining prerequisites](evidence/RELEASE-BLOCKERS.md), [receipt](evidence/release-blocked-audit.json).
 

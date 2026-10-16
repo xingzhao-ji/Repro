@@ -1,5 +1,7 @@
 # Release completion audit and remaining blockers
 
+Subsequent audit correction: [package input provenance](PACKAGE-INPUT-PROVENANCE.md) identifies and repairs an input-inventory omission missed by this audit. Its fresh focused/unit/static results and retained runtime identities are separate. The report below remains the historical audit at its stated commit; its no-additional-work conclusion is superseded by that finding and repair.
+
 2026-10-15 UTC. The supported synthetic release candidate is implemented and delivered to the private repository. **Full completion remains unproven because native 200% zoom and actual screen-reader workflow are unverified.** A fresh independent R0–R10 audit identified no additional unfinished item in the currently supported release scope. It did not rerun expensive suites or grant human approval.
 
 Source audited: `f60a3f5fff2926cf4f3e66880ab148c7c8ee6bff`. [Machine receipt](release-blocked-audit.json) records fresh source/build/log identity checks and the initial audit-parser correction. [Release report](RELEASE.md) retains actual test results and historical failures. This audit/state supplement changes no executable source, dependency, test or fixture.
