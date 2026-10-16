@@ -1,0 +1,707 @@
+{
+  "schemaVersion": 1,
+  "status": "incomplete: native htmx stability failed on browser cleanup; fresh Linux three-case scope passed",
+  "baseline": "88fedc530152b786fdb8ac76a867ddbcd8229201",
+  "branch": "task/practical-beta",
+  "verifiedCodeCommit": "75e973c",
+  "protocol": {
+    "path": "benchmarks/PRACTICAL-BETA-PROTOCOL.md",
+    "sha256": "175d5e8f1fe84d07de8da969a1252c63ed561979d645ea1af345a555a9fc9c90",
+    "bytes": 7720
+  },
+  "policy": {
+    "path": "security/repro-chromium-seccomp.json",
+    "sha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+    "bytes": 10601
+  },
+  "nativeMeasurementHelper": {
+    "path": "scripts/measure-beta.mjs",
+    "sha256": "bcf718a241ffd5ac7ee035cff59f6887c57819e7f6054459733014cf88a3bfdd",
+    "bytes": 18064
+  },
+  "isolatedDriver": {
+    "path": "scripts/verify-beta-isolated.mjs",
+    "sha256": "af858b5798cace8cf53a0421576ebf7a1496e5657a46a5d22bf798f400b53328",
+    "bytes": 64253
+  },
+  "inputs": {
+    "path": ".repro-runs/practical-beta/native-v5/input-identities.json",
+    "sha256": "c553b9df2ddd70a3e8e588623fd7c676cda2ed1ce47a5c19e40ccc11bdc9e6ff",
+    "bytes": 14452
+  },
+  "checks": {
+    "ordinaryUnits": {
+      "passed": 310,
+      "failed": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "functionalBrowser": {
+      "passed": 50,
+      "failed": 0,
+      "cancelled": 0,
+      "scope": "Final functional selection; eight accessibility-focused or mixed tests excluded; not the full 58-test matrix"
+    },
+    "types": "passed",
+    "lint": "passed",
+    "build": "passed at final product bytes",
+    "installedPackage": {
+      "boundedCommands": 15,
+      "result": "passed",
+      "scope": "Native synthetic package smoke, host pinned browser and task cache; not cache-free Linux evidence",
+      "documentationCutoff": "Before this final evidence/status update"
+    },
+    "nativeAudit": {
+      "workflowDistinctRunIds": 30,
+      "workflowMeasurements": 15,
+      "sourceIdentities": 118,
+      "workflowRecords": 414,
+      "originalStabilityCohort": {
+        "planned": 120,
+        "completed": 69,
+        "failed": 1,
+        "cancelled": 0,
+        "unattempted": 50
+      },
+      "stabilityAcceptance": false,
+      "independentMarkedContinuation": "40 completed exported runs; separate from original stopped cohort"
+    },
+    "freshLinux": {
+      "cases": 3,
+      "operationsPerCase": 44,
+      "setupBuildsPerCase": 2
+    }
+  },
+  "environments": {
+    "native": "macOS arm64, Node 26.7.0, Playwright 1.64.0, Chromium 156.0.8078.4; existing development dependencies/browser, sampled RSS only",
+    "linux": "Linux arm64 Debian container in fresh task-owned Colima profile d; Node 26.7.0, Playwright 1.64.0, pinned Chromium; capsule-only no-cache input and reduced-export images; no original workspace, host mounts, credentials or preexisting npm/browser cache; initial empty daemon; cohort public base layer reuse only",
+    "daemonId": "182bea56-74b5-45ea-99e8-7dc3e1635154",
+    "runtimeControls": "Unprivileged node, Docker --init, Chromium sandbox enabled, network none, read-only root, cap-drop ALL, no-new-privileges, private cgroup namespace, 2 CPUs, 128 tasks, 1 GiB memory, 256 MiB /tmp and /dev/shm, only owned named evidence volumes",
+    "prerequisites": "Declared Node >=24 and npm, locked dependencies, pinned Playwright Chromium and system libraries. Only Node 26.7.0 verified. Public acquisition network allowed separately; no runtime external network, account, LLM, API key, proprietary viewer or database."
+  },
+  "cases": [
+    {
+      "caseId": "morphdom-textarea",
+      "assertionDigest": "8ec0310e16a14eb7b0bdd530fce211881a7a3db2933705b18eb07ccce35f4aef",
+      "size": {
+        "original": {
+          "actions": 3,
+          "actionBytes": 276
+        },
+        "reduced": {
+          "actions": 2,
+          "actionBytes": 175
+        },
+        "bothExecutedVariantBytes": 27220,
+        "upstreamArchiveBytes": 64426,
+        "exportBytes": 515258,
+        "executions": 7,
+        "trials": 5,
+        "minimality": "unverified"
+      },
+      "native": {
+        "workflow": {
+          "capture": {
+            "durationMs": 1725.022667,
+            "peakRssBytes": 464371712,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/morphdom-textarea/measure-capture/receipt.json"
+          },
+          "replay": {
+            "durationMs": 350.52337500000067,
+            "peakRssBytes": 453509120,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/morphdom-textarea/measure-replay/receipt.json"
+          },
+          "reduce": {
+            "durationMs": 1851.7496250000004,
+            "peakRssBytes": 465698816,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/morphdom-textarea/measure-reduce/receipt.json"
+          },
+          "verify": {
+            "durationMs": 488.26724999999715,
+            "peakRssBytes": 452558848,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/morphdom-textarea/measure-verify/receipt.json"
+          },
+          "export": {
+            "durationMs": 204.1647499999999,
+            "peakRssBytes": 100614144,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/morphdom-textarea/measure-export/receipt.json"
+          }
+        },
+        "stability": {
+          "buggyCompleted": 20,
+          "fixedCompleted": 20,
+          "unexpected": 0,
+          "unattempted": 0,
+          "status": "passed",
+          "durationRangeScope": "Completed expected outcomes only; failed htmx duration and cleanup retained separately",
+          "durationMsRange": [
+            392.6894579999789,
+            494.562042000005
+          ],
+          "maximumSampledRssBytes": 516390912
+        },
+        "summary": {
+          "path": ".repro-runs/practical-beta/native-v5/morphdom-textarea/summary.json",
+          "sha256": "6163e4972412bc0ac76bb912d93956224576ff660bb16071dbd4a569392b2aeb",
+          "bytes": 2031
+        },
+        "stabilitySummary": {
+          "path": ".repro-runs/practical-beta/native-stability-v4/morphdom-textarea/summary.json",
+          "sha256": "05e1753e47dc6b13a4c9e342171716a68b8818a6b7b23921b7161fa0c75c6f27",
+          "bytes": 36177
+        }
+      },
+      "linux": {
+        "workflow": [
+          {
+            "name": "capture",
+            "revision": "buggy",
+            "durationMs": 346.3008940000001,
+            "kernelPeakBytes": 242171904,
+            "problems": []
+          },
+          {
+            "name": "replay",
+            "revision": "buggy",
+            "durationMs": 333.894741,
+            "kernelPeakBytes": 175099904,
+            "problems": []
+          },
+          {
+            "name": "reduce",
+            "revision": "buggy",
+            "durationMs": 1087.854863,
+            "kernelPeakBytes": 181047296,
+            "problems": []
+          },
+          {
+            "name": "export",
+            "revision": "buggy",
+            "durationMs": 203.391477,
+            "kernelPeakBytes": 101171200,
+            "problems": []
+          }
+        ],
+        "stability": {
+          "buggy": 20,
+          "fixed": 20,
+          "unexpected": 0,
+          "durationMsRange": [
+            354.96403,
+            429.10756100000003
+          ]
+        },
+        "setupDurationMs": 166741.190625,
+        "setupMaximumMs": 900000,
+        "maximumKernelPeakBytes": 288731136,
+        "minimumTerminalCensusDelayMs": 5001.83409,
+        "distinctRunIdsAudited": 49,
+        "summary": {
+          "path": ".repro-runs/practical-beta/isolated-v3/morphdom-textarea/summary.json",
+          "sha256": "11e03f09dff01920b7ace526d732c052e7eed0bcbba2c8845f8136442b0125be",
+          "bytes": 31111
+        },
+        "independentAudit": {
+          "path": ".repro-runs/practical-beta/independent-linux-audit-v3/morphdom-v1.json",
+          "sha256": "f2e37b8a0ff06b54993a0f548cf5d3de7342e050e29772f92ec1d5ef13bcbc34",
+          "bytes": 30087
+        }
+      }
+    },
+    {
+      "caseId": "htmx-checkbox",
+      "assertionDigest": "8639bce5f7ec8de44b13cd0aa8d04916c76491d7328de6058a13bf5ebcb9d5b7",
+      "size": {
+        "original": {
+          "actions": 2,
+          "actionBytes": 152
+        },
+        "reduced": {
+          "actions": 2,
+          "actionBytes": 152
+        },
+        "bothExecutedVariantBytes": 334001,
+        "upstreamArchiveBytes": 349769,
+        "exportBytes": 1109617,
+        "executions": 4,
+        "trials": 3,
+        "minimality": "unverified"
+      },
+      "native": {
+        "workflow": {
+          "capture": {
+            "durationMs": 385.8950420000001,
+            "peakRssBytes": 448282624,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/htmx-checkbox/measure-capture/receipt.json"
+          },
+          "replay": {
+            "durationMs": 363.89537500000006,
+            "peakRssBytes": 449314816,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/htmx-checkbox/measure-replay/receipt.json"
+          },
+          "reduce": {
+            "durationMs": 841.2662090000013,
+            "peakRssBytes": 458883072,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/htmx-checkbox/measure-reduce/receipt.json"
+          },
+          "verify": {
+            "durationMs": 540.494749999998,
+            "peakRssBytes": 449314816,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/htmx-checkbox/measure-verify/receipt.json"
+          },
+          "export": {
+            "durationMs": 207.99037500000122,
+            "peakRssBytes": 98566144,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/htmx-checkbox/measure-export/receipt.json"
+          }
+        },
+        "stability": {
+          "buggyCompleted": 15,
+          "fixedCompleted": 14,
+          "unexpected": 1,
+          "unattempted": 10,
+          "status": "failed-incomplete",
+          "durationRangeScope": "Completed expected outcomes only; failed htmx duration and cleanup retained separately",
+          "durationMsRange": [
+            414.3190000000177,
+            539.3260000000009
+          ],
+          "maximumSampledRssBytes": 526336000
+        },
+        "summary": {
+          "path": ".repro-runs/practical-beta/native-v5/htmx-checkbox/summary.json",
+          "sha256": "7f0fd6f8b72cc92c8500f4b7737b398a08ad11fc134464bab0a533c52e79c6a6",
+          "bytes": 2013
+        },
+        "stabilitySummary": {
+          "path": ".repro-runs/practical-beta/native-stability-v4/htmx-checkbox/runs.json",
+          "sha256": "eadbca10e296dd4c2ebd700511e43e6a482635f7e7f406fbc804826f43f88de4",
+          "bytes": 25031
+        }
+      },
+      "linux": {
+        "workflow": [
+          {
+            "name": "capture",
+            "revision": "buggy",
+            "durationMs": 430.48970700000007,
+            "kernelPeakBytes": 242036736,
+            "problems": []
+          },
+          {
+            "name": "replay",
+            "revision": "buggy",
+            "durationMs": 368.92626,
+            "kernelPeakBytes": 174149632,
+            "problems": []
+          },
+          {
+            "name": "reduce",
+            "revision": "buggy",
+            "durationMs": 800.8919259999999,
+            "kernelPeakBytes": 177324032,
+            "problems": []
+          },
+          {
+            "name": "export",
+            "revision": "buggy",
+            "durationMs": 234.106127,
+            "kernelPeakBytes": 107282432,
+            "problems": []
+          }
+        ],
+        "stability": {
+          "buggy": 20,
+          "fixed": 20,
+          "unexpected": 0,
+          "durationMsRange": [
+            404.293522,
+            469.04651800000005
+          ]
+        },
+        "setupDurationMs": 160156.627459,
+        "setupMaximumMs": 900000,
+        "maximumKernelPeakBytes": 242036736,
+        "minimumTerminalCensusDelayMs": 5001.628071,
+        "distinctRunIdsAudited": 46,
+        "summary": {
+          "path": ".repro-runs/practical-beta/isolated-v3/htmx-checkbox/summary.json",
+          "sha256": "565152d0c703f4f3b2cc901598cfab4c080606e550d8bbb292fe0d3816f5b9d8",
+          "bytes": 33968
+        },
+        "independentAudit": {
+          "path": ".repro-runs/practical-beta/independent-linux-audit-v3/htmx-v1.json",
+          "sha256": "f9b7e9b79205d9476f576fe872445193fc3db8b870324840799ef8504c4f4f54",
+          "bytes": 29305
+        }
+      }
+    },
+    {
+      "caseId": "marked-empty-heading",
+      "assertionDigest": "5db74a0d773d607c1f615de4c4d68371734fe41d8eefcbd8036114f065c5ebca",
+      "size": {
+        "original": {
+          "actions": 3,
+          "actionBytes": 294
+        },
+        "reduced": {
+          "actions": 3,
+          "actionBytes": 294
+        },
+        "bothExecutedVariantBytes": 145256,
+        "upstreamArchiveBytes": 927068,
+        "exportBytes": 1521857,
+        "executions": 7,
+        "trials": 6,
+        "minimality": "unverified"
+      },
+      "native": {
+        "workflow": {
+          "capture": {
+            "durationMs": 454.92287499999657,
+            "peakRssBytes": 439894016,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/marked-empty-heading/measure-capture/receipt.json"
+          },
+          "replay": {
+            "durationMs": 384.1102499999979,
+            "peakRssBytes": 452673536,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/marked-empty-heading/measure-replay/receipt.json"
+          },
+          "reduce": {
+            "durationMs": 1268.3174160000053,
+            "peakRssBytes": 468877312,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/marked-empty-heading/measure-reduce/receipt.json"
+          },
+          "verify": {
+            "durationMs": 547.5038749999949,
+            "peakRssBytes": 470859776,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/marked-empty-heading/measure-verify/receipt.json"
+          },
+          "export": {
+            "durationMs": 213.72137500000827,
+            "peakRssBytes": 98811904,
+            "unrelatedSentinelAlive": true,
+            "receipt": ".repro-runs/practical-beta/native-v5/marked-empty-heading/measure-export/receipt.json"
+          }
+        },
+        "stability": {
+          "buggyCompleted": 20,
+          "fixedCompleted": 20,
+          "unexpected": 0,
+          "unattempted": 0,
+          "status": "passed",
+          "durationRangeScope": "Completed expected outcomes only; failed htmx duration and cleanup retained separately",
+          "durationMsRange": [
+            435.44841700000325,
+            542.2043330000015
+          ],
+          "maximumSampledRssBytes": 536444928
+        },
+        "summary": {
+          "path": ".repro-runs/practical-beta/native-v5/marked-empty-heading/summary.json",
+          "sha256": "58927bf05bc30b6a72d6542b3738e604e99f58accc78b66977af31ad3a85b330",
+          "bytes": 2057
+        },
+        "stabilitySummary": {
+          "path": ".repro-runs/practical-beta/native-marked-v1/marked-empty-heading/summary.json",
+          "sha256": "bd7dcdf29fe5a5526b3e672a90a539c640bf95f24e574c726733fc7b8c9c0243",
+          "bytes": 36169
+        }
+      },
+      "linux": {
+        "workflow": [
+          {
+            "name": "capture",
+            "revision": "buggy",
+            "durationMs": 415.70921799999996,
+            "kernelPeakBytes": 323801088,
+            "problems": []
+          },
+          {
+            "name": "replay",
+            "revision": "buggy",
+            "durationMs": 377.64189600000003,
+            "kernelPeakBytes": 183660544,
+            "problems": []
+          },
+          {
+            "name": "reduce",
+            "revision": "buggy",
+            "durationMs": 1160.695651,
+            "kernelPeakBytes": 182902784,
+            "problems": []
+          },
+          {
+            "name": "export",
+            "revision": "buggy",
+            "durationMs": 260.67001700000003,
+            "kernelPeakBytes": 110465024,
+            "problems": []
+          }
+        ],
+        "stability": {
+          "buggy": 20,
+          "fixed": 20,
+          "unexpected": 0,
+          "durationMsRange": [
+            428.87165699999997,
+            513.108138
+          ]
+        },
+        "setupDurationMs": 127647.296,
+        "setupMaximumMs": 900000,
+        "maximumKernelPeakBytes": 323801088,
+        "minimumTerminalCensusDelayMs": 5001.430112,
+        "distinctRunIdsAudited": 49,
+        "summary": {
+          "path": ".repro-runs/practical-beta/isolated-v3/marked-empty-heading/summary.json",
+          "sha256": "00709b3d805c1318103b3e8dd6b3a4b1e65a12ef2105085c0874716e9ad785f0",
+          "bytes": 63491
+        },
+        "independentAudit": {
+          "path": ".repro-runs/practical-beta/independent-linux-audit-v3/marked-v1.json",
+          "sha256": "09c6f214eae832a7cd6b317a82ee6a38c2544dce3243f90bf8ae154df45f2f25",
+          "bytes": 30107
+        }
+      }
+    }
+  ],
+  "retainedEarlierNative": [
+    {
+      "workflow": "native-v3",
+      "stability": "native-stability-v2",
+      "priorIndependentAudit": ".repro-runs/practical-beta/native-v3-stability-v2-independent-audit.json",
+      "previouslyCheckedExecutions": 150,
+      "previouslyCheckedCases": [
+        {
+          "caseId": "morphdom-textarea",
+          "originalActions": 3,
+          "reducedActions": 2,
+          "executions": 7,
+          "trials": 5,
+          "acceptedTrialsIncludingBaseline": 2,
+          "rejectedTrials": 3,
+          "minimality": "unverified",
+          "stability": {
+            "buggy": 20,
+            "fixed": 20,
+            "unexpected": 0
+          }
+        },
+        {
+          "caseId": "htmx-checkbox",
+          "originalActions": 2,
+          "reducedActions": 2,
+          "executions": 4,
+          "trials": 3,
+          "acceptedTrialsIncludingBaseline": 1,
+          "rejectedTrials": 2,
+          "minimality": "unverified",
+          "stability": {
+            "buggy": 20,
+            "fixed": 20,
+            "unexpected": 0
+          }
+        },
+        {
+          "caseId": "marked-empty-heading",
+          "originalActions": 3,
+          "reducedActions": 3,
+          "executions": 7,
+          "trials": 6,
+          "acceptedTrialsIncludingBaseline": 1,
+          "rejectedTrials": 5,
+          "minimality": "unverified",
+          "stability": {
+            "buggy": 20,
+            "fixed": 20,
+            "unexpected": 0
+          }
+        }
+      ],
+      "earlyTerminalCensuses": 42,
+      "measurementCount": 135,
+      "strictCleanupGate": "unverified",
+      "limitation": "42 terminal censuses preceded the absolute cutoff; all receipts lack process/inventory completion timestamps added later. Prior behavioral identity checks remain retained; these measurements are excluded from the current cohort."
+    },
+    {
+      "workflow": "native-v4",
+      "stability": "native-stability-v3",
+      "recordedCompletedWorkflows": 3,
+      "recordedStability": {
+        "planned": 120,
+        "completed": 61,
+        "cancelled": 1,
+        "failed": 0,
+        "unattempted": 58,
+        "cases": [
+          {
+            "caseId": "morphdom-textarea",
+            "completed": 40,
+            "cancelled": 0,
+            "failed": 0,
+            "unattempted": 0
+          },
+          {
+            "caseId": "htmx-checkbox",
+            "completed": 21,
+            "cancelled": 1,
+            "failed": 0,
+            "unattempted": 18
+          },
+          {
+            "caseId": "marked-empty-heading",
+            "completed": 0,
+            "cancelled": 0,
+            "failed": 0,
+            "unattempted": 40
+          }
+        ]
+      },
+      "strictCleanupGate": "unverified",
+      "limitation": "Agent stopped its owned repetition supervisor after the completion-timestamp gap was identified. Counts are retained receipt outcomes, not a newly passed sequence; completion timestamps are absent. None are added to the current cohort."
+    }
+  ],
+  "nativeHtmxFailure": {
+    "caseId": "htmx-checkbox",
+    "pair": 15,
+    "revision": "fixed",
+    "status": "failed",
+    "runId": "202a6e1c-caea-4f7b-a079-1b087e7dd846",
+    "assertionCount": 1,
+    "observedBehavior": "requirement-satisfied",
+    "productOutcome": "inconclusive",
+    "reasonCode": "CLEANUP_FAILED",
+    "productDurationMs": 2187.433166,
+    "commandDurationMs": 5969.898541999981,
+    "retainedProfile": ".repro-runs/readable-fixed/202a6e1c-caea-4f7b-a079-1b087e7dd846/.profile",
+    "profilePreserved": true,
+    "profileContentsNotReadOrModified": true,
+    "commandProcessAndTmpdirPostExitCleanup": "passed; scope excludes retained product profile",
+    "lastMultipleOwnedProcessSample": {
+      "elapsedMs": 5852.288874999969,
+      "completedAtMs": 5898.46545899997,
+      "rssBytes": 312377344,
+      "ownedCount": 3,
+      "error": null
+    },
+    "cause": "Close acknowledgement failure is recorded; rejection versus timeout and underlying Playwright/host cause are not established by this receipt.",
+    "receipt": ".repro-runs/practical-beta/native-stability-v4/htmx-checkbox/15-fixed/receipt.json",
+    "evidence": ".repro-runs/readable-fixed/202a6e1c-caea-4f7b-a079-1b087e7dd846/evidence.json"
+  },
+  "shutdownDiagnostic": {
+    "commands": 10,
+    "expectedOutcomes": 10,
+    "unexpected": 0,
+    "purpose": "Public shutdown event/call/settlement timestamps without changing limits; did not reproduce delay; not replacement acceptance evidence",
+    "source": {
+      "path": ".repro-runs/practical-beta/htmx-close-diagnostic-v1/summary.json",
+      "sha256": "8bcc618ae3be4ef0826ce28fa903d133b28c299e1d3b31d087aa94426d3cdcc9",
+      "bytes": 21107
+    }
+  },
+  "unverified": [
+    "Complete native htmx 20-pair gate:15 buggy and14 fixed expected outcomes,1 fixed CLEANUP_FAILED,10 remaining rows unattempted in the failed cohort; exact shutdown delay cause unresolved",
+    "Accessibility, native 200% zoom and actual screen-reader workflows deferred; original CUA service restriction never retried/probed",
+    "Linux amd64 and another physical host",
+    "Linux fault-injection suite not executed; fault/privacy coverage is native/unit evidence",
+    "Held-out effectiveness, arbitrary applications, general-purpose redaction or global reduction minimality"
+  ],
+  "holdProvenance": {
+    "earlierBlanketBetaHold": "Project instruction at 921f14c:STATE.md:11, superseded by owner clarification; no observed beta service denial",
+    "actualRestrictedOperation": "Historical Chrome CUA navigation to http://127.0.0.1:4318, recorded net::ERR_BLOCKED_BY_CLIENT; no current probe",
+    "reference": "evidence/NATIVE-ZOOM-GATE.md:9",
+    "prerequisite": "Provider must legitimately permit the original supported Chrome route; native zoom control and actual screen-reader operation/observation must be supported. No callable policy remediation is known; owner must also resume deferred accessibility."
+  },
+  "evidence": [
+    {
+      "path": ".repro-runs/practical-beta/native-clean-by-cutoff-fix/all-units.log",
+      "sha256": "65b3b1a50213aa6b1c8ae830863e5cff1cbd8ef7fc82d63110b22d7475034a0f",
+      "bytes": 30002
+    },
+    {
+      "path": ".repro-runs/practical-beta/linux-cleanup-repair/functional-browser.log",
+      "sha256": "e47300959bc0c0efb3c528593c2ad73b0f3b458fb5cf4dcdaea019f46df2be2f",
+      "bytes": 5530
+    },
+    {
+      "path": ".repro-runs/practical-beta/native-clean-by-cutoff-fix/typecheck-final.log",
+      "sha256": "6c762e335cb113232b35d1103e850970facc97992570c8da9e1763356c2358a4",
+      "bytes": 47
+    },
+    {
+      "path": ".repro-runs/practical-beta/native-clean-by-cutoff-fix/lint-final.log",
+      "sha256": "c8c5805a54d8564016c7cbb05468a9cf22f70863ee87ad32bb04a18876ca6f23",
+      "bytes": 63
+    },
+    {
+      "path": ".repro-runs/practical-beta/linux-cleanup-repair/build.log",
+      "sha256": "e72c7ae118b13edfce9f09d41f28217c3e90a948d924bbeb538157e981a0aee7",
+      "bytes": 53
+    },
+    {
+      "path": ".repro-runs/practical-beta/linux-cleanup-repair/package/run-9G1L3Q/summary.json",
+      "sha256": "17e60f05a9a6b86ebebcbbc78b614d015ed0788f70726963b912334200dbdff1",
+      "bytes": 14807
+    },
+    {
+      "path": ".repro-runs/practical-beta/native-v5/input-identities.json",
+      "sha256": "c553b9df2ddd70a3e8e588623fd7c676cda2ed1ce47a5c19e40ccc11bdc9e6ff",
+      "bytes": 14452
+    },
+    {
+      "path": ".repro-runs/practical-beta/native-v5-workflow-independent-audit.json",
+      "sha256": "1de32a6c94de283ac5ec240e721831fa32a4c936a89b6bd98d34386cf2d7b840",
+      "bytes": 102707
+    },
+    {
+      "path": ".repro-runs/practical-beta/native-stability-v4-partial-audit.json",
+      "sha256": "e0164222fe2f374819e11b1509df9dd7c662e148ae7e4958f4fee172099a19dd",
+      "bytes": 186490
+    },
+    {
+      "path": ".repro-runs/practical-beta/native-marked-v1-independent-audit.json",
+      "sha256": "4d0d605a7e8df4941d31664325259958cd1769dfa0f47a593794ad641bf84c09",
+      "bytes": 95694
+    },
+    {
+      "path": ".repro-runs/practical-beta/htmx-close-diagnostic-v1/summary.json",
+      "sha256": "8bcc618ae3be4ef0826ce28fa903d133b28c299e1d3b31d087aa94426d3cdcc9",
+      "bytes": 21107
+    },
+    {
+      "path": ".repro-runs/practical-beta/independent-linux-audit-v3/cohort-v1.json",
+      "sha256": "f24828419cf99eb1a8041d41a6c2050bc1439d38d3144a42d59ac1061d411892",
+      "bytes": 4849
+    },
+    {
+      "path": ".repro-runs/practical-beta/independent-linux-audit-v3/profile-d-v1.json",
+      "sha256": "895efce47748481ef119049ff3188fd352c13427b48be9021f552b6adc8dcc51",
+      "bytes": 2833
+    },
+    {
+      "path": ".repro-runs/practical-beta/delivery/capsules.json",
+      "sha256": "677a9070d54faf84f6191d3520f879b9177f6d995be58692372876f56602e586",
+      "bytes": 23000
+    },
+    {
+      "path": ".repro-runs/practical-beta/delivery/resource-cleanup.json",
+      "sha256": "73312019d1430275262f6d59669be0df521e31b525504d18c48375d6d7b4f63f",
+      "bytes": 1835
+    }
+  ]
+}

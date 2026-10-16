@@ -1,5 +1,24 @@
 # Supported scope and observed limits
 
+## Current practical beta extension
+
+The synthetic alpha below remains supported. The beta adds three registered public repository cases, with current evidence in [PRACTICAL-BETA-PROGRESS](../evidence/PRACTICAL-BETA-PROGRESS.md) and exact pins/criteria in the [frozen protocol](../benchmarks/PRACTICAL-BETA-PROTOCOL.md). The beta is incomplete because native htmx stability failed on browser shutdown. Accessibility is deferred/unverified throughout this extension.
+
+| Boundary | Implemented and observed | Limit |
+| --- | --- | --- |
+| Real source | Actual pinned morphdom textarea, htmx delegated checkbox and Marked empty-heading buggy/fixed library source in local integration pages | Three selected development cases, not arbitrary repositories or full upstream applications |
+| Capture and oracle | Explicit consent/declaration, schema 3 frozen registered expectation, independent DOM assertion and exact source/harness identities | No manual/private recording, invented expectation or unrelated failure accepted as the bug |
+| Reduction | Action/dependency-group deletion with repeated acceptance and complete trial accounting; morphdom 3→2, htmx 2→2, Marked 3→3 | No value/source/state reduction; all three minimalities unverified |
+| Export | Readable conventional single-revision Node test, locked dependencies, selected source/provenance/licenses and integrity-checked runner | Public prerequisite acquisition needed; no LLM, key, proprietary viewer or original workspace needed |
+| Platform evidence | Three fresh Linux arm64 workflows and 20 buggy/fixed exported pairs each passed; native macOS arm64 workflows passed | Native htmx stability failed on close acknowledgement; no Linux amd64/other physical host claim |
+| Linux boundary | Fresh owned VM/daemon, capsule-only no-cache builds, no host binds/credentials/runtime external network, unprivileged user, verified init, sandbox enabled, unchanged approved policy and limits | Ordinary containers are not hostile-code isolation; receiving hosts need their own legitimate scoped permission |
+| Privacy and failures | Registered public projection only; secret sentinels, cancellation/deadlines, missing/tampered dependencies, malformed input and user-file preservation tested | General redaction/private-data support unestablished; fault-injection evidence is native/unit, not a Linux fault suite |
+| UI | Functional case selection, expectation confirmation, observed failure, reduction/trials, comparison, export and historical inspection tested | Accessibility, native 200% zoom and actual screen-reader workflows deferred/unverified |
+
+Node ≥24 is declared; the measured runtime is Node 26.7.0, Playwright 1.64.0 and Chromium 156.0.8078.4. The Linux recipe targets arm64 and pins the Node Debian base digest, but system repositories are not snapshotted. Native development uses existing dependencies/browser and is not a clean-machine observation. Final case packages and exact metric/audit identities are linked in the current report.
+
+## Retained synthetic alpha boundary
+
 This matrix describes the implemented local synthetic product. It is not a claim that every release gate has passed; exact final commands and remaining gates belong in [RELEASE](../evidence/RELEASE.md).
 
 | Boundary | Implemented and observed | Unsupported or not established |
