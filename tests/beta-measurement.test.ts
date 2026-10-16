@@ -11,8 +11,8 @@ async function workspace() {
   await mkdir(parent, { recursive: true });
   return mkdtemp(join(parent, 'case-'));
 }
-function launch(output: string, code: string, timeout = 40000, expected = 0, executable = process.execPath) {
-  const child = spawn(process.execPath, [supervisor, '--output', output, '--timeout-ms', String(timeout), '--expect-exit', String(expected), '--', executable, '-e', code], { stdio: ['ignore', 'pipe', 'pipe'] });
+function launch(output: string, code: string, timeout = 40000, expected = 0, executable = process.execPath, preload?: string) {
+  const child = spawn(process.execPath, [...(preload ? ['--import', preload] : []), supervisor, '--output', output, '--timeout-ms', String(timeout), '--expect-exit', String(expected), '--', executable, '-e', code], { stdio: ['ignore', 'pipe', 'pipe'] });
   let stdout = '', stderr = '';
   child.stdout.on('data', bytes => { stdout += String(bytes); });
   child.stderr.on('data', bytes => { stderr += String(bytes); });
@@ -43,6 +43,35 @@ async function withSentinel(run: () => Promise<void>) {
   } finally { sentinel.kill(); await closed; }
 }
 
+test('an early timer callback cannot end native cleanup observation before its absolute cutoff', { timeout: 15000 }, async () => {
+  const root = await workspace(), output = join(root, 'measurement');
+  const preload = join(root, 'early-timer.mjs'), marker = join(root, 'early-timer-fired');
+  // Timer delivery is the only substituted boundary. The real supervisor,
+  // monotonic clock, command, process census and receipt remain exercised.
+  await writeFile(preload, `import { writeFileSync } from 'node:fs';
+const schedule = globalThis.setTimeout;
+let shortenNextTerminal = true;
+globalThis.setTimeout = (callback, delay, ...args) => {
+  if (shortenNextTerminal && delay >= 4000 && delay <= 5000) {
+    shortenNextTerminal = false;
+    return schedule(() => { writeFileSync(${JSON.stringify(marker)}, 'early callback'); callback(...args); }, delay - 100);
+  }
+  return schedule(callback, delay, ...args);
+};
+`);
+  const result = await launch(output, 'process.exit(0)', 40000, 0, process.execPath, preload).closed;
+  assert.equal(result.code, 0, result.stderr);
+  assert.equal(await readFile(marker, 'utf8'), 'early callback');
+  const receipt = JSON.parse(await readFile(join(output, 'receipt.json'), 'utf8'));
+  assert.equal(receipt.outcome, 'completed');
+  assert.equal(receipt.cleanup.passed, true);
+  assert.deepEqual(receipt.cleanup.first.owned, []);
+  assert.deepEqual(receipt.cleanup.terminal.owned, []);
+  assert.ok(receipt.cleanup.terminal.elapsedMs >= receipt.durationMs + 5000,
+    `Terminal census at exit + ${receipt.cleanup.terminal.elapsedMs - receipt.durationMs} ms preceded the frozen 5000 ms cutoff`);
+  assert.deepEqual(receipt.interventions, []);
+});
+
 test('native measurement records real descendant RSS and distinct cleanup censuses without changing user files', { timeout: 20000 }, async () => {
   await withSentinel(async () => {
     const root = await workspace(); const output = join(root, 'measurement');
@@ -58,7 +87,7 @@ test('native measurement records real descendant RSS and distinct cleanup census
     assert.ok(receipt.memory.peakRssBytes > 0);
     assert.match(receipt.memory.method, /sampled.*RSS.*not.*kernel/i);
     assert.ok(receipt.processes.observed.length >= 2, 'The real owned grandchild must be observed');
-    assert.ok(receipt.cleanup.terminal.elapsedMs - receipt.cleanup.first.elapsedMs >= 4900);
+    assert.ok(receipt.cleanup.terminal.elapsedMs >= receipt.durationMs + 5000);
     assert.deepEqual(receipt.cleanup.terminal.owned, []);
     assert.equal(receipt.cleanup.passed, true);
     assert.equal(receipt.temporaryFiles.terminal.length, 0);
@@ -84,7 +113,7 @@ test('owner cancellation stops only the measured process group and preserves can
     assert.equal(receipt.stopReason, 'owner-cancelled');
     assert.equal(receipt.cleanup.passed, true);
     assert.deepEqual(receipt.cleanup.terminal.owned, []);
-    assert.ok(receipt.cleanup.terminal.elapsedMs - receipt.stopAtMs >= 7900);
+    assert.ok(receipt.cleanup.terminal.elapsedMs >= receipt.stopAtMs + 8000);
     assert.ok(receipt.interventions.some((event: { signal: string }) => event.signal === 'SIGTERM'));
   });
 });
@@ -102,6 +131,7 @@ test('watchdog escalates an owned stubborn descendant and never relabels forced 
     assert.ok(receipt.interventions.some((event: { signal: string }) => event.signal === 'SIGKILL'));
     assert.equal(receipt.cleanup.passed, true);
     assert.deepEqual(receipt.cleanup.terminal.owned, []);
+    assert.ok(receipt.cleanup.terminal.elapsedMs >= receipt.stopAtMs + 8000);
   });
 });
 

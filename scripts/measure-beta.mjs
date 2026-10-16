@@ -150,7 +150,14 @@ export async function measureCommand(options) {
   function scheduleTerminal() {
     clearTimeout(terminalTimer);
     const deadline = stopAtMs === undefined ? exitAtMs + NORMAL_CLEANUP_MS : stopAtMs + STOP_CLEANUP_MS;
-    terminalTimer = setTimeout(terminalReady, Math.max(0, deadline - elapsed()));
+    const checkDeadline = () => {
+      const remaining = deadline - elapsed();
+      if (remaining > 0) terminalTimer = setTimeout(checkDeadline, Math.ceil(remaining));
+      else terminalReady();
+    };
+    // Fractional timer delays can be truncated, so callback delivery alone is
+    // not evidence that the absolute cleanup observation point was reached.
+    checkDeadline();
   }
   function recordFirstCensus(kind = 'first-post-exit') {
     first = sample(kind);
@@ -220,7 +227,8 @@ export async function measureCommand(options) {
     await firstTemporaryCensus;
     if (closedAtMs === undefined) { measurementErrors.push('COMMAND_STREAMS_OPEN'); child.stdout.destroy(); child.stderr.destroy(); }
     if (!terminalTemporaryFiles.length && !temporaryCensusFailed) await rmdir(scratch);
-    const cleanupPassed = first !== undefined && first.error === null && terminal.error === null && terminal.owned.length === 0 && terminalTemporaryFiles.length === 0 && !temporaryCensusFailed;
+    const cleanupDeadline = stopAtMs === undefined ? exitAtMs + NORMAL_CLEANUP_MS : stopAtMs + STOP_CLEANUP_MS;
+    const cleanupPassed = first !== undefined && first.error === null && terminal.error === null && terminal.elapsedMs >= cleanupDeadline && terminal.owned.length === 0 && terminalTemporaryFiles.length === 0 && !temporaryCensusFailed;
     const commandPassed = !launchFailed && exitCode === options.expectedExit && exitSignal === null;
     const outcome = stopReason === 'owner-cancelled' ? 'cancelled' : !stopReason && commandPassed && cleanupPassed && !outputTruncated && !measurementErrors.length ? 'completed' : 'failed';
     const artifacts = [];
