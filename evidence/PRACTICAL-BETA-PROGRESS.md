@@ -12,15 +12,17 @@ Observed failing regressions preceded fixes for a wrapper name collision, incomp
 
 Permitted review during the runtime hold also exposed driver defects. New failing unit tests preceded repairs for cancellation during final cleanup incorrectly retaining success, delayed host-client signals outliving process ownership, stuck stdio after timeout/cancellation, and malformed cleanup/kernel receipts passing validation. Host-client lifecycle tests use fake timers and mocked signals; they do not establish Docker cancellation or runtime cleanup. The security profile and frozen acceptance thresholds are unchanged.
 
+A subsequent input audit found that a CLI declaration containing `expectation: null` silently selected the registered expectation. A failing ordinary unit regression preceded a boundary check matching the API's rejection of null/non-object/array declarations. It returns an actionable `input/CASE_DECLARATION` error and preserves the input and neighboring files. The internal fixture-construction default is unchanged.
+
 ## Completed verification
 
 Counts overlap and must not be added into a new aggregate suite.
 
 | Check | Actual result | Boundary |
 | --- | --- | --- |
-| Ordinary unit/contract suite | **294/294 passed** | `driver-hold-review/all-units-final.log`; includes 16 added driver regressions; earlier 278- and 291-test results retained |
-| Types, lint, driver syntax | Passed after driver repairs | Ordinary static checks; no runtime portability claim |
-| Build, kit | Retained pass before driver-only repairs | No product source changed in these repairs; kit is structural/synthetic evidence |
+| Ordinary unit/contract suite | **295/295 passed** | `explicit-expectation-null/all-units.log`; includes the null-expectation regression; earlier results retained |
+| Types, lint, build | Passed after the input repair | Ordinary static/build checks; no runtime portability claim |
+| Driver syntax, kit | Retained passes | Input repair changes neither driver nor fixtures; kit is structural/synthetic evidence |
 | Repository adapter/lifecycle checks | **10/10 passed** | Actual buggy/fixed pairs, privacy, close acknowledgement, late acquisition and profile preservation |
 | Repository fault checks | **7/7 passed** | Cancellation/recovery with unrelated Chromium alive, deadline, unavailable browser/source, CSP-blocked secret-bearing request; late CSP tests include five repetitions each |
 | Workbench journeys | **4/4 passed** | API plus all three cases through capture, reduction, verification, export and history |
@@ -28,9 +30,11 @@ Counts overlap and must not be added into a new aggregate suite.
 | Native CLI workflows | All three completed | Capture, replay, reduction, comparison, export; actual assertion evidence independently re-evaluated |
 | Native exported regression stability | **20 buggy + 20 fixed per case** | 60 target-assertion failures and 60 fixed passes; zero unexpected outcomes; no dependency/setup failures counted as bugs |
 | Export/receipt inspection | Three capsules validated; **297 records / 150 distinct runs** audited | Read-only integrity, source, entrypoint-specific harness, frozen assertion, reduction trial, cleanup and log-hash validation |
-| Isolated driver unit checks/preparation | **26/26 focused tests**, three real capsule `--prepare` checks | 16 receipt/policy/preparation and 10 mocked lifecycle tests; v3 contexts validated without Docker or application execution |
+| Isolated driver unit checks/preparation | **26/26 focused tests**, three updated capsule `--prepare` checks | 16 receipt/policy/preparation and 10 mocked lifecycle tests; v4 contexts validated without Docker or application execution |
 
 Native environment: macOS arm64, Node 26.7.0, Playwright 1.64.0, pinned Chromium 156.0.8078.4. Existing workspace dependencies/browser were used. No LLM, API key, account or proprietary viewer is needed by the exported conventional test. These observations are neither fresh-machine verification nor a determinism proof.
+
+All native runtime results below precede the null-expectation input repair. The previous build and native capsules remain preserved. Rebuilding changed only `dist/cli.js` and its source map; the index runner, web artifacts, readable test, manifests and case assets remain byte-identical. Three newly emitted capsules differ from their native-tested predecessors only in `dist/cli.js` and `integrity.json`; they passed import/content/preparation validation but were not executed. `explicit-expectation-null/exports.json` binds both CLI identities and the precise export differences. Retained results do not establish a fresh final-candidate workflow pass.
 
 | Case | Full pinned revisions (buggy → fixed) | Actions / serialized action bytes | Capture / replay / reduction / export |
 | --- | --- | --- | --- |
@@ -58,7 +62,7 @@ The new task-owned VM setup did complete, with an initially empty Docker image s
 
 Purpose: prove that each exported regression works from its own package and declared public prerequisites, without the current workspace, ambient dependencies/browser caches, hidden credentials or host services; collect actual Linux kernel resource and cleanup evidence. This evidence is essential to the requested beta milestone.
 
-The driver after these unit-tested repairs is `scripts/verify-beta-isolated.mjs`, SHA256 `03408c04a25b12517066a25d2a5d34d8cd6dd4cd68a60a3d308fa0258d6ea63c`. All three capsule contents passed preparation checks under `.repro-runs/practical-beta/isolation-prepared-v3/{caseId}/`; `driver-hold-review/prepare-v3.json` binds the interim driver `3cd771eda5c7a3877772fa1224eb9e37992365209670e28a9143b08b29f7f9f3` used for those checks. The subsequent host-client cancellation fixes change neither capsule contents nor preparation/observer code. Earlier v2 contexts and their driver `ca032e114139c3d2715b9beda7b54227d4bc4fe276e09ed9cca1b7597d2e8341` remain preserved. No version was executed in Docker. The [frozen protocol](../benchmarks/PRACTICAL-BETA-PROTOCOL.md) remains unchanged.
+The driver after the unit-tested repairs is `scripts/verify-beta-isolated.mjs`, SHA256 `03408c04a25b12517066a25d2a5d34d8cd6dd4cd68a60a3d308fa0258d6ea63c`. Current capsule-only contexts are under `.repro-runs/practical-beta/isolation-prepared-v4/{caseId}/`, bound by `explicit-expectation-null/exports.json`. Earlier v2/v3 contexts, their preparation receipts and original driver identities remain preserved as historical preparation evidence. No version was executed in Docker. The [frozen protocol](../benchmarks/PRACTICAL-BETA-PROTOCOL.md) remains unchanged.
 
 Manual review must establish legitimate execution support for the exact Linux arm64 runtime and the unchanged profile `949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b`. Runtime restrictions remain USER node, enabled Chromium sandbox, network none, read-only root, all capabilities dropped, no-new-privileges, 2 CPUs, 128 tasks, 1 GiB memory, 256 MiB /tmp and /dev/shm, and task-owned evidence volumes. No host binds, Docker socket inside the container, credentials, privileged mode or sandbox disabling are permitted. Acquisition needs public npm/browser/system dependency access and the pinned Node 26.7.0 Debian base image; replay itself must have no external network.
 
@@ -77,3 +81,5 @@ Raw evidence is ignored local data under `.repro-runs/practical-beta/`, with con
 Primary current logs: `all-units-final-native.log`, `adapter-before-native-v1.log`, `case-faults-csp-timing.log`, `case-ui-expanded-v2.log`, `legacy-adapter-history-v1.log`, `native-v2-driver.log`, `native-stability-v1-driver.log`, `native-evidence-audit.json`, `isolation/vm-stop-owner-hold.log`. Their names are relative to `.repro-runs/practical-beta/`.
 
 Later driver-only evidence is under `driver-hold-review/`: `receipt-red.log` (six observed failures), `receipt-green.log` (16 passes), `lifecycle-red.log` (four failures/two passes), the separate drain/cancel/post-exit red logs, `lifecycle-post-exit-cancel-green.log` (10 passes), `all-units-final.log` (294 passes), static-check logs, and `prepare-v3.json`. Independent review's cancellation reproduction is retained at `isolated-review-cancel-drain.log`. The native JSON summary keeps its earlier 278-unit cutoff; native case results were not rerun for these driver changes.
+
+The later input repair is bound by `explicit-expectation-null/red.log` (observed missing rejection), `green.log` (15 focused passes), `all-units.log` (295 passes), build/typecheck/lint logs, `previous-dist.json` and `exports.json`. The old build is retained in that directory's `previous-dist/`; original native logs and capsules were not overwritten. The hold has persisted through native-evidence preservation, driver repairs and this input repair. Independent requirement review found no further demonstrated code defect; fresh runtime evidence remains essential and blocked by the owner's no-retry instruction.

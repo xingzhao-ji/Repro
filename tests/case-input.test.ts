@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { randomUUID } from 'node:crypto';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { createCaseManifest } from '../src/browser-case.js';
 import { readExperiment } from '../src/input.js';
+import { ReproError } from '../src/contracts.js';
 
 test('an explicit registered-case declaration freezes the same expectation through the public file reader', async () => {
   const root = join('.repro-runs/practical-beta/input-tests', randomUUID()); await mkdir(root, { recursive: true });
@@ -17,6 +18,19 @@ test('an explicit registered-case declaration freezes the same expectation throu
     await writeFile(path, JSON.stringify(data));
     await assert.rejects(readExperiment(path), error => error instanceof Error && !error.message.includes('privacy-sentinel'));
   }
+});
+
+test('a null case expectation is rejected instead of silently selecting the registered requirement', async () => {
+  const root = join('.repro-runs/practical-beta/input-tests', randomUUID()); await mkdir(root, { recursive: true });
+  const path = join(root, 'declaration.json');
+  const bytes = JSON.stringify({ caseId: 'morphdom-textarea', expectation: null });
+  await writeFile(path, bytes);
+  const neighbor = join(root, 'user-file.txt'); await writeFile(neighbor, 'Preserve user bytes.');
+  await assert.rejects(readExperiment(path), error => error instanceof ReproError
+    && error.category === 'input' && error.code === 'CASE_DECLARATION'
+    && /cases --case ID/.test(error.message));
+  assert.equal(await readFile(path, 'utf8'), bytes);
+  assert.equal(await readFile(neighbor, 'utf8'), 'Preserve user bytes.');
 });
 
 test('CLI lists an inspectable case declaration without launching a browser', () => {

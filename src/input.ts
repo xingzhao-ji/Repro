@@ -11,7 +11,8 @@ export async function readManifest(path: string): Promise<Manifest> {
 export async function readExperiment(path: string): Promise<Manifest> {
   const input = await readDocument(path, 'EXPERIMENT', 'Experiment');
   if (input && typeof input === 'object' && !Array.isArray(input) && 'caseId' in input) {
-    if (Object.keys(input).length !== 2 || !('expectation' in input) || typeof input.caseId !== 'string') {
+    if (Object.keys(input).length !== 2 || !('expectation' in input) || typeof input.caseId !== 'string'
+      || !input.expectation || typeof input.expectation !== 'object' || Array.isArray(input.expectation)) {
       throw new ReproError('input', 'CASE_DECLARATION', 'Provide only caseId and an explicit expectation. Run cases --case ID to inspect the supported declaration.');
     }
     return createCaseManifest(input.caseId, input.expectation as BrowserCaseExpectation);
