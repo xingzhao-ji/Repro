@@ -1,8 +1,8 @@
 # Supported scope and observed limits
 
-## Current practical beta extension
+## Current practical beta (release 0.1.0)
 
-The synthetic alpha below remains supported. The beta adds three registered public repository cases, with current evidence in [PRACTICAL-BETA-PROGRESS](../evidence/PRACTICAL-BETA-PROGRESS.md) and exact pins/criteria in the [frozen protocol](../benchmarks/PRACTICAL-BETA-PROTOCOL.md). The beta is incomplete because native htmx stability failed on browser shutdown. Accessibility is deferred/unverified throughout this extension.
+The synthetic alpha below remains supported. The beta adds three registered public repository cases, with exact pins and criteria in the [frozen protocol](../benchmarks/PRACTICAL-BETA-PROTOCOL.md). Release 0.1.0 packages implementation `9aec7fe`. Its accepted native and Linux evidence is summarized in the [release notes](RELEASE-NOTES.md), and verification of the exact release tarball is in [`evidence/PRACTICAL-BETA-RELEASE.md`](../evidence/PRACTICAL-BETA-RELEASE.md). An earlier build's native htmx shutdown failure remains preserved; its cause is unresolved (see Known issues in the release notes). Earlier progress reports such as [PRACTICAL-BETA-PROGRESS](../evidence/PRACTICAL-BETA-PROGRESS.md) describe older candidates. Accessibility is deferred and unverified throughout this extension.
 
 | Boundary | Implemented and observed | Limit |
 | --- | --- | --- |
@@ -10,7 +10,7 @@ The synthetic alpha below remains supported. The beta adds three registered publ
 | Capture and oracle | Explicit consent/declaration, schema 3 frozen registered expectation, independent DOM assertion and exact source/harness identities | No manual/private recording, invented expectation or unrelated failure accepted as the bug |
 | Reduction | Action/dependency-group deletion with repeated acceptance and complete trial accounting; morphdom 3→2, htmx 2→2, Marked 3→3 | No value/source/state reduction; all three minimalities unverified |
 | Export | Readable conventional single-revision Node test, locked dependencies, selected source/provenance/licenses and integrity-checked runner | Public prerequisite acquisition needed; no LLM, key, proprietary viewer or original workspace needed |
-| Platform evidence | Three fresh Linux arm64 workflows and 20 buggy/fixed exported pairs each passed; native macOS arm64 workflows passed | Native htmx stability failed on close acknowledgement; no Linux amd64/other physical host claim |
+| Platform evidence | Native macOS arm64 workflows and 120/120 stability runs passed, as did three fresh Linux arm64 workflows and 20 buggy/fixed exported pairs each (implementation `9aec7fe`) | One historical native htmx close-acknowledgement failure on an earlier build is unexplained; no Linux amd64/other physical host claim |
 | Linux boundary | Fresh owned VM/daemon, capsule-only no-cache builds, no host binds/credentials/runtime external network, unprivileged user, verified init, sandbox enabled, unchanged approved policy and limits | Ordinary containers are not hostile-code isolation; receiving hosts need their own legitimate scoped permission |
 | Startup cleanup | Parent finalization requires timely natural worker completion plus either a sealed zero-creation-attempt receipt or an acquired context’s fresh close acknowledgment | A real failed launch with any creation attempt and no fresh acquired-context acknowledgment retains its profile; trusted pinned-browser lifecycle handling is not general descendant containment or reaping |
 | Privacy and failures | Registered public projection only; secret sentinels, cancellation/deadlines, missing/tampered dependencies, malformed input and user-file preservation tested | General redaction/private-data support unestablished; fault-injection evidence is native/unit, not a Linux fault suite |
@@ -18,7 +18,7 @@ The synthetic alpha below remains supported. The beta adds three registered publ
 
 Node ≥24 is declared; the measured runtime is Node 26.7.0, Playwright 1.64.0 and Chromium 156.0.8078.4. The Linux recipe targets arm64 and pins the Node Debian base digest, but system repositories are not snapshotted. Native development uses existing dependencies/browser and is not a clean-machine observation. Final case packages and exact metric/audit identities are linked in the current report.
 
-The startup cleanup implementation is described in [the boundary record](STARTUP-OWNER-BOUNDARY.md), with current verification status in [STATE](../STATE.md). The recorded platform results above retain their original candidate identities; they do not automatically verify the new worker implementation. Late completion cannot revise a cleanup failure or remove its retained profile.
+The startup cleanup implementation is described in [the boundary record](STARTUP-OWNER-BOUNDARY.md), with current verification status in [STATE](../STATE.md). The platform results above were recorded for the startup-repair worker implementation `9aec7fe`. A later runtime change needs its own native and Linux acceptance. Late completion cannot revise a cleanup failure or remove its retained profile.
 
 ## Retained synthetic alpha boundary
 

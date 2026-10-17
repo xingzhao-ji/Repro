@@ -1,5 +1,9 @@
 # Source delivery and hosted deployment boundaries
 
+## Practical beta 0.1.0 delivery status
+
+Release 0.1.0 is a local package (`repro-local-0.1.0.tgz`) plus reviewed source on the private GitHub repository. No hosted deployment target has been agreed, so nothing is deployed. No npm registry publication, GitHub Release object, public endpoint or cloud resource exists. The package is marked `private` and is installed from the tarball. Before any hosting, the decisions below are still required.
+
 The earlier publication hold is superseded. Reviewed source/history delivery to the existing private GitHub repository is authorized and has occurred; inspect the delivery receipts for the exact current commit. A new Library transfer remains unperformed because the available tool has no usable Library destination.
 
 The product runs locally. The user authorized reviewed source/history delivery to the existing private `xingzhao-ji/Repro` GitHub repository and a scanned source/assets/docs bundle in ChatGPT Library for cloud handoff. Preserve history and destination visibility; exclude local/private runtime data. Record actual commit, inventory, checksum and Library receipt. This does not authorize a hosted endpoint, telemetry, paid service, account provisioning or new cloud infrastructure. A portable source transfer is not a deployed or cloud-verified runtime.

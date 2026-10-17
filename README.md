@@ -2,9 +2,32 @@
 
 Repro captures an explicitly declared browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench and CLI share the same runner. Registered buggy and fixed revisions execute against the same frozen expected behavior in fresh browser state.
 
-The completed synthetic alpha is the baseline. This branch develops a practical beta on three pinned public repository bugs: morphdom textarea updates, htmx delegated checkbox events, and Marked empty headings. The current candidate (`9aec7fe`, startup cleanup repair) passes fresh native macOS arm64 workflows and 120/120 native stability runs. It also passes fresh isolated Linux arm64 workflows plus 20 buggy/fixed exported-test pairs for each of the three cases, 132 operations in all, independently audited under the unchanged approved controls. See [native acceptance](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md) and [Linux acceptance](evidence/LINUX-THREE-CASE-RESUME.md). An earlier candidate's native htmx stability run failed on browser shutdown and retained its profile. That failure's cause is still unresolved, so the practical beta is not declared complete. These are selected development cases using actual upstream source and small integration pages, not held-out effectiveness or arbitrary website support. See [verification status](evidence/PRACTICAL-BETA-PROGRESS.md) and the [frozen protocol](benchmarks/PRACTICAL-BETA-PROTOCOL.md). Earlier [release evidence](evidence/RELEASE.md) belongs to the synthetic alpha. Accessibility remains explicitly deferred and unverified. Real-user recording, PostgreSQL adapters and public untrusted execution remain unsupported.
+**Release 0.1.0 (practical beta)** packages implementation `9aec7fe` as `repro-local-0.1.0.tgz`. It supports the synthetic stale-response alpha plus three pinned public repository bugs: morphdom textarea updates, htmx delegated checkbox events and Marked empty headings. They run against actual upstream source in small integration pages.
 
-## Run locally
+The implementation passed its accepted gates:
+
+- fresh native macOS arm64 workflows and 120/120 native stability runs ([native acceptance](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md));
+- fresh isolated Linux arm64 workflows plus 20 buggy/fixed exported-test pairs per case, 132 operations in all, independently audited ([Linux acceptance](evidence/LINUX-THREE-CASE-RESUME.md)).
+
+Verification of the exact release tarball is recorded in [`evidence/PRACTICAL-BETA-RELEASE.md`](evidence/PRACTICAL-BETA-RELEASE.md), added by a documentation-only commit after the release commit.
+
+Read [INSTALL](docs/INSTALL.md), [USAGE](docs/USAGE.md), [TROUBLESHOOTING](docs/TROUBLESHOOTING.md) and the [release notes](docs/RELEASE-NOTES.md). The notes cover known issues: one historical native htmx shutdown failure on an earlier build, cause unresolved, is preserved. They are selected development cases, not held-out effectiveness or arbitrary website support; see the [frozen protocol](benchmarks/PRACTICAL-BETA-PROTOCOL.md). Earlier [release evidence](evidence/RELEASE.md) belongs to the synthetic alpha. Accessibility remains explicitly deferred and unverified. Real-user recording, PostgreSQL adapters and public untrusted execution remain unsupported.
+
+## Install the release
+
+```sh
+mkdir repro-workspace && cd repro-workspace
+npm init -y
+npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.1.0.tgz
+export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
+npx --no-install playwright install chromium --only-shell
+npx --no-install repro doctor
+npx --no-install repro serve
+```
+
+See [INSTALL](docs/INSTALL.md) for requirements, checksum verification and running an exported capsule on another machine.
+
+## Run from a source checkout
 
 Use Node 24 or newer, npm, and a supported Chromium host. Development was tested on macOS arm64 with Node 26.7.0.
 

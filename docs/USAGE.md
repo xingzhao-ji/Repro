@@ -1,6 +1,65 @@
-# Local use
+# Operating Repro
 
-Repro is being built as a local synthetic failure compiler. Read `evidence/RELEASE.md` for the current gates and limitations. No API key, paid model, account or original service is required.
+Repro runs locally. No API key, paid model, account or original service is required. Install it with [INSTALL](INSTALL.md); when something fails, see [TROUBLESHOOTING](TROUBLESHOOTING.md). The [release notes](RELEASE-NOTES.md) list known issues and limits.
+
+## Release package workflow
+
+Run these commands from the workspace where you installed `repro-local-0.1.0.tgz`, with `PLAYWRIGHT_BROWSERS_PATH` exported as in INSTALL. Every operation that writes evidence needs a new directory beneath `.repro-runs/`.
+
+### 1. Declare the expected behavior
+
+Each registered case ships the expected behavior derived from its public issue or specification. Print it, read it, and save it:
+
+```sh
+npx --no-install repro cases
+mkdir -p .repro-runs/morphdom
+npx --no-install repro cases --case morphdom-textarea > .repro-runs/morphdom/expectation.json
+```
+
+The other case IDs are `htmx-checkbox` and `marked-empty-heading`. Capture refuses a changed or partial declaration. For the synthetic search app you can author your own declaration; see [AUTHORED-EXPECTATIONS](AUTHORED-EXPECTATIONS.md). The installed package includes an example at `node_modules/repro-local/docs/examples/search-beta-alpha.json`.
+
+### 2. Capture and replay the failure
+
+```sh
+npx --no-install repro record --consent --experiment .repro-runs/morphdom/expectation.json --output .repro-runs/morphdom/capture
+npx --no-install repro replay --manifest .repro-runs/morphdom/capture/manifest.json --output .repro-runs/morphdom/replay
+```
+
+Both exit **1** when the frozen assertion executes and fails on the buggy revision, which is the intended result. `--consent` is required. Capture records only the registered inputs and observed values, not arbitrary DOM, screenshots, traces, console output or request bodies.
+
+### 3. Reduce, compare and export
+
+```sh
+npx --no-install repro reduce --manifest .repro-runs/morphdom/capture/manifest.json --budget 80 --output .repro-runs/morphdom/reduction
+npx --no-install repro verify --manifest .repro-runs/morphdom/reduction/reduced.manifest.json --output .repro-runs/morphdom/comparison
+npx --no-install repro export --manifest .repro-runs/morphdom/reduction/reduced.manifest.json --output .repro-runs/morphdom/capsule
+npx --no-install repro inspect --capsule .repro-runs/morphdom/capsule
+```
+
+- `reduce` exits 0. Its `result.json` lists every trial with its seed, input digest, outcome, reason and cost. It also reports whether minimality is verified; it never claims global minimality.
+- `verify` runs the buggy and fixed revisions in separate fresh runs with the same assertion. It exits 0 only when buggy reproduces the failure and fixed satisfies the requirement.
+- `export` exits 0 once the capsule is atomically finalized. That proves the files were written, not that the failure reproduces elsewhere.
+
+### 4. Run the exported regression independently
+
+The capsule directory is the portable result. Copy it anywhere and follow its README: `npm ci --ignore-scripts --omit=dev`, install the browser, then `REPRO_REVISION=buggy node --test replay.test.mjs` (fails with `TARGET_ASSERTION`) and `REPRO_REVISION=fixed node --test replay.test.mjs` (passes). See [INSTALL](INSTALL.md#run-an-exported-regression-capsule-elsewhere).
+
+### Workbench
+
+`npx --no-install repro serve` starts the workbench at `http://127.0.0.1:4318` (`--port 0` picks a free port; `--output .repro-runs/NAME` selects its ledger directory). The workbench runs the same core as the CLI:
+
+1. Choose the application case.
+2. Review the linked expected-behavior source and the declared values.
+3. Consent, confirm that you reviewed the expectation, then start capture.
+4. Inspect the observed values, then reduce, compare the fixed revision and export.
+
+Cancel stops the selected active job. Refresh reconnects to persisted state.
+
+### Cancellation and cleanup
+
+Press Ctrl-C (or send SIGTERM) to cancel a CLI operation. It exits **130** and finalizes nothing. Export removes its own partial staging directory, and the next attempt needs a new output directory. Owned browser and server resources are released within 8 seconds of cancellation and within 5 seconds of ordinary completion. Unrelated processes and other runs' files are never touched. If shutdown cannot be certified, the run reports `CLEANUP_FAILED` and keeps its browser profile; see [TROUBLESHOOTING](TROUBLESHOOTING.md#cleanup_failed-and-a-retained-profile).
+
+## Source checkout and synthetic workflow
 
 Use Node 24 or newer and npm. Dependencies are pinned in `package-lock.json`.
 
