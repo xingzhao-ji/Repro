@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "status": "candidate-prerequisites-passed-no-acceptance-claim",
+  "candidate": {
+    "branch": "task/cleanup-failure-basis",
+    "testedSourceCommit": "1ae6ffc",
+    "headAtReceiptBuild": "1ae6ffcb1636d6171026e3264f09a3eb0eb9d8dc",
+    "base": "c880a07 (implementation 9aec7fe)"
+  },
+  "change": "Fixed-vocabulary Cleanup basis clause on CLEANUP_FAILED for registered browser cases; validated receipt basis fields; no shutdown, deadline or retention change (ADR 0003).",
+  "redBeforeGreen": {
+    "initialRed": {
+      "path": ".repro-runs/cleanup-basis/logs/basis-red-v1.log",
+      "bytes": 3794,
+      "sha256": "702713c361da77ee7de6f21ea7a3221f5b63e5ee871adf8013095542643df3d3"
+    },
+    "protocolRed": {
+      "path": ".repro-runs/cleanup-basis/logs/basis-protocol-red-v1.log",
+      "bytes": 5226,
+      "sha256": "a4e2659fe3e939b41bd636179640e0c2c455ac9b334ed217851da8314a6bbff6"
+    },
+    "reviewRoundRed": {
+      "path": ".repro-runs/cleanup-basis/logs/review-fixes-red-v1.log",
+      "bytes": 15346,
+      "sha256": "045ae88f58b4e38a5b589fa37409310d6502125832bec7af0b884de87f5a2027"
+    },
+    "reviewRoundGreen": {
+      "path": ".repro-runs/cleanup-basis/logs/review-fixes-green-v1.log",
+      "bytes": 6524,
+      "sha256": "aaa25202ee9057beafb45351f01348ec98b35a1091153ae2d39f8274b0a88c3d"
+    },
+    "secondReviewGreen": {
+      "path": ".repro-runs/cleanup-basis/logs/review2-fixes-green-v1.log",
+      "bytes": 3096,
+      "sha256": "1ca6bf2287b9dd59e54579fcd5710af7cfcbfc5d93f956a1f1aa4fcd4361ca63"
+    }
+  },
+  "ruleMutationSensitivity": [
+    {
+      "path": ".repro-runs/cleanup-basis/logs/rule-mutation-sensitivity-v1.json",
+      "bytes": 1483,
+      "sha256": "eef05c9a73d552a39e2fa66393208f7e6a265e64d72dbff48acb7a515b889b50"
+    },
+    {
+      "path": ".repro-runs/cleanup-basis/logs/rule-mutation-sensitivity-v2-additions.json",
+      "bytes": 193,
+      "sha256": "b1dc8d4d62cdf8a7b461697fd0b0b001558bb9fdac62cf14633dcaa54e1282de"
+    }
+  ],
+  "prerequisites": {
+    "typecheck": "passed",
+    "lint": "passed",
+    "build": "passed",
+    "kit": "passed",
+    "statusFile": {
+      "path": ".repro-runs/cleanup-basis/logs/prereq-v4.status",
+      "bytes": 40,
+      "sha256": "c97a2308384f6a8999b1fc28f2020f63b93fb20df7f52c0eda8ba0080d77a0e3"
+    },
+    "ordinary": {
+      "log": {
+        "path": ".repro-runs/cleanup-basis/logs/ordinary-v4.log",
+        "bytes": 39552,
+        "sha256": "fd0bdd01d2106f3054e6f499e7eb4266d24a618688958a8ba94d2bd8e15d3cc5"
+      },
+      "tests": 407,
+      "pass": 407,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    }
+  },
+  "functionalBrowser": {
+    "selection": "Same 50-test selection as 9aec7fe: case-adapter + case-faults (affected) and 11 files with the recorded skip pattern; 6 accessibility-focused or mixed files excluded.",
+    "affected": {
+      "log": {
+        "path": ".repro-runs/cleanup-basis/logs/affected-browser-v3-fresh-browser.log",
+        "bytes": 1831,
+        "sha256": "f2d6d5dbd3368470345bf23efd4b3b847fb9c1755403343ce81f2143de5b0684"
+      },
+      "tests": 15,
+      "pass": 15,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "remaining": {
+      "log": {
+        "path": ".repro-runs/cleanup-basis/logs/remaining-browser-v3-fresh-browser.log",
+        "bytes": 3817,
+        "sha256": "67cd960de20d4b3099bd28cc4d9e91008d05abfc6b0fcf65582752931f52c3e2"
+      },
+      "tests": 35,
+      "pass": 35,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0
+    },
+    "browserSubstitution": "PLAYWRIGHT_BROWSERS_PATH pointed at a fresh Playwright download of chromium_headless_shell-1248 outside iCloud, 18/18 files byte-identical to .repro-cache/browsers; run from a detached worktree at 1ae6ffc outside iCloud.",
+    "diagnosis": {
+      "path": ".repro-runs/cleanup-basis/browser-location-diagnosis.json",
+      "bytes": 1166,
+      "sha256": "87e5e853e4229173db15455c2b9526b889a399b34ddbd85bb9b73e4cc6200790"
+    },
+    "probe": {
+      "path": ".repro-runs/cleanup-basis/raf-probe.mjs",
+      "bytes": 1156,
+      "sha256": "98ac581a0ace68be704fbb5ffc8021766a9c6381254e00d0f6fc577d2a9efa9d"
+    },
+    "contaminatedRunsNotCounted": [
+      {
+        "path": ".repro-runs/cleanup-basis/logs/browser-v1.CONTAMINATED",
+        "bytes": 595,
+        "sha256": "c7c5117c4efb42aa36998b7cf29575d422124fffeafee3973343f0b3eb7e9e5c"
+      },
+      {
+        "path": ".repro-runs/cleanup-basis/logs/affected-browser-v1.log",
+        "bytes": 3467,
+        "sha256": "1f5fdcd226c959e514f405b9dacfa254ad8c4bd1db0d7ac60f0ff28a8324bf7a"
+      },
+      {
+        "path": ".repro-runs/cleanup-basis/logs/affected-browser-v2-outside-icloud.log",
+        "bytes": 3577,
+        "sha256": "a79fd82942c2e8ab351ed783c1763e18e23fa5b6f7ab4f42973e20220629a21e"
+      }
+    ],
+    "stoppedOrdinaryRun": {
+      "path": ".repro-runs/cleanup-basis/logs/ordinary-v1.STOPPED",
+      "bytes": 73,
+      "sha256": "42f3425e32756f11d2c9f4e3e7caa9b98b93a5e840aa24e810ee192e1fc5f239"
+    }
+  },
+  "review": "Two rounds of read-only automated Claude subagent review (not human review); all findings addressed or recorded as remaining.",
+  "remaining": [
+    "launch-join=expired and context-close=late have no fixture-driven test",
+    "No native workflow/stability, installed-package or Linux cohort has run on this candidate; 9aec7fe acceptance does not transfer (ADR 0002/0003).",
+    "Original native htmx shutdown cause unresolved; this change only improves future diagnosability.",
+    "Accessibility deferred: eight focused or mixed browser scenarios, native zoom and screen-reader workflows unverified."
+  ]
+}

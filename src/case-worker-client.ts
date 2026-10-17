@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { VERSION, type ManifestV3, type RunOptions, type RunEvent, type TeardownEvent } from './contracts.js';
 import { caseRevisionDigest, evaluateCaseObservation } from './browser-case.js';
 import { digest } from './manifest.js';
-import { boundedFrame, exactKeys, monotonicNs, WORKER_PROTOCOL, type CaseWorkerRequest, type ExecutionReceipt, type ParentFrame } from './case-worker-protocol.js';
+import { boundedFrame, CONTEXT_CLOSE_BASES, exactKeys, LAUNCH_JOIN_BASES, monotonicNs, WORKER_PROTOCOL, type CaseWorkerRequest, type ExecutionReceipt, type ParentFrame } from './case-worker-protocol.js';
 
 const sourceMode = import.meta.url.endsWith('.ts');
 const workerURL = new URL(sourceMode ? './case-worker.ts' : './case-worker.js', import.meta.url);
@@ -25,6 +25,10 @@ export interface WorkerCompletion {
   closed: boolean;
   protocolFailed: boolean;
   completedBeforeDeadline: boolean;
+  /** What ended the caller's wait: worker close, a receipt already proving failed cleanup, the deadline, or a protocol/spawn fault. */
+  finishedBy: 'close' | 'failed-receipt' | 'deadline' | 'protocol';
+  /** Whether the worker reported cleanup start; a close without it is an early exit, not a late cleanup. */
+  cleanupStarted: boolean;
 }
 /** Keep runtime prerequisites, not arbitrary caller credentials or Node preloads. */
 function workerEnvironment(): NodeJS.ProcessEnv {
@@ -91,9 +95,26 @@ function validEvent(value: unknown, request: CaseWorkerRequest, index: number): 
   if (action) return value.type === 'action-executed' && value.actionId === action.id && value.message === `Executed registered ${action.kind} action.`;
   return index === request.input.actions.length + 1 && value.type === 'assertion' && value.actionId === undefined && ASSERTION_MESSAGES.includes(String(value.message));
 }
+/**
+ * The explanatory basis must agree exactly with the flags that decide cleanup: the worker sets cleanupTimedOut
+ * only for an expired join, an unacknowledged close or an incomplete drain, so a failure must name its predicate.
+ */
+function cleanupBasisConsistent(value: Record<string, unknown>): boolean {
+  const close = value.contextClose, join = value.launchJoin;
+  if (typeof close !== 'string' || typeof join !== 'string'
+    || !(CONTEXT_CLOSE_BASES as readonly string[]).includes(close) || !(LAUNCH_JOIN_BASES as readonly string[]).includes(join)) return false;
+  if ((value.launchState === 'acquired') === (close === 'not-applicable')) return false;
+  if (value.closeAcknowledged !== (close === 'acknowledged')) return false;
+  if (join !== 'not-needed' && value.launchState === 'not-attempted') return false;
+  // no-budget exists only after a startup join; an acquisition observed past the join deadline has no close budget.
+  if (close === 'no-budget' && join === 'not-needed') return false;
+  if (join === 'expired' && value.launchState === 'acquired' && close !== 'no-budget') return false;
+  const explained = join === 'expired' || !['not-applicable', 'acknowledged'].includes(close) || value.workDrained !== true;
+  return value.cleanupTimedOut === explained;
+}
 function validReceipt(value: unknown, request: CaseWorkerRequest, acknowledged: RunEvent[]): value is ExecutionReceipt {
-  if (!boundedFrame(value) || !exactKeys(value, ['result', 'ownedDirectory', 'launchState', 'closeAcknowledged', 'workDrained', 'cleanupTimedOut', 'cleanupStartedNs'])
-    || !boundedFrame(value.result)) return false;
+  if (!boundedFrame(value) || !exactKeys(value, ['result', 'ownedDirectory', 'launchState', 'closeAcknowledged', 'workDrained', 'cleanupTimedOut', 'cleanupStartedNs', 'contextClose', 'launchJoin'])
+    || !boundedFrame(value.result) || !cleanupBasisConsistent(value)) return false;
   const r = value.result;
   if (!exactKeys(r, ['id', 'outcome', 'reason', 'manifestDigest', 'assertionDigest', 'harnessDigest', 'appRevision', 'appDigest', 'adapterVersion', 'runnerVersion',
     'seed', 'startedAt', 'durationMs', 'assertionCount', 'observation', 'events', 'artifacts', 'environment'], ['category'])) return false;
@@ -102,7 +123,7 @@ function validReceipt(value: unknown, request: CaseWorkerRequest, acknowledged: 
     || r.harnessDigest !== request.harnessDigest || r.startedAt !== request.startedAt || r.appRevision !== revision
     || !['', caseRevisionDigest(request.input, revision)].includes(String(r.appDigest)) || r.adapterVersion !== VERSION || r.runnerVersion !== VERSION
     || r.seed !== request.input.environment.seed || !finite(r.durationMs) || ![0, 1].includes(Number(r.assertionCount)) || typeof r.assertionCount !== 'number'
-    || !['not-attempted', 'unacquired', 'acquired'].includes(String(value.launchState))
+    || typeof value.launchState !== 'string' || !['not-attempted', 'unacquired', 'acquired'].includes(value.launchState)
     || typeof value.ownedDirectory !== 'boolean' || typeof value.closeAcknowledged !== 'boolean'
     || typeof value.workDrained !== 'boolean' || typeof value.cleanupTimedOut !== 'boolean' || !monotonicNs(value.cleanupStartedNs)
     || value.closeAcknowledged && value.launchState !== 'acquired' || !value.ownedDirectory && value.launchState !== 'not-attempted'
@@ -173,11 +194,11 @@ export function runCaseWorker(input: ManifestV3, options: RunOptions, identity: 
     let deadlineTimer: NodeJS.Timeout | undefined;
     const send = (frame: ParentFrame) => {
       if (!child?.connected || !boundedFrame(frame)) return;
-      try { child.send(frame, error => { if (error && !returned) { protocolFailed = true; finish(); } }); }
-      catch { if (!returned) { protocolFailed = true; finish(); } }
+      try { child.send(frame, error => { if (error && !returned) { protocolFailed = true; finish('protocol'); } }); }
+      catch { if (!returned) { protocolFailed = true; finish('protocol'); } }
     };
     const cancel = () => { if (ready) send({ version: WORKER_PROTOCOL, type: 'cancel', nonce }); };
-    const finish = () => {
+    const finish = (finishedBy: WorkerCompletion['finishedBy']) => {
       if (returned) return;
       returned = true;
       clearTimeout(deadlineTimer);
@@ -191,7 +212,8 @@ export function runCaseWorker(input: ManifestV3, options: RunOptions, identity: 
         child.unref(); child.channel?.unref();
       }
       resolveCompletion({ ...(receipt ? { receipt: structuredClone(receipt) } : {}), ...(attempts === undefined ? {} : { attempts }),
-        ownedDirectory, closed, protocolFailed, completedBeforeDeadline: closedAtNs !== undefined && ownershipDeadlineNs !== undefined && closedAtNs <= ownershipDeadlineNs && closedAtNs <= absoluteDeadlineNs });
+        ownedDirectory, closed, protocolFailed, completedBeforeDeadline: closedAtNs !== undefined && ownershipDeadlineNs !== undefined && closedAtNs <= ownershipDeadlineNs && closedAtNs <= absoluteDeadlineNs, finishedBy,
+        cleanupStarted: cleanupStartedNs !== undefined });
       // A timed-out owned worker may finish its existing close later. Retained
       // diagnostics remain bounded; late receipt/exit cannot mutate this result.
     };
@@ -199,17 +221,17 @@ export function runCaseWorker(input: ManifestV3, options: RunOptions, identity: 
       clearTimeout(deadlineTimer);
       const remaining = Math.max(0, Number(deadlineNs - process.hrtime.bigint()) / 1e6);
       deadlineTimer = setTimeout(() => {
-        if (process.hrtime.bigint() < deadlineNs) armDeadline(); else finish();
+        if (process.hrtime.bigint() < deadlineNs) armDeadline(); else finish('deadline');
       }, Math.ceil(remaining));
     };
-    const invalid = () => { protocolFailed = true; cancel(); finish(); };
+    const invalid = () => { protocolFailed = true; cancel(); finish('protocol'); };
     try { child = childProcess.spawn(process.execPath, args, { cwd: process.cwd(), env: workerEnvironment(), stdio: ['ignore', 'ignore', 'ignore', 'ipc'] }); }
-    catch { protocolFailed = true; finish(); return; }
-    child.on('error', () => { protocolFailed = true; finish(); });
+    catch { protocolFailed = true; finish('protocol'); return; }
+    child.on('error', () => { protocolFailed = true; finish('protocol'); });
     child.on('close', (code, signal) => {
       closed = true; closedAtNs = process.hrtime.bigint();
       if (code !== 0 || signal !== null || !receipt) protocolFailed = true;
-      if (!returned) finish();
+      if (!returned) finish('close');
     });
     child.on('message', (value: unknown) => {
       if (!boundedFrame(value) || value.version !== WORKER_PROTOCOL) { invalid(); return; }
@@ -250,7 +272,7 @@ export function runCaseWorker(input: ManifestV3, options: RunOptions, identity: 
         receipt = value.receipt; attempts = Number(value.attempts);
         // Missing close acknowledgment remains a bounded failure; its process
         // may continue cleanup and diagnostics after the caller returns.
-        if (receipt.cleanupTimedOut || !receipt.workDrained || receipt.launchState === 'acquired' && !receipt.closeAcknowledged) finish();
+        if (receipt.cleanupTimedOut || !receipt.workDrained || receipt.launchState === 'acquired' && !receipt.closeAcknowledged) finish('failed-receipt');
         return;
       }
       invalid();

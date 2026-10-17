@@ -122,6 +122,7 @@ for (const boundary of ['rejection', 'deadline'] as const) test(`launcher comple
     const result = await pending;
     assert.ok(owner); assert.equal(result.outcome, 'inconclusive'); assert.match(result.reason, /CLEANUP_FAILED/);
     if (boundary === 'deadline') assert.match(result.reason, /DEADLINE/);
+    else assert.match(result.reason, /launch=unacquired; launch-join=joined; context-close=not-applicable;/);
     assert.equal(result.assertionCount, 0);
     await fs.access(profile); assert.equal(await owner.probe(), 'used'); assert.equal(await sentinel.probe(), 'used');
     const original = JSON.stringify(result);
@@ -190,6 +191,7 @@ test('an acquired disconnected context cannot certify a detached writer has stop
       'Still make one scoped close request even when the context already reports closed.');
     assert.equal(ownerWasAliveAtRemoval, false, 'An idempotent close after disconnection must not delete a live detached writer’s profile.');
     assert.equal(result.outcome, 'inconclusive'); assert.match(result.reason, /CLEANUP_FAILED/); assert.equal(result.assertionCount, 0);
+    assert.match(result.reason, /launch=acquired; launch-join=[a-z-]+; context-close=stale;/, 'An already-disconnected context is reported as stale, not acknowledged.');
     await fs.access(owner.profile); assert.equal(await owner.probe(), 'used'); assert.equal(await sentinel.probe(), 'used');
     const original = JSON.stringify(result);
     await owner.stop(); await fs.access(owner.profile);

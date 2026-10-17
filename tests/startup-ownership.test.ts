@@ -60,6 +60,7 @@ for (const cancelled of [false, true]) test(`launch rejection cannot authorize p
     assert.equal(await owner.probe(), 'used');
     assert.equal(result.outcome, cancelled ? 'cancelled' : 'inconclusive');
     assert.match(result.reason, /CLEANUP_FAILED/); assert.equal(result.assertionCount, 0);
+    assert.match(result.reason, /Cleanup basis: [^.]*launch=unacquired; launch-join=joined; context-close=not-applicable; [^.]*\. .* Previous outcome: /);
     assert.equal(JSON.stringify(result).includes('private simulated'), false);
     const before = JSON.stringify(result); await owner.stop();
     await fs.access(profile);
@@ -95,6 +96,7 @@ for (const mode of ['delayed-launch', 'close-rejected', 'late-termination'] as c
       assert.equal(result.outcome, 'cancelled'); await assert.rejects(fs.access(profile), { code: 'ENOENT' });
     } else {
       assert.equal(result.outcome, 'inconclusive'); assert.match(result.reason, /CLEANUP_FAILED/);
+      assert.match(result.reason, mode === 'close-rejected' ? /launch=acquired; launch-join=not-needed; context-close=rejected;/ : /launch=acquired; launch-join=not-needed; context-close=timeout;/);
       assert.equal(await owner.probe(), 'used'); const before = JSON.stringify(result);
       await owner.stop(); await new Promise<void>(accept => setImmediate(accept));
       await fs.access(profile); assert.equal(JSON.stringify(result), before);
@@ -157,6 +159,7 @@ test('an exhausted acquisition cleanup window cannot accept an immediately resol
     controller.abort(); fixture.command('release-launch');
     const result = await pending;
     assert.equal(result.outcome, 'cancelled'); assert.match(result.reason, /CLEANUP_FAILED/);
+    assert.match(result.reason, /launch=acquired; launch-join=joined; context-close=no-budget;/, 'A timely join whose window was then consumed is reported as no-budget.');
     assert.equal(fixture.messages.filter(message => message.type === 'close-called').length, 1, 'Still request exactly one scoped best-effort shutdown.');
     await fs.access(owner.profile);
     const before = JSON.stringify(result); await owner.stop();

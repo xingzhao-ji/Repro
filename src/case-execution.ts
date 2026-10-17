@@ -15,7 +15,8 @@ import { assertExplicitBrowserCacheAvailable } from './browser-prerequisite.js';
 import type { CaseWorkerRequest, ExecutionBridge, ExecutionReceipt } from './case-worker-protocol.js';
 type WaitEvent = Pick<TeardownEvent, 'event' | 'outcome' | 'late' | 'budgetMs' | 'causeKind'>;
 type DiagnosticClock = { performanceMs: number; monotonicNs: string };
-async function settlesWithin(work: Promise<unknown>, timeoutMs: number, observe?: (event: WaitEvent, clock?: DiagnosticClock) => void): Promise<boolean> {
+type WaitOutcome = 'resolved' | 'rejected' | 'timeout';
+async function settlesWithin(work: Promise<unknown>, timeoutMs: number, observe?: (event: WaitEvent, clock?: DiagnosticClock) => void): Promise<WaitOutcome> {
   let timer: NodeJS.Timeout | undefined;
   let returned = false;
   try {
@@ -38,7 +39,7 @@ async function settlesWithin(work: Promise<unknown>, timeoutMs: number, observe?
     ]);
     returned = true;
     observe?.({ event: 'wait-return', outcome });
-    return outcome === 'resolved';
+    return outcome;
   } finally { if (timer) clearTimeout(timer); }
 }
 /** Registered public source in a fresh sandboxed browser; never an arbitrary host-code executor. */
@@ -85,6 +86,8 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
   let fault: ReproError | undefined;
   let cleanupFailed = false;
   let closeAcknowledged = false;
+  let contextClose: ExecutionReceipt['contextClose'] = 'not-applicable';
+  let launchJoin: ExecutionReceipt['launchJoin'] = 'not-needed';
   let workDrained: boolean;
   let cleanupStartedNs: string;
   let origin = '';
@@ -291,8 +294,9 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
     let startupCleanupDeadline: number | undefined;
     if (!context && launching) {
       startupCleanupDeadline = performance.now() + 2000;
-      const joined = await settlesWithin(launching.then(acquired => { if (!launchJoinExpired) context = acquired; }, () => undefined), 2000);
-      if (!joined || performance.now() > startupCleanupDeadline) { launchJoinExpired = true; cleanupFailed = true; }
+      const joined = await settlesWithin(launching.then(acquired => { if (!launchJoinExpired) context = acquired; }, () => undefined), 2000) === 'resolved';
+      if (!joined || performance.now() > startupCleanupDeadline) { launchJoinExpired = true; cleanupFailed = true; launchJoin = 'expired'; }
+      else launchJoin = 'joined';
     }
     // Rejected acquisition is classified by the parent only after the sealed
     // process receipt and actual worker close. It is never itself a certificate.
@@ -307,16 +311,18 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
       const closeDeadline = startupCleanupDeadline ?? performance.now() + 2000;
       const closeBudget = startupCleanupDeadline === undefined ? 2000 : Math.max(0, closeDeadline - performance.now());
       const close = closeOwned(context);
-      if (closeBudget <= 0) { cleanupFailed = true; void close.catch(() => undefined); }
+      if (closeBudget <= 0) { cleanupFailed = true; contextClose = 'no-budget'; void close.catch(() => undefined); }
       else {
         const settled = await settlesWithin(close, closeBudget, observeWait('context-close'));
-        closeAcknowledged = freshCloseRequested && settled && performance.now() <= closeDeadline;
+        const inTime = performance.now() <= closeDeadline;
+        closeAcknowledged = freshCloseRequested && settled === 'resolved' && inTime;
+        contextClose = settled !== 'resolved' ? settled : !freshCloseRequested ? 'stale' : inTime ? 'acknowledged' : 'late';
         if (!closeAcknowledged) cleanupFailed = true;
       }
     }
     // The drain intentionally handles work rejection; execution-work above
     // observes its original settlement separately without changing that decision.
-    workDrained = !executing || await settlesWithin(executing.catch(() => undefined), 1000, observeWait('execution-drain'));
+    workDrained = !executing || await settlesWithin(executing.catch(() => undefined), 1000, observeWait('execution-drain')) === 'resolved';
     if (!workDrained) cleanupFailed = true;
     if (fault && result.outcome !== 'cancelled') { result.outcome = 'inconclusive'; result.category = fault.category; result.reason = `${fault.code}: ${fault.message}`; }
     if (options.signal?.aborted) { result.outcome = 'cancelled'; result.category = 'cancelled'; result.reason = 'CANCELLED: The owner cancelled the run. Start a new run to retry.'; }
@@ -325,6 +331,6 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
   return {
     result, ownedDirectory: directory !== undefined,
     launchState: context ? 'acquired' : launchAttempted ? 'unacquired' : 'not-attempted',
-    closeAcknowledged, workDrained, cleanupTimedOut: cleanupFailed, cleanupStartedNs,
+    closeAcknowledged, workDrained, cleanupTimedOut: cleanupFailed, cleanupStartedNs, contextClose, launchJoin,
   };
 }

@@ -16,7 +16,8 @@ process.on('message', frame => {
     seed: request.input.environment.seed, startedAt: request.startedAt, durationMs: 0, assertionCount: 0,
     observation: null, events: [], artifacts: [], environment: { platform: `${process.platform}-${process.arch}`, node: process.version, browser: 'not-launched', isolation: 'registered public browser library; fresh owned profile; Chromium sandbox enabled; loopback asset allowlist; not a hostile-code sandbox' },
   };
-  const receipt = { result, ownedDirectory: false, launchState: 'not-attempted', closeAcknowledged: false, workDrained: true, cleanupTimedOut: false, cleanupStartedNs };
+  const receipt = { result, ownedDirectory: false, launchState: 'not-attempted', closeAcknowledged: false, workDrained: true, cleanupTimedOut: false, cleanupStartedNs,
+    contextClose: 'not-applicable', launchJoin: 'not-needed' };
   const secret = 'private-ipc-sentinel-never-retain';
   if (mode === 'foreign-observation') { result.assertionCount = 1; result.observation = { kind: 'browser-case', values: [secret] }; }
   if (mode === 'extra-result-field') result.privateRaw = secret;

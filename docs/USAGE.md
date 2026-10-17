@@ -88,7 +88,26 @@ npm run repro -- export --manifest .repro-runs/reduced/reduced.manifest.json --o
 
 Every record, replay, reduce, verify and export command must use a new output directory. `OUTPUT_EXISTS` (`EXPORT_EXISTS` for export) means earlier or partial evidence is preserved: choose a new directory for the retry. Concurrent commands cannot claim the same run output. The persistent `serve` workbench is the exception and deliberately reopens its ledger. `replay --capsule DIRECTORY` validates bundle integrity and installed trusted-runner identity before execution. Follow the exported README for fresh Linux execution. A hash proves byte identity, not author trust; do not execute unknown bundle code on the host.
 
-For registered browser cases, `CLEANUP_FAILED` means resource completion was not certified and the run's owned `.profile` is retained. Preserve the evidence and inspect only that run's owned browser, worker and applicable descendants. Consider removing only that exact `.profile` after their completion is established; if completion remains uncertain, keep it. Do not stop unrelated processes or remove another run's files. Retry in a new output directory. A later shutdown does not rewrite the failed result or automatically remove the retained profile. See [cleanup guarantees and limits](STARTUP-OWNER-BOUNDARY.md).
+For registered browser cases, `CLEANUP_FAILED` means resource completion was not certified and the run's owned `.profile` is retained. Preserve the evidence and inspect only that run's owned browser, worker and applicable descendants. Consider removing only that exact `.profile` after their completion is established; if completion remains uncertain, keep it. Do not stop unrelated processes or remove another run's files. Retry in a new output directory. A later shutdown does not rewrite the failed result or automatically remove the retained profile.
+
+The reason includes a fixed-vocabulary `Cleanup basis:` clause naming the predicate that failed, so a rare failure can be localized from ordinary evidence without the diagnostic observer:
+
+- `receipt` (`present`/`absent`) and `protocol` (`ok`/`failed`): the worker's validated terminal receipt.
+- `wait-ended`: what ended the wait — `close` (the worker exited), `failed-receipt` (the receipt already proved failed cleanup, so the parent stopped waiting), `deadline`, or `protocol` (an invalid frame, or a spawn/IPC error).
+- `worker`: state when the parent decided — `closed`, `closed-late` (after its cleanup deadline), `closed-before-cleanup` (exited before reporting cleanup start, e.g. a bootstrap crash), or `open`.
+- `launch`: `not-attempted`, `unacquired` or `acquired`.
+- `launch-join`: `not-needed`, `joined` or `expired` (startup acquisition still pending at cleanup).
+- `context-close`:
+  - `acknowledged`, `rejected`, `timeout` or `not-applicable`;
+  - `stale` — the close resolved but wasn't a fresh request: the context was already closed or disconnected, or its state couldn't be read;
+  - `late` — the close *resolved* after its deadline (a rejection after the deadline reports `rejected`);
+  - `no-budget` — the shared startup window was already spent when close began, after a startup join (including server shutdown time).
+
+  `rejected` and `timeout` take precedence over `stale`.
+- `drain`: `complete` or `timeout`.
+- `creation-attempts`: process, worker, native-addon or exec creation attempts counted by the worker's creation fence.
+
+The worker's basis fields are validated against the receipt flags they explain. A receipt outside the vocabulary, or one that contradicts those flags, is a protocol failure. The clause never contains target text, paths or error messages. See [cleanup guarantees and limits](STARTUP-OWNER-BOUNDARY.md).
 
 CLI behavioral exits: 0 for a satisfied requirement or completed non-replay operation, 1 for an intended target failure, 2 for invalid/unsupported/inconclusive execution, 130 for owner cancellation. Reduction's JSON explicitly reports budget exhaustion and unverified minimality. An export succeeding means bytes were finalized; it does not imply the failure was reproduced on a clean machine.
 
