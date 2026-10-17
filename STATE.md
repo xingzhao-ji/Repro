@@ -53,6 +53,11 @@ No `CLEANUP_FAILED` occurred, so the htmx failure didn't recur.
 2. Approve enlarging the data disk; the host has about 14 GiB free.
 3. Accept the candidate on native evidence only, without a Linux claim.
 
+**Measured sizes** (read-only `docker system df -v` during a short restart at 20:05 PDT; VM stopped and verified afterwards; `vm-e-inspect-v3/`):
+- Each of the six cohort images is 1.92 GB, of which about 1.556 GB is unique; the 368 MB node base is shared.
+- The other 48 `image ls -a` entries are intermediate build-step images inside that accounting.
+- The candidate cohort retains about 9.3 GB of new images. Option 1 therefore means deleting at least five of the six; option 2 means growing the data disk by about 7.5 GB.
+
 The prepared candidate audit is `.repro-runs/cleanup-basis/linux-v2/audit-linux-candidate.py`, with its template diff alongside. The finalizer is `vm-e-resume-v2/finalize-resume.py.pending`, which needs its post-restart hashes filled in.
 
 **Driver finding:** `docker image ls --quiet` hides untagged images under this Docker 29 store. The driver's foreign-image and terminal-inventory checks therefore cannot see them, and earlier "only base image retained" statements understated what was retained (corrected in the Linux report). Fix this in a future driver revision. Accessibility remains deferred. Full practical-beta acceptance is not claimed.
