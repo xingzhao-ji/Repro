@@ -18,7 +18,7 @@ export function caseHarnessDigest(manifest: ManifestV3): string {
 function cleanupBasis(completion: WorkerCompletion): string {
   const receipt = completion.receipt;
   const parts = [`receipt=${receipt ? 'present' : 'absent'}`, `protocol=${completion.protocolFailed ? 'failed' : 'ok'}`, `wait-ended=${completion.finishedBy}`,
-    `worker=${!completion.closed ? 'open' : completion.completedBeforeDeadline ? 'closed' : 'closed-late'}`];
+    `worker=${!completion.closed ? 'open' : !completion.cleanupStarted ? 'closed-before-cleanup' : completion.completedBeforeDeadline ? 'closed' : 'closed-late'}`];
   if (receipt) parts.push(`launch=${receipt.launchState}`, `launch-join=${receipt.launchJoin}`, `context-close=${receipt.contextClose}`,
     `drain=${receipt.workDrained ? 'complete' : 'timeout'}`);
   if (completion.attempts !== undefined) parts.push(`creation-attempts=${completion.attempts}`);

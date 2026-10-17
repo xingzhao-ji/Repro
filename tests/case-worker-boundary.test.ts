@@ -46,7 +46,9 @@ for (const mode of ['natural-close', 'late-close', 'missing-receipt', 'wrong-non
       assert.equal(result.closed, true, 'The real worker completed, but outside the owner cleanup deadline.');
       assert.equal(result.completedBeforeDeadline, false, 'The drain allowance must not extend owner completion.');
       assert.equal(result.protocolFailed, false);
+      assert.equal(result.finishedBy, 'close'); assert.equal(result.cleanupStarted, true);
     }
+    if (mode === 'missing-receipt') { assert.equal(result.finishedBy, 'close'); assert.equal(result.cleanupStarted, true); assert.equal(result.receipt, undefined); }
     if (mode !== 'natural-close' && mode !== 'late-close') assert.equal(result.protocolFailed, true);
     assert.equal(JSON.stringify({ result, forwarded }).includes('private-ipc-sentinel'), false);
     await closed;

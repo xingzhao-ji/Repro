@@ -28,7 +28,7 @@ function finish() {
   const { request, nonce } = frame;
   const cleanupStartedNs = process.hrtime.bigint().toString();
   process.send({ version: 1, type: 'cleanup-start', nonce, cleanupStartedNs });
-  const conclusive = mode !== 'snapshot' && mode !== 'callbacks';
+  const conclusive = mode !== 'snapshot' && mode !== 'callbacks' && !mode.startsWith('inconclusive-');
   const result = {
     id: request.id, outcome: conclusive ? 'requirement-satisfied' : 'inconclusive',
     reason: conclusive ? 'The executed frozen assertion is satisfied by this revision.' : 'RUNNER_ERROR: Browser or owned server setup failed. Check prerequisites and writable task output, then retry.',
@@ -52,6 +52,18 @@ function finish() {
   if (mode === 'expired-join-without-cleanup-failure') receipt.launchJoin = 'expired';
   if (mode === 'unknown-close-basis') receipt.contextClose = 'closed-eventually';
   if (mode === 'failed-close-with-cleanup-failure') { receipt.closeAcknowledged = false; receipt.contextClose = 'rejected'; receipt.cleanupTimedOut = true; }
+  // Each rule-* mode violates exactly one consistency rule while satisfying all others.
+  if (mode === 'rule-vocabulary-close') { receipt.closeAcknowledged = false; receipt.cleanupTimedOut = true; receipt.contextClose = '/private/basis-path-sentinel'; }
+  if (mode === 'rule-vocabulary-join') receipt.launchJoin = 'private-join-sentinel';
+  if (mode === 'rule-acquired-without-close') { receipt.closeAcknowledged = false; receipt.contextClose = 'not-applicable'; receipt.cleanupTimedOut = true; receipt.workDrained = false; }
+  if (mode === 'inconclusive-close-without-acquisition') { receipt.contextClose = 'rejected'; receipt.cleanupTimedOut = true; }
+  if (mode === 'rule-acknowledgement-mismatch') { receipt.closeAcknowledged = false; receipt.cleanupTimedOut = true; receipt.workDrained = false; }
+  if (mode === 'inconclusive-join-without-launch') receipt.launchJoin = 'joined';
+  if (mode === 'rule-unexplained-cleanup-failure') receipt.cleanupTimedOut = true;
+  if (mode === 'rule-no-budget-without-join') { receipt.closeAcknowledged = false; receipt.contextClose = 'no-budget'; receipt.cleanupTimedOut = true; }
+  if (mode === 'rule-expired-acquired-close') { receipt.closeAcknowledged = false; receipt.contextClose = 'timeout'; receipt.launchJoin = 'expired'; receipt.cleanupTimedOut = true; }
+  if (mode === 'rule-array-close-basis') { receipt.closeAcknowledged = false; receipt.cleanupTimedOut = true; receipt.contextClose = ['timeout']; }
+  if (mode === 'rule-object-close-basis') { receipt.closeAcknowledged = false; receipt.cleanupTimedOut = true; receipt.contextClose = { toString: 1 }; }
   if (mode === 'empty-app-digest') result.appDigest = '';
   if (mode === 'wrong-success-reason') result.reason = 'The frozen browser-case assertion observed the registered failure.';
   process.send({ version: 1, type: 'terminal', nonce, receipt, attempts: 0, sealed: true }, () => process.disconnect());
@@ -66,12 +78,13 @@ process.on('message', message => {
   if (message.type === 'event-ack') { next(); return; }
   if (message.type !== 'start') return;
   frame = message;
+  if (mode === 'exit-before-cleanup') process.exit(1);
   const { request, nonce } = frame;
   events = [];
   if (mode !== 'snapshot') {
     process.send({ version: 1, type: 'owned', nonce });
     events.push({ type: 'reset', message: 'Starting a new owned browser profile and pinned local application.' });
-    if (mode !== 'callbacks') {
+    if (mode !== 'callbacks' && !mode.startsWith('inconclusive-')) {
       const actions = mode === 'reordered-actions' ? [...request.input.actions].reverse() : request.input.actions;
       for (const action of actions) events.push({ type: 'action-executed', message: 'Executed registered ' + action.kind + ' action.', actionId: action.id });
       if (mode !== 'missing-assertion-event') events.push({ type: 'assertion', message: mode === 'wrong-assertion-message' ? 'The frozen browser-case assertion observed the registered failure.' : 'The executed frozen assertion is satisfied by this revision.' });
@@ -163,7 +176,9 @@ for (const mode of ['no-acquisition', 'empty-app-digest', 'wrong-success-reason'
   });
 }
 
-for (const mode of ['acknowledged-close-timeout', 'acquired-without-close-basis', 'failed-close-without-cleanup-failure', 'expired-join-without-cleanup-failure', 'unknown-close-basis']) {
+for (const mode of ['acknowledged-close-timeout', 'acquired-without-close-basis', 'failed-close-without-cleanup-failure', 'expired-join-without-cleanup-failure', 'unknown-close-basis',
+  'rule-vocabulary-close', 'rule-vocabulary-join', 'rule-acquired-without-close', 'inconclusive-close-without-acquisition', 'rule-acknowledgement-mismatch',
+  'inconclusive-join-without-launch', 'rule-unexplained-cleanup-failure', 'rule-no-budget-without-join', 'rule-expired-acquired-close', 'rule-array-close-basis', 'rule-object-close-basis']) {
   test(`a receipt cannot misstate its cleanup basis: ${mode}`, async t => {
     installPeer(t, mode);
     const completion = await runCaseWorker(createCaseManifest('morphdom-textarea'), { artifactDir: '.repro-runs/worker-client/basis' }, identity());
@@ -171,6 +186,27 @@ for (const mode of ['acknowledged-close-timeout', 'acquired-without-close-basis'
     assert.equal(completion.receipt, undefined);
   });
 }
+
+test('a basis outside the vocabulary cannot reach the public reason', async t => {
+  installPeer(t, 'rule-vocabulary-close');
+  const result = await runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: '.repro-runs/worker-client/basis-vocabulary' });
+  // The protocol peer creates no files, so evidence finalization may replace the reason; the property is non-disclosure.
+  assert.equal(result.outcome, 'inconclusive');
+  assert.equal(JSON.stringify(result).includes('basis-path-sentinel'), false);
+});
+
+test('a worker that exits before cleanup starts is not reported as a late close', async t => {
+  installPeer(t, 'exit-before-cleanup');
+  const completion = await runCaseWorker(createCaseManifest('morphdom-textarea'), { artifactDir: '.repro-runs/worker-client/early-exit' }, identity());
+  assert.equal(completion.closed, true); assert.equal(completion.protocolFailed, true);
+  assert.equal(completion.cleanupStarted, false); assert.equal(completion.finishedBy, 'close');
+});
+
+test('the cleanup basis names an early worker exit without inventing receipt fields', async t => {
+  installPeer(t, 'exit-before-cleanup');
+  const result = await runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: '.repro-runs/worker-client/early-exit-basis' });
+  assert.match(result.reason, /Cleanup basis: receipt=absent; protocol=failed; wait-ended=close; worker=closed-before-cleanup\. /);
+});
 
 test('an actual verdict followed by a rejected close keeps its consistent cleanup basis', async t => {
   installPeer(t, 'failed-close-with-cleanup-failure');
@@ -215,5 +251,6 @@ for (const mode of ['never-ready', 'late-ready']) {
     const result = JSON.parse(stdout.trim());
     assert.equal(result.ownedDirectory, false); assert.equal(result.closed, false);
     assert.equal(result.completedBeforeDeadline, false); assert.equal(result.receipt, undefined);
+    assert.equal(result.finishedBy, 'deadline');
   });
 }

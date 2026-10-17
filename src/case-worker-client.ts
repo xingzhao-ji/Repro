@@ -25,8 +25,10 @@ export interface WorkerCompletion {
   closed: boolean;
   protocolFailed: boolean;
   completedBeforeDeadline: boolean;
-  /** What ended the caller's wait: worker close, a receipt already proving failed cleanup, the deadline, or a protocol fault. */
+  /** What ended the caller's wait: worker close, a receipt already proving failed cleanup, the deadline, or a protocol/spawn fault. */
   finishedBy: 'close' | 'failed-receipt' | 'deadline' | 'protocol';
+  /** Whether the worker reported cleanup start; a close without it is an early exit, not a late cleanup. */
+  cleanupStarted: boolean;
 }
 /** Keep runtime prerequisites, not arbitrary caller credentials or Node preloads. */
 function workerEnvironment(): NodeJS.ProcessEnv {
@@ -93,15 +95,22 @@ function validEvent(value: unknown, request: CaseWorkerRequest, index: number): 
   if (action) return value.type === 'action-executed' && value.actionId === action.id && value.message === `Executed registered ${action.kind} action.`;
   return index === request.input.actions.length + 1 && value.type === 'assertion' && value.actionId === undefined && ASSERTION_MESSAGES.includes(String(value.message));
 }
-/** The explanatory basis must agree with the acknowledgement and failure flags that decide cleanup. */
+/**
+ * The explanatory basis must agree exactly with the flags that decide cleanup: the worker sets cleanupTimedOut
+ * only for an expired join, an unacknowledged close or an incomplete drain, so a failure must name its predicate.
+ */
 function cleanupBasisConsistent(value: Record<string, unknown>): boolean {
-  const close = String(value.contextClose), join = String(value.launchJoin);
-  if (!(CONTEXT_CLOSE_BASES as readonly string[]).includes(close) || !(LAUNCH_JOIN_BASES as readonly string[]).includes(join)) return false;
+  const close = value.contextClose, join = value.launchJoin;
+  if (typeof close !== 'string' || typeof join !== 'string'
+    || !(CONTEXT_CLOSE_BASES as readonly string[]).includes(close) || !(LAUNCH_JOIN_BASES as readonly string[]).includes(join)) return false;
   if ((value.launchState === 'acquired') === (close === 'not-applicable')) return false;
   if (value.closeAcknowledged !== (close === 'acknowledged')) return false;
-  if (!['not-applicable', 'acknowledged'].includes(close) && value.cleanupTimedOut !== true) return false;
   if (join !== 'not-needed' && value.launchState === 'not-attempted') return false;
-  return join !== 'expired' || value.cleanupTimedOut === true;
+  // no-budget exists only after a startup join; an acquisition observed past the join deadline has no close budget.
+  if (close === 'no-budget' && join === 'not-needed') return false;
+  if (join === 'expired' && value.launchState === 'acquired' && close !== 'no-budget') return false;
+  const explained = join === 'expired' || !['not-applicable', 'acknowledged'].includes(close) || value.workDrained !== true;
+  return value.cleanupTimedOut === explained;
 }
 function validReceipt(value: unknown, request: CaseWorkerRequest, acknowledged: RunEvent[]): value is ExecutionReceipt {
   if (!boundedFrame(value) || !exactKeys(value, ['result', 'ownedDirectory', 'launchState', 'closeAcknowledged', 'workDrained', 'cleanupTimedOut', 'cleanupStartedNs', 'contextClose', 'launchJoin'])
@@ -203,7 +212,8 @@ export function runCaseWorker(input: ManifestV3, options: RunOptions, identity: 
         child.unref(); child.channel?.unref();
       }
       resolveCompletion({ ...(receipt ? { receipt: structuredClone(receipt) } : {}), ...(attempts === undefined ? {} : { attempts }),
-        ownedDirectory, closed, protocolFailed, completedBeforeDeadline: closedAtNs !== undefined && ownershipDeadlineNs !== undefined && closedAtNs <= ownershipDeadlineNs && closedAtNs <= absoluteDeadlineNs, finishedBy });
+        ownedDirectory, closed, protocolFailed, completedBeforeDeadline: closedAtNs !== undefined && ownershipDeadlineNs !== undefined && closedAtNs <= ownershipDeadlineNs && closedAtNs <= absoluteDeadlineNs, finishedBy,
+        cleanupStarted: cleanupStartedNs !== undefined });
       // A timed-out owned worker may finish its existing close later. Retained
       // diagnostics remain bounded; late receipt/exit cannot mutate this result.
     };

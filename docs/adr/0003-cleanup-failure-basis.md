@@ -13,7 +13,9 @@ The worker receipt carries two fixed-vocabulary fields:
 - `contextClose`: `not-applicable`, `acknowledged`, `rejected`, `timeout`, `stale`, `late` or `no-budget`.
 - `launchJoin`: `not-needed`, `joined` or `expired`.
 
-The parent rejects a receipt whose basis contradicts the flags that decide cleanup. Examples: an acknowledged close with a timeout basis; a failed close without a cleanup failure; an expired join that is not reported as a failure; or an acquired context without a close basis. The client also reports what ended its wait: `close`, `failed-receipt`, `deadline` or `protocol`.
+The parent rejects a receipt whose basis contradicts the flags that decide cleanup. A cleanup failure must be explained by an expired join, an unacknowledged close or an incomplete drain, and every such predicate must be reported as a failure. The other rules: a close basis exists exactly when a context was acquired; `acknowledged` matches the acknowledgement flag; `no-budget` follows only a startup join; and an acquisition observed past an expired join can only report `no-budget`. Non-string values are rejected rather than coerced. Each rule has a test in which only that rule is violated.
+
+The client also reports what ended its wait (`close`, `failed-receipt`, `deadline` or `protocol`) and whether cleanup had started, so an early worker crash reads as `closed-before-cleanup`, not as a late close.
 
 On `CLEANUP_FAILED`, the parent appends one `Cleanup basis:` clause built only from those enums, worker close/deadline state, drain state and the process-creation count. A certified cleanup keeps its unchanged reason.
 
