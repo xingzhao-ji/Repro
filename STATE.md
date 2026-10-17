@@ -8,6 +8,16 @@ Profile `e` was restarted for Marked: a recorded deviation, with the same daemon
 
 **Next-session note:** the restart passed `COLIMA_HOME`/`LIMA_HOME` relative to the shell's lower-case path alias (`/Users/xingzhaoji/desktop/repro`). The live profile config therefore holds lower-case socket paths (colima.yaml `2368f4f4…`, lima.yaml `9b88bd56…`), and acceptance-v1's inspector/finalizer config hashes no longer match. For any future start, use absolute canonical paths (`cd "$(pwd -P)"`).
 
+**Environment hazard (observed 2026-10-16):** the repository sits in an iCloud-synced Desktop, and macOS evicts files to dataless placeholders. At 18:40 PDT, 2,364 `node_modules` files, 16 browser-cache files, 222 npm-cache files and 10 `.git` files were dataless. Two git objects made `git worktree add` fail (`mmap failed: Operation timed out`). ESLint crashed with `ESLint is not a constructor`, and an ordinary test run stalled at 0% CPU until it was stopped. Neither is a product result. Check `find node_modules .repro-cache .git -flags +dataless | wc -l` before trusting tool failures.
+
+What worked:
+- **`node_modules`:** `npm ci --ignore-scripts --cache <fresh scratch dir>`. It fetched the 116 locked packages from the official registry in about 1 s, with identical top-level versions. Don't reuse `.repro-cache/npm` for this: it was partly dataless.
+- **Individual files:** `brctl download <file>`, then poll until the flag clears.
+
+What was misleading:
+- A `compressed,dataless` Chromium file (`icudtl.dat`, 10.8 MB) read back **empty** while `cat` exited 0. Verify full read length or hash, not just exit status.
+- Parallel `cat` hydration slowed to about 30 files a minute.
+
 Still open: the original native htmx repetition-15 shutdown cause is unresolved. Current-candidate native (120/120) and Linux cohorts did not reproduce it, which is not a causal repair. Normal-run `CLEANUP_FAILED` evidence still cannot say which cleanup predicate failed (worker close, deadline, drain, or context-close rejection vs timeout); only the optional diagnostic observer distinguishes them. Closing that diagnosability gap is in progress on branch `task/cleanup-failure-basis`, worktree `.repro-runs/cleanup-basis/worktree`. It changes product/harness bytes, so it is a new candidate and must not be reported under `9aec7fe`'s acceptance. Accessibility remains deferred. Full practical-beta acceptance is not claimed.
 
 ## Preserved Claude handoff checkpoint
