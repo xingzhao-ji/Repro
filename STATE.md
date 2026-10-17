@@ -28,7 +28,16 @@ How it was isolated:
 
 Before trusting any browser failure here, probe animation frames first.
 
-Still open: the original native htmx repetition-15 shutdown cause is unresolved. Current-candidate native (120/120) and Linux cohorts did not reproduce it, which is not a causal repair. Normal-run `CLEANUP_FAILED` evidence still cannot say which cleanup predicate failed (worker close, deadline, drain, or context-close rejection vs timeout); only the optional diagnostic observer distinguishes them. Closing that diagnosability gap is in progress on branch `task/cleanup-failure-basis`, worktree `.repro-runs/cleanup-basis/worktree`. It changes product/harness bytes, so it is a new candidate and must not be reported under `9aec7fe`'s acceptance. Accessibility remains deferred. Full practical-beta acceptance is not claimed.
+Still open: the original native htmx repetition-15 shutdown cause is unresolved. Current-candidate native (120/120) and Linux cohorts did not reproduce it, which is not a causal repair. Normal-run `CLEANUP_FAILED` evidence still cannot say which cleanup predicate failed (worker close, deadline, drain, or context-close rejection vs timeout); only the optional diagnostic observer distinguishes them. That gap is closed on the separate candidate branch `task/cleanup-failure-basis`, pushed at `a68bf03` (tested source `1ae6ffc`, worktree `.repro-runs/cleanup-basis/worktree`). `CLEANUP_FAILED` reasons now carry a validated, fixed-vocabulary `Cleanup basis:` clause. Prerequisites pass:
+
+- **Ordinary:** 407/407, plus typecheck, lint, build and kit.
+- **Functional browser:** the same 50-test selection, run with a byte-identical pinned Chromium outside iCloud (see the hazard note below).
+
+Two rounds of automated subagent review are addressed. See `evidence/CLEANUP-BASIS-CANDIDATE.md` on that branch.
+
+It changes harness bytes, so it has **no acceptance**. No native, installed-package or Linux cohort has run on it, and it must not be reported under `9aec7fe`'s acceptance.
+
+**Next executable action**, if the owner wants this candidate accepted: prepare fresh native, installed and Linux drivers bound to its frozen inputs (the acceptance-v1 drivers are hash-bound to `9aec7fe`). Run native from a checkout and browser copy outside the iCloud-synced Desktop, then run Linux on profile `e` using canonical absolute paths. Otherwise `9aec7fe` remains the accepted candidate. Accessibility remains deferred. Full practical-beta acceptance is not claimed.
 
 ## Preserved Claude handoff checkpoint
 
