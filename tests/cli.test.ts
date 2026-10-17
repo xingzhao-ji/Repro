@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
-import { access, link, mkdir, mkdtemp, readFile, symlink, writeFile } from 'node:fs/promises';
+import { spawn, spawnSync } from 'node:child_process';
+import { access, link, mkdir, mkdtemp, readFile, readdir, symlink, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
 import { createManifest } from '../src/manifest.js';
 
@@ -81,4 +81,29 @@ test('CLI validates the reduction budget before creating output or writing a man
   assert.equal(result.status, 2);
   assert.equal(JSON.parse(result.stderr).category, 'input');
   await assert.rejects(access(output), { code: 'ENOENT' });
+});
+
+test('an export interrupted while staging exits as an owner cancellation and finalizes nothing', { timeout: 30_000 }, async () => {
+  const root = await fixtureRoot();
+  const input = join(root, 'input.json');
+  await writeFile(input, JSON.stringify(createManifest()));
+  const output = join(root, 'capsule');
+  const child = spawn(process.execPath, ['--import', 'tsx', 'src/cli.ts', 'export', '--manifest', input, '--output', output], { stdio: ['ignore', 'pipe', 'pipe'] });
+  let stderr = '';
+  child.stderr.on('data', chunk => { stderr += chunk; });
+  child.stdout.resume();
+  const exited = new Promise<{ code: number | null; signal: NodeJS.Signals | null }>(accept => child.once('exit', (code, signal) => accept({ code, signal })));
+  let staged = false;
+  const began = Date.now();
+  while (!staged && child.exitCode === null && Date.now() - began < 20_000) {
+    staged = (await readdir(root)).some(name => name.startsWith('.capsule.partial-'));
+    if (!staged) await new Promise(accept => setTimeout(accept, 1));
+  }
+  assert.equal(staged, true, 'The export must be interrupted while its staging directory exists');
+  child.kill('SIGINT');
+  assert.deepEqual(await exited, { code: 130, signal: null }, 'An owner interrupt is a cancellation, not an invalid or inconclusive run');
+  const reported = JSON.parse(stderr) as { outcome: string; category: string; code: string };
+  assert.deepEqual([reported.outcome, reported.category, reported.code], ['cancelled', 'cancelled', 'EXPORT_CANCELLED']);
+  await assert.rejects(access(output), { code: 'ENOENT' });
+  assert.deepEqual((await readdir(root)).filter(name => name.includes('capsule')), [], 'Staging and lock must be removed');
 });

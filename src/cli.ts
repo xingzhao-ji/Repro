@@ -54,6 +54,8 @@ export async function doctor() {
   const container = spawnSync('docker', ['info', '--format', '{{.ServerVersion}}'], { encoding: 'utf8', timeout: 5000, maxBuffer: 4096 });
   return { runnerVersion: VERSION, node: process.version, platform: `${process.platform}-${process.arch}`, browser, linuxContainer: container.status === 0 ? { available: true, version: container.stdout.trim() } : { available: false, reason: 'Docker engine unavailable; fresh Linux-container replay remains unverified.' }, scope: 'Registered public browser-library cases and synthetic fixture; no arbitrary capsule execution, credentials, or LLM required.' };
 }
+// Set only by this process's own SIGINT/SIGTERM handler for an operation.
+let ownerCancelled = false;
 async function main(): Promise<void> {
   const parsed = parseArgs({ allowPositionals: true, strict: true, options: {
     help: { type: 'boolean' }, case: { type: 'string' }, consent: { type: 'boolean' }, manifest: { type: 'string' }, capsule: { type: 'string' }, experiment: { type: 'string' }, output: { type: 'string' }, revision: { type: 'string' }, budget: { type: 'string' }, port: { type: 'string' }
@@ -94,7 +96,7 @@ async function main(): Promise<void> {
   if (command === 'reduce' && (!Number.isInteger(budget) || budget < 1 || budget > 200)) throw new ReproError('input', 'BUDGET', 'Execution budget must be 1–200.');
   const output = command === 'export' ? resolve(options.output ?? `.repro-runs/export-${Date.now()}`) : ownedDirectory(options.output ?? `.repro-runs/${command}-${Date.now()}`, { exclusive: true });
   const controller = new AbortController();
-  const cancel = () => controller.abort(); process.once('SIGINT', cancel); process.once('SIGTERM', cancel);
+  const cancel = () => { ownerCancelled = true; controller.abort(); }; process.once('SIGINT', cancel); process.once('SIGTERM', cancel);
   let result: unknown;
   try {
     if (command === 'export') result = await exportCapsule(manifest, output, { signal: controller.signal });
@@ -118,5 +120,9 @@ async function main(): Promise<void> {
 main().catch(error => {
   const failure = error instanceof Error && 'code' in error && String(error.code).startsWith('ERR_PARSE_ARGS')
     ? new ReproError('input', 'ARGUMENTS', 'Invalid command arguments. Use --help.', { cause: error }) : error;
-  console.error(JSON.stringify(publicError(failure), null, 2)); process.exitCode = 2;
+  const reported = publicError(failure);
+  console.error(JSON.stringify(reported, null, 2));
+  // An owner interrupt that stops an operation before it returns a result (an
+  // export) is still a cancellation, not an invalid or inconclusive run.
+  process.exitCode = ownerCancelled && reported.outcome === 'cancelled' ? 130 : 2;
 });
