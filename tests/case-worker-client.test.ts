@@ -4,7 +4,8 @@ import childProcess, { type ChildProcess } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import { once } from 'node:events';
 import { promisify } from 'node:util';
-import { resolve } from 'node:path';
+import { join, resolve } from 'node:path';
+import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { createCaseManifest } from '../src/browser-case.js';
 import { runCaseBrowser } from '../src/case-adapter.js';
@@ -15,6 +16,8 @@ import type { RunOptions } from '../src/contracts.js';
 // It is substituted at the spawn boundary; production accepts no custom entry.
 const peer = String.raw`
 const crypto = require('node:crypto');
+const fs = require('node:fs');
+const path = require('node:path');
 const mode = process.argv[1];
 function canonical(value) {
   if (Array.isArray(value)) return '[' + value.map(canonical).join(',') + ']';
@@ -64,6 +67,7 @@ function finish() {
   if (mode === 'rule-expired-acquired-close') { receipt.closeAcknowledged = false; receipt.contextClose = 'timeout'; receipt.launchJoin = 'expired'; receipt.cleanupTimedOut = true; }
   if (mode === 'rule-array-close-basis') { receipt.closeAcknowledged = false; receipt.cleanupTimedOut = true; receipt.contextClose = ['timeout']; }
   if (mode === 'rule-object-close-basis') { receipt.closeAcknowledged = false; receipt.cleanupTimedOut = true; receipt.contextClose = { toString: 1 }; }
+  if (mode === 'inconclusive-array-launch-state') receipt.launchState = ['not-attempted'];
   if (mode === 'empty-app-digest') result.appDigest = '';
   if (mode === 'wrong-success-reason') result.reason = 'The frozen browser-case assertion observed the registered failure.';
   process.send({ version: 1, type: 'terminal', nonce, receipt, attempts: 0, sealed: true }, () => process.disconnect());
@@ -82,6 +86,8 @@ process.on('message', message => {
   const { request, nonce } = frame;
   events = [];
   if (mode !== 'snapshot') {
+    // The end-to-end vocabulary mode owns a real run directory so evidence finalization keeps the decided reason.
+    if (mode === 'rule-vocabulary-close') fs.mkdirSync(path.join(request.artifactDir, request.id), { recursive: true, mode: 0o700 });
     process.send({ version: 1, type: 'owned', nonce });
     events.push({ type: 'reset', message: 'Starting a new owned browser profile and pinned local application.' });
     if (mode !== 'callbacks' && !mode.startsWith('inconclusive-')) {
@@ -178,21 +184,25 @@ for (const mode of ['no-acquisition', 'empty-app-digest', 'wrong-success-reason'
 
 for (const mode of ['acknowledged-close-timeout', 'acquired-without-close-basis', 'failed-close-without-cleanup-failure', 'expired-join-without-cleanup-failure', 'unknown-close-basis',
   'rule-vocabulary-close', 'rule-vocabulary-join', 'rule-acquired-without-close', 'inconclusive-close-without-acquisition', 'rule-acknowledgement-mismatch',
-  'inconclusive-join-without-launch', 'rule-unexplained-cleanup-failure', 'rule-no-budget-without-join', 'rule-expired-acquired-close', 'rule-array-close-basis', 'rule-object-close-basis']) {
+  'inconclusive-join-without-launch', 'rule-unexplained-cleanup-failure', 'rule-no-budget-without-join', 'rule-expired-acquired-close', 'rule-array-close-basis', 'rule-object-close-basis',
+  'inconclusive-array-launch-state']) {
   test(`a receipt cannot misstate its cleanup basis: ${mode}`, async t => {
     installPeer(t, mode);
     const completion = await runCaseWorker(createCaseManifest('morphdom-textarea'), { artifactDir: '.repro-runs/worker-client/basis' }, identity());
     assert.equal(completion.protocolFailed, true, 'The cleanup basis must agree with the acknowledgement and failure flags it explains.');
-    assert.equal(completion.receipt, undefined);
+    assert.equal(completion.receipt, undefined); assert.equal(completion.finishedBy, 'protocol');
   });
 }
 
 test('a basis outside the vocabulary cannot reach the public reason', async t => {
   installPeer(t, 'rule-vocabulary-close');
   const result = await runCaseBrowser(createCaseManifest('morphdom-textarea'), { artifactDir: '.repro-runs/worker-client/basis-vocabulary' });
-  // The protocol peer creates no files, so evidence finalization may replace the reason; the property is non-disclosure.
   assert.equal(result.outcome, 'inconclusive');
+  assert.match(result.reason, /^CLEANUP_FAILED: .*Cleanup basis: receipt=absent; protocol=failed; wait-ended=protocol; /);
   assert.equal(JSON.stringify(result).includes('basis-path-sentinel'), false);
+  const evidence = await readFile(join(resolve('.repro-runs/worker-client/basis-vocabulary'), result.id, 'evidence.json'), 'utf8');
+  assert.equal(JSON.parse(evidence).reason, result.reason);
+  assert.equal(evidence.includes('basis-path-sentinel'), false);
 });
 
 test('a worker that exits before cleanup starts is not reported as a late close', async t => {

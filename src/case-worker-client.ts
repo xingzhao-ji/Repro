@@ -123,7 +123,7 @@ function validReceipt(value: unknown, request: CaseWorkerRequest, acknowledged: 
     || r.harnessDigest !== request.harnessDigest || r.startedAt !== request.startedAt || r.appRevision !== revision
     || !['', caseRevisionDigest(request.input, revision)].includes(String(r.appDigest)) || r.adapterVersion !== VERSION || r.runnerVersion !== VERSION
     || r.seed !== request.input.environment.seed || !finite(r.durationMs) || ![0, 1].includes(Number(r.assertionCount)) || typeof r.assertionCount !== 'number'
-    || !['not-attempted', 'unacquired', 'acquired'].includes(String(value.launchState))
+    || typeof value.launchState !== 'string' || !['not-attempted', 'unacquired', 'acquired'].includes(value.launchState)
     || typeof value.ownedDirectory !== 'boolean' || typeof value.closeAcknowledged !== 'boolean'
     || typeof value.workDrained !== 'boolean' || typeof value.cleanupTimedOut !== 'boolean' || !monotonicNs(value.cleanupStartedNs)
     || value.closeAcknowledged && value.launchState !== 'acquired' || !value.ownedDirectory && value.launchState !== 'not-attempted'
