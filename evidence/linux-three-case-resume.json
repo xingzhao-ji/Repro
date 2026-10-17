@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "status": "linux-arm64-three-case-current-candidate-passed",
+  "scope": "Fresh isolated Linux arm64 capture, replay, bounded reduction, export and 20 alternating readable buggy/fixed pairs for the three pinned practical-beta cases on implementation 9aec7fe. Fault suite and accessibility excluded.",
+  "source": {
+    "testedImplementationCommit": "9aec7fe8d8513a30da30705b0619072a6c056302",
+    "headAtExecution": "a386750b40a089603219a227e774ef21ab5d45d2",
+    "postImplementationDiff": "documentation/evidence only",
+    "frozenInputsRechecked": 132,
+    "policySha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
+    "driver": {
+      "path": "scripts/verify-beta-isolated.mjs",
+      "bytes": 64736,
+      "sha256": "cf5a45a1e100c868a1932cf3dc685e150b22fa68282791d6c6409fb6f9ece1e9"
+    },
+    "protocol": {
+      "path": "benchmarks/PRACTICAL-BETA-PROTOCOL.md",
+      "bytes": 7720,
+      "sha256": "175d5e8f1fe84d07de8da969a1252c63ed561979d645ea1af345a555a9fc9c90"
+    }
+  },
+  "cohorts": {
+    "acceptance-v1": {
+      "directory": ".repro-runs/startup-repair-20261016/acceptance-v1/linux-arm64",
+      "cases": [
+        "morphdom-textarea",
+        "htmx-checkbox"
+      ],
+      "note": "Preserved unchanged; nothing was appended."
+    },
+    "claude-resume-20261016": {
+      "directory": ".repro-runs/claude-resume-20261016/linux-arm64",
+      "cases": [
+        "marked-empty-heading"
+      ],
+      "note": "Fresh named output. --previous-summary binds htmx summary, same daemon, driver, protocol, policy and unchanged image inventory."
+    }
+  },
+  "cases": [
+    {
+      "caseId": "morphdom-textarea",
+      "status": "passed",
+      "operations": 44,
+      "actualExecutions": 49,
+      "readableTests": 40,
+      "readableOutcomes": {
+        "buggyTargetFailure": 20,
+        "fixedRequirementSatisfied": 20
+      },
+      "workflowSeconds": {
+        "capture": 0.745,
+        "replay": 0.725,
+        "reduce": 3.354,
+        "export": 0.312
+      },
+      "maximumKernelPeakBytes": 363134976,
+      "setupRecordedMs": 171224.1595,
+      "maximumTerminalCensusDelayMs": 5018.662611,
+      "reduction": {
+        "originalActions": 3,
+        "reducedActions": 2,
+        "executions": 7,
+        "trials": 5,
+        "acceptedTrials": 2,
+        "minimality": "unverified"
+      },
+      "wholeExportBytes": 604377,
+      "owner": "f981244a-7ed6-47b9-a717-a6bb39bffd80",
+      "summary": {
+        "path": ".repro-runs/startup-repair-20261016/acceptance-v1/linux-arm64/morphdom-textarea/summary.json",
+        "bytes": 31882,
+        "sha256": "202c67a308fd4f80ef60a091901ef21e0f905d788658a29bdb0f97cc2cf8c712"
+      }
+    },
+    {
+      "caseId": "htmx-checkbox",
+      "status": "passed",
+      "operations": 44,
+      "actualExecutions": 46,
+      "readableTests": 40,
+      "readableOutcomes": {
+        "buggyTargetFailure": 20,
+        "fixedRequirementSatisfied": 20
+      },
+      "workflowSeconds": {
+        "capture": 0.906,
+        "replay": 0.796,
+        "reduce": 2.142,
+        "export": 0.312
+      },
+      "maximumKernelPeakBytes": 429580288,
+      "setupRecordedMs": 179370.404875,
+      "maximumTerminalCensusDelayMs": 5014.364584,
+      "reduction": {
+        "originalActions": 2,
+        "reducedActions": 2,
+        "executions": 4,
+        "trials": 3,
+        "acceptedTrials": 1,
+        "minimality": "unverified"
+      },
+      "wholeExportBytes": 1198736,
+      "owner": "3a1b99e7-ef39-4d15-ae5c-f17addecdebf",
+      "summary": {
+        "path": ".repro-runs/startup-repair-20261016/acceptance-v1/linux-arm64/htmx-checkbox/summary.json",
+        "bytes": 34696,
+        "sha256": "1e232d2e5a2910047d7c6b672455e1366800ab1b4edd15a468e6fb57229a4a9e"
+      }
+    },
+    {
+      "caseId": "marked-empty-heading",
+      "status": "passed",
+      "operations": 44,
+      "actualExecutions": 49,
+      "readableTests": 40,
+      "readableOutcomes": {
+        "buggyTargetFailure": 20,
+        "fixedRequirementSatisfied": 20
+      },
+      "workflowSeconds": {
+        "capture": 0.714,
+        "replay": 0.709,
+        "reduce": 3.14,
+        "export": 0.339
+      },
+      "maximumKernelPeakBytes": 328650752,
+      "setupRecordedMs": 139139.153708,
+      "maximumTerminalCensusDelayMs": 5012.251848,
+      "reduction": {
+        "originalActions": 3,
+        "reducedActions": 3,
+        "executions": 7,
+        "trials": 6,
+        "acceptedTrials": 1,
+        "minimality": "unverified"
+      },
+      "wholeExportBytes": 1610976,
+      "owner": "c60712bf-6d74-472d-980d-343c5f9f191e",
+      "summary": {
+        "path": ".repro-runs/claude-resume-20261016/linux-arm64/marked-empty-heading/summary.json",
+        "bytes": 64245,
+        "sha256": "d9c137c6a838483b19b378dbd73c655e21fc2a86758d9fa1271b82ba5bd92367"
+      }
+    }
+  ],
+  "totals": {
+    "operations": 132,
+    "uniqueRuns": 144,
+    "uniqueContainers": 132,
+    "readableTests": 120,
+    "auditedRecords": 6870
+  },
+  "independentAudit": {
+    "path": ".repro-runs/claude-resume-20261016/linux-three-case-audit.json",
+    "bytes": 1791336,
+    "sha256": "4dee68ebb36d75f25116f51b0df99d08532622ba79a2e197a77c3fc7026bde61",
+    "status": "linux-three-case-audit-complete",
+    "method": "Executed unchanged audit-linux.py preflight(), isolation() and audit(case) definitions with only the case-directory root split between two cohort directories; independent Python receipt/file inspection; no product, Docker, browser, VM, network, process probe or signal.",
+    "helper": {
+      "path": ".repro-runs/startup-repair-20261016/acceptance-v1/audit-linux.py",
+      "sha256": "66ed6febeafb813afeae771e0555d046fe7188d1190c470a700c52e4618afcdf"
+    },
+    "auditor": {
+      "path": ".repro-runs/claude-resume-20261016/audit-linux-resume.py",
+      "bytes": 12300,
+      "sha256": "019db4858c4669af3e25c2727c7d857a89bddba986dafe6cacbf5d8bc7e17229"
+    },
+    "uniqueAcrossCases": true
+  },
+  "negativeControls": {
+    "path": ".repro-runs/claude-resume-20261016/audit-negative-control.json",
+    "bytes": 532,
+    "sha256": "567e058d44a33ce4380020b87d7971ed0c502aaee7c8ca8faacd50c85a62ea30",
+    "script": {
+      "path": ".repro-runs/claude-resume-20261016/audit-negative-control.py",
+      "bytes": 4085,
+      "sha256": "68db82404bfea6aa370e951bdb7c65e3606eff25ed4044e16cda506e47f12829"
+    },
+    "findingCodes": {
+      "unmodified": [
+        "NO_CACHE_ACQUISITION"
+      ],
+      "tampered-log": [
+        "FILE_HASH",
+        "NO_CACHE_ACQUISITION",
+        "OPERATION_LOG"
+      ],
+      "wrong-previous": [
+        "NO_CACHE_ACQUISITION",
+        "PREVIOUS_RECEIPT_EXACT",
+        "SESSION_CHAIN"
+      ]
+    }
+  },
+  "restart": {
+    "deviation": "Profile e was stopped for the Claude handoff after htmx and restarted before Marked.",
+    "priorUnexecutedIntent": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/start-intent.json",
+      "bytes": 2251,
+      "sha256": "51f50b9b193445e9efdfe429966f0b2812dc7e36c555501af84d0659978ef4a5"
+    },
+    "startIntent": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/start-intent-v2.json",
+      "bytes": 12191,
+      "sha256": "dafc7de82a303b29cd9c77adcd22e080c97e31a16cc2d49c27757cf2317644d6"
+    },
+    "startLog": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/start.log",
+      "bytes": 3514,
+      "sha256": "232ac71371c0661e202057f6e0c32a61d1ad4d721bb33ac3361472625faf7f68"
+    },
+    "isolation": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/isolation-resume.json",
+      "bytes": 26641,
+      "sha256": "e4ac4d946b5852bb336ac84ec0efa0f8163c825432b2e35bcfc0da80dee5003f"
+    },
+    "inspector": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/inspect-isolation-resume.py",
+      "bytes": 9082,
+      "sha256": "84c83eee64e6850e3ea75af32cff37ef6177227d5d5158ef28c5725bc7392a91"
+    },
+    "daemonId": "ad0afe52-788a-48f2-ba68-4ae79926c51b",
+    "dockerServer": "29.5.2",
+    "configDiffsFromFirstStart": {
+      "colima.yaml": [
+        "-hostname: \"\"",
+        "+hostname: colima-e"
+      ],
+      "lima.yaml": [
+        "-      hostSocket: /Users/xingzhaoji/Desktop/Repro/.repro-cache/pb/e/docker.sock",
+        "+      hostSocket: /Users/xingzhaoji/desktop/repro/.repro-cache/pb/e/docker.sock",
+        "-      hostSocket: /Users/xingzhaoji/Desktop/Repro/.repro-cache/pb/e/containerd.sock",
+        "+      hostSocket: /Users/xingzhaoji/desktop/repro/.repro-cache/pb/e/containerd.sock"
+      ],
+      "override.yaml": []
+    },
+    "configDiffNote": "hostname filled in by Colima; host socket path letter case from the caller PWD alias on case-insensitive APFS (same files)."
+  },
+  "finalization": {
+    "finalizer": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/finalize-resume.py",
+      "bytes": 21899,
+      "sha256": "5d17aa756f4d1c8b3116945f8cd3b30563be69b93084c2a25686cf7bd708fb3c"
+    },
+    "terminalDaemon": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/terminal-daemon.json",
+      "bytes": 7981,
+      "sha256": "460e57ab6871934a819996983ff99d529eb6aac04a948fce63af260376db9426",
+      "status": "verified-empty-containers-volumes-images-retained",
+      "imageIds": [
+        "sha256:4db36457f406501e6f608802e5da617e5fbd0e80b75901b6a09de1ae5a667d32"
+      ]
+    },
+    "stopVerification": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/stop-verification.json",
+      "bytes": 24852,
+      "sha256": "209979d1f666850f68945358be8117a4a1165ad04e471b2e9f91ccdac2e00c40",
+      "status": "verified-profile-e-stopped-evidence-retained",
+      "originalProcess": {
+        "status": "original-pid-absent"
+      },
+      "dockerUnavailableStdout": "\"\"",
+      "dockerSocketAbsent": true
+    },
+    "firstHandoffVerifierNote": "The post-stop Docker client again printed \"\" for the unavailable endpoint, the response the first handoff verifier rejected; that preserved failed receipt is unchanged."
+  },
+  "remaining": {
+    "originalNativeHtmxShutdownCause": "unresolved; no recurrence in current-candidate native or Linux cohorts, which is not a causal repair",
+    "accessibility": "eight focused or mixed browser scenarios plus native zoom and actual screen-reader workflows deferred/unverified",
+    "fullPracticalBetaAcceptance": false,
+    "limitations": [
+      "Same owned Linux arm64 VM, not another physical machine or Linux amd64.",
+      "Profile e was stopped for the Claude handoff after htmx and restarted before Marked; same daemon, disks and image inventory re-verified; Marked is in a separate cohort directory.",
+      "Read-only audit of retained receipts, not a new execution.",
+      "VM shutdown is separate from empty daemon containers/volumes; retained images and disks are not claimed removed.",
+      "Fault suite and accessibility excluded; eight focused or mixed browser scenarios and native zoom/screen-reader checks remain deferred/unverified.",
+      "Original native htmx shutdown cause and historical failed cohorts are unchanged."
+    ]
+  }
+}

@@ -1,4 +1,14 @@
-# Current work — Claude handoff at a safe partial Linux checkpoint
+# Current work — Claude resumed; all three current-candidate Linux cases pass
+
+October 16, 2026, on `task/startup-owner-boundary` from delivered `a386750` (origin readback matched). The owner's `/goal continue` / `/goal resume` reopened the handed-off work. Implementation `9aec7fe` is unchanged; this continuation added only evidence and documentation.
+
+**Fresh Linux arm64 is now complete for all three pinned cases.** Morphdom and htmx (acceptance-v1, before the handoff) plus Marked (new `.repro-runs/claude-resume-20261016/` cohort) each passed 44 operations: **132 operations, 144 distinct executions, 120 readable tests (20 buggy target failures + 20 fixed passes per case)**. The unchanged, hash-bound `audit-linux.py` helpers found no findings across 132 unique containers and 6,870 records; negative controls on disposable copies detected log tampering and a broken session chain. See [the Linux report](evidence/LINUX-THREE-CASE-RESUME.md) and [receipt](evidence/linux-three-case-resume.json).
+
+Profile `e` was restarted for Marked: a recorded deviation, with the same daemon, disks and image inventory re-verified. The earlier session's unexecuted start intent is preserved. Afterwards a verified finalizer confirmed empty containers/volumes, stopped the VM, and confirmed the original hostagent absent, Docker unavailable, the socket absent and the disks retained. No other profile, shared service or game-session resource was touched.
+
+Still open: the original native htmx repetition-15 shutdown cause is unresolved. Current-candidate native (120/120) and Linux cohorts did not reproduce it, which is not a causal repair. Normal-run `CLEANUP_FAILED` evidence still cannot say which cleanup predicate failed (worker close, deadline, drain, or context-close rejection vs timeout); only the optional diagnostic observer distinguishes them. Closing that diagnosability gap is the next engineering item. It changes product/harness bytes, so it belongs to a new candidate and must not be reported under `9aec7fe`'s acceptance. Accessibility remains deferred. Full practical-beta acceptance is not claimed.
+
+## Preserved Claude handoff checkpoint
 
 October 16, 2026. The owner changed priority to transferring Repro to Claude and authorized committing/pushing the current branch to the existing private GitHub repository. After the already-running htmx Linux case finished, no new implementation or test cohort started. See [the self-contained handoff](CLAUDE_HANDOFF.md), [takeover prompt](CLAUDE_TAKEOVER_PROMPT.md), and [exact checkpoint receipt](evidence/CLAUDE-HANDOFF-CHECKPOINT.json). Final publication SHA/readback is recorded separately in the delivery manifest after this commit; no main merge, force push, visibility change or deployment is authorized.
 
