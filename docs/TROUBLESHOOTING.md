@@ -1,6 +1,6 @@
 # Troubleshooting
 
-Every CLI failure prints a JSON error with a `category`, a stable `code` and a recovery message. Diagnostics never echo raw target exceptions or page content. Start from the exit code, then find the code below.
+Every CLI failure prints JSON with a `category`, a stable code and a recovery message. A command that cannot run prints an error object with a `code` field. A run that executed but was inconclusive prints its `result`, whose `reason` starts with the code, for example `BROWSER_UNAVAILABLE: …`. Diagnostics never echo raw target exceptions or page content. Start from the exit code, then find the code below.
 
 ## Exit codes
 
@@ -9,7 +9,7 @@ Every CLI failure prints a JSON error with a `category`, a stable `code` and a r
 | 0 | Requirement satisfied, or a non-replay operation (reduce, verify, export, inspect, doctor) completed | No |
 | 1 | The declared target failure was reproduced: the frozen assertion executed and failed on the buggy revision | No. This is the expected result of `record` and `replay` on a buggy revision |
 | 2 | Invalid input, unsupported request, environment problem, or an inconclusive run | Read the error code |
-| 130 | You cancelled (Ctrl-C, SIGTERM, or Cancel in the workbench) | No. Nothing was finalized; retry in a new output directory |
+| 130 | You cancelled with Ctrl-C or SIGTERM | No. The result is saved as `cancelled`, and an export is never finalized; retry in a new output directory |
 
 An inconclusive result is never counted as reproducing the bug or as proving a fix. A timeout, missing dependency, wrong observation, unrelated page exception or changed identity is inconclusive by design.
 
@@ -44,6 +44,7 @@ Check for evicted files with `find node_modules .repro-cache -flags +dataless | 
 | Symptom or code | Cause | What to do |
 | --- | --- | --- |
 | `OUTPUT_EXISTS`, `EXPORT_EXISTS` | The output directory already exists | Choose a new directory. Repro never overwrites earlier or partial evidence |
+| `CANCELLED`, `REDUCTION_CANCELLED`, `EXPORT_CANCELLED` | You cancelled the operation | Nothing was accepted as a result. Retry in a new output directory |
 | `OUTPUT_BOUNDARY`, `EXPORT_LOCATION` | Output is not a child of `.repro-runs/` in the current directory | Run from your workspace and use `--output .repro-runs/NAME` |
 | `CONSENT_REQUIRED` | `record` was run without `--consent` | Read the declaration, then add `--consent` |
 | `CASE_DECLARATION`, `EXPECTATION_CHANGED` | The expectation file is not the supported declaration | Regenerate it with `repro cases --case ID`; for the synthetic app, see [AUTHORED-EXPECTATIONS](AUTHORED-EXPECTATIONS.md) |
@@ -59,14 +60,14 @@ Check for evicted files with `find node_modules .repro-cache -flags +dataless | 
 
 ### CLEANUP_FAILED and a retained profile
 
-`CLEANUP_FAILED` means Repro could not certify that the run's browser and worker shut down within the cleanup budget. It keeps that run's owned `.profile` directory instead of deleting files a live process might still write. This is deliberate safety behavior, not data loss. Repro never removes a profile while ownership or shutdown is uncertain.
+`CLEANUP_FAILED` means Repro could not certify that the run's browser and worker shut down within the cleanup budget. It keeps that run's owned `.profile` directory instead of deleting files a live process might still write. This is deliberate safety behavior, not data loss. Repro never removes a profile while ownership or shutdown is uncertain. The reason's `Cleanup basis:` clause names the condition that failed, for example `context-close=timeout` or `worker=closed-before-cleanup`; [USAGE](USAGE.md) lists the vocabulary.
 
 1. Keep the run directory as evidence.
 2. Check whether that run's own browser or worker processes are still alive. Look only at that run; do not stop unrelated browsers or processes.
 3. Once those processes have exited, you may remove that exact `.profile`. If you cannot tell, keep it.
 4. Retry in a new output directory.
 
-A later successful shutdown does not change the failed result or remove the profile automatically. One historical occurrence on an earlier build remains unexplained; see the [release notes](RELEASE-NOTES.md#known-issues).
+A later successful shutdown does not change the failed result or remove the profile automatically. Cancel with Ctrl-C, SIGTERM to the CLI, or the workbench's Cancel. Signalling the worker process directly can still end in this safe state. One historical occurrence on an earlier build remains unexplained; see the [release notes](RELEASE-NOTES.md#known-issues).
 
 ## Workbench
 

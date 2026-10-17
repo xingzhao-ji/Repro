@@ -1,6 +1,6 @@
 # Repro 0.1.0 — practical beta
 
-Release package: `repro-local-0.1.0.tgz`, built with `npm pack` from the release commit tagged `v0.1.0-beta` on branch `release/practical-beta-0.1.0`. The implementation is commit `9aec7fe` (startup cleanup repair). The release commit changes only documentation, so its built `dist/` is byte-identical to the accepted implementation's. The tarball's SHA-256 and the verification of that exact tarball are recorded in [`evidence/PRACTICAL-BETA-RELEASE.md`](../evidence/PRACTICAL-BETA-RELEASE.md), which a documentation-only commit adds after this one. A tarball cannot contain its own verification report.
+Release package: `repro-local-0.1.0.tgz`, built with `npm pack` from the release commit on branch `release/practical-beta-0.1.0`, which is tagged `v0.1.0-beta` once every gate passes. Its SHA-256 and the verification of that exact tarball are recorded in [`evidence/PRACTICAL-BETA-RELEASE.md`](../evidence/PRACTICAL-BETA-RELEASE.md). A documentation-only commit adds that report after the release commit, because a tarball cannot contain its own verification report.
 
 ## What it does
 
@@ -25,17 +25,15 @@ The CLI (`record`, `replay`, `reduce`, `verify`, `export`, `inspect`, `cases`, `
 
 The three cases are selected development cases with small integration pages. They are not held-out evaluations, and they are not coverage of each project's full application.
 
-## Accepted evidence for implementation 9aec7fe
+## Changes since implementation 9aec7fe
 
-Recorded against these product bytes before this release. The release verification re-checks the bytes' identity and reruns the package, workflow, stability, cancellation and fresh-install checks on the release tarball.
+`9aec7fe`, the startup cleanup repair, passed its own native and Linux acceptance ([native](../evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](../evidence/LINUX-THREE-CASE-RESUME.md)). Release verification then exercised CLI cancellation through the installed package and found two defects. The release contains:
 
-| Gate | Result | Evidence |
-| --- | --- | --- |
-| Ordinary tests | 382/382 | [repair checkpoint](../evidence/STARTUP-CLEANUP-REPAIR.md) |
-| Functional browser tests | 50/50 selected; 8 accessibility-focused or mixed scenarios deferred | same |
-| Native macOS arm64 workflows | 15 measurements, 30 browser executions | [native acceptance](../evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md) |
-| Native stability | 120/120: 20 alternating buggy/fixed pairs per case | same |
-| Fresh isolated Linux arm64 | 132 operations, 144 executions, 120 readable tests; independent audit found no issues | [Linux acceptance](../evidence/LINUX-THREE-CASE-RESUME.md) |
+- **Terminal Ctrl-C no longer defeats certified cleanup.** The case worker shared the CLI's process group, so a terminal interrupt killed it directly. The run then reported `CLEANUP_FAILED` and kept an empty browser profile, although no process survived. The worker now runs in its own process group, and cancellation reaches it only through the CLI ([ADR 0004](adr/0004-cancellation-signal-boundary.md)).
+- **A cancelled `export` exits 130.** It previously exited 2, although its JSON already reported `cancelled` and nothing was finalized.
+- **`CLEANUP_FAILED` names the failed condition.** Its reason carries a validated, fixed-vocabulary `Cleanup basis:` clause, such as `context-close=timeout` or `worker=closed-before-cleanup` ([ADR 0003](adr/0003-cleanup-failure-basis.md)). The retention decision itself is unchanged.
+
+Each fix has a regression that failed before the change and passes after it. These changes alter runtime and harness bytes, so none of `9aec7fe`'s acceptance transfers. The release has its own verification.
 
 Budgets are unchanged from the [frozen protocol](../benchmarks/PRACTICAL-BETA-PROTOCOL.md):
 
@@ -47,15 +45,15 @@ Budgets are unchanged from the [frozen protocol](../benchmarks/PRACTICAL-BETA-PR
 
 ## Known issues
 
-- **Historical htmx shutdown failure, cause unresolved.** On an earlier build, one fixed htmx run (repetition 15 of a native stability cohort) completed its assertion but missed the browser-shutdown acknowledgment. The run reported `CLEANUP_FAILED` and kept its profile, as designed. In the accepted cohorts for the current build, all 40 native and all 40 Linux htmx stability runs passed without recurrence. Those passes do not explain the original cause, which remains open. If it recurs, Repro still fails safe: it reports `CLEANUP_FAILED`, retains the profile and never claims a pass.
-- **`CLEANUP_FAILED` does not yet say which cleanup condition failed.** A follow-up candidate on branch `task/cleanup-failure-basis` adds that detail. It is not in this release because it changes runtime bytes and has not passed Linux acceptance.
-- **Linux verification driver blind spot.** `scripts/verify-beta-isolated.mjs` lists images with `docker image ls --quiet`. Under Docker 29 that listing hides untagged images, so the driver's foreign-image check cannot see them. An independent listing showed that the Linux cohorts' retained images were all their own labeled artifacts, so no result changes. A fix needs a live Linux run to verify and is deferred to the follow-up candidate. The driver is not part of the npm package.
+- **Historical htmx shutdown failure, cause unresolved.** On an earlier build, one fixed htmx run (repetition 15 of a native stability cohort) completed its assertion but missed the browser-shutdown acknowledgment. It reported `CLEANUP_FAILED` and kept its profile, as designed. Later cohorts passed without recurrence, which does not explain the original cause. If it recurs, Repro still fails safe: it reports `CLEANUP_FAILED` with its cleanup basis, retains the profile and never claims a pass.
+- **A worker signalled directly by an outside tool still fails safe.** Ctrl-C, SIGTERM to the CLI and workbench Cancel are the supported cancellation paths. Signalling the worker's own PID can still produce `CLEANUP_FAILED` with a retained profile.
+- **Linux verification driver blind spot.** `scripts/verify-beta-isolated.mjs` lists images with `docker image ls --quiet`. Under Docker 29 that listing hides untagged images, so the driver's foreign-image check cannot see them. Earlier independent audits listed images with `--all` and found only each cohort's own labeled images. The driver is not part of the npm package.
 
 ## Limitations
 
 - Only the four registered workflows above. Arbitrary websites, authenticated apps, databases, WebSockets and real-user recording are unsupported, and are rejected rather than silently approximated.
 - Ordinary containers are a development boundary, not hostile-code isolation. Do not execute untrusted capsules.
-- Verified platforms: native macOS arm64, and isolated Linux arm64 on one task-owned VM. Linux amd64, Windows and other physical machines are untested.
+- Platform claims are limited to what the release evidence records: native macOS arm64, and isolated Linux arm64 on one task-owned VM when that evidence is present. Linux amd64, Windows and other physical machines are untested.
 - Reduction deletes actions and dependency groups only. It reports minimality as unverified and never claims global minimality.
 - Repeated passing runs are bounded evidence, not proof of determinism.
 - **Accessibility is deferred and unverified.** That covers native 200% zoom, actual screen-reader workflows and the 8 accessibility-focused or mixed browser scenarios. Keyboard, focus and automated checks keep their earlier scoped results only.

@@ -2,16 +2,11 @@
 
 Repro captures an explicitly declared browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench and CLI share the same runner. Registered buggy and fixed revisions execute against the same frozen expected behavior in fresh browser state.
 
-**Release 0.1.0 (practical beta)** packages implementation `9aec7fe` as `repro-local-0.1.0.tgz`. It supports the synthetic stale-response alpha plus three pinned public repository bugs: morphdom textarea updates, htmx delegated checkbox events and Marked empty headings. They run against actual upstream source in small integration pages.
+**Release 0.1.0 (practical beta)** ships as `repro-local-0.1.0.tgz`. It supports the synthetic stale-response alpha plus three pinned public repository bugs: morphdom textarea updates, htmx delegated checkbox events and Marked empty headings. They run against actual upstream source in small integration pages.
 
-The implementation passed its accepted gates:
+The release builds on implementation `9aec7fe`, which passed native macOS arm64 and fresh isolated Linux arm64 acceptance ([native](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](evidence/LINUX-THREE-CASE-RESUME.md)). It adds the cleanup-basis diagnostics and two cancellation fixes found while verifying the installed package. Those changes need fresh evidence, so verification of the exact release tarball is recorded separately in [`evidence/PRACTICAL-BETA-RELEASE.md`](evidence/PRACTICAL-BETA-RELEASE.md). A documentation-only commit adds that report after the release commit.
 
-- fresh native macOS arm64 workflows and 120/120 native stability runs ([native acceptance](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md));
-- fresh isolated Linux arm64 workflows plus 20 buggy/fixed exported-test pairs per case, 132 operations in all, independently audited ([Linux acceptance](evidence/LINUX-THREE-CASE-RESUME.md)).
-
-Verification of the exact release tarball is recorded in [`evidence/PRACTICAL-BETA-RELEASE.md`](evidence/PRACTICAL-BETA-RELEASE.md), added by a documentation-only commit after the release commit.
-
-Read [INSTALL](docs/INSTALL.md), [USAGE](docs/USAGE.md), [TROUBLESHOOTING](docs/TROUBLESHOOTING.md) and the [release notes](docs/RELEASE-NOTES.md). The notes cover known issues: one historical native htmx shutdown failure on an earlier build, cause unresolved, is preserved. They are selected development cases, not held-out effectiveness or arbitrary website support; see the [frozen protocol](benchmarks/PRACTICAL-BETA-PROTOCOL.md). Earlier [release evidence](evidence/RELEASE.md) belongs to the synthetic alpha. Accessibility remains explicitly deferred and unverified. Real-user recording, PostgreSQL adapters and public untrusted execution remain unsupported.
+Read [INSTALL](docs/INSTALL.md), [USAGE](docs/USAGE.md), [TROUBLESHOOTING](docs/TROUBLESHOOTING.md) and the [release notes](docs/RELEASE-NOTES.md). The notes cover what changed and the known issues: one historical native htmx shutdown failure on an earlier build, cause unresolved, is preserved. They are selected development cases, not held-out effectiveness or arbitrary website support; see the [frozen protocol](benchmarks/PRACTICAL-BETA-PROTOCOL.md). Earlier [release evidence](evidence/RELEASE.md) belongs to the synthetic alpha. Accessibility remains explicitly deferred and unverified. Real-user recording, PostgreSQL adapters and public untrusted execution remain unsupported.
 
 ## Install the release
 

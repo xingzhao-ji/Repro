@@ -57,7 +57,13 @@ Cancel stops the selected active job. Refresh reconnects to persisted state.
 
 ### Cancellation and cleanup
 
-Press Ctrl-C (or send SIGTERM) to cancel a CLI operation. It exits **130** and finalizes nothing. Export removes its own partial staging directory, and the next attempt needs a new output directory. Owned browser and server resources are released within 8 seconds of cancellation and within 5 seconds of ordinary completion. Unrelated processes and other runs' files are never touched. If shutdown cannot be certified, the run reports `CLEANUP_FAILED` and keeps its browser profile; see [TROUBLESHOOTING](TROUBLESHOOTING.md#cleanup_failed-and-a-retained-profile).
+Press Ctrl-C (or send SIGTERM to the CLI) to cancel an operation. It exits **130**, and nothing counts as a reproduction, a pass or a completed reduction:
+
+- `record`, `replay` and `verify` save their result as `cancelled`.
+- `reduce` saves a `cancelled` result beside its best-known manifest; minimality stays unverified.
+- `export` never finalizes. It removes its own partial staging directory and lock.
+
+Retry in a new output directory. Owned browser and server resources are released within 8 seconds of cancellation and within 5 seconds of ordinary completion. Unrelated processes and other runs' files are never touched. If shutdown cannot be certified, the run reports `CLEANUP_FAILED` with a `Cleanup basis:` clause and keeps its browser profile; see [TROUBLESHOOTING](TROUBLESHOOTING.md#cleanup_failed-and-a-retained-profile).
 
 ## Source checkout and synthetic workflow
 
