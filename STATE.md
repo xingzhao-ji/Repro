@@ -18,6 +18,16 @@ What was misleading:
 - A `compressed,dataless` Chromium file (`icudtl.dat`, 10.8 MB) read back **empty** while `cat` exited 0. Verify full read length or hash, not just exit status.
 - Parallel `cat` hydration slowed to about 30 files a minute.
 
+**Browser-location hazard (diagnosed 2026-10-16 ~19:20 PDT):** after rehydration, the pinned Chromium in `.repro-cache/browsers` (inside the synced Desktop) loaded pages and handled `fill`, but `requestAnimationFrame` never fired. Clicks hung at Playwright's "visible, enabled and stable" check, and screenshots timed out. Every click-based browser test hit its deadline, base code `9aec7fe` included.
+
+How it was isolated:
+- A fresh Playwright download of the same build into the session scratchpad has 18/18 byte-identical files and renders normally, as does a flag-preserving copy of the cached tree outside iCloud.
+- The cause is therefore executing Chromium from the iCloud-synced location while the iCloud daemon `bird` was at ~90% CPU, not the bytes or the `hidden` flag.
+- Workaround used for verification: `PLAYWRIGHT_BROWSERS_PATH` pointing at a hash-identical copy outside iCloud.
+- Probe script: `.repro-runs/cleanup-basis/raf-probe.mjs`.
+
+Before trusting any browser failure here, probe animation frames first.
+
 Still open: the original native htmx repetition-15 shutdown cause is unresolved. Current-candidate native (120/120) and Linux cohorts did not reproduce it, which is not a causal repair. Normal-run `CLEANUP_FAILED` evidence still cannot say which cleanup predicate failed (worker close, deadline, drain, or context-close rejection vs timeout); only the optional diagnostic observer distinguishes them. Closing that diagnosability gap is in progress on branch `task/cleanup-failure-basis`, worktree `.repro-runs/cleanup-basis/worktree`. It changes product/harness bytes, so it is a new candidate and must not be reported under `9aec7fe`'s acceptance. Accessibility remains deferred. Full practical-beta acceptance is not claimed.
 
 ## Preserved Claude handoff checkpoint
