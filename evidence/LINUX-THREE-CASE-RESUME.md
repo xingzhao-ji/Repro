@@ -2,7 +2,7 @@
 
 October 16, 2026. Resumed after the Claude handoff. Implementation `9aec7fe` now has passing fresh isolated Linux arm64 evidence for all three pinned practical-beta cases. Morphdom and htmx ran before the handoff in `acceptance-v1`. The previously unrun Marked case ran afterwards in a separately named cohort directory. **Practical-beta completion is still not claimed:** the original native htmx shutdown cause remains unresolved, and accessibility stays deferred.
 
-[Machine-readable receipt](linux-three-case-resume.json) binds every summary, audit, auditor, negative control, isolation, start and stop receipt, plus the builder that generated it, by path and SHA-256 (and size, except for the audit helper's nested reference). Raw evidence is local under `.repro-runs/startup-repair-20261016/acceptance-v1/` and `.repro-runs/claude-resume-20261016/`; a clone without those ignored files cannot re-audit them.
+[Machine-readable receipt](linux-three-case-resume.json) binds every summary, audit, auditor, negative control, isolation, start and stop receipt, plus the builder that generated it, by path, size and SHA-256. Raw evidence is local under `.repro-runs/startup-repair-20261016/acceptance-v1/` and `.repro-runs/claude-resume-20261016/`; a clone without those ignored files cannot re-audit them.
 
 | Case | Cohort directory | Operations | Executions | Readable buggy / fixed | Reduction | Kernel peak |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -21,16 +21,16 @@ Workflow times in seconds (capture / replay / reduction / export): morphdom 0.74
   - It also verified no host shares and no SSH agent, loopback-only host listeners, and the unchanged override.
   - Colima rewrote three lines in two files. It filled in `hostname` in `colima.yaml`, and the two `lima.yaml` host socket paths came out lower case. That's because `COLIMA_HOME`/`LIMA_HOME` were given relative to the shell's lower-case alias of the same case-insensitive APFS directory. The receipt lists these inspector relaxations.
 - **Execution.** `scripts/verify-beta-isolated.mjs` ran unchanged with the approved policy SHA-256 `949b87f7…`, chained by `--previous-summary` to the htmx summary. Nothing was written into `acceptance-v1`.
-- **Independent audit (v2).** `linux-three-case-audit-v2.json` runs the hash-bound, unchanged `preflight()`, `isolation()` and `audit(case)` definitions from `acceptance-v1/audit-linux.py`. It replaces only the case-directory root, so Marked reads from the new cohort while its previous summary still binds acceptance-v1's htmx summary.
+- **Independent audit (v3).** `linux-three-case-audit-v3.json` runs the hash-bound, unchanged `preflight()`, `isolation()` and `audit(case)` definitions from `acceptance-v1/audit-linux.py`. It replaces only the case-directory root, so Marked reads from the new cohort while its previous summary still binds acceptance-v1's htmx summary.
   - Three new functions cover what the helper's fixed paths cannot reach:
     - `resume_isolation()` applies every `isolation()` check to the restart receipt, with recorded adaptations. Those adaptations are the same daemon, base-image inventory, case-insensitive path comparison, and config diffs recomputed from the snapshot files.
     - `resume_daemon_cleanup()` mirrors `daemon_cleanup()`.
-    - `resume_stop()` rechecks the stop receipt's own command logs.
-  - Result: 132 operations, 144 unique runs, 132 unique containers and 6,897 file records, with no findings. Run, container and owner identities are unique across all three cases.
-  - Independent review found that v1 of this audit (`linux-three-case-audit.json`, same counts) had a much weaker restart-isolation check than this report originally claimed. v1 is preserved; v2 replaces it as the cited evidence.
-- **Negative controls.** Disposable copies show that the audit rejects consistent mutations, where the receipt hash of the mutated log is updated too. Unmutated copies pass.
-  - Helper path: a one-bit readable-test log change yields `OPERATION_LOG`/`FILE_HASH`, and an expected-predecessor substitution yields `PREVIOUS_RECEIPT_EXACT`/`SESSION_CHAIN`.
-  - Replacement functions and routing are each rejected on:
+    - `resume_stop()` rechecks the stop receipt's command logs, the Docker binding of every command, the pre-stop hostagent identity against the isolation receipt, the post-stop Lima dir, and the finalizer script hash.
+  - Result: 132 operations, 144 unique runs, 132 unique containers and 6,898 file records, with no findings. Run, container and owner identities are unique across all three cases.
+  - Two rounds of automated review by a read-only Claude subagent (not human review) found weaknesses. v1 (`linux-three-case-audit.json`) had a much weaker restart-isolation check than first claimed. v2 accepted two stop-receipt mutations. Both versions report the same counts and are preserved; v3 is the cited evidence.
+- **Negative controls.** All run on disposable copies.
+  - Helper path: a one-bit readable-test log change is caught by hash checks (`OPERATION_LOG`/`FILE_HASH`), and an expected-predecessor substitution yields `PREVIOUS_RECEIPT_EXACT`/`SESSION_CHAIN`. An unmodified copy differs only in the path-bound `NO_CACHE_ACQUISITION` argument hash.
+  - Replacement functions (v3): unmutated copies pass. Mutated logs have their receipt hashes updated, so only a semantic check can reject them, and each result records the auditor line that fired. Each of these is rejected:
     - a guest CPU count of 4;
     - a new hostagent listener;
     - a foreign Docker host socket;
@@ -38,8 +38,10 @@ Workflow times in seconds (capture / replay / reduction / export): morphdom 0.74
     - a leftover volume;
     - a surviving hostagent PID;
     - a Docker endpoint that still answers;
-    - Marked's previous-summary hash changed in a copy;
-    - morphdom routed to the wrong cohort.
+    - a foreign post-stop Docker host binding;
+    - a different pre-stop hostagent identity;
+    - Marked's previous-summary hash changed in a copy (`PREVIOUS_RECEIPT_EXACT`);
+    - morphdom routed to htmx's directory (morphdom's pinned source is absent there, so the audit is incomplete).
 - **Finalization.** A terminal receipt confirmed no containers or volumes and the base image retained. The verified stop then confirmed the following, while the original pre-handoff hostagent 58483 had already exited at the handoff stop:
   - Lima Stopped;
   - the resumed hostagent (PID 95902) absent;
@@ -47,7 +49,7 @@ Workflow times in seconds (capture / replay / reduction / export): morphdom 0.74
   - the socket absent;
   - the disks retained.
 
-  The Docker client again printed `""` for the unavailable endpoint. That response made the first handoff stop verifier fail; this finalizer accepts it but still requires exit 1, an endpoint error, the absent socket and a stopped VM. The failed receipt is preserved. A later read-only process note found neither the resumed hostagent nor the task-local usernet (PID 95896) running.
+  The Docker client again printed `""` for the unavailable endpoint. That response made the first handoff stop verifier fail; this finalizer accepts it but still requires exit 1, an endpoint error, the absent socket and a stopped VM. The failed receipt is preserved. A read-only process note taken about 27 minutes after the stop, with raw `ps` output and its script retained, found neither the resumed hostagent nor the task-local usernet (PID 95896) running.
 
 ## Limits
 
