@@ -27,9 +27,10 @@ The three cases are selected development cases with small integration pages. The
 
 ## Changes since implementation 9aec7fe
 
-`9aec7fe`, the startup cleanup repair, passed its own native and Linux acceptance ([native](../evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](../evidence/LINUX-THREE-CASE-RESUME.md)). Release verification then exercised CLI cancellation through the installed package and found two defects. The release contains:
+`9aec7fe`, the startup cleanup repair, passed its own native and Linux acceptance ([native](../evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](../evidence/LINUX-THREE-CASE-RESUME.md)). Release verification then exercised CLI cancellation through the installed package and found three defects. The release contains:
 
 - **Terminal Ctrl-C no longer defeats certified cleanup.** The case worker shared the CLI's process group, so a terminal interrupt killed it directly. The run then reported `CLEANUP_FAILED` and kept an empty browser profile, although no process survived. The worker now runs in its own process group, and cancellation reaches it only through the CLI ([ADR 0004](adr/0004-cancellation-signal-boundary.md)).
+- **A cancelled synthetic run cannot keep the CLI alive.** If cancellation landed while a synthetic run was still creating its directory, the owned fixture server could bind after the run had returned. Its socket then kept the CLI process running after it printed a `cancelled` result. A late-bound server now closes itself.
 - **A cancelled `export` exits 130.** It previously exited 2, although its JSON already reported `cancelled` and nothing was finalized.
 - **`CLEANUP_FAILED` names the failed condition.** Its reason carries a validated, fixed-vocabulary `Cleanup basis:` clause, such as `context-close=timeout` or `worker=closed-before-cleanup` ([ADR 0003](adr/0003-cleanup-failure-basis.md)). The retention decision itself is unchanged.
 
