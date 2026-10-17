@@ -1,12 +1,25 @@
 {
   "schemaVersion": 1,
+  "revision": 2,
+  "builder": {
+    "path": ".repro-runs/claude-resume-20261016/build-tracked-receipt-v2.py",
+    "bytes": 10576,
+    "sha256": "a42e29aec62d2a9d0b764a9c116aa8a9a913f304cb88375c70889c19e36f96e0"
+  },
   "status": "linux-arm64-three-case-current-candidate-passed",
   "scope": "Fresh isolated Linux arm64 capture, replay, bounded reduction, export and 20 alternating readable buggy/fixed pairs for the three pinned practical-beta cases on implementation 9aec7fe. Fault suite and accessibility excluded.",
   "source": {
     "testedImplementationCommit": "9aec7fe8d8513a30da30705b0619072a6c056302",
-    "headAtExecution": "a386750b40a089603219a227e774ef21ab5d45d2",
+    "headAtExecution": "c880a074135457bb794e9314d05ebd51ae674256",
     "postImplementationDiff": "documentation/evidence only",
-    "frozenInputsRechecked": 132,
+    "frozenInputsRechecked": {
+      "count": 132,
+      "bindingChecks": [
+        "audit preflight() after the run",
+        "finalizer frozen_inputs() at terminal capture and stop"
+      ],
+      "preRestartNote": "The pre-restart 132-input and 59-entry Marked capsule checks (58 integrity rows plus integrity.json) are recorded only as text in start-intent-v2.json."
+    },
     "policySha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b",
     "driver": {
       "path": "scripts/verify-beta-isolated.mjs",
@@ -148,48 +161,97 @@
     "uniqueRuns": 144,
     "uniqueContainers": 132,
     "readableTests": 120,
-    "auditedRecords": 6870
+    "auditedRecords": 6897
   },
   "independentAudit": {
-    "path": ".repro-runs/claude-resume-20261016/linux-three-case-audit.json",
-    "bytes": 1791336,
-    "sha256": "4dee68ebb36d75f25116f51b0df99d08532622ba79a2e197a77c3fc7026bde61",
+    "path": ".repro-runs/claude-resume-20261016/linux-three-case-audit-v2.json",
+    "bytes": 1800140,
+    "sha256": "285986aeb698cb06eb6629924615ba8ce4156e09a6ec6e03adce8ab078f6174d",
     "status": "linux-three-case-audit-complete",
-    "method": "Executed unchanged audit-linux.py preflight(), isolation() and audit(case) definitions with only the case-directory root split between two cohort directories; independent Python receipt/file inspection; no product, Docker, browser, VM, network, process probe or signal.",
+    "method": "Unchanged audit-linux.py preflight(), isolation() and audit(case) definitions with BASE split across two cohort directories; new resume_isolation() ports every isolation() check with recorded adaptations; resume_daemon_cleanup() mirrors daemon_cleanup(); resume_stop() rechecks the stop receipt logs. Independent Python receipt/file inspection; no product, Docker, browser, VM, network, process probe or signal.",
     "helper": {
       "path": ".repro-runs/startup-repair-20261016/acceptance-v1/audit-linux.py",
+      "bytes": 40565,
       "sha256": "66ed6febeafb813afeae771e0555d046fe7188d1190c470a700c52e4618afcdf"
     },
     "auditor": {
-      "path": ".repro-runs/claude-resume-20261016/audit-linux-resume.py",
-      "bytes": 12300,
-      "sha256": "019db4858c4669af3e25c2727c7d857a89bddba986dafe6cacbf5d8bc7e17229"
+      "path": ".repro-runs/claude-resume-20261016/audit-linux-resume-v2.py",
+      "bytes": 21611,
+      "sha256": "cba214cafcb912aab85d5a62974957bdad62da4ce385b2d752355657f60dc34b"
     },
-    "uniqueAcrossCases": true
+    "uniqueAcrossCases": true,
+    "newFunctions": [
+      "resume_isolation(): every audit-linux.py isolation() check, adapted for the restart",
+      "resume_daemon_cleanup(): daemon_cleanup() checks on resumed paths",
+      "resume_stop(): stop receipt and its command logs"
+    ],
+    "adaptations": [
+      "same daemon; initial images equal htmx terminal images",
+      "case-insensitive host socket and identity path comparison",
+      "config diffs recomputed from snapshot files",
+      "start-intent-v2.json replaces preflight.json"
+    ],
+    "supersededV1": {
+      "path": ".repro-runs/claude-resume-20261016/linux-three-case-audit.json",
+      "bytes": 1791336,
+      "sha256": "4dee68ebb36d75f25116f51b0df99d08532622ba79a2e197a77c3fc7026bde61",
+      "auditor": {
+        "path": ".repro-runs/claude-resume-20261016/audit-linux-resume.py",
+        "bytes": 12300,
+        "sha256": "019db4858c4669af3e25c2727c7d857a89bddba986dafe6cacbf5d8bc7e17229"
+      },
+      "reviewFinding": "v1 resume_isolation() omitted many isolation() checks; same result, weaker evidence. Preserved, not deleted."
+    }
   },
   "negativeControls": {
-    "path": ".repro-runs/claude-resume-20261016/audit-negative-control.json",
-    "bytes": 532,
-    "sha256": "567e058d44a33ce4380020b87d7971ed0c502aaee7c8ca8faacd50c85a62ea30",
-    "script": {
-      "path": ".repro-runs/claude-resume-20261016/audit-negative-control.py",
-      "bytes": 4085,
-      "sha256": "68db82404bfea6aa370e951bdb7c65e3606eff25ed4044e16cda506e47f12829"
+    "helperPath": {
+      "path": ".repro-runs/claude-resume-20261016/audit-negative-control.json",
+      "bytes": 532,
+      "sha256": "567e058d44a33ce4380020b87d7971ed0c502aaee7c8ca8faacd50c85a62ea30",
+      "script": {
+        "path": ".repro-runs/claude-resume-20261016/audit-negative-control.py",
+        "bytes": 4085,
+        "sha256": "68db82404bfea6aa370e951bdb7c65e3606eff25ed4044e16cda506e47f12829"
+      },
+      "findingCodes": {
+        "unmodified": [
+          "NO_CACHE_ACQUISITION"
+        ],
+        "tampered-log": [
+          "FILE_HASH",
+          "NO_CACHE_ACQUISITION",
+          "OPERATION_LOG"
+        ],
+        "wrong-previous": [
+          "NO_CACHE_ACQUISITION",
+          "PREVIOUS_RECEIPT_EXACT",
+          "SESSION_CHAIN"
+        ]
+      }
     },
-    "findingCodes": {
-      "unmodified": [
-        "NO_CACHE_ACQUISITION"
-      ],
-      "tampered-log": [
-        "FILE_HASH",
-        "NO_CACHE_ACQUISITION",
-        "OPERATION_LOG"
-      ],
-      "wrong-previous": [
-        "NO_CACHE_ACQUISITION",
-        "PREVIOUS_RECEIPT_EXACT",
-        "SESSION_CHAIN"
-      ]
+    "replacementFunctionsAndRouting": {
+      "path": ".repro-runs/claude-resume-20261016/audit-negative-control-v2.json",
+      "bytes": 1176,
+      "sha256": "ebec0c309f12dc39483d731380732c892eb6e9e2d1857f14ad36f532b02941ab",
+      "script": {
+        "path": ".repro-runs/claude-resume-20261016/audit-negative-control-v2.py",
+        "bytes": 6810,
+        "sha256": "99527b0300005d4775c3f6db9ba98db069733a3a1819b0305407936fa66fdbed"
+      },
+      "results": {
+        "control-isolation": "accepted",
+        "control-daemon-cleanup": "accepted",
+        "control-stop": "accepted",
+        "isolation-guest-cpus-4": "rejected: assertion",
+        "isolation-hostagent-public-listener": "rejected: hostagent-tcp-listeners",
+        "isolation-foreign-host-socket": "rejected: assertion",
+        "isolation-unrecorded-config-drift": "rejected: Recorded config diff differs from the snapshot files",
+        "daemon-cleanup-leftover-volume": "rejected: assertion",
+        "stop-hostagent-still-present": "rejected: assertion",
+        "stop-docker-still-answers": "rejected: assertion",
+        "marked-previous-summary-sha": "rejected: NO_CACHE_ACQUISITION,PREVIOUS_RECEIPT_EXACT",
+        "routing-morphdom-to-resume-cohort": "rejected: status pending"
+      }
     }
   },
   "restart": {
@@ -234,7 +296,23 @@
       ],
       "override.yaml": []
     },
-    "configDiffNote": "hostname filled in by Colima; host socket path letter case from the caller PWD alias on case-insensitive APFS (same files)."
+    "configDiffNote": "Three changed lines in two files: colima.yaml hostname filled in; two lima.yaml hostSocket paths in lower case because COLIMA_HOME/LIMA_HOME were given relative to the lower-case PWD alias of the same case-insensitive APFS directory.",
+    "persistentDrift": "The live task-owned profile config keeps the lower-case paths (colima.yaml 2368f4f4..., lima.yaml 9b88bd56...); acceptance-v1 inspector/finalizer config hashes no longer match. Future starts should pass absolute canonical paths.",
+    "relaxations": {
+      "inspector": [
+        "same daemon ad0afe52... required instead of a fresh one",
+        "images must equal the retained base image instead of empty",
+        "host socket comparison by samefile",
+        "usernet identity path compared case-insensitively",
+        "config diffs limited to hostname and host socket letter case"
+      ],
+      "finalizer": [
+        "post-restart isolation/config/process identity (PID from the hash-bound isolation receipt, not 58483)",
+        "lima dir compared by samefile",
+        "three-summary chain across two cohort directories",
+        "accepts the \"\" Docker unavailable-endpoint stdout; exit 1, endpoint stderr, absent socket and Stopped Lima still required"
+      ]
+    }
   },
   "finalization": {
     "finalizer": {
@@ -262,6 +340,14 @@
       "dockerUnavailableStdout": "\"\"",
       "dockerSocketAbsent": true
     },
+    "postStopProcessNote": {
+      "path": ".repro-runs/claude-resume-20261016/vm-e-resume/poststop-process-note-v2.json",
+      "bytes": 471,
+      "sha256": "45902502e5b03a2709c83d1803311612e376e354f0c3e8e8a96b2ff48183277c",
+      "pidsPresent": [],
+      "executableNameMatches": [],
+      "note": "Usernet (PID 95896) state is not in the stop receipt; this later read-only ps found neither the resumed hostagent nor the usernet. v1 of this note matched the observer command text and is preserved."
+    },
     "firstHandoffVerifierNote": "The post-stop Docker client again printed \"\" for the unavailable endpoint, the response the first handoff verifier rejected; that preserved failed receipt is unchanged."
   },
   "remaining": {
@@ -271,10 +357,12 @@
     "limitations": [
       "Same owned Linux arm64 VM, not another physical machine or Linux amd64.",
       "Profile e was stopped for the Claude handoff after htmx and restarted before Marked; same daemon, disks and image inventory re-verified; Marked is in a separate cohort directory.",
+      "The restart ran from the lower-case path alias; task-owned colima.yaml/lima.yaml now hold lower-case host socket paths, so acceptance-v1 config hashes no longer match the live profile files.",
       "Read-only audit of retained receipts, not a new execution.",
       "VM shutdown is separate from empty daemon containers/volumes; retained images and disks are not claimed removed.",
       "Fault suite and accessibility excluded; eight focused or mixed browser scenarios and native zoom/screen-reader checks remain deferred/unverified.",
       "Original native htmx shutdown cause and historical failed cohorts are unchanged."
     ]
-  }
+  },
+  "independentReview": "One read-only reviewer inspected commit c880a07 and the raw receipts. A medium finding (v1 restart-isolation checks weaker than claimed) led to the v2 audit and negative controls; low findings led to wording, binding and limitation corrections."
 }
