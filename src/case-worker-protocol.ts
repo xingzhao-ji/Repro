@@ -7,6 +7,9 @@ export interface CaseWorkerRequest {
   id: string; harnessDigest: string; startedAt: string; startedNs: string;
   diagnostics: boolean;
 }
+/** Why the acquired context's close was or was not acknowledged; fixed vocabulary only. */
+export const CONTEXT_CLOSE_BASES = ['not-applicable', 'acknowledged', 'rejected', 'timeout', 'stale', 'late', 'no-budget'] as const;
+export const LAUNCH_JOIN_BASES = ['not-needed', 'joined', 'expired'] as const;
 export interface ExecutionReceipt {
   result: RunResult;
   ownedDirectory: boolean;
@@ -15,6 +18,10 @@ export interface ExecutionReceipt {
   workDrained: boolean;
   cleanupTimedOut: boolean;
   cleanupStartedNs: string;
+  /** stale: closed/disconnected before the request; late: settled after the close deadline. */
+  contextClose: typeof CONTEXT_CLOSE_BASES[number];
+  /** Startup acquisition still pending when cleanup began; expired means it was not joined in time. */
+  launchJoin: typeof LAUNCH_JOIN_BASES[number];
 }
 export type EventAcknowledgment = 'continue' | 'cancelled' | 'observer-failed';
 export type ParentFrame =

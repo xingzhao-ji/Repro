@@ -5,13 +5,24 @@ import { join, resolve } from 'node:path';
 import { VERSION, ReproError, type ManifestV3, type RunOptions, type RunResult, type TeardownEvent } from './contracts.js';
 import { getRegisteredCase, BROWSER_CASE_ARTIFACT_DIGEST } from './browser-case.js';
 import { digest, validateManifest } from './manifest.js';
-import { caseWorkerArtifactDigest, runCaseWorker } from './case-worker-client.js';
+import { caseWorkerArtifactDigest, runCaseWorker, type WorkerCompletion } from './case-worker-client.js';
 
 const EXECUTABLE_DIGEST = createHash('sha256').update(readFileSync(new URL(import.meta.url))).digest('hex');
 export function caseHarnessDigest(manifest: ManifestV3): string {
   const definition = getRegisteredCase(manifest.caseId);
   return digest({ executable: EXECUTABLE_DIGEST, oracleExecutable: BROWSER_CASE_ARTIFACT_DIGEST,
     workerExecutable: caseWorkerArtifactDigest(), contract: definition.contractDigest, wrapper: definition.wrapperDigest, version: VERSION });
+}
+
+/** Which cleanup predicate failed, in a fixed vocabulary that cannot carry target text. */
+function cleanupBasis(completion: WorkerCompletion): string {
+  const receipt = completion.receipt;
+  const parts = [`receipt=${receipt ? 'present' : 'absent'}`, `protocol=${completion.protocolFailed ? 'failed' : 'ok'}`, `wait-ended=${completion.finishedBy}`,
+    `worker=${!completion.closed ? 'open' : completion.completedBeforeDeadline ? 'closed' : 'closed-late'}`];
+  if (receipt) parts.push(`launch=${receipt.launchState}`, `launch-join=${receipt.launchJoin}`, `context-close=${receipt.contextClose}`,
+    `drain=${receipt.workDrained ? 'complete' : 'timeout'}`);
+  if (completion.attempts !== undefined) parts.push(`creation-attempts=${completion.attempts}`);
+  return `Cleanup basis: ${parts.join('; ')}.`;
 }
 
 /** The parent alone authorizes profile deletion after a trusted worker join. */
@@ -70,9 +81,10 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
     }
     if (!completed) {
       result.outcome = options.signal?.aborted ? 'cancelled' : 'inconclusive'; result.category = 'environment';
+      const basis = cleanupBasis(completion);
       result.reason = receipt?.launchState === 'unacquired'
-        ? `CLEANUP_FAILED: Browser launch failed without a shutdown acknowledgment. The owned .profile directory is retained; verify this run’s owned runtime has stopped before removing it or retrying. Previous outcome: ${result.reason}`
-        : 'CLEANUP_FAILED: Browser shutdown or worker completion was not acknowledged within the cleanup budget. The owned .profile directory is retained; inspect this run and stop its owned runtime before retrying.';
+        ? `CLEANUP_FAILED: Browser launch failed without a shutdown acknowledgment. ${basis} The owned .profile directory is retained; verify this run’s owned runtime has stopped before removing it or retrying. Previous outcome: ${result.reason}`
+        : `CLEANUP_FAILED: Browser shutdown or worker completion was not acknowledged within the cleanup budget. ${basis} The owned .profile directory is retained; inspect this run and stop its owned runtime before retrying.`;
       if (directory) trace('profile-cleanup', 'retained');
     } else if (directory) {
       trace('profile-cleanup', 'call');

@@ -43,8 +43,15 @@ function finish() {
       isolation: 'registered public browser library; fresh owned profile; Chromium sandbox enabled; loopback asset allowlist; not a hostile-code sandbox' },
   };
   const receipt = { result, ownedDirectory: mode !== 'snapshot', launchState: conclusive ? 'acquired' : 'not-attempted',
-    closeAcknowledged: conclusive, workDrained: true, cleanupTimedOut: false, cleanupStartedNs };
-  if (mode === 'no-acquisition') { receipt.launchState = 'not-attempted'; receipt.closeAcknowledged = false; result.environment.browser = 'not-launched'; }
+    closeAcknowledged: conclusive, workDrained: true, cleanupTimedOut: false, cleanupStartedNs,
+    contextClose: conclusive ? 'acknowledged' : 'not-applicable', launchJoin: 'not-needed' };
+  if (mode === 'no-acquisition') { receipt.launchState = 'not-attempted'; receipt.closeAcknowledged = false; receipt.contextClose = 'not-applicable'; result.environment.browser = 'not-launched'; }
+  if (mode === 'acknowledged-close-timeout') receipt.contextClose = 'timeout';
+  if (mode === 'acquired-without-close-basis') receipt.contextClose = 'not-applicable';
+  if (mode === 'failed-close-without-cleanup-failure') { receipt.closeAcknowledged = false; receipt.contextClose = 'rejected'; }
+  if (mode === 'expired-join-without-cleanup-failure') receipt.launchJoin = 'expired';
+  if (mode === 'unknown-close-basis') receipt.contextClose = 'closed-eventually';
+  if (mode === 'failed-close-with-cleanup-failure') { receipt.closeAcknowledged = false; receipt.contextClose = 'rejected'; receipt.cleanupTimedOut = true; }
   if (mode === 'empty-app-digest') result.appDigest = '';
   if (mode === 'wrong-success-reason') result.reason = 'The frozen browser-case assertion observed the registered failure.';
   process.send({ version: 1, type: 'terminal', nonce, receipt, attempts: 0, sealed: true }, () => process.disconnect());
@@ -155,6 +162,23 @@ for (const mode of ['no-acquisition', 'empty-app-digest', 'wrong-success-reason'
     assert.equal(completion.receipt, undefined);
   });
 }
+
+for (const mode of ['acknowledged-close-timeout', 'acquired-without-close-basis', 'failed-close-without-cleanup-failure', 'expired-join-without-cleanup-failure', 'unknown-close-basis']) {
+  test(`a receipt cannot misstate its cleanup basis: ${mode}`, async t => {
+    installPeer(t, mode);
+    const completion = await runCaseWorker(createCaseManifest('morphdom-textarea'), { artifactDir: '.repro-runs/worker-client/basis' }, identity());
+    assert.equal(completion.protocolFailed, true, 'The cleanup basis must agree with the acknowledgement and failure flags it explains.');
+    assert.equal(completion.receipt, undefined);
+  });
+}
+
+test('an actual verdict followed by a rejected close keeps its consistent cleanup basis', async t => {
+  installPeer(t, 'failed-close-with-cleanup-failure');
+  const completion = await runCaseWorker(createCaseManifest('morphdom-textarea'), { artifactDir: '.repro-runs/worker-client/basis' }, identity());
+  assert.equal(completion.protocolFailed, false);
+  assert.equal(completion.receipt?.contextClose, 'rejected');
+  assert.equal(completion.receipt?.cleanupTimedOut, true);
+});
 
 test('a complete acquired execution receipt still passes independent validation', async t => {
   installPeer(t, 'complete');
