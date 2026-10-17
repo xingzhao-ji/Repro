@@ -1,0 +1,76 @@
+{
+  "schemaVersion": 1,
+  "sourceCommit": "1ae6ffcb1636d6171026e3264f09a3eb0eb9d8dc",
+  "nativeGate": "passed",
+  "scope": "Native macOS arm64 gates for the cleanup-basis candidate; not clean-host isolation or Linux.",
+  "sourceIdentity": {
+    "nativeManifest": {
+      "path": ".repro-runs/cleanup-basis/worktree/.repro-runs/cleanup-basis-acceptance/v2/native-workflow/input-identities.json",
+      "bytes": 15882,
+      "sha256": "600f8e6c6745f4b46209788e21a32ca50d38d29d3818f5bb60331c175ff95d01"
+    },
+    "frozenInputs": 131
+  },
+  "packageSmoke": {
+    "commands": 15,
+    "summary": {
+      "path": ".repro-runs/cleanup-basis/worktree/.repro-runs/cleanup-basis-acceptance/v2/package/run-GH9e6r/summary.json",
+      "bytes": 16819,
+      "sha256": "7afc3416b222045f9f553c4b828d90440c47d1680f6861a76cfb70d7c8c4a9e6"
+    }
+  },
+  "installedSchema3": {
+    "passed": 18,
+    "planned": 18,
+    "summary": {
+      "path": ".repro-runs/cleanup-basis/worktree/.repro-runs/cleanup-basis-acceptance/v2/installed-schema3-v2/summary.json",
+      "bytes": 95172,
+      "sha256": "72af36a6f9e4f99e97a39d85eed37afc124e9f1942e8d41804d35df6f1e8dc56"
+    }
+  },
+  "nativeWorkflow": {
+    "status": "passed",
+    "measurements": 15,
+    "cohortStatus": {
+      "path": ".repro-runs/cleanup-basis/worktree/.repro-runs/cleanup-basis-acceptance/v2/native-workflow/cohort-status.json",
+      "bytes": 6288,
+      "sha256": "6c6d76ad8ac2985e7011f6d0202997e9cf8870eddb697841315b0890b9539fb0"
+    }
+  },
+  "nativeStability": {
+    "status": "passed",
+    "completed": 120,
+    "failedOrIncomplete": 0,
+    "cohortStatus": {
+      "path": ".repro-runs/cleanup-basis/worktree/.repro-runs/cleanup-basis-acceptance/v2/native-stability/cohort-status.json",
+      "bytes": 76291,
+      "sha256": "6fd98d147b6c3501c25f05ea1b6cf0cf305ae2d640a9a9d903a74a12e5b06e1f"
+    }
+  },
+  "independentAudit": {
+    "path": ".repro-runs/cleanup-basis/worktree/.repro-runs/cleanup-basis-acceptance/v2/native-independent-audit.json",
+    "bytes": 194502,
+    "sha256": "60c29967196a0e48bceec61f36de45f7ab94a9f98abb89a4582a9a71e9a5f8ba",
+    "uniqueRunIds": 150,
+    "records": 853,
+    "timingFindings": []
+  },
+  "environment": "Executed in an outside-iCloud detached checkout at a68bf03 (product bytes = 1ae6ffc) with real node_modules from the lockfile and a byte-identical pinned Chromium; cohort copied into the candidate worktree, tree sha256 96f917b6d12e90550847c08be1c2a148610c2d9819462ae9f76b7837da189acc.",
+  "copyReceipt": {
+    "path": ".repro-runs/cleanup-basis/worktree/.repro-runs/cleanup-basis-acceptance/v2/copied-from-scratch.json",
+    "bytes": 429,
+    "sha256": "c34f5050498a94d051639873c52b4e205d940782e9354590e0e164bfbc9b67e9"
+  },
+  "preparation": {
+    "path": ".repro-runs/cleanup-basis/worktree/.repro-runs/cleanup-basis-acceptance/v2/preparation.json",
+    "bytes": 3094,
+    "sha256": "1a752ba67853cabe4395f424cac27869a8a449da3733edf00da7144eb4404899"
+  },
+  "cleanupFailuresObserved": 0,
+  "recordedAt": "2026-10-17T02:48:28.334926+00:00",
+  "limitations": [
+    "Existing workspace dependencies and browser; not clean-host isolation.",
+    "Accessibility deferred.",
+    "Original htmx shutdown cause unresolved; no recurrence in this cohort."
+  ]
+}
