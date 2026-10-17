@@ -37,7 +37,25 @@ Two rounds of automated subagent review are addressed. See `evidence/CLEANUP-BAS
 
 It changes harness bytes, so it has **no acceptance**. No native, installed-package or Linux cohort has run on it, and it must not be reported under `9aec7fe`'s acceptance.
 
-**Next executable action**, if the owner wants this candidate accepted: prepare fresh native, installed and Linux drivers bound to its frozen inputs (the acceptance-v1 drivers are hash-bound to `9aec7fe`). Run native from a checkout and browser copy outside the iCloud-synced Desktop, then run Linux on profile `e` using canonical absolute paths. Otherwise `9aec7fe` remains the accepted candidate. Accessibility remains deferred. Full practical-beta acceptance is not claimed.
+**Candidate acceptance progress (19:55 PDT).** The native gates pass for tested source `1ae6ffc`. They ran in an outside-iCloud checkout with real dependencies and a byte-identical browser, and were copied into the candidate worktree (cohort `.repro-runs/cleanup-basis-acceptance/v2`):
+
+- package smoke: 15 commands;
+- installed schema-3: 18/18;
+- native workflow: 15 measurements;
+- native stability: **120/120**;
+- independent native audit: 150 runs, 131 frozen inputs, 853 records, no timing findings.
+
+No `CLEANUP_FAILED` occurred, so the htmx failure didn't recur.
+
+**Linux for the candidate is blocked on an owner decision.** After a verified restart, the VM's Docker filesystem had only 2.1 GB free of 12 GB. The six labeled per-case images from the passed `9aec7fe` Linux cohorts (1.92 GB each, `retainedAsArtifact`) hold the space, and each new case needs two such builds. Profile `e` was stopped and verified with nothing executed and nothing deleted. Options:
+
+1. Approve removing those six exact task-owned images (IDs and owner labels are in `vm-e-resume-v2/image-owner-labels.stdout.log`).
+2. Approve enlarging the data disk; the host has about 14 GiB free.
+3. Accept the candidate on native evidence only, without a Linux claim.
+
+The prepared candidate audit is `.repro-runs/cleanup-basis/linux-v2/audit-linux-candidate.py`, with its template diff alongside. The finalizer is `vm-e-resume-v2/finalize-resume.py.pending`, which needs its post-restart hashes filled in.
+
+**Driver finding:** `docker image ls --quiet` hides untagged images under this Docker 29 store. The driver's foreign-image and terminal-inventory checks therefore cannot see them, and earlier "only base image retained" statements understated what was retained (corrected in the Linux report). Fix this in a future driver revision. Accessibility remains deferred. Full practical-beta acceptance is not claimed.
 
 ## Preserved Claude handoff checkpoint
 

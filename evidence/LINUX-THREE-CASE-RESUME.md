@@ -51,6 +51,16 @@ Workflow times in seconds (capture / replay / reduction / export): morphdom 0.74
 
   The Docker client again printed `""` for the unavailable endpoint. That response made the first handoff stop verifier fail; this finalizer accepts it but still requires exit 1, an endpoint error, the absent socket and a stopped VM. The failed receipt is preserved. A read-only process note taken about 27 minutes after the stop, with raw `ps` output and its script retained, found neither the resumed hostagent nor the task-local usernet (PID 95896) running.
 
+## Correction: retained images (found later the same evening)
+
+The terminal receipts and the driver's own terminal inventory use `docker image ls --quiet`, which listed only the public base image. A later read-only `docker image ls -a` on the same daemon shows more:
+
+- **Six images built by these cohorts are also retained.** These are the input and final image of each case, 1.92 GB each, with ownership labels matching the cohort owners `f981244a`, `3a1b99e7` and `c60712bf`. The summaries already mark these images `retainedAsArtifact: true`.
+- **The quiet listing hides untagged images.** Under this Docker 29 image store it doesn't show them, so the statement above that only the base image is retained understates what remains.
+- **The foreign-image check is blind to untagged images.** The driver's `FOREIGN_IMAGES_APPEARED` and `IMAGE_INVENTORY` checks rely on that listing. No cohort result changes: the hidden images are each cohort's own labeled artifacts. This is a check weakness to fix in a future driver revision.
+
+The raw listings are local under `.repro-runs/claude-resume-20261016/vm-e-resume-v2/`.
+
 ## Limits
 
 - **Same VM.** These are runs on the same task-owned Linux arm64 VM, not another physical machine or Linux amd64.
