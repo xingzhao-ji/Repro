@@ -164,6 +164,10 @@ export const runBrowser: RunFunction = async (input, options) => {
     scriptHash = createHash('sha256').update(/<script>([\s\S]*)<\/script>/.exec(source)?.[1] ?? '').digest('base64');
     await mkdir(directory, { recursive: true });
     await new Promise<void>((resolve, reject) => { server.once('error', reject); server.listen(0, '127.0.0.1', resolve); });
+    // Finalization may already have run while this bind was pending. It saw no
+    // listening server, so a late bind closes itself instead of keeping the
+    // process alive after the run returned.
+    if (stopped) { server.close(); return; }
     const address = server.address();
     if (!address || typeof address === 'string') throw new ReproError('harness', 'SERVER_ADDRESS', 'Owned fixture did not bind to a loopback port.');
     origin = `http://127.0.0.1:${address.port}`;
