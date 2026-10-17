@@ -6,7 +6,7 @@ Repro installs as a local npm package. It runs on your machine and needs no acco
 
 | Requirement | Verified | Notes |
 | --- | --- | --- |
-| Operating system | macOS arm64 (native) | Exported capsules were also verified in fresh isolated Linux arm64 containers. Linux amd64, Windows and other hosts are untested. |
+| Operating system | macOS arm64 (native) | Exported registered-case capsules are also run in fresh isolated Linux arm64 containers; the release evidence records this build's Linux result. Linux amd64, Windows and other hosts are untested. |
 | Node.js | 26.7.0 | `package.json` declares `>=24`; only 26.7.0 was measured. |
 | npm | 11.19.0 | Uses the committed `package-lock.json`. |
 | Browser | Playwright 1.64.0 pinned Chromium 156.0.8078.4 | Acquired with Playwright, not your installed Chrome. |
@@ -66,7 +66,9 @@ The repository is private; cloning needs your existing GitHub access. `npm run b
 
 ## Run an exported regression capsule elsewhere
 
-An exported capsule is a self-contained directory with a readable `replay.test.mjs`, `manifest.json`, the pinned case source, the trusted runner and a lockfile. It does not need the original workspace, a Repro installation or any LLM. Copy the directory to the receiving machine, then follow the README inside it. Without `PLAYWRIGHT_BROWSERS_PATH`, Playwright uses its default per-user browser cache:
+An exported capsule is a self-contained directory with a readable `replay.test.mjs`, `manifest.json`, the application source, the trusted runner and a lockfile. It does not need the original workspace, a Repro installation or any LLM. Copy the directory to the receiving machine, then follow the README inside it. Without `PLAYWRIGHT_BROWSERS_PATH`, Playwright uses its default per-user browser cache.
+
+A registered-case capsule (morphdom, htmx, Marked) has a single-revision test:
 
 ```sh
 cd capsule
@@ -76,6 +78,18 @@ node dist/cli.js inspect --capsule .
 REPRO_REVISION=buggy node --test replay.test.mjs   # expected: exit 1, TARGET_ASSERTION
 REPRO_REVISION=fixed node --test replay.test.mjs   # expected: exit 0
 node dist/cli.js verify --capsule . --output .repro-runs/comparison
+```
+
+A synthetic search capsule's test runs both revisions itself and passes when buggy reproduces the stale result and fixed shows the expected one:
+
+```sh
+cd capsule
+npm ci --ignore-scripts --omit=dev
+npx --no-install playwright install --with-deps chromium
+node dist/cli.js inspect --capsule .
+node dist/cli.js replay --capsule . --output .repro-runs/buggy        # expected: exit 1
+node dist/cli.js verify --capsule . --output .repro-runs/verification  # expected: exit 0
+node --test replay.test.mjs                                            # expected: exit 0
 ```
 
 On Linux, `--with-deps` installs Chromium's system libraries and may ask for administrator rights; on macOS it adds nothing. Inspect a capsule before running it. Hashes establish integrity, not trust; do not execute capsules from unknown authors on your host. For the isolated Linux container recipe, see the capsule's README and [SECURITY](SECURITY.md).
