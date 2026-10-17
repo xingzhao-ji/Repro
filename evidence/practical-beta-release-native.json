@@ -1,0 +1,405 @@
+{
+ "schemaVersion": 1,
+ "release": "repro-local 0.1.0 practical beta",
+ "releaseCommit": "65e6003235b553e2820ac7e0949407b0a1fe61ce",
+ "releaseCommitResolved": "65e6003235b553e2820ac7e0949407b0a1fe61ce",
+ "tarball": {
+  "path": ".repro-runs/practical-beta-release-rc5/artifact/repro-local-0.1.0.tgz",
+  "bytes": 1495621,
+  "sha256": "f2282cda6de110eb5d0873520c2d42c67fa4cf0a8b0f5d10227fa1d151c8e546",
+  "label": "release tarball",
+  "npmIntegrity": "sha512-KwUIWjbk2XPN8QuQJWOQtNANNMmEJnvEAKiGvakIMBCMlBBek+Db1bNZSPufTeNhbNmbA5UTsDXP0H30hZby9Q==",
+  "entryCount": 189,
+  "unpackedSize": 7097311
+ },
+ "platform": "darwin-arm64 native",
+ "gates": {
+  "allStepsPassed": true,
+  "check:kit": {
+   "exit": 0,
+   "log": {
+    "path": ".repro-runs/practical-beta-release-rc5/logs/check:kit.log",
+    "bytes": 986,
+    "sha256": "5bd31007ba14eec4130c9b3b5a17bba85c5be8c205f5d848c0a49f7b63d0336f"
+   }
+  },
+  "typecheck": {
+   "exit": 0,
+   "log": {
+    "path": ".repro-runs/practical-beta-release-rc5/logs/typecheck.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  },
+  "lint": {
+   "exit": 0,
+   "log": {
+    "path": ".repro-runs/practical-beta-release-rc5/logs/lint.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+   }
+  },
+  "ordinary": {
+   "tests": 409,
+   "pass": 409,
+   "fail": 0,
+   "cancelled": 0,
+   "skipped": 0
+  },
+  "affectedBrowser": {
+   "tests": 17,
+   "pass": 17,
+   "fail": 0,
+   "cancelled": 0,
+   "skipped": 0
+  },
+  "remainingFunctionalBrowser": {
+   "tests": 35,
+   "pass": 35,
+   "fail": 0,
+   "cancelled": 0,
+   "skipped": 0
+  },
+  "packageSmoke": {
+   "outcome": "passed",
+   "checks": 15,
+   "observations": 6,
+   "tarballIntegrity": "sha512-KwUIWjbk2XPN8QuQJWOQtNANNMmEJnvEAKiGvakIMBCMlBBek+Db1bNZSPufTeNhbNmbA5UTsDXP0H30hZby9Q==",
+   "tarballEqualsRelease": true
+  },
+  "installedSchema3": {
+   "outcome": "passed",
+   "counts": {
+    "planned": 18,
+    "passed": 18,
+    "failed": 0,
+    "unattempted": 0,
+    "running": 0
+   },
+   "finalIdentityChecked": true
+  },
+  "nativeWorkflow": {
+   "status": "passed",
+   "completedMeasurements": 15,
+   "planned": 15,
+   "cases": [
+    {
+     "caseId": "morphdom-textarea",
+     "actions": "3->2",
+     "executions": 7,
+     "minimality": "unverified",
+     "seconds": {
+      "capture": 0.509,
+      "replay": 0.516,
+      "reduce": 2.412,
+      "verify": 0.843,
+      "export": 0.196
+     },
+     "peakRssMiB": {
+      "capture": 471.5,
+      "replay": 427.1,
+      "reduce": 565.4,
+      "verify": 435.6,
+      "export": 94.4
+     },
+     "exportBytes": 609390
+    },
+    {
+     "caseId": "htmx-checkbox",
+     "actions": "2->2",
+     "executions": 4,
+     "minimality": "unverified",
+     "seconds": {
+      "capture": 0.541,
+      "replay": 0.537,
+      "reduce": 1.504,
+      "verify": 0.899,
+      "export": 0.199
+     },
+     "peakRssMiB": {
+      "capture": 432.4,
+      "replay": 442.8,
+      "reduce": 560.1,
+      "verify": 555.4,
+      "export": 94.5
+     },
+     "exportBytes": 1203749
+    },
+    {
+     "caseId": "marked-empty-heading",
+     "actions": "3->3",
+     "executions": 7,
+     "minimality": "unverified",
+     "seconds": {
+      "capture": 0.553,
+      "replay": 0.555,
+      "reduce": 2.507,
+      "verify": 0.941,
+      "export": 0.211
+     },
+     "peakRssMiB": {
+      "capture": 573.0,
+      "replay": 569.2,
+      "reduce": 568.6,
+      "verify": 571.0,
+      "export": 94.4
+     },
+     "exportBytes": 1615989
+    }
+   ]
+  },
+  "nativeStability": {
+   "status": "passed",
+   "planned": 120,
+   "completed": 120,
+   "failedOrIncomplete": 0,
+   "unattempted": 0
+  },
+  "nativeAudit": {
+   "status": "native-workflow-and-stability-audit-complete",
+   "uniqueRunIds": 150,
+   "records": 857,
+   "sourceHashesChecked": 132,
+   "timingFindings": []
+  },
+  "cancellation": {
+   "status": "passed",
+   "planned": 16,
+   "passed": 16,
+   "failed": 0,
+   "unattempted": 0,
+   "maxSignalToExitMs": 97,
+   "exits": [
+    130
+   ],
+   "failures": []
+  },
+  "workbenchJourney": {
+   "status": "passed",
+   "steps": [
+    "serve",
+    "case-journey",
+    "workbench-cancel",
+    "case-journey",
+    "case-journey",
+    "authored-synthetic",
+    "unknown-run"
+   ],
+   "serverExit": {
+    "code": 0,
+    "signal": null,
+    "afterMs": 6
+   },
+   "census": {
+    "observedOwned": 149,
+    "aliveFiveSecondsAfterExit": 0
+   },
+   "pageErrors": 0
+  },
+  "independentExecution": {
+   "status": "passed",
+   "capsules": [
+    {
+     "name": "synthetic",
+     "setupSeconds": 16.8,
+     "checksPassed": true,
+     "checks": 12
+    },
+    {
+     "name": "morphdom-textarea",
+     "setupSeconds": 17.9,
+     "checksPassed": true,
+     "checks": 12
+    },
+    {
+     "name": "htmx-checkbox",
+     "setupSeconds": 19.1,
+     "checksPassed": true,
+     "checks": 12
+    },
+    {
+     "name": "marked-empty-heading",
+     "setupSeconds": 16.5,
+     "checksPassed": true,
+     "checks": 12
+    }
+   ]
+  }
+ },
+ "allNativeGatesPassed": true,
+ "records": [
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/logs/steps.log",
+   "bytes": 2479,
+   "sha256": "35fcbd099b52da61ae583af2b5ab7e724657dbb30dd2fd67ba60168623e8d7a9"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/logs/check:kit.log",
+   "bytes": 986,
+   "sha256": "5bd31007ba14eec4130c9b3b5a17bba85c5be8c205f5d848c0a49f7b63d0336f"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/logs/typecheck.log",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/logs/lint.log",
+   "bytes": 0,
+   "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/logs/ordinary.log",
+   "bytes": 39716,
+   "sha256": "abb222c49acfe763ecab6466ab0f706076fd4f06eb14e18fe74f1eed4f582c7e"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/logs/affected-browser.log",
+   "bytes": 2105,
+   "sha256": "de94317dd168caaa42aecb6c71071b8912ffe4e49d7a5782bd35bd9ff1a4216f"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/logs/remaining-functional-browser.log",
+   "bytes": 3809,
+   "sha256": "5c036e67a18e2f8295a02ea26351451767d7a1060e0573fc1e114b4d93e79123"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/artifact/repro-local-0.1.0.tgz",
+   "bytes": 1495621,
+   "sha256": "f2282cda6de110eb5d0873520c2d42c67fa4cf0a8b0f5d10227fa1d151c8e546",
+   "label": "release tarball",
+   "npmIntegrity": "sha512-KwUIWjbk2XPN8QuQJWOQtNANNMmEJnvEAKiGvakIMBCMlBBek+Db1bNZSPufTeNhbNmbA5UTsDXP0H30hZby9Q==",
+   "entryCount": 189,
+   "unpackedSize": 7097311
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/package/run-9iwV27/summary.json",
+   "bytes": 16937,
+   "sha256": "be10e192fcb5c88b177cabd4f5aa49d78fad8b11613782231d69590d531e7824"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/installed-schema3-v2/summary.json",
+   "bytes": 95626,
+   "sha256": "ab470cb43a099bf2f9d0e35ea41cf594c0f9dab0dad752507048a00df8426cad"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/native-workflow/cohort-status.json",
+   "bytes": 6348,
+   "sha256": "b0f5abae4e6fc179424e13e652fd6d9d93bca2d9a59d4474ece0cd92296920ef"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/native-workflow/summary.json",
+   "bytes": 7966,
+   "sha256": "a6887c01f6e2e6302ee8dc39d684e9020d37315cf3ce731f959321571ebbf65b"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/native-stability/cohort-status.json",
+   "bytes": 77491,
+   "sha256": "938b03fdd9447ff8d8cf5bd378ab2628d00e0127cf5241ac5e024ac2add5cde8"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/native-independent-audit.json",
+   "bytes": 194212,
+   "sha256": "2f005617d9c81bf8f30aea07b9ec81c8f858e341267581688004447ff6a43c74"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/cancellation/summary.json",
+   "bytes": 13742,
+   "sha256": "016afd22fcf2cfb244a5134353ba97e8e414f7b78202f5837aa41a910f6f6861"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/workbench-journey/summary.json",
+   "bytes": 3744,
+   "sha256": "08dca793bafb111d2a199bb190024d7c2df8d03074b48b5bac11a4a0a6ad95ad"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/independent/summary.json",
+   "bytes": 15465,
+   "sha256": "cb918ccd45d756f7fbf9f1cd19ff7702a16bbce2cb7c4e34c2e5ee65e181489e"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-linux-v5.py.template.diff",
+   "bytes": 16356,
+   "sha256": "02a2db4ffad68e32bb4073ffad24e9be7408ce720863496da6c513f82a997bc2",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-native.mjs",
+   "bytes": 19929,
+   "sha256": "d634c2a0e68f0b8cdafcc5c21ce0ec3de1e1db1aca22bc46f543e70b09fcbbc8",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-native.mjs.template.diff",
+   "bytes": 3444,
+   "sha256": "29cb8ceed6b0a2af9146050f74ca7bdc022a05bf8f8d9a236c550ee50630a8b4",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-cancellation.mjs",
+   "bytes": 13938,
+   "sha256": "2e92c2968d499bde15d68c14735c494bb61c669847786a0340294fc213eb373f",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-independent.mjs",
+   "bytes": 9693,
+   "sha256": "cc2821c43dadde4ba9271f9f5b79b2eb85c49c49cd5fc9e22bbf422526d19f5d",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-installed-schema3-v2.mjs",
+   "bytes": 26655,
+   "sha256": "802aead4804464f8508e68f5d7dd67bf629aaca34e549c17f2d74f1a40715ff6",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-installed-schema3-v2.mjs.template.diff",
+   "bytes": 769,
+   "sha256": "a793fad03dbe4712bf425c4d04739ac6c558fbe9fa8f115666aa8cafa1b673a9",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-installed-schema3.mjs",
+   "bytes": 26629,
+   "sha256": "b9b9385a53072c771101100d6cbbf5c84abdd93318c54efbdb7f819f928228a1",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-installed-schema3.mjs.template.diff",
+   "bytes": 763,
+   "sha256": "b48fb7cf8770e2239ee7a9bf961ecd82ce1974ac91aa40cae847dcfc7bd4a2bd",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-native-stability.mjs",
+   "bytes": 7113,
+   "sha256": "8c6bed046963333249455dbc25736fa20d121d355aa4c266c8f9d1f60afe7323",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-native-stability.mjs.template.diff",
+   "bytes": 2580,
+   "sha256": "5bcbdba6c486a6a8ae72083aae4008ab1e948f754feb3abe00a52dc943d6cf19",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-native-workflow.mjs",
+   "bytes": 10898,
+   "sha256": "9d8de7653a17ee64fe1c789583849bb2d69427629baef6f847a882bac6d56a72",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-native-workflow.mjs.template.diff",
+   "bytes": 3555,
+   "sha256": "c40d53482428737c2d889ad3c3b71fb1c09fca6742f15a77e2872f69985b9c5f",
+   "label": "cohort driver"
+  },
+  {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/run-workbench-journey.mjs",
+   "bytes": 17475,
+   "sha256": "7c1ea53c4a01cb8617c7e6bd37036f6948a1fe8c084dadc562f9a261450a5719",
+   "label": "cohort driver"
+  }
+ ]
+}

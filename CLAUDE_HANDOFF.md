@@ -1,5 +1,7 @@
 # Repro handoff to Claude
 
+> **Release update (October 17, 2026):** Repro 0.1.0 practical beta is released and verified. Release commit `65e6003` (tag `v0.1.0-beta`, branch `release/practical-beta-0.1.0`). See [evidence/PRACTICAL-BETA-RELEASE.md](evidence/PRACTICAL-BETA-RELEASE.md) and the newest `STATE.md` section. The text below is preserved history.
+
 > **Post-handoff update (October 16, 2026):** After takeover, the owner resumed the work. The fresh Marked Linux case then ran in a separate cohort, and all three current-candidate Linux cases passed an independent audit. See the newest `STATE.md` section and [evidence/LINUX-THREE-CASE-RESUME.md](evidence/LINUX-THREE-CASE-RESUME.md). The text below is the preserved handoff as written, so its "Marked not started" statements describe the handoff moment only.
 
 ## Current instruction and delivery identity

@@ -1,4 +1,64 @@
-# Current work — Claude resumed; all three current-candidate Linux cases pass
+# Current work — Repro 0.1.0 practical beta released and verified
+
+October 17, 2026. The owner's `/goal` asked to finish the practical beta as a verified release.
+
+## Release identity
+
+- Release commit `65e6003235b553e2820ac7e0949407b0a1fe61ce`, tagged `v0.1.0-beta`.
+- Branch `release/practical-beta-0.1.0`; the evidence commit sits on top of the release commit.
+- Package `repro-local-0.1.0.tgz`: 1,495,621 bytes, SHA-256 `f2282cda6de110eb5d0873520c2d42c67fa4cf0a8b0f5d10227fa1d151c8e546`. A second independent rebuild of the commit packs to identical bytes.
+- Report: [evidence/PRACTICAL-BETA-RELEASE.md](evidence/PRACTICAL-BETA-RELEASE.md), with the native and Linux JSON receipts beside it.
+
+## Results on the release commit
+
+- **Native (cohort rc5):** every gate passed.
+  - Tests: 409/409 ordinary and 17/17 + 35/35 functional browser.
+  - Package and install: package smoke from the exact tarball, and 18/18 installed schema-3.
+  - Workflow and stability: 15/15 workflow measurements and 120/120 stability runs.
+  - Audit: 150 runs, 857 records.
+  - Cancellation, workbench and clean machine: 16/16 CLI cancellations, the installed-workbench journey, and 4/4 exported capsules on a clean machine.
+- **Linux (cohort v5):** 132 operations, 144 runs and 120 readable tests on profile e. The owner approved removing the six old images first. The independent audit found no findings in 7,191 records. The VM stop was verified.
+
+## Changes from `9aec7fe`
+
+- The `task/cleanup-failure-basis` diagnostics were merged.
+- Three defects found during release verification were fixed, each with a failing-then-passing regression:
+  - terminal Ctrl-C killed the case worker (ADR 0004);
+  - a cancelled export exited 2;
+  - a late-bound synthetic fixture server kept the CLI alive.
+- An INSTALL capsule-command inaccuracy was corrected.
+
+## Preserved failures
+
+Each failure is preserved with its logs: rc1 and rc2 (heavy host load from another session), rc3 (defect 3), rc4 (a driver defect and the INSTALL inaccuracy), the frozen v5 Linux auditor output, the timed-out `colima stop` receipt, and a false-positive v1 stop resolution.
+
+## Not claimed
+
+- Accessibility (deferred).
+- Independent review of the three fixes: four agent attempts stalled, so only the self-review is recorded.
+- Other physical machines.
+- Deployment: none.
+
+## Environment hazards
+
+- iCloud repeatedly evicts this repo's git refs and objects, `.repro-runs` evidence, and profile-e configuration including its SSH key.
+- Git in this checkout needs `-c core.trustctime=false -c core.checkStat=minimal`. Ref-enumerating commands hang while refs are evicted.
+- Commits were made in an outside-iCloud clone and transferred with `pack-objects` | `unpack-objects`. GitHub holds the authoritative refs.
+- Restore files with `brctl download` before VM or git work.
+- Run timing-sensitive gates only on a quiet host.
+
+## Next actions
+
+These are owner decisions:
+
+1. Merge to `main` or create a GitHub Release.
+2. Choose a hosting target, if any.
+3. Resume accessibility work.
+4. Fix the Linux driver's quiet image listing in a future candidate.
+5. Consider moving the repository and VM out of the iCloud-synced Desktop.
+
+## Preserved Claude resume checkpoint (Linux three-case pass for 9aec7fe)
+
 
 October 16, 2026, on `task/startup-owner-boundary` from delivered `a386750` (origin readback matched). The owner's `/goal continue` / `/goal resume` reopened the handed-off work. Implementation `9aec7fe` is unchanged; this continuation added only evidence and documentation.
 

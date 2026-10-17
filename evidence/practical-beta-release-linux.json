@@ -1,0 +1,260 @@
+{
+ "schemaVersion": 1,
+ "status": "linux-arm64-three-case-release-candidate-passed",
+ "releaseCommit": "65e6003235b553e2820ac7e0949407b0a1fe61ce",
+ "environment": {
+  "profile": "e (task-owned Colima 0.10.3 / Lima 2.2.1, VZ, 2 CPUs, 3 GiB, 12 GiB data disk)",
+  "daemonId": "ad0afe52-788a-48f2-ba68-4ae79926c51b",
+  "dockerServer": "29.5.2",
+  "policySha256": "949b87f781131e0c1a842e306ee102506d33ba5f33247fe073d62519614ed72b"
+ },
+ "ownerApprovedImageRemoval": {
+  "approvedAt": "2026-10-17",
+  "removedOwnerLabelledImages": 6,
+  "prunedUntaggedParents": 48,
+  "receipt": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/remove-images.json",
+   "bytes": 49925,
+   "sha256": "3e82091dd56f8d84aad59c5a22293d141ef878daa2d696563969c4df254b5604"
+  }
+ },
+ "cases": [
+  {
+   "caseId": "morphdom-textarea",
+   "status": "passed",
+   "acceptance": true,
+   "operations": 44,
+   "readableTests": 40,
+   "readableBuggy": 20,
+   "readableFixed": 20,
+   "problems": 0,
+   "workflowSeconds": {
+    "capture": 0.701,
+    "replay": 0.69,
+    "reduce": 3.257,
+    "export": 0.277
+   },
+   "maxReadableSeconds": 1.009,
+   "maxKernelPeakMiB": 312.7,
+   "setupSeconds": 159.3,
+   "reduction": "3->2 (7 executions, minimality unverified)",
+   "wholeExportBytes": 609390,
+   "owner": "47401498-0ae9-4104-9529-7a0662916cc1",
+   "retainedContainers": [],
+   "retainedVolumes": [],
+   "summary": {
+    "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/linux-arm64/morphdom-textarea/summary.json",
+    "bytes": 32368,
+    "sha256": "4cf043389984cbf9805d4705eea51a0401bf361663ce2095f5376581f99e05d2"
+   }
+  },
+  {
+   "caseId": "htmx-checkbox",
+   "status": "passed",
+   "acceptance": true,
+   "operations": 44,
+   "readableTests": 40,
+   "readableBuggy": 20,
+   "readableFixed": 20,
+   "problems": 0,
+   "workflowSeconds": {
+    "capture": 1.176,
+    "replay": 0.712,
+    "reduce": 2.383,
+    "export": 0.371
+   },
+   "maxReadableSeconds": 1.115,
+   "maxKernelPeakMiB": 393.0,
+   "setupSeconds": 177.4,
+   "reduction": "2->2 (4 executions, minimality unverified)",
+   "wholeExportBytes": 1203749,
+   "owner": "25c75ae0-9837-4e4e-a32f-a4c1d735f7b6",
+   "retainedContainers": [],
+   "retainedVolumes": [],
+   "summary": {
+    "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/linux-arm64/htmx-checkbox/summary.json",
+    "bytes": 34981,
+    "sha256": "b578fc00df47591c89f6e45c86dca2ce1e5334fe27d96a689a3336490b474d77"
+   }
+  },
+  {
+   "caseId": "marked-empty-heading",
+   "status": "passed",
+   "acceptance": true,
+   "operations": 44,
+   "readableTests": 40,
+   "readableBuggy": 20,
+   "readableFixed": 20,
+   "problems": 0,
+   "workflowSeconds": {
+    "capture": 0.906,
+    "replay": 0.795,
+    "reduce": 3.932,
+    "export": 0.381
+   },
+   "maxReadableSeconds": 1.069,
+   "maxKernelPeakMiB": 504.0,
+   "setupSeconds": 155.9,
+   "reduction": "3->3 (7 executions, minimality unverified)",
+   "wholeExportBytes": 1615989,
+   "owner": "10a36f54-18bd-46b4-96a1-9811801572d3",
+   "retainedContainers": [],
+   "retainedVolumes": [],
+   "summary": {
+    "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/linux-arm64/marked-empty-heading/summary.json",
+    "bytes": 64484,
+    "sha256": "c25463c8778659c31c0fc039692fc011f5a8b0b92e72035fad8dd0e67ad8a5c3"
+   }
+  }
+ ],
+ "totals": {
+  "operations": 132,
+  "uniqueRuns": 144,
+  "uniqueContainers": 132,
+  "auditedRecords": 7191
+ },
+ "lifecycle": {
+  "pre-start": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/pre-start.json",
+   "bytes": 3304,
+   "sha256": "e25bdf150c4c55942aa0555dd66ae97ad473cc9a4c5fb763c32af6a54e693551"
+  },
+  "start": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/start.json",
+   "bytes": 1289,
+   "sha256": "8a66c8a0f2120f7d3e10ce4950c265f035e7b3eb41794b77668be00143ce9594"
+  },
+  "inspect": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/inspect.json",
+   "bytes": 51094,
+   "sha256": "1e12348c893034849dd32657c494485a109d35d95227548e805638f7a9e8316d"
+  },
+  "remove-images": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/remove-images.json",
+   "bytes": 49925,
+   "sha256": "3e82091dd56f8d84aad59c5a22293d141ef878daa2d696563969c4df254b5604"
+  },
+  "terminal": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/terminal.json",
+   "bytes": 43297,
+   "sha256": "2301759bec789014fa16de38860d8d4021ec2a66ff5baf8092fcee280531cad2"
+  },
+  "stop": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/stop.json",
+   "bytes": 1270,
+   "sha256": "ba8da9c204b43185341a7bc6fe3a58457cb8e7b26b51972c15877efd48fb57fe"
+  },
+  "stop-resolution": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/stop-resolution.json",
+   "bytes": 6214,
+   "sha256": "dad33d3953cd1f33bf5ee2c9d20d2bda6e69ed77c612c1d140373542349a57bf"
+  },
+  "stop-resolution-v2": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/vm-e/stop-resolution-v2.json",
+   "bytes": 1779,
+   "sha256": "479e46e0e280a4364ec8f132df7ef0494dd3993194127b041de0806bc7f4d5bc"
+  }
+ },
+ "stopNote": "colima stop exceeded the tool timeout after the VM had stopped (hostagent log: VZ stopped at 22:17:22Z); its limactl child was blocked reading the iCloud-evicted lima-version of stopped profile c. The failed stop receipt and a v1 resolution (false positive: it matched its own shell) are preserved; v2 verified Stopped, hostagent and usernet gone, socket absent, Docker unavailable, disks retained. No signal was sent.",
+ "audit": {
+  "final": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/linux-independent-audit-v5d.json",
+   "bytes": 1813628,
+   "sha256": "c78a907af3bd2aeb849fcff2a73a294bcb04211132375272e2143d3c4de0aaab"
+  },
+  "auditor": {
+   "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-linux-v5d.py",
+   "bytes": 38609,
+   "sha256": "01023b9966eedc7366b3bb61db8a737ee1755b03dc37d0af438eba0388d0b5ed"
+  },
+  "chain": [
+   {
+    "version": "v5 (generated before Linux results from the hash-bound acceptance-v1 template)",
+    "auditor": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-linux-v5.py",
+     "bytes": 36650,
+     "sha256": "c8542ecce8d08eb2af3d256e95dca92a2dd9b928d79e7b63180cd0f28ebad289"
+    },
+    "templateDiff": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-linux-v5.py.template.diff",
+     "bytes": 16356,
+     "sha256": "02a2db4ffad68e32bb4073ffad24e9be7408ce720863496da6c513f82a997bc2"
+    },
+    "outcome": "incomplete: morphdom predecessor outside the audited tree raised; stop receipt failed",
+    "log": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/linux-audit-v5-frozen.log",
+     "bytes": 1317,
+     "sha256": "7e9e371b4a736edfce5be7655db3e33f0d5b1bd989c97ebfd12d6a37d9079004"
+    }
+   },
+   {
+    "version": "v5b",
+    "diff": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-linux-v5b.py.from-v5.diff",
+     "bytes": 3541,
+     "sha256": "85774bf655136aafeab25d548b0b5db19d1522cbe2b726e2427b580dfab08d24"
+    },
+    "change": "accept the hash-bound failed stop receipt only together with the verified stop resolution",
+    "log": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/linux-audit-v5b-check.log",
+     "bytes": 4867,
+     "sha256": "b0a80ce6725204587b2bc4d0fb3fdd262f16d01215b9d029c57e315318b07e8d"
+    }
+   },
+   {
+    "version": "v5c",
+    "diff": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-linux-v5c.py.from-v5b.diff",
+     "bytes": 2983,
+     "sha256": "7803dcecdcd0e81854cb767401f99453dd9a58eb9b6d1a9d609190c32dac3525"
+    },
+    "change": "record the single hash-pinned predecessor summary outside the tree by absolute path",
+    "log": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/linux-audit-v5c-check.log",
+     "bytes": 4604,
+     "sha256": "e7395d14ee3849470988ada40d6f4bcf6b756c1ed066ffc8de5c4eeb2e224593"
+    }
+   },
+   {
+    "version": "v5d",
+    "diff": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/audit-linux-v5d.py.from-v5c.diff",
+     "bytes": 4494,
+     "sha256": "d60aa46b58025bc1564315162efd712be89779f052e0658552338d9840e3e619"
+    },
+    "change": "accept untagged terminal images only when they are the recorded Parent-chain build ancestry of this cohort's labelled images rooted at the pinned base (closes the driver quiet-listing blind spot)",
+    "log": {
+     "path": ".repro-runs/practical-beta-release-rc5/tree-repro-runs/practical-beta-release/v5/linux-audit-v5d-write.log",
+     "bytes": 991,
+     "sha256": "dac7b6b3b8ebf9ce981bdbd1c834797260337ea65389c3a1dd4b0ef38a7d0fb4"
+    }
+   }
+  ],
+  "negativeControls": {
+   "method": "disposable APFS clones; control 0 unmodified establishes relocation-only path-bound findings (NO_CACHE_ACQUISITION, PREVIOUS_RECEIPT_EXACT)",
+   "results": [
+    {
+     "control": 1,
+     "mutation": "one flipped byte in an htmx container log",
+     "detected": "DOCKER_LOG_HASH"
+    },
+    {
+     "control": 2,
+     "mutation": "foreign image appended to the terminal inventory",
+     "detected": "cleanup rejected: every terminal image must have a recorded inspection"
+    },
+    {
+     "control": 3,
+     "mutation": "stop resolution forged with a live hostagent",
+     "detected": "cleanup assertion"
+    }
+   ]
+  }
+ },
+ "limitations": [
+  "Same task-owned Linux arm64 VM on this Mac, not another physical machine or Linux amd64",
+  "Ordinary containers are not hostile-code isolation",
+  "The audit derivatives v5b-v5d were written after results; each change is diffed and negative-controlled",
+  "Accessibility deferred and unverified"
+ ]
+}
