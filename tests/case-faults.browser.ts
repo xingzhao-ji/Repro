@@ -2,13 +2,13 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { randomUUID } from 'node:crypto';
 import { createServer } from 'node:http';
-import { execFile } from 'node:child_process';
+import { execFile, spawn, spawnSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import { cp, mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { join, resolve } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { chromium } from 'playwright';
-import { createCaseManifest } from '../src/browser-case.js';
+import { createCaseManifest, getRegisteredCase } from '../src/browser-case.js';
 import { runExperiment } from '../src/runner.js';
 import type { RunEvent, RunResult } from '../src/contracts.js';
 import { installCaseWorkerFixture } from './helpers/case-worker-control.js';
@@ -77,6 +77,62 @@ test('cancellation after real navigation closes only the owned browser and fresh
     finally { fixture.restore(); await unrelated.close(); }
   }
 });
+
+// A terminal Ctrl-C delivers SIGINT to the whole foreground process group, not
+// only to the CLI. Cancellation must still flow through the parent so cleanup
+// can be certified and the owned profile removed.
+function processTable(): { pid: number; ppid: number; command: string }[] {
+  const listed = spawnSync('ps', ['-axo', 'pid=,ppid=,command='], { encoding: 'utf8', timeout: 5000, maxBuffer: 8 * 1024 * 1024 });
+  assert.equal(listed.status, 0);
+  return listed.stdout.trim().split('\n').map(line => /^\s*(\d+)\s+(\d+)\s+(.*)$/.exec(line)).filter(match => match !== null)
+    .map(match => ({ pid: Number(match[1]), ppid: Number(match[2]), command: match[3]! }));
+}
+function descendants(root: number): number[] {
+  const rows = processTable(); const found = new Set([root]);
+  let added = true;
+  while (added) { added = false; for (const row of rows) if (!found.has(row.pid) && found.has(row.ppid)) { found.add(row.pid); added = true; } }
+  found.delete(root); return [...found];
+}
+for (const stage of ['worker-started', 'browser-launched'] as const) {
+  test(`terminal Ctrl-C to the CLI process group after the ${stage.replace('-', ' ')} cancels through the parent and removes the profile`, { timeout: 30_000 }, async () => {
+    const directory = await workspace(`terminal-interrupt-${stage}`);
+    const temporary = join(directory, 'tmp'); await mkdir(temporary);
+    const declaration = join(directory, 'declaration.json');
+    await writeFile(declaration, JSON.stringify({ caseId: 'morphdom-textarea', expectation: getRegisteredCase('morphdom-textarea').expectation }));
+    const output = join(directory, 'capture');
+    const cli = spawn(process.execPath, ['--import', 'tsx', 'src/cli.ts', 'record', '--consent', '--experiment', declaration, '--output', relative(process.cwd(), output)],
+      { detached: true, env: childEnvironment(temporary, resolve('.repro-cache/browsers')), stdio: ['ignore', 'pipe', 'pipe'] });
+    let stdout = '';
+    cli.stdout!.on('data', chunk => { stdout += chunk; });
+    cli.stderr!.resume();
+    const exited = new Promise<{ code: number | null; signal: NodeJS.Signals | null }>(accept => cli.once('exit', (code, signal) => accept({ code, signal })));
+    const began = Date.now();
+    let worker: number | undefined;
+    while (Date.now() - began < 15_000) {
+      worker = processTable().find(row => row.ppid === cli.pid && row.command.includes('case-worker'))?.pid;
+      if (worker !== undefined && (stage === 'worker-started' || descendants(worker).length > 0)) break;
+      await new Promise(accept => setTimeout(accept, 10));
+    }
+    assert.ok(worker !== undefined, 'The registered case worker must start before the interrupt');
+    if (stage === 'browser-launched') assert.ok(descendants(worker).length > 0, 'The browser must be launched before the interrupt');
+    const owned = [worker, ...descendants(worker)];
+    process.kill(-cli.pid!, 'SIGINT');
+    const exit = await exited;
+    assert.deepEqual(exit, { code: 130, signal: null }, 'The CLI must finish its own cancellation path');
+    const result = JSON.parse(await readFile(join(output, 'result.json'), 'utf8')) as RunResult;
+    assert.equal(result.outcome, 'cancelled', result.reason);
+    assert.doesNotMatch(result.reason, /CLEANUP_FAILED/, 'Terminal interrupt must not defeat certified cleanup');
+    assert.equal(result.assertionCount, 0);
+    assert.equal(JSON.parse(stdout).result.outcome, 'cancelled');
+    const runs = (await readdir(output)).filter(name => name !== 'manifest.json' && name !== 'result.json');
+    assert.ok(runs.every(name => name === result.id), 'Only this run may own output beside its manifest and result');
+    for (const name of runs) assert.deepEqual(await readdir(join(output, name)), ['evidence.json'], 'The owned profile must be removed after certified cancellation');
+    assert.deepEqual((await readdir(output, { recursive: true })).filter(path => path.split('/').includes('.profile')), []);
+    const alive = new Set(processTable().map(row => row.pid));
+    assert.deepEqual(owned.filter(pid => alive.has(pid)), [], 'Owned worker and browser processes must be gone after the CLI exits');
+    assert.equal(await readFile(join(directory, 'user-file.txt'), 'utf8'), 'preserve this user file');
+  });
+}
 
 test('a 100 ms repository deadline remains inconclusive and removes its owned temporary profile', { timeout: 10_000 }, async () => {
   const directory = await workspace('deadline');

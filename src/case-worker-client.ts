@@ -225,7 +225,10 @@ export function runCaseWorker(input: ManifestV3, options: RunOptions, identity: 
       }, Math.ceil(remaining));
     };
     const invalid = () => { protocolFailed = true; cancel(); finish('protocol'); };
-    try { child = childProcess.spawn(process.execPath, args, { cwd: process.cwd(), env: workerEnvironment(), stdio: ['ignore', 'ignore', 'ignore', 'ipc'] }); }
+    // Own process group: a terminal Ctrl-C signals the foreground group, and a
+    // directly interrupted worker could never return a certifiable receipt.
+    // Cancellation reaches the worker only through this parent's protocol.
+    try { child = childProcess.spawn(process.execPath, args, { cwd: process.cwd(), env: workerEnvironment(), detached: true, stdio: ['ignore', 'ignore', 'ignore', 'ipc'] }); }
     catch { protocolFailed = true; finish('protocol'); return; }
     child.on('error', () => { protocolFailed = true; finish('protocol'); });
     child.on('close', (code, signal) => {
