@@ -1,5 +1,23 @@
 # Practical beta — three real repository cases
 
+## Current status (October 16, 2026)
+
+Everything below this section is preserved history for older candidates, including `1ecca68`'s failed native htmx stability. Don't combine its counts with the current results.
+
+| Candidate | Native macOS arm64 | Linux arm64 | Evidence |
+| --- | --- | --- | --- |
+| `9aec7fe` (startup cleanup repair) | Workflows 15 measurements; stability **120/120**; installed schema-3 18/18; package smoke 15 | **All three cases passed**, 132 operations; independent audit found nothing | [native](STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](LINUX-THREE-CASE-RESUME.md) |
+| `1ae6ffc` (cleanup-failure basis; branch `task/cleanup-failure-basis`) | Workflows 15; stability **120/120**; installed schema-3 18/18; package smoke 15; independent audit found nothing | **Not run**: blocked on an owner decision about VM disk space | `evidence/CLEANUP-BASIS-CANDIDATE.md` on that branch |
+
+The practical beta is **not declared complete**:
+
+- The original native htmx repetition-15 shutdown failure (candidate `1ecca68` and earlier) has no causal explanation. Every later cohort passed without recurrence, which doesn't establish one. The `1ae6ffc` candidate makes any recurrence explainable from ordinary evidence.
+- Accessibility is deferred: eight focused or mixed browser scenarios, native zoom and actual screen-reader workflows are unverified.
+
+Current source state, blockers and the next action are in the newest `STATE.md` section.
+
+## Preserved history
+
 Follow-up from `1ecca68`: [the native cleanup investigation](HTMX-CLEANUP-INVESTIGATION.md) adds tested teardown/process diagnostics. One bounded 40-command htmx diagnostic sequence had expected outcomes but no failure recurrence; no lifecycle repair or replacement acceptance is claimed. Affected browser regressions were 14/15, with a separate startup profile-cleanup failure preserved. The results below retain the earlier candidate's cutoff and are not verification of the new instrumented build. Current branch: `task/htmx-cleanup-investigation`.
 
 The practical beta remains incomplete: all three fresh Linux cases passed, but native htmx stability failed on browser shutdown. This is not a public release or overall completion declaration. Accessibility remains deferred/unverified. Baseline `88fedc530152b786fdb8ac76a867ddbcd8229201` was clean and checked before changes (84 matching checks over overlapping inventories, not 84 unique files). Work remains on `task/practical-beta`; no merge, push, release, visibility change, paid service or maintainer contact occurred.
