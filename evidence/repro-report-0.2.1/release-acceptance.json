@@ -1,0 +1,158 @@
+{
+  "startedAt": "2026-10-18T06:25:09.636Z",
+  "tarball": {
+    "path": "~/Developer/repro-acceptance/release-0.2.1/artifacts/release/repro-local-0.2.1.tgz",
+    "sha256": "8dbb80096221846cdf88aa318550d4bfb4ea507f299d8f9b9e5fa6260f565560"
+  },
+  "steps": [
+    {
+      "name": "npm-init",
+      "command": "npm init -y",
+      "exit": 0,
+      "signal": null,
+      "ms": 293
+    },
+    {
+      "name": "npm-install",
+      "command": "npm install --ignore-scripts --no-audit --no-fund ~/Developer/repro-acceptance/release-0.2.1/artifacts/release/repro-local-0.2.1.tgz",
+      "exit": 0,
+      "signal": null,
+      "ms": 964
+    },
+    {
+      "name": "browser-install",
+      "command": "npx --no-install playwright install chromium --only-shell",
+      "exit": 0,
+      "signal": null,
+      "ms": 8735
+    },
+    {
+      "name": "doctor",
+      "command": "npx --no-install repro doctor",
+      "exit": 0,
+      "signal": null,
+      "ms": 3298
+    },
+    {
+      "name": "report-shopping-list",
+      "command": "npx --no-install repro report --app ~/Developer/repro-acceptance/apps/shopping-list --yes --output .repro-runs/reports/shopping-list --title Deleting a bought item lowers the items-left counter --went-wrong Open the app\nType \"Milk\" into \"Add an item\"\nPress Enter\nType \"Eggs\" into \"Add an item\"\nPress Enter\nType \"Bread\" into \"Add an item\"\nPress Enter\nClick \"Active\"\nClick \"All\"\nCheck \"",
+      "exit": 0,
+      "signal": null,
+      "ms": 34926
+    },
+    {
+      "name": "report-cafe-orders",
+      "command": "npx --no-install repro report --app ~/Developer/repro-acceptance/apps/cafe-orders --yes --output .repro-runs/reports/cafe-orders --title WELCOME10 can be applied twice --went-wrong Open the app\nType \"barista@example.com\" into \"Email\"\nType \"[canary]\" into \"Password\"\nClick \"Sign in\"\nClick \"Add Latte\" 2 times\nHover over \"Add Croissant\"\nType \"WELCOME10\" into \"Discou",
+      "exit": 0,
+      "signal": null,
+      "ms": 33768
+    },
+    {
+      "name": "fixed-npm-ci",
+      "command": "npm ci --no-audit --no-fund",
+      "exit": 0,
+      "signal": null,
+      "ms": 1004
+    },
+    {
+      "name": "report-not-reproduced",
+      "command": "npx --no-install repro report --app ~/Developer/repro-acceptance/release-0.2.1/release/fixed-apps/shopping-list --yes --output .repro-runs/reports/not-reproduced --title Deleting a bought item lowers the items-left counter --went-wrong Open the app\nType \"Milk\" into \"Add an item\"\nPress Enter\nType \"Eggs\" into \"Add an item\"\nPress Enter\nType \"Bread\" into \"Add an item\"\nPress Enter\nClick",
+      "exit": 0,
+      "signal": null,
+      "ms": 24889
+    }
+  ],
+  "scenarios": {
+    "shoppingList": {
+      "exit": 0,
+      "status": "Reproduced",
+      "fresh": "Reproduced: in a clean clone of the commit, the test failed with the same observed result.",
+      "report": "~/Developer/repro-acceptance/release-0.2.1/release/workspace/.repro-runs/reports/shopping-list/REPRO.md",
+      "ms": 34926,
+      "recipient": {
+        "report": "~/Developer/repro-acceptance/release-0.2.1/release/workspace/.repro-runs/reports/shopping-list/REPRO.md",
+        "repository": "~/Developer/repro-acceptance/apps/shopping-list",
+        "scriptExit": 0,
+        "testExitBefore": 1,
+        "beforeMatchesReported": true,
+        "beforeExpectationFailed": true,
+        "setupAndFirstRunMs": 17020,
+        "appFolder": "~/Developer/repro-acceptance/release-0.2.1/release/recipients/shopping-list/work/shopping-list",
+        "fix": {
+          "path": "~/Developer/repro-acceptance/fixes/shopping-list-fix.patch",
+          "sha256": "0798564f22e5458e2f0a4cbdc9e54787e4fc046ad07b30412b11ff1abaaeb7ce"
+        },
+        "testExitAfter": 0,
+        "afterSatisfied": true,
+        "passed": true
+      }
+    },
+    "cafeOrders": {
+      "exit": 0,
+      "status": "Reproduced",
+      "fresh": "Reproduced: in a clean clone of the commit with the local changes applied, the test failed with the same observed result.",
+      "report": "~/Developer/repro-acceptance/release-0.2.1/release/workspace/.repro-runs/reports/cafe-orders/REPRO.md",
+      "ms": 33768,
+      "canariesPresent": {
+        "canary-sha256:116795b5b3869068": false,
+        "canary-sha256:c43cf8f2601eb9cd": false,
+        "canary-sha256:b14ffb0ac208b9ff": false,
+        "canary-sha256:87cbebfeebc05f7c": false,
+        "canary-sha256:06c529a47555c947": false,
+        "canary-sha256:2faad83c56b34f52": false,
+        "canary-sha256:86e0b9e56c17cc4d": false,
+        "canary-sha256:10c11292b3cd47f9": false
+      },
+      "recipient": {
+        "report": "~/Developer/repro-acceptance/release-0.2.1/release/workspace/.repro-runs/reports/cafe-orders/REPRO.md",
+        "repository": "~/Developer/repro-acceptance/remotes/cafe-orders.git",
+        "scriptExit": 0,
+        "testExitBefore": 1,
+        "beforeMatchesReported": true,
+        "beforeExpectationFailed": true,
+        "setupAndFirstRunMs": 14962,
+        "appFolder": "~/Developer/repro-acceptance/release-0.2.1/release/recipients/cafe-orders/work/cafe-orders",
+        "fix": {
+          "path": "~/Developer/repro-acceptance/fixes/cafe-orders-fix.patch",
+          "sha256": "52831814a0180a1059391d92159060f91b5f39609021f47736dd521e1aba6481"
+        },
+        "testExitAfter": 0,
+        "afterSatisfied": true,
+        "passed": true
+      },
+      "canaryNote": "Each canary value is identified by the first 16 hex digits of its SHA-256; the values themselves are kept out of the repository."
+    },
+    "notReproduced": {
+      "exit": 0,
+      "status": "Not reproduced",
+      "fresh": "Passed: in a clean clone of the commit, the test ran and the expected behavior held, as in Repro’s runs.",
+      "report": "~/Developer/repro-acceptance/release-0.2.1/release/workspace/.repro-runs/reports/not-reproduced/REPRO.md",
+      "ms": 24889
+    },
+    "cancellation": {
+      "code": 130,
+      "signal": null,
+      "signalToExitMs": 1266,
+      "reproMdWritten": false,
+      "leftoverProcesses": [],
+      "appPortListening": false,
+      "retainedProfiles": []
+    }
+  },
+  "installed": {
+    "version": "0.2.1",
+    "integrity": "sha512-hoaKne5ndi5PEjNap06H74yrzUi04BHC3BLbDVlcvwcFkxHnFst05jHR5ZEuRTkNCXDtE8XpEuAYk3zylj/y6A=="
+  },
+  "checks": {
+    "installedVersion": true,
+    "shoppingReproduced": true,
+    "cafeReproduced": true,
+    "cafeRedacted": true,
+    "notReproduced": true,
+    "cancellation": true,
+    "shoppingRecipient": true,
+    "cafeRecipient": true
+  },
+  "passed": true,
+  "finishedAt": "2026-10-18T06:27:55.459Z"
+}

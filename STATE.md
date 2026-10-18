@@ -1,8 +1,18 @@
-# Current work — Repro 0.2.0: one REPRO.md from your own app (released as a verified beta)
+# Current work — Repro 0.2.1: one REPRO.md from your own app (released as a verified beta; merge to main awaits the owner)
 
 October 17–18, 2026. The owner's `/goal`: evolve Repro into a developer tool. The input is an application plus an issue description; the output is one actionable REPRO.md that a teammate or coding agent can use to reproduce the bug, fix the original app and run the same test.
 
-## Release identity
+## Release identity (current: 0.2.1)
+
+- **0.2.1, the release to use:**
+  - release commit `42d2b32fb8ee5e99e5fb21006d3ac4827ffc931e`, tagged `v0.2.1-beta`, branch `release/repro-report-0.2.1`, with the evidence commit on top;
+  - package `repro-local-0.2.1.tgz`, 1,895,799 bytes, SHA-256 `8dbb80096221846cdf88aa318550d4bfb4ea507f299d8f9b9e5fa6260f565560`, reproducible;
+  - acceptance passed 8/8 plus the post-hoc held-out run;
+  - report: [evidence/REPRO-REPORT-0.2.1-RELEASE.md](evidence/REPRO-REPORT-0.2.1-RELEASE.md).
+- **0.2.0 is superseded:** it has the defects in [evidence/FOREGROUND-REVIEW-0.2.0.md](evidence/FOREGROUND-REVIEW-0.2.0.md). Its record follows.
+
+### 0.2.0 (superseded)
+
 
 - Release commit `5ca54f101d517626551d53d0b9756d4eea99a83c`, tagged `v0.2.0-beta`. Branch `release/repro-report-0.2.0`, with the evidence commit on top. The development branch is `feature/repro-report`.
 - Package `repro-local-0.2.0.tgz`: 1,875,935 bytes, SHA-256 `99ec27ccea0b812858573b6f174a332550dbfaf9bba69072529516565230ad2a`. A rebuild of the commit packs to identical bytes. The runtime bytes are identical to rc3.

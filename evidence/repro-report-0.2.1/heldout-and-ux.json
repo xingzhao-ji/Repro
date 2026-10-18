@@ -1,0 +1,98 @@
+{
+  "posthoc-release": {
+    "plan": {
+      "folder": "~/Developer/repro-acceptance/apps/pantry-scale",
+      "title": "Recipe amounts change after adding recipes to the shopping list",
+      "wentWrong": "Open the app\nClick \"Add to shopping list\"\nClick \"Crisp Waffles\"\nClick \"Add to shopping list\"\nClick \"Buttermilk Pancakes\"\nThe Pancakes recipe now shows Plain flour 450 g, Eggs 4 and Butter 90 g, the shopping-list totals.",
+      "shouldHappen": "A recipe's own amounts should not change when it is added to the shopping list.\n\"Plain flour\" should show \"200 g\"",
+      "choose": [
+        "450 g (in “Buttermilk Pancakes”)"
+      ]
+    },
+    "steps": [
+      {
+        "report": "http://127.0.0.1:54799/#/reports/47644409-0860-4251-bcc0-c733786cb2a8"
+      },
+      {
+        "status": "Needs your input",
+        "summary": "Repro could not complete the first run: check 1 could not be matched to exactly one element."
+      },
+      {
+        "questions": [
+          "Repro could not tell which element \"Plain flour\" refers to (check 1). Choose one of the elements below, or quote a CSS selector such as \"#total\". On the command line, answer with --check-element 1=SELECTOR.\n\nElements Repro found on the page\n#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)\nshows “450 g (in “Buttermilk Pancakes”)”\n#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)\nshows “Plain flour (in “Buttermilk Pancakes”)”\n#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(2)\nshows “450 g (in “Shopping list”)”\n#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(1)\nshows “Plain flour (in “Shopping list”)”\n#app > main > div > section > div > div > button:nth-of-type(1)\nshows “− (in “Fewer servings”)”\n#app > main > div > section > div > div > output\nshows “4 servings (in “Servings”)”\n#app > main > div > section > div > div > button:nth-of-type(2)\nshows “+ (in “More servings”)”\n#shopping-heading\nshows “Shopping list”"
+        ],
+        "candidates": [
+          "#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)\nshows “450 g (in “Buttermilk Pancakes”)”",
+          "#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)\nshows “Plain flour (in “Buttermilk Pancakes”)”",
+          "#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(2)\nshows “450 g (in “Shopping list”)”",
+          "#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(1)\nshows “Plain flour (in “Shopping list”)”",
+          "#app > main > div > section > div > div > button:nth-of-type(1)\nshows “− (in “Fewer servings”)”",
+          "#app > main > div > section > div > div > output\nshows “4 servings (in “Servings”)”",
+          "#app > main > div > section > div > div > button:nth-of-type(2)\nshows “+ (in “More servings”)”",
+          "#shopping-heading\nshows “Shopping list”"
+        ]
+      },
+      {
+        "report": "http://127.0.0.1:54799/#/reports/8408fb75-0390-44d6-829f-dd3764ee3046"
+      },
+      {
+        "status": "Reproduced",
+        "summary": "Reproduced: the failure occurred in 4 of 4 conclusive runs from a fresh start (the capture and 3 repetitions)."
+      }
+    ],
+    "final": {
+      "status": "Reproduced",
+      "reportId": "8408fb75-0390-44d6-829f-dd3764ee3046",
+      "markdown": "~/Developer/repro-acceptance/release-0.2.1/heldout/posthoc-release/REPRO.md",
+      "path": "~/Developer/repro-acceptance/release-0.2.1/release/workspace/.repro-runs/workbench/reports/8408fb75-0390-44d6-829f-dd3764ee3046/REPRO.md"
+    },
+    "pageErrors": []
+  },
+  "ux-step-suggestions-rc1": {
+    "plan": {
+      "folder": "~/Developer/repro-acceptance/apps/pantry-scale",
+      "title": "Misspelled step (UX check)",
+      "wentWrong": "Open the app\nClick \"Crispy Waffles\"",
+      "shouldHappen": "\"Plain flour\" should show \"200 g\"",
+      "choose": []
+    },
+    "steps": [
+      {
+        "report": "http://127.0.0.1:54432/#/reports/10c9c2f9-2301-45d7-81a7-da9e19573c07"
+      },
+      {
+        "status": "Needs your input",
+        "summary": "Repro could not complete the first run: Step 2 (Click \"Crispy Waffles\") could not find its element on the page."
+      },
+      {
+        "questions": [
+          "Step 2 (Click \"Crispy Waffles\") could not find its element on the page. Reword that step with one of the names below, exactly as shown or its beginning.\n\nElements on the page you may mean:\n\nbutton “Crisp Waffles Serves 4 · 30 min”\nfield “Search recipes”\nbutton “Buttermilk Pancakes Serves 4 · 25 min”\nbutton “Banana Bread Serves 8 · 70 min”\nbutton “Roast Tomato Soup Serves 4 · 50 min”\nbutton “Fewer servings”\nbutton “More servings”\nbutton “Add to shopping list”"
+        ],
+        "candidates": []
+      }
+    ],
+    "final": {
+      "status": "Needs your input",
+      "reportId": "10c9c2f9-2301-45d7-81a7-da9e19573c07",
+      "path": null
+    },
+    "pageErrors": []
+  },
+  "posthoc-release-recipient": {
+    "report": "~/Developer/repro-acceptance/release-0.2.1/heldout/posthoc-release/REPRO.md",
+    "repository": "~/Developer/repro-acceptance/apps/pantry-scale",
+    "scriptExit": 0,
+    "testExitBefore": 1,
+    "beforeMatchesReported": true,
+    "beforeExpectationFailed": true,
+    "setupAndFirstRunMs": 17952,
+    "appFolder": "~/Developer/repro-acceptance/release-0.2.1/heldout/posthoc-release-recipient/work/pantry-scale",
+    "fix": {
+      "path": "~/Developer/repro-acceptance/sealed/heldout/fix.patch",
+      "sha256": "dfe36e3b9a6db1ab0e870c1db045daf00c6b513155b8417f640c52676f0e5b2e"
+    },
+    "testExitAfter": 0,
+    "afterSatisfied": true,
+    "passed": true
+  }
+}
