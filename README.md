@@ -14,10 +14,10 @@ Repro does not invent results:
 - suspected causes are kept apart from verified ones;
 - what is missing or unsupported is stated in the file.
 
-**Release 0.2.0** adds this developer workflow to the 0.1.0 practical beta, whose built-in cases remain as examples. Start with the [QUICKSTART](docs/QUICKSTART.md). The supported apps, step grammar, redaction and limits are in [LOCAL-APPS](docs/LOCAL-APPS.md), and the design is in [ADR 0005](docs/adr/0005-local-app-repro-report.md). [Example REPRO.md files](docs/examples/README.md) show the output, and the [release notes](docs/RELEASE-NOTES.md) list what changed. Accessibility remains deferred and unverified.
+**Release 0.2.1** adds this developer workflow to the 0.1.0 practical beta, whose built-in cases remain as examples. Start with the [QUICKSTART](docs/QUICKSTART.md). The supported apps, step grammar, redaction and limits are in [LOCAL-APPS](docs/LOCAL-APPS.md), and the design is in [ADR 0005](docs/adr/0005-local-app-repro-report.md). [Example REPRO.md files](docs/examples/README.md) show the output, and the [release notes](docs/RELEASE-NOTES.md) list what changed. Accessibility remains deferred and unverified.
 
 ```sh
-npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.0.tgz
+npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.1.tgz
 export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
 npx --no-install playwright install chromium --only-shell
 npx --no-install repro serve            # open http://127.0.0.1:4318
@@ -30,7 +30,7 @@ Repro began as a local failure compiler for explicitly registered cases. It capt
 
 **Release 0.1.0 (practical beta)** shipped as `repro-local-0.1.0.tgz`. It supports the synthetic stale-response alpha plus three pinned public repository bugs: morphdom textarea updates, htmx delegated checkbox events and Marked empty headings. They run against actual upstream source in small integration pages.
 
-The release builds on implementation `9aec7fe`, which passed native macOS arm64 and fresh isolated Linux arm64 acceptance ([native](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](evidence/LINUX-THREE-CASE-RESUME.md)). It adds the cleanup-basis diagnostics and two cancellation fixes found while verifying the installed package. Those changes need fresh evidence, so verification of the exact release tarball is recorded separately in [`evidence/PRACTICAL-BETA-RELEASE.md`](evidence/PRACTICAL-BETA-RELEASE.md). A documentation-only commit adds that report after the release commit. Release 0.2.0 changes runtime bytes, so the 0.1.0 platform evidence does not transfer to it.
+The release builds on implementation `9aec7fe`, which passed native macOS arm64 and fresh isolated Linux arm64 acceptance ([native](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](evidence/LINUX-THREE-CASE-RESUME.md)). It adds the cleanup-basis diagnostics and two cancellation fixes found while verifying the installed package. Those changes need fresh evidence, so verification of the exact release tarball is recorded separately in [`evidence/PRACTICAL-BETA-RELEASE.md`](evidence/PRACTICAL-BETA-RELEASE.md). A documentation-only commit adds that report after the release commit. Releases 0.2.0 and 0.2.1 change runtime bytes, so the 0.1.0 platform evidence does not transfer to them.
 
 Read [INSTALL](docs/INSTALL.md), [USAGE](docs/USAGE.md), [TROUBLESHOOTING](docs/TROUBLESHOOTING.md) and the [release notes](docs/RELEASE-NOTES.md). The notes cover what changed and the known issues: one historical native htmx shutdown failure on an earlier build, cause unresolved, is preserved. The registered cases are selected development cases, not held-out effectiveness or arbitrary website support; see the [frozen protocol](benchmarks/PRACTICAL-BETA-PROTOCOL.md). Earlier [release evidence](evidence/RELEASE.md) belongs to the synthetic alpha. Real-user recording, PostgreSQL adapters and public untrusted execution remain unsupported.
 
@@ -39,7 +39,7 @@ Read [INSTALL](docs/INSTALL.md), [USAGE](docs/USAGE.md), [TROUBLESHOOTING](docs/
 ```sh
 mkdir repro-workspace && cd repro-workspace
 npm init -y
-npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.0.tgz
+npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.1.tgz
 export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
 npx --no-install playwright install chromium --only-shell
 npx --no-install repro doctor

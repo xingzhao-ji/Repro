@@ -1,6 +1,8 @@
-# Changes after v0.2.0-beta (on `feature/repro-report`, not in the released tarball)
+# Repro 0.2.1 — correctness and privacy fixes for REPRO.md
 
-These fixes come from the 2026-10-17 foreground review of the diff against `main` (see `evidence/FOREGROUND-REVIEW-0.2.0.md`). They change behavior compared with the `repro-local-0.2.0.tgz` package, which is unchanged.
+Release package: `repro-local-0.2.1.tgz`, built with `npm pack` from the release commit on branch `release/repro-report-0.2.1` and tagged `v0.2.1-beta`. Its SHA-256 and the acceptance runs of that exact tarball are in `evidence/REPRO-REPORT-0.2.1-RELEASE.md`. That file sits in the evidence commit on top of the release commit, so it is not inside the tarball.
+
+**Use 0.2.1 instead of 0.2.0.** These fixes come from the October 17 foreground review of the diff against `main` (`evidence/FOREGROUND-REVIEW-0.2.0.md`). Under 0.2.0, a report on a negative check could shorten the steps to a test that also fails on a correct app.
 
 - **Shortening:** steps are shortened automatically only when every check is "there should be no errors". Negative checks ("should not show …") now need the reporter's declaration, because they can depend on the steps.
 - **Status:** "Intermittent" now requires that some run failed and some run did not fail in the recorded way. Failing runs with too few conclusive repetitions are reported as **Blocked**.
@@ -11,6 +13,9 @@ These fixes come from the 2026-10-17 foreground review of the diff against `main
   - log text containing backticks stays inside its code span;
   - the test refuses the `…` placeholder for a withheld value.
 - **Workbench:** editing the form starts a new request instead of reusing the previous idempotency key.
+- **Version:** runtime and adapter version 0.2.1. Manifests and capsules from 0.2.0 name the 0.2.0 runtime and are refused as an unavailable version, as with every earlier release.
+
+Everything else in 0.2.0 below still applies.
 
 ---
 

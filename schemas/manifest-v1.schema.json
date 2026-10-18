@@ -43,12 +43,12 @@
           "const": "synthetic-search-v1"
         },
         "version": {
-          "const": "0.2.0"
+          "const": "0.2.1"
         }
       }
     },
     "runnerVersion": {
-      "const": "0.2.0"
+      "const": "0.2.1"
     },
     "expectation": {
       "type": "object",

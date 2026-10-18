@@ -1,4 +1,4 @@
-# Install Repro 0.2.0
+# Install Repro 0.2.1
 
 Repro installs as a local npm package. It runs on your machine and needs no account, API key, LLM, proprietary viewer or hosted service. This guide covers the release package, a source checkout and an exported regression capsule. For daily use see [USAGE](USAGE.md); for failures see [TROUBLESHOOTING](TROUBLESHOOTING.md); for what is and is not supported see [SUPPORTED-SCOPE](SUPPORTED-SCOPE.md) and the [release notes](RELEASE-NOTES.md).
 
@@ -17,10 +17,10 @@ Keep the working directory outside folders that a cloud-sync client can evict, s
 
 ## Install the release package
 
-The release artifact is `repro-local-0.2.0.tgz`, produced by `npm pack` from the release commit. After installing, continue with the [QUICKSTART](QUICKSTART.md). Check its SHA-256 against the release evidence before installing. A digest proves the bytes match; it does not establish who built them.
+The release artifact is `repro-local-0.2.1.tgz`, produced by `npm pack` from the release commit. After installing, continue with the [QUICKSTART](QUICKSTART.md). Check its SHA-256 against the release evidence before installing. A digest proves the bytes match; it does not establish who built them.
 
 ```sh
-shasum -a 256 repro-local-0.2.0.tgz
+shasum -a 256 repro-local-0.2.1.tgz
 ```
 
 Install into a new, empty workspace directory. Repro writes every run beneath that workspace's `.repro-runs/`.
@@ -29,7 +29,7 @@ Install into a new, empty workspace directory. Repro writes every run beneath th
 mkdir repro-workspace
 cd repro-workspace
 npm init -y
-npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.0.tgz
+npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.1.tgz
 export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
 npx --no-install playwright install chromium --only-shell
 npx --no-install repro doctor
@@ -52,7 +52,7 @@ Open exactly `http://127.0.0.1:4318`. Requests with any other Host or Origin are
 Use this to develop Repro or to rebuild the release artifact.
 
 ```sh
-git clone --branch release/repro-report-0.2.0 https://github.com/xingzhao-ji/Repro.git
+git clone --branch release/repro-report-0.2.1 https://github.com/xingzhao-ji/Repro.git
 cd Repro
 npm ci --ignore-scripts --cache .repro-cache/npm
 export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
@@ -62,7 +62,7 @@ node dist/cli.js doctor
 npm pack --ignore-scripts
 ```
 
-The repository is private; cloning needs your existing GitHub access. `npm run build` reproduces `dist/` byte for byte from the committed source and lockfile. The tarball also packs `docs/` and `evidence/`, so only the release commit, tagged `v0.2.0-beta`, packs to the exact release tarball whose SHA-256 is recorded in the release evidence. Run `git checkout v0.2.0-beta` before `npm pack` to reproduce it. Later documentation commits pack the same runtime bytes with newer documents. The development checks are listed in the [README](../README.md#development-checks).
+The repository is private; cloning needs your existing GitHub access. `npm run build` reproduces `dist/` byte for byte from the committed source and lockfile. The tarball also packs `docs/` and `evidence/`, so only the release commit, tagged `v0.2.1-beta`, packs to the exact release tarball whose SHA-256 is recorded in the release evidence. Run `git checkout v0.2.1-beta` before `npm pack` to reproduce it. Later documentation commits pack the same runtime bytes with newer documents. The development checks are listed in the [README](../README.md#development-checks).
 
 ## Run an exported regression capsule elsewhere
 

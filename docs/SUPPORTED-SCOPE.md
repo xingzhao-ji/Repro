@@ -1,8 +1,8 @@
 # Supported scope and observed limits
 
-## Your local web app (release 0.2.0)
+## Your local web app (release 0.2.1)
 
-The exact boundary for user-owned apps is in [LOCAL-APPS](LOCAL-APPS.md): which apps and start methods are supported, the step and check grammar, statuses, shortening, the fresh-checkout check, redaction and limits. Acceptance of the exact 0.2.0 tarball is recorded in [evidence/REPRO-REPORT-RELEASE.md](../evidence/REPRO-REPORT-RELEASE.md). The sections below describe the registered cases and the synthetic alpha, unchanged as built-in examples.
+The exact boundary for user-owned apps is in [LOCAL-APPS](LOCAL-APPS.md): which apps and start methods are supported, the step and check grammar, statuses, shortening, the fresh-checkout check, redaction and limits. Acceptance of the exact 0.2.1 tarball is recorded in [evidence/REPRO-REPORT-0.2.1-RELEASE.md](../evidence/REPRO-REPORT-0.2.1-RELEASE.md); the 0.2.0 record is [evidence/REPRO-REPORT-RELEASE.md](../evidence/REPRO-REPORT-RELEASE.md). The sections below describe the registered cases and the synthetic alpha, unchanged as built-in examples.
 
 
 ## Current practical beta (release 0.1.0)

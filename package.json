@@ -1,6 +1,6 @@
 {
   "name": "repro-local",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "private": true,
   "type": "module",
   "description": "Local developer tool: turn a browser bug in your own local web app into one reproducible REPRO.md, plus the registered example cases",

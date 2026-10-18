@@ -86,10 +86,10 @@
       ]
     },
     "adapterVersion": {
-      "const": "0.2.0"
+      "const": "0.2.1"
     },
     "runnerVersion": {
-      "const": "0.2.0"
+      "const": "0.2.1"
     },
     "seed": {
       "type": "integer",
