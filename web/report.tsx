@@ -154,7 +154,7 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
   return <form className="report-form" onSubmit={event => { event.preventDefault(); void generate(); }} noValidate>
     <div className="report-intro">
       <h1>Turn a bug into one REPRO.md</h1>
-      <p className="muted">Point Repro at your app and describe the bug. Repro reproduces it in a fresh browser, shortens the steps, and writes one Markdown file with a regression test your teammate or coding agent can run. Everything stays on this machine.</p>
+      <p className="muted">Point Repro at your app and describe the bug. Repro reproduces it in a fresh browser, shortens the steps when that is safe, and writes one Markdown file with a regression test your teammate or coding agent can run. Everything stays on this machine.</p>
       {example && <p className="small"><button type="button" className="link-button" onClick={() => void tryExample()} disabled={busy || !token}>Try it with an example app</button></p>}
     </div>
 

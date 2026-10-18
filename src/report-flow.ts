@@ -2,7 +2,7 @@ import { spawn } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { readFile, rm, writeFile } from 'node:fs/promises';
 import { join, relative, resolve } from 'node:path';
-import { ReproError, VERSION, type AppObservation, type AppResolution, type ManifestV4, type RunResult, type Trial } from './contracts.js';
+import { ReproError, VERSION, type AppCheck, type AppObservation, type AppResolution, type ManifestV4, type RunResult, type Trial } from './contracts.js';
 import { createDraftManifest, resolveManifest, checkPasses, evaluateAppObservation } from './app-contract.js';
 import { inspectApp, type AppInput, type AppProfile } from './app-inspect.js';
 import { childEnvironment, startApp, type RunningApp, type StopReceipt } from './app-process.js';
@@ -348,7 +348,12 @@ export async function generateReport(request: ReportRequest, context: { output: 
       values: (run.result.observation as AppObservation | null)?.values?.map(value => value === null ? null : redactor.redact(value)) ?? null,
       note: ['target-failure', 'requirement-satisfied'].includes(run.result.outcome) ? '' : run.result.reason.replace(/^[A-Z_]+: /, '').slice(0, 160), durationMs: run.result.durationMs }));
     const stepNumber = new Map((extra.resolved ?? manifest).actions.map((action, index) => [action.id, `${index + 1}. ${redactor.redact(describeAction(action, describeReference(action.target ?? action.reference)))}`]));
-    const checks = manifest.expectation.checks.map((check, index) => ({ text: describeCheck(check, describeReference(check.target ?? check.reference)), expected: check.expected,
+    // An element the reporter picked from Repro's list keeps the name they used for it.
+    const named = parseExpectation(request.shouldHappen ?? '').checks.map(check => check.reference?.text ?? null);
+    const chosen = request.options?.checkSelectors ?? {};
+    const checkTarget = (check: AppCheck, index: number) => named[index] && chosen[index] && check.target?.by === 'css' && check.target.value === chosen[index]
+      ? `"${redactor.redact(named[index]!)}" (the element \`${check.target.value}\` the reporter chose for it)` : describeReference(check.target ?? check.reference);
+    const checks = manifest.expectation.checks.map((check, index) => ({ text: describeCheck(check, checkTarget(check, index)), expected: check.expected,
       observed: observation ? redact(observation.values[index] ?? null) : null, passed: observation ? checkPasses(check, observation.values[index] ?? null) : false }));
     function redact(value: string | null) { return value === null ? null : redactor.redact(value); }
     // Logs come from a run of exactly the final steps, preferring one that reproduced the failure.

@@ -71,6 +71,7 @@ test('the one-page flow: app folder and description in, progress and cancellatio
     await page.getByRole('heading', { name: 'Turn a bug into one REPRO.md' }).waitFor();
     assert.equal(await page.getByLabel('What went wrong?').inputValue(), STEPS, 'the description is restored for the retry');
     await page.getByText('Starts with').waitFor();
+    await page.locator('.understood').getByText('(the element you chose)').waitFor();
     await page.getByLabel('The steps and checks above are right').check();
     await page.getByRole('button', { name: 'Generate report' }).click();
     await page.waitForURL(/#\/reports\//);
@@ -83,6 +84,8 @@ test('the one-page flow: app folder and description in, progress and cancellatio
     assert.match(await page.locator('.result-summary').innerText(), /^Reproduced: the failure occurred/);
     // "X should show Y" depends on the steps, so Repro does not shorten them and says why.
     await preview.getByText(/Repro did not shorten them: the expected value can depend on every step/).waitFor();
+    // The chosen element keeps the reporter's own name in the report.
+    await preview.locator('p', { hasText: /After the steps below, Repro expected that "Tasks left" \(the element #remaining the reporter chose for it\) text is "2 tasks remaining", but observed/ }).waitFor();
     await shot('05-result');
     const download = await Promise.all([page.waitForEvent('download'), page.getByRole('link', { name: 'Download REPRO.md' }).click()]).then(([item]) => item);
     assert.equal(download.suggestedFilename(), 'REPRO.md');
