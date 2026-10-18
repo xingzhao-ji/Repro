@@ -88,5 +88,6 @@ node --test .repro/<name>.test.mjs   # fails now; passes once the bug is fixed
 ## What to read next
 
 - [LOCAL-APPS](LOCAL-APPS.md): exactly which apps are supported, `repro.config.json`, the step and check grammar, redaction and limits.
+- [Example REPRO.md files](examples/README.md): four unedited reports from the release acceptance.
 - [TROUBLESHOOTING](TROUBLESHOOTING.md): what to do when a step is not found, the app does not start, or the fresh-checkout check differs.
 - [USAGE](USAGE.md): every command, including the built-in examples and registered cases from 0.1.0.

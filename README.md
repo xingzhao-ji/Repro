@@ -14,7 +14,7 @@ Repro does not invent results:
 - suspected causes are kept apart from verified ones;
 - what is missing or unsupported is stated in the file.
 
-**Release 0.2.0** adds this developer workflow to the 0.1.0 practical beta, whose built-in cases remain as examples. Start with the [QUICKSTART](docs/QUICKSTART.md). The supported apps, step grammar, redaction and limits are in [LOCAL-APPS](docs/LOCAL-APPS.md), and the design is in [ADR 0005](docs/adr/0005-local-app-repro-report.md). The [release notes](docs/RELEASE-NOTES.md) list what changed. Accessibility remains deferred and unverified.
+**Release 0.2.0** adds this developer workflow to the 0.1.0 practical beta, whose built-in cases remain as examples. Start with the [QUICKSTART](docs/QUICKSTART.md). The supported apps, step grammar, redaction and limits are in [LOCAL-APPS](docs/LOCAL-APPS.md), and the design is in [ADR 0005](docs/adr/0005-local-app-repro-report.md). [Example REPRO.md files](docs/examples/README.md) show the output, and the [release notes](docs/RELEASE-NOTES.md) list what changed. Accessibility remains deferred and unverified.
 
 ```sh
 npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.0.tgz
