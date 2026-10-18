@@ -177,7 +177,7 @@ test('keyboard investigation joins immutable job input and actual trial evidence
     check('Keyboard event inspector reveals selected event', await page.getByText('Sequence 1', { exact: true }).count(), 1);
     await audit('captured-timeline');
 
-    const original = app.ledger.getSession(captured.sessionId).manifest;
+    const original = app.ledger.getSession(captured.sessionId).manifest as import('../src/contracts.js').SyntheticManifest;
     const bounded = { ...original, environment: { ...original.environment, timeoutMs: 1500 } };
     app.ledger.updateManifest(captured.sessionId, bounded);
     summary['fixtureAdjustment'] = { originalTimeoutMs: original.environment.timeoutMs, reductionTimeoutMs: bounded.environment.timeoutMs, reason: 'Owned synthetic UI fixture bound; actual browser, reducer, oracle and all outcomes preserved.' };

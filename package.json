@@ -1,9 +1,9 @@
 {
   "name": "repro-local",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
-  "description": "Local portable failure compiler for explicitly registered synthetic web adapters",
+  "description": "Local developer tool: turn a browser bug in your own local web app into one reproducible REPRO.md, plus the registered example cases",
   "engines": {
     "node": ">=24.0.0"
   },

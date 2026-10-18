@@ -1,4 +1,5 @@
-export const VERSION = '0.1.0';
+import type { AppActionKind, AppTarget, CheckProperty, Comparison, TargetReference } from './steps.js';
+export const VERSION = '0.2.0';
 export const ADAPTER = 'synthetic-search-v1';
 export type Outcome = 'target-failure' | 'requirement-satisfied' | 'inconclusive' | 'cancelled';
 export type ErrorCategory = 'input' | 'unsupported' | 'environment' | 'harness' | 'target-failure' | 'cancelled' | 'verification';
@@ -88,7 +89,49 @@ export interface ManifestV3 {
   boundary: { behavior: 'frontend'; network: 'local-assets-only'; database: 'none'; externalDependencies: [] };
   app: { revision: 'buggy' | 'fixed'; sourceDigest: string; repository: string; commit: string };
 }
-export type Manifest = SyntheticManifest | ManifestV3;
+export interface AppAction {
+  id: string; kind: AppActionKind; target: AppTarget | null; reference: TargetReference | null;
+  /** Empty when the typed value is withheld; then secret names the environment variable that supplies it. */
+  value: string; secret: string | null; text: string; dependsOn: string[];
+}
+export interface AppCheck { target: AppTarget | null; reference: TargetReference | null; property: CheckProperty; comparison: Comparison; expected: string; text: string }
+export interface AppObservation {
+  kind: 'local-app'; values: (string | null)[]; url: string;
+  /** Sanitized, bounded diagnostics recorded during the run; never part of the verdict except page-error checks. */
+  pageErrors: string[]; console: string[]; failedRequests: string[]; blockedHosts: string[]; dialogs: string[];
+}
+export interface ManifestV4 {
+  schemaVersion: 4;
+  id: string;
+  classification: 'user-local-application';
+  adapter: { id: 'local-web-app-v1'; version: string };
+  runnerVersion: string;
+  /** draft: reporter references not yet resolved against the live page. */
+  resolution: 'draft' | 'resolved';
+  expectation: { invariantId: 'REPORTED_EXPECTATION'; description: string; checks: AppCheck[] };
+  assertionDigest: string;
+  expectationBasis: 'reporter-approved' | 'proposed-unconfirmed';
+  humanApproval: 'reporter-confirmed' | 'not-claimed';
+  /** Signature of the first failing capture: exact values for equality checks, pass/fail for containment checks. */
+  failure: { values: (string | null)[]; exact: boolean[] } | null;
+  actions: AppAction[];
+  responses: [];
+  environment: {
+    browser: 'chromium'; viewport: { width: number; height: number }; locale: 'en-US'; timezoneId: 'UTC';
+    clock: string | null; seed: number; platform: 'host'; timeoutMs: number; actionTimeoutMs: number; settleMs: number; checkTimeoutMs: number;
+  };
+  boundary: { behavior: 'local-web-app'; network: 'loopback-only'; database: 'not-reset'; externalDependencies: [] };
+  app: { revision: 'working-tree'; sourceDigest: string; commit: string | null; dirty: boolean; name: string };
+}
+export interface AppResolution {
+  actions: { id: string; target: AppTarget | null; sensitive: boolean }[];
+  checks: (AppTarget | null)[];
+  /** Up to eight visible elements offered when a check target is missing; local UI only, never in a report. */
+  candidates: { selector: string; text: string }[];
+}
+export type Manifest = SyntheticManifest | ManifestV3 | ManifestV4;
+/** Manifests of the evidence workbench's capture sessions; local-app reports use REPRO.md jobs instead. */
+export type WorkbenchManifest = SyntheticManifest | ManifestV3;
 export interface AuthoredExperimentDeclaration {
   searchOrder: SearchOrder;
   expectation: Omit<Expectation, 'description'>;
@@ -112,12 +155,24 @@ export interface RunResult {
   manifestDigest: string; assertionDigest: string; harnessDigest: string;
   appRevision: string; appDigest: string; adapterVersion: string; runnerVersion: string;
   seed: number; startedAt: string; durationMs: number; assertionCount: number;
-  observation: { latestRequestId: number; query: string; results: string[] } | BrowserCaseObservation | null;
+  observation: { latestRequestId: number; query: string; results: string[] } | BrowserCaseObservation | AppObservation | null;
   events: RunEvent[]; artifacts: { path: string; sha256: string; bytes: number }[];
   environment: { platform: string; node: string; browser: string; isolation: string };
 }
+export interface AppRunTarget {
+  /** Loopback origin of the running app for this execution. */
+  origin: string;
+  /** Withheld typed values by variable name; held in memory only. */
+  secrets: Record<string, string>;
+  /** Resolve draft references (capture) instead of using frozen targets. */
+  resolve: boolean;
+}
 export interface RunOptions {
   artifactDir: string; signal?: AbortSignal; revision?: 'buggy' | 'fixed';
+  /** Required for schema 4: where and how to run the user's app. */
+  app?: AppRunTarget;
+  /** Schema 4 capture only: receives how each reporter reference resolved on the live page, even when the run is blocked. */
+  onResolution?: (resolution: AppResolution) => void;
   onEvent?: (event: RunEvent) => void;
   /** Best-effort synchronous diagnostic sink. A throwing sink is disabled; callers must validate coverage. */
   onTeardown?: (event: TeardownEvent) => void;

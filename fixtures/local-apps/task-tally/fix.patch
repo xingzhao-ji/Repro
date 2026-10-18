@@ -1,0 +1,12 @@
+--- a/public/app.js
++++ b/public/app.js
+@@ -20,8 +20,7 @@ function render() {
+ }
+ function toggle(task) {
+   task.done = !task.done;
+-  // BUG: unchecking a task counts as another completion.
+-  completedToggles++;
++  completedToggles += task.done ? 1 : -1;
+   render();
+ }
+ document.getElementById('add-form').addEventListener('submit', async event => {

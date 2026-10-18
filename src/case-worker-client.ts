@@ -3,8 +3,11 @@ import { createHash, randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { VERSION, type ManifestV3, type RunOptions, type RunEvent, type TeardownEvent } from './contracts.js';
+import { ReproError, VERSION, type ManifestV3, type ManifestV4, type RunOptions, type RunEvent, type TeardownEvent } from './contracts.js';
 import { caseRevisionDigest, evaluateCaseObservation } from './browser-case.js';
+import { APP_ISOLATION, evaluateAppObservation, validTarget } from './app-contract.js';
+import { APP_FAILURE_REASON, APP_REASON_PATTERNS, APP_RESET_MESSAGE, APP_SATISFIED_REASON, appActionMessage, isLoopbackUrl } from './app-execution.js';
+import { CASE_ISOLATION } from './case-execution-constants.js';
 import { digest } from './manifest.js';
 import { boundedFrame, CONTEXT_CLOSE_BASES, exactKeys, LAUNCH_JOIN_BASES, monotonicNs, WORKER_PROTOCOL, type CaseWorkerRequest, type ExecutionReceipt, type ParentFrame } from './case-worker-protocol.js';
 
@@ -14,7 +17,7 @@ const hash = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex')
 /** Bind all external source execution bytes; bundled helpers are inside the worker. */
 export function caseWorkerArtifactDigest(): string {
   if (!sourceMode) return hash(readFileSync(workerURL));
-  const files = ['case-worker.ts', 'case-worker-client.ts', 'case-execution.ts', 'case-worker-protocol.ts', 'case-process-fence.ts', 'browser-prerequisite.ts'];
+  const files = ['case-worker.ts', 'case-worker-client.ts', 'case-execution.ts', 'case-execution-constants.ts', 'case-worker-protocol.ts', 'case-process-fence.ts', 'browser-prerequisite.ts', 'app-execution.ts', 'app-contract.ts', 'redaction.ts', 'steps.ts'];
   return digest(Object.fromEntries(files.map(file => [file, hash(readFileSync(new URL(file, import.meta.url)))])));
 }
 export interface WorkerIdentity { id: string; harnessDigest: string; startedAt: string; startedNs: string }
@@ -86,14 +89,52 @@ const APPROVED_REASONS = new Set<string>([
 ]);
 const ISO_TIME = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/;
 const ASSERTION_MESSAGES = ['The frozen browser-case assertion observed the registered failure.', 'The executed frozen assertion is satisfied by this revision.'];
+/** What a receipt may contain for each scenario; both share every lifecycle and cleanup predicate. */
+interface ReceiptPolicy {
+  revision: string; appDigest: string; isolation: string; resetMessage: string; assertionMessages: [string, string];
+  actionMessage(action: { id: string; kind: string }): string;
+  approvedReason(reason: string): boolean;
+  /** Re-evaluate an observation outside the worker; DIFFERENT_FAILURE marks an observed but non-reproducing run. */
+  evaluate(observation: unknown): 'target-failure' | 'requirement-satisfied' | 'different-failure';
+}
+function policyFor(request: CaseWorkerRequest): ReceiptPolicy {
+  const input = request.input;
+  if (input.schemaVersion === 4) return {
+    revision: input.app.revision, appDigest: input.app.sourceDigest, isolation: APP_ISOLATION, resetMessage: APP_RESET_MESSAGE,
+    assertionMessages: [APP_FAILURE_REASON, APP_SATISFIED_REASON], actionMessage: appActionMessage,
+    approvedReason: reason => APPROVED_REASONS.has(reason) && !reason.startsWith('CASE_') || reason === APP_FAILURE_REASON || reason === APP_SATISFIED_REASON || APP_REASON_PATTERNS.some(pattern => pattern.test(reason)),
+    evaluate: observation => {
+      try { return evaluateAppObservation(input, observation); }
+      catch (cause) { if (cause instanceof ReproError && cause.code === 'DIFFERENT_FAILURE') return 'different-failure'; throw cause; }
+    },
+  };
+  const revision = request.revision ?? input.app.revision;
+  return {
+    revision, appDigest: caseRevisionDigest(input, revision), isolation: CASE_ISOLATION,
+    resetMessage: 'Starting a new owned browser profile and pinned local application.', assertionMessages: [ASSERTION_MESSAGES[0]!, ASSERTION_MESSAGES[1]!],
+    actionMessage: action => `Executed registered ${action.kind} action.`, approvedReason: reason => APPROVED_REASONS.has(reason),
+    evaluate: observation => evaluateCaseObservation(input, observation),
+  };
+}
+function validResolution(value: unknown, input: ManifestV4): boolean {
+  if (!boundedFrame(value) || !exactKeys(value, ['actions', 'checks', 'candidates'])) return false;
+  const { actions, checks, candidates } = value;
+  const target = (entry: unknown) => { if (entry === null) return true; try { validTarget(entry); return true; } catch { return false; } };
+  return Array.isArray(actions) && actions.length <= input.actions.length && actions.every((entry, index) => boundedFrame(entry) && exactKeys(entry, ['id', 'target', 'sensitive'])
+      && entry.id === input.actions[index]?.id && typeof entry.sensitive === 'boolean' && target(entry.target))
+    && Array.isArray(checks) && checks.length <= input.expectation.checks.length && checks.every(target)
+    && Array.isArray(candidates) && candidates.length <= 8 && candidates.every(entry => boundedFrame(entry) && exactKeys(entry, ['selector', 'text'])
+      && typeof entry.selector === 'string' && entry.selector.length <= 300 && typeof entry.text === 'string' && entry.text.length <= 120);
+}
 function finite(value: unknown): value is number { return typeof value === 'number' && Number.isFinite(value) && value >= 0; }
 function validEvent(value: unknown, request: CaseWorkerRequest, index: number): value is RunEvent {
   if (!boundedFrame(value) || !exactKeys(value, ['seq', 'at', 'type', 'message'], ['actionId'])
     || !Number.isSafeInteger(value.seq) || Number(value.seq) <= 0 || typeof value.at !== 'string' || !ISO_TIME.test(value.at)) return false;
-  if (index === 0) return value.type === 'reset' && value.actionId === undefined && value.message === 'Starting a new owned browser profile and pinned local application.';
+  const policy = policyFor(request);
+  if (index === 0) return value.type === 'reset' && value.actionId === undefined && value.message === policy.resetMessage;
   const action = request.input.actions[index - 1];
-  if (action) return value.type === 'action-executed' && value.actionId === action.id && value.message === `Executed registered ${action.kind} action.`;
-  return index === request.input.actions.length + 1 && value.type === 'assertion' && value.actionId === undefined && ASSERTION_MESSAGES.includes(String(value.message));
+  if (action) return value.type === 'action-executed' && value.actionId === action.id && value.message === policy.actionMessage(action);
+  return index === request.input.actions.length + 1 && value.type === 'assertion' && value.actionId === undefined && policy.assertionMessages.includes(String(value.message));
 }
 /**
  * The explanatory basis must agree exactly with the flags that decide cleanup: the worker sets cleanupTimedOut
@@ -113,44 +154,48 @@ function cleanupBasisConsistent(value: Record<string, unknown>): boolean {
   return value.cleanupTimedOut === explained;
 }
 function validReceipt(value: unknown, request: CaseWorkerRequest, acknowledged: RunEvent[]): value is ExecutionReceipt {
-  if (!boundedFrame(value) || !exactKeys(value, ['result', 'ownedDirectory', 'launchState', 'closeAcknowledged', 'workDrained', 'cleanupTimedOut', 'cleanupStartedNs', 'contextClose', 'launchJoin'])
+  const resolving = request.input.schemaVersion === 4 && request.app?.resolve === true;
+  if (!boundedFrame(value) || !exactKeys(value, ['result', 'ownedDirectory', 'launchState', 'closeAcknowledged', 'workDrained', 'cleanupTimedOut', 'cleanupStartedNs', 'contextClose', 'launchJoin'], resolving ? ['resolution'] : [])
     || !boundedFrame(value.result) || !cleanupBasisConsistent(value)) return false;
+  if (resolving && !validResolution(value.resolution, request.input as ManifestV4)) return false;
   const r = value.result;
+  const policy = policyFor(request);
   if (!exactKeys(r, ['id', 'outcome', 'reason', 'manifestDigest', 'assertionDigest', 'harnessDigest', 'appRevision', 'appDigest', 'adapterVersion', 'runnerVersion',
     'seed', 'startedAt', 'durationMs', 'assertionCount', 'observation', 'events', 'artifacts', 'environment'], ['category'])) return false;
-  const revision = request.revision ?? request.input.app.revision;
+  const revision = policy.revision;
   if (r.id !== request.id || r.manifestDigest !== digest(request.input) || r.assertionDigest !== request.input.assertionDigest
     || r.harnessDigest !== request.harnessDigest || r.startedAt !== request.startedAt || r.appRevision !== revision
-    || !['', caseRevisionDigest(request.input, revision)].includes(String(r.appDigest)) || r.adapterVersion !== VERSION || r.runnerVersion !== VERSION
+    || !['', policy.appDigest].includes(String(r.appDigest)) || r.adapterVersion !== VERSION || r.runnerVersion !== VERSION
     || r.seed !== request.input.environment.seed || !finite(r.durationMs) || ![0, 1].includes(Number(r.assertionCount)) || typeof r.assertionCount !== 'number'
     || typeof value.launchState !== 'string' || !['not-attempted', 'unacquired', 'acquired'].includes(value.launchState)
     || typeof value.ownedDirectory !== 'boolean' || typeof value.closeAcknowledged !== 'boolean'
     || typeof value.workDrained !== 'boolean' || typeof value.cleanupTimedOut !== 'boolean' || !monotonicNs(value.cleanupStartedNs)
     || value.closeAcknowledged && value.launchState !== 'acquired' || !value.ownedDirectory && value.launchState !== 'not-attempted'
     || !value.workDrained && !value.cleanupTimedOut
-    || typeof r.reason !== 'string' || !APPROVED_REASONS.has(r.reason)
+    || typeof r.reason !== 'string' || !policy.approvedReason(r.reason)
     || !['inconclusive', 'cancelled', 'target-failure', 'requirement-satisfied'].includes(String(r.outcome))
     || r.category !== undefined && !['input', 'unsupported', 'environment', 'harness', 'target-failure', 'cancelled', 'verification'].includes(String(r.category))
     || !Array.isArray(r.events) || r.events.length > request.input.actions.length + 2 || !r.events.every((event, index) => validEvent(event, request, index) && event.seq === index + 1)
     || digest(r.events) !== digest(acknowledged) || !Array.isArray(r.artifacts) || r.artifacts.length !== 0) return false;
   if (!boundedFrame(r.environment) || !exactKeys(r.environment, ['platform', 'node', 'browser', 'isolation'])
     || r.environment.platform !== `${process.platform}-${process.arch}` || r.environment.node !== process.version
-    || r.environment.isolation !== 'registered public browser library; fresh owned profile; Chromium sandbox enabled; loopback asset allowlist; not a hostile-code sandbox'
+    || r.environment.isolation !== policy.isolation
     || typeof r.environment.browser !== 'string' || !(r.environment.browser === 'not-launched'
       || /^(?:unknown|[0-9]{1,10}(?:\.[0-9]{1,10}){0,4}) \((?:pinned Chromium|explicit installed Chrome channel)\)$/.test(r.environment.browser))) return false;
   if (r.observation !== null) {
     if (r.assertionCount !== 1) return false;
     let evaluated: string;
-    try { evaluated = evaluateCaseObservation(request.input, r.observation); } catch { return false; }
+    try { evaluated = policy.evaluate(r.observation); } catch { return false; }
     if (['target-failure', 'requirement-satisfied'].includes(String(r.outcome)) && evaluated !== r.outcome) return false;
+    if (evaluated === 'different-failure' && !['inconclusive', 'cancelled'].includes(String(r.outcome))) return false;
   } else if (['target-failure', 'requirement-satisfied'].includes(String(r.outcome))) return false;
   if (r.outcome === 'target-failure' || r.outcome === 'requirement-satisfied') {
-    const reason = r.outcome === 'target-failure' ? ASSERTION_MESSAGES[0] : ASSERTION_MESSAGES[1];
+    const reason = r.outcome === 'target-failure' ? policy.assertionMessages[0] : policy.assertionMessages[1];
     // A declared value is insufficient without the matching acquired execution
     // and complete acknowledged action/assertion stream. Cleanup is checked
     // separately so an actual verdict followed by failed close stays reportable.
     if (value.ownedDirectory !== true || value.launchState !== 'acquired' || r.environment.browser === 'not-launched'
-      || r.appDigest !== caseRevisionDigest(request.input, revision) || r.assertionCount !== 1
+      || r.appDigest !== policy.appDigest || r.assertionCount !== 1
       || r.events.length !== request.input.actions.length + 2 || r.reason !== reason
       || r.events.at(-1)?.message !== reason) return false;
   }
@@ -172,13 +217,15 @@ function validTeardown(value: unknown, id: string): value is TeardownEvent {
 }
 
 /** A fixed trusted worker; callers cannot provide executable paths or receipt flags. */
-export function runCaseWorker(input: ManifestV3, options: RunOptions, identity: WorkerIdentity): Promise<WorkerCompletion> {
+export function runCaseWorker(input: ManifestV3 | ManifestV4, options: RunOptions, identity: WorkerIdentity): Promise<WorkerCompletion> {
   input = structuredClone(input);
   options = { ...options };
   identity = { ...identity };
   const nonce = randomUUID();
+  if (input.schemaVersion === 4 && (!options.app || !isLoopbackUrl(options.app.origin))) throw new ReproError('input', 'APP_ORIGIN', 'A local app run needs the loopback origin of its running app.');
   const request: CaseWorkerRequest = { input, artifactDir: resolve(options.artifactDir), ...identity,
-    diagnostics: options.onTeardown !== undefined, ...(options.revision ? { revision: options.revision } : {}) };
+    diagnostics: options.onTeardown !== undefined, ...(options.revision && input.schemaVersion === 3 ? { revision: options.revision } : {}),
+    ...(input.schemaVersion === 4 ? { app: structuredClone(options.app!) } : {}) };
   const args = sourceMode ? ['--import', import.meta.resolve('tsx'), fileURLToPath(workerURL)] : [fileURLToPath(workerURL)];
   return new Promise(resolveCompletion => {
     let child: ReturnType<typeof childProcess.spawn>;

@@ -7,6 +7,7 @@ const fence = installCreationFence();
 const { executeCaseBrowser } = await import('./case-execution.js');
 const { validateManifest } = await import('./manifest.js');
 const { isAbsolute } = await import('node:path');
+const { isLoopbackUrl } = await import('./app-execution.js');
 let nonce: string | undefined, started = false, terminal = false;
 const controller = new AbortController();
 const acknowledgments = new Map<number, (value: EventAcknowledgment) => void>();
@@ -26,12 +27,20 @@ function fail() {
 function validRequest(frame: Record<string, unknown>): frame is Record<string, unknown> & Extract<ParentFrame, { type: 'start' }> {
   const r = frame.request;
   if (!exactKeys(frame, ['version', 'type', 'nonce', 'request']) || !boundedFrame(r)
-    || !exactKeys(r, ['input', 'artifactDir', 'id', 'harnessDigest', 'startedAt', 'startedNs', 'diagnostics'], ['revision']) || typeof frame.nonce !== 'string' || !/^[0-9a-f-]{36}$/.test(frame.nonce)
+    || !exactKeys(r, ['input', 'artifactDir', 'id', 'harnessDigest', 'startedAt', 'startedNs', 'diagnostics'], ['revision', 'app']) || typeof frame.nonce !== 'string' || !/^[0-9a-f-]{36}$/.test(frame.nonce)
     || typeof r.id !== 'string' || !/^[0-9a-f-]{36}$/.test(r.id) || typeof r.artifactDir !== 'string' || !isAbsolute(r.artifactDir)
     || typeof r.harnessDigest !== 'string' || !/^[0-9a-f]{64}$/.test(r.harnessDigest) || typeof r.startedAt !== 'string'
     || !monotonicNs(r.startedNs) || typeof r.diagnostics !== 'boolean'
     || (r.revision !== undefined && r.revision !== 'buggy' && r.revision !== 'fixed')) return false;
-  try { return validateManifest(r.input).schemaVersion === 3; } catch { return false; }
+  let schema: number;
+  try { schema = validateManifest(r.input).schemaVersion; } catch { return false; }
+  if (schema === 3) return r.app === undefined;
+  // Schema 4 browses a parent-owned loopback origin; withheld inputs stay in this process's memory.
+  const app = r.app;
+  if (schema !== 4 || r.revision !== undefined || !boundedFrame(app) || !exactKeys(app, ['origin', 'secrets', 'resolve']) || typeof app.resolve !== 'boolean'
+    || typeof app.origin !== 'string' || !isLoopbackUrl(app.origin) || new URL(app.origin).origin !== app.origin
+    || !boundedFrame(app.secrets) || Object.entries(app.secrets).some(([name, value]) => !/^REPRO_(?:SECRET|INPUT)_\d{1,2}$/.test(name) || typeof value !== 'string' || value.length > 2000)) return false;
+  return true;
 }
 async function run(frame: Extract<ParentFrame, { type: 'start' }>) {
   let receipt: ExecutionReceipt;

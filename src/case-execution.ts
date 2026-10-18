@@ -6,8 +6,11 @@ import { join } from 'node:path';
 import type { BrowserContext, Page } from 'playwright';
 // Preserve the bootstrap fence ordering when esbuild bundles this module.
 const { chromium } = await import('playwright');
-import { VERSION, ReproError, type RunResult, type BrowserCaseObservation, type TeardownEvent } from './contracts.js';
+import { VERSION, ReproError, type RunResult, type BrowserCaseObservation, type TeardownEvent, type AppResolution } from './contracts.js';
 import { getRegisteredCase, caseSource, caseRevisionDigest, evaluateCaseObservation } from './browser-case.js';
+import { APP_ISOLATION, evaluateAppObservation } from './app-contract.js';
+import { CASE_ISOLATION } from './case-execution-constants.js';
+import { APP_FAILURE_REASON, APP_RESET_MESSAGE, APP_SATISFIED_REASON, isLoopbackUrl, observePage, prepareAppContext, runAppSteps, type AppDiagnostics } from './app-execution.js';
 import { digest, validateManifest } from './manifest.js';
 import { ownedDirectory } from './paths.js';
 import { assertExplicitBrowserCacheAvailable } from './browser-prerequisite.js';
@@ -42,13 +45,21 @@ async function settlesWithin(work: Promise<unknown>, timeoutMs: number, observe?
     return outcome;
   } finally { if (timer) clearTimeout(timer); }
 }
-/** Registered public source in a fresh sandboxed browser; never an arbitrary host-code executor. */
+/**
+ * One certified browser lifecycle for two scenarios: a registered public case
+ * served from pinned assets (schema 3), or a user's local app already running
+ * on a loopback origin owned by the parent (schema 4). Launch, close, drain and
+ * receipt rules are identical for both.
+ */
 export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: ExecutionBridge): Promise<ExecutionReceipt> {
   const { input, id } = request;
+  const app = input.schemaVersion === 4 ? request.app : undefined;
+  const diagnostics: AppDiagnostics = { pageErrors: [], console: [], failedRequests: [], blockedHosts: new Set(), dialogs: [], inflight: 0 };
+  const resolution: AppResolution = { actions: [], checks: [], candidates: [] };
   const options = { artifactDir: request.artifactDir, signal: bridge.signal, revision: request.revision, onTeardown: bridge.onTeardown };
   const elapsedBeforeExecution = Number(process.hrtime.bigint() - BigInt(request.startedNs)) / 1e6;
   const started = performance.now() - elapsedBeforeExecution;
-  const revision = options.revision ?? input.app.revision;
+  const revision = input.schemaVersion === 4 ? input.app.revision : options.revision ?? input.app.revision;
   const result: RunResult = {
     id, outcome: 'inconclusive', reason: 'The frozen assertion has not executed.',
     manifestDigest: digest(input), assertionDigest: input.assertionDigest, harnessDigest: request.harnessDigest,
@@ -56,7 +67,7 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
     seed: input.environment.seed, startedAt: request.startedAt, durationMs: 0, assertionCount: 0,
     observation: null, events: [], artifacts: [],
     environment: { platform: `${process.platform}-${process.arch}`, node: process.version, browser: 'not-launched',
-      isolation: 'registered public browser library; fresh owned profile; Chromium sandbox enabled; loopback asset allowlist; not a hostile-code sandbox' },
+      isolation: input.schemaVersion === 4 ? APP_ISOLATION : CASE_ISOLATION },
   };
   let context: BrowserContext | undefined;
   let launching: Promise<BrowserContext> | undefined;
@@ -151,10 +162,15 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
   const work = async () => {
     check();
     const manifest = validateManifest(input);
+    if (manifest.schemaVersion === 4) {
+      if (!app || !isLoopbackUrl(app.origin)) throw new ReproError('input', 'APP_ORIGIN', 'A local app run needs the loopback origin of its running app.');
+      return workApp(manifest);
+    }
     if (manifest.schemaVersion !== 3) throw new ReproError('unsupported', 'CASE_SCHEMA', 'Use a schema 3 registered browser case.');
     const definition = getRegisteredCase(manifest.caseId);
-    assets = caseSource(manifest, revision);
-    result.appDigest = caseRevisionDigest(manifest, revision);
+    const caseRevision = revision as 'buggy' | 'fixed';
+    assets = caseSource(manifest, caseRevision);
+    result.appDigest = caseRevisionDigest(manifest, caseRevision);
     const channel = process.env['REPRO_BROWSER_CHANNEL'];
     if (channel !== undefined && channel !== 'chrome') throw new ReproError('unsupported', 'BROWSER_CHANNEL', 'Omit REPRO_BROWSER_CHANNEL to use pinned Chromium, or explicitly select chrome.');
     await assertExplicitBrowserCacheAvailable(channel);
@@ -172,34 +188,7 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
     check();
     await emit('reset', 'Starting a new owned browser profile and pinned local application.');
     check();
-    // Keep acquisition alive through the existing cleanup window so a short
-    // operation deadline can still acquire its owner and acknowledge shutdown.
-    // check() prevents any browser work after the operation deadline.
-    launchAttempted = true;
-    launching = chromium.launchPersistentContext(profile, { headless: true, chromiumSandbox: true, timeout: Math.min(5000, remaining() + 2000),
-      // Chromium helpers (including fontconfig) also write outside userDataDir.
-      // Keep their home/cache inside the same owned cleanup boundary.
-      env: { ...process.env, HOME: profile, XDG_CACHE_HOME: join(profile, '.cache') },
-      viewport: manifest.environment.viewport, locale: 'en-US', timezoneId: 'UTC', serviceWorkers: 'block', acceptDownloads: false,
-      colorScheme: 'light', ...(channel === 'chrome' ? { channel: 'chrome' } : {}) });
-    const acquired = await launching;
-    if (launchJoinExpired) {
-      // A late owner still needs a close request, but cannot authorize deletion
-      // or revise the already returned cleanup failure.
-      void closeOwned(acquired).catch(() => undefined);
-      check();
-    }
-    context = acquired;
-    context.once('close', () => {
-      if (!closeRequested) contextClosedBeforeRequest = true;
-      trace('context-close', { event: 'context-close-event' });
-    });
-    context.browser()?.once('disconnected', () => {
-      if (!closeRequested) browserDisconnectedBeforeRequest = true;
-      trace('context-close', { event: 'browser-disconnected' });
-    });
-    check();
-    result.environment.browser = `${context.browser()?.version() ?? 'unknown'} (${channel === 'chrome' ? 'explicit installed Chrome channel' : 'pinned Chromium'})`;
+    context = await launchOwned(manifest.environment.viewport, channel);
     await context.route('**/*', async route => {
       if (!allowed(route.request().url(), route.request().method())) {
         fault = new ReproError('unsupported', 'NETWORK_BOUNDARY', 'The target requested an undeclared URL. Add an explicit supported dependency before retrying.');
@@ -267,6 +256,73 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
     result.reason = outcome === 'target-failure' ? 'The frozen browser-case assertion observed the registered failure.' : 'The executed frozen assertion is satisfied by this revision.';
     await emit('assertion', result.reason);
   };
+  // Shared by both scenarios. Keep acquisition alive through the existing
+  // cleanup window so a short operation deadline can still acquire its owner
+  // and acknowledge shutdown; check() prevents browser work after the deadline.
+  const launchOwned = async (viewport: { width: number; height: number }, channel: string | undefined): Promise<BrowserContext> => {
+    launchAttempted = true;
+    launching = chromium.launchPersistentContext(profile!, { headless: true, chromiumSandbox: true, timeout: Math.min(5000, remaining() + 2000),
+      // Chromium helpers (including fontconfig) also write outside userDataDir.
+      // Keep their home/cache inside the same owned cleanup boundary.
+      env: { ...process.env, HOME: profile!, XDG_CACHE_HOME: join(profile!, '.cache') },
+      viewport, locale: 'en-US', timezoneId: 'UTC', serviceWorkers: 'block', acceptDownloads: false,
+      colorScheme: 'light', ...(channel === 'chrome' ? { channel: 'chrome' } : {}) });
+    const acquired = await launching;
+    if (launchJoinExpired) {
+      // A late owner still needs a close request, but cannot authorize deletion
+      // or revise the already returned cleanup failure.
+      void closeOwned(acquired).catch(() => undefined);
+      check();
+    }
+    context = acquired;
+    acquired.once('close', () => {
+      if (!closeRequested) contextClosedBeforeRequest = true;
+      trace('context-close', { event: 'context-close-event' });
+    });
+    acquired.browser()?.once('disconnected', () => {
+      if (!closeRequested) browserDisconnectedBeforeRequest = true;
+      trace('context-close', { event: 'browser-disconnected' });
+    });
+    check();
+    result.environment.browser = `${acquired.browser()?.version() ?? 'unknown'} (${channel === 'chrome' ? 'explicit installed Chrome channel' : 'pinned Chromium'})`;
+    return acquired;
+  };
+  // Schema 4: the parent started the app; this worker only browses its loopback origin.
+  const workApp = async (manifest: import('./contracts.js').ManifestV4) => {
+    result.appDigest = manifest.app.sourceDigest;
+    origin = new URL(app!.origin).origin;
+    const channel = process.env['REPRO_BROWSER_CHANNEL'];
+    if (channel !== undefined && channel !== 'chrome') throw new ReproError('unsupported', 'BROWSER_CHANNEL', 'Omit REPRO_BROWSER_CHANNEL to use pinned Chromium, or explicitly select chrome.');
+    await assertExplicitBrowserCacheAvailable(channel);
+    check();
+    directory = ownedDirectory(join(options.artifactDir, id), { exclusive: true });
+    bridge.onOwned();
+    profile = join(directory, '.profile');
+    await mkdir(profile, { mode: 0o700 });
+    check();
+    await emit('reset', APP_RESET_MESSAGE);
+    check();
+    context = await launchOwned(manifest.environment.viewport, channel);
+    await prepareAppContext(context, diagnostics, manifest.environment.seed);
+    check();
+    page = context.pages()[0] ?? await context.newPage(); check();
+    observePage(page, origin, diagnostics);
+    page.on('crash', () => { fault = new ReproError('environment', 'BROWSER_CRASH', 'Chromium crashed. Check memory/process limits and retry a fresh run.'); });
+    if (manifest.environment.clock) await page.clock.setFixedTime(new Date(manifest.environment.clock));
+    const observation = await runAppSteps({ page, manifest, origin, secrets: app!.secrets, resolve: app!.resolve, diagnostics, resolution,
+      clock: { remaining, check }, emit: (type, message, actionId) => emit(type, message, actionId) });
+    check();
+    if (manifest.expectationBasis !== 'reporter-approved') throw new ReproError('verification', 'PROVISIONAL_EXPECTATION', 'Establish the independent expectation before reporting an assertion verdict.');
+    result.assertionCount = 1;
+    result.observation = observation;
+    // A different failure throws DIFFERENT_FAILURE: inconclusive, with its observation retained as evidence.
+    const outcome = evaluateAppObservation(manifest, observation);
+    check();
+    result.outcome = outcome;
+    if (outcome === 'target-failure') result.category = 'target-failure';
+    result.reason = outcome === 'target-failure' ? APP_FAILURE_REASON : APP_SATISFIED_REASON;
+    await emit('assertion', result.reason);
+  };
   try {
     executing = work();
     if (teardownObserver) void executing.then(
@@ -329,6 +385,7 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
     result.durationMs = performance.now() - started;
   }
   return {
+    ...(app?.resolve ? { resolution } : {}),
     result, ownedDirectory: directory !== undefined,
     launchState: context ? 'acquired' : launchAttempted ? 'unacquired' : 'not-attempted',
     closeAcknowledged, workDrained, cleanupTimedOut: cleanupFailed, cleanupStartedNs, contextClose, launchJoin,

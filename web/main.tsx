@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { createRoot } from 'react-dom/client';
-import type { AuthoredExperimentDeclaration, BrowserCaseExpectation, Manifest, ReductionResult, RunEvent, RunResult, SearchOrder, SearchQuery, Trial } from '../src/contracts.js';
+import type { AuthoredExperimentDeclaration, BrowserCaseExpectation, WorkbenchManifest as Manifest, ReductionResult, RunEvent, RunResult, SearchOrder, SearchQuery, Trial } from '../src/contracts.js';
 import type { Job, Operation, Session } from '../src/ledger.js';
 import type { JobInputEvidence, TrialEvidence } from '../src/evidence-inspector.js';
 import './style.css';
@@ -171,7 +171,7 @@ function Capture({ busy, ready, cases, onCapture }: { busy: boolean; ready: bool
 
 function ObservationFields({ observation }: { observation: RunResult['observation'] }) {
   if (!observation) return <KeyValue name="Observed values" value="Not observed" />;
-  if ('kind' in observation) return <KeyValue name="Observed values" value={<ol>{observation.values.map((value, index) => <li key={index}><DeclaredValue value={value} /></li>)}</ol>} />;
+  if ('kind' in observation) return <KeyValue name="Observed values" value={<ol>{observation.values.map((value, index) => <li key={index}><DeclaredValue value={value ?? '(element not found)'} /></li>)}</ol>} />;
   return <><KeyValue name="Observed query" value={<code>{observation.query}</code>} /><KeyValue name="Observed results" value={observation.results.join(', ')} /></>;
 }
 function RunEvidence({ run, heading }: { run: RunResult; heading: string }) {

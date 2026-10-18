@@ -3,15 +3,20 @@ import { mkdirSync, readFileSync, writeFileSync, unlinkSync } from 'node:fs';
 import { join } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { isDeepStrictEqual } from 'node:util';
-import { ReproError, type Manifest, type RunEvent } from './contracts.js';
+import { ReproError, type Manifest, type RunEvent, type WorkbenchManifest } from './contracts.js';
 import { validateManifest } from './manifest.js';
 import { ownedDirectory, regularOwnedFile } from './paths.js';
 
 export type SessionState = 'ready' | 'running' | 'reducing' | 'exporting' | 'complete' | 'cancelled' | 'blocked';
 export type Operation = 'record' | 'replay' | 'reduce' | 'verify' | 'export';
-export interface Session { id: string; createdAt: string; state: SessionState; manifest: Manifest; consent: true }
+export interface Session { id: string; createdAt: string; state: SessionState; manifest: WorkbenchManifest; consent: true }
 export interface Job { id: string; sessionId: string; operation: Operation; status: 'running' | 'complete' | 'cancelled' | 'failed' | 'interrupted'; requestKey: string; startedAt: string; result: unknown }
 
+function workbenchManifest(value: unknown): WorkbenchManifest {
+  const manifest = validateManifest(value);
+  if (manifest.schemaVersion === 4) throw new ReproError('unsupported', 'SESSION_SCHEMA', 'Local-app reports are generated as REPRO.md report jobs, not capture sessions.');
+  return manifest;
+}
 export function validId(value: string): string {
   if (!/^[a-zA-Z0-9_-]{1,100}$/.test(value)) throw new ReproError('input', 'INVALID_ID', 'Invalid identifier');
   return value;
@@ -63,13 +68,13 @@ export class Ledger {
   }
   createSession(manifest: Manifest, consent: boolean): Session {
     if (!consent) throw new ReproError('input', 'CONSENT_REQUIRED', 'Capture consent is required for the registered synthetic origin.');
-    const result: Session = { id: randomUUID(), createdAt: new Date().toISOString(), state: 'ready', manifest: validateManifest(manifest), consent: true };
+    const result: Session = { id: randomUUID(), createdAt: new Date().toISOString(), state: 'ready', manifest: workbenchManifest(manifest), consent: true };
     this.db.prepare('INSERT INTO sessions VALUES(?,?,?,?,?)').run(result.id, result.createdAt, result.state, JSON.stringify(result.manifest), 1);
     return result;
   }
   sessions(): Session[] { return this.db.prepare('SELECT * FROM sessions ORDER BY createdAt DESC').all().map(row => this.sessionRow(row)); }
   private sessionRow(row: Record<string, unknown>): Session {
-    return { id: String(row.id), createdAt: String(row.createdAt), state: row.state as SessionState, manifest: validateManifest(JSON.parse(String(row.manifest))), consent: true };
+    return { id: String(row.id), createdAt: String(row.createdAt), state: row.state as SessionState, manifest: workbenchManifest(JSON.parse(String(row.manifest))), consent: true };
   }
   getSession(id: string): Session {
     const row = this.db.prepare('SELECT * FROM sessions WHERE id=?').get(validId(id));
@@ -77,9 +82,9 @@ export class Ledger {
     return this.sessionRow(row);
   }
   updateManifest(id: string, manifest: Manifest): void {
-    const updated = validateManifest(manifest);
+    const updated = workbenchManifest(manifest);
     const current = this.getSession(id).manifest;
-    const frozen = (value: Manifest) => ({
+    const frozen = (value: WorkbenchManifest) => ({
       schemaVersion: value.schemaVersion, expectation: value.expectation,
       assertionDigest: value.assertionDigest, expectationBasis: value.expectationBasis,
       humanApproval: value.humanApproval,

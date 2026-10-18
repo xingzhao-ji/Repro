@@ -1,9 +1,11 @@
-import type { ManifestV3, RunEvent, RunResult, TeardownEvent } from './contracts.js';
+import type { AppResolution, AppRunTarget, ManifestV3, ManifestV4, RunEvent, RunResult, TeardownEvent } from './contracts.js';
 
 export const WORKER_PROTOCOL = 1;
 export const WORKER_FRAME_LIMIT = 131_072;
 export interface CaseWorkerRequest {
-  input: ManifestV3; artifactDir: string; revision?: 'buggy' | 'fixed';
+  input: ManifestV3 | ManifestV4; artifactDir: string; revision?: 'buggy' | 'fixed';
+  /** Schema 4 only: the parent-owned app origin, withheld input values and capture-resolution mode. */
+  app?: AppRunTarget;
   id: string; harnessDigest: string; startedAt: string; startedNs: string;
   diagnostics: boolean;
 }
@@ -22,6 +24,8 @@ export interface ExecutionReceipt {
   contextClose: typeof CONTEXT_CLOSE_BASES[number];
   /** Startup acquisition still pending when cleanup began; expired means it was not joined in time. */
   launchJoin: typeof LAUNCH_JOIN_BASES[number];
+  /** Schema 4 capture only: how reporter references resolved on the live page. */
+  resolution?: AppResolution;
 }
 export type EventAcknowledgment = 'continue' | 'cancelled' | 'observer-failed';
 export type ParentFrame =

@@ -1,0 +1,8 @@
+{
+  "name": "task-tally",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Repro test fixture: a small task list with a server API and a remaining-count bug.",
+  "scripts": { "start": "node server.mjs" }
+}

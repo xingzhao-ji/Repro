@@ -81,7 +81,7 @@ export async function installNetworkBoundary(context: BrowserContext, origin: st
 }
 
 export const runBrowser: RunFunction = async (input, options) => {
-  if (input.schemaVersion === 3) throw new ReproError('unsupported', 'CASE_ADAPTER_REQUIRED', 'Use runExperiment for registered public repository cases.');
+  if (input.schemaVersion === 3 || input.schemaVersion === 4) throw new ReproError('unsupported', 'CASE_ADAPTER_REQUIRED', 'Use runExperiment for registered public repository cases.');
   let manifest = input;
   const id = randomUUID();
   const started = Date.now();
@@ -151,7 +151,7 @@ export const runBrowser: RunFunction = async (input, options) => {
     directory = ownedDirectory(join(ownedDirectory(options.artifactDir), id));
     artifactWritable = true;
     const validated = validateManifest(manifest);
-    if (validated.schemaVersion === 3) throw new ReproError('unsupported', 'CASE_ADAPTER_REQUIRED', 'Use runExperiment for registered public repository cases.');
+    if (validated.schemaVersion === 3 || validated.schemaVersion === 4) throw new ReproError('unsupported', 'CASE_ADAPTER_REQUIRED', 'Use runExperiment for registered public repository cases.');
     manifest = validated;
     validateBoundary(manifest);
     const contract = searchContract(manifest);

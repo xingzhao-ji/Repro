@@ -2,8 +2,10 @@ import { randomUUID, createHash } from 'node:crypto';
 import { lstatSync, readFileSync } from 'node:fs';
 import { rm, writeFile } from 'node:fs/promises';
 import { join, resolve } from 'node:path';
-import { VERSION, ReproError, type ManifestV3, type RunOptions, type RunResult, type TeardownEvent } from './contracts.js';
+import { VERSION, ReproError, type ManifestV3, type ManifestV4, type RunOptions, type RunResult, type TeardownEvent } from './contracts.js';
 import { getRegisteredCase, BROWSER_CASE_ARTIFACT_DIGEST } from './browser-case.js';
+import { APP_CONTRACT_ARTIFACT_DIGEST, APP_ISOLATION } from './app-contract.js';
+import { CASE_ISOLATION } from './case-execution-constants.js';
 import { digest, validateManifest } from './manifest.js';
 import { caseWorkerArtifactDigest, runCaseWorker, type WorkerCompletion } from './case-worker-client.js';
 
@@ -12,6 +14,10 @@ export function caseHarnessDigest(manifest: ManifestV3): string {
   const definition = getRegisteredCase(manifest.caseId);
   return digest({ executable: EXECUTABLE_DIGEST, oracleExecutable: BROWSER_CASE_ARTIFACT_DIGEST,
     workerExecutable: caseWorkerArtifactDigest(), contract: definition.contractDigest, wrapper: definition.wrapperDigest, version: VERSION });
+}
+/** Local-app runs share the worker; their oracle is the schema-4 contract module, not a registered case. */
+export function appHarnessDigest(): string {
+  return digest({ executable: EXECUTABLE_DIGEST, oracleExecutable: APP_CONTRACT_ARTIFACT_DIGEST, workerExecutable: caseWorkerArtifactDigest(), adapter: 'local-web-app-v1', version: VERSION });
 }
 
 /** Which cleanup predicate failed, in a fixed vocabulary that cannot carry target text. */
@@ -26,7 +32,7 @@ function cleanupBasis(completion: WorkerCompletion): string {
 }
 
 /** The parent alone authorizes profile deletion after a trusted worker join. */
-export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Promise<RunResult> {
+export async function runCaseBrowser(input: ManifestV3 | ManifestV4, options: RunOptions): Promise<RunResult> {
   // Bind identities and callbacks before asynchronous bootstrap can expose a
   // caller mutation. The signal object itself remains live for cancellation.
   input = structuredClone(input);
@@ -36,11 +42,11 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
   const id = randomUUID();
   let result: RunResult = {
     id, outcome: 'inconclusive', reason: 'The frozen assertion has not executed.',
-    manifestDigest: digest(input), assertionDigest: input.assertionDigest, harnessDigest: caseHarnessDigest(input),
-    appRevision: options.revision ?? input.app.revision, appDigest: '', adapterVersion: VERSION, runnerVersion: VERSION,
+    manifestDigest: digest(input), assertionDigest: input.assertionDigest, harnessDigest: input.schemaVersion === 4 ? appHarnessDigest() : caseHarnessDigest(input),
+    appRevision: input.schemaVersion === 4 ? input.app.revision : options.revision ?? input.app.revision, appDigest: '', adapterVersion: VERSION, runnerVersion: VERSION,
     seed: input.environment.seed, startedAt, durationMs: 0, assertionCount: 0, observation: null, events: [], artifacts: [],
     environment: { platform: `${process.platform}-${process.arch}`, node: process.version, browser: 'not-launched',
-      isolation: 'registered public browser library; fresh owned profile; Chromium sandbox enabled; loopback asset allowlist; not a hostile-code sandbox' },
+      isolation: input.schemaVersion === 4 ? APP_ISOLATION : CASE_ISOLATION },
   };
   let directory: string | undefined;
   let observer = options.onTeardown;
@@ -68,6 +74,7 @@ export async function runCaseBrowser(input: ManifestV3, options: RunOptions): Pr
       { id, harnessDigest: result.harnessDigest, startedAt, startedNs: startedNs.toString() });
     const receipt = completion.receipt;
     if (receipt) result = receipt.result;
+    if (receipt?.resolution) try { options.onResolution?.(structuredClone(receipt.resolution)); } catch { /* the caller's observer cannot change a verdict */ }
     if (completion.ownedDirectory) directory = join(artifactDir, id);
     // A no-process receipt is usable only after creation was fenced and that
     // exact worker naturally completed. Any process attempt needs the acquired

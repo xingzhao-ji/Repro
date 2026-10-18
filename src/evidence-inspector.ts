@@ -2,7 +2,7 @@ import { constants } from 'node:fs';
 import { lstat, open } from 'node:fs/promises';
 import { dirname, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
-import { ReproError, type Manifest, type Outcome, type RunResult, type Trial } from './contracts.js';
+import { ReproError, type Manifest, type Outcome, type RunResult, type Trial, type WorkbenchManifest } from './contracts.js';
 import { type Job, type Ledger, validId } from './ledger.js';
 import { digest, validateManifest } from './manifest.js';
 import { searchContract } from './search-contract.js';
@@ -12,7 +12,7 @@ export type PublicRun = Omit<RunResult, 'events' | 'artifacts'>;
 export interface JobInputEvidence {
   jobId: string; sessionId: string; availability: 'available' | 'unavailable';
   outcome: 'verified-input' | 'inconclusive'; reason: string; code?: string;
-  manifest: Manifest | null; manifestDigest: string | null;
+  manifest: WorkbenchManifest | null; manifestDigest: string | null;
 }
 export interface InspectedRun {
   runId: string; availability: 'available' | 'unavailable'; outcome: Outcome;
@@ -21,7 +21,7 @@ export interface InspectedRun {
 export interface TrialEvidence {
   jobId: string; sessionId: string; trialIndex: number; availability: 'available' | 'unavailable';
   outcome: Outcome; reason: string; code?: string; trial: Trial | null;
-  candidate: Manifest | null; runs: InspectedRun[];
+  candidate: WorkbenchManifest | null; runs: InspectedRun[];
 }
 const hash = /^[a-f0-9]{64}$/;
 const outcomes: Outcome[] = ['target-failure', 'requirement-satisfied', 'inconclusive', 'cancelled'];
@@ -93,6 +93,7 @@ export async function inspectJobInput(ledger: Ledger, jobId: string): Promise<Jo
   const identity = { jobId: job.id, sessionId: job.sessionId };
   try {
     const manifest = validateManifest(await readOwnedJson(ledger.root, ['artifacts', validId(job.id), 'manifest.json'], 65_536));
+    if (manifest.schemaVersion === 4) throw new ReproError('unsupported', 'SESSION_SCHEMA', 'Local-app reports are inspected in their REPRO.md report.');
     const manifestDigest = digest(manifest);
     const result = job.result === null ? null : record(job.result);
     const recordedDigests: unknown[] = [];
@@ -140,7 +141,8 @@ function publicRun(value: unknown, id: string, candidate: Manifest, expectedHarn
     || environment['isolation'] !== (candidate.schemaVersion === 3 ? 'registered public browser library; fresh owned profile; Chromium sandbox enabled; loopback asset allowlist; not a hostile-code sandbox' : 'registered trusted synthetic fixture; fresh Chromium sandbox/context; loopback HTTP allowlist; not a hostile-code sandbox')) problem('RUN_ENVIRONMENT', 'Run environment is outside the registered public evidence contract.');
   let observation: RunResult['observation'] = null;
   if (run['observation'] !== null) {
-    if (candidate.schemaVersion === 3) {
+    if (candidate.schemaVersion === 4) problem('RUN_SCHEMA', 'Local-app runs are reviewed in their REPRO.md report, not this inspector.');
+    else if (candidate.schemaVersion === 3) {
       try { evaluateObservation(candidate, run['observation']); }
       catch { problem('RUN_OBSERVATION', 'Run observation is outside the registered browser-case evidence contract.'); }
       const observed = record(run['observation']);
@@ -193,7 +195,7 @@ export async function inspectTrial(ledger: Ledger, jobId: string, trialIndex: nu
   const job = ledger.getJob(jobId);
   if (job.operation !== 'reduce' || !Number.isSafeInteger(trialIndex) || trialIndex < 0 || trialIndex > 80) throw new ReproError('input', 'NOT_FOUND', 'Reduction trial not found.');
   const identity = { jobId: job.id, sessionId: job.sessionId, trialIndex };
-  let trial: Trial | null = null; let candidate: Manifest | null = null;
+  let trial: Trial | null = null; let candidate: WorkbenchManifest | null = null;
   const runs: InspectedRun[] = [];
   try {
     const input = await inspectJobInput(ledger, job.id);
@@ -202,7 +204,7 @@ export async function inspectTrial(ledger: Ledger, jobId: string, trialIndex: nu
     if (trialIndex > executionLimit) throw new ReproError('input', 'NOT_FOUND', 'Reduction trial not found.');
     const records = trialRecords(ledger, job, input.manifest);
     if (trialIndex >= records.length) throw new ReproError('input', 'NOT_FOUND', 'Reduction trial not found.');
-    let best = input.manifest;
+    let best: WorkbenchManifest = input.manifest;
     let executions = 0;
     const seenRuns = new Set<string>();
     for (let index = 0; index <= trialIndex; index++) {
@@ -211,7 +213,7 @@ export async function inspectTrial(ledger: Ledger, jobId: string, trialIndex: nu
       if (removed.size !== current.removed.length || index === 0 && removed.size !== 0
         || current.removed.some(id => !best.actions.some(action => action.id === id))
         || JSON.stringify(best.actions.filter(action => removed.has(action.id)).map(action => action.id)) !== JSON.stringify(current.removed)) problem('TRIAL_REMOVAL_MISMATCH', 'Recorded removals do not match the preceding accepted candidate.');
-      const reconstructed = validateManifest({ ...best, actions: best.actions.filter(action => !removed.has(action.id)) });
+      const reconstructed = validateManifest({ ...best, actions: (best.actions as { id: string }[]).filter(action => !removed.has(action.id)) }) as WorkbenchManifest;
       if (digest(reconstructed) !== current.inputDigest || current.seed !== reconstructed.environment.seed) problem('TRIAL_INPUT_MISMATCH', 'The exact trial candidate cannot be reconstructed from the frozen input and recorded removals.');
       if (current.runIds.some(id => seenRuns.has(id)) || new Set(current.runIds).size !== current.runIds.length) problem('TRIAL_RUN_MISMATCH', 'A run identifier is reused across reduction executions.');
       current.runIds.forEach(id => seenRuns.add(id));
