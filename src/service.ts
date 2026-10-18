@@ -3,7 +3,8 @@ import { join } from 'node:path';
 import { runExperiment, experimentHarnessDigest, revisionDigest, evaluateObservation } from './runner.js';
 import { exportCapsule } from './capsule.js';
 import { ReproError, type Manifest, type RunResult } from './contracts.js';
-import { Ledger, type Job, type Operation } from './ledger.js';
+import { Ledger, type Job, type Operation, type ReportJob } from './ledger.js';
+import { generateReport, type ReportRequest } from './report-flow.js';
 import { digest } from './manifest.js';
 import { reduce } from './reducer.js';
 import { ownedDirectory } from './paths.js';
@@ -71,6 +72,38 @@ export class Coordinator {
       this.ledger.finish(job.id, signal.aborted || record.outcome === 'cancelled' || record.status === 'cancelled' ? 'cancelled' : record.outcome === 'inconclusive' || record.status === 'inconclusive' ? 'failed' : 'complete', result);
     } catch (error) {
       this.ledger.finish(job.id, signal.aborted ? 'cancelled' : 'failed', signal.aborted ? { outcome: 'cancelled', reason: 'Cancelled by owner.' } : publicError(error));
+    }
+  }
+}
+
+/** Runs one REPRO.md report at a time for the local workbench; cancellation stops only that report's owned processes. */
+export class ReportCoordinator {
+  private active = new Map<string, { controller: AbortController; promise: Promise<void> }>();
+  /** defaults: options applied to every report from this workbench (tests point npm at Repro's own cache). */
+  constructor(readonly ledger: Ledger, private readonly defaults: NonNullable<ReportRequest['options']> = {}) {}
+  start(request: ReportRequest, requestKey: string): ReportJob {
+    const report = this.ledger.createReport({ app: request.app, title: request.title ?? null, wentWrong: request.wentWrong, shouldHappen: request.shouldHappen }, requestKey);
+    if (report.status !== 'running' || this.active.has(report.id)) return report;
+    const controller = new AbortController();
+    const promise = this.execute(report, request, controller.signal).finally(() => this.active.delete(report.id));
+    this.active.set(report.id, { controller, promise });
+    return report;
+  }
+  cancel(id: string): ReportJob {
+    const running = this.active.get(id);
+    if (running && !running.controller.signal.aborted) { this.ledger.reportEvent(id, 'cancel-requested', 'Cancelling: stopping this report’s app and browser.'); running.controller.abort(); }
+    return this.ledger.getReport(id);
+  }
+  async wait(id: string): Promise<ReportJob> { await this.active.get(id)?.promise; return this.ledger.getReport(id); }
+  async close(): Promise<void> { for (const active of this.active.values()) active.controller.abort(); await Promise.all([...this.active.values()].map(active => active.promise)); }
+  private async execute(report: ReportJob, request: ReportRequest, signal: AbortSignal): Promise<void> {
+    try {
+      const outcome = await generateReport({ ...request, options: { ...this.defaults, ...request.options } }, { output: join(this.ledger.root, 'reports', report.id), signal,
+        onProgress: progress => this.ledger.reportEvent(report.id, progress.stage, progress.message) });
+      const { markdown: _markdown, ...stored } = outcome;
+      this.ledger.finishReport(report.id, signal.aborted ? 'cancelled' : outcome.status, stored);
+    } catch (error) {
+      this.ledger.finishReport(report.id, signal.aborted ? 'cancelled' : 'failed', signal.aborted ? { status: 'cancelled', summary: 'Cancelled. No REPRO.md was written.' } : { status: 'failed', summary: publicError(error).reason, error: publicError(error) });
     }
   }
 }

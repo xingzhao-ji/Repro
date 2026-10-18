@@ -14,9 +14,17 @@ import { reduce } from './reducer.js';
 import { verify, publicError } from './service.js';
 import { ownedDirectory, regularOwnedFile, writeOwnedFile } from './paths.js';
 
-const help = `Repro ${VERSION} — local failure compiler
+const help = `Repro ${VERSION} — turn a bug in your local web app into one REPRO.md
 
-Commands:
+Your app:
+  report --app DIR --went-wrong TEXT --should-happen TEXT [--url URL] [--start CMD]
+         [--title TEXT] [--yes] [--budget RUNS] [--no-fresh-check] [--report-blocked]
+                                     Reproduce the bug, shorten the steps and write REPRO.md
+  report --issue FILE [--yes]        The same, from a JSON file {app, url, start, title, wentWrong, shouldHappen}
+  app --app DIR [--url URL] [--start CMD]
+                                     Show how Repro would run the app (read-only)
+
+Built-in examples and registered cases:
   doctor                             Inspect browser and Linux container prerequisites
   cases [--case ID]                  Inspect registered public cases / explicit declaration
   record --consent                    Capture the registered synthetic browser scenario
@@ -30,7 +38,9 @@ Commands:
   serve                              Open the local workbench (loopback only)
 
 Options: --output DIRECTORY (under .repro-runs), --revision buggy|fixed,
-         --budget COUNT (reduce), --port PORT (serve), --help
+         --budget COUNT (reduce, report), --port PORT (serve), --help
+In --went-wrong, write one step per line (Click "Add", Type "milk" into "Item", Press Enter);
+in --should-happen, name the element and value ("Total" should show "$8.10"). See docs/QUICKSTART.md.
 Each execution needs a new output directory; serve reopens its workbench state.
 Browser install: PLAYWRIGHT_BROWSERS_PATH=.repro-cache/browsers npx playwright install chromium --only-shell
 Use the same PLAYWRIGHT_BROWSERS_PATH when invoking Repro.
@@ -58,7 +68,9 @@ export async function doctor() {
 let ownerCancelled = false;
 async function main(): Promise<void> {
   const parsed = parseArgs({ allowPositionals: true, strict: true, options: {
-    help: { type: 'boolean' }, case: { type: 'string' }, consent: { type: 'boolean' }, manifest: { type: 'string' }, capsule: { type: 'string' }, experiment: { type: 'string' }, output: { type: 'string' }, revision: { type: 'string' }, budget: { type: 'string' }, port: { type: 'string' }
+    help: { type: 'boolean' }, case: { type: 'string' }, consent: { type: 'boolean' }, manifest: { type: 'string' }, capsule: { type: 'string' }, experiment: { type: 'string' }, output: { type: 'string' }, revision: { type: 'string' }, budget: { type: 'string' }, port: { type: 'string' },
+    app: { type: 'string' }, url: { type: 'string' }, start: { type: 'string' }, title: { type: 'string' }, 'went-wrong': { type: 'string' }, 'should-happen': { type: 'string' },
+    issue: { type: 'string' }, yes: { type: 'boolean' }, 'no-fresh-check': { type: 'boolean' }, 'report-blocked': { type: 'boolean' },
   } });
   const command = parsed.positionals[0]; const options = parsed.values;
   if (options.help || !command) { console.log(help); return; }
@@ -71,6 +83,18 @@ async function main(): Promise<void> {
     console.log(JSON.stringify(options.case ? declarations[0] : declarations, null, 2)); return;
   }
   if (command === 'doctor') { console.log(JSON.stringify(await doctor(), null, 2)); return; }
+  const reportOptions = ['app', 'url', 'start', 'title', 'went-wrong', 'should-happen', 'issue', 'yes', 'no-fresh-check', 'report-blocked'] as const;
+  if (command !== 'report' && command !== 'app' && reportOptions.some(name => options[name] !== undefined)) throw new ReproError('input', 'ARGUMENTS', 'Use --app, --url, --went-wrong and the other report options with report or app.');
+  if (command === 'app') {
+    const { inspectApp } = await import('./app-inspect.js');
+    const profile = await inspectApp({ repository: options.app, url: options.url, start: options.start });
+    console.log(JSON.stringify({ name: profile.name, run: profile.plan ? { kind: profile.plan.kind, command: profile.plan.command, url: profile.plan.url, source: profile.plan.source } : null,
+      install: profile.install, dependenciesInstalled: profile.dependenciesInstalled,
+      source: profile.git ? { commit: profile.git.commit, branch: profile.git.branch, remotes: profile.git.remotes, pushedTo: profile.git.pushedTo, dirty: profile.git.dirty, changed: profile.git.changed.length, untracked: profile.git.untracked.length, omitted: profile.git.omitted } : null,
+      missing: profile.missing, notes: profile.notes }, null, 2));
+    process.exitCode = profile.missing.length ? 2 : 0; return;
+  }
+  if (command === 'report') { await report(options); return; }
   if (command === 'serve') {
     const port = Number(options.port ?? '4318');
     if (!Number.isInteger(port) || port < 0 || port > 65535) throw new ReproError('input', 'PORT', 'Port must be between 0 and 65535.');
@@ -116,6 +140,61 @@ async function main(): Promise<void> {
     const verdict = result as Partial<RunResult> & { status?: string };
     process.exitCode = verdict.outcome === 'cancelled' || verdict.status === 'cancelled' ? 130 : verdict.outcome === 'inconclusive' || verdict.status === 'inconclusive' ? 2 : verdict.outcome === 'target-failure' ? 1 : 0;
   } finally { process.removeListener('SIGINT', cancel); process.removeListener('SIGTERM', cancel); }
+}
+type ReportCliOptions = { app?: string | undefined; url?: string | undefined; start?: string | undefined; title?: string | undefined; 'went-wrong'?: string | undefined; 'should-happen'?: string | undefined;
+  issue?: string | undefined; yes?: boolean | undefined; 'no-fresh-check'?: boolean | undefined; 'report-blocked'?: boolean | undefined; budget?: string | undefined; output?: string | undefined };
+async function report(options: ReportCliOptions): Promise<void> {
+  const { generateReport, prepareReport, slugify } = await import('./report-flow.js');
+  let input: Record<string, unknown> = {};
+  if (options.issue) {
+    const { readFile } = await import('node:fs/promises');
+    try { input = JSON.parse(await readFile(resolve(options.issue), 'utf8')); }
+    catch (cause) { throw new ReproError('input', 'ISSUE_FILE', 'The --issue file must be a JSON object with wentWrong and shouldHappen.', { cause }); }
+    if (!input || typeof input !== 'object' || Array.isArray(input)) throw new ReproError('input', 'ISSUE_FILE', 'The --issue file must be a JSON object.');
+  }
+  const text = (value: unknown) => typeof value === 'string' ? value : undefined;
+  const request = {
+    app: { repository: options.app ?? text(input['app']), url: options.url ?? text(input['url']), start: options.start ?? text(input['start']) },
+    ...((options.title ?? text(input['title'])) ? { title: (options.title ?? text(input['title']))! } : {}),
+    wentWrong: options['went-wrong'] ?? text(input['wentWrong']) ?? '', shouldHappen: options['should-happen'] ?? text(input['shouldHappen']) ?? '',
+    confirmed: false,
+    options: { ...(options.budget ? { budget: Number(options.budget) } : {}), freshCheck: !options['no-fresh-check'], reportBlocked: options['report-blocked'] === true },
+  };
+  if (options.budget !== undefined && (!Number.isInteger(Number(options.budget)) || Number(options.budget) < 8 || Number(options.budget) > 120)) throw new ReproError('input', 'BUDGET', 'The report budget must be 8–120 runs.');
+  const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\..*$/, '').replace('T', '-');
+  const outputFor = () => options.output ?? `.repro-runs/reports/${stamp}-${slugify(request.title ?? request.wentWrong.split('\n')[0] ?? 'bug')}`;
+  // First pass: understand and ask, never run. The reporter confirms the parsed checks and execution scope.
+  const preview = await prepareReport({ ...request, confirmed: false });
+  const blocking = preview.questions.filter(question => question.field !== 'confirm');
+  if (blocking.length) { printReport({ status: 'needs-input', summary: 'Repro needs a little more information before it can run.', path: null, evidenceDir: '', questions: blocking }); process.exitCode = 2; return; }
+  const profile = preview.profile;
+  const { executionScope } = await import('./report-flow.js');
+  const scope = executionScope(profile, request.options.freshCheck);
+  process.stderr.write(['Repro understood:', ...preview.understood.steps.map((step, index) => `  ${index + 1}. ${step}`), 'It will check:', ...preview.understood.checks.map(check => `  - ${check}`),
+    'It will:', ...scope.map(line => `  - ${line}`), ''].join('\n'));
+  let confirmed = options.yes === true;
+  if (!confirmed) {
+    if (!process.stdin.isTTY) throw new ReproError('input', 'CONFIRM_REQUIRED', 'Review the steps, checks and scope above, then rerun with --yes to confirm them.');
+    const { createInterface } = await import('node:readline/promises');
+    const prompt = createInterface({ input: process.stdin, output: process.stderr });
+    confirmed = /^y(es)?$/i.test((await prompt.question('Is this right, and may Repro run it? [y/N] ')).trim());
+    prompt.close();
+    if (!confirmed) { console.log(JSON.stringify({ status: 'not-confirmed', reason: 'Nothing was run.' }, null, 2)); process.exitCode = 2; return; }
+  }
+  const controller = new AbortController();
+  const cancel = () => { ownerCancelled = true; controller.abort(); };
+  process.once('SIGINT', cancel); process.once('SIGTERM', cancel);
+  try {
+    const outcome = await generateReport({ ...request, confirmed: true }, { output: outputFor(), signal: controller.signal,
+      onProgress: progress => process.stderr.write(`[${progress.stage}] ${progress.message}\n`) });
+    printReport(outcome);
+    process.exitCode = outcome.status === 'cancelled' ? 130 : outcome.status === 'needs-input' ? 2 : 0;
+  } finally { process.removeListener('SIGINT', cancel); process.removeListener('SIGTERM', cancel); }
+}
+function printReport(outcome: { status: string; summary: string; path: string | null; evidenceDir: string; questions: { field: string; question: string; suggestion?: string; candidates?: { selector: string; text: string }[] }[] }) {
+  console.log(JSON.stringify({ status: outcome.status, summary: outcome.summary, report: outcome.path, evidence: outcome.evidenceDir,
+    ...(outcome.questions.length ? { questions: outcome.questions } : {}) }, null, 2));
+  if (outcome.path) process.stderr.write(`\nREPRO.md written to ${outcome.path}\n`);
 }
 main().catch(error => {
   const failure = error instanceof Error && 'code' in error && String(error.code).startsWith('ERR_PARSE_ARGS')

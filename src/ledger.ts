@@ -11,6 +11,10 @@ export type SessionState = 'ready' | 'running' | 'reducing' | 'exporting' | 'com
 export type Operation = 'record' | 'replay' | 'reduce' | 'verify' | 'export';
 export interface Session { id: string; createdAt: string; state: SessionState; manifest: WorkbenchManifest; consent: true }
 export interface Job { id: string; sessionId: string; operation: Operation; status: 'running' | 'complete' | 'cancelled' | 'failed' | 'interrupted'; requestKey: string; startedAt: string; result: unknown }
+export type ReportJobStatus = 'running' | 'reproduced' | 'intermittent' | 'not-reproduced' | 'blocked' | 'needs-input' | 'cancelled' | 'failed' | 'interrupted';
+/** A REPRO.md job from the one-page report flow. The request keeps the reporter's text as entered; REPRO.md is redacted. */
+export interface ReportJob { id: string; createdAt: string; status: ReportJobStatus; requestKey: string; request: unknown; result: unknown }
+export interface ReportEvent { seq: number; at: string; stage: string; message: string }
 
 function workbenchManifest(value: unknown): WorkbenchManifest {
   const manifest = validateManifest(value);
@@ -49,12 +53,18 @@ export class Ledger {
     this.db.exec(`PRAGMA journal_mode=WAL; PRAGMA foreign_keys=ON;
       CREATE TABLE IF NOT EXISTS sessions(id TEXT PRIMARY KEY, createdAt TEXT NOT NULL, state TEXT NOT NULL, manifest TEXT NOT NULL, consent INTEGER NOT NULL);
       CREATE TABLE IF NOT EXISTS jobs(id TEXT PRIMARY KEY, sessionId TEXT NOT NULL REFERENCES sessions(id), operation TEXT NOT NULL, status TEXT NOT NULL, requestKey TEXT NOT NULL, startedAt TEXT NOT NULL, result TEXT, UNIQUE(sessionId, requestKey));
-      CREATE TABLE IF NOT EXISTS events(jobId TEXT NOT NULL REFERENCES jobs(id), seq INTEGER NOT NULL, at TEXT NOT NULL, type TEXT NOT NULL, message TEXT NOT NULL, actionId TEXT, PRIMARY KEY(jobId, seq));`);
+      CREATE TABLE IF NOT EXISTS events(jobId TEXT NOT NULL REFERENCES jobs(id), seq INTEGER NOT NULL, at TEXT NOT NULL, type TEXT NOT NULL, message TEXT NOT NULL, actionId TEXT, PRIMARY KEY(jobId, seq));
+      CREATE TABLE IF NOT EXISTS reports(id TEXT PRIMARY KEY, createdAt TEXT NOT NULL, status TEXT NOT NULL, requestKey TEXT NOT NULL UNIQUE, request TEXT NOT NULL, result TEXT);
+      CREATE TABLE IF NOT EXISTS report_events(reportId TEXT NOT NULL REFERENCES reports(id), seq INTEGER NOT NULL, at TEXT NOT NULL, stage TEXT NOT NULL, message TEXT NOT NULL, PRIMARY KEY(reportId, seq));`);
     this.transaction(() => {
       for (const row of this.db.prepare("SELECT id, sessionId FROM jobs WHERE status = 'running'").all()) {
         this.db.prepare("UPDATE jobs SET status='interrupted', result=? WHERE id=?").run(JSON.stringify({ outcome: 'inconclusive', reason: 'Process interrupted before durable completion; retry creates fresh owned state.' }), row.id!);
         this.db.prepare("UPDATE sessions SET state='blocked' WHERE id=?").run(row.sessionId!);
         this.event(String(row.id), 'interrupted', 'Run interrupted before durable completion. Retry with a fresh run.');
+      }
+      for (const row of this.db.prepare("SELECT id FROM reports WHERE status = 'running'").all()) {
+        this.db.prepare("UPDATE reports SET status='interrupted', result=? WHERE id=?").run(JSON.stringify({ status: 'interrupted', summary: 'Repro stopped before this report finished. No REPRO.md was written; start a new report.' }), String(row.id));
+        this.reportEvent(String(row.id), 'interrupted', 'Repro stopped before this report finished.');
       }
     });
     } catch (error) {
@@ -132,6 +142,41 @@ export class Ledger {
       this.db.prepare('UPDATE jobs SET status=?,result=? WHERE id=?').run(status, JSON.stringify(result), id);
       this.db.prepare('UPDATE sessions SET state=? WHERE id=?').run(status === 'failed' ? 'blocked' : status, job.sessionId);
       this.event(id, status, `${job.operation} ${status}`);
+    });
+  }
+  createReport(request: unknown, requestKey: string): ReportJob {
+    validId(requestKey);
+    return this.transaction(() => {
+      const previous = this.db.prepare('SELECT * FROM reports WHERE requestKey=?').get(requestKey);
+      if (previous) return this.reportRow(previous);
+      if (this.db.prepare("SELECT id FROM reports WHERE status='running'").get()) throw new ReproError('input', 'BUSY', 'A report is already being generated. Cancel it or wait for it to finish.');
+      const report: ReportJob = { id: randomUUID(), createdAt: new Date().toISOString(), status: 'running', requestKey, request, result: null };
+      this.db.prepare('INSERT INTO reports VALUES(?,?,?,?,?,NULL)').run(report.id, report.createdAt, report.status, requestKey, JSON.stringify(request));
+      this.reportEvent(report.id, 'started', 'Report started');
+      return report;
+    });
+  }
+  private reportRow(row: Record<string, unknown>): ReportJob {
+    return { id: String(row.id), createdAt: String(row.createdAt), status: row.status as ReportJobStatus, requestKey: String(row.requestKey), request: JSON.parse(String(row.request)), result: row.result ? JSON.parse(String(row.result)) : null };
+  }
+  getReport(id: string): ReportJob {
+    const row = this.db.prepare('SELECT * FROM reports WHERE id=?').get(validId(id));
+    if (!row) throw new ReproError('input', 'NOT_FOUND', 'Report not found');
+    return this.reportRow(row);
+  }
+  reports(limit = 20): ReportJob[] { return this.db.prepare('SELECT * FROM reports ORDER BY createdAt DESC LIMIT ?').all(limit).map(row => this.reportRow(row)); }
+  reportEvent(reportId: string, stage: string, message: string): void {
+    if (Buffer.byteLength(message, 'utf8') > 4096) message = message.slice(0, 2000);
+    this.db.prepare('INSERT INTO report_events SELECT ?, COALESCE(MAX(seq),0)+1, ?, ?, ? FROM report_events WHERE reportId=?').run(validId(reportId), new Date().toISOString(), stage, message, reportId);
+  }
+  reportEvents(reportId: string, after = 0): ReportEvent[] {
+    return this.db.prepare('SELECT * FROM report_events WHERE reportId=? AND seq>? ORDER BY seq').all(validId(reportId), after).map(row => ({ seq: Number(row.seq), at: String(row.at), stage: String(row.stage), message: String(row.message) }));
+  }
+  finishReport(id: string, status: Exclude<ReportJobStatus, 'running' | 'interrupted'>, result: unknown): void {
+    this.transaction(() => {
+      if (this.getReport(id).status !== 'running') throw new ReproError('verification', 'TERMINAL_JOB', 'Cannot change a finished report.');
+      this.db.prepare('UPDATE reports SET status=?, result=? WHERE id=?').run(status, JSON.stringify(result), id);
+      this.reportEvent(id, 'finished', status);
     });
   }
   close(): void { this.db.close(); unlinkSync(this.lock); }

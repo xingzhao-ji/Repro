@@ -71,7 +71,7 @@ test('starting capture moves keyboard focus into the new evidence workspace', { 
   try {
     browser = await chromium.launch({ headless: true, chromiumSandbox: true, ...(process.env['REPRO_BROWSER_CHANNEL'] === 'chrome' ? { channel: 'chrome' } : {}) });
     const page = await browser.newPage();
-    await page.goto(app.url);
+    await page.goto(`${app.url}/#/new`);
     await page.getByRole('checkbox').waitFor();
     await page.keyboard.press('Tab');
     await page.keyboard.press('Enter');

@@ -4,18 +4,23 @@ import { readFile } from 'node:fs/promises';
 import { ReproError, type BrowserCaseExpectation } from './contracts.js';
 import { createAuthoredManifest, createManifest } from './manifest.js';
 import { createCaseManifest, listRegisteredCases } from './browser-case.js';
-import { Coordinator, publicError } from './service.js';
+import { execFile } from 'node:child_process';
+import { readFile as readText } from 'node:fs/promises';
+import { join, relative, sep, isAbsolute } from 'node:path';
+import { Coordinator, ReportCoordinator, publicError } from './service.js';
 import { Ledger, type Operation } from './ledger.js';
+import { executionScope, prepareReport, type ReportRequest } from './report-flow.js';
+import { createExampleApp, EXAMPLE_DESCRIPTION } from './example-app.js';
 import { inspectJobInput, inspectTrial } from './evidence-inspector.js';
 
-const html = '<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Repro · Evidence workbench</title><link rel="stylesheet" href="/web.css"></head><body><div id="root"></div><script type="module" src="/web.js"></script></body></html>';
+const html = '<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Repro</title><link rel="stylesheet" href="/web.css"></head><body><div id="root"></div><script type="module" src="/web.js"></script></body></html>';
 function json(response: ServerResponse, status: number, value: unknown) { response.writeHead(status, { 'Content-Type': 'application/json; charset=utf-8' }); response.end(JSON.stringify(value)); }
-async function body(request: IncomingMessage): Promise<Record<string, unknown>> {
+async function body(request: IncomingMessage, limit = 16_384): Promise<Record<string, unknown>> {
   if (request.headers['content-type'] !== 'application/json') throw new ReproError('input', 'CONTENT_TYPE', 'Use application/json.');
   let bytes = 0; const chunks: Buffer[] = [];
   for await (const chunk of request) {
     bytes += Buffer.byteLength(chunk as Buffer);
-    if (bytes > 16_384) throw new ReproError('input', 'BODY_TOO_LARGE', 'Request exceeds 16 KB.');
+    if (bytes > limit) throw new ReproError('input', 'BODY_TOO_LARGE', `Request exceeds ${Math.round(limit / 1024)} KB.`);
     chunks.push(Buffer.from(chunk as Buffer));
   }
   let value: unknown;
@@ -36,8 +41,42 @@ function declaredManifest(input: unknown) {
   }
   return createAuthoredManifest(input);
 }
-export async function serve(options: { port: number; root: string }) {
-  const ledger = new Ledger(options.root); const coordinator = new Coordinator(ledger);
+const string = (value: unknown, name: string, maximum: number): string | undefined => {
+  if (value === undefined || value === null || value === '') return undefined;
+  if (typeof value !== 'string' || value.length > maximum) throw new ReproError('input', 'FIELD', `${name} must be text of at most ${maximum} characters.`);
+  return value;
+};
+/** The one-page report request: app location, the two descriptions and optional answers to earlier questions. */
+function reportRequest(input: Record<string, unknown>, confirmed: boolean): ReportRequest {
+  keys(input, ['app', 'title', 'wentWrong', 'shouldHappen', 'confirmed', 'requestKey', 'checkSelectors', 'reportBlocked']);
+  const app = input.app && typeof input.app === 'object' && !Array.isArray(input.app) ? input.app as Record<string, unknown> : {};
+  keys(app, ['repository', 'url', 'start']);
+  const selectors = input.checkSelectors && typeof input.checkSelectors === 'object' && !Array.isArray(input.checkSelectors) ? input.checkSelectors as Record<string, unknown> : {};
+  if (Object.entries(selectors).some(([index, selector]) => !/^\d$/.test(index) || typeof selector !== 'string' || selector.length > 300)) throw new ReproError('input', 'FIELD', 'Choose an element for each unclear check.');
+  const title = string(input.title, 'Title', 120);
+  return {
+    app: { repository: string(app.repository, 'App folder', 1000), url: string(app.url, 'URL', 500), start: string(app.start, 'Start command', 500) },
+    ...(title ? { title } : {}),
+    wentWrong: string(input.wentWrong, 'What went wrong', 6000) ?? '', shouldHappen: string(input.shouldHappen, 'What should happen', 6000) ?? '', confirmed,
+    options: { checkSelectors: selectors as Record<number, string>, reportBlocked: input.reportBlocked === true },
+  };
+}
+function appSummary(profile: Awaited<ReturnType<typeof prepareReport>>['profile']) {
+  return { name: profile.name, directory: profile.directory, run: profile.plan ? { kind: profile.plan.kind, command: profile.plan.command, url: profile.plan.url, source: profile.plan.source } : null,
+    install: profile.install, dependenciesInstalled: profile.dependenciesInstalled,
+    source: profile.git ? { commit: profile.git.commit, branch: profile.git.branch, dirty: profile.git.dirty, changed: profile.git.changed.length + profile.git.untracked.length, remote: profile.git.remotes[0]?.url ?? null, pushed: profile.git.pushedTo.length > 0 } : null,
+    missing: profile.missing, notes: profile.notes };
+}
+/** macOS only: the native folder chooser, run on this machine for the local workbench user. */
+function chooseFolder(): Promise<string | null> {
+  if (process.platform !== 'darwin') return Promise.reject(new ReproError('unsupported', 'CHOOSER_UNAVAILABLE', 'Type or paste the folder path on this platform.'));
+  return new Promise((resolve, reject) => execFile('osascript', ['-e', 'POSIX path of (choose folder with prompt "Choose your app folder for Repro")'], { timeout: 300_000 }, (error, stdout) => {
+    if (error) { if (/User canceled|-128/.test(String(error.message) + String(stdout))) resolve(null); else reject(new ReproError('environment', 'CHOOSER_FAILED', 'The folder chooser could not open. Type or paste the path instead.')); return; }
+    resolve(stdout.trim().replace(/\/$/, '') || null);
+  }));
+}
+export async function serve(options: { port: number; root: string; reportDefaults?: NonNullable<ReportRequest['options']> }) {
+  const ledger = new Ledger(options.root); const coordinator = new Coordinator(ledger); const reports = new ReportCoordinator(ledger, options.reportDefaults);
   const token = randomBytes(32).toString('hex'); let origin = '';
   let closing: Promise<void> | undefined;
   const server = createServer((request, response) => {
@@ -68,8 +107,22 @@ export async function serve(options: { port: number; root: string }) {
     if (request.method === 'GET') {
       if (path === '/api/config') {
         const cases = listRegisteredCases().map(registered => ({ id: registered.id, title: registered.title, expectation: registered.expectation, issue: registered.issue, contractUrls: registered.expectationUrls, repository: registered.repository }));
-        json(response, 200, { token, cases, scope: 'Registered public repository cases and the synthetic search example. Scripted capture freezes an explicit supported expectation; no human approval claimed. Fresh-environment portability requires a separately verified run. Accessibility remains deferred and unverified.' }); return;
+        json(response, 200, { token, cases, platform: process.platform, example: EXAMPLE_DESCRIPTION, scope: 'Your local web app, plus registered example cases. Every result comes from actual local runs; no AI service or upload is involved. Accessibility remains deferred and unverified.' }); return;
       }
+      if (path === '/api/reports') { json(response, 200, { reports: ledger.reports().map(item => ({ id: item.id, createdAt: item.createdAt, status: item.status, title: (item.request as { title?: string | null }).title ?? null, summary: (item.result as { summary?: string } | null)?.summary ?? null })) }); return; }
+      const reportMarkdown = /^\/api\/reports\/([a-zA-Z0-9_-]{1,100})\/markdown$/.exec(path);
+      if (reportMarkdown?.[1]) {
+        const report = ledger.getReport(reportMarkdown[1]);
+        const location = (report.result as { path?: string | null } | null)?.path;
+        const inside = location ? relative(join(ledger.root, 'reports', report.id), location) : '..';
+        if (!location || inside !== 'REPRO.md' || isAbsolute(inside) || inside.startsWith(`..${sep}`)) throw new ReproError('input', 'NOT_FOUND', 'This report has no REPRO.md.');
+        const markdown = await readText(location, 'utf8');
+        response.writeHead(200, { 'Content-Type': 'text/markdown; charset=utf-8', ...(url.searchParams.get('download') === '1' ? { 'Content-Disposition': 'attachment; filename="REPRO.md"' } : {}) });
+        response.end(markdown); return;
+      }
+      const reportJob = /^\/api\/reports\/([a-zA-Z0-9_-]{1,100})$/.exec(path);
+      // The request returns only to this same-origin local page, so "Edit and try again" survives a refresh.
+      if (reportJob?.[1]) { const report = ledger.getReport(reportJob[1]); json(response, 200, { report: { ...report, title: (report.request as { title?: string | null }).title ?? null }, events: ledger.reportEvents(report.id) }); return; }
       if (path === '/api/sessions') { json(response, 200, { sessions: ledger.sessions() }); return; }
       const session = /^\/api\/sessions\/([a-zA-Z0-9_-]{1,100})$/.exec(path);
       if (session?.[1]) { json(response, 200, { session: ledger.getSession(session[1]), jobs: ledger.jobs(session[1]) }); return; }
@@ -87,7 +140,25 @@ export async function serve(options: { port: number; root: string }) {
         response.writeHead(200, { 'Content-Type': path.endsWith('.js') ? 'text/javascript' : 'text/css' }); response.end(file); return;
       }
     } else {
-      const input = await body(request);
+      const input = await body(request, path.startsWith('/api/reports') ? 65_536 : 16_384);
+      if (path === '/api/app/inspect') {
+        keys(input, ['repository', 'url', 'start']);
+        const prepared = await prepareReport({ app: { repository: string(input.repository, 'App folder', 1000), url: string(input.url, 'URL', 500), start: string(input.start, 'Start command', 500) }, wentWrong: '', shouldHappen: '', confirmed: false });
+        json(response, 200, { app: appSummary(prepared.profile), scope: executionScope(prepared.profile) }); return;
+      }
+      if (path === '/api/app/choose-folder') { keys(input, []); json(response, 200, { path: await chooseFolder() }); return; }
+      if (path === '/api/examples/local-app') { keys(input, []); json(response, 201, await createExampleApp(ledger.root)); return; }
+      if (path === '/api/reports/prepare') {
+        const prepared = await prepareReport(reportRequest(input, false));
+        json(response, 200, { questions: prepared.questions.filter(question => question.field !== 'confirm'), understood: prepared.understood, app: appSummary(prepared.profile), scope: executionScope(prepared.profile) }); return;
+      }
+      if (path === '/api/reports') {
+        if (input.confirmed !== true) throw new ReproError('input', 'CONFIRM_REQUIRED', 'Confirm the steps, checks and what Repro will run first.');
+        if (typeof input.requestKey !== 'string') throw new ReproError('input', 'OPERATION', 'Supply a request key.');
+        json(response, 202, { report: reports.start(reportRequest(input, true), input.requestKey) }); return;
+      }
+      const reportCancel = /^\/api\/reports\/([a-zA-Z0-9_-]{1,100})\/cancel$/.exec(path);
+      if (reportCancel?.[1]) { keys(input, []); json(response, 202, { report: reports.cancel(reportCancel[1]) }); return; }
       if (path === '/api/sessions') {
         keys(input, ['consent', 'experiment']);
         const manifest = Object.hasOwn(input, 'experiment') ? declaredManifest(input.experiment) : createManifest();
@@ -111,9 +182,10 @@ export async function serve(options: { port: number; root: string }) {
   const address = server.address();
   if (!address || typeof address === 'string') throw new ReproError('environment', 'LISTEN_FAILED', 'Cannot resolve workbench address.');
   origin = `http://127.0.0.1:${address.port}`;
-  return { url: origin, ledger, coordinator, close: () => closing ??= (async () => {
+  return { url: origin, ledger, coordinator, reports, close: () => closing ??= (async () => {
     const stopped = new Promise<void>((resolve, reject) => { server.close(error => error ? reject(error) : resolve()); server.closeIdleConnections(); });
     await coordinator.close();
+    await reports.close();
     await stopped;
     ledger.close();
   })() };

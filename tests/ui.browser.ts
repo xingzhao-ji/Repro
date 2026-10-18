@@ -35,7 +35,7 @@ test('real workbench capture, reduction, comparison, export, recovery and respon
     return app.ledger.getJob(jobId);
   }
   try {
-    await page.goto(app.url);
+    await page.goto(`${app.url}/#/new`);
     const start = page.getByRole('button', { name: 'Start synthetic capture', exact: true });
     await start.waitFor(); assert.equal(await start.isDisabled(), true);
     await page.keyboard.press('Tab');

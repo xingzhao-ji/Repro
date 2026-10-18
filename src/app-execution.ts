@@ -211,9 +211,11 @@ async function candidateElements(page: Page): Promise<{ selector: string; text: 
       const results: { selector: string; text: string }[] = [];
       for (const element of Array.from(document.querySelectorAll<HTMLElement>('body [id], body [data-testid], body [aria-label], body output, body [role=status]'))) {
         if (results.length >= 8) break;
-        const text = (element.innerText ?? '').replace(/\s+/g, ' ').trim();
+        const raw = (element.innerText ?? '').trim();
+        const text = raw.replace(/\s+/g, ' ');
         const box = element.getBoundingClientRect();
-        if (!text || text.length > 80 || !box.width || !box.height) continue;
+        // Single-line, short, visible elements only: containers of several items are not candidates.
+        if (!text || raw.includes('\n') || text.length > 80 || !box.width || !box.height) continue;
         const attribute = element.dataset['testid'] ? ['data-testid', element.dataset['testid']] : element.getAttribute('aria-label') ? ['aria-label', element.getAttribute('aria-label')!] : null;
         const selector = element.id && /^[A-Za-z][\w-]*$/.test(element.id) ? `#${element.id}`
           : attribute ? `[${attribute[0]}="${attribute[1]!.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"]` : null;

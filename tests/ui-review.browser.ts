@@ -35,7 +35,7 @@ test('independent UI review: keyboard consent, automated accessibility, reflow, 
     return app.ledger.getJob(await page.locator('#job').inputValue());
   }
   try {
-    await page.goto(app.url);
+    await page.goto(`${app.url}/#/new`);
     await page.getByRole('checkbox').waitFor();
     await audit('empty-desktop');
     assert.equal(await page.getByRole('button', { name: 'Start synthetic capture', exact: true }).isDisabled(), true);

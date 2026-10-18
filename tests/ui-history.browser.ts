@@ -58,7 +58,7 @@ test('historical Evidence run selection identifies the exact job across evidence
     browser = await chromium.launch({ headless: true, chromiumSandbox: true, ...(process.env['REPRO_BROWSER_CHANNEL'] === 'chrome' ? { channel: 'chrome' } : {}) });
     page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     page.on('pageerror', error => errors.push(error.message));
-    await page.goto(app.url);
+    await page.goto(`${app.url}/#/new`);
     await page.getByRole('checkbox').check();
     await page.getByRole('button', { name: 'Start synthetic capture', exact: true }).click();
     const captured = await terminal('record');

@@ -20,7 +20,7 @@ test('selected run expectation persists alongside actual captured evidence', { t
     browser = await chromium.launch({ headless: true, chromiumSandbox: true, ...(process.env['REPRO_BROWSER_CHANNEL'] === 'chrome' ? { channel: 'chrome' } : {}) });
     const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
     summary['browser'] = browser.version();
-    await page.goto(app.url);
+    await page.goto(`${app.url}/#/new`);
     await page.getByRole('checkbox').waitFor();
     await page.keyboard.press('Tab');
     assert.equal(await page.evaluate(() => document.activeElement?.textContent), 'Skip to evidence');
@@ -164,7 +164,7 @@ test('keyboard investigation joins immutable job input and actual trial evidence
     expectation = page.getByRole('region', { name: 'Selected run expectation', exact: true });
     inspector = page.getByRole('region', { name: 'Trial evidence', exact: true });
     summary['browser'] = browser.version();
-    await page.goto(app.url);
+    await page.goto(`${app.url}/#/new`);
     await page.getByRole('checkbox').waitFor();
     await activate(page.getByRole('link', { name: 'Skip to evidence', exact: true }), 'Skip to evidence');
     await activate(page.getByRole('checkbox'), 'Capture consent', 'Space');

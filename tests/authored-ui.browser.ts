@@ -38,7 +38,7 @@ test('keyboard authoring freezes an explicit reversed expectation through captur
     return terminal(operation);
   }
   try {
-    await page.goto(app.url);
+    await page.goto(`${app.url}/#/new`);
     await page.getByRole('button', { name: 'Start synthetic capture', exact: true }).waitFor();
     const mode = page.getByRole('combobox', { name: 'Expectation input', exact: true });
     assert.equal(await mode.count(), 1, 'Capture must offer actual expected-behavior input');

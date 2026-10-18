@@ -58,7 +58,7 @@ test('real repository journey freezes reviewed expectation through capture inspe
     return terminal(kind);
   }
   try {
-    await page.goto(app.url);
+    await page.goto(`${app.url}/#/new`);
     await page.getByRole('button', { name: 'Start synthetic capture', exact: true }).waitFor();
     const selector = page.getByRole('combobox', { name: 'Application case', exact: true });
     assert.equal(await selector.count(), 1, 'Capture must offer the registered repository cases.');
@@ -154,7 +154,7 @@ for (const scenario of [
       await page.locator('.sidebar nav').getByRole('link', { name: section, exact: true }).click();
     }
     try {
-      await page.goto(app.url);
+      await page.goto(`${app.url}/#/new`);
       const selector = page.getByRole('combobox', { name: 'Application case', exact: true });
       await selector.selectOption(scenario.caseId);
       assert.deepEqual(await page.locator('.expectation-fields .key-value dd').allTextContents(), scenario.fixed);

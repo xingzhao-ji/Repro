@@ -45,6 +45,8 @@ export interface ReportOutcome {
   summary: string;
   /** A preview of what Repro understood, for confirmation in the UI and CLI. */
   understood: { steps: string[]; checks: string[]; notes: string[] };
+  /** The report title, given or derived from the description. */
+  title?: string;
 }
 interface RunRecord { label: string; result: RunResult; serverLogs: string[]; stopped: boolean }
 
@@ -61,17 +63,13 @@ function titleFrom(request: ReportRequest, profile: AppProfile): string {
 }
 const opensApp = (action: DraftAction) => action.kind === 'navigate' && (action.line === 0 || /^(?:open|go to|visit|load)\s+(?:the\s+)?(?:app|application|site|home\s*page|homepage|start page|main page)\b/i.test(action.text));
 
-export async function generateReport(request: ReportRequest, context: { output: string; signal?: AbortSignal; onProgress?: (progress: ReportProgress) => void }): Promise<ReportOutcome> {
-  const signal = context.signal;
-  const progress = (stage: ReportStage, message: string) => { try { context.onProgress?.({ stage, message, at: now() }); } catch { /* observers cannot change the report */ } };
-  const cancelled = () => signal?.aborted === true;
-  const evidenceDir = ownedDirectory(context.output, { exclusive: true });
-  const understood: ReportOutcome['understood'] = { steps: [], checks: [], notes: [] };
-  const outcome = (status: ReportOutcome['status'], summary: string, extra: Partial<ReportOutcome> = {}): ReportOutcome =>
-    ({ status, questions: [], markdown: null, path: null, evidenceDir, summary, understood, ...extra });
+export interface PreparedReport {
+  profile: AppProfile; steps: ReturnType<typeof parseSteps>; expectation: ReturnType<typeof parseExpectation>;
+  questions: Question[]; understood: ReportOutcome['understood'];
+}
+/** Read-only first stage: inspect the app, parse the description and list what is missing. Runs nothing, writes nothing. */
+export async function prepareReport(request: ReportRequest): Promise<PreparedReport> {
   if ((request.wentWrong?.length ?? 0) > MAX_TEXT || (request.shouldHappen?.length ?? 0) > MAX_TEXT) throw new ReproError('input', 'TEXT_TOO_LONG', `Keep each description under ${MAX_TEXT} characters.`);
-
-  progress('inspect', 'Checking your app and reading the description');
   const profile = await inspectApp(request.app);
   const steps = parseSteps(request.wentWrong ?? '');
   const expectation = parseExpectation(request.shouldHappen ?? '');
@@ -79,9 +77,11 @@ export async function generateReport(request: ReportRequest, context: { output: 
     const check = expectation.checks[Number(index)];
     if (check && typeof selector === 'string' && selector.length <= 300) check.reference = { css: selector };
   }
-  understood.steps = steps.actions.map(action => describeAction({ ...action, secret: null }, describeReference(action.reference)));
-  understood.checks = expectation.checks.map(check => describeCheck(check, describeReference(check.reference)));
-  understood.notes = [...steps.notes, ...expectation.notes];
+  const understood: ReportOutcome['understood'] = {
+    steps: steps.actions.map(action => describeAction({ ...action, secret: null }, describeReference(action.reference))),
+    checks: expectation.checks.map(check => describeCheck(check, describeReference(check.reference))),
+    notes: [...steps.notes, ...expectation.notes],
+  };
   const questions: Question[] = profile.missing.map(item => ({ field: item.field, question: item.question }));
   if (!steps.actions.length) questions.push({ field: 'steps', question: 'What did you do? Write the steps one per line, for example: Type "milk" into "Add an item", then Press Enter.' });
   for (const problem of steps.problems) questions.push({ field: 'steps', question: `${problem.message}${problem.text ? ` (“${problem.text.slice(0, 80)}”)` : ''}`, line: problem.line, suggestion: problem.suggestion });
@@ -89,8 +89,38 @@ export async function generateReport(request: ReportRequest, context: { output: 
   for (const problem of expectation.problems) questions.push({ field: 'expectation', question: `${problem.message}${problem.text ? ` (“${problem.text.slice(0, 80)}”)` : ''}`, line: problem.line, suggestion: problem.suggestion });
   for (const check of expectation.checks) if (classifyInput(check.expected) !== 'plain') questions.push({ field: 'expectation', question: `The expected value for “${check.text.slice(0, 60)}” looks like a credential or personal data. Use test data instead; Repro does not put such values in reports.` });
   if (!request.confirmed && !questions.length) questions.push({ field: 'confirm', question: 'Review what Repro understood and confirm it before Repro starts your app.' });
-  if (questions.length) return outcome('needs-input', 'Repro needs a little more information before it can run.', { questions });
-  if (cancelled()) return outcome('cancelled', 'Cancelled before any run. No report was written.');
+  return { profile, steps, expectation, questions, understood };
+}
+
+/** Plain statement of what Repro will execute, shown for confirmation before anything runs. */
+export function executionScope(profile: AppProfile, freshCheck = true): string[] {
+  const plan = profile.plan;
+  return [
+    !plan ? 'Nothing yet: Repro still needs to know how to start the app.'
+      : plan.kind === 'external' ? `Use the app already running at ${plan.url} (Repro cannot restart it between runs).`
+      : plan.kind === 'static' ? `Serve the folder ${plan.directory} with Repro's own read-only file server, once per run.`
+      : `Run \`${plan.command}\` in ${plan.directory} (${plan.source}), once per run, on a free local port, and stop it after each run.`,
+    'Open the app in a fresh, headless Chromium profile and block every request to a host other than this machine.',
+    ...(freshCheck && profile.git?.commit && profile.startPlan ? [`Test the finished report in a separate clone of commit ${profile.git.commit.slice(0, 12)}${profile.install ? `, running \`${profile.install}\` there` : ''}.`] : []),
+    'Keep everything on this machine. Nothing is uploaded, and your app folder is not changed.',
+  ];
+}
+
+export async function generateReport(request: ReportRequest, context: { output: string; signal?: AbortSignal; onProgress?: (progress: ReportProgress) => void }): Promise<ReportOutcome> {
+  const signal = context.signal;
+  const progress = (stage: ReportStage, message: string) => { try { context.onProgress?.({ stage, message, at: now() }); } catch { /* observers cannot change the report */ } };
+  const cancelled = () => signal?.aborted === true;
+  progress('inspect', 'Checking your app and reading the description');
+  const { profile, steps, expectation, questions, understood } = await prepareReport(request);
+  const outcomeWithout = (status: ReportOutcome['status'], summary: string, extra: Partial<ReportOutcome> = {}): ReportOutcome =>
+    ({ status, questions: [], markdown: null, path: null, evidenceDir: '', summary, understood, ...extra });
+  if (questions.length) return outcomeWithout('needs-input', 'Repro needs a little more information before it can run.', { questions });
+  if (cancelled()) return outcomeWithout('cancelled', 'Cancelled before any run. No report was written.');
+  const evidenceDir = ownedDirectory(context.output, { exclusive: true });
+  const title = titleFrom(request, profile);
+  const slug = slugify(title.replace(/^[^:]+:\s*/, '') || title);
+  const outcome = (status: ReportOutcome['status'], summary: string, extra: Partial<ReportOutcome> = {}): ReportOutcome =>
+    ({ status, questions: [], markdown: null, path: null, evidenceDir, summary, understood, title, ...extra });
 
   // Withheld inputs: values typed into password-like fields or that look like credentials or personal data.
   const secrets: Record<string, string> = {};
@@ -109,8 +139,6 @@ export async function generateReport(request: ReportRequest, context: { output: 
     const sensitivity = classifyInput(action.value, { label: action.reference?.text ?? '' });
     if (sensitivity !== 'plain') withhold(index, action, sensitivity);
   });
-  const title = titleFrom(request, profile);
-  const slug = slugify(title.replace(/^[^:]+:\s*/, '') || title);
   const draft = createDraftManifest({ id: slug, name: profile.name, description: (request.shouldHappen ?? '').slice(0, 4000), actions: steps.actions, checks: expectation.checks,
     sourceDigest: profile.sourceDigest, commit: profile.git?.commit ?? null, dirty: profile.git?.dirty ?? false, approved: request.confirmed, secrets: secretIndex });
   await writeOwnedFile(join(evidenceDir, 'request.json'), JSON.stringify({ app: { ...request.app }, title, wentWrong: request.wentWrong, shouldHappen: request.shouldHappen, understood }, null, 2));
