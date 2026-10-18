@@ -1,4 +1,54 @@
-# Current work — Repro 0.1.0 practical beta released and verified
+# Current work — Repro 0.2.0: one REPRO.md from your own app (in progress)
+
+October 17–18, 2026. The owner's new `/goal`: evolve Repro into a developer tool. The input is an application plus an issue description; the output is one actionable REPRO.md that a teammate or coding agent can use to reproduce the bug, fix the original app and run the same test. The goal requires extending the same product, reusing its capture, replay, reduction, comparison, isolation and evidence infrastructure, and validating the packaged product on user-owned apps, including a held-out one.
+
+## Where the work is
+
+- **Durable, outside iCloud:** the clone is `~/Developer/Repro-dev`, branch `feature/repro-report`, cut from the 0.1.0 release branch (`0b9ef1a`). An older copy at `~/Developer/Repro`, holding someone else's uncommitted edits, was left untouched.
+- **Acceptance apps:** they live in `~/Developer/repro-acceptance/` and were built by a workflow of agents, each checked by an independent verifier:
+  - `apps/shopping-list` (React + Vite): a committed counter bug.
+  - `apps/cafe-orders` (Express): an uncommitted bug, a bare remote, and canary secrets for redaction tests.
+  - `apps/pantry-scale`: the **held-out** app (Vue 3 + Vite). Its fix and notes are sealed in `sealed/heldout/` and are not to be read before its report is generated.
+  - The controlled fixes are in `fixes/`.
+- **Design:** [ADR 0005](docs/adr/0005-local-app-repro-report.md). Scope and grammar are in [LOCAL-APPS](docs/LOCAL-APPS.md), and the user flow is in [QUICKSTART](docs/QUICKSTART.md).
+
+## Implemented on `feature/repro-report`
+
+- **Data model and runner:**
+  - schema-4 manifest (`src/app-contract.ts`), with a frozen failure signature and reporter approval;
+  - a plain-language steps and checks grammar (`src/steps.ts`);
+  - local-app execution inside the existing certified case worker (`src/app-execution.ts`, `case-execution.ts`, `case-worker*.ts`);
+  - an owned app process group with port and survivor checks (`src/app-process.ts`);
+  - read-only git and package inspection, including the local-changes patch (`src/app-inspect.ts`);
+  - redaction (`src/redaction.ts`).
+- **Report generation:** the orchestrator (`src/report-flow.ts`) runs, in order:
+  1. capture with target resolution;
+  2. three repetitions;
+  3. reduction that keeps every step that changed a checked value;
+  4. confirmation;
+  5. a standalone node:test + Playwright test (`src/report-test.ts`);
+  6. the fresh-checkout check;
+  7. REPRO.md with hash-checked file blocks and an extraction command (`src/report-markdown.ts`).
+- **Interfaces:**
+  - CLI `repro report` and `repro app`;
+  - ledger report jobs and server endpoints;
+  - the one-page UI (`web/report.tsx`) as the default page, with built-in examples moved to `#/new`;
+  - a guided demonstration recorder (`src/demonstration.ts`);
+  - an example app (`fixtures/local-apps/task-tally`).
+- **Tests:**
+  - ordinary suite, which includes the new units: 431/431 (earlier run; the browser suite is below).
+  - full browser suite: 63/67. The four failures were my own report-UI assertion, since fixed, and three deferred accessibility scenarios. Those three fail identically on the untouched 0.1.0 source, and 0.1.0 also excluded them as deferred.
+
+## Next actions
+
+1. Fix any defects the independent review workflow confirms.
+2. Pack the release candidate and run `~/Developer/repro-acceptance/release-0.2.0/tools/acceptance.mjs` on the exact tarball. It covers the two development apps, not-reproduced, cancellation, redaction and the recipient workflows.
+3. Run the held-out app with the installed product; only after that, apply its sealed fix. Then run a coding-agent recipient trial and a manual UX screenshot pass.
+4. Write the evidence report, examples, release notes and scope update; tag and push after a review for secrets.
+
+---
+
+# Preserved checkpoint — Repro 0.1.0 practical beta released and verified
 
 October 17, 2026. The owner's `/goal` asked to finish the practical beta as a verified release.
 
