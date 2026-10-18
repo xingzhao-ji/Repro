@@ -1,59 +1,39 @@
-# Current work — Repro 0.2.0: one REPRO.md from your own app (in progress)
+# Current work — Repro 0.2.0: one REPRO.md from your own app (released as a verified beta)
 
-October 17–18, 2026. The owner's new `/goal`: evolve Repro into a developer tool. The input is an application plus an issue description; the output is one actionable REPRO.md that a teammate or coding agent can use to reproduce the bug, fix the original app and run the same test. The goal requires extending the same product, reusing its capture, replay, reduction, comparison, isolation and evidence infrastructure, and validating the packaged product on user-owned apps, including a held-out one.
+October 17–18, 2026. The owner's `/goal`: evolve Repro into a developer tool. The input is an application plus an issue description; the output is one actionable REPRO.md that a teammate or coding agent can use to reproduce the bug, fix the original app and run the same test.
 
-## Where the work is
+## Release identity
 
-- **Durable, outside iCloud:** the clone is `~/Developer/Repro-dev`, branch `feature/repro-report`, cut from the 0.1.0 release branch (`0b9ef1a`). An older copy at `~/Developer/Repro`, holding someone else's uncommitted edits, was left untouched.
-- **Acceptance apps:** they live in `~/Developer/repro-acceptance/` and were built by a workflow of agents, each checked by an independent verifier:
-  - `apps/shopping-list` (React + Vite): a committed counter bug.
-  - `apps/cafe-orders` (Express): an uncommitted bug, a bare remote, and canary secrets for redaction tests.
-  - `apps/pantry-scale`: the **held-out** app (Vue 3 + Vite). Its fix and notes are sealed in `sealed/heldout/` and are not to be read before its report is generated.
-  - The controlled fixes are in `fixes/`.
-- **Design:** [ADR 0005](docs/adr/0005-local-app-repro-report.md). Scope and grammar are in [LOCAL-APPS](docs/LOCAL-APPS.md), and the user flow is in [QUICKSTART](docs/QUICKSTART.md).
+- Release commit `5ca54f101d517626551d53d0b9756d4eea99a83c`, tagged `v0.2.0-beta`. Branch `release/repro-report-0.2.0`, with the evidence commit on top. The development branch is `feature/repro-report`.
+- Package `repro-local-0.2.0.tgz`: 1,875,935 bytes, SHA-256 `99ec27ccea0b812858573b6f174a332550dbfaf9bba69072529516565230ad2a`. A rebuild of the commit packs to identical bytes. The runtime bytes are identical to rc3.
+- Report: [evidence/REPRO-REPORT-RELEASE.md](evidence/REPRO-REPORT-RELEASE.md), with JSON records in `evidence/repro-report-0.2.0/`.
+- Not done: no merge to `main`, no GitHub Release, no npm publication, no deployment.
 
-## Implemented on `feature/repro-report` (pushed, at `c6a2f6c` or later)
+## Verified
 
-- **Data model and runner:**
-  - schema-4 manifest (`src/app-contract.ts`), with a frozen failure signature (`values`, `exact`, `passed`) and reporter approval;
-  - a plain-language steps and checks grammar (`src/steps.ts`);
-  - local-app execution inside the existing certified case worker (`src/app-execution.ts`, `case-execution.ts`, `case-worker*.ts`). A step's quoted text may match inside one control's name when no exact name exists, recorded as `match: "contains"`;
-  - an owned app process group with port and survivor checks (`src/app-process.ts`);
-  - read-only git and package inspection, including the local-changes patch and a refusal of inline secrets (`src/app-inspect.ts`);
-  - redaction with broad, code and credentials modes (`src/redaction.ts`).
-- **Report generation:** the orchestrator (`src/report-flow.ts`) runs, in order:
-  1. capture with target resolution;
-  2. three repetitions;
-  3. reduction, only when every check is step-independent or the reporter declares it;
-  4. confirmation;
-  5. a standalone node:test + Playwright test (`src/report-test.ts`);
-  6. the fresh-checkout check;
-  7. REPRO.md (`src/report-markdown.ts`).
-- **Interfaces:** CLI `repro report` (with `--check-element` and `--steps-independent`) and `repro app`; ledger report jobs; the one-page UI; the guided demonstration; the example app.
-- **Independent review, round 1** (workflow, 45 findings). The confirmed defects were fixed in `88139ea` with regressions in `tests/review-fixes.test.ts`. The findings are saved in `~/Developer/repro-acceptance/release-0.2.0/review-round1/`.
-- **Tests at `c6a2f6c`:**
-  - ordinary suite: 441/441;
-  - functional browser suite: 68/69, after excluding the three deferred accessibility scenarios by name, which fail identically on the 0.1.0 source. The one failure, `marked-empty-heading complete UI journey` (job `failed`, not `complete`), happened while a coding-agent trial was loading the machine. It then passed 3/3 in isolation, and passed in the two previous full runs. The cause was not established.
+- **Automated checks:** ordinary suite 441/441, and functional browser suite 70/70 with the three deferred accessibility scenarios excluded. Typecheck, lint, build and `test:package` pass.
+- **The exact tarball, installed into an empty project:**
+  - shopping-list (React) and cafe-orders (Express, uncommitted changes and a withheld password) reproduced, and the fresh checkout reproduced;
+  - all 8 redaction canaries absent;
+  - not-reproduced on a fixed clone;
+  - CLI cancellation: exit 130, nothing written or left running;
+  - the scripted recipient workflow passed for both apps: an empty HOME, REPRO.md's own commands, the test fails as recorded, then the same test passes after the controlled fix.
+- **Held-out pantry-scale (Vue):**
+  - With rc1 and the issue's own wording, Repro needed input: a partial button name, and no suggestions were offered.
+  - With the rendered names it reproduced, and the sealed fix passed the same test.
+  - Both gaps were fixed generically. The post-hoc reruns with the original wording, on rc2, rc3 and the release, reproduce and pass the recipient workflow. They are not held-out evidence.
 
-## Acceptance so far
+## Open, with reasons
 
-- **rc1** is `repro-local-0.2.0.tgz` from `30d97b6`, SHA-256 `f4245d77…`, in `release-0.2.0/artifacts/rc1/`. `acceptance.mjs` passed all eight checks:
-  - shopping-list and cafe-orders reproduced;
-  - cafe redaction canaries absent;
-  - not-reproduced;
-  - cancellation: exit 130, no REPRO.md, no leftover processes or profiles;
-  - both recipient workflows: a fresh-HOME clone fails as recorded, then passes after the controlled fix.
-- **Held-out pantry-scale, through the installed rc1 workbench page:**
-  - **Attempt 1, with the issue's own wording:** Needs your input. `Click "Crisp Waffles"` found no element, because the button's name is "Crisp Waffles Serves 4 · 30 min", and no suggestions were offered.
-  - **Attempt 2, with the page's full names (read from a screenshot and accessibility snapshot, not from source):** Repro asked which element "Plain flour" means, and one candidate was chosen. The result was **Reproduced** in 4/4 runs, and the fresh checkout reproduced.
-  - **Recipient:** in a fresh-HOME clone the test failed as recorded. The sealed fix (SHA-256 `dfe36e3b…`) was applied and the same test passed.
-  - **Follow-up:** the gaps from attempt 1 were fixed generically in `40165ad`. Any rerun with the original wording is post-hoc, not held-out.
+- **The second independent review and the coding-agent recipient trial were attempted but not run.** From about 21:05 PDT every subagent stalled before its first response, on every route and model tried. Both are recorded as not run.
+- **One unexplained browser failure:** `marked-empty-heading complete UI journey` failed once under load and passed in every other run. Its cause was not established.
+- **Not done:** Linux acceptance for 0.2.0, accessibility (deferred), human usability testing, and stacks other than JavaScript/npm.
 
-## Next actions
+## Workspace
 
-1. Triage the round-2 review (workflow `wf_60877fc2-db4`) and the coding-agent recipient trial (`release-0.2.0/agent-trial/`).
-2. Pack rc2 and rerun `acceptance.mjs` with nothing else loading the machine. Add the post-hoc held-out rerun with the original wording.
-3. Write the evidence report and examples (`docs/examples/`), finish the release notes, rerun both suites, tag `v0.2.0-beta` on `release/repro-report-0.2.0`, and push. No main merge, publish or deploy.
+- **The clone:** `~/Developer/Repro-dev`, outside iCloud.
+- **Acceptance:** `~/Developer/repro-acceptance/`. It holds the apps, the sealed held-out fix, the drivers in `release-0.2.0/tools/`, the cohorts `rc1` to `rc3` and `release`, the screenshots and the round-1 review findings.
+- **Still running:** the 0.1.0 walkthrough workbench from earlier in the session, at http://127.0.0.1:4318, from the scratchpad.
 
 ---
 

@@ -1,0 +1,174 @@
+[
+  {
+    "severity": "critical",
+    "title": "Pinned-step rule pins nothing when the bug is that a step fails to update the checked value, so reduction drops every step and still claims the same failure (src/report-flow.ts:263)"
+  },
+  {
+    "severity": "critical",
+    "title": "Input steps whose effect appears only through a later click (fill before Add) are neither pinned nor dependencies, so reduction removes them and changes what the expectation means (src/app-contract.ts:233)"
+  },
+  {
+    "severity": "major",
+    "title": "Trace truncates values to 120 characters and reads them without the check poll, so real changes are missed and their steps become removable (src/app-execution.ts:293)"
+  },
+  {
+    "severity": "major",
+    "title": "The shorter-steps confirmation runs have no error handling: an app start failure or cancellation there rejects the whole report instead of falling back (src/report-flow.ts:283)"
+  },
+  {
+    "severity": "minor",
+    "title": "Minimality is claimed for steps that were never tested because they are prerequisites of pinned steps, and the claim holds even when zero neighbours were tested (src/reducer.ts:231)"
+  },
+  {
+    "severity": "critical",
+    "title": "A chosen candidate selector stays hidden in the draft and gets applied to unrelated checks in later reports (web/report.tsx:123)"
+  },
+  {
+    "severity": "major",
+    "title": "Retrying with a selected element discards earlier selections, so two ambiguous checks loop forever in needs-input (web/report.tsx:312)"
+  },
+  {
+    "severity": "major",
+    "title": "Confirmation is not tied to what runs: pressing Enter before re-inspection finishes runs a start command or folder that was never shown (web/report.tsx:127)"
+  },
+  {
+    "severity": "minor",
+    "title": "Recording panel hides errors and has no way out: Done and polling failures leave it stuck (web/report.tsx:239)"
+  },
+  {
+    "severity": "minor",
+    "title": "REPRO.md fetch ignores the HTTP status, so an error body is shown, copied and offered for download as the report (web/report.tsx:293)"
+  },
+  {
+    "severity": "minor",
+    "title": "Web UI never sends reportBlocked, so a first-run failure that is not about the description can only loop as 'Needs your input' (web/report.tsx:122)"
+  },
+  {
+    "severity": "minor",
+    "title": "CLI: Ctrl-C at the confirmation prompt is reported as a generic environment failure (exit 2), not a cancellation (exit 130) (src/cli.ts:177)"
+  },
+  {
+    "severity": "minor",
+    "title": "Report page keeps polling every 700 ms after a permanent 404 (web/report.tsx:299)"
+  },
+  {
+    "severity": "major",
+    "title": "Cancel or timeout of the fresh-check test step leaves the fresh clone's app server running (it is in a separate process group), while the summary says its processes were stopped (src/report-flow.ts:421)"
+  },
+  {
+    "severity": "major",
+    "title": "A cancel during the last confirmation run is ignored: the fresh check then clones, checks out and runs the user's install command to completion (src/report-flow.ts:285)"
+  },
+  {
+    "severity": "major",
+    "title": "Closing the workbench while a demonstration is starting leaks the app process group and the visible Chromium (src/demonstration.ts:155)"
+  },
+  {
+    "severity": "major",
+    "title": "A capture run whose cleanup failed is counted as having met the expectation, so the report says 'intermittent ... 1 met the expectation' (src/report-flow.ts:249)"
+  },
+  {
+    "severity": "minor",
+    "title": "The base-path probe's stop receipt is discarded, so a leaked probe app is never reported (src/report-flow.ts:187)"
+  },
+  {
+    "severity": "minor",
+    "title": "A cancel that arrives while REPRO.md is being written marks the job 'cancelled', but the REPRO.md stays on disk and the API still serves it (src/service.ts:104)"
+  },
+  {
+    "severity": "minor",
+    "title": "A fresh-check command that hits its timeout is reported as 'exited with code null' instead of as a timeout (src/report-flow.ts:422)"
+  },
+  {
+    "severity": "critical",
+    "title": "Step reduction can delete the step that triggers a 'nothing happens' bug, then report Reproduced with a test that fails on a correct app (src/report-flow.ts:263)"
+  },
+  {
+    "severity": "major",
+    "title": "Frozen failure for contains/not-contains checks is re-evaluated on a 200-char prefix, so an identical failure is classified DIFFERENT_FAILURE (src/app-contract.ts:222)"
+  },
+  {
+    "severity": "major",
+    "title": "An inconclusive capture that still has an observation (for example APP_CLEANUP_FAILED) is counted as 'met the expectation', and no failure is frozen (src/report-flow.ts:249)"
+  },
+  {
+    "severity": "major",
+    "title": "The generated test compares against redacted frozen values, so in a clean clone the same failure is reported as 'Different' (src/report-flow.ts:304)"
+  },
+  {
+    "severity": "major",
+    "title": "Fresh-checkout result and test text claim more than the evidence for Intermittent and Blocked reports (src/report-flow.ts:501)"
+  },
+  {
+    "severity": "major",
+    "title": "'X should disappear / should not appear' checks can never give 'Not reproduced': the capture requires the element to exist (src/app-execution.ts:355)"
+  },
+  {
+    "severity": "minor",
+    "title": "REPRO.md says every run used 'a freshly started app' even when Repro reused an already-running external app (src/report-markdown.ts:206)"
+  },
+  {
+    "severity": "minor",
+    "title": "A DIFFERENT_FAILURE label is trusted without the parent re-evaluating it (src/case-worker-client.ts:190)"
+  },
+  {
+    "severity": "major",
+    "title": "Code-mode redaction rewrites the OS username and hostname inside the exported test, breaking it (src/report-flow.ts:306)"
+  },
+  {
+    "severity": "major",
+    "title": "App process is started before the try/finally, so a Chromium launch failure leaks the dev server and hangs node --test (src/report-test.ts:143)"
+  },
+  {
+    "severity": "major",
+    "title": "For an app in a repository subfolder, the local-changes patch is applied from that subfolder and silently drops changes outside it (src/report-markdown.ts:171)"
+  },
+  {
+    "severity": "major",
+    "title": "REPRO.md installs dependencies before the patch is applied, but the fresh check verified the opposite order (src/report-markdown.ts:174)"
+  },
+  {
+    "severity": "major",
+    "title": "Recipient instructions describe a deterministic failure for every status, so one passing run of an intermittent bug reads as a verified fix (src/report-markdown.ts:184)"
+  },
+  {
+    "severity": "major",
+    "title": "Frozen failure values are redacted before being embedded, so the same failure is labeled 'different' by the recipient's test and the fresh check (src/report-flow.ts:304)"
+  },
+  {
+    "severity": "major",
+    "title": "Extractor normalizes CRLF before checking SHA-256, so any patch from CRLF files can never be extracted (src/report-markdown.ts:77)"
+  },
+  {
+    "severity": "minor",
+    "title": "A local filesystem remote is shown as the clone URL and counted as shared (src/report-markdown.ts:169)"
+  },
+  {
+    "severity": "major",
+    "title": "The read-only inspect step runs code from the repository (and corepack downloads) before the user confirms (src/app-inspect.ts:279)"
+  },
+  {
+    "severity": "major",
+    "title": "The extractor also picks up file blocks inside log code blocks, so app output can plant .repro/.npmrc and get code run (src/report-markdown.ts:78)"
+  },
+  {
+    "severity": "major",
+    "title": "Username and hostname redaction in 'code' mode breaks the generated test and the patch for common usernames (src/redaction.ts:108)"
+  },
+  {
+    "severity": "major",
+    "title": "Remote URL redaction removes SSH remotes and remotes under the user's own account, so REPRO.md gives no clone URL (src/app-inspect.ts:177)"
+  },
+  {
+    "severity": "major",
+    "title": "Secrets typed into the Start command reach REPRO.md and the generated test unredacted (src/report-markdown.ts:181)"
+  },
+  {
+    "severity": "minor",
+    "title": "Withheld values stay in the manifest's step text and are written to manifest.resolved.json and report.json (src/app-contract.ts:251)"
+  },
+  {
+    "severity": "minor",
+    "title": "The guided demonstration runs the app's start command without the confirmation the docs require (src/server.ts:158)"
+  }
+]

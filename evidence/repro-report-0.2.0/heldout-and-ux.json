@@ -1,0 +1,194 @@
+{
+  "heldout-rc1-attempt-1": {
+    "plan": {
+      "folder": "~/Developer/repro-acceptance/apps/pantry-scale",
+      "title": "Recipe amounts change after adding recipes to the shopping list",
+      "wentWrong": "Open the app\nClick \"Add to shopping list\"\nClick \"Crisp Waffles\"\nClick \"Add to shopping list\"\nClick \"Buttermilk Pancakes\"\nThe Pancakes recipe now shows Plain flour 450 g, Eggs 4 and Butter 90 g, the shopping-list totals.",
+      "shouldHappen": "A recipe's own amounts should not change when it is added to the shopping list.\n\"Plain flour\" should show \"200 g\"",
+      "choose": []
+    },
+    "steps": [
+      {
+        "report": "http://127.0.0.1:59467/#/reports/5be5a732-dce1-45a8-a607-053922f73c6c"
+      },
+      {
+        "status": "Needs your input",
+        "summary": "Repro could not complete the first run: step-3 could not find its element on the page."
+      },
+      {
+        "questions": [
+          "step-3 could not find its element on the page. Check the wording of that step against the page."
+        ],
+        "candidates": []
+      }
+    ],
+    "final": {
+      "status": "Needs your input",
+      "reportId": "5be5a732-dce1-45a8-a607-053922f73c6c",
+      "path": null
+    },
+    "pageErrors": []
+  },
+  "heldout-rc1-attempt-2": {
+    "plan": {
+      "folder": "~/Developer/repro-acceptance/apps/pantry-scale",
+      "title": "Recipe amounts change after adding recipes to the shopping list",
+      "wentWrong": "Open the app\nClick \"Add to shopping list\"\nClick \"Crisp Waffles Serves 4 · 30 min\"\nClick \"Add to shopping list\"\nClick \"Buttermilk Pancakes Serves 4 · 25 min\"\nThe Pancakes recipe now shows Plain flour 450 g, Eggs 4 and Butter 90 g, the shopping-list totals.",
+      "shouldHappen": "A recipe's own amounts should not change when it is added to the shopping list.\n\"Plain flour\" should show \"200 g\"",
+      "choose": [
+        "450 g (in “Buttermilk Pancakes”)"
+      ]
+    },
+    "steps": [
+      {
+        "report": "http://127.0.0.1:59508/#/reports/c8a42b8d-b6e7-47a3-bbec-ed5b33e95d3c"
+      },
+      {
+        "status": "Needs your input",
+        "summary": "Repro could not complete the first run: check 1 could not be matched to exactly one element."
+      },
+      {
+        "questions": [
+          "Repro could not tell which element \"Plain flour\" refers to (check 1). Choose one of the elements below, or quote a CSS selector such as \"#total\". On the command line, answer with --check-element 1=SELECTOR.\n\nElements Repro found on the page\n#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)\nshows “450 g (in “Buttermilk Pancakes”)”\n#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)\nshows “Plain flour (in “Buttermilk Pancakes”)”\n#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(2)\nshows “450 g (in “Shopping list”)”\n#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(1)\nshows “Plain flour (in “Shopping list”)”\n#app > main > div > section > div > div > button:nth-of-type(1)\nshows “− (in “Fewer servings”)”\n#app > main > div > section > div > div > output\nshows “4 servings (in “Servings”)”\n#app > main > div > section > div > div > button:nth-of-type(2)\nshows “+ (in “More servings”)”\n#shopping-heading\nshows “Shopping list”"
+        ],
+        "candidates": [
+          "#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)\nshows “450 g (in “Buttermilk Pancakes”)”",
+          "#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)\nshows “Plain flour (in “Buttermilk Pancakes”)”",
+          "#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(2)\nshows “450 g (in “Shopping list”)”",
+          "#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(1)\nshows “Plain flour (in “Shopping list”)”",
+          "#app > main > div > section > div > div > button:nth-of-type(1)\nshows “− (in “Fewer servings”)”",
+          "#app > main > div > section > div > div > output\nshows “4 servings (in “Servings”)”",
+          "#app > main > div > section > div > div > button:nth-of-type(2)\nshows “+ (in “More servings”)”",
+          "#shopping-heading\nshows “Shopping list”"
+        ]
+      },
+      {
+        "report": "http://127.0.0.1:59508/#/reports/72a34473-fc77-4fe7-9475-12ee42475ab9"
+      },
+      {
+        "status": "Reproduced",
+        "summary": "Reproduced: the failure occurred in 4 of 4 conclusive runs from a fresh start (the capture and 3 repetitions)."
+      }
+    ],
+    "final": {
+      "status": "Reproduced",
+      "reportId": "72a34473-fc77-4fe7-9475-12ee42475ab9",
+      "markdown": "~/Developer/repro-acceptance/release-0.2.0/heldout/run-2/REPRO.md",
+      "path": "~/Developer/repro-acceptance/release-0.2.0/rc1/workspace/.repro-runs/workbench/reports/72a34473-fc77-4fe7-9475-12ee42475ab9/REPRO.md"
+    },
+    "pageErrors": []
+  },
+  "posthoc-release": {
+    "plan": {
+      "folder": "~/Developer/repro-acceptance/apps/pantry-scale",
+      "title": "Recipe amounts change after adding recipes to the shopping list",
+      "wentWrong": "Open the app\nClick \"Add to shopping list\"\nClick \"Crisp Waffles\"\nClick \"Add to shopping list\"\nClick \"Buttermilk Pancakes\"\nThe Pancakes recipe now shows Plain flour 450 g, Eggs 4 and Butter 90 g, the shopping-list totals.",
+      "shouldHappen": "A recipe's own amounts should not change when it is added to the shopping list.\n\"Plain flour\" should show \"200 g\"",
+      "choose": [
+        "450 g (in “Buttermilk Pancakes”)"
+      ]
+    },
+    "steps": [
+      {
+        "report": "http://127.0.0.1:49501/#/reports/edb0da7f-659d-41f2-8c81-718124b03c9c"
+      },
+      {
+        "status": "Needs your input",
+        "summary": "Repro could not complete the first run: check 1 could not be matched to exactly one element."
+      },
+      {
+        "questions": [
+          "Repro could not tell which element \"Plain flour\" refers to (check 1). Choose one of the elements below, or quote a CSS selector such as \"#total\". On the command line, answer with --check-element 1=SELECTOR.\n\nElements Repro found on the page\n#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)\nshows “450 g (in “Buttermilk Pancakes”)”\n#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)\nshows “Plain flour (in “Buttermilk Pancakes”)”\n#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(2)\nshows “450 g (in “Shopping list”)”\n#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(1)\nshows “Plain flour (in “Shopping list”)”\n#app > main > div > section > div > div > button:nth-of-type(1)\nshows “− (in “Fewer servings”)”\n#app > main > div > section > div > div > output\nshows “4 servings (in “Servings”)”\n#app > main > div > section > div > div > button:nth-of-type(2)\nshows “+ (in “More servings”)”\n#shopping-heading\nshows “Shopping list”"
+        ],
+        "candidates": [
+          "#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2)\nshows “450 g (in “Buttermilk Pancakes”)”",
+          "#app > main > div > section > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)\nshows “Plain flour (in “Buttermilk Pancakes”)”",
+          "#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(2)\nshows “450 g (in “Shopping list”)”",
+          "#app > main > div > aside > ul > li:nth-of-type(6) > label > span:nth-of-type(1)\nshows “Plain flour (in “Shopping list”)”",
+          "#app > main > div > section > div > div > button:nth-of-type(1)\nshows “− (in “Fewer servings”)”",
+          "#app > main > div > section > div > div > output\nshows “4 servings (in “Servings”)”",
+          "#app > main > div > section > div > div > button:nth-of-type(2)\nshows “+ (in “More servings”)”",
+          "#shopping-heading\nshows “Shopping list”"
+        ]
+      },
+      {
+        "report": "http://127.0.0.1:49501/#/reports/9038940f-9b02-41ab-8f81-648878d28428"
+      },
+      {
+        "status": "Reproduced",
+        "summary": "Reproduced: the failure occurred in 4 of 4 conclusive runs from a fresh start (the capture and 3 repetitions)."
+      }
+    ],
+    "final": {
+      "status": "Reproduced",
+      "reportId": "9038940f-9b02-41ab-8f81-648878d28428",
+      "markdown": "~/Developer/repro-acceptance/release-0.2.0/heldout/posthoc-release/REPRO.md",
+      "path": "~/Developer/repro-acceptance/release-0.2.0/release/workspace/.repro-runs/workbench/reports/9038940f-9b02-41ab-8f81-648878d28428/REPRO.md"
+    },
+    "pageErrors": []
+  },
+  "ux-step-suggestions-release": {
+    "plan": {
+      "folder": "~/Developer/repro-acceptance/apps/pantry-scale",
+      "title": "Misspelled step (UX check)",
+      "wentWrong": "Open the app\nClick \"Crispy Waffles\"",
+      "shouldHappen": "\"Plain flour\" should show \"200 g\"",
+      "choose": []
+    },
+    "steps": [
+      {
+        "report": "http://127.0.0.1:49663/#/reports/784fe753-0cbd-4146-8071-61b4c05d7be4"
+      },
+      {
+        "status": "Needs your input",
+        "summary": "Repro could not complete the first run: Step 2 (Click \"Crispy Waffles\") could not find its element on the page."
+      },
+      {
+        "questions": [
+          "Step 2 (Click \"Crispy Waffles\") could not find its element on the page. Reword that step with one of the names below, exactly as shown or its beginning.\n\nElements on the page you may mean:\n\nbutton “Crisp Waffles Serves 4 · 30 min”\nfield “Search recipes”\nbutton “Buttermilk Pancakes Serves 4 · 25 min”\nbutton “Banana Bread Serves 8 · 70 min”\nbutton “Roast Tomato Soup Serves 4 · 50 min”\nbutton “Fewer servings”\nbutton “More servings”\nbutton “Add to shopping list”"
+        ],
+        "candidates": []
+      }
+    ],
+    "final": {
+      "status": "Needs your input",
+      "reportId": "784fe753-0cbd-4146-8071-61b4c05d7be4",
+      "path": null
+    },
+    "pageErrors": []
+  },
+  "heldout-rc1-recipient": {
+    "report": "~/Developer/repro-acceptance/release-0.2.0/heldout/run-2/REPRO.md",
+    "repository": "~/Developer/repro-acceptance/apps/pantry-scale",
+    "scriptExit": 0,
+    "testExitBefore": 1,
+    "beforeMatchesReported": true,
+    "beforeExpectationFailed": true,
+    "setupAndFirstRunMs": 13740,
+    "appFolder": "~/Developer/repro-acceptance/release-0.2.0/heldout/recipient-1/work/pantry-scale",
+    "fix": {
+      "path": "~/Developer/repro-acceptance/sealed/heldout/fix.patch",
+      "sha256": "dfe36e3b9a6db1ab0e870c1db045daf00c6b513155b8417f640c52676f0e5b2e"
+    },
+    "testExitAfter": 0,
+    "afterSatisfied": true,
+    "passed": true
+  },
+  "posthoc-release-recipient": {
+    "report": "~/Developer/repro-acceptance/release-0.2.0/heldout/posthoc-release/REPRO.md",
+    "repository": "~/Developer/repro-acceptance/apps/pantry-scale",
+    "scriptExit": 0,
+    "testExitBefore": 1,
+    "beforeMatchesReported": true,
+    "beforeExpectationFailed": true,
+    "setupAndFirstRunMs": 17763,
+    "appFolder": "~/Developer/repro-acceptance/release-0.2.0/heldout/posthoc-release-recipient/work/pantry-scale",
+    "fix": {
+      "path": "~/Developer/repro-acceptance/sealed/heldout/fix.patch",
+      "sha256": "dfe36e3b9a6db1ab0e870c1db045daf00c6b513155b8417f640c52676f0e5b2e"
+    },
+    "testExitAfter": 0,
+    "afterSatisfied": true,
+    "passed": true
+  }
+}
