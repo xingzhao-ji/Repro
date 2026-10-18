@@ -33,7 +33,8 @@ test('a guided demonstration turns clicks, typing and a marked element into step
     const finished = await post(`/api/demonstrations/${started.demonstration.id}/finish`, {}).then(response => response.json()) as { demonstration: { status: string; steps: string[]; checks: string[]; notes: string[] } };
     assert.equal(finished.demonstration.status, 'finished');
     assert.deepEqual(finished.demonstration.steps, ['Open the app', 'Type "Write report" into "New task"', 'Click "Add task"', 'Type "Send invoice" into "New task"', 'Press Enter', 'Check "Done: Send invoice"', 'Uncheck "Done: Send invoice"']);
-    assert.deepEqual(finished.demonstration.checks, ['"#remaining" should show "0 tasks remaining"']);
+    assert.deepEqual(finished.demonstration.checks, ['"#remaining" should show "(expected value)"']);
+    assert.deepEqual(finished.demonstration.notes, ['"#remaining" showed "0 tasks remaining" during the demonstration']);
     // The recorded text is valid input for the report grammar.
     const steps = parseSteps(finished.demonstration.steps.join('\n'));
     assert.deepEqual([steps.actions.length, steps.problems], [7, []]);

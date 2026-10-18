@@ -100,7 +100,9 @@ const recorderScript = () => {
       document.documentElement.style.cursor = '';
       const name = nameOf(element) ?? (element.id ? `#${element.id}` : null);
       const text = ((element as HTMLElement).innerText ?? '').replace(/\s+/g, ' ').trim().slice(0, 80);
-      void global.__reproCheck(name ? `${quote(name)} should show ${quote(text || 'the expected value')}` : '# Repro could not name the element you marked; write this check yourself');
+      // The page shows the wrong value now; the reporter must type what it should show.
+      if (name) { void global.__reproCheck(`${quote(name)} should show "(expected value)"`); void global.__reproStep(`# ${quote(name)} showed ${quote(text || '(nothing)')} during the demonstration`); }
+      else void global.__reproCheck('# Repro could not name the element you marked; write this check yourself');
       return;
     }
     if (element instanceof HTMLInputElement && ['text', 'email', 'password', 'search', 'number', 'tel', 'url'].includes(element.type) || element instanceof HTMLTextAreaElement || element instanceof HTMLSelectElement) return;

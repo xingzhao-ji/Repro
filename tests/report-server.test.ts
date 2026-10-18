@@ -33,6 +33,8 @@ test('report endpoints inspect and prepare without running, require confirmation
     const clear = await post('/api/reports/prepare', { app: { repository: folder }, wentWrong: 'Click "Buy"', shouldHappen: '"#total" should show "$5.00"' }).then(response => response.json()) as { questions: unknown[]; understood: { steps: string[]; checks: string[] } };
     assert.deepEqual(clear.questions, []);
     assert.deepEqual(clear.understood.steps, ['Open `/`', 'Click "Buy"']);
+    const placeholder = await post('/api/reports/prepare', { app: { repository: folder }, wentWrong: 'Click "Buy"', shouldHappen: '"#total" should show "(expected value)"' }).then(response => response.json()) as { questions: { question: string }[] };
+    assert.match(placeholder.questions[0]!.question, /Replace "\(expected value\)"/, 'a demonstration placeholder is never run as an expectation');
     const unconfirmed = await post('/api/reports', { app: { repository: folder }, wentWrong: 'Click "Buy"', shouldHappen: '"#total" should show "$5.00"', requestKey: 'k1' });
     assert.equal(unconfirmed.status, 400);
     assert.match((await unconfirmed.json() as { error: { reason: string } }).error.reason, /Confirm/);

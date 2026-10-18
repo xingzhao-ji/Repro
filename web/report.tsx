@@ -84,6 +84,8 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
   const [recent, setRecent] = useState<{ id: string; createdAt: string; status: string; title: string | null }[]>([]);
   const requestKey = useRef<string>('');
   const confirmBox = useRef<HTMLInputElement>(null);
+  const expectField = useRef<HTMLTextAreaElement>(null);
+  const [demoNote, setDemoNote] = useState('');
   const update = (patch: Partial<Draft>) => setDraft(current => { const next = { ...current, ...patch }; saveDraft(next); return next; });
   useEffect(() => { void call<{ reports: typeof recent }>('/api/reports').then(data => setRecent(data.reports.slice(0, 6))).catch(() => undefined); }, []);
   // Inspect the app (read-only) shortly after the location changes.
@@ -101,7 +103,8 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
   const steps = useMemo(() => parseSteps(draft.wentWrong), [draft.wentWrong]);
   const expected = useMemo(() => parseExpectation(draft.shouldHappen), [draft.shouldHappen]);
   const needsStart = app?.app.missing.some(item => item.field === 'start') ?? false;
-  const ready = Boolean(app && !app.app.missing.length && steps.actions.length && expected.checks.length && !steps.problems.length && !expected.problems.length);
+  const placeholder = expected.checks.some(check => check.expected === '(expected value)');
+  const ready = Boolean(app && !app.app.missing.length && steps.actions.length && expected.checks.length && !steps.problems.length && !expected.problems.length && !placeholder);
   const choose = async () => {
     setMessage('');
     try { const result = await call<{ path: string | null }>('/api/app/choose-folder', token, {}); if (result.path) update({ folder: result.path }); }
@@ -171,14 +174,16 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
       </label>
       <p id="steps-hint" className="field-hint">Quote what you clicked or typed into, as it appears on the page. Lines that are not steps are kept as your notes.</p>
       <label className="report-field">What should happen?
-        <textarea value={draft.shouldHappen} onChange={event => update({ shouldHappen: event.target.value })} rows={3} spellCheck={false} aria-describedby="expect-hint"
+        <textarea ref={expectField} value={draft.shouldHappen} onChange={event => update({ shouldHappen: event.target.value })} rows={3} spellCheck={false} aria-describedby="expect-hint"
           placeholder={'"#items-left" should show "0 items left"'} />
       </label>
       <p id="expect-hint" className="field-hint">Name the element and the value, e.g. <code>"Total" should show "$8.10"</code>, <code>"Saved" should appear</code>, <code>there should be no errors</code>.</p>
       {app && !app.app.missing.length && <Demonstration token={token} app={draft} onFinished={(recorded, checks) => {
         update({ wentWrong: recorded, ...(checks ? { shouldHappen: checks } : {}) });
-        setMessage(checks ? 'Your demonstration was added. In “What should happen?”, replace the marked element’s current text with the value it should show.' : 'Your demonstration was added. Now say what should happen.');
+        setDemoNote(checks ? 'Your steps were added. In “What should happen?”, replace (expected value) with what the marked element should show.' : 'Your steps were added. Now say what should happen.');
+        requestAnimationFrame(() => { const field = expectField.current; if (!field) return; field.focus(); const at = field.value.indexOf('(expected value)'); if (at >= 0) field.setSelectionRange(at, at + '(expected value)'.length); });
       }} />}
+      {demoNote && <p className="question" role="status">{demoNote}</p>}
       <Understood steps={steps} expected={expected} />
       {[...questionsFor('steps'), ...questionsFor('expectation')].map((question, index) => <p key={index} className="question" role="alert">{question.question}{question.suggestion ? ` ${question.suggestion}` : ''}</p>)}
       <details className="grammar"><summary>How to write steps and checks</summary><Grammar /></details>
@@ -194,7 +199,7 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
       <label className="consent"><input ref={confirmBox} type="checkbox" checked={confirmed} onChange={event => setConfirmed(event.target.checked)} disabled={!app} />
         <span>The steps and checks above are right, and Repro may run them as described.</span></label>
       <button className="primary generate" type="submit" disabled={busy || !token || !ready}>{busy ? 'Starting…' : 'Generate report'}</button>
-      {!ready && <p className="field-hint">{!app ? 'Add your app folder (or a running URL) first.' : !steps.actions.length ? 'Describe at least one step.' : !expected.checks.length ? 'Say what should happen, naming the element and the value.' : 'Resolve the highlighted lines first.'}</p>}
+      {!ready && <p className="field-hint">{!app ? 'Add your app folder (or a running URL) first.' : !steps.actions.length ? 'Describe at least one step.' : !expected.checks.length ? 'Say what should happen, naming the element and the value.' : placeholder ? 'Replace (expected value) with what the element should show.' : 'Resolve the highlighted lines first.'}</p>}
       {message && <p className="question" role="status">{message}</p>}
     </section>
     {recent.length > 0 && <section className="recent" aria-labelledby="recent-heading"><h2 id="recent-heading">Recent reports</h2>

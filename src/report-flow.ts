@@ -51,6 +51,8 @@ export interface ReportOutcome {
 interface RunRecord { label: string; result: RunResult; serverLogs: string[]; stopped: boolean }
 
 const MAX_TEXT = 6000;
+/** Written by a guided demonstration where only the reporter knows the expected value. */
+export const EXPECTED_PLACEHOLDER = '(expected value)';
 const now = () => new Date().toISOString();
 export function slugify(text: string): string {
   const slug = text.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
@@ -91,6 +93,7 @@ export async function prepareReport(request: ReportRequest): Promise<PreparedRep
   for (const problem of steps.problems) questions.push({ field: 'steps', question: `${problem.message}${problem.text ? ` (“${problem.text.slice(0, 80)}”)` : ''}`, line: problem.line, suggestion: problem.suggestion });
   if (!expectation.checks.length) questions.push({ field: 'expectation', question: 'What exactly should happen? Name the element and the value, for example: "Total" should show "$8.10", or "#items-left" should show "2 items left".' });
   for (const problem of expectation.problems) questions.push({ field: 'expectation', question: `${problem.message}${problem.text ? ` (“${problem.text.slice(0, 80)}”)` : ''}`, line: problem.line, suggestion: problem.suggestion });
+  for (const check of expectation.checks) if (check.expected === EXPECTED_PLACEHOLDER) questions.push({ field: 'expectation', question: `Replace "${EXPECTED_PLACEHOLDER}" in “${check.text.slice(0, 60)}” with the value the element should show.` });
   for (const check of expectation.checks) if (classifyInput(check.expected) !== 'plain') questions.push({ field: 'expectation', question: `The expected value for “${check.text.slice(0, 60)}” looks like a credential or personal data. Use test data instead; Repro does not put such values in reports.` });
   if (!request.confirmed && !questions.length) questions.push({ field: 'confirm', question: 'Review what Repro understood and confirm it before Repro starts your app.' });
   return { profile, steps, expectation, questions, understood };
