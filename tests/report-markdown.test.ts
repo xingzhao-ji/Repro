@@ -90,3 +90,15 @@ test('REPRO.md embeds every file as a hash-checked block that survives backticks
   assert.match(none.stderr, /No \.repro files found/);
   assert.deepEqual(extractReproFiles(hostile), []);
 });
+
+test('only remotes another machine can reach are used in the clone command', async () => {
+  const { shareableRemote } = await import('../src/report-markdown.js');
+  for (const url of ['https://github.com/acme/shop.git', 'git@github.com:acme/shop.git', 'ssh://git@host/shop.git']) assert.equal(shareableRemote(url), true, url);
+  for (const url of ['~/Developer/shop.git', '/srv/git/shop.git', 'file:///srv/shop.git', '../shop']) assert.equal(shareableRemote(url), false, url);
+  const base = data([file('.repro/demo.test.mjs', 'x\n')]);
+  const local = renderReport({ ...base, app: { ...base.app, git: { ...base.app.git!, remotes: [{ name: 'origin', url: '~/Developer/shop.git' }] } } });
+  assert.match(local, /git clone <repository URL or path> demo/);
+  assert.match(local, /origin remote is a path on the reporter’s machine/);
+  const redacted = renderReport({ ...base, app: { ...base.app, git: { ...base.app.git!, remotes: [{ name: 'origin', url: 'https://[redacted url-credentials]@git.example.invalid/shop.git' }] } } });
+  assert.match(redacted, /git clone https:\/\/git\.example\.invalid\/shop\.git demo/);
+});

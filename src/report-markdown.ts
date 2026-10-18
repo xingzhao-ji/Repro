@@ -95,6 +95,12 @@ export function extractReproFiles(markdown: string): { path: string; content: st
   }));
 }
 
+/** A remote another machine can reach: a URL with a network scheme or scp-style host:path, never a local path. */
+export function shareableRemote(url: string): boolean {
+  return /^(?:https?|ssh|git):\/\//i.test(url) && !url.includes('[redacted') || /^[\w.-]+@[\w.-]+:[^/]/.test(url);
+}
+/** The clone URL without Repro's redaction marker: the recipient authenticates with their own credentials. */
+const cloneUrl = (url: string) => url.replace('[redacted url-credentials]@', '');
 function statusSentence(data: ReportData): string {
   return `**${STATUS_LABEL[data.status]}** — ${data.statusDetail}`;
 }
@@ -105,7 +111,7 @@ function sourceSection(data: ReportData): string {
   const rows = [
     ['Commit', inline(git.commit)],
     ['Branch', git.branch ? inline(git.branch) : '_(detached HEAD)_'],
-    ['Remote', remote ? `${inline(remote.url)} (${remote.name})` : '_none configured — share the repository or a git bundle with the recipient_'],
+    ['Remote', remote ? `${inline(remote.url)} (${remote.name})${shareableRemote(cloneUrl(remote.url)) ? '' : ' — a path on the reporter’s machine, not reachable from elsewhere'}` : '_none configured — share the repository or a git bundle with the recipient_'],
     ['On a remote branch', git.pushedTo.length ? git.pushedTo.map(inline).join(', ') : '_no — push the commit before sharing this report_'],
     ['App folder in repository', inline(git.appPath)],
     ['Local changes', git.dirty ? `yes — ${git.changed.length} changed tracked file(s), ${git.untracked.length} untracked file(s)` : 'none (working tree clean)'],
@@ -166,8 +172,10 @@ export function renderReport(data: ReportData): string {
   if (git) {
     const remote = git.remotes.find(item => item.name === 'origin') ?? git.remotes[0];
     const folder = data.app.name.replace(/^@[^/]+\//, '').replace(/[^A-Za-z0-9._-]/g, '-');
-    out.push(code([`git clone ${remote && !remote.url.includes('[redacted') ? remote.url : '<repository URL or path>'} ${folder}`, `cd ${folder}`, `git checkout ${git.commit}`, ...(git.appPath !== '.' ? [`cd ${git.appPath}`] : [])].join('\n'), 'sh'));
+    const reachable = remote && shareableRemote(cloneUrl(remote.url)) ? remote : null;
+    out.push(code([`git clone ${reachable ? cloneUrl(reachable.url) : '<repository URL or path>'} ${folder}`, `cd ${folder}`, `git checkout ${git.commit}`, ...(git.appPath !== '.' ? [`cd ${git.appPath}`] : [])].join('\n'), 'sh'));
     if (!remote) out.push('', 'The repository has no remote configured. Use any copy that contains this commit, for example a pushed branch or `git bundle`.');
+    else if (!reachable) out.push('', `The repository's ${remote.name} remote is a path on the reporter’s machine (${inline(remote.url)}), so it is not reachable from elsewhere. Use any copy that contains this commit, for example a pushed branch or \`git bundle\`.`);
     if (git.dirty && data.app.patch) out.push('', 'This bug was reproduced with uncommitted local changes. The step 3 command also writes `.repro/local-changes.patch`; apply it right after step 3 with `git apply .repro/local-changes.patch`.');
     else if (git.dirty) out.push('', '**The local changes Repro tested could not be embedded** (see “Source revision and local changes”), so a clean checkout may not reproduce the bug.');
   } else out.push('No exact revision is available (the app folder is not a git repository). Use the same copy of the app the reporter used.');
