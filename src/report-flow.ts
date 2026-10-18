@@ -53,7 +53,11 @@ interface RunRecord { label: string; result: RunResult; serverLogs: string[]; st
 const MAX_TEXT = 6000;
 const now = () => new Date().toISOString();
 export function slugify(text: string): string {
-  return text.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '').slice(0, 48).replace(/-+$/, '') || 'bug';
+  const slug = text.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  if (slug.length <= 48) return slug || 'bug';
+  // Cut at a word boundary so file names stay readable.
+  const cut = slug.slice(0, 49);
+  return (cut.lastIndexOf('-') > 20 ? cut.slice(0, cut.lastIndexOf('-')) : slug.slice(0, 48)).replace(/-+$/, '');
 }
 function titleFrom(request: ReportRequest, profile: AppProfile): string {
   const explicit = request.title?.trim();
@@ -282,7 +286,8 @@ export async function generateReport(request: ReportRequest, context: { output: 
         final = reduced;
         reductionNote = `This is the shortest sequence Repro verified within its search budget: ${reduced.actions.length} of ${resolved.actions.length} reported steps, confirmed in ${repetitions} more fresh runs. Repro kept every step that changed a checked value and removed only steps that did not, so the expected value still means the same thing. ${reduction.minimality === 'dependency-group-1-minimal' ? 'Removing any other single remaining step stopped the failure; shorter sequences might still exist.' : 'Some neighbouring sequences were inconclusive, so it may not be minimal.'}`;
       } else reductionNote = `Repro found a shorter sequence (${reduced.actions.length} steps), but it did not fail in all ${repetitions} confirmation runs, so the full reported steps are used.`;
-    } else reductionNote = reduction.status === 'complete' ? 'Repro tried removing steps; every step was needed to keep the failure, so these are the reported steps.' : `Repro could not shorten the steps within its budget (${reduction.reason})`;
+    } else if (reduction.trials.length <= 1 && reduction.status === 'complete') reductionNote = 'These are the reported steps. Every step changed a checked value or prepared a step that did, so Repro removed none.';
+    else reductionNote = reduction.status === 'complete' ? `Repro tried removing steps (${reduction.trials.length - 1} trials); none kept the same failure, so these are the reported steps.` : `Repro could not shorten the steps within its budget (${reduction.reason})`;
   } else if (status === 'reproduced' && resolved.actions.length > 2) reductionNote = 'These are the reported steps. Every step changed a checked value or prepared one that did, so Repro removed none.';
   else if (status === 'reproduced') reductionNote = 'These are the reported steps; they were already short.';
   else if (status !== 'blocked') reductionNote = `These are the reported steps. Repro shortens steps only when the failure reproduces consistently.`;

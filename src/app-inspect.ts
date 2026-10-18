@@ -147,6 +147,8 @@ async function packageFacts(directory: string, files: Set<string>): Promise<Pack
 }
 
 const MAX_PATCH = 256 * 1024, MAX_UNTRACKED = 64 * 1024;
+/** Untracked files are embedded only when they look like source or configuration; notes, logs and data are listed by name. */
+const SOURCE_FILE = /\.(?:[cm]?[jt]sx?|vue|svelte|astro|css|scss|sass|less|html?|json|ya?ml|toml|graphql|gql|sql|py|rb|go|rs|java|kt|php|cs|swift|sh|svg)$|(?:^|\/)(?:Dockerfile|Makefile|Procfile)$/i;
 async function isText(path: string, limit: number): Promise<boolean> {
   try {
     const handle = await open(path, constants.O_RDONLY | constants.O_NOFOLLOW);
@@ -202,6 +204,7 @@ export async function gitIdentity(directory: string): Promise<GitIdentity | null
   }
   for (const path of untracked) {
     if (isSensitiveFileName(path)) { omitted.push({ path, reason: 'sensitive file name; content withheld' }); continue; }
+    if (!SOURCE_FILE.test(path)) { omitted.push({ path, reason: 'untracked file that is not source code or configuration; not embedded' }); continue; }
     if (!(await isText(join(root, path), MAX_UNTRACKED))) { omitted.push({ path, reason: 'untracked binary or large file; not embedded' }); continue; }
     const diff = await git(root, ['diff', '--no-index', '--no-color', '--no-ext-diff', '--', '/dev/null', path]);
     patch += diff.stdout;

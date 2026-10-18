@@ -38,6 +38,7 @@ test('a git npm app is detected from package.json with its exact revision, local
   await writeFile(join(directory, 'src/discount.js'), 'export const discount = 0.1;\n');
   await writeFile(join(directory, '.env.local'), 'STRIPE_SECRET=sk_live_51ReproCanaryKey9d8f7a6b5c4e3d2f1a0b9c8d\n');
   await writeFile(join(directory, 'logo.png'), Buffer.from([0x89, 0x50, 0x4e, 0x47, 0, 0, 1, 2]));
+  await writeFile(join(directory, 'notes-private.txt'), 'call jane about the release\n');
   const before = await tree(join(directory, '.git'));
   const profile = await inspectApp({ repository: directory });
   assert.equal(await tree(join(directory, '.git')), before, 'inspection never writes the repository');
@@ -58,7 +59,8 @@ test('a git npm app is detected from package.json with its exact revision, local
   assert.match(git.patch, /item\.price \* item\.qty/);
   assert.match(git.patch, /new file mode 100644\n[\s\S]*\+\+\+ b\/src\/discount\.js/);
   assert.equal(git.patch.includes('sk_live_'), false);
-  assert.deepEqual(git.omitted.map(item => [item.path, item.reason.split(';')[0]]).sort(), [['.env.local', 'sensitive file name'], ['logo.png', 'untracked binary or large file']]);
+  assert.deepEqual(git.omitted.map(item => [item.path, item.reason.split(';')[0]]).sort(), [['.env.local', 'sensitive file name'], ['logo.png', 'untracked file that is not source code or configuration'], ['notes-private.txt', 'untracked file that is not source code or configuration']]);
+  assert.equal(git.patch.includes('call jane'), false);
   assert.ok(profile.notes.some(note => /not on any remote-tracking branch/.test(note)));
   // The patch reproduces the developer's state in a separate clone.
   const clone = join(directory, '..', `${directory.split('/').pop()}-clone`);
