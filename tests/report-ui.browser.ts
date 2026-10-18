@@ -49,7 +49,8 @@ test('the one-page flow: app folder and description in, progress and cancellatio
     await understood.getByText('Type "Write report" into "New task"').waitFor();
     assert.match(await understood.innerText(), /Uncheck "Done: Send invoice"[\s\S]*It will check that:[\s\S]*"Tasks left" text is "2 tasks remaining"/);
     assert.match(await understood.innerText(), /Kept as your notes: “The counter says "0 tasks remaining"”/);
-    assert.match(await page.locator('.scope').innerText(), /Run `npm run start`[\s\S]*block every request to a host other than this machine[\s\S]*Nothing is uploaded/);
+    assert.match(await page.locator('.scope').innerText(), /Run npm run start in [\s\S]*block every request to a host other than this machine[\s\S]*Nothing is uploaded/);
+    assert.equal(await page.locator('.scope code', { hasText: 'npm run start' }).count(), 1, 'commands are shown as code');
     assert.equal(await generate.isDisabled(), false);
     await generate.click();
     await page.getByText('Confirm what Repro will run, then generate the report.').waitFor();

@@ -1,19 +1,45 @@
-# Repro — local failure compiler
+# Repro — turn a bug in your local web app into one REPRO.md
 
-Repro captures an explicitly declared browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its local workbench and CLI share the same runner. Registered buggy and fixed revisions execute against the same frozen expected behavior in fresh browser state.
+Point Repro at your own local web app and write what went wrong and what should happen. Repro then:
 
-**Release 0.1.0 (practical beta)** ships as `repro-local-0.1.0.tgz`. It supports the synthetic stale-response alpha plus three pinned public repository bugs: morphdom textarea updates, htmx delegated checkbox events and Marked empty headings. They run against actual upstream source in small integration pages.
+- starts the app in a fresh browser and reproduces the bug from a fresh state;
+- shortens the steps;
+- writes **one Markdown file**.
 
-The release builds on implementation `9aec7fe`, which passed native macOS arm64 and fresh isolated Linux arm64 acceptance ([native](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](evidence/LINUX-THREE-CASE-RESUME.md)). It adds the cleanup-basis diagnostics and two cancellation fixes found while verifying the installed package. Those changes need fresh evidence, so verification of the exact release tarball is recorded separately in [`evidence/PRACTICAL-BETA-RELEASE.md`](evidence/PRACTICAL-BETA-RELEASE.md). A documentation-only commit adds that report after the release commit.
+The file gives a teammate or coding agent the status, the expected and observed behavior, the exact commit with any local changes, the environment, sanitized logs, and a **regression test embedded as code blocks**. They can recreate the test with one command, reproduce the failure, fix the original app, and run the same command to check the fix. They do not need Repro or an AI service.
 
-Read [INSTALL](docs/INSTALL.md), [USAGE](docs/USAGE.md), [TROUBLESHOOTING](docs/TROUBLESHOOTING.md) and the [release notes](docs/RELEASE-NOTES.md). The notes cover what changed and the known issues: one historical native htmx shutdown failure on an earlier build, cause unresolved, is preserved. They are selected development cases, not held-out effectiveness or arbitrary website support; see the [frozen protocol](benchmarks/PRACTICAL-BETA-PROTOCOL.md). Earlier [release evidence](evidence/RELEASE.md) belongs to the synthetic alpha. Accessibility remains explicitly deferred and unverified. Real-user recording, PostgreSQL adapters and public untrusted execution remain unsupported.
+Repro does not invent results:
 
-## Install the release
+- every status and observed value comes from actual runs;
+- suspected causes are kept apart from verified ones;
+- what is missing or unsupported is stated in the file.
+
+**Release 0.2.0** adds this developer workflow to the 0.1.0 practical beta, whose built-in cases remain as examples. Start with the [QUICKSTART](docs/QUICKSTART.md). The supported apps, step grammar, redaction and limits are in [LOCAL-APPS](docs/LOCAL-APPS.md), and the design is in [ADR 0005](docs/adr/0005-local-app-repro-report.md). The [release notes](docs/RELEASE-NOTES.md) list what changed. Accessibility remains deferred and unverified.
+
+```sh
+npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.0.tgz
+export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
+npx --no-install playwright install chromium --only-shell
+npx --no-install repro serve            # open http://127.0.0.1:4318
+# or: npx --no-install repro report --app /path/to/app --went-wrong '…' --should-happen '…'
+```
+
+## Built-in examples and registered cases (from 0.1.0)
+
+Repro began as a local failure compiler for explicitly registered cases. It captures a declared browser failure, reduces its action sequence, and exports a readable test and integrity-checked capsule. Its workbench (now at `#/new`, under **Built-in examples**) and CLI share the same runner. Registered buggy and fixed revisions execute against the same frozen expected behavior in fresh browser state.
+
+**Release 0.1.0 (practical beta)** shipped as `repro-local-0.1.0.tgz`. It supports the synthetic stale-response alpha plus three pinned public repository bugs: morphdom textarea updates, htmx delegated checkbox events and Marked empty headings. They run against actual upstream source in small integration pages.
+
+The release builds on implementation `9aec7fe`, which passed native macOS arm64 and fresh isolated Linux arm64 acceptance ([native](evidence/STARTUP-CLEANUP-NATIVE-ACCEPTANCE.md), [Linux](evidence/LINUX-THREE-CASE-RESUME.md)). It adds the cleanup-basis diagnostics and two cancellation fixes found while verifying the installed package. Those changes need fresh evidence, so verification of the exact release tarball is recorded separately in [`evidence/PRACTICAL-BETA-RELEASE.md`](evidence/PRACTICAL-BETA-RELEASE.md). A documentation-only commit adds that report after the release commit. Release 0.2.0 changes runtime bytes, so the 0.1.0 platform evidence does not transfer to it.
+
+Read [INSTALL](docs/INSTALL.md), [USAGE](docs/USAGE.md), [TROUBLESHOOTING](docs/TROUBLESHOOTING.md) and the [release notes](docs/RELEASE-NOTES.md). The notes cover what changed and the known issues: one historical native htmx shutdown failure on an earlier build, cause unresolved, is preserved. The registered cases are selected development cases, not held-out effectiveness or arbitrary website support; see the [frozen protocol](benchmarks/PRACTICAL-BETA-PROTOCOL.md). Earlier [release evidence](evidence/RELEASE.md) belongs to the synthetic alpha. Real-user recording, PostgreSQL adapters and public untrusted execution remain unsupported.
+
+### Install the release
 
 ```sh
 mkdir repro-workspace && cd repro-workspace
 npm init -y
-npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.1.0.tgz
+npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.0.tgz
 export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
 npx --no-install playwright install chromium --only-shell
 npx --no-install repro doctor
@@ -22,7 +48,7 @@ npx --no-install repro serve
 
 See [INSTALL](docs/INSTALL.md) for requirements, checksum verification and running an exported capsule on another machine.
 
-## Run from a source checkout
+### Run from a source checkout
 
 Use Node 24 or newer, npm, and a supported Chromium host. Development was tested on macOS arm64 with Node 26.7.0.
 
@@ -34,7 +60,7 @@ npm run repro -- doctor
 npm run dev
 ```
 
-Open `http://127.0.0.1:4318`. Capture requires opt-in. Use the supplied example or explicitly declare either supported alpha/beta search order and its expected result; see [expected-behavior input](docs/AUTHORED-EXPECTATIONS.md). No account, API key, proprietary viewer or LLM is required. All generated sessions, traces, screenshots, reports and exports stay beneath ignored `.repro-runs/`; downloaded tools and caches use `.repro-cache/`.
+Open `http://127.0.0.1:4318/#/new` for the built-in examples. Capture requires opt-in. Use the supplied example or explicitly declare either supported alpha/beta search order and its expected result; see [expected-behavior input](docs/AUTHORED-EXPECTATIONS.md). No account, API key, proprietary viewer or LLM is required. All generated sessions, traces, screenshots, reports and exports stay beneath ignored `.repro-runs/`; downloaded tools and caches use `.repro-cache/`.
 
 For a repository case, choose it in the workbench, review its linked expected-behavior contract, and confirm capture. Inspect the observed values, reduce the actions, compare the fixed revision, then export. The new adapter retains only registered input and observation values; it does not capture arbitrary DOM, screenshots, traces, console or request bodies.
 

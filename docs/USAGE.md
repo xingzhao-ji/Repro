@@ -2,7 +2,33 @@
 
 Repro runs locally. No API key, paid model, account or original service is required. Install it with [INSTALL](INSTALL.md); when something fails, see [TROUBLESHOOTING](TROUBLESHOOTING.md). The [release notes](RELEASE-NOTES.md) list known issues and limits.
 
-## Release package workflow
+## Your app: one REPRO.md
+
+[QUICKSTART](QUICKSTART.md) walks through the workbench page. [LOCAL-APPS](LOCAL-APPS.md) defines the supported apps, the step and check grammar, statuses, redaction and limits. The CLI equivalent:
+
+```sh
+npx --no-install repro app --app /path/to/app                      # how Repro would run it (read-only)
+npx --no-install repro report --app /path/to/app \
+  --went-wrong $'Type "Milk" into "Add an item"\nPress Enter' \
+  --should-happen '"#items-left" should show "1 item left"'
+```
+
+| Option | Meaning |
+| --- | --- |
+| `--app DIR` | The app folder, which should be a git repository |
+| `--url URL` | Use an app already running on a local address instead of starting one |
+| `--start CMD` | Override the detected start command |
+| `--title TEXT` | Report title; otherwise it is derived from the description |
+| `--went-wrong TEXT`, `--should-happen TEXT` | The two descriptions. `--issue FILE.json` supplies them, plus `app`, `url`, `start` and `title`, from a file |
+| `--yes` | Confirm the understood steps, checks and execution scope without the interactive prompt |
+| `--budget RUNS` | Step-shortening budget, 8–120 runs (default 40) |
+| `--no-fresh-check` | Skip the fresh-checkout check; the report then says it was not run |
+| `--report-blocked` | Write a **Blocked** REPRO.md when a step cannot be performed, instead of asking you to fix the description |
+| `--output DIR` | Evidence directory under `.repro-runs/` (default `.repro-runs/reports/<time>-<slug>`) |
+
+Repro prints progress on stderr and a JSON summary on stdout. Exit codes: **0**, REPRO.md was written (any status); **2**, input is needed or Repro could not start (see `questions`); **130**, cancelled. Ctrl-C stops the app, the browser and any fresh-checkout commands that Repro started, and writes no REPRO.md.
+
+## Built-in examples: release package workflow
 
 Run these commands from the workspace where you installed `repro-local-0.1.0.tgz`, with `PLAYWRIGHT_BROWSERS_PATH` exported as in INSTALL. Every operation that writes evidence needs a new directory beneath `.repro-runs/`.
 

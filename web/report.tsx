@@ -175,6 +175,10 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
           placeholder={'"#items-left" should show "0 items left"'} />
       </label>
       <p id="expect-hint" className="field-hint">Name the element and the value, e.g. <code>"Total" should show "$8.10"</code>, <code>"Saved" should appear</code>, <code>there should be no errors</code>.</p>
+      {app && !app.app.missing.length && <Demonstration token={token} app={draft} onFinished={(recorded, checks) => {
+        update({ wentWrong: recorded, ...(checks ? { shouldHappen: checks } : {}) });
+        setMessage(checks ? 'Your demonstration was added. In “What should happen?”, replace the marked element’s current text with the value it should show.' : 'Your demonstration was added. Now say what should happen.');
+      }} />}
       <Understood steps={steps} expected={expected} />
       {[...questionsFor('steps'), ...questionsFor('expectation')].map((question, index) => <p key={index} className="question" role="alert">{question.question}{question.suggestion ? ` ${question.suggestion}` : ''}</p>)}
       <details className="grammar"><summary>How to write steps and checks</summary><Grammar /></details>
@@ -196,6 +200,48 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
     {recent.length > 0 && <section className="recent" aria-labelledby="recent-heading"><h2 id="recent-heading">Recent reports</h2>
       <ul>{recent.map(item => <li key={item.id}><a href={`#/reports/${item.id}`}>{item.title ?? 'Untitled report'}</a> <span className={`badge ${STATUS_CLASS[item.status] ?? ''}`}>{STATUS_TEXT[item.status] ?? item.status}</span> <span className="muted small">{new Date(item.createdAt).toLocaleString()}</span></li>)}</ul></section>}
   </form>;
+}
+
+interface DemonstrationState { id: string; status: string; steps: string[]; checks: string[]; notes: string[]; reason?: string }
+/** Guided demonstration: record the bug once in a real browser window; the text returns to the form for review. */
+function Demonstration({ token, app, onFinished }: { token: string; app: Draft; onFinished: (steps: string, checks: string) => void }) {
+  const [state, setState] = useState<DemonstrationState | null>(null);
+  const [error, setError] = useState('');
+  const finished = useRef(false);
+  const apply = useCallback((demo: DemonstrationState) => {
+    if (finished.current) return;
+    finished.current = true;
+    onFinished([...demo.steps, ...demo.notes].join('\n'), demo.checks.join('\n'));
+  }, [onFinished]);
+  useEffect(() => {
+    if (!state || state.status !== 'recording') return;
+    const timer = setInterval(() => {
+      void call<{ demonstration: DemonstrationState }>(`/api/demonstrations/${state.id}`).then(result => {
+        setState(result.demonstration);
+        if (result.demonstration.status === 'finished') apply(result.demonstration);
+      }).catch(() => undefined);
+    }, 800);
+    return () => clearInterval(timer);
+  }, [state, apply]);
+  const start = async () => {
+    setError(''); finished.current = false;
+    try { setState((await call<{ demonstration: DemonstrationState }>('/api/demonstrations', token, { repository: app.folder.trim() || undefined, url: app.url.trim() || undefined, start: app.start.trim() || undefined })).demonstration); }
+    catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
+  };
+  const done = async () => {
+    if (!state) return;
+    try { const result = await call<{ demonstration: DemonstrationState }>(`/api/demonstrations/${state.id}/finish`, token, {}); setState(result.demonstration); apply(result.demonstration); }
+    catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
+  };
+  if (!state || state.status === 'finished') return <div className="demonstrate"><button type="button" onClick={() => void start()} disabled={!token}>Show me in a browser instead</button>
+    <span className="field-hint"> Repro opens your app; do the steps once and it writes them down for you.</span>{error && <p className="question" role="alert">{error}</p>}</div>;
+  if (state.status === 'failed') return <div className="demonstrate"><p className="question" role="alert">{state.reason}</p><button type="button" onClick={() => setState(null)}>Back</button></div>;
+  return <div className="demonstrate recording" aria-live="polite">
+    <p><strong>A browser window opened with your app.</strong> Do the steps that show the bug. Use <em>Mark the wrong element</em> in the window’s toolbar on whatever shows the wrong result, then click <em>Done</em> there or here.</p>
+    <ol>{state.steps.map((line, index) => <li key={index}><code>{line}</code></li>)}</ol>
+    {state.checks.map((line, index) => <p key={index} className="small">Check: <code>{line}</code></p>)}
+    <button type="button" className="primary" onClick={() => void done()}>Done</button>
+  </div>;
 }
 
 function AppFacts({ app }: { app: AppSummary }) {

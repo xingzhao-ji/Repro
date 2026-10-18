@@ -11,6 +11,7 @@ import { Coordinator, ReportCoordinator, publicError } from './service.js';
 import { Ledger, type Operation } from './ledger.js';
 import { executionScope, prepareReport, type ReportRequest } from './report-flow.js';
 import { createExampleApp, EXAMPLE_DESCRIPTION } from './example-app.js';
+import { closeDemonstrations, demonstration, finishDemonstration, startDemonstration } from './demonstration.js';
 import { inspectJobInput, inspectTrial } from './evidence-inspector.js';
 
 const html = '<!doctype html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><title>Repro</title><link rel="stylesheet" href="/web.css"></head><body><div id="root"></div><script type="module" src="/web.js"></script></body></html>';
@@ -75,7 +76,7 @@ function chooseFolder(): Promise<string | null> {
     resolve(stdout.trim().replace(/\/$/, '') || null);
   }));
 }
-export async function serve(options: { port: number; root: string; reportDefaults?: NonNullable<ReportRequest['options']> }) {
+export async function serve(options: { port: number; root: string; reportDefaults?: NonNullable<ReportRequest['options']>; demonstrationHeadless?: boolean }) {
   const ledger = new Ledger(options.root); const coordinator = new Coordinator(ledger); const reports = new ReportCoordinator(ledger, options.reportDefaults);
   const token = randomBytes(32).toString('hex'); let origin = '';
   let closing: Promise<void> | undefined;
@@ -109,6 +110,8 @@ export async function serve(options: { port: number; root: string; reportDefault
         const cases = listRegisteredCases().map(registered => ({ id: registered.id, title: registered.title, expectation: registered.expectation, issue: registered.issue, contractUrls: registered.expectationUrls, repository: registered.repository }));
         json(response, 200, { token, cases, platform: process.platform, example: EXAMPLE_DESCRIPTION, scope: 'Your local web app, plus registered example cases. Every result comes from actual local runs; no AI service or upload is involved. Accessibility remains deferred and unverified.' }); return;
       }
+      const demo = /^\/api\/demonstrations\/([a-zA-Z0-9_-]{1,100})$/.exec(path);
+      if (demo?.[1]) { json(response, 200, { demonstration: demonstration(demo[1]) }); return; }
       if (path === '/api/reports') { json(response, 200, { reports: ledger.reports().map(item => ({ id: item.id, createdAt: item.createdAt, status: item.status, title: (item.request as { title?: string | null }).title ?? null, summary: (item.result as { summary?: string } | null)?.summary ?? null })) }); return; }
       const reportMarkdown = /^\/api\/reports\/([a-zA-Z0-9_-]{1,100})\/markdown$/.exec(path);
       if (reportMarkdown?.[1]) {
@@ -147,6 +150,15 @@ export async function serve(options: { port: number; root: string; reportDefault
         json(response, 200, { app: appSummary(prepared.profile), scope: executionScope(prepared.profile) }); return;
       }
       if (path === '/api/app/choose-folder') { keys(input, []); json(response, 200, { path: await chooseFolder() }); return; }
+      if (path === '/api/demonstrations') {
+        keys(input, ['repository', 'url', 'start']);
+        const prepared = await prepareReport({ app: { repository: string(input.repository, 'App folder', 1000), url: string(input.url, 'URL', 500), start: string(input.start, 'Start command', 500) }, wentWrong: '', shouldHappen: '', confirmed: false });
+        const missing = prepared.profile.missing[0];
+        if (missing || !prepared.profile.plan) throw new ReproError('input', 'APP_NOT_READY', missing?.question ?? 'Repro does not know how to start this app yet.');
+        json(response, 201, { demonstration: await startDemonstration(prepared.profile.plan, options.demonstrationHeadless ? { headless: true } : {}) }); return;
+      }
+      const demoFinish = /^\/api\/demonstrations\/([a-zA-Z0-9_-]{1,100})\/finish$/.exec(path);
+      if (demoFinish?.[1]) { keys(input, []); json(response, 200, { demonstration: await finishDemonstration(demoFinish[1]) }); return; }
       if (path === '/api/examples/local-app') { keys(input, []); json(response, 201, await createExampleApp(ledger.root)); return; }
       if (path === '/api/reports/prepare') {
         const prepared = await prepareReport(reportRequest(input, false));
@@ -186,6 +198,7 @@ export async function serve(options: { port: number; root: string; reportDefault
     const stopped = new Promise<void>((resolve, reject) => { server.close(error => error ? reject(error) : resolve()); server.closeIdleConnections(); });
     await coordinator.close();
     await reports.close();
+    await closeDemonstrations();
     await stopped;
     ledger.close();
   })() };

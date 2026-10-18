@@ -81,6 +81,29 @@ A later successful shutdown does not change the failed result or remove the prof
 | A job shows INCONCLUSIVE after a restart | The workbench was interrupted while that job ran | Expected recovery. Start the operation again; it uses fresh state |
 | Unknown run ID in the URL | The run belongs to another ledger or was mistyped | Choose a run from the Evidence selector |
 
+## REPRO.md reports for your app
+
+`repro report` exits **0** when it wrote REPRO.md, whatever the status inside it. It exits **2** when it needs more input (the JSON lists `questions`) or could not start, and **130** when you cancelled. In the workbench, the same codes appear in plain words.
+
+| Symptom or code | Cause | What to do |
+| --- | --- | --- |
+| **Needs your input:** a step "could not find its element" (`STEP_TARGET_NOT_FOUND`) | No element on the page has that label, placeholder, button text or link text at that point | Quote the text exactly as shown, add the missing step before it, or use a CSS selector such as `Click "#save"` |
+| A step "matched more than one element" (`STEP_TARGET_AMBIGUOUS`) | Several elements share that name, for example many "Delete" buttons | Use a more specific name (`Click "Delete Milk"`) or a selector |
+| `STEP_FAILED` | The element existed but did not accept the action in time (hidden, disabled, covered) | Add a step that makes it usable, for example opening a menu first, or `Wait for "…"` |
+| **Needs your input:** Repro "could not tell which element … refers to" (`CHECK_TARGET_UNRESOLVED`) | The element named in "What should happen?" did not match exactly one element | Choose one of the elements Repro lists, or quote a selector such as `"#total" should show "$8.10"` |
+| `APP_START_TIMEOUT` | The start command ran, but nothing answered HTTP on a local address in time | Check that the app serves on `127.0.0.1` or `localhost`, honours `PORT` or prints its URL, or set `url` and `startTimeoutMs` in `repro.config.json` |
+| `APP_START_FAILED` | The start command exited before it served | Run the command yourself in the app folder. The last lines of its output are in the report's server output |
+| Repro asks you to install dependencies | `package.json` declares dependencies but `node_modules` is missing | Run the shown install command in your app folder. Repro does not change your folder |
+| `APP_UNREACHABLE` | The URL you gave did not answer, or the app stopped answering | Start the app, or leave the URL empty so Repro starts it |
+| `APP_CLEANUP_FAILED` | After a run, the app's process group or its port was still alive after SIGTERM, then SIGKILL | The run is not counted. Check for processes the app starts outside its own group, and stop only processes that belong to your app |
+| `DIFFERENT_FAILURE` in a run | The expectation failed, but with different values from the frozen failure | Expected during step shortening. If it appears in reproduction runs, the result is reported as **Intermittent** |
+| Status **Intermittent** | Some runs failed in the reported way and others did not | Look for timing, randomness, real time, or external state. The report lists every run's observation |
+| Status **Not reproduced** | The expected behavior happened in every run | Check the steps against what you did, any data or state outside the app process, or whether the bug needs a non-local service (blocked hosts are listed) |
+| Fresh checkout: **Not reproduced in a clean clone** | The test passed in a clean clone of the commit (with the patch applied) | The bug depends on something outside the commit: untracked or ignored files, local data, environment variables or installed tools |
+| Fresh checkout: **Failed** at `install` or `npm ci` | The install command or the npm registry was not available, or an npm setting rejected the install | Run the shown commands yourself in a clean clone; the report includes their output |
+| `SECRET_MISSING`, or the exported test asks for `REPRO_SECRET_1` | A typed value was withheld from the report | Set the named environment variable to the value described in REPRO.md |
+| `REPRO_STEP_FAILED` when running the exported test | The app no longer matches the recorded steps, for example a renamed button | This is not the reported bug; update the app or ask the reporter |
+
 ## Getting help
 
 Collect the command, its exit code, the JSON error and the run directory. The run directory contains only registered inputs, observations and identities, not page contents or credentials, but review it before sharing.
