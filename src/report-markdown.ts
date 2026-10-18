@@ -11,7 +11,7 @@ export type ReportStatus = 'reproduced' | 'intermittent' | 'not-reproduced' | 'b
 export interface RunLine { label: string; outcome: string; values: (string | null)[] | null; note: string; durationMs: number }
 export interface CheckLine { text: string; expected: string; observed: string | null; passed: boolean }
 export interface FreshCheck {
-  status: 'reproduced' | 'not-reproduced' | 'passed' | 'failed' | 'not-run';
+  status: 'reproduced' | 'not-reproduced' | 'different' | 'passed' | 'failed' | 'not-run';
   summary: string; observed: (string | null)[] | null; commands: string[]; durationMs: number; output: string[];
 }
 export interface ReportData {
@@ -80,14 +80,16 @@ const escapeCell = (value: string) => value.replace(/\|/g, '\\|').replace(/\n/g,
  * named by fenced blocks, refuses to overwrite and checks each SHA-256.
  */
 export const EXTRACTOR = `node --input-type=module -e '
-import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, lstatSync, realpathSync } from "node:fs";
 import { createHash } from "node:crypto";
+import { join } from "node:path";
 const markdown = readFileSync(process.argv[1], "utf8").replace(/\\r\\n/g, "\\n");
+try { mkdirSync(".repro"); } catch (error) { if (error.code !== "EEXIST") throw error; }
+if (!lstatSync(".repro").isDirectory() || realpathSync(".repro") !== join(realpathSync("."), ".repro")) throw new Error(".repro must be a real folder inside this one, not a link; remove it and run this again.");
 const blocks = /^(\`{3,})[a-z]+ repro-file=(\\.repro\\/(?:[a-z0-9][a-z0-9-]*\\.test\\.mjs|package\\.json|package-lock\\.json|local-changes\\.patch)) sha256=([0-9a-f]{64})\\n([\\s\\S]*?)^\\1$/gm;
 let written = 0;
 for (const [, , path, sha256, content] of markdown.matchAll(blocks)) {
   if (createHash("sha256").update(content).digest("hex") !== sha256) throw new Error(path + " does not match its SHA-256; use an unmodified REPRO.md.");
-  mkdirSync(".repro", { recursive: true });
   writeFileSync(path, content, { flag: "wx" });
   console.log("wrote " + path);
   written++;
@@ -109,6 +111,13 @@ export function shareableRemote(url: string): boolean {
 }
 /** The clone URL without Repro's redaction marker: the recipient authenticates with their own credentials. */
 const cloneUrl = (url: string) => url.replace('[redacted url-credentials]@', '');
+/** One shell word, whatever the data: repository metadata is untrusted and must never be interpreted by the shell. */
+export function shellQuote(value: string): string { return /^[A-Za-z0-9_@%+=:,./-]+$/.test(value) && !value.startsWith('-') ? value : `'${value.replace(/'/g, `'\\''`)}'`; }
+/** A folder name for the clone: the app name made safe, never empty, ".", ".." or option-like. */
+function cloneFolder(name: string): string {
+  const folder = name.replace(/^@[^/]+\//, '').replace(/[^A-Za-z0-9._-]/g, '-');
+  return /^[A-Za-z0-9_]/.test(folder) ? folder : `app-${folder.replace(/^[.-]+/, '')}`.replace(/-$/, '') || 'app';
+}
 function statusSentence(data: ReportData): string {
   return `**${STATUS_LABEL[data.status]}** — ${data.statusDetail}`;
 }
@@ -183,9 +192,11 @@ export function renderReport(data: ReportData): string {
   heading('Get the exact source');
   if (git) {
     const remote = git.remotes.find(item => item.name === 'origin') ?? git.remotes[0];
-    const folder = data.app.name.replace(/^@[^/]+\//, '').replace(/[^A-Za-z0-9._-]/g, '-');
+    const folder = cloneFolder(data.app.name);
     const reachable = remote && shareableRemote(cloneUrl(remote.url)) ? remote : null;
-    out.push(code([`git clone ${reachable ? cloneUrl(reachable.url) : '<repository URL or path>'} ${folder}`, `cd ${folder}`, `git checkout ${git.commit}`, ...(git.appPath !== '.' ? [`cd ${git.appPath}`] : [])].join('\n'), 'sh'));
+    // Every data argument is one quoted shell word; "--" ends git's options before the URL.
+    out.push(code([`git clone -- ${reachable ? shellQuote(cloneUrl(reachable.url)) : '<repository URL or path>'} ${shellQuote(folder)}`, `cd ${shellQuote(folder)}`, `git checkout ${shellQuote(git.commit)}`,
+      ...(git.appPath !== '.' ? [`cd ${shellQuote(git.appPath.startsWith('-') ? `./${git.appPath}` : git.appPath)}`] : [])].join('\n'), 'sh'));
     if (!remote) out.push('', 'The repository has no remote configured. Use any copy that contains this commit, for example a pushed branch or `git bundle`.');
     else if (!reachable) out.push('', `The repository's ${remote.name} remote is a path on the reporter’s machine (${inline(remote.url)}), so it is not reachable from elsewhere. Use any copy that contains this commit, for example a pushed branch or \`git bundle\`.`);
     if (git.dirty && !data.app.patch) out.push('', '**The local changes Repro tested could not be embedded** (see “Source revision and local changes”), so a clean checkout may not reproduce the bug.');

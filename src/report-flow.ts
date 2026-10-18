@@ -105,6 +105,10 @@ export async function prepareReport(request: ReportRequest): Promise<PreparedRep
   for (const problem of expectation.problems) questions.push({ field: 'expectation', question: `${problem.message}${problem.text ? ` (“${problem.text.slice(0, 80)}”)` : ''}`, line: problem.line, suggestion: problem.suggestion });
   for (const check of expectation.checks) if (check.expected === EXPECTED_PLACEHOLDER) questions.push({ field: 'expectation', question: `Replace "${EXPECTED_PLACEHOLDER}" in “${check.text.slice(0, 60)}” with the value the element should show.` });
   for (const check of expectation.checks) if (classifyInput(check.expected) !== 'plain') questions.push({ field: 'expectation', question: `The expected value for “${check.text.slice(0, 60)}” looks like a credential or personal data. Use test data instead; Repro does not put such values in reports.` });
+  // Element names become locators in the exported test, which redaction must never rewrite: ask instead.
+  const sensitiveName = (reference: DraftAction['reference']) => reference !== null && [reference.text, reference.css, reference.testid].some(value => value !== undefined && classifyInput(value) !== 'plain');
+  steps.actions.forEach((action, index) => { if (sensitiveName(action.reference)) questions.push({ field: 'steps', line: action.line, question: `Step ${index + 1} names an element with what looks like a credential or personal data. Refer to it by a label, test id or CSS selector without that value.` }); });
+  expectation.checks.forEach((check, index) => { if (sensitiveName(check.reference)) questions.push({ field: 'expectation', line: check.line, question: `Check ${index + 1} names an element with what looks like a credential or personal data. Refer to it by a label, test id or CSS selector without that value.` }); });
   if (!request.confirmed && !questions.length) questions.push({ field: 'confirm', question: 'Review what Repro understood and confirm it before Repro starts your app.' });
   return { profile, steps, expectation, questions, understood };
 }
@@ -134,7 +138,8 @@ export async function generateReport(request: ReportRequest, context: { output: 
   if (questions.length) return outcomeWithout('needs-input', 'Repro needs a little more information before it can run.', { questions });
   if (cancelled()) return outcomeWithout('cancelled', 'Cancelled before any run. No report was written.');
   const evidenceDir = ownedDirectory(context.output, { exclusive: true });
-  const title = reportTitle(request, profile.name);
+  // A personal email or token in a typed title is redacted before it names the report, the test and its file.
+  const title = createRedactor().redact(reportTitle(request, profile.name));
   const slug = slugify(title.replace(/^[^:]+:\s*/, '') || title);
   const outcome = (status: ReportOutcome['status'], summary: string, extra: Partial<ReportOutcome> = {}): ReportOutcome =>
     ({ status, questions: [], markdown: null, path: null, evidenceDir, summary, understood, title, ...extra });
@@ -333,8 +338,12 @@ export async function generateReport(request: ReportRequest, context: { output: 
     const testManifest = manifest.failure ? { ...manifest, failure: { ...manifest.failure,
       values: manifest.failure.values.map(value => value === null ? null : redactor.redact(value)),
       exact: manifest.failure.exact.map((exact, index) => exact && (manifest.failure!.values[index] === null || createRedactor({ knownSecrets }).redact(manifest.failure!.values[index]!) === manifest.failure!.values[index])) } } : manifest;
-    const testFiles = statusValue === 'blocked' && manifest.resolution === 'draft' ? [] : generateTestFiles({ manifest: testManifest, title, slug, start: profile.startPlan, appDirectory: profile.directory, secretPurposes })
-      .map(file => { const content = codeRedactor.redact(file.content); return content === file.content ? file : { ...file, content, sha256: createHash('sha256').update(content).digest('hex') }; });
+    let testFiles: GeneratedFile[];
+    try { testFiles = statusValue === 'blocked' && manifest.resolution === 'draft' ? [] : exportableTestFiles(generateTestFiles({ manifest: testManifest, title, slug, start: profile.startPlan, appDirectory: profile.directory, secretPurposes }), knownSecrets); }
+    catch (error) {
+      if (!(error instanceof ReproError) || error.code !== 'SENSITIVE_TEST_DATA') throw error;
+      return outcome('needs-input', `Repro reproduced the steps, but did not write REPRO.md: ${error.message}`, { questions: [{ field: 'expectation', question: error.message }] });
+    }
     let patchFile: GeneratedFile | null = null, patchRedacted = false;
     const rawPatch = profile.git?.patch ?? '';
     if (rawPatch) {
@@ -353,7 +362,7 @@ export async function generateReport(request: ReportRequest, context: { output: 
     const chosen = request.options?.checkSelectors ?? {};
     const checkTarget = (check: AppCheck, index: number) => named[index] && chosen[index] && check.target?.by === 'css' && check.target.value === chosen[index]
       ? `"${redactor.redact(named[index]!)}" (the element \`${check.target.value}\` the reporter chose for it)` : describeReference(check.target ?? check.reference);
-    const checks = manifest.expectation.checks.map((check, index) => ({ text: describeCheck(check, checkTarget(check, index)), expected: check.expected,
+    const checks = manifest.expectation.checks.map((check, index) => ({ text: redactor.redact(describeCheck(check, checkTarget(check, index))), expected: redactor.redact(check.expected),
       observed: observation ? redact(observation.values[index] ?? null) : null, passed: observation ? checkPasses(check, observation.values[index] ?? null) : false }));
     function redact(value: string | null) { return value === null ? null : redactor.redact(value); }
     // Logs come from a run of exactly the final steps, preferring one that reproduced the failure.
@@ -374,6 +383,7 @@ export async function generateReport(request: ReportRequest, context: { output: 
     limitations.push(`Only ${captureRun?.environment.browser ?? 'pinned Chromium'} in headless mode was used; other browsers were not tested.`);
     limitations.push(`Runs used ${manifest.environment.clock ? `a fixed clock (${manifest.environment.clock})` : 'the real clock'}, a ${manifest.environment.viewport.width}×${manifest.environment.viewport.height} viewport, en-US locale, UTC time zone and a seeded Math.random.`);
     limitations.push('Repro stops the app’s own process group after each run. Processes the app detaches into another group are not tracked.');
+    if (profile.git?.commit && profile.startPlan) limitations.push('The fresh-checkout check clones your local repository, so it does not show that the recipient can fetch this commit from a remote.');
     if (Object.keys(secretPurposes).length) limitations.push(`${Object.keys(secretPurposes).length} typed value(s) are withheld; the recipient must supply them as environment variables.`);
     const missing: string[] = [];
     if (!profile.git) missing.push('An exact source revision (the app folder is not tracked by git).');
@@ -571,14 +581,36 @@ async function freshCheck(profile: AppProfile, markdown: string, testPath: strin
   catch { verdict = 'different'; }
   const values = observation.values.map(value => value === null ? null : redactor.redact(value));
   const where = `in a clean clone of the commit${git.dirty ? ' with the local changes applied' : ''}`;
-  if (status === 'not-reproduced') return finish(verdict === 'requirement-satisfied' && test.code === 0
-    ? { status: 'passed', summary: `Passed: ${where}, the test ran and the expected behavior held, as in Repro’s runs.`, observed: values }
-    : { status: 'failed', summary: `In a clean clone the expected behavior did not hold, unlike Repro’s runs in the working copy (one run). The difference may be in the local environment or state.`, observed: values });
-  if (status === 'intermittent') return finish({ status: verdict === 'requirement-satisfied' ? 'passed' : 'reproduced',
-    summary: `One run ${where}: the test ${verdict === 'requirement-satisfied' ? 'passed' : verdict === 'target-failure' ? 'failed in the recorded way' : 'failed with a different result'}. The bug is intermittent, so one run decides nothing.`, observed: values });
-  if (verdict === 'target-failure' && test.code !== 0) return finish({ status: 'reproduced', summary: `Reproduced: ${where}, the test failed with the same observed result.`, observed: values });
-  if (verdict === 'requirement-satisfied') return finish({ status: 'not-reproduced', summary: `**Not reproduced in a clean clone:** the test passed ${where} (one run). Something outside the commit and patch may matter (local state, untracked files or environment).`, observed: values });
-  return finish({ status: 'not-reproduced', summary: '**Different in a clean clone:** the test failed, but with a different observed result than in Repro’s runs.', observed: values });
+  return finish({ ...freshVerdict({ status, verdict, code: test.code, where }), observed: values });
+}
+/** How one fresh-checkout test run compares with Repro's runs. Pure, so every combination is testable. */
+export function freshVerdict(run: { status: ReportStatus; verdict: 'target-failure' | 'requirement-satisfied' | 'different'; code: number | null; where: string }): { status: FreshCheck['status']; summary: string } {
+  const { status, verdict, where } = run;
+  // The observation and the exit code must agree: a satisfied observation followed by a failing exit (for
+  // example in teardown) is not a passing test, and a recorded failure that exits 0 is not a failing one.
+  const consistent = verdict === 'requirement-satisfied' ? run.code === 0 : run.code !== 0 && run.code !== null;
+  if (!consistent) return { status: 'failed', summary: `Failed: ${where}, the test printed ${verdict === 'requirement-satisfied' ? 'an observation that meets the expectation' : 'a failing observation'} but exited with code ${run.code}, so this run counts as neither; see the output below.` };
+  if (verdict === 'different') return { status: 'different', summary: `**Different in a clean clone:** ${where}, the test failed, but with a different observed result than ${status === 'not-reproduced' ? 'the expected behavior' : 'the failure recorded in Repro’s runs'}.` };
+  if (status === 'not-reproduced') return verdict === 'requirement-satisfied'
+    ? { status: 'passed', summary: `Passed: ${where}, the test ran and the expected behavior held, as in Repro’s runs.` }
+    : { status: 'failed', summary: `In a clean clone the expected behavior did not hold, unlike Repro’s runs in the working copy (one run). The difference may be in the local environment or state.` };
+  if (status === 'intermittent') return verdict === 'requirement-satisfied'
+    ? { status: 'passed', summary: `One run ${where}: the test passed. The bug is intermittent, so one run decides nothing.` }
+    : { status: 'reproduced', summary: `One run ${where}: the test failed in the recorded way. The bug is intermittent, so one run decides nothing.` };
+  if (verdict === 'target-failure') return { status: 'reproduced', summary: `Reproduced: ${where}, the test failed with the same observed result.` };
+  return { status: 'not-reproduced', summary: `**Not reproduced in a clean clone:** the test passed ${where} (one run). Something outside the commit and patch may matter (local state, untracked files or environment).` };
+}
+/**
+ * The exported test files exactly as generated. Redaction never rewrites executable code: replacing a value
+ * inside an assertion or a locator would change what the test checks. Sensitive data is kept out upstream
+ * (withheld inputs, questions about expected values and element names); a test that would still contain
+ * any is refused rather than altered.
+ */
+export function exportableTestFiles(files: GeneratedFile[], knownSecrets: string[]): GeneratedFile[] {
+  const codeRedactor = createRedactor({ knownSecrets, mode: 'code' });
+  if (files.some(file => codeRedactor.redact(file.content) !== file.content)) throw new ReproError('input', 'SENSITIVE_TEST_DATA',
+    'The regression test would contain what looks like a credential or personal data (in an element name, an expected value or the title). Use test data, or name the element by a label, test id or selector without it, then generate the report again.');
+  return files;
 }
 /** Stop an app process group a generated test recorded, if it outlived the test. */
 async function stopRecordedGroup(file: string): Promise<void> {

@@ -67,7 +67,7 @@ test('REPRO.md embeds every file as a hash-checked block that survives backticks
   for (const heading of ['## Summary', '## Expected and observed behavior', '## Steps to reproduce', '## Run the regression test', '## Checking a fix', '## Test files', '### Observed facts', '### Suspected causes (not verified)', '### Verified causes', '## Limits and missing information'])
     assert.ok(markdown.includes(heading), heading);
   assert.match(markdown, /export REPRO_SECRET_1='…' {3}# the account password/);
-  assert.match(markdown, /git clone https:\/\/git\.example\.invalid\/demo\.git demo/);
+  assert.match(markdown, /git clone -- https:\/\/git\.example\.invalid\/demo\.git demo/);
 
   await mkdir('.repro-runs', { recursive: true });
   const directory = await mkdtemp(resolve('.repro-runs/tests-extract-'));
@@ -97,8 +97,8 @@ test('only remotes another machine can reach are used in the clone command', asy
   for (const url of ['~/Developer/shop.git', '/srv/git/shop.git', 'file:///srv/shop.git', '../shop']) assert.equal(shareableRemote(url), false, url);
   const base = data([file('.repro/demo.test.mjs', 'x\n')]);
   const local = renderReport({ ...base, app: { ...base.app, git: { ...base.app.git!, remotes: [{ name: 'origin', url: '~/Developer/shop.git' }] } } });
-  assert.match(local, /git clone <repository URL or path> demo/);
+  assert.match(local, /git clone -- <repository URL or path> demo/);
   assert.match(local, /origin remote is a path on the reporter’s machine/);
   const redacted = renderReport({ ...base, app: { ...base.app, git: { ...base.app.git!, remotes: [{ name: 'origin', url: 'https://[redacted url-credentials]@git.example.invalid/shop.git' }] } } });
-  assert.match(redacted, /git clone https:\/\/git\.example\.invalid\/shop\.git demo/);
+  assert.match(redacted, /git clone -- https:\/\/git\.example\.invalid\/shop\.git demo/);
 });

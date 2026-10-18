@@ -132,7 +132,12 @@ Before writing the final file, Repro follows its own REPRO.md:
 5. It installs the test's dependencies.
 6. It runs the test.
 
-These are the steps REPRO.md gives the recipient, in the same order. Extraction writes only the four expected names (`<name>.test.mjs`, `package.json`, `package-lock.json` and `local-changes.patch`), and log output in the report is indented so it can never look like a file block.
+These are the steps REPRO.md gives the recipient, in the same order:
+
+- **Extraction:** it writes only the four expected names (`<name>.test.mjs`, `package.json`, `package-lock.json` and `local-changes.patch`), only into a real `.repro` folder (a `.repro` that is a link is refused), and never over an existing file. Log output in the report is indented so it can never look like a file block.
+- **Commands:** every value from the repository, such as the remote URL, the folder and the app's subfolder, is quoted as one shell word, so copying a command never runs text from the repository.
+- **The verdict:** a run counts only when the test's observation and its exit code agree. A run that fails differently is reported as **different**, never as the recorded bug.
+- **Where the clone comes from:** the check clones your local repository, so it does not show that the recipient can fetch the commit from your remote.
 
 The report then says whether the test failed in the same way in that clean checkout. If the result differs, the bug depends on something outside the commit and patch: untracked or ignored files, local data, or the environment. The clone is deleted afterwards; its commands and output stay in the report.
 
@@ -149,6 +154,7 @@ The report then says whether the test failed in the same way in that clean check
 - **Start command:** an inline `NAME=value` in it, in `repro.config.json` or in a `package.json` script, whose name looks like a secret (`*PASSWORD*`, `*TOKEN*`, `*SECRET*`, `*API_KEY*` …), is refused or hidden. Set secrets in your shell; Repro passes your environment to the app and never writes it into the report.
 - **Remotes:** a git remote's address is kept, including the plain `git@` user, but a password or token in it is removed.
 - **Final scan:** before the file is written, a last pass over the whole document checks for withheld values and unambiguous credentials.
+- **The exported test is never redacted:** replacing a value inside an assertion or a locator would change what the test checks. Repro asks before running when an expected value or an element name looks like a credential or personal data. It refuses to write a test that would still contain such data (`SENSITIVE_TEST_DATA`).
 
 Redaction is a safeguard, not a guarantee. Review REPRO.md before you share it beyond your team. Repro's local evidence folder, `.repro-runs/`, keeps your original request text and is not meant to be shared.
 
