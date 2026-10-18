@@ -98,6 +98,16 @@ test('an unresolvable check offers nearby elements for the reporter to choose; c
   assert.equal(unresolved.outcome, 'inconclusive');
   assert.equal(unresolved.reason, 'CHECK_TARGET_UNRESOLVED: check 1 could not be matched to exactly one element.');
   assert.ok(unresolved.resolution!.candidates.some(candidate => candidate.selector === '#remaining' && candidate.text === '0 tasks remaining'));
+  // Text that appears in several rows: Repro offers the elements beside it, each with an exact selector.
+  const duplicate = parseSteps('Open the app\nType "Pay rent" into "New task"\nPress Enter\nType "Pay rent" into "New task"\nPress Enter');
+  const rows = await run(createDraftManifest({ id: 'rows', name: 'task-tally', description: '', sourceDigest: 'a'.repeat(64), commit: null, dirty: false, approved: true, secrets: new Map(),
+    actions: duplicate.actions, checks: parseExpectation('"Pay rent" should show "done"').checks }), buggy, true);
+  assert.equal(rows.reason, 'CHECK_TARGET_UNRESOLVED: check 1 could not be matched to exactly one element.');
+  const offered = rows.resolution!.candidates;
+  for (const row of [1, 2]) {
+    assert.ok(offered.some(candidate => candidate.selector === `#tasks > li:nth-of-type(${row}) > span` && candidate.text === 'Pay rent'), JSON.stringify(offered));
+    assert.ok(offered.some(candidate => candidate.selector === `#tasks > li:nth-of-type(${row}) > button` && candidate.text === 'Remove Pay rent'), JSON.stringify(offered));
+  }
 
   const controller = new AbortController();
   setTimeout(() => controller.abort(), 1200);

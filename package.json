@@ -19,7 +19,8 @@
     "schemas",
     "fixtures/browser-search",
     "fixtures/repository-cases",
-    "security"
+    "security",
+    "fixtures/local-apps"
   ],
   "scripts": {
     "typecheck": "tsc --noEmit",

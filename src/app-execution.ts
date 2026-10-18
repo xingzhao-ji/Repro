@@ -52,6 +52,8 @@ export async function prepareAppContext(context: BrowserContext, diagnostics: Ap
     if (isLoopbackUrl(socket.url())) socket.connectToServer();
     else { diagnostics.blockedHosts.add(host(socket.url())); void socket.close(); }
   });
+  // Source-mode transforms may wrap Repro's own evaluated helpers with a __name call the page lacks; never overrides the app's own.
+  await context.addInitScript('globalThis.__name ??= (target) => target;');
   await context.addInitScript(({ seed: initial }) => {
     let state = initial >>> 0;
     Math.random = () => { state = (Math.imul(1664525, state) + 1013904223) >>> 0; return state / 4294967296; };
@@ -204,25 +206,67 @@ async function fieldDescription(locator: Locator) {
   } catch { return {}; }
 }
 
-async function candidateElements(page: Page): Promise<{ selector: string; text: string }[]> {
+/**
+ * Elements offered when a check names no unique element: first the short-text
+ * elements in the same row as the named text (with the nearest heading as
+ * context), then elements with an id, test id or aria-label. Each selector is
+ * exact and unique on the current page. Shown only in the local UI.
+ */
+async function candidateElements(page: Page, named?: string): Promise<{ selector: string; text: string }[]> {
   try {
     // No named inner functions: source-mode transforms would inject helpers the page does not have.
-    return await page.evaluate(() => {
+    return await page.evaluate(namedText => {
       const results: { selector: string; text: string }[] = [];
-      for (const element of Array.from(document.querySelectorAll<HTMLElement>('body [id], body [data-testid], body [aria-label], body output, body [role=status]'))) {
-        if (results.length >= 8) break;
-        const raw = (element.innerText ?? '').trim();
-        const text = raw.replace(/\s+/g, ' ');
-        const box = element.getBoundingClientRect();
-        // Single-line, short, visible elements only: containers of several items are not candidates.
-        if (!text || raw.includes('\n') || text.length > 80 || !box.width || !box.height) continue;
-        const attribute = element.dataset['testid'] ? ['data-testid', element.dataset['testid']] : element.getAttribute('aria-label') ? ['aria-label', element.getAttribute('aria-label')!] : null;
-        const selector = element.id && /^[A-Za-z][\w-]*$/.test(element.id) ? `#${element.id}`
-          : attribute ? `[${attribute[0]}="${attribute[1]!.replace(/\\/g, '\\\\').replace(/"/g, '\\"')}"]` : null;
-        if (selector && !results.some(result => result.selector === selector)) results.push({ selector, text });
+      const seen = new Set<Element>();
+      const textOf = (element: Element) => ((element as HTMLElement).innerText ?? element.textContent ?? '').replace(/\s+/g, ' ').trim();
+      const visible = (element: Element) => { const box = element.getBoundingClientRect(); return box.width > 0 && box.height > 0; };
+      const pathOf = (element: Element): string | null => {
+        const parts: string[] = [];
+        let current: Element | null = element;
+        while (current && current !== document.body && current !== document.documentElement) {
+          if (current.id && /^[A-Za-z][\w-]*$/.test(current.id) && document.querySelectorAll(`#${current.id}`).length === 1) { parts.unshift(`#${current.id}`); break; }
+          const tag = current.tagName.toLowerCase();
+          const siblings = current.parentElement ? Array.from(current.parentElement.children).filter(child => child.tagName === current!.tagName) : [];
+          parts.unshift(siblings.length > 1 ? `${tag}:nth-of-type(${siblings.indexOf(current) + 1})` : tag);
+          current = current.parentElement;
+        }
+        const selector = parts.join(' > ');
+        return selector && document.querySelectorAll(selector).length === 1 ? selector : null;
+      };
+      const contextOf = (element: Element): string => {
+        let current: Element | null = element;
+        while (current && current !== document.body) {
+          const label = current.getAttribute('aria-label');
+          if (label) return label.trim();
+          const heading = current.querySelector('h1, h2, h3, h4, legend, caption');
+          if (heading && current !== element && textOf(heading)) return textOf(heading);
+          current = current.parentElement;
+        }
+        return '';
+      };
+      const offer = (element: Element) => {
+        if (results.length >= 8 || seen.has(element) || !visible(element)) return;
+        const text = textOf(element);
+        if (!text || text.length > 80 || ((element as HTMLElement).innerText ?? '').trim().includes('\n')) return;
+        const selector = pathOf(element);
+        if (!selector) return;
+        seen.add(element);
+        const context = contextOf(element);
+        results.push({ selector, text: context && !text.includes(context) ? `${text} (in “${context.slice(0, 40)}”)` : text });
+      };
+      if (namedText) {
+        const wanted = namedText.toLowerCase();
+        const labels = Array.from(document.querySelectorAll<HTMLElement>('body *')).filter(element => element.children.length === 0 && textOf(element).toLowerCase().includes(wanted) && visible(element)).slice(0, 6);
+        for (const label of labels) {
+          const row = label.closest('li, tr, [role=row], [role=listitem], dt, dd, p, div') ?? label.parentElement;
+          const leaves = row ? Array.from(row.querySelectorAll('*')).filter(element => element.children.length === 0) : [];
+          for (const leaf of leaves) if (leaf !== label) offer(leaf);
+          offer(label);
+        }
       }
+      for (const element of Array.from(document.querySelectorAll<HTMLElement>('body [id], body [data-testid], body [aria-label], body output, body [role=status]'))) offer(element);
       return results;
-    });
+    }, named ?? '');
   } catch { return []; }
 }
 
@@ -310,7 +354,7 @@ export async function runAppSteps(context: AppStepContext): Promise<AppObservati
     if (!context.resolve || check.reference === null) { targets.push(check.target); continue; }
     const resolved = await resolveReference(page, check.reference, 'check', Math.min(environment.actionTimeoutMs, clock.remaining()), clock);
     if (!resolved.target) {
-      resolution.checks = targets; resolution.candidates = await candidateElements(page);
+      resolution.checks = targets; resolution.candidates = await candidateElements(page, check.reference.text);
       fail('CHECK_TARGET_UNRESOLVED', `check ${index + 1} could not be matched to exactly one element.`);
     }
     targets.push(resolved.target);
