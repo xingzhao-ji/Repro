@@ -99,6 +99,8 @@ export interface AppObservation {
   kind: 'local-app'; values: (string | null)[]; url: string;
   /** Sanitized, bounded diagnostics recorded during the run; never part of the verdict except page-error checks. */
   pageErrors: string[]; console: string[]; failedRequests: string[]; blockedHosts: string[]; dialogs: string[];
+  /** Traced runs only: checked values (shortened) after each step, in step order. */
+  trace?: (string | null)[][];
 }
 export interface ManifestV4 {
   schemaVersion: 4;
@@ -166,6 +168,8 @@ export interface AppRunTarget {
   secrets: Record<string, string>;
   /** Resolve draft references (capture) instead of using frozen targets. */
   resolve: boolean;
+  /** Also record every checked value after each step (relevance for reduction). */
+  trace?: boolean;
 }
 export interface RunOptions {
   artifactDir: string; signal?: AbortSignal; revision?: 'buggy' | 'fixed';
@@ -191,5 +195,7 @@ export interface ReductionResult {
 }
 export interface ReductionOptions {
   artifactDir: string; maxExecutions: number; maxDurationMs: number; repetitions: number;
+  /** Actions that must be kept; a candidate removing one (or a prerequisite of one) is not tested. */
+  pinned?: string[];
   signal?: AbortSignal; onTrial?: (trial: Trial) => void;
 }

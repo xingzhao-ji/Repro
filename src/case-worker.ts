@@ -37,7 +37,8 @@ function validRequest(frame: Record<string, unknown>): frame is Record<string, u
   if (schema === 3) return r.app === undefined;
   // Schema 4 browses a parent-owned loopback origin; withheld inputs stay in this process's memory.
   const app = r.app;
-  if (schema !== 4 || r.revision !== undefined || !boundedFrame(app) || !exactKeys(app, ['origin', 'secrets', 'resolve']) || typeof app.resolve !== 'boolean'
+  if (schema !== 4 || r.revision !== undefined || !boundedFrame(app) || !exactKeys(app, ['origin', 'secrets', 'resolve'], ['trace']) || typeof app.resolve !== 'boolean'
+    || (app.trace !== undefined && typeof app.trace !== 'boolean')
     || typeof app.origin !== 'string' || !isLoopbackUrl(app.origin) || new URL(app.origin).origin !== app.origin
     || !boundedFrame(app.secrets) || Object.entries(app.secrets).some(([name, value]) => !/^REPRO_(?:SECRET|INPUT)_\d{1,2}$/.test(name) || typeof value !== 'string' || value.length > 2000)) return false;
   return true;

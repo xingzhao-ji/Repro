@@ -87,6 +87,8 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
   let harnessDigest: string | undefined;
   const trials: Trial[] = [];
   const runIds = new Set<string>();
+  const pinned = new Set(options.pinned ?? []);
+  const permitted = (removed: string[]) => !removed.some(id => pinned.has(id));
 
   const stopped = (): Stop | undefined => {
     if (options.signal?.aborted) return 'cancelled';
@@ -148,7 +150,10 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
         stop = 'cancelled'; outcome = 'cancelled'; reason = 'Runner reported owned execution cancellation.'; break;
       }
       if (observed.outcome === 'inconclusive') {
-        outcome = 'inconclusive'; reason = 'Runner evidence was inconclusive; the target failure is not established.'; break;
+        // A validated different failure (schema 4) conclusively shows this candidate does not preserve the reported one.
+        const different = observed.reason.startsWith('DIFFERENT_FAILURE:') && observed.assertionCount === 1 && observed.observation !== null && preserved === 0;
+        outcome = 'inconclusive'; conclusive = different;
+        reason = different ? 'A different failure was observed; the reported failure was not preserved.' : 'Runner evidence was inconclusive; the target failure is not established.'; break;
       }
       if (observed.outcome === 'requirement-satisfied') {
         outcome = preserved > 0 ? 'inconclusive' : 'requirement-satisfied';
@@ -192,7 +197,7 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
       for (let offset = 0; offset < best.actions.length; offset += chunkSize) {
         const next = without(best, best.actions.slice(offset, offset + chunkSize).map(action => action.id));
         const key = digest(next.candidate);
-        if (tested.has(key)) continue;
+        if (tested.has(key) || !permitted(next.removed)) continue;
         tested.add(key);
         const evaluation = await evaluate(next.candidate, next.removed);
         if (evaluation.stop) return finish(evaluation.stop, 'Reduction stopped with the best verified candidate; final neighbors remain unverified.');
@@ -214,7 +219,7 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
       for (const action of best.actions) {
         const next = without(best, [action.id]);
         const key = digest(next.candidate);
-        if (tested.has(key)) continue;
+        if (tested.has(key) || !permitted(next.removed)) continue;
         tested.add(key);
         const evaluation = await evaluate(next.candidate, next.removed);
         if (evaluation.stop) return finish(evaluation.stop, 'Reduction stopped with the best verified candidate; final neighbors remain unverified.');
@@ -223,7 +228,7 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
       }
       if (changed) continue;
       return allConclusive
-        ? finish('complete', 'Every permitted single dependency-group deletion of the final candidate was tested and did not preserve the failure. This is not global minimality.', 'dependency-group-1-minimal')
+        ? finish('complete', `Every permitted single dependency-group deletion of the final candidate was tested and did not preserve the failure.${pinned.size ? ' Pinned actions were kept by request and not tested.' : ''} This is not global minimality.`, 'dependency-group-1-minimal')
         : finish('complete', 'Search completed, but inconclusive or unstable final neighbors leave dependency-group minimality unverified.');
     }
   } finally {

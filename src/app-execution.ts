@@ -65,7 +65,8 @@ export function observePage(page: Page, origin: string, diagnostics: AppDiagnost
   const clean = (text: string) => redactor.redact(text.replace(new RegExp(origin.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), ''));
   page.on('pageerror', error => push(diagnostics.pageErrors, clean(`${error.name}: ${error.message}`)));
   page.on('console', message => {
-    if (message.type() === 'error' || message.type() === 'warning') push(diagnostics.console, clean(`${message.type()}: ${message.text()}`));
+    // Resource errors caused by Repro's own non-loopback block are reported once, as blocked hosts.
+    if ((message.type() === 'error' || message.type() === 'warning') && !message.text().includes('ERR_BLOCKED_BY_CLIENT')) push(diagnostics.console, clean(`${message.type()}: ${message.text()}`));
   });
   page.on('request', request => { if (!['websocket', 'eventsource'].includes(request.resourceType())) diagnostics.inflight++; });
   const settled = (request: import('playwright').Request) => { if (!['websocket', 'eventsource'].includes(request.resourceType())) diagnostics.inflight = Math.max(0, diagnostics.inflight - 1); };
@@ -224,7 +225,7 @@ async function candidateElements(page: Page): Promise<{ selector: string; text: 
 }
 
 export interface AppStepContext {
-  page: Page; manifest: ManifestV4; origin: string; secrets: Record<string, string>; resolve: boolean;
+  page: Page; manifest: ManifestV4; origin: string; secrets: Record<string, string>; resolve: boolean; trace?: boolean;
   diagnostics: AppDiagnostics; clock: Clock; emit: (type: string, message: string, actionId?: string) => Promise<void>;
   /** Filled as resolution proceeds, so a blocked capture still reports how far it resolved. */
   resolution: AppResolution;
@@ -237,6 +238,15 @@ export async function runAppSteps(context: AppStepContext): Promise<AppObservati
   const { page, manifest, origin, diagnostics, clock, resolution } = context;
   const environment = manifest.environment;
   const settleNow = () => settle(page, diagnostics, environment.settleMs, Math.min(3000, clock.remaining()));
+  // Traced runs record what each step did to the checked values; only frozen targets are read.
+  const trace: (string | null)[][] = [];
+  const traceStep = async () => {
+    if (!context.trace || context.resolve) return;
+    trace.push(await Promise.all(manifest.expectation.checks.map(async check => {
+      const value = await readCheck(page, { property: check.property, target: check.target }, diagnostics, origin);
+      return value === null ? null : value.slice(0, 120);
+    })));
+  };
   for (const action of manifest.actions) {
     clock.check();
     const step = action.id;
@@ -289,6 +299,7 @@ export async function runAppSteps(context: AppStepContext): Promise<AppObservati
     resolution.actions.push({ id: action.id, target, sensitive });
     await settleNow();
     clock.check();
+    await traceStep();
     await context.emit('action-executed', appActionMessage(action), action.id);
   }
   const checks = manifest.expectation.checks;
@@ -311,5 +322,5 @@ export async function runAppSteps(context: AppStepContext): Promise<AppObservati
   while (!satisfied(values) && performance.now() < pollUntil) { await pause(100); clock.check(); values = await read(); }
   return { kind: 'local-app', values, url: (await readCheck(page, { property: 'url', target: null }, diagnostics, origin)) ?? '',
     pageErrors: [...diagnostics.pageErrors], console: [...diagnostics.console], failedRequests: [...diagnostics.failedRequests],
-    blockedHosts: [...diagnostics.blockedHosts].slice(0, 40), dialogs: [...diagnostics.dialogs] };
+    blockedHosts: [...diagnostics.blockedHosts].slice(0, 40), dialogs: [...diagnostics.dialogs], ...(context.trace && !context.resolve ? { trace } : {}) };
 }

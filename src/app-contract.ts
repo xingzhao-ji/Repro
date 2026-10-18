@@ -180,7 +180,10 @@ export function validAppObservation(input: unknown, checks: number): AppObservat
   if (!input || typeof input !== 'object' || Array.isArray(input)) throw new ReproError('verification', 'APP_OBSERVATION', 'The complete declared observation is unavailable.');
   const observation = input as Record<string, unknown>;
   const keys = ['kind', 'values', 'url', 'pageErrors', 'console', 'failedRequests', 'blockedHosts', 'dialogs'];
-  if (Object.keys(observation).length !== keys.length || keys.some(key => !(key in observation)) || observation['kind'] !== 'local-app'
+  const trace = observation['trace'];
+  if (trace !== undefined && (!Array.isArray(trace) || trace.length > MAX_STEPS || trace.some(row => !Array.isArray(row) || row.length !== checks
+    || row.some(value => value !== null && (typeof value !== 'string' || value.length > 120))))) throw new ReproError('verification', 'APP_OBSERVATION', 'The step trace is malformed.');
+  if (Object.keys(observation).length !== keys.length + (trace === undefined ? 0 : 1) || keys.some(key => !(key in observation)) || observation['kind'] !== 'local-app'
     || !Array.isArray(observation['values']) || observation['values'].length !== checks
     || observation['values'].some(value => value !== null && (typeof value !== 'string' || value.length > MAX_OBSERVED))
     || typeof observation['url'] !== 'string' || observation['url'].length > 2048

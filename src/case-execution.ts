@@ -309,7 +309,7 @@ export async function executeCaseBrowser(request: CaseWorkerRequest, bridge: Exe
     observePage(page, origin, diagnostics);
     page.on('crash', () => { fault = new ReproError('environment', 'BROWSER_CRASH', 'Chromium crashed. Check memory/process limits and retry a fresh run.'); });
     if (manifest.environment.clock) await page.clock.setFixedTime(new Date(manifest.environment.clock));
-    const observation = await runAppSteps({ page, manifest, origin, secrets: app!.secrets, resolve: app!.resolve, diagnostics, resolution,
+    const observation = await runAppSteps({ page, manifest, origin, secrets: app!.secrets, resolve: app!.resolve, trace: app!.trace === true, diagnostics, resolution,
       clock: { remaining, check }, emit: (type, message, actionId) => emit(type, message, actionId) });
     check();
     if (manifest.expectationBasis !== 'reporter-approved') throw new ReproError('verification', 'PROVISIONAL_EXPECTATION', 'Establish the independent expectation before reporting an assertion verdict.');

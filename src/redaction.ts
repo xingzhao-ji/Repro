@@ -24,7 +24,7 @@ export interface Redactor {
  * only high-confidence credentials, personal emails and paths are replaced so
  * ordinary identifiers such as tokenCount = 5 keep a patch applicable.
  */
-export interface RedactorOptions { knownSecrets?: string[]; home?: string; username?: string; hostname?: string; mode?: 'broad' | 'code' }
+export interface RedactorOptions { knownSecrets?: string[]; home?: string; username?: string; hostname?: string; mode?: 'broad' | 'code' | 'credentials' }
 
 const RESERVED_EMAIL_DOMAIN = /(?:^|\.)(?:example\.(?:com|net|org)|example|invalid|test|localhost)$/i;
 const TOKEN_PATTERNS: RegExp[] = [
@@ -68,6 +68,7 @@ export function createRedactor(options: RedactorOptions = {}): Redactor {
   const host = options.hostname ?? hostname();
   const hostPattern = host.length >= 4 ? new RegExp(`\\b${escapeRegExp(host.replace(/\.local$/i, ''))}(?:\\.local)?\\b`, 'gi') : null;
   const broad = (options.mode ?? 'broad') === 'broad';
+  const credentialsOnly = options.mode === 'credentials';
   function redact(input: string): string {
     let text = input;
     text = text.replace(/-----BEGIN [A-Z0-9 ]*PRIVATE KEY-----[\s\S]*?(?:-----END [A-Z0-9 ]*PRIVATE KEY-----|$)/g, () => count('private-key'));
@@ -77,6 +78,8 @@ export function createRedactor(options: RedactorOptions = {}): Redactor {
     text = text.replace(/\b([a-z][a-z0-9+.-]*:\/\/)([^/\s:@'"]+)(?::[^/\s@'"]*)?@/gi, (_match, scheme: string) => `${scheme}${count('url-credentials')}@`);
     text = text.replace(/\beyJ[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{5,}\.[A-Za-z0-9_-]{5,}\b/g, () => count('jwt'));
     for (const pattern of TOKEN_PATTERNS) text = text.replace(pattern, () => count('token'));
+    // The final whole-document scan: only unambiguous credentials, never identifiers in generated code.
+    if (credentialsOnly) return text;
     if (broad) {
       text = text.replace(/\b((?:proxy-)?authorization)(\s*[:=]\s*["']?)(?:(bearer|basic|token|digest|negotiate)\s+)?[^\s"',;]+/gi,
         (_match, name: string, separator: string, scheme?: string) => `${name}${separator}${scheme ? `${scheme} ` : ''}${count('authorization')}`);

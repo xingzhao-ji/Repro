@@ -34,6 +34,17 @@ const URL_PATTERN = /https?:\/\/(?:localhost|127\.0\.0\.1|\[::1\]|0\.0\.0\.0)(?:
 const ANSI = /\u001b\[[0-9;?]*[ -/]*[@-~]|\u001b\][^\u0007]*\u0007/g;
 const MAX_LINES = 300;
 
+/**
+ * The environment for the user's own commands: the user's environment without
+ * what an npm/npx wrapper around Repro injected (npm_* settings, INIT_CWD) or
+ * a Node loader Repro itself runs under. npm re-reads the user's config files.
+ */
+export function childEnvironment(extra: Record<string, string> = {}): NodeJS.ProcessEnv {
+  const environment: NodeJS.ProcessEnv = {};
+  // NODE_TEST_CONTEXT would make a child `node --test` believe it runs inside Repro's own test runner.
+  for (const [key, value] of Object.entries(process.env)) if (!/^npm_/i.test(key) && !['INIT_CWD', 'NODE_OPTIONS', 'NODE_TEST_CONTEXT'].includes(key)) environment[key] = value;
+  return { ...environment, ...extra };
+}
 export async function freePort(): Promise<number> {
   return new Promise((resolvePort, reject) => {
     const server = createNetServer();
@@ -103,8 +114,7 @@ export async function startApp(plan: LaunchPlan, options: { signal?: AbortSignal
   if (!plan.command || !plan.directory) throw new ReproError('input', 'APP_COMMAND', 'Repro needs the command that starts your app.');
   const port = await freePort();
   const command = plan.command.replaceAll('{port}', String(port));
-  const environment: NodeJS.ProcessEnv = { ...process.env, ...plan.env, PORT: String(port), HOST: '127.0.0.1', BROWSER: 'none', NO_COLOR: '1', FORCE_COLOR: '0' };
-  delete environment['NODE_OPTIONS'];
+  const environment = childEnvironment({ ...plan.env, PORT: String(port), HOST: '127.0.0.1', BROWSER: 'none', NO_COLOR: '1', FORCE_COLOR: '0' });
   const collector = lineCollector();
   let child: ChildProcess;
   try { child = spawn('/bin/sh', ['-c', command], { cwd: plan.directory, env: environment, detached: true, stdio: ['ignore', 'pipe', 'pipe'] }); }
