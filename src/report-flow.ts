@@ -200,12 +200,14 @@ export async function generateReport(request: ReportRequest, context: { output: 
     return blockedOrAsk(error.code, error.message);
   }
   if (cancelled() || capture.outcome === 'cancelled') return outcome('cancelled', 'Cancelled during the first run. No report was written; the app and browser were stopped.');
-  function blockedOrAsk(code: string, reason: string): ReportOutcome | Promise<ReportOutcome> {
+  function blockedOrAsk(code: string, rawReason: string): ReportOutcome | Promise<ReportOutcome> {
+    // "step-3" is the worker's id; people read "Step 3 (Click "Add")", from the draft so withheld values stay withheld.
+    const reason = rawReason.replace(/\bstep-(\d+)\b/, (_, number: string) => { const action = draft.actions[Number(number) - 1]; return action ? `Step ${number} (${action.text})` : `Step ${number}`; });
     const checkIndex = Number(/check (\d+)/.exec(reason)?.[1] ?? 1) - 1;
     const checkReference = expectation.checks[checkIndex]?.reference ?? null;
     const question: Question = code === 'CHECK_TARGET_UNRESOLVED'
       ? { field: 'check-target', check: checkIndex, question: `Repro could not tell which element ${describeReference(checkReference)} refers to (check ${checkIndex + 1}). Choose one of the elements below, or quote a CSS selector such as "#total". On the command line, answer with --check-element ${checkIndex + 1}=SELECTOR.`, candidates: resolution?.candidates ?? [] }
-      : /^STEP_/.test(code) ? { field: 'steps', line: Number(/step-(\d+)/.exec(reason)?.[1] ?? 0), candidates: resolution?.candidates ?? [],
+      : /^STEP_/.test(code) ? { field: 'steps', line: Number(/step-(\d+)/.exec(rawReason)?.[1] ?? 0), candidates: resolution?.candidates ?? [],
         question: `${reason.replace(/^[A-Z_]+: /, '')} ${resolution?.candidates.length ? 'Reword that step with one of the names below, exactly as shown or its beginning.' : 'Check the wording of that step against the page.'}` }
       : { field: 'start', question: reason.replace(/^[A-Z_]+: /, '') };
     if (!request.options?.reportBlocked) return outcome('needs-input', `Repro could not complete the first run: ${reason.replace(/^[A-Z_]+: /, '')}`, { questions: [question] });

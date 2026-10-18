@@ -118,3 +118,20 @@ test('missing essentials are asked for before anything runs, and a cancelled rep
   const leftovers = execFileSync('ps', ['-axo', 'command'], { encoding: 'utf8' }).split('\n').filter(line => line.includes(app));
   assert.deepEqual(leftovers, []);
 });
+
+test('a step that finds no element asks a readable question with the controls the reporter may mean, or writes a Blocked report on request', { timeout: 300_000 }, async () => {
+  const app = await repository();
+  const misspelled = 'Open the app\nType "Write report" into "New task"\nClick "Add tsk"';
+  const asked = await generateReport({ app: { repository: app }, wentWrong: misspelled, shouldHappen: EXPECT, confirmed: true }, { output: join(root, `report-${randomUUID()}`) });
+  assert.equal(asked.status, 'needs-input');
+  assert.equal(asked.path, null);
+  const question = asked.questions[0]!;
+  assert.equal(question.field, 'steps');
+  assert.match(question.question, /^Step 3 \(Click "Add tsk"\) could not find its element on the page\. Reword that step with one of the names below/);
+  assert.equal(question.candidates?.[0]?.text, 'button “Add task”');
+
+  const blocked = await generateReport({ app: { repository: app }, wentWrong: misspelled, shouldHappen: EXPECT, confirmed: true, options: { reportBlocked: true } }, { output: join(root, `report-${randomUUID()}`) });
+  assert.equal(blocked.status, 'blocked');
+  const markdown = await readFile(blocked.path!, 'utf8');
+  assert.match(markdown, /\*\*Blocked\*\* — Repro could not complete the reported steps: Step 3 \(Click "Add tsk"\) could not find its element on the page\./);
+});
