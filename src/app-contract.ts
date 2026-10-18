@@ -40,11 +40,12 @@ export function validTarget(value: unknown): AppTarget {
   if (!value || typeof value !== 'object' || Array.isArray(value)) invalid('APP_TARGET', 'A step target must be an object.');
   const target = value as Record<string, unknown>;
   const keys = Object.keys(target).sort();
-  if (!(keys.join() === 'by,value' || keys.join() === 'by,role,value')) invalid('APP_TARGET', 'A step target has unsupported fields.');
+  if (!['by,value', 'by,role,value', 'by,match,role,value'].includes(keys.join())) invalid('APP_TARGET', 'A step target has unsupported fields.');
   oneOf(target['by'], STRATEGIES, 'APP_TARGET');
   text(target['value'], 512, 'APP_TARGET', false);
   if (target['by'] === 'role') oneOf(target['role'], ROLES, 'APP_TARGET_ROLE');
   else if ('role' in target) invalid('APP_TARGET', 'Only role targets name a role.');
+  if ('match' in target) oneOf(target['match'], ['contains'], 'APP_TARGET');
   return target as unknown as AppTarget;
 }
 export function validReference(value: unknown): TargetReference {

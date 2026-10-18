@@ -106,3 +106,10 @@ test('pinning that leaves nothing to delete does not claim minimality', async ()
   assert.equal(result.minimality, 'unverified');
   assert.match(result.reason, /No permitted deletion remained to test/);
 });
+
+test('a partial-name target is a role target that says so; nothing else may match partially', async () => {
+  const { validTarget } = await import('../src/app-contract.js');
+  assert.deepEqual(validTarget({ by: 'role', role: 'button', value: 'Crisp Waffles', match: 'contains' }), { by: 'role', role: 'button', value: 'Crisp Waffles', match: 'contains' });
+  assert.throws(() => validTarget({ by: 'text', value: 'Crisp', match: 'contains' }), /unsupported fields/);
+  assert.throws(() => validTarget({ by: 'role', role: 'button', value: 'Crisp', match: 'regex' }), /outside its supported vocabulary/);
+});

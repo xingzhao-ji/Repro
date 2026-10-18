@@ -102,7 +102,7 @@ export async function settle(page: Page, diagnostics: AppDiagnostics, settleMs: 
 
 export function locatorFor(page: Page, target: AppTarget): Locator {
   switch (target.by) {
-    case 'role': return page.getByRole(target.role as Parameters<Page['getByRole']>[0], { name: target.value, exact: true });
+    case 'role': return page.getByRole(target.role as Parameters<Page['getByRole']>[0], { name: target.value, exact: target.match !== 'contains' });
     case 'label': return page.getByLabel(target.value, { exact: true });
     case 'placeholder': return page.getByPlaceholder(target.value, { exact: true });
     case 'text': return page.getByText(target.value, { exact: true });
@@ -161,12 +161,19 @@ async function waitUnique(locator: Locator, timeoutMs: number, clock: Clock): Pr
     await pause(100);
   }
 }
+/** Exact names first; for steps, after a grace period, a role name that contains the quoted text. */
+const PARTIAL_GRACE_MS = 1000;
 async function resolveReference(page: Page, reference: TargetReference, purpose: Purpose, timeoutMs: number, clock: Clock): Promise<{ target: AppTarget | null; ambiguous: boolean }> {
-  const options = candidateTargets(reference, purpose);
-  const deadline = performance.now() + timeoutMs;
+  const exact = candidateTargets(reference, purpose);
+  // Reporters quote the visible start of a name ("Crisp Waffles" for "Crisp Waffles Serves 4 · 30 min").
+  // Checks never match partially: a check must read the element the reporter meant.
+  const partial: AppTarget[] = purpose === 'check' || !reference.text ? [] : exact.filter(target => target.by === 'role').map(target => ({ ...target, match: 'contains' as const }));
+  const started = performance.now(), deadline = started + timeoutMs;
   for (;;) {
     clock.check();
     let ambiguous = false;
+    // The page settled before this step; an exact match still absent after the grace period is not coming.
+    const options = partial.length && performance.now() - started >= Math.min(PARTIAL_GRACE_MS, timeoutMs / 2) ? [...exact, ...partial] : exact;
     for (const target of options) {
       let count: number;
       try { count = await locatorFor(page, target).count(); } catch { count = 0; }
@@ -213,6 +220,47 @@ async function fieldDescription(locator: Locator) {
  * context), then elements with an id, test id or aria-label. Each selector is
  * exact and unique on the current page. Shown only in the local UI.
  */
+/** Visible interactive elements a step could mean, closest name first; shown only in the local UI. */
+async function stepCandidates(page: Page, named: string): Promise<{ selector: string; text: string }[]> {
+  try {
+    const found = await page.evaluate(() => {
+      // No named inner functions: source-mode transforms would inject helpers the page does not have.
+      const results: { role: string; name: string; selector: string }[] = [];
+      const elements = Array.from(document.querySelectorAll<HTMLElement>('button, a[href], input:not([type=hidden]), select, textarea, summary, [role=button], [role=link], [role=tab], [role=menuitem], [role=option], [role=checkbox], [role=radio], [role=switch]'));
+      for (const element of elements) {
+        const box = element.getBoundingClientRect();
+        if (box.width === 0 || box.height === 0 || results.length >= 60) continue;
+        const input = element as HTMLInputElement;
+        const labels = 'labels' in input && input.labels ? Array.from(input.labels).map(label => label.innerText).join(' ') : '';
+        const name = (element.getAttribute('aria-label') || labels || element.innerText || input.placeholder || element.title || '').replace(/\s+/g, ' ').trim();
+        if (!name) continue;
+        const tag = element.tagName.toLowerCase();
+        const role = element.getAttribute('role') ?? (tag === 'a' ? 'link' : tag === 'select' ? 'select' : tag === 'textarea' ? 'field' : tag === 'input' ? (['checkbox', 'radio'].includes(input.type) ? input.type : ['button', 'submit', 'reset'].includes(input.type) ? 'button' : 'field') : 'button');
+        const parts: string[] = [];
+        let current: Element | null = element;
+        while (current && current !== document.body) {
+          if (current.id && /^[A-Za-z][\w-]*$/.test(current.id)) { parts.unshift(`#${current.id}`); break; }
+          const parent: Element | null = current.parentElement;
+          const same = parent ? Array.from(parent.children).filter(child => child.tagName === current!.tagName) : [];
+          parts.unshift(same.length > 1 ? `${current.tagName.toLowerCase()}:nth-of-type(${same.indexOf(current) + 1})` : current.tagName.toLowerCase());
+          current = parent;
+        }
+        results.push({ role, name: name.slice(0, 100), selector: parts.join(' > ').slice(0, 300) });
+      }
+      return results;
+    });
+    const words = (value: string) => value.toLowerCase().split(/[^\p{L}\p{N}]+/u).filter(Boolean);
+    const wanted = words(named);
+    const score = (name: string) => {
+      const have = new Set(words(name));
+      const shared = wanted.filter(word => have.has(word) || [...have].some(other => other.startsWith(word.slice(0, 4)) && word.length >= 4)).length;
+      return shared / Math.max(1, wanted.length) + (name.toLowerCase().includes(named.toLowerCase()) ? 1 : 0);
+    };
+    return found.map((entry, order) => ({ entry, order, score: score(entry.name) })).sort((a, b) => b.score - a.score || a.order - b.order)
+      .slice(0, 8).map(({ entry }) => ({ selector: entry.selector, text: `${entry.role} “${entry.name}”`.slice(0, 120) }));
+  } catch { return []; }
+}
+
 async function candidateElements(page: Page, named?: string): Promise<{ selector: string; text: string }[]> {
   try {
     // No named inner functions: source-mode transforms would inject helpers the page does not have.
@@ -317,6 +365,7 @@ export async function runAppSteps(context: AppStepContext): Promise<AppObservati
     } else {
       if (context.resolve) {
         const resolved = await resolveReference(page, action.reference!, purposeOf(action.kind), environment.actionTimeoutMs, clock);
+        if (!resolved.target && action.reference!.text) resolution.candidates = await stepCandidates(page, action.reference!.text);
         if (!resolved.target) fail(resolved.ambiguous ? 'STEP_TARGET_AMBIGUOUS' : 'STEP_TARGET_NOT_FOUND', resolved.ambiguous ? `${step} matched more than one element; name it more specifically.` : `${step} could not find its element on the page.`);
         target = resolved.target;
       }

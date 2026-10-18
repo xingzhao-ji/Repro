@@ -26,7 +26,7 @@ const literal = (value: string) => JSON.stringify(value);
 
 export function locatorCode(target: AppTarget): string {
   switch (target.by) {
-    case 'role': return `page.getByRole(${literal(target.role!)}, { name: ${literal(target.value)}, exact: true })`;
+    case 'role': return `page.getByRole(${literal(target.role!)}, { name: ${literal(target.value)}, exact: ${target.match === 'contains' ? 'false' : 'true'} })`;
     case 'label': return `page.getByLabel(${literal(target.value)}, { exact: true })`;
     case 'placeholder': return `page.getByPlaceholder(${literal(target.value)}, { exact: true })`;
     case 'text': return `page.getByText(${literal(target.value)}, { exact: true })`;

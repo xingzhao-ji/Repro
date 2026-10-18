@@ -63,7 +63,11 @@ Write one step per line. Quote what you clicked or typed into, as it appears on 
 
 A list's numbering or bullets, and words like "then", are ignored. A line that is not a step, such as `The counter shows "-1"`, is kept as your note in the report; Repro does not check it.
 
-During the first run, each quoted name is matched to exactly one element on the live page: a role and name, label, placeholder, text, test id, `aria-label` or CSS selector. Repro uses the first rule that finds exactly one element, and REPRO.md records the matched element. If a name matches no element or several, Repro asks you to reword the step.
+During the first run, each quoted name is matched to exactly one element on the live page: a role and name, label, placeholder, text, test id, `aria-label` or CSS selector. Repro uses the first rule that finds exactly one element, and REPRO.md records the matched element.
+
+For a step, and only when no element has the exact name, the quoted text may also be part of one button's, link's or other control's name. `Click "Crisp Waffles"` then clicks the only button named, for example, "Crisp Waffles Serves 4 · 30 min". REPRO.md and the test record it as the button whose name contains "Crisp Waffles". Checks always need an exact match.
+
+If a name matches no element or several, Repro asks you to reword the step and lists the controls on the page whose names are closest.
 
 ## Saying what should happen (“What should happen?”)
 

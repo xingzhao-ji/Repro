@@ -248,6 +248,7 @@ a.button.primary { background: var(--blue); border-color: var(--blue); color: va
 .needs-input fieldset { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 10px 12px; margin: 10px 0; }
 .candidate { display: flex; gap: 10px; align-items: center; padding: 4px 0; font-size: 13px; }
 .candidate input { min-height: 18px; width: 18px; height: 18px; }
+.step-candidates { margin: 4px 0 8px; padding-left: 20px; font-size: 13px; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 @media (max-width: 640px) { .report-top { padding: 12px 16px; } .report-page { padding: 18px 16px 48px; } .report-section { padding: 16px; } .field-row { flex-direction: column; } .generate { width: 100%; } }
 

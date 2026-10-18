@@ -411,7 +411,9 @@ function NeedsInput({ questions, onRetry, onBlocked }: { questions: Question[]; 
   const [choice, setChoice] = useState<Record<number, string>>({});
   return <div className="needs-input">{questions.map((question, index) => <div key={index} className="question-block">
     <p className="question">{question.question}</p>
-    {question.candidates && question.candidates.length > 0 && <fieldset><legend>Elements Repro found on the page</legend>
+    {question.field === 'steps' && question.candidates && question.candidates.length > 0 && <div><p className="small">Elements on the page you may mean:</p>
+      <ul className="step-candidates">{question.candidates.map(candidate => <li key={candidate.selector}>{candidate.text}</li>)}</ul></div>}
+    {question.field === 'check-target' && question.candidates && question.candidates.length > 0 && <fieldset><legend>Elements Repro found on the page</legend>
       {question.candidates.map(candidate => <label key={candidate.selector} className="candidate"><input type="radio" name={`check-${question.check}`} value={candidate.selector}
         checked={choice[question.check ?? 0] === candidate.selector} onChange={() => setChoice(current => ({ ...current, [question.check ?? 0]: candidate.selector }))} />
         <code>{candidate.selector}</code> <span>shows “{candidate.text}”</span></label>)}

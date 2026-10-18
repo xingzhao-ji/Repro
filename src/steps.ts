@@ -5,8 +5,11 @@
  * shared by the CLI, the orchestrator and the browser UI preview.
  */
 export type TargetStrategy = 'role' | 'label' | 'placeholder' | 'text' | 'testid' | 'css' | 'title' | 'alt';
-/** A resolved, exact Playwright locator. */
-export interface AppTarget { by: TargetStrategy; value: string; role?: string }
+/**
+ * A resolved Playwright locator. Names match exactly, except a role target with match "contains":
+ * Playwright's case-insensitive substring match, used only for steps and only when no exact name matched.
+ */
+export interface AppTarget { by: TargetStrategy; value: string; role?: string; match?: 'contains' }
 export type ReferenceKind = 'button' | 'link' | 'checkbox' | 'radio' | 'field' | 'tab' | 'menuitem' | 'option' | 'heading' | 'combobox' | 'element';
 /** What the reporter wrote; resolved against the live page during capture. */
 export interface TargetReference { text?: string; kind?: ReferenceKind; css?: string; testid?: string }
@@ -279,7 +282,7 @@ export function parseExpectation(input: string): ParsedExpectation {
 export function describeReference(ref: TargetReference | AppTarget | null): string {
   if (!ref) return 'the page';
   if ('by' in ref) {
-    if (ref.by === 'role') return `the ${ref.role ?? 'element'} "${ref.value}"`;
+    if (ref.by === 'role') return ref.match === 'contains' ? `the ${ref.role ?? 'element'} whose name contains "${ref.value}"` : `the ${ref.role ?? 'element'} "${ref.value}"`;
     if (ref.by === 'css') return ref.value === 'body' ? 'the page' : `the element \`${ref.value}\``;
     if (ref.by === 'testid') return `the element with test id "${ref.value}"`;
     return `the element with ${({ label: 'label', placeholder: 'placeholder', text: 'text', title: 'title', alt: 'alt text' } as Record<string, string>)[ref.by]} "${ref.value}"`;
