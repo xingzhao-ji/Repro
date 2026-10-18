@@ -55,7 +55,7 @@ test('a git npm app is detected from package.json with its exact revision, local
   assert.match(git.commit!, /^[a-f0-9]{40}$/);
   assert.equal(git.branch, 'main');
   assert.equal(git.dirty, true);
-  assert.deepEqual(git.remotes, [{ name: 'origin', url: 'https://[redacted url-credentials]@git.example.invalid/shop/demo.git' }]);
+  assert.deepEqual(git.remotes, [{ name: 'origin', url: 'https://git.example.invalid/shop/demo.git' }], 'credentials are removed whole; the address stays usable');
   assert.deepEqual(git.pushedTo, []);
   assert.match(git.patch, /item\.price \* item\.qty/);
   assert.match(git.patch, /new file mode 100644\n[\s\S]*\+\+\+ b\/src\/discount\.js/);

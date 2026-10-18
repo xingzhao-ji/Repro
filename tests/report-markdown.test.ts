@@ -45,7 +45,7 @@ test('generated test files are valid modules that read withheld values from the 
   assert.equal(test.includes('secret-value'), false, 'the typed secret never reaches the test file');
   assert.equal(test.includes('/somewhere/app'), false, 'no local absolute path in the test');
   assert.match(test, /page\.getByRole\("button", \{ name: "Sign in", exact: true \}\)/);
-  assert.match(test, /const REPORTED_FAILURE = \{"exact":\[true\],"values":\["Invalid password"\]\};/);
+  assert.match(test, /const REPORTED_FAILURE = \{"exact":\[true\],"passed":\[false\],"values":\["Invalid password"\]\};/);
   const directory = await mkdtemp(resolve('.repro-runs/tests-report-test-'));
   await writeFile(join(directory, 'login.test.mjs'), test);
   const check = spawnSync(process.execPath, ['--check', join(directory, 'login.test.mjs')], { encoding: 'utf8' });
