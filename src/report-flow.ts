@@ -3,7 +3,7 @@ import { createHash } from 'node:crypto';
 import { readFile, rm, writeFile } from 'node:fs/promises';
 import { join, relative, resolve } from 'node:path';
 import { ReproError, VERSION, type AppCheck, type AppObservation, type AppResolution, type ManifestV4, type RunResult, type Trial } from './contracts.js';
-import { createDraftManifest, resolveManifest, checkPasses, evaluateAppObservation } from './app-contract.js';
+import { createDraftManifest, resolveManifest, checkPasses, evaluateAppObservation, withheldText } from './app-contract.js';
 import { inspectApp, type AppInput, type AppProfile } from './app-inspect.js';
 import { childEnvironment, startApp, type RunningApp, type StopReceipt } from './app-process.js';
 import { classifyInput, createRedactor, type RedactionKind } from './redaction.js';
@@ -63,11 +63,19 @@ export function slugify(text: string): string {
   const cut = slug.slice(0, 49);
   return (cut.lastIndexOf('-') > 20 ? cut.slice(0, cut.lastIndexOf('-')) : slug.slice(0, 48)).replace(/-+$/, '');
 }
-function titleFrom(request: ReportRequest, profile: AppProfile): string {
+/**
+ * The report title, and through it the test's file name. A derived title comes from the reporter's first
+ * note, else the first step that types nothing; never from a line that contains a typed value, which may be
+ * a credential or personal data.
+ */
+export function reportTitle(request: Pick<ReportRequest, 'title' | 'wentWrong'>, appName: string): string {
   const explicit = request.title?.trim();
   if (explicit) return explicit.slice(0, 120);
-  const firstNote = parseSteps(request.wentWrong).notes[0] ?? request.wentWrong.split(/\r?\n/).find(line => line.trim())?.trim() ?? 'Unexpected behavior';
-  return `${profile.name}: ${firstNote.replace(/^[-*\d.)\s]+/, '').slice(0, 100)}`;
+  const parsed = parseSteps(request.wentWrong ?? '');
+  const typed = parsed.actions.filter(action => action.kind === 'fill' || action.kind === 'select').map(action => action.value.trim()).filter(Boolean);
+  const safe = (line: string) => !typed.some(value => line.includes(value));
+  const first = parsed.notes.find(safe) ?? parsed.actions.find(action => action.line > 0 && action.kind !== 'fill' && action.kind !== 'select' && safe(action.text))?.text ?? 'Unexpected behavior';
+  return `${appName}: ${first.replace(/^[-*\d.)\s]+/, '').slice(0, 100)}`;
 }
 const opensApp = (action: DraftAction) => action.kind === 'navigate' && (action.line === 0 || /^(?:open|go to|visit|load)\s+(?:the\s+)?(?:app|application|site|home\s*page|homepage|start page|main page)\b/i.test(action.text));
 
@@ -126,7 +134,7 @@ export async function generateReport(request: ReportRequest, context: { output: 
   if (questions.length) return outcomeWithout('needs-input', 'Repro needs a little more information before it can run.', { questions });
   if (cancelled()) return outcomeWithout('cancelled', 'Cancelled before any run. No report was written.');
   const evidenceDir = ownedDirectory(context.output, { exclusive: true });
-  const title = titleFrom(request, profile);
+  const title = reportTitle(request, profile.name);
   const slug = slugify(title.replace(/^[^:]+:\s*/, '') || title);
   const outcome = (status: ReportOutcome['status'], summary: string, extra: Partial<ReportOutcome> = {}): ReportOutcome =>
     ({ status, questions: [], markdown: null, path: null, evidenceDir, summary, understood, title, ...extra });
@@ -201,8 +209,15 @@ export async function generateReport(request: ReportRequest, context: { output: 
   }
   if (cancelled() || capture.outcome === 'cancelled') return outcome('cancelled', 'Cancelled during the first run. No report was written; the app and browser were stopped.');
   function blockedOrAsk(code: string, rawReason: string): ReportOutcome | Promise<ReportOutcome> {
+    // Values typed into fields the capture recognised as sensitive (a password field, say) are withheld even
+    // though the run did not finish: they stay out of the question, the steps and every text in a Blocked report.
+    const blockedDraft = { ...draft, actions: draft.actions.map((action, index) => {
+      if (action.secret || !resolution?.actions[index]?.sensitive || (action.kind !== 'fill' && action.kind !== 'select')) return action;
+      const name = withhold(index, steps.actions[index]!, 'secret');
+      return { ...action, value: '', secret: name, text: withheldText(action.kind, name, action.reference) };
+    }) } as ManifestV4;
     // "step-3" is the worker's id; people read "Step 3 (Click "Add")", from the draft so withheld values stay withheld.
-    const reason = rawReason.replace(/\bstep-(\d+)\b/, (_, number: string) => { const action = draft.actions[Number(number) - 1]; return action ? `Step ${number} (${action.text})` : `Step ${number}`; });
+    const reason = rawReason.replace(/\bstep-(\d+)\b/, (_, number: string) => { const action = blockedDraft.actions[Number(number) - 1]; return action ? `Step ${number} (${action.text})` : `Step ${number}`; });
     const checkIndex = Number(/check (\d+)/.exec(reason)?.[1] ?? 1) - 1;
     const checkReference = expectation.checks[checkIndex]?.reference ?? null;
     const question: Question = code === 'CHECK_TARGET_UNRESOLVED'
@@ -211,7 +226,7 @@ export async function generateReport(request: ReportRequest, context: { output: 
         question: `${reason.replace(/^[A-Z_]+: /, '')} ${resolution?.candidates.length ? 'Reword that step with one of the names below, exactly as shown or its beginning.' : 'Check the wording of that step against the page.'}` }
       : { field: 'start', question: reason.replace(/^[A-Z_]+: /, '') };
     if (!request.options?.reportBlocked) return outcome('needs-input', `Repro could not complete the first run: ${reason.replace(/^[A-Z_]+: /, '')}`, { questions: [question] });
-    return finish('blocked', `Repro could not complete the reported steps: ${reason.replace(/^[A-Z_]+: /, '')}`, null, draft, null, []);
+    return finish('blocked', `Repro could not complete the reported steps: ${reason.replace(/^[A-Z_]+: /, '')}`, null, blockedDraft, null, []);
   }
   // Only a conclusive capture can freeze a failure or count as meeting the expectation; anything else
   // (including an observation followed by uncertified cleanup) blocks the report.
@@ -246,24 +261,10 @@ export async function generateReport(request: ReportRequest, context: { output: 
   const failures = reproductions.filter(run => run.outcome === 'target-failure').length;
   const satisfied = reproductions.filter(run => run.outcome === 'requirement-satisfied').length;
   const different = reproductions.filter(run => /^DIFFERENT_FAILURE/.test(run.reason)).length;
-  const conclusive = failures + satisfied + different;
-  let status: ReportStatus;
-  let statusDetail: string;
   // An app that was already running was not restarted between runs; only the browser profile was fresh.
   const freshStart = profile.plan?.kind === 'external' ? 'from a fresh browser profile against the already-running app' : 'from a fresh start';
-  if (captureFailed && failures === conclusive && failures >= 2) {
-    status = 'reproduced';
-    statusDetail = `the failure occurred in ${failures + 1} of ${failures + 1} conclusive runs ${freshStart} (the capture and ${failures} repetitions)${conclusive < repetitions ? `; ${repetitions - conclusive} more run(s) were inconclusive` : ''}.`;
-  } else if (!captureFailed && capture.outcome === 'requirement-satisfied' && satisfied === conclusive && satisfied >= 2) {
-    status = 'not-reproduced';
-    statusDetail = `the expected behavior happened in all ${satisfied + 1} conclusive runs ${freshStart}.`;
-  } else if ((captureFailed ? failures + 1 : failures) > 0 && conclusive > 0) {
-    status = 'intermittent';
-    statusDetail = `the failure occurred in ${(captureFailed ? 1 : 0) + failures} of ${conclusive + 1} runs; ${satisfied + (captureFailed ? 0 : 1)} met the expectation${different ? ` and ${different} failed differently` : ''}.`;
-  } else {
-    status = 'blocked';
-    statusDetail = `too few runs were conclusive to decide (${conclusive} of ${repetitions + 1}). ${reproductions.find(run => run.outcome === 'inconclusive')?.reason.replace(/^[A-Z_]+: /, '') ?? ''}`.trim();
-  }
+  const { status, detail: statusDetail } = classifyRuns({ captureFailed, failures, satisfied, different, repetitions, freshStart,
+    inconclusiveReason: reproductions.find(run => run.outcome === 'inconclusive')?.reason.replace(/^[A-Z_]+: /, '') ?? '' });
 
   // Reduce the steps while the reported failure stays the same.
   let final = resolved;
@@ -272,14 +273,8 @@ export async function generateReport(request: ReportRequest, context: { output: 
   const confirmations: RunResult[] = [];
   // Steps that changed a checked value in the traced run are kept: the expected value may depend on them,
   // so removing them could reach the same wrong-looking value through correct behavior.
-  const traced = (reproductions[0]?.observation as AppObservation | null | undefined)?.trace;
-  const pinned = traced && traced.length === resolved.actions.length
-    ? resolved.actions.filter((_action, index) => index === 0 || JSON.stringify(traced[index]) !== JSON.stringify(traced[index - 1])).map(action => action.id) : resolved.actions.map(action => action.id);
-  // Shortening is sound only when the expected values cannot depend on which steps ran: invariant checks
-  // ("no errors", "should not show …", "should not be visible"), or the reporter declares it. Otherwise a
-  // removed step may be the one that should have changed the value ("clicking does nothing" bugs).
-  const invariant = resolved.expectation.checks.every(check => check.property === 'page-errors' || check.comparison === 'not-equals' || check.comparison === 'not-contains' || (check.property === 'visible' && check.expected === 'false'));
-  const mayShorten = invariant || request.options?.stepsIndependent === true;
+  const { pinned, traced } = pinnedSteps(resolved.actions.map(action => action.id), (reproductions[0]?.observation as AppObservation | null | undefined)?.trace);
+  const { invariant, mayShorten } = shorteningPolicy(resolved.expectation.checks, request.options?.stepsIndependent === true);
   const neutral = resolved.actions.filter(action => !pinned.includes(action.id)).map(action => resolved.actions.indexOf(action) + 1);
   if (status === 'reproduced' && resolved.actions.length > 2 && !mayShorten) {
     reductionNote = `These are the reported steps. Repro did not shorten them: the expected value can depend on every step, so a shorter sequence might show the same value for a different reason.${neutral.length ? ` In Repro's runs, step${neutral.length === 1 ? '' : 's'} ${neutral.join(', ')} did not change a checked value; they may be unnecessary, but Repro has not verified that.` : ''}`;
@@ -316,15 +311,18 @@ export async function generateReport(request: ReportRequest, context: { output: 
       } else reductionNote = `Repro found a shorter sequence (${reduced.actions.length} steps), but it did not fail in all ${repetitions} confirmation runs, so the full reported steps are used.`;
     } else if (reduction.trials.length <= 1 && reduction.status === 'complete') reductionNote = 'These are the reported steps. Every step changed a checked value or prepared a step that did, so Repro removed none.';
     else reductionNote = reduction.status === 'complete' ? `Repro tried removing steps (${reduction.trials.length - 1} trials); none kept the same failure, so these are the reported steps.` : `Repro could not shorten the steps within its budget (${reduction.reason})`;
-  } else if (status === 'reproduced' && resolved.actions.length > 2) reductionNote = 'These are the reported steps. Every step changed a checked value or prepared one that did, so Repro removed none.';
+  } else if (status === 'reproduced' && resolved.actions.length > 2) reductionNote = traced ? 'These are the reported steps. Every step changed a checked value or prepared one that did, so Repro removed none.'
+    : 'These are the reported steps. Repro could not record which steps changed a checked value, so it did not shorten them.';
   else if (status === 'reproduced') reductionNote = 'These are the reported steps; they were already short.';
   else if (status !== 'blocked') reductionNote = `These are the reported steps. Repro shortens steps only when the failure reproduces consistently.`;
 
   if (cancelled()) return outcome('cancelled', 'Cancelled. No report was written; the app and browser were stopped.');
-  return finish(status, statusDetail, capture, final, observed, reproductions, { trials, confirmations, reductionNote, resolved });
+  // When the capture met the expectation but a later run failed, show that failing run's values.
+  const shown = !captureFailed && status === 'intermittent' ? (reproductions.find(run => run.outcome === 'target-failure')?.observation as AppObservation | null | undefined) ?? observed : observed;
+  return finish(status, statusDetail, capture, final, shown, reproductions, { trials, confirmations, reductionNote, resolved, observedFrom: shown === observed ? 'capture run' : 'a failing repetition' });
 
   async function finish(statusValue: ReportStatus, detail: string, captureRun: RunResult | null, manifest: ManifestV4, observation: AppObservation | null, repeats: RunResult[],
-    extra: { trials?: Trial[]; confirmations?: RunResult[]; reductionNote?: string; resolved?: ManifestV4 } = {}): Promise<ReportOutcome> {
+    extra: { trials?: Trial[]; confirmations?: RunResult[]; reductionNote?: string; resolved?: ManifestV4; observedFrom?: string } = {}): Promise<ReportOutcome> {
     if (cancelled()) return outcome('cancelled', 'Cancelled. No report was written; the app and browser were stopped.');
     progress('test', 'Writing the regression test');
     const knownSecrets = [...Object.values(secrets)];
@@ -386,10 +384,10 @@ export async function generateReport(request: ReportRequest, context: { output: 
     // Fresh checkout: follow this report's own instructions in a separate clone.
     let fresh: FreshCheck = { status: 'not-run', summary: 'Not run.', observed: null, commands: [], durationMs: 0, output: [] };
     const draftData = (freshCheck: FreshCheck): ReportData => ({
-      title, slug, generatedAt: now().slice(0, 16).replace('T', ' ') + ' UTC', reproVersion: VERSION, status: statusValue, statusDetail: detail,
+      title, slug, generatedAt: now().slice(0, 16).replace('T', ' ') + ' UTC', reproVersion: VERSION, status: statusValue, statusDetail: detail, failureRecorded: manifest.failure !== null,
       reporter: { wentWrong: redactor.redact(request.wentWrong ?? ''), shouldHappen: redactor.redact(request.shouldHappen ?? ''), notes: steps.notes.map(note => redactor.redact(note)) },
       expectation: { checks, approval: manifest.humanApproval },
-      observedFrom: captureRun ? 'capture run' : 'not observed',
+      observedFrom: captureRun ? extra.observedFrom ?? 'capture run' : 'not observed',
       steps: { final: manifest.actions.map(action => redactor.redact(describeAction(action, describeReference(action.target ?? action.reference)))),
         original: (extra.resolved ?? manifest).actions.map(action => redactor.redact(describeAction(action, describeReference(action.target ?? action.reference)))),
         reduction: extra.reductionNote ?? 'These are the reported steps.', secrets: Object.entries(secretPurposes).map(([name, purpose]) => ({ name, purpose })) },
@@ -436,6 +434,33 @@ export async function generateReport(request: ReportRequest, context: { output: 
   }
 }
 
+/** How the capture and repetitions decide the report status. Pure, so every combination is testable. */
+export function classifyRuns(runs: { captureFailed: boolean; failures: number; satisfied: number; different: number; repetitions: number; freshStart: string; inconclusiveReason: string }): { status: ReportStatus; detail: string } {
+  const { captureFailed, failures, satisfied, different, repetitions, freshStart } = runs;
+  const conclusive = failures + satisfied + different;
+  if (captureFailed && failures === conclusive && failures >= 2)
+    return { status: 'reproduced', detail: `the failure occurred in ${failures + 1} of ${failures + 1} conclusive runs ${freshStart} (the capture and ${failures} repetitions)${conclusive < repetitions ? `; ${repetitions - conclusive} more run(s) were inconclusive` : ''}.` };
+  if (!captureFailed && satisfied === conclusive && satisfied >= 2) return { status: 'not-reproduced', detail: `the expected behavior happened in all ${satisfied + 1} conclusive runs ${freshStart}.` };
+  // Intermittent means both happened: some run failed, and some run met the expectation or failed differently.
+  const failed = (captureFailed ? 1 : 0) + failures, other = satisfied + (captureFailed ? 0 : 1) + different;
+  if (failed > 0 && other > 0 && conclusive > 0)
+    return { status: 'intermittent', detail: `the failure occurred in ${(captureFailed ? 1 : 0) + failures} of ${conclusive + 1} runs; ${satisfied + (captureFailed ? 0 : 1)} met the expectation${different ? ` and ${different} failed differently` : ''}.` };
+  return { status: 'blocked', detail: `too few runs were conclusive to decide (${conclusive} of ${repetitions + 1}). ${runs.inconclusiveReason}`.trim() };
+}
+/** Steps that changed a checked value in the traced run are pinned; without a trace every step is. */
+export function pinnedSteps(ids: string[], trace: (string | null)[][] | undefined): { pinned: string[]; traced: boolean } {
+  if (!trace || trace.length !== ids.length) return { pinned: [...ids], traced: false };
+  return { pinned: ids.filter((_id, index) => index === 0 || JSON.stringify(trace[index]) !== JSON.stringify(trace[index - 1])), traced: true };
+}
+/**
+ * Shortening is sound only when the expected values cannot depend on which steps ran. Only "there should be
+ * no errors" has that property by itself; even a negative check can depend on the steps ("the total should
+ * not be $0.00" after adding an item, when adding does nothing). Otherwise the reporter must declare it.
+ */
+export function shorteningPolicy(checks: Pick<AppCheck, 'property' | 'comparison' | 'expected'>[], stepsIndependent: boolean): { invariant: boolean; mayShorten: boolean } {
+  const invariant = checks.every(check => check.property === 'page-errors');
+  return { invariant, mayShorten: invariant || stepsIndependent };
+}
 function mergeCounts(a: Partial<Record<RedactionKind, number>>, b: Partial<Record<RedactionKind, number>>) {
   const merged: Partial<Record<RedactionKind, number>> = { ...a };
   for (const [kind, count] of Object.entries(b)) merged[kind as RedactionKind] = (merged[kind as RedactionKind] ?? 0) + (count ?? 0);
@@ -508,6 +533,7 @@ async function freshCheck(profile: AppProfile, markdown: string, testPath: strin
       ? await new Promise<{ code: number | null; output: string; timedOut: boolean; cancelled: boolean }>(resolveApply => {
         const child = spawn('git', ['apply', '-'], { cwd: clone, env: childEnvironment(), stdio: ['pipe', 'pipe', 'pipe'] });
         let text = ''; child.stdout.on('data', chunk => { text += chunk; }); child.stderr.on('data', chunk => { text += chunk; });
+        child.on('error', () => resolveApply({ code: -1, output: `${text}\ngit apply could not start`, timedOut: false, cancelled: false }));
         child.on('close', code => resolveApply({ code, output: text, timedOut: false, cancelled: false })); child.stdin.end(options.rawPatch);
       })
       : await execute({ label: 'apply', command: 'git', args: ['apply', join(app, '.repro/local-changes.patch')], cwd: clone, timeoutMs: 30_000 }, options.signal);

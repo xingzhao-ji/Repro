@@ -53,7 +53,7 @@ Reduction therefore preserves the reported failure. A different failure, such as
 
 - **Runner.** Browser runs use the existing fixed case worker, so the process group, IPC protocol, creation fence and cleanup certification are unchanged. The worker accepts schema 4, and `executeAppBrowser` runs the steps. The parent validates a schema-4 receipt with the same cleanup predicates. Reasons are templated and contain no target text. A profile is removed only after certified completion. Otherwise the run is `CLEANUP_FAILED` and the profile is kept, as before.
 - **App process.** The app server is owned by the parent, in its own process group. Stopping it sends SIGTERM to the group, then SIGKILL after a grace period, then checks that the group and port are gone. A survivor makes the run inconclusive with `APP_CLEANUP_FAILED`.
-- **Reduction.** This uses the existing `reduce()` delta-debugging search over actions and their `dependsOn` groups, with repeated acceptance, full trial accounting and an explicit budget. It runs only when the expectation cannot depend on which steps ran: every check is step-independent ("no errors", "should not show …", "should not contain …", "should not be visible"), or the reporter declares it. Even then, steps that changed a checked value in a traced run are pinned. Minimality is claimed only after at least one permitted removal was tested.
+- **Reduction.** This uses the existing `reduce()` delta-debugging search over actions and their `dependsOn` groups, with repeated acceptance, full trial accounting and an explicit budget. It runs only when the expectation cannot depend on which steps ran: every check is "there should be no errors", or the reporter declares it. Negative checks are not step-independent by themselves; "the total should not show $0.00" also holds for a correct app before an item is added. Even then, steps that changed a checked value in a traced run are pinned. Minimality is claimed only after at least one permitted removal was tested.
 - **Comparison.** "Buggy versus fixed" is generalized to the same frozen test on two source states. One is the report's captured revision. The other is a later revision or working tree that the developer chooses, so a fix can be checked. The report records it only if it was run.
 - **Evidence.** Each step writes its JSON to an owned directory under `.repro-runs/`, with the same path and link checks.
 
@@ -117,6 +117,7 @@ Files with sensitive names (`.env*`, keys, certificates, `credentials*`, `secret
   - a field filled before a later click is likewise removable.
 
   Either way, the shortened test could fail on a correct app while the report claimed Reproduced. Value checks are therefore not shortened unless the reporter declares them step-independent.
+- **Treating negative checks as step-independent.** The 0.2.0 release shortened steps automatically for "should not show", "should not contain" and "should not be visible" checks. The 2026-10-18 foreground review showed the same failure there. With "Total should not show $0.00" when adding an item does nothing, the report was shortened to "Open the app", and its test failed on the correct app. Only "no errors" checks now qualify automatically.
 
 ## Consequences
 

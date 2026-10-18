@@ -21,7 +21,7 @@ function manifest() {
 }
 function data(files: GeneratedFile[]): ReportData {
   return {
-    title: 'Sign-in rejects a valid password', slug: 'login', generatedAt: '2026-10-18 00:00 UTC', reproVersion: '0.2.0', status: 'reproduced', statusDetail: 'the failure occurred in 4 of 4 conclusive runs.',
+    title: 'Sign-in rejects a valid password', slug: 'login', generatedAt: '2026-10-18 00:00 UTC', reproVersion: '0.2.0', status: 'reproduced', statusDetail: 'the failure occurred in 4 of 4 conclusive runs.', failureRecorded: true,
     reporter: { wentWrong: 'Type the password, click Sign in', shouldHappen: 'It should say Welcome', notes: [] },
     expectation: { checks: [{ text: 'the element `#status` text is "Welcome"', expected: 'Welcome', observed: 'Invalid password', passed: false }], approval: 'reporter-confirmed' },
     observedFrom: 'capture run', steps: { final: ['Open `/`'], original: ['Open `/`'], reduction: 'These are the reported steps.', secrets: [{ name: 'REPRO_SECRET_1', purpose: 'the account password' }] },

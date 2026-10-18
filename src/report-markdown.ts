@@ -17,6 +17,8 @@ export interface FreshCheck {
 export interface ReportData {
   title: string; slug: string; generatedAt: string; reproVersion: string;
   status: ReportStatus; statusDetail: string;
+  /** Whether a failure was frozen from a run; without one the test cannot say a failure is "the recorded" one. */
+  failureRecorded: boolean;
   reporter: { wentWrong: string; shouldHappen: string; notes: string[] };
   expectation: { checks: CheckLine[]; approval: 'reporter-confirmed' | 'not-claimed' };
   observedFrom: string;
@@ -42,6 +44,8 @@ export interface ReportData {
   details: Record<string, string>;
 }
 
+/** From an app subfolder, plain `git apply` would skip changes outside it; apply from the repository root. */
+const applyCommand = (appPath: string) => appPath === '.' ? 'git apply .repro/local-changes.patch' : 'git -C "$(git rev-parse --show-toplevel)" apply "$PWD/.repro/local-changes.patch"';
 const STATUS_LABEL: Record<ReportStatus, string> = { reproduced: 'Reproduced', intermittent: 'Intermittent', 'not-reproduced': 'Not reproduced', blocked: 'Blocked' };
 function fence(content: string): string {
   const longest = Math.max(2, ...[...content.matchAll(/`+/g)].map(match => match[0].length));
@@ -59,10 +63,12 @@ export function fileBlock(file: GeneratedFile): string {
   const marks = fence(file.content);
   return `${marks}${file.language} repro-file=${file.path} sha256=${file.sha256}\n${file.content}${marks}`;
 }
+/** An inline code span that holds any text: its delimiter is longer than the longest backtick run inside. */
 const inline = (value: string) => {
   const text = value.replace(/\s+/g, ' ');
-  const marks = text.includes('`') ? '``' : '`';
-  return `${marks}${marks.length > 1 ? ' ' : ''}${text}${marks.length > 1 ? ' ' : ''}${marks}`;
+  const longest = Math.max(0, ...[...text.matchAll(/`+/g)].map(match => match[0].length));
+  const marks = '`'.repeat(longest + 1), pad = longest ? ' ' : '';
+  return `${marks}${pad}${text}${pad}${marks}`;
 };
 export const shown = (value: string | null, limit = 160) => value === null ? '_(element not found)_' : inline(value.length > limit ? `${value.slice(0, limit)}… (${value.length} characters)` : value || '(empty)');
 const quote = (text: string) => text.trim() ? text.trim().split(/\r?\n/).map(line => `> ${line}`).join('\n') : '> _(not provided)_';
@@ -126,7 +132,7 @@ function sourceSection(data: ReportData): string {
     if (git.changed.length + git.untracked.length > 80) lines.push('- …');
     if (git.omitted.length) lines.push('', 'Not included in the patch below:', '', ...git.omitted.map(item => `- ${inline(item.path)}: ${item.reason}`));
     if (data.app.patch) {
-      lines.push('', `The patch is materialized with the test files as ${inline(data.app.patch.path)} and applied with ${inline('git apply .repro/local-changes.patch')}.`
+      lines.push('', `The patch is materialized with the test files as ${inline(data.app.patch.path)} and applied with ${inline(applyCommand(git.appPath))}.`
         + (data.app.patchRedacted ? ' **Repro redacted values in this copy, so it may not apply cleanly; ask the reporter for the original values.**' : ''), '', fileBlock(data.app.patch));
     }
   }
@@ -146,8 +152,10 @@ export function renderReport(data: ReportData): string {
   out.push(`| **Generated** | ${data.generatedAt} by Repro ${data.reproVersion}, locally, without an AI service |`, '');
   out.push('## Summary', '');
   const failing = data.expectation.checks.filter(check => !check.passed);
-  if (data.status === 'reproduced' || data.status === 'intermittent') {
+  if ((data.status === 'reproduced' || data.status === 'intermittent') && failing.length) {
     out.push(`After the steps below, Repro expected that ${failing.map(check => `${check.text}, but observed ${shown(check.observed)}`).join('; and that ')}.`);
+  } else if (data.status === 'reproduced' || data.status === 'intermittent') {
+    out.push('After the steps below, the expected behavior did not always happen; the runs under “Evidence” show when it failed.');
   } else if (data.status === 'not-reproduced') out.push('Repro followed the reported steps, and the expected behavior happened in every run. The bug did not reproduce under the conditions recorded here.');
   else out.push(`Repro could not complete the reported steps, so it could not tell whether the bug occurs: ${data.statusDetail}`);
   out.push('', 'In the reporter’s words:', '', quote(data.reporter.wentWrong), '');
@@ -189,7 +197,7 @@ export function renderReport(data: ReportData): string {
   if (git?.dirty && data.app.patch) {
     heading('Apply the local changes');
     out.push('This bug was reproduced with uncommitted changes. The previous step wrote them to `.repro/local-changes.patch`; apply them before installing, because they may change dependencies.', '');
-    out.push(code(git.appPath === '.' ? 'git apply .repro/local-changes.patch' : 'git -C "$(git rev-parse --show-toplevel)" apply "$PWD/.repro/local-changes.patch"', 'sh'), '');
+    out.push(code(applyCommand(git.appPath), 'sh'), '');
   }
   heading('Install the app’s dependencies');
   out.push(data.app.install ? code(data.app.install, 'sh') : 'No install command is known for this app.', '');
@@ -200,7 +208,7 @@ export function renderReport(data: ReportData): string {
   else out.push(`Start the app yourself and set ${inline('REPRO_BASE_URL')} to its address before running the test.`, '');
   out.push(({
     reproduced: 'Right now the test **fails** with `REPRO_EXPECTATION_FAILED` and says “This is the failure recorded in REPRO.md”. If it fails with `REPRO_STEP_FAILED` instead, the app no longer matches the recorded steps; that is not the reported bug.',
-    intermittent: `The bug is **intermittent** (${data.statusDetail.replace(/\.$/, '')}), so a single run may pass or fail. When it fails in the reported way, it says “This is the failure recorded in REPRO.md”.`,
+    intermittent: `The bug is **intermittent** (${data.statusDetail.replace(/\.$/, '')}), so a single run may pass or fail. ${data.failureRecorded ? 'When it fails in the reported way, it says “This is the failure recorded in REPRO.md”.' : 'When it fails, compare what it prints with “Expected and observed behavior”.'}`,
     'not-reproduced': 'Right now the test **passes**, because the bug did not reproduce in Repro’s runs. It still records exactly what was tried.',
     blocked: 'Repro could not complete the steps, so this test is not a verified reproduction. It is likely to stop with `REPRO_STEP_FAILED` at the step that could not be performed.',
   } as Record<ReportStatus, string>)[data.status], '');

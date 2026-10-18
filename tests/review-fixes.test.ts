@@ -62,7 +62,7 @@ function data(status: ReportData['status'], extra: Partial<ReportData> = {}): Re
   const testFile: GeneratedFile = { path: '.repro/case.test.mjs', language: 'js', content: 'x\n', sha256: sha('x\n') };
   const patch: GeneratedFile = { path: '.repro/local-changes.patch', language: 'diff', content: 'diff --git a/x b/x\n', sha256: sha('diff --git a/x b/x\n') };
   return {
-    title: 'T', slug: 'case', generatedAt: 'now', reproVersion: '0.2.0', status, statusDetail: 'the failure occurred in 2 of 4 runs; 2 met the expectation.',
+    title: 'T', slug: 'case', generatedAt: 'now', reproVersion: '0.2.0', status, statusDetail: 'the failure occurred in 2 of 4 runs; 2 met the expectation.', failureRecorded: true,
     reporter: { wentWrong: '', shouldHappen: '', notes: [] }, expectation: { checks: [{ text: 'c', expected: 'e', observed: 'o', passed: false }], approval: 'reporter-confirmed' },
     observedFrom: 'capture run', steps: { final: ['Open `/`'], original: ['Open `/`'], reduction: '', secrets: [] }, runs: [], trials: [],
     app: { name: 'web', folderNote: '', git: { commit: 'c'.repeat(40), branch: 'main', remotes: [], pushedTo: [], appPath: 'apps/web', dirty: true, changed: [{ path: 'packages/lib/x.js', status: 'M' }], untracked: [], omitted: [] },

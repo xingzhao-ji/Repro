@@ -88,6 +88,8 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
   const expectField = useRef<HTMLTextAreaElement>(null);
   const [demoNote, setDemoNote] = useState('');
   const update = (patch: Partial<Draft>) => {
+    // A new request gets a new idempotency key: an earlier key returns the report it already created.
+    requestKey.current = '';
     // Any change to what will run invalidates the confirmation.
     if (['folder', 'url', 'start', 'wentWrong', 'shouldHappen', 'checkSelectors', 'stepsIndependent', 'reportBlocked'].some(key => key in patch)) setConfirmed(false);
     setDraft(current => {

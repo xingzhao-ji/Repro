@@ -102,12 +102,12 @@ Once a failure reproduces, Repro freezes it. A later run that fails differently,
 
 ## Shortening the steps
 
-Removing steps is safe only when the expected behavior cannot depend on which steps ran. Take "3 tasks remaining": it means something only after three tasks were added. In a "clicking Add does nothing" bug, the useless click *is* the bug, yet it changes no value, so no observation can show that removing it is harmless.
+Removing steps is safe only when the expected behavior cannot depend on which steps ran. Take "3 tasks remaining": it means something only after three tasks were added. In a "clicking Add does nothing" bug, the useless click *is* the bug, yet it changes no value, so no observation can show that removing it is harmless. A negative check is no exception: "the total should not show $0.00" is also true of a correct app before anything is added.
 
 Repro therefore shortens steps only in two cases:
 
-- **Every check is step-independent:** `There should be no errors`, `… should not show …`, `… should not contain …`, or `… should not be visible`.
-- **The reporter declares it:** tick *The expected values above stay the same whichever of my steps run* in **More options**, or pass `--steps-independent`.
+- **Every check is `There should be no errors`:** a correct app raises no uncaught error after any sequence of steps.
+- **The reporter declares it:** tick *The expected values above stay the same whichever of my steps run* in **More options**, or pass `--steps-independent`. Declare it only when that is true, for example "the page should never show NaN".
 
 In every other case REPRO.md keeps the reported steps. It says why, and lists any steps that did not change a checked value in Repro's runs as *possibly unnecessary, not verified*.
 

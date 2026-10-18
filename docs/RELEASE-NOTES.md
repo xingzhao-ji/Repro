@@ -1,3 +1,19 @@
+# Changes after v0.2.0-beta (on `feature/repro-report`, not in the released tarball)
+
+These fixes come from the 2026-10-18 foreground review of the diff against `main` (see `evidence/FOREGROUND-REVIEW-0.2.0.md`). They change behavior compared with the `repro-local-0.2.0.tgz` package, which is unchanged.
+
+- **Shortening:** steps are shortened automatically only when every check is "there should be no errors". Negative checks ("should not show …") now need the reporter's declaration, because they can depend on the steps.
+- **Status:** "Intermittent" now requires that some run failed and some run did not fail in the recorded way. Failing runs with too few conclusive repetitions are reported as **Blocked**.
+- **Privacy:** a Blocked report withholds values typed into fields Repro recognised as sensitive during the run, such as a password field without "password" in its label. A derived title, and the test's file name, never come from a line that types a value.
+- **REPRO.md:**
+  - every patch command works from an app subfolder;
+  - an intermittent report whose first run passed shows a failing run, and does not promise a "recorded" failure;
+  - log text containing backticks stays inside its code span;
+  - the test refuses the `…` placeholder for a withheld value.
+- **Workbench:** editing the form starts a new request instead of reusing the previous idempotency key.
+
+---
+
 # Repro 0.2.0 — one REPRO.md from your own app
 
 Release package: `repro-local-0.2.0.tgz`, built with `npm pack` from the release commit on branch `release/repro-report-0.2.0` and tagged `v0.2.0-beta`. Its SHA-256, and the acceptance runs of that exact tarball, are recorded in `evidence/REPRO-REPORT-RELEASE.md`. That file is in the evidence commit on top of the release commit, so it is not inside the tarball.

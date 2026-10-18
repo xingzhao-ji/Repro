@@ -138,7 +138,7 @@ const REPORTED_FAILURE = ${JSON.stringify(manifest.failure)};
 
 test(${literal(title)}, { timeout: 180_000 }, async () => {
   for (const [name, purpose] of Object.entries(SECRETS)) {
-    assert.ok(process.env[name] !== undefined, 'Set ' + name + ' to ' + purpose + ' before running. REPRO.md withholds this value.');
+    assert.ok(process.env[name] !== undefined && process.env[name] !== '…', 'Set ' + name + ' to ' + purpose + ' before running. REPRO.md withholds this value.');
   }
   let app = null, browser = null;
   try {

@@ -145,7 +145,7 @@ async function main(): Promise<void> {
 type ReportCliOptions = { app?: string | undefined; url?: string | undefined; start?: string | undefined; title?: string | undefined; 'went-wrong'?: string | undefined; 'should-happen'?: string | undefined;
   issue?: string | undefined; yes?: boolean | undefined; 'no-fresh-check'?: boolean | undefined; 'report-blocked'?: boolean | undefined; 'steps-independent'?: boolean | undefined; 'check-element'?: string[] | undefined; budget?: string | undefined; output?: string | undefined };
 async function report(options: ReportCliOptions): Promise<void> {
-  const { generateReport, prepareReport, slugify } = await import('./report-flow.js');
+  const { generateReport, prepareReport, slugify, reportTitle } = await import('./report-flow.js');
   let input: Record<string, unknown> = {};
   if (options.issue) {
     const { readFile } = await import('node:fs/promises');
@@ -169,7 +169,8 @@ async function report(options: ReportCliOptions): Promise<void> {
   };
   if (options.budget !== undefined && (!Number.isInteger(Number(options.budget)) || Number(options.budget) < 8 || Number(options.budget) > 120)) throw new ReproError('input', 'BUDGET', 'The report budget must be 8–120 runs.');
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\..*$/, '').replace('T', '-');
-  const outputFor = () => options.output ?? `.repro-runs/reports/${stamp}-${slugify(request.title ?? request.wentWrong.split('\n')[0] ?? 'bug')}`;
+  // Named like the report itself, never after a line that types a value.
+  const outputFor = () => options.output ?? `.repro-runs/reports/${stamp}-${slugify(reportTitle(request, 'report').replace(/^[^:]+:\s*/, ''))}`;
   // First pass: understand and ask, never run. The reporter confirms the parsed checks and execution scope.
   const preview = await prepareReport({ ...request, confirmed: false });
   const blocking = preview.questions.filter(question => question.field !== 'confirm');
