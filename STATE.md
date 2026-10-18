@@ -2,6 +2,24 @@
 
 October 17–18, 2026. The owner's `/goal`: evolve Repro into a developer tool. The input is an application plus an issue description; the output is one actionable REPRO.md that a teammate or coding agent can use to reproduce the bug, fix the original app and run the same test.
 
+## Stopped here (owner asked to pause), October 18, 2026, about 01:10 PDT
+
+An independent verification of `v0.2.1-beta` reported four export and handoff defects. They are fixed, along with a fifth found by its new held-out app. Branch `feature/repro-report` holds 0.2.2 (`3897ce2` or later). Summary: [evidence/INDEPENDENT-VERIFICATION-0.2.1.md](evidence/INDEPENDENT-VERIFICATION-0.2.1.md).
+
+- **Checks at `3897ce2`:** ordinary 455/455, browser 72/72 (three deferred accessibility scenarios excluded), typecheck, lint and `test:package` pass.
+- **On the 0.2.2 rc1 package:** acceptance 8/8. The new independent held-out app (Harbor Pantry) was Reproduced on the first attempt, and its recipient workflow passed with the sealed fix.
+- **0.2.2 is not released.** The docs on this branch already name `repro-local-0.2.2.tgz`, which does not exist yet. The current release is still 0.2.1 (below).
+
+**Next actions:**
+
+1. Pack 0.2.2 rc2 from the branch head.
+2. Run `~/Developer/repro-acceptance/release-0.2.2/tools/acceptance.mjs` on it, plus the Harbor Pantry and post-hoc pantry runs.
+3. Regenerate `docs/examples/`, adding `harbor-pantry`.
+4. Make the release commit, pack the final tarball, and compare it with rc2.
+5. Add per-file content SHA-256s to the evidence, then tag `v0.2.2-beta` on `release/repro-report-0.2.2` and push.
+
+The merge to `main` still waits for the owner.
+
 ## Release identity (current: 0.2.1)
 
 - **0.2.1, the release to use:**

@@ -1,4 +1,4 @@
-# Repro 0.2.2 — fixes from the independent verification
+# Repro 0.2.2 — fixes from the independent verification (in preparation: not yet packed, tagged or released)
 
 Release package: `repro-local-0.2.2.tgz`, built with `npm pack` from the release commit on branch `release/repro-report-0.2.2` and tagged `v0.2.2-beta`. Its SHA-256, the per-file SHA-256s of its contents, and the acceptance runs of that exact tarball are in `evidence/REPRO-REPORT-0.2.2-RELEASE.md`. That file sits in the evidence commit on top of the release commit, so it is not inside the tarball.
 
