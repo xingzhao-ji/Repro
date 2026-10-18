@@ -38,7 +38,7 @@ function finish() {
     manifestDigest: crypto.createHash('sha256').update(canonical(request.input)).digest('hex'),
     assertionDigest: request.input.assertionDigest, harnessDigest: request.harnessDigest,
     appRevision: request.revision ?? request.input.app.revision, appDigest: conclusive ? request.input.app.sourceDigest : '',
-    adapterVersion: '0.2.1', runnerVersion: '0.2.1', seed: request.input.environment.seed,
+    adapterVersion: '0.2.2', runnerVersion: '0.2.2', seed: request.input.environment.seed,
     startedAt: request.startedAt, durationMs: 0, assertionCount: conclusive ? 1 : 0,
     observation: conclusive ? { kind: 'browser-case', values: request.input.expectation.checks.map(c => c.expected) } : null,
     events, artifacts: [], environment: { platform: process.platform + '-' + process.arch, node: process.version,

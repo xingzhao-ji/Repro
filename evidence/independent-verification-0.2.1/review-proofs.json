@@ -1,0 +1,11 @@
+{
+  "expected": "synthetic-person@private-company.org",
+  "generatedCheckAfterRedaction": "    { text: \"the element `#status` text is \\\"[redacted email]\\\"\", property: \"text\", comparison: \"equals\", expected: \"[redacted email]\", target: page.locator(\"#status\") },",
+  "expectedStillInFinalNarrative": true,
+  "cloneCommand": "git clone https://host.invalid/$(printf${IFS}INJECTED).git demo",
+  "appCdCommand": "cd app folder",
+  "shellStubOutput": "ARG:<clone>\nARG:<https://host.invalid/INJECTED.git>\nARG:<demo>\n",
+  "extractorExit": 0,
+  "extractorWroteOutsideRepro": true,
+  "work": "/workspace/shared/repro-cloud-verification/evidence/extractor-proof-d3YBdp"
+}

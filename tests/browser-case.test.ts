@@ -10,7 +10,7 @@ import { ReproError } from '../src/contracts.js';
 const declaration = {
   schemaVersion: 3, id: 'morphdom-textarea', caseId: 'morphdom-textarea',
   classification: 'public-repository-development-case',
-  adapter: { id: 'registered-browser-v1', version: '0.2.1' }, runnerVersion: '0.2.1',
+  adapter: { id: 'registered-browser-v1', version: '0.2.2' }, runnerVersion: '0.2.2',
   expectation: {
     invariantId: 'MORPHDOM_TEXTAREA_LIVE_VALUE',
     description: 'Morphing an edited textarea to Hello World updates its live value after each input.',

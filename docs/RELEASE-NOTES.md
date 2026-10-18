@@ -1,3 +1,27 @@
+# Repro 0.2.2 — fixes from the independent verification
+
+Release package: `repro-local-0.2.2.tgz`, built with `npm pack` from the release commit on branch `release/repro-report-0.2.2` and tagged `v0.2.2-beta`. Its SHA-256, the per-file SHA-256s of its contents, and the acceptance runs of that exact tarball are in `evidence/REPRO-REPORT-0.2.2-RELEASE.md`. That file sits in the evidence commit on top of the release commit, so it is not inside the tarball.
+
+**Use 0.2.2.** An independent verification of 0.2.1 in a separate Linux environment (`evidence/INDEPENDENT-VERIFICATION-0.2.1.md`) found four export and handoff defects. 0.2.2 fixes all four, each with a regression test that failed before its fix:
+
+1. **The exported test is never rewritten by redaction.** Under 0.2.1, a value that looked like personal data inside a generated assertion or locator was replaced in the test code itself, which changed what the test checked. Now:
+   - Repro asks before running when an expected value or an element name looks like a credential or personal data;
+   - it refuses to write a test that would still contain such data (`SENSITIVE_TEST_DATA`);
+   - it redacts the title and the expectation table as narrative.
+2. **Repository data in REPRO.md commands is quoted:**
+   - a remote URL or folder name is one shell word, so copying a command never runs text from the repository;
+   - folders with spaces work;
+   - `git clone --` ends git's options;
+   - the clone folder is never `.`, `..` or option-like.
+3. **The extraction command refuses a `.repro` that is a symbolic link** or resolves outside the app folder.
+4. **The fresh-checkout verdict needs the observation and the exit code to agree.** A run that fails differently is reported as **different**, never as the recorded bug. A satisfied observation followed by a failing exit is not a pass.
+
+REPRO.md now also states that the fresh-checkout check clones the local repository, so it does not prove the recipient can fetch the commit from a remote.
+
+Runtime and adapter version: 0.2.2. Manifests and capsules from earlier versions are refused as an unavailable version.
+
+---
+
 # Repro 0.2.1 — correctness and privacy fixes for REPRO.md
 
 Release package: `repro-local-0.2.1.tgz`, built with `npm pack` from the release commit on branch `release/repro-report-0.2.1` and tagged `v0.2.1-beta`. Its SHA-256 and the acceptance runs of that exact tarball are in `evidence/REPRO-REPORT-0.2.1-RELEASE.md`. That file sits in the evidence commit on top of the release commit, so it is not inside the tarball.

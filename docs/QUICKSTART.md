@@ -9,7 +9,7 @@ You need Node.js 24 or newer and npm. Repro was tested with Node 26.7.0 on macOS
 ```sh
 mkdir repro-workspace && cd repro-workspace
 npm init -y
-npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.1.tgz
+npm install --ignore-scripts --no-audit --no-fund /absolute/path/to/repro-local-0.2.2.tgz
 export PLAYWRIGHT_BROWSERS_PATH="$PWD/.repro-cache/browsers"
 npx --no-install playwright install chromium --only-shell
 npx --no-install repro doctor

@@ -1,5 +1,5 @@
 import type { AppActionKind, AppTarget, CheckProperty, Comparison, TargetReference } from './steps.js';
-export const VERSION = '0.2.1';
+export const VERSION = '0.2.2';
 export const ADAPTER = 'synthetic-search-v1';
 export type Outcome = 'target-failure' | 'requirement-satisfied' | 'inconclusive' | 'cancelled';
 export type ErrorCategory = 'input' | 'unsupported' | 'environment' | 'harness' | 'target-failure' | 'cancelled' | 'verification';

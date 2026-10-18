@@ -1,6 +1,6 @@
 # Your local web app: supported scope
 
-This page states exactly what Repro 0.2.1 supports when it turns a bug in your own application into REPRO.md, and what it does not. The design is recorded in [ADR 0005](adr/0005-local-app-repro-report.md).
+This page states exactly what Repro 0.2.2 supports when it turns a bug in your own application into REPRO.md, and what it does not. The design is recorded in [ADR 0005](adr/0005-local-app-repro-report.md).
 
 ## Supported apps
 
@@ -163,6 +163,6 @@ Redaction is a safeguard, not a guarantee. Review REPRO.md before you share it b
 - **Browser and settings:** only Chromium 156 (pinned by Playwright 1.64) in headless mode, at 1280×720, en-US, UTC, with a seeded `Math.random`. The page clock is real unless the manifest sets one.
 - **Timing-dependent bugs** may come out **Intermittent**, or reproduce only part of the time.
 - **Processes:** Repro stops the app's own process group after every run. A process the app detaches into another group or session is not tracked.
-- **Platforms:** Windows is not supported; the exported test uses POSIX process groups. Linux was not part of the 0.2.0 or 0.2.1 acceptance.
+- **Platforms:** Windows is not supported; the exported test uses POSIX process groups. Linux was not part of the 0.2.x acceptance on this machine; an independent Linux run of 0.2.1 passed the ordinary tests but could not run the browser (see evidence).
 - **Not supported:** file uploads, drag and drop, iframes from other origins, multiple tabs, and native dialogs other than auto-accepted `alert` and `confirm`.
 - **Causes:** Repro shows that and how a failure happens. It does not diagnose causes, and it does not change your code.

@@ -12,7 +12,7 @@ process.on('message', frame => {
     id: request.id, outcome: 'inconclusive', reason: 'RUNNER_ERROR: Browser or owned server setup failed. Check prerequisites and writable task output, then retry.',
     manifestDigest: require('node:crypto').createHash('sha256').update(canonical(request.input)).digest('hex'),
     assertionDigest: request.input.assertionDigest, harnessDigest: request.harnessDigest,
-    appRevision: request.revision ?? request.input.app.revision, appDigest: '', adapterVersion: '0.2.1', runnerVersion: '0.2.1',
+    appRevision: request.revision ?? request.input.app.revision, appDigest: '', adapterVersion: '0.2.2', runnerVersion: '0.2.2',
     seed: request.input.environment.seed, startedAt: request.startedAt, durationMs: 0, assertionCount: 0,
     observation: null, events: [], artifacts: [], environment: { platform: `${process.platform}-${process.arch}`, node: process.version, browser: 'not-launched', isolation: 'registered public browser library; fresh owned profile; Chromium sandbox enabled; loopback asset allowlist; not a hostile-code sandbox' },
   };

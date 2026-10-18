@@ -79,10 +79,10 @@
       "$ref": "#/$defs/sha256"
     },
     "adapterVersion": {
-      "const": "0.2.1"
+      "const": "0.2.2"
     },
     "runnerVersion": {
-      "const": "0.2.1"
+      "const": "0.2.2"
     },
     "seed": {
       "type": "integer",
