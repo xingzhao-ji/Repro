@@ -117,7 +117,7 @@ Files with sensitive names (`.env*`, keys, certificates, `credentials*`, `secret
   - a field filled before a later click is likewise removable.
 
   Either way, the shortened test could fail on a correct app while the report claimed Reproduced. Value checks are therefore not shortened unless the reporter declares them step-independent.
-- **Treating negative checks as step-independent.** The 0.2.0 release shortened steps automatically for "should not show", "should not contain" and "should not be visible" checks. The 2026-10-18 foreground review showed the same failure there. With "Total should not show $0.00" when adding an item does nothing, the report was shortened to "Open the app", and its test failed on the correct app. Only "no errors" checks now qualify automatically.
+- **Treating negative checks as step-independent.** The 0.2.0 release shortened steps automatically for "should not show", "should not contain" and "should not be visible" checks. The 2026-10-17 foreground review showed the same failure there. With "Total should not show $0.00" when adding an item does nothing, the report was shortened to "Open the app", and its test failed on the correct app. Only "no errors" checks now qualify automatically.
 
 ## Consequences
 

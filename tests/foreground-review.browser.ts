@@ -8,7 +8,7 @@ import { generateReport } from '../src/report-flow.js';
 import { EXTRACTOR, extractReproFiles } from '../src/report-markdown.js';
 import { childEnvironment } from '../src/app-process.js';
 
-// End-to-end regressions for the 2026-10-18 foreground review (see evidence/FOREGROUND-REVIEW-0.2.0.md).
+// End-to-end regressions for the 2026-10-17 foreground review (see evidence/FOREGROUND-REVIEW-0.2.0.md).
 const root = resolve('.repro-runs/foreground-review-tests');
 const npmCache = resolve('.repro-cache/npm');
 const browsers = resolve(process.env['PLAYWRIGHT_BROWSERS_PATH'] ?? '.repro-cache/browsers');

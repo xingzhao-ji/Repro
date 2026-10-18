@@ -1,6 +1,6 @@
 # Changes after v0.2.0-beta (on `feature/repro-report`, not in the released tarball)
 
-These fixes come from the 2026-10-18 foreground review of the diff against `main` (see `evidence/FOREGROUND-REVIEW-0.2.0.md`). They change behavior compared with the `repro-local-0.2.0.tgz` package, which is unchanged.
+These fixes come from the 2026-10-17 foreground review of the diff against `main` (see `evidence/FOREGROUND-REVIEW-0.2.0.md`). They change behavior compared with the `repro-local-0.2.0.tgz` package, which is unchanged.
 
 - **Shortening:** steps are shortened automatically only when every check is "there should be no errors". Negative checks ("should not show …") now need the reporter's declaration, because they can depend on the steps.
 - **Status:** "Intermittent" now requires that some run failed and some run did not fail in the recorded way. Failing runs with too few conclusive repetitions are reported as **Blocked**.

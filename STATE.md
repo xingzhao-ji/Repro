@@ -23,9 +23,25 @@ October 17–18, 2026. The owner's `/goal`: evolve Repro into a developer tool. 
   - With the rendered names it reproduced, and the sealed fix passed the same test.
   - Both gaps were fixed generically. The post-hoc reruns with the original wording, on rc2, rc3 and the release, reproduce and pass the recipient workflow. They are not held-out evidence.
 
+## Foreground review (October 17, 2026, after the release)
+
+The owner asked for a direct review of the diff against `main`, without subagents. The implementing agent did it in the same session, so **it is not independent**. It found 11 defects:
+
+- **High:** automatic step shortening for negative checks, which produced a test that fails on a correct app.
+- **Medium:** "Intermittent" on thin evidence; a password in a Blocked report; typed values in the derived title and file name; an intermittent report without a recorded failure.
+- **Low:** six smaller ones.
+
+They were fixed test-first in `11a42f0`. Afterwards:
+
+- ordinary suite 449/449, functional browser suite 72/72, and `test:package` passed;
+- packaged acceptance of the fixed tarball (`db550ad1…`) passed 8/8, and the post-hoc held-out rerun passed;
+- a manual clean-checkout recipient run of a cafe-orders REPRO.md: exit 1 as recorded, then exit 0 after the controlled fix, with byte-identical test files.
+
+**The tagged `v0.2.0-beta` package contains these defects; the branch head does not.** Details are in [evidence/FOREGROUND-REVIEW-0.2.0.md](evidence/FOREGROUND-REVIEW-0.2.0.md). The merge to `main` waits for the owner's approval.
+
 ## Open, with reasons
 
-- **The second independent review and the coding-agent recipient trial were attempted but not run.** From about 21:05 PDT every subagent stalled before its first response, on every route and model tried. Both are recorded as not run.
+- **The second independent review and the coding-agent recipient trial were attempted but not run.** From about 21:05 PDT every subagent stalled before its first response, on every route and model tried, and a further trial launch during the foreground review stalled the same way. Both are recorded as not run; the foreground review is not a substitute for an independent one.
 - **One unexplained browser failure:** `marked-empty-heading complete UI journey` failed once under load and passed in every other run. Its cause was not established.
 - **Not done:** Linux acceptance for 0.2.0, accessibility (deferred), human usability testing, and stacks other than JavaScript/npm.
 

@@ -7,7 +7,7 @@ import { generateTestFiles, type GeneratedFile } from '../src/report-test.js';
 import { createDraftManifest, resolveManifest } from '../src/app-contract.js';
 import { parseExpectation, parseSteps } from '../src/steps.js';
 
-// Regressions for the 2026-10-18 foreground review of the diff against main (see evidence/FOREGROUND-REVIEW-0.2.0.md).
+// Regressions for the 2026-10-17 foreground review of the diff against main (see evidence/FOREGROUND-REVIEW-0.2.0.md).
 
 const runs = (counts: { captureFailed: boolean; failures: number; satisfied: number; different?: number }) =>
   classifyRuns({ different: 0, repetitions: 3, freshStart: 'from a fresh start', inconclusiveReason: 'APP_START_TIMEOUT', ...counts });
