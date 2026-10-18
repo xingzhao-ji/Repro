@@ -87,8 +87,8 @@ A later successful shutdown does not change the failed result or remove the prof
 
 | Symptom or code | Cause | What to do |
 | --- | --- | --- |
-| **Needs your input:** a step "could not find its element" (`STEP_TARGET_NOT_FOUND`) | No element on the page has that label, placeholder, button text or link text at that point | Quote the text exactly as shown, add the missing step before it, or use a CSS selector such as `Click "#save"` |
-| A step "matched more than one element" (`STEP_TARGET_AMBIGUOUS`) | Several elements share that name, for example many "Delete" buttons | Use a more specific name (`Click "Delete Milk"`) or a selector |
+| **Needs your input:** a step "could not find its element" (`STEP_TARGET_NOT_FOUND`) | No element on the page has that label, placeholder, button text or link text at that point, and no single control's name contains it | Use one of the names Repro lists under the question, add the missing step before it, or use a CSS selector such as `Click "#save"` |
+| A step "matched more than one element" (`STEP_TARGET_AMBIGUOUS`) | Several elements share that name, for example many "Delete" buttons, or several control names contain the quoted text | Quote more of the name, as listed under the question; use a more specific name (`Click "Delete Milk"`); or use a CSS selector |
 | `STEP_FAILED` | The element existed but did not accept the action in time (hidden, disabled, covered) | Add a step that makes it usable, for example opening a menu first, or `Wait for "…"` |
 | **Needs your input:** Repro "could not tell which element … refers to" (`CHECK_TARGET_UNRESOLVED`) | The element named in "What should happen?" did not match exactly one element | Choose one of the elements Repro lists, or quote a selector such as `"#total" should show "$8.10"` |
 | `APP_START_TIMEOUT` | The start command ran, but nothing answered HTTP on a local address in time | Check that the app serves on `127.0.0.1` or `localhost`, honours `PORT` or prints its URL, or set `url` and `startTimeoutMs` in `repro.config.json` |

@@ -3,7 +3,7 @@
 Point Repro at your own local web app and write what went wrong and what should happen. Repro then:
 
 - starts the app in a fresh browser and reproduces the bug from a fresh state;
-- shortens the steps;
+- shortens the steps when the expected behavior cannot depend on them;
 - writes **one Markdown file**.
 
 The file gives a teammate or coding agent the status, the expected and observed behavior, the exact commit with any local changes, the environment, sanitized logs, and a **regression test embedded as code blocks**. They can recreate the test with one command, reproduce the failure, fix the original app, and run the same command to check the fix. They do not need Repro or an AI service.

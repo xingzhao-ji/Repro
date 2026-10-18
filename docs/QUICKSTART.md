@@ -1,6 +1,6 @@
 # Quickstart: one bug, one REPRO.md
 
-Repro runs a bug in your own local web app, confirms that it reproduces, shortens the steps, and writes one `REPRO.md`. A teammate or coding agent can use that file to reproduce the bug, fix it, and run the same test to check the fix. Everything runs on your machine. Repro needs no account, AI service or upload, and it does not change your app folder.
+Repro runs a bug in your own local web app, confirms that it reproduces, shortens the steps when that is safe, and writes one `REPRO.md`. A teammate or coding agent can use that file to reproduce the bug, fix it, and run the same test to check the fix. Everything runs on your machine. Repro needs no account, AI service or upload, and it does not change your app folder.
 
 ## 1. Install Repro (once)
 

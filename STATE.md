@@ -12,39 +12,48 @@ October 17–18, 2026. The owner's new `/goal`: evolve Repro into a developer to
   - The controlled fixes are in `fixes/`.
 - **Design:** [ADR 0005](docs/adr/0005-local-app-repro-report.md). Scope and grammar are in [LOCAL-APPS](docs/LOCAL-APPS.md), and the user flow is in [QUICKSTART](docs/QUICKSTART.md).
 
-## Implemented on `feature/repro-report`
+## Implemented on `feature/repro-report` (pushed, at `c6a2f6c` or later)
 
 - **Data model and runner:**
-  - schema-4 manifest (`src/app-contract.ts`), with a frozen failure signature and reporter approval;
+  - schema-4 manifest (`src/app-contract.ts`), with a frozen failure signature (`values`, `exact`, `passed`) and reporter approval;
   - a plain-language steps and checks grammar (`src/steps.ts`);
-  - local-app execution inside the existing certified case worker (`src/app-execution.ts`, `case-execution.ts`, `case-worker*.ts`);
+  - local-app execution inside the existing certified case worker (`src/app-execution.ts`, `case-execution.ts`, `case-worker*.ts`). A step's quoted text may match inside one control's name when no exact name exists, recorded as `match: "contains"`;
   - an owned app process group with port and survivor checks (`src/app-process.ts`);
-  - read-only git and package inspection, including the local-changes patch (`src/app-inspect.ts`);
-  - redaction (`src/redaction.ts`).
+  - read-only git and package inspection, including the local-changes patch and a refusal of inline secrets (`src/app-inspect.ts`);
+  - redaction with broad, code and credentials modes (`src/redaction.ts`).
 - **Report generation:** the orchestrator (`src/report-flow.ts`) runs, in order:
   1. capture with target resolution;
   2. three repetitions;
-  3. reduction that keeps every step that changed a checked value;
+  3. reduction, only when every check is step-independent or the reporter declares it;
   4. confirmation;
   5. a standalone node:test + Playwright test (`src/report-test.ts`);
   6. the fresh-checkout check;
-  7. REPRO.md with hash-checked file blocks and an extraction command (`src/report-markdown.ts`).
-- **Interfaces:**
-  - CLI `repro report` and `repro app`;
-  - ledger report jobs and server endpoints;
-  - the one-page UI (`web/report.tsx`) as the default page, with built-in examples moved to `#/new`;
-  - a guided demonstration recorder (`src/demonstration.ts`);
-  - an example app (`fixtures/local-apps/task-tally`).
-- **Tests:**
-  - ordinary suite, which includes the new units: 431/431 (earlier run; the browser suite is below).
-  - full browser suite: 63/67. The four failures were my own report-UI assertion, since fixed, and three deferred accessibility scenarios. Those three fail identically on the untouched 0.1.0 source, and 0.1.0 also excluded them as deferred.
+  7. REPRO.md (`src/report-markdown.ts`).
+- **Interfaces:** CLI `repro report` (with `--check-element` and `--steps-independent`) and `repro app`; ledger report jobs; the one-page UI; the guided demonstration; the example app.
+- **Independent review, round 1** (workflow, 45 findings). The confirmed defects were fixed in `88139ea` with regressions in `tests/review-fixes.test.ts`. The findings are saved in `~/Developer/repro-acceptance/release-0.2.0/review-round1/`.
+- **Tests at `c6a2f6c`:**
+  - ordinary suite: 441/441;
+  - functional browser suite: 68/69, after excluding the three deferred accessibility scenarios by name, which fail identically on the 0.1.0 source. The one failure, `marked-empty-heading complete UI journey` (job `failed`, not `complete`), happened while a coding-agent trial was loading the machine. It then passed 3/3 in isolation, and passed in the two previous full runs. The cause was not established.
+
+## Acceptance so far
+
+- **rc1** is `repro-local-0.2.0.tgz` from `30d97b6`, SHA-256 `f4245d77…`, in `release-0.2.0/artifacts/rc1/`. `acceptance.mjs` passed all eight checks:
+  - shopping-list and cafe-orders reproduced;
+  - cafe redaction canaries absent;
+  - not-reproduced;
+  - cancellation: exit 130, no REPRO.md, no leftover processes or profiles;
+  - both recipient workflows: a fresh-HOME clone fails as recorded, then passes after the controlled fix.
+- **Held-out pantry-scale, through the installed rc1 workbench page:**
+  - **Attempt 1, with the issue's own wording:** Needs your input. `Click "Crisp Waffles"` found no element, because the button's name is "Crisp Waffles Serves 4 · 30 min", and no suggestions were offered.
+  - **Attempt 2, with the page's full names (read from a screenshot and accessibility snapshot, not from source):** Repro asked which element "Plain flour" means, and one candidate was chosen. The result was **Reproduced** in 4/4 runs, and the fresh checkout reproduced.
+  - **Recipient:** in a fresh-HOME clone the test failed as recorded. The sealed fix (SHA-256 `dfe36e3b…`) was applied and the same test passed.
+  - **Follow-up:** the gaps from attempt 1 were fixed generically in `40165ad`. Any rerun with the original wording is post-hoc, not held-out.
 
 ## Next actions
 
-1. Fix any defects the independent review workflow confirms.
-2. Pack the release candidate and run `~/Developer/repro-acceptance/release-0.2.0/tools/acceptance.mjs` on the exact tarball. It covers the two development apps, not-reproduced, cancellation, redaction and the recipient workflows.
-3. Run the held-out app with the installed product; only after that, apply its sealed fix. Then run a coding-agent recipient trial and a manual UX screenshot pass.
-4. Write the evidence report, examples, release notes and scope update; tag and push after a review for secrets.
+1. Triage the round-2 review (workflow `wf_60877fc2-db4`) and the coding-agent recipient trial (`release-0.2.0/agent-trial/`).
+2. Pack rc2 and rerun `acceptance.mjs` with nothing else loading the machine. Add the post-hoc held-out rerun with the original wording.
+3. Write the evidence report and examples (`docs/examples/`), finish the release notes, rerun both suites, tag `v0.2.0-beta` on `release/repro-report-0.2.0`, and push. No main merge, publish or deploy.
 
 ---
 
