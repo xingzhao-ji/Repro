@@ -1,5 +1,10 @@
 # Supported scope and observed limits
 
+## Your local web app (release 0.2.0)
+
+The exact boundary for user-owned apps is in [LOCAL-APPS](LOCAL-APPS.md): which apps and start methods are supported, the step and check grammar, statuses, shortening, the fresh-checkout check, redaction and limits. Acceptance of the exact 0.2.0 tarball is recorded in [evidence/REPRO-REPORT-RELEASE.md](../evidence/REPRO-REPORT-RELEASE.md). The sections below describe the registered cases and the synthetic alpha, unchanged as built-in examples.
+
+
 ## Current practical beta (release 0.1.0)
 
 The synthetic alpha below remains supported. The beta adds three registered public repository cases, with exact pins and criteria in the [frozen protocol](../benchmarks/PRACTICAL-BETA-PROTOCOL.md). Release 0.1.0 builds on implementation `9aec7fe`, which passed native and Linux acceptance. It adds cleanup-basis diagnostics and two cancellation fixes; the [release notes](RELEASE-NOTES.md) list them. Verification of the exact release tarball is in [`evidence/PRACTICAL-BETA-RELEASE.md`](../evidence/PRACTICAL-BETA-RELEASE.md). An earlier build's native htmx shutdown failure remains preserved; its cause is unresolved (see Known issues in the release notes). Earlier progress reports such as [PRACTICAL-BETA-PROGRESS](../evidence/PRACTICAL-BETA-PROGRESS.md) describe older candidates. Accessibility is deferred and unverified throughout this extension.

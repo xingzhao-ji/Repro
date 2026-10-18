@@ -1,4 +1,57 @@
-# Repro 0.1.0 — practical beta
+# Repro 0.2.0 — one REPRO.md from your own app
+
+Release package: `repro-local-0.2.0.tgz`, built with `npm pack` from the release commit on branch `release/repro-report-0.2.0` and tagged `v0.2.0-beta`. Its SHA-256, and the acceptance runs of that exact tarball, are recorded in [`evidence/REPRO-REPORT-RELEASE.md`](../evidence/REPRO-REPORT-RELEASE.md).
+
+## What is new
+
+Repro now works on **your own local web app**. Give it the app folder (and, optionally, the URL where it already runs), say what went wrong and what should happen, and press **Generate report**. Repro then:
+
+1. **Checks the app read-only:** how it starts (`repro.config.json`, a `package.json` script, or static files), the exact git commit and any uncommitted changes, the lockfile and dependencies. It asks only for what is missing.
+2. **Understands the description** with a small, documented grammar: `Click "Add"`, `Type "milk" into "New item"`, `"Total" should show "$8.10"`. You can also **demonstrate** the bug in a browser window, and Repro writes the steps down. Nothing runs until you confirm the steps, the checks and the exact command.
+3. **Reproduces** from fresh state: the app is restarted and a fresh browser profile is used for every run, with non-local network blocked. It reports **Reproduced**, **Intermittent**, **Not reproduced** or **Blocked** from actual runs only.
+4. **Shortens the steps** when that is sound: only when the expectation cannot depend on which steps ran, or you declare that it doesn't. Steps that change a checked value are always kept.
+5. **Writes a standalone regression test**: `node:test` + Playwright, with no Repro dependency. It starts your app, repeats the steps, and fails until the bug is fixed.
+6. **Checks the report in a fresh clone** by following its own instructions, then writes one **REPRO.md**. The file holds the status, expected versus observed behavior, the exact revision and local-changes patch, environment and dependencies, sanitized logs, kept-apart observed facts and suspected and verified causes, the test files as hash-checked code blocks, the commands to run them, the fix criteria, and the limits.
+
+It runs on the same certified browser worker, reducer, evidence ledger and loopback-only server as 0.1.0, and it is available as the default workbench page (`repro serve`) and as `repro report` / `repro app` on the CLI. The 0.1.0 registered cases remain as **Built-in examples** (`#/new`). [QUICKSTART](QUICKSTART.md) and [LOCAL-APPS](LOCAL-APPS.md) document the workflow and its exact scope; [ADR 0005](adr/0005-local-app-repro-report.md) records the design.
+
+## Trust and privacy
+
+- Values typed into password-like fields, and anything that looks like a credential or personal data, are withheld from the report. The recipient supplies them as environment variables.
+- The following are removed from logs, observed values, text, remotes and the local-changes patch:
+  - tokens, keys, JWTs, cookies, authorization headers and secret-named values;
+  - personal emails, phone numbers, card numbers and public IPs;
+  - your home path, username and hostname.
+- Sensitive files and untracked non-source files are listed by name only. A final whole-document scan checks for withheld values and credentials.
+- Repro never writes to your repository. It reads git with optional locks disabled, runs nothing before you confirm, and blocks non-local requests in its browser.
+
+## Fixed during this release
+
+An independent multi-agent review of the feature found, among others, these defects, and each was fixed before acceptance:
+
+- unsound step shortening for value checks;
+- an inconclusive capture counted as meeting the expectation;
+- a containment-signature truncation;
+- REPRO.md install and patch order;
+- patch application in monorepo subfolders;
+- redaction rewriting identifiers such as `node:test` for common usernames;
+- planted file blocks in logs;
+- secrets in a typed start command;
+- leaked processes on cancellation;
+- several UI state errors.
+
+They are listed with their regressions in the release evidence.
+
+## Known limits
+
+- Chromium only (headless, pinned 156 via Playwright 1.64), on macOS arm64 and Node 26.7.0 as measured. Linux was not part of 0.2.0 acceptance. Windows is not supported, because the exported test uses POSIX process groups.
+- State outside the browser and the app process (databases, files, external services) is not reset. Non-local services are blocked, not mocked.
+- Repro does not diagnose causes or change your code. "Verified causes" stays empty unless it was actually verified.
+- Accessibility remains deferred and unverified, as in 0.1.0.
+
+---
+
+# Repro 0.1.0 — practical beta (previous release)
 
 Release package: `repro-local-0.1.0.tgz`, built with `npm pack` from the release commit on branch `release/practical-beta-0.1.0`, which is tagged `v0.1.0-beta` once every gate passes. Its SHA-256 and the verification of that exact tarball are recorded in [`evidence/PRACTICAL-BETA-RELEASE.md`](../evidence/PRACTICAL-BETA-RELEASE.md). A documentation-only commit adds that report after the release commit, because a tarball cannot contain its own verification report.
 

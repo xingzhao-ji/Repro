@@ -204,7 +204,7 @@ export async function generateReport(request: ReportRequest, context: { output: 
     const checkIndex = Number(/check (\d+)/.exec(reason)?.[1] ?? 1) - 1;
     const checkReference = expectation.checks[checkIndex]?.reference ?? null;
     const question: Question = code === 'CHECK_TARGET_UNRESOLVED'
-      ? { field: 'check-target', check: checkIndex, question: `Repro could not tell which element ${describeReference(checkReference)} refers to. Choose one of the elements below, or quote a CSS selector such as "#total".`, candidates: resolution?.candidates ?? [] }
+      ? { field: 'check-target', check: checkIndex, question: `Repro could not tell which element ${describeReference(checkReference)} refers to (check ${checkIndex + 1}). Choose one of the elements below, or quote a CSS selector such as "#total". On the command line, answer with --check-element ${checkIndex + 1}=SELECTOR.`, candidates: resolution?.candidates ?? [] }
       : /^STEP_/.test(code) ? { field: 'steps', question: `${reason.replace(/^[A-Z_]+: /, '')} Check the wording of that step against the page.`, line: Number(/step-(\d+)/.exec(reason)?.[1] ?? 0) }
       : { field: 'start', question: reason.replace(/^[A-Z_]+: /, '') };
     if (!request.options?.reportBlocked) return outcome('needs-input', `Repro could not complete the first run: ${reason.replace(/^[A-Z_]+: /, '')}`, { questions: [question] });
