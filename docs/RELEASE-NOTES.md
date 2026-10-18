@@ -1,6 +1,6 @@
 # Repro 0.2.0 — one REPRO.md from your own app
 
-Release package: `repro-local-0.2.0.tgz`, built with `npm pack` from the release commit on branch `release/repro-report-0.2.0` and tagged `v0.2.0-beta`. Its SHA-256, and the acceptance runs of that exact tarball, are recorded in [`evidence/REPRO-REPORT-RELEASE.md`](../evidence/REPRO-REPORT-RELEASE.md).
+Release package: `repro-local-0.2.0.tgz`, built with `npm pack` from the release commit on branch `release/repro-report-0.2.0` and tagged `v0.2.0-beta`. Its SHA-256, and the acceptance runs of that exact tarball, are recorded in `evidence/REPRO-REPORT-RELEASE.md`. That file is in the evidence commit on top of the release commit, so it is not inside the tarball.
 
 ## What is new
 
