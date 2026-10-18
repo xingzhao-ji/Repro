@@ -1,14 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { classifyInput, createRedactor, isSensitiveFileName, reportUrl } from '../src/redaction.js';
+import { CANARY } from './helpers/canaries.js';
 
 const fixed = { home: '/Users/alex', username: 'alex', hostname: 'alex-laptop.local' };
 
 test('broad redaction removes credentials, personal data and machine identity from log text', () => {
   const canaries = {
-    stripe: 'sk_live_51ReproCanaryKey9d8f7a6b5c4e3d2f1a0b9c8d',
-    github: 'ghp_ReproCanaryToken0123456789abcdefABCDEF01',
-    aws: 'AKIAIOSFODNN7EXAMPLE',
+    stripe: CANARY.stripeLive,
+    github: CANARY.github,
+    aws: CANARY.aws,
     jwt: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJyZXByby1jYW5hcnkifQ.c2lnbmF0dXJlLWNhbmFyeQ',
     session: 'repro-canary-session-secret-7f3a91',
     cookie: 'sid=8f3a9b1c2d4e5f60718293a4b5c6d7e8',
@@ -58,7 +59,7 @@ test('code mode keeps applicable source edits but still removes high-confidence 
     '+const API_KEY = "a1b2c3d4e5f6a7b8c9d0";',
     '+fetch(url, { headers: { Authorization: `Bearer ${token}` } });',
     '+// contact jane.doe@corp-mail.com',
-    '+const stripe = "sk_test_1234567890abcdefXYZ";',
+    `+const stripe = "${CANARY.stripeTest}";`,
   ].join('\n');
   const output = createRedactor({ ...fixed, mode: 'code' }).redact(diff);
   assert.match(output, /const tokenCount = items\.length;/);
@@ -66,7 +67,7 @@ test('code mode keeps applicable source edits but still removes high-confidence 
   assert.match(output, /Authorization: `Bearer \$\{token\}`/);
   assert.equal(output.includes('a1b2c3d4e5f6a7b8c9d0'), false);
   assert.equal(output.includes('jane.doe@corp-mail.com'), false);
-  assert.equal(output.includes('sk_test_1234567890abcdefXYZ'), false);
+  assert.equal(output.includes(CANARY.stripeTest), false);
 });
 
 test('known withheld input values are removed wherever they appear, longest first', () => {
@@ -86,7 +87,7 @@ test('typed inputs are classified as secret, personal or plain', () => {
   assert.equal(classifyInput('correct-horse-battery-staple', { type: 'password' }), 'secret');
   assert.equal(classifyInput('hunter2', { label: 'Password' }), 'secret');
   assert.equal(classifyInput('123456', { autocomplete: 'one-time-code' }), 'secret');
-  assert.equal(classifyInput('ghp_ReproCanaryToken0123456789abcdefABCDEF01'), 'secret');
+  assert.equal(classifyInput(CANARY.github), 'secret');
   assert.equal(classifyInput('maria.gonzalez@gmail.com', { label: 'Email' }), 'personal');
   assert.equal(classifyInput('barista@example.com', { label: 'Email' }), 'plain');
   assert.equal(classifyInput('Milk', { label: 'Add an item' }), 'plain');
