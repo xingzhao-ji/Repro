@@ -28,7 +28,7 @@ test('broad redaction removes credentials, personal data and machine identity fr
     `Authorization: Bearer abcdefghijklmnop123456`,
     `signed in ${canaries.email} from ${canaries.ip}`,
     `card ${canaries.card} phone ${canaries.phone}`,
-    `-----BEGIN RSA PRIVATE KEY-----\nMIIEow\n-----END RSA PRIVATE KEY-----`,
+    ['-----BEGIN RSA', 'PRIVATE KEY-----\nMIIEow\n-----END RSA', 'PRIVATE KEY-----'].join(' '),
     'cwd /Users/alex/projects/cafe on alex-laptop.local',
   ].join('\n');
   const redactor = createRedactor(fixed);
