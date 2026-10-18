@@ -107,3 +107,14 @@ test('4: the fresh-checkout verdict needs both a matching observation and a cons
   assert.match(teardown.summary, /exited with code 1/);
   assert.equal(/did not hold/.test(teardown.summary), false, 'the expected behavior did hold; the exit code is what failed');
 });
+
+test('5 (found by the held-out run): a remote that is a path on the reporter’s machine is never printed, so no local username leaks', () => {
+  const path = '/private/tmp/claude-503/-Users-alexandra-Desktop-Repro/scratch/app.bundle';
+  const markdown = renderReport(reportData({ git: { ...reportData({}).app.git!, remotes: [{ name: 'origin', url: path }] } }));
+  assert.equal(markdown.includes('alexandra'), false);
+  assert.equal(markdown.includes('/private/tmp'), false);
+  assert.match(markdown, /origin remote is a folder on the reporter’s machine/);
+  assert.match(markdown, /git clone -- <repository URL or path>/);
+  const shared = renderReport(reportData({ git: { ...reportData({}).app.git!, remotes: [{ name: 'origin', url: 'https://github.com/alexandra/shop.git' }] } }));
+  assert.match(shared, /git clone -- https:\/\/github\.com\/alexandra\/shop\.git/, 'a reachable remote is still used as given');
+});

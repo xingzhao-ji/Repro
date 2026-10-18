@@ -98,7 +98,8 @@ test('only remotes another machine can reach are used in the clone command', asy
   const base = data([file('.repro/demo.test.mjs', 'x\n')]);
   const local = renderReport({ ...base, app: { ...base.app, git: { ...base.app.git!, remotes: [{ name: 'origin', url: '~/Developer/shop.git' }] } } });
   assert.match(local, /git clone -- <repository URL or path> demo/);
-  assert.match(local, /origin remote is a path on the reporter’s machine/);
+  assert.match(local, /origin remote is a folder on the reporter’s machine/);
+  assert.equal(local.includes('~/Developer/shop.git'), false, 'the local path itself is not shown');
   const redacted = renderReport({ ...base, app: { ...base.app, git: { ...base.app.git!, remotes: [{ name: 'origin', url: 'https://[redacted url-credentials]@git.example.invalid/shop.git' }] } } });
   assert.match(redacted, /git clone -- https:\/\/git\.example\.invalid\/shop\.git demo/);
 });

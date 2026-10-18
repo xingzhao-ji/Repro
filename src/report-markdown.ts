@@ -128,7 +128,8 @@ function sourceSection(data: ReportData): string {
   const rows = [
     ['Commit', inline(git.commit)],
     ['Branch', git.branch ? inline(git.branch) : '_(detached HEAD)_'],
-    ['Remote', remote ? `${inline(remote.url)} (${remote.name})${shareableRemote(cloneUrl(remote.url)) ? '' : ' — a path on the reporter’s machine, not reachable from elsewhere'}` : '_none configured — share the repository or a git bundle with the recipient_'],
+    // A remote that is a folder on the reporter's machine is not shown: it helps no recipient and can name local users.
+    ['Remote', remote ? (shareableRemote(cloneUrl(remote.url)) ? `${inline(remote.url)} (${remote.name})` : `_a folder on the reporter’s machine (${remote.name}), not reachable from elsewhere and not shown_`) : '_none configured — share the repository or a git bundle with the recipient_'],
     ['On a remote branch', git.pushedTo.length ? git.pushedTo.map(inline).join(', ') : '_no — push the commit before sharing this report_'],
     ['App folder in repository', inline(git.appPath)],
     ['Local changes', git.dirty ? `yes — ${git.changed.length} changed tracked file(s), ${git.untracked.length} untracked file(s)` : 'none (working tree clean)'],
@@ -198,7 +199,7 @@ export function renderReport(data: ReportData): string {
     out.push(code([`git clone -- ${reachable ? shellQuote(cloneUrl(reachable.url)) : '<repository URL or path>'} ${shellQuote(folder)}`, `cd ${shellQuote(folder)}`, `git checkout ${shellQuote(git.commit)}`,
       ...(git.appPath !== '.' ? [`cd ${shellQuote(git.appPath.startsWith('-') ? `./${git.appPath}` : git.appPath)}`] : [])].join('\n'), 'sh'));
     if (!remote) out.push('', 'The repository has no remote configured. Use any copy that contains this commit, for example a pushed branch or `git bundle`.');
-    else if (!reachable) out.push('', `The repository's ${remote.name} remote is a path on the reporter’s machine (${inline(remote.url)}), so it is not reachable from elsewhere. Use any copy that contains this commit, for example a pushed branch or \`git bundle\`.`);
+    else if (!reachable) out.push('', `The repository's ${remote.name} remote is a folder on the reporter’s machine, so it is not reachable from elsewhere. Use any copy that contains this commit, for example a pushed branch or \`git bundle\`.`);
     if (git.dirty && !data.app.patch) out.push('', '**The local changes Repro tested could not be embedded** (see “Source revision and local changes”), so a clean checkout may not reproduce the bug.');
   } else out.push('No exact revision is available (the app folder is not a git repository). Use the same copy of the app the reporter used.');
   out.push('');
