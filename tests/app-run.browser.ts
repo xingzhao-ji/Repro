@@ -57,7 +57,7 @@ test('capture resolves plain-language targets, observes the reported failure and
   ]);
   assert.deepEqual(capture.resolution!.checks, [{ by: 'css', value: '#remaining' }]);
   const frozen = resolveManifest(draft(), capture.resolution!, observation.values, () => null);
-  assert.deepEqual(frozen.failure, { values: ['0 tasks remaining'], exact: [true] });
+  assert.deepEqual(frozen.failure, { values: ['0 tasks remaining'], exact: [true], passed: [false] });
 
   const replay = await run(frozen, buggy, false);
   assert.equal(replay.outcome, 'target-failure', replay.reason);
@@ -108,6 +108,12 @@ test('an unresolvable check offers nearby elements for the reporter to choose; c
     assert.ok(offered.some(candidate => candidate.selector === `#tasks > li:nth-of-type(${row}) > span` && candidate.text === 'Pay rent'), JSON.stringify(offered));
     assert.ok(offered.some(candidate => candidate.selector === `#tasks > li:nth-of-type(${row}) > button` && candidate.text === 'Remove Pay rent'), JSON.stringify(offered));
   }
+
+  // Visibility checks need no existing element: "should not be visible" may observe nothing at all.
+  const absent = await run(draft('"Archive" should not be visible\n"#saved" should not be visible'), buggy, true);
+  assert.equal(absent.outcome, 'target-failure', absent.reason);
+  assert.deepEqual((absent.observation as AppObservation).values, ['false', 'true']);
+  assert.deepEqual(absent.resolution!.checks, [{ by: 'text', value: 'Archive' }, { by: 'css', value: '#saved' }]);
 
   const controller = new AbortController();
   setTimeout(() => controller.abort(), 1200);

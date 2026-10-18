@@ -16,9 +16,10 @@ test('a guided demonstration turns clicks, typing and a marked element into step
   try {
     const { token } = await fetch(`${app.url}/api/config`).then(response => response.json()) as { token: string };
     const post = (path: string, body: unknown) => fetch(`${app.url}${path}`, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Repro-Token': token }, body: JSON.stringify(body) });
-    const started = await post('/api/demonstrations', { repository: folder }).then(response => response.json()) as { demonstration: { id: string; status: string } };
+    assert.equal((await post('/api/demonstrations', { repository: folder })).status, 400, 'a demonstration runs the start command only after confirmation');
+    const started = await post('/api/demonstrations', { repository: folder, confirmed: true }).then(response => response.json()) as { demonstration: { id: string; status: string } };
     assert.equal(started.demonstration.status, 'recording');
-    assert.equal((await post('/api/demonstrations', { repository: folder })).status, 409, 'one demonstration at a time');
+    assert.equal((await post('/api/demonstrations', { repository: folder, confirmed: true })).status, 409, 'one demonstration at a time');
     const page = demonstrationPage(started.demonstration.id)!;
     // The reporter's own actions in the opened window.
     await page.getByLabel('New task').fill('Write report');

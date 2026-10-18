@@ -15,12 +15,13 @@ interface AppSummary {
 }
 interface ReportView {
   id: string; createdAt: string; status: string; title: string | null;
-  request?: { app: { repository?: string; url?: string; start?: string }; title: string | null; wentWrong: string; shouldHappen: string };
+  request?: { app: { repository?: string; url?: string; start?: string }; title: string | null; wentWrong: string; shouldHappen: string; checkSelectors?: Record<number, string>; stepsIndependent?: boolean };
   result: { status: string; summary: string; title?: string; path: string | null; questions?: Question[]; understood?: { steps: string[]; checks: string[] } } | null;
 }
 interface ReportEvent { seq: number; at: string; stage: string; message: string }
-interface Draft { folder: string; url: string; start: string; title: string; wentWrong: string; shouldHappen: string; checkSelectors: Record<number, string> }
-const EMPTY: Draft = { folder: '', url: '', start: '', title: '', wentWrong: '', shouldHappen: '', checkSelectors: {} };
+/** checkSelectors apply only to the exact "What should happen?" text they were chosen for (selectorsFor). */
+interface Draft { folder: string; url: string; start: string; title: string; wentWrong: string; shouldHappen: string; checkSelectors: Record<number, string>; selectorsFor: string; reportBlocked: boolean; stepsIndependent: boolean }
+const EMPTY: Draft = { folder: '', url: '', start: '', title: '', wentWrong: '', shouldHappen: '', checkSelectors: {}, selectorsFor: '', reportBlocked: false, stepsIndependent: false };
 const DRAFT_KEY = 'repro.report.draft';
 const STAGES: { key: string; label: string }[] = [
   { key: 'inspect', label: 'Checking your app' },
@@ -86,17 +87,30 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
   const confirmBox = useRef<HTMLInputElement>(null);
   const expectField = useRef<HTMLTextAreaElement>(null);
   const [demoNote, setDemoNote] = useState('');
-  const update = (patch: Partial<Draft>) => setDraft(current => { const next = { ...current, ...patch }; saveDraft(next); return next; });
+  const update = (patch: Partial<Draft>) => {
+    // Any change to what will run invalidates the confirmation.
+    if (['folder', 'url', 'start', 'wentWrong', 'shouldHappen', 'checkSelectors', 'stepsIndependent', 'reportBlocked'].some(key => key in patch)) setConfirmed(false);
+    setDraft(current => {
+      const next = { ...current, ...patch };
+      // A changed expectation invalidates element choices made for the old one.
+      if (next.shouldHappen !== next.selectorsFor) { next.checkSelectors = {}; next.selectorsFor = next.shouldHappen; }
+      saveDraft(next); return next;
+    });
+  };
+  const inspection = useRef(0);
   useEffect(() => { void call<{ reports: typeof recent }>('/api/reports').then(data => setRecent(data.reports.slice(0, 6))).catch(() => undefined); }, []);
   // Inspect the app (read-only) shortly after the location changes.
   useEffect(() => {
     if (!token || (!draft.folder.trim() && !draft.url.trim())) { setApp(null); setAppError(''); return; }
+    // Until the new inspection answers, the old scope must not be confirmable or runnable.
+    const sequence = ++inspection.current;
+    setChecking(true); setConfirmed(false);
     const timer = setTimeout(() => {
-      setChecking(true); setAppError('');
+      setAppError('');
       void call<{ app: AppSummary; scope: string[] }>('/api/app/inspect', token, { repository: draft.folder.trim() || undefined, url: draft.url.trim() || undefined, start: draft.start.trim() || undefined })
-        .then(result => { setApp(result); setConfirmed(false); })
-        .catch(cause => { setApp(null); setAppError(cause instanceof Error ? cause.message : String(cause)); })
-        .finally(() => setChecking(false));
+        .then(result => { if (sequence === inspection.current) setApp(result); })
+        .catch(cause => { if (sequence === inspection.current) { setApp(null); setAppError(cause instanceof Error ? cause.message : String(cause)); } })
+        .finally(() => { if (sequence === inspection.current) setChecking(false); });
     }, 450);
     return () => clearTimeout(timer);
   }, [draft.folder, draft.url, draft.start, token]);
@@ -104,7 +118,7 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
   const expected = useMemo(() => parseExpectation(draft.shouldHappen), [draft.shouldHappen]);
   const needsStart = app?.app.missing.some(item => item.field === 'start') ?? false;
   const placeholder = expected.checks.some(check => check.expected === '(expected value)');
-  const ready = Boolean(app && !app.app.missing.length && steps.actions.length && expected.checks.length && !steps.problems.length && !expected.problems.length && !placeholder);
+  const ready = Boolean(app && !checking && !app.app.missing.length && steps.actions.length && expected.checks.length && !steps.problems.length && !expected.problems.length && !placeholder);
   const choose = async () => {
     setMessage('');
     try { const result = await call<{ path: string | null }>('/api/app/choose-folder', token, {}); if (result.path) update({ folder: result.path }); }
@@ -120,10 +134,11 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
     finally { setBusy(false); }
   };
   async function generate() {
-    if (busy || !token) return;
+    if (busy || !token || checking || !ready) return;
     setBusy(true); setMessage(''); setQuestions([]);
     const body = { app: { repository: draft.folder.trim() || undefined, url: draft.url.trim() || undefined, start: draft.start.trim() || undefined },
-      title: draft.title.trim() || undefined, wentWrong: draft.wentWrong, shouldHappen: draft.shouldHappen, checkSelectors: draft.checkSelectors };
+      title: draft.title.trim() || undefined, wentWrong: draft.wentWrong, shouldHappen: draft.shouldHappen,
+      checkSelectors: draft.selectorsFor === draft.shouldHappen ? draft.checkSelectors : {}, reportBlocked: draft.reportBlocked, stepsIndependent: draft.stepsIndependent };
     try {
       const prepared = await call<{ questions: Question[] }>('/api/reports/prepare', token, body);
       if (prepared.questions.length) { setQuestions(prepared.questions); setMessage('Repro needs a little more information; see the questions below.'); return; }
@@ -184,12 +199,15 @@ function ReportForm({ token, platform, example }: { token: string; platform: str
         requestAnimationFrame(() => { const field = expectField.current; if (!field) return; field.focus(); const at = field.value.indexOf('(expected value)'); if (at >= 0) field.setSelectionRange(at, at + '(expected value)'.length); });
       }} />}
       {demoNote && <p className="question" role="status">{demoNote}</p>}
-      <Understood steps={steps} expected={expected} />
+      <Understood steps={steps} expected={expected} selectors={draft.checkSelectors} onClearSelectors={() => update({ checkSelectors: {} })} />
+      {draft.reportBlocked && <p className="question">This report will be written even if a step cannot be performed (status <strong>Blocked</strong>). <button type="button" className="link-button" onClick={() => update({ reportBlocked: false })}>Undo</button></p>}
       {[...questionsFor('steps'), ...questionsFor('expectation')].map((question, index) => <p key={index} className="question" role="alert">{question.question}{question.suggestion ? ` ${question.suggestion}` : ''}</p>)}
       <details className="grammar"><summary>How to write steps and checks</summary><Grammar /></details>
       <details><summary>More options</summary>
         <label className="report-field"><span>Title <span className="optional">optional</span></span><input value={draft.title} onChange={event => update({ title: event.target.value })} placeholder="Deleting a bought item lowers the counter" /></label>
         {!needsStart && <label className="report-field"><span>Start command <span className="optional">overrides the detected one</span></span><input value={draft.start} onChange={event => update({ start: event.target.value })} placeholder="npm run dev" spellCheck={false} /></label>}
+        <label className="consent"><input type="checkbox" checked={draft.stepsIndependent} onChange={event => update({ stepsIndependent: event.target.checked })} />
+          <span>The expected values above stay the same whichever of my steps run. Repro may then remove steps that don’t affect the failure. Leave this off when, say, “3 items left” only makes sense after adding three items.</span></label>
       </details>
     </section>
 
@@ -220,32 +238,45 @@ function Demonstration({ token, app, onFinished }: { token: string; app: Draft; 
   }, [onFinished]);
   useEffect(() => {
     if (!state || state.status !== 'recording') return;
+    let failures = 0;
     const timer = setInterval(() => {
       void call<{ demonstration: DemonstrationState }>(`/api/demonstrations/${state.id}`).then(result => {
+        failures = 0;
         setState(result.demonstration);
         if (result.demonstration.status === 'finished') apply(result.demonstration);
-      }).catch(() => undefined);
+      }).catch(cause => {
+        // A restarted workbench no longer knows this demonstration: stop waiting and say so.
+        if (++failures >= 3) setState(current => current ? { ...current, status: 'failed', reason: `The demonstration was lost (${cause instanceof Error ? cause.message : String(cause)}). Start it again.` } : current);
+      });
     }, 800);
     return () => clearInterval(timer);
   }, [state, apply]);
+  const [asking, setAsking] = useState(false);
+  const [starting, setStarting] = useState(false);
   const start = async () => {
-    setError(''); finished.current = false;
-    try { setState((await call<{ demonstration: DemonstrationState }>('/api/demonstrations', token, { repository: app.folder.trim() || undefined, url: app.url.trim() || undefined, start: app.start.trim() || undefined })).demonstration); }
+    setError(''); finished.current = false; setStarting(true);
+    try { setState((await call<{ demonstration: DemonstrationState }>('/api/demonstrations', token, { repository: app.folder.trim() || undefined, url: app.url.trim() || undefined, start: app.start.trim() || undefined, confirmed: true })).demonstration); setAsking(false); }
     catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
+    finally { setStarting(false); }
   };
   const done = async () => {
     if (!state) return;
     try { const result = await call<{ demonstration: DemonstrationState }>(`/api/demonstrations/${state.id}/finish`, token, {}); setState(result.demonstration); apply(result.demonstration); }
     catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); }
   };
-  if (!state || state.status === 'finished') return <div className="demonstrate"><button type="button" onClick={() => void start()} disabled={!token}>Show me in a browser instead</button>
-    <span className="field-hint"> Repro opens your app; do the steps once and it writes them down for you.</span>{error && <p className="question" role="alert">{error}</p>}</div>;
-  if (state.status === 'failed') return <div className="demonstrate"><p className="question" role="alert">{state.reason}</p><button type="button" onClick={() => setState(null)}>Back</button></div>;
+  if (!state || state.status === 'finished') return <div className="demonstrate">
+    {!asking ? <><button type="button" onClick={() => setAsking(true)} disabled={!token}>Show me in a browser instead</button>
+      <span className="field-hint"> Repro opens your app; do the steps once and it writes them down for you.</span></>
+      : <div className="recording"><p>Repro will start your app as listed under “Repro will” below and open a browser window you can use. Requests to other hosts are blocked.</p>
+        <p className="result-actions"><button type="button" className="primary" onClick={() => void start()} disabled={starting}>{starting ? 'Starting…' : 'Start the demonstration'}</button><button type="button" onClick={() => setAsking(false)} disabled={starting}>Cancel</button></p></div>}
+    {error && <p className="question" role="alert">{error}</p>}</div>;
+  if (state.status === 'failed') return <div className="demonstrate"><p className="question" role="alert">{state.reason}</p><button type="button" onClick={() => { setState(null); setAsking(false); }}>Back</button></div>;
   return <div className="demonstrate recording" aria-live="polite">
     <p><strong>A browser window opened with your app.</strong> Do the steps that show the bug. Use <em>Mark the wrong element</em> in the window’s toolbar on whatever shows the wrong result, then click <em>Done</em> there or here.</p>
     <ol>{state.steps.map((line, index) => <li key={index}><code>{line}</code></li>)}</ol>
     {state.checks.map((line, index) => <p key={index} className="small">Check: <code>{line}</code></p>)}
     <button type="button" className="primary" onClick={() => void done()}>Done</button>
+    {error && <p className="question" role="alert">{error} <button type="button" className="link-button" onClick={() => { setState(null); setAsking(false); setError(''); }}>Close</button></p>}
   </div>;
 }
 
@@ -258,11 +289,12 @@ function AppFacts({ app }: { app: AppSummary }) {
     {app.notes.length > 0 && <ul className="notes">{app.notes.map((note, index) => <li key={index}>{note}</li>)}</ul>}</div>;
 }
 
-function Understood({ steps, expected }: { steps: ReturnType<typeof parseSteps>; expected: ReturnType<typeof parseExpectation> }) {
+function Understood({ steps, expected, selectors, onClearSelectors }: { steps: ReturnType<typeof parseSteps>; expected: ReturnType<typeof parseExpectation>; selectors: Record<number, string>; onClearSelectors: () => void }) {
   if (!steps.actions.length && !expected.checks.length && !steps.problems.length && !expected.problems.length) return null;
   return <div className="understood" aria-live="polite"><h3>Repro understood</h3>
     {steps.actions.length > 0 && <ol>{steps.actions.map((action, index) => <li key={index}>{rich(describeAction({ ...action, secret: null }, describeReference(action.reference)))}{action.line === 0 ? <span className="muted"> (added: every report starts by opening the app)</span> : null}</li>)}</ol>}
-    {expected.checks.length > 0 && <><p className="small">It will check that:</p><ul>{expected.checks.map((check, index) => <li key={index}>{rich(describeCheck(check, describeReference(check.reference)))}</li>)}</ul></>}
+    {expected.checks.length > 0 && <><p className="small">It will check that:</p><ul>{expected.checks.map((check, index) => <li key={index}>{rich(describeCheck(check, selectors[index] ? describeReference({ css: selectors[index] }) : describeReference(check.reference)))}{selectors[index] ? <span className="muted"> (the element you chose)</span> : null}</li>)}</ul>
+      {Object.keys(selectors).length > 0 && <p className="small"><button type="button" className="link-button" onClick={onClearSelectors}>Forget the elements I chose</button></p>}</>}
     {[...steps.problems, ...expected.problems].map((problem, index) => <p key={`p${index}`} className="question">{problem.line ? `Line ${problem.line}: ` : ''}{problem.message} {problem.suggestion}</p>)}
     {steps.notes.length > 0 && <p className="small muted">Kept as your notes: {steps.notes.map(note => `“${note}”`).join(', ')}</p>}
   </div>;
@@ -295,26 +327,42 @@ function ReportStatus({ id, token }: { id: string; token: string }) {
     try {
       const data = await call<{ report: ReportView; events: ReportEvent[] }>(`/api/reports/${id}`);
       setReport(data.report); setEvents(data.events); setError('');
-      if (data.report.status !== 'running' && data.report.result?.path) setMarkdown(await (await fetch(`/api/reports/${id}/markdown`, { cache: 'no-store' })).text());
+      if (data.report.status !== 'running' && data.report.result?.path) {
+        const response = await fetch(`/api/reports/${id}/markdown`, { cache: 'no-store' });
+        if (response.ok) setMarkdown(await response.text());
+        else { setMarkdown(''); setError('The REPRO.md file for this report is missing on disk. Generate the report again.'); }
+      }
       return data.report.status;
-    } catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); return 'error'; }
+    } catch (cause) {
+      const message = cause instanceof Error ? cause.message : String(cause);
+      setError(message);
+      return /not found/i.test(message) ? 'missing' : 'error';
+    }
   }, [id]);
   useEffect(() => {
     let stopped = false; let timer: ReturnType<typeof setTimeout>;
-    const tick = async () => { const status = await load(); if (!stopped && (status === 'running' || status === 'error')) timer = setTimeout(() => void tick(), 700); };
+    let failures = 0;
+    const tick = async () => {
+      const status = await load();
+      failures = status === 'error' ? failures + 1 : 0;
+      // Poll while running; back off on transient errors; stop on a report that does not exist.
+      if (!stopped && (status === 'running' || status === 'error')) timer = setTimeout(() => void tick(), status === 'error' ? Math.min(10_000, 700 * 2 ** failures) : 700);
+    };
     void tick();
     return () => { stopped = true; clearTimeout(timer); };
   }, [load]);
   useEffect(() => { if (report?.status !== 'running') return; const timer = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(timer); }, [report?.status]);
-  if (error && !report) return <div><p className="report-error" role="alert">{error === 'Report not found' ? 'This report does not exist in this workspace.' : error}</p><a href="#/">Start a new report</a></div>;
+  if (error && !report) return <div><p className="report-error" role="alert">{/not found/i.test(error) ? 'This report does not exist in this workspace.' : error}</p><a href="#/">Start a new report</a></div>;
   if (!report) return <p className="muted" role="status">Loading the report…</p>;
   const running = report.status === 'running';
   const reached = new Set(events.map(event => event.stage));
   const current = [...events].reverse().find(event => STAGES.some(stage => stage.key === event.stage));
   const cancel = async () => { setCancelling(true); try { await call(`/api/reports/${id}/cancel`, token, {}); await load(); } catch (cause) { setError(cause instanceof Error ? cause.message : String(cause)); setCancelling(false); } };
-  const editAgain = (selectors: Record<number, string> = {}) => {
+  const editAgain = (selectors: Record<number, string> = {}, reportBlocked = false) => {
     const request = report.request;
-    if (request) saveDraft({ folder: request.app.repository ?? '', url: request.app.url ?? '', start: request.app.start ?? '', title: request.title ?? '', wentWrong: request.wentWrong, shouldHappen: request.shouldHappen, checkSelectors: selectors });
+    // Keep every element chosen so far for this expectation, plus the new choice.
+    if (request) saveDraft({ folder: request.app.repository ?? '', url: request.app.url ?? '', start: request.app.start ?? '', title: request.title ?? '', wentWrong: request.wentWrong, shouldHappen: request.shouldHappen,
+      checkSelectors: { ...(request.checkSelectors ?? {}), ...selectors }, selectorsFor: request.shouldHappen, reportBlocked, stepsIndependent: request.stepsIndependent === true });
     location.hash = '#/';
   };
   const copy = async () => { try { await navigator.clipboard.writeText(markdown); setCopied('Copied to the clipboard.'); } catch { setCopied('Copy failed; use Download instead.'); } };
@@ -336,7 +384,7 @@ function ReportStatus({ id, token }: { id: string; token: string }) {
     {!running && report.result && <section className="result" aria-labelledby="result-heading">
       <h2 id="result-heading" className="visually-hidden">Result</h2>
       <p className="result-summary">{report.result.summary}</p>
-      {report.status === 'needs-input' && <NeedsInput questions={report.result.questions ?? []} onRetry={editAgain} />}
+      {report.status === 'needs-input' && <NeedsInput questions={report.result.questions ?? []} onRetry={editAgain} onBlocked={() => editAgain({}, true)} />}
       {['cancelled', 'failed', 'interrupted'].includes(report.status) && <p><button type="button" onClick={() => editAgain()}>Edit and try again</button></p>}
       {markdown && <>
         <div className="result-actions">
@@ -359,7 +407,7 @@ function ReportStatus({ id, token }: { id: string; token: string }) {
   </div>;
 }
 
-function NeedsInput({ questions, onRetry }: { questions: Question[]; onRetry: (selectors?: Record<number, string>) => void }) {
+function NeedsInput({ questions, onRetry, onBlocked }: { questions: Question[]; onRetry: (selectors?: Record<number, string>) => void; onBlocked: () => void }) {
   const [choice, setChoice] = useState<Record<number, string>>({});
   return <div className="needs-input">{questions.map((question, index) => <div key={index} className="question-block">
     <p className="question">{question.question}</p>
@@ -369,7 +417,8 @@ function NeedsInput({ questions, onRetry }: { questions: Question[]; onRetry: (s
         <code>{candidate.selector}</code> <span>shows “{candidate.text}”</span></label>)}
     </fieldset>}
   </div>)}
-    <p><button type="button" className="primary" onClick={() => onRetry(choice)}>{Object.keys(choice).length ? 'Use this element and try again' : 'Edit the description and try again'}</button></p></div>;
+    <p className="result-actions"><button type="button" className="primary" onClick={() => onRetry(choice)}>{Object.keys(choice).length ? 'Use this element and try again' : 'Edit the description and try again'}</button>
+      {questions.some(question => question.field === 'steps' || question.field === 'start') && <button type="button" onClick={onBlocked}>Write a Blocked report anyway</button>}</p></div>;
 }
 
 /** A small renderer for the Markdown Repro itself writes. Text is always rendered as text, never as HTML. */

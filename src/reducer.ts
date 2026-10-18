@@ -150,8 +150,13 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
         stop = 'cancelled'; outcome = 'cancelled'; reason = 'Runner reported owned execution cancellation.'; break;
       }
       if (observed.outcome === 'inconclusive') {
-        // A validated different failure (schema 4) conclusively shows this candidate does not preserve the reported one.
-        const different = observed.reason.startsWith('DIFFERENT_FAILURE:') && observed.assertionCount === 1 && observed.observation !== null && preserved === 0;
+        // A different failure (schema 4), re-evaluated here from the observation itself rather than from
+        // the reason text, conclusively shows that this candidate does not preserve the reported one.
+        let different = false;
+        if (observed.reason.startsWith('DIFFERENT_FAILURE:') && observed.assertionCount === 1 && observed.observation !== null && preserved === 0) {
+          try { evaluateObservation(input, observed.observation); }
+          catch (cause) { different = cause instanceof ReproError && cause.code === 'DIFFERENT_FAILURE'; }
+        }
         outcome = 'inconclusive'; conclusive = different;
         reason = different ? 'A different failure was observed; the reported failure was not preserved.' : 'Runner evidence was inconclusive; the target failure is not established.'; break;
       }
@@ -215,18 +220,22 @@ export async function reduce(manifest: Manifest, run: RunFunction, options: Redu
     for (;;) {
       let changed = false;
       let allConclusive = true;
+      let neighbors = 0;
       const tested = new Set<string>();
       for (const action of best.actions) {
         const next = without(best, [action.id]);
         const key = digest(next.candidate);
         if (tested.has(key) || !permitted(next.removed)) continue;
         tested.add(key);
+        neighbors++;
         const evaluation = await evaluate(next.candidate, next.removed);
         if (evaluation.stop) return finish(evaluation.stop, 'Reduction stopped with the best verified candidate; final neighbors remain unverified.');
         if (evaluation.trial.accepted) { best = freeze(next.candidate); changed = true; break; }
         if (!evaluation.conclusive) allConclusive = false;
       }
       if (changed) continue;
+      // Pinning can leave nothing to delete; untested neighbors do not establish minimality.
+      if (pinned.size && neighbors === 0) return finish('complete', 'No permitted deletion remained to test: every remaining action is pinned or a prerequisite of a pinned action. Minimality is not established.');
       return allConclusive
         ? finish('complete', `Every permitted single dependency-group deletion of the final candidate was tested and did not preserve the failure.${pinned.size ? ' Pinned actions were kept by request and not tested.' : ''} This is not global minimality.`, 'dependency-group-1-minimal')
         : finish('complete', 'Search completed, but inconclusive or unstable final neighbors leave dependency-group minimality unverified.');

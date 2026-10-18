@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import type { BrowserContext, Locator, Page } from 'playwright';
 import { ReproError, type AppObservation, type AppResolution, type ManifestV4, type AppAction, type AppCheck } from './contracts.js';
 import { checkPasses, MAX_OBSERVED } from './app-contract.js';
@@ -288,9 +289,10 @@ export async function runAppSteps(context: AppStepContext): Promise<AppObservati
   const trace: (string | null)[][] = [];
   const traceStep = async () => {
     if (!context.trace || context.resolve) return;
+    // A digest of each full value: a change anywhere in a long text still counts as a change.
     trace.push(await Promise.all(manifest.expectation.checks.map(async check => {
       const value = await readCheck(page, { property: check.property, target: check.target }, diagnostics, origin);
-      return value === null ? null : value.slice(0, 120);
+      return value === null ? null : createHash('sha256').update(value).digest('hex').slice(0, 32);
     })));
   };
   for (const action of manifest.actions) {
@@ -352,6 +354,19 @@ export async function runAppSteps(context: AppStepContext): Promise<AppObservati
   const targets: (AppTarget | null)[] = [];
   for (const [index, check] of checks.entries()) {
     if (!context.resolve || check.reference === null) { targets.push(check.target); continue; }
+    if (check.property === 'visible' || check.property === 'count') {
+      // Zero or several matches are valid observations here ("should not appear", "should appear 2 times"):
+      // use the first strategy that finds anything, or the most literal one when nothing matches.
+      const options = candidateTargets(check.reference, 'check');
+      let chosen: AppTarget | null = null;
+      for (const target of options) {
+        let count: number;
+        try { count = await locatorFor(page, target).count(); } catch { count = 0; }
+        if (count > 0) { chosen = target; break; }
+      }
+      targets.push(chosen ?? (check.reference.css ? { by: 'css', value: check.reference.css } : check.reference.testid ? { by: 'testid', value: check.reference.testid } : { by: 'text', value: check.reference.text! }));
+      continue;
+    }
     const resolved = await resolveReference(page, check.reference, 'check', Math.min(environment.actionTimeoutMs, clock.remaining()), clock);
     if (!resolved.target) {
       resolution.checks = targets; resolution.candidates = await candidateElements(page, check.reference.text);

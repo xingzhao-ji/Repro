@@ -82,7 +82,9 @@ export class ReportCoordinator {
   /** defaults: options applied to every report from this workbench (tests point npm at Repro's own cache). */
   constructor(readonly ledger: Ledger, private readonly defaults: NonNullable<ReportRequest['options']> = {}) {}
   start(request: ReportRequest, requestKey: string): ReportJob {
-    const report = this.ledger.createReport({ app: request.app, title: request.title ?? null, wentWrong: request.wentWrong, shouldHappen: request.shouldHappen }, requestKey);
+    // The stored request lets the page retry with every choice made so far (selected elements, options).
+    const report = this.ledger.createReport({ app: request.app, title: request.title ?? null, wentWrong: request.wentWrong, shouldHappen: request.shouldHappen,
+      checkSelectors: request.options?.checkSelectors ?? {}, stepsIndependent: request.options?.stepsIndependent === true }, requestKey);
     if (report.status !== 'running' || this.active.has(report.id)) return report;
     const controller = new AbortController();
     const promise = this.execute(report, request, controller.signal).finally(() => this.active.delete(report.id));
@@ -101,7 +103,9 @@ export class ReportCoordinator {
       const outcome = await generateReport({ ...request, options: { ...this.defaults, ...request.options } }, { output: join(this.ledger.root, 'reports', report.id), signal,
         onProgress: progress => this.ledger.reportEvent(report.id, progress.stage, progress.message) });
       const { markdown: _markdown, ...stored } = outcome;
-      this.ledger.finishReport(report.id, signal.aborted ? 'cancelled' : outcome.status, stored);
+      // Once REPRO.md is written the outcome stands; a cancel that arrived during the write changed nothing.
+      if (signal.aborted && outcome.path) this.ledger.reportEvent(report.id, 'cancel-late', 'Cancel arrived after REPRO.md was written; the report stands.');
+      this.ledger.finishReport(report.id, outcome.path ? outcome.status : signal.aborted ? 'cancelled' : outcome.status, stored);
     } catch (error) {
       this.ledger.finishReport(report.id, signal.aborted ? 'cancelled' : 'failed', signal.aborted ? { status: 'cancelled', summary: 'Cancelled. No REPRO.md was written.' } : { status: 'failed', summary: publicError(error).reason, error: publicError(error) });
     }

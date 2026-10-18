@@ -24,6 +24,7 @@ npx --no-install repro report --app /path/to/app \
 | `--budget RUNS` | Step-shortening budget, 8–120 runs (default 40) |
 | `--no-fresh-check` | Skip the fresh-checkout check; the report then says it was not run |
 | `--report-blocked` | Write a **Blocked** REPRO.md when a step cannot be performed, instead of asking you to fix the description |
+| `--steps-independent` | Declare that the expected values do not depend on which of your steps ran, which lets Repro shorten the steps (see [LOCAL-APPS](LOCAL-APPS.md#shortening-the-steps)) |
 | `--output DIR` | Evidence directory under `.repro-runs/` (default `.repro-runs/reports/<time>-<slug>`) |
 
 Repro prints progress on stderr and a JSON summary on stdout. Exit codes: **0**, REPRO.md was written (any status); **2**, input is needed or Repro could not start (see `questions`); **130**, cancelled. Ctrl-C stops the app, the browser and any fresh-checkout commands that Repro started, and writes no REPRO.md.

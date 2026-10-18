@@ -15,7 +15,7 @@ export interface DemonstrationState {
   id: string; status: 'starting' | 'recording' | 'finished' | 'failed';
   steps: string[]; checks: string[]; notes: string[]; reason?: string; url?: string;
 }
-interface Session { state: DemonstrationState; app?: RunningApp; browser?: Browser; context?: BrowserContext; page?: Page; closing?: Promise<void> }
+interface Session { state: DemonstrationState; app?: RunningApp | undefined; browser?: Browser | undefined; context?: BrowserContext; page?: Page; finished?: boolean }
 const sessions = new Map<string, Session>();
 const MAX_LINES = 80;
 
@@ -133,10 +133,14 @@ export async function startDemonstration(plan: LaunchPlan, options: { headless?:
   const id = randomUUID();
   const session: Session = { state: { id, status: 'starting', steps: ['Open the app'], checks: [], notes: [] } };
   sessions.set(id, session);
+  // A finish can arrive while the app or browser is still starting; each await re-checks it and stops what started.
+  const stopIfFinished = async () => { if (session.finished) { await close(session); throw new ReproError('cancelled', 'CANCELLED', 'The demonstration was closed while starting.'); } };
   try {
     session.app = await startApp(plan);
+    await stopIfFinished();
     const { chromium } = await import('playwright');
     session.browser = await chromium.launch({ headless: options.headless ?? false, chromiumSandbox: true });
+    await stopIfFinished();
     session.context = await session.browser.newContext({ viewport: { width: 1280, height: 800 }, locale: 'en-US', timezoneId: 'UTC', serviceWorkers: 'block' });
     await session.context.route('**/*', route => isLoopbackUrl(route.request().url()) ? route.continue() : route.abort('blockedbyclient'));
     const add = (list: string[], line: string) => { if (session.state.steps.length + session.state.checks.length < MAX_LINES) list.push(line); };
@@ -154,20 +158,23 @@ export async function startDemonstration(plan: LaunchPlan, options: { headless?:
       try { const url = new URL(frame.url()); const path = `${url.pathname}${url.search}`; if (lastPath && path !== lastPath) add(session.state.notes, `The page changed to ${path}`); lastPath = path; } catch { /* about:blank */ }
     });
     await session.page.goto(session.app.url, { waitUntil: 'load' });
+    await stopIfFinished();
     session.state.status = 'recording'; session.state.url = session.app.url;
   } catch (error) {
-    session.state.status = 'failed';
-    session.state.reason = error instanceof ReproError ? error.message : 'The app or the browser could not start for the demonstration.';
+    if (!session.finished) {
+      session.state.status = 'failed';
+      session.state.reason = error instanceof ReproError ? error.message : 'The app or the browser could not start for the demonstration.';
+    }
     await close(session);
   }
   return structuredClone(session.state);
 }
+/** Idempotent: closes whatever has been acquired so far, and can run again after a late acquisition. */
 async function close(session: Session) {
-  session.closing ??= (async () => {
-    await session.browser?.close().catch(() => undefined);
-    await session.app?.stop().catch(() => undefined);
-  })();
-  await session.closing;
+  const browser = session.browser, app = session.app;
+  session.browser = undefined; session.app = undefined;
+  await browser?.close().catch(() => undefined);
+  await app?.stop().catch(() => undefined);
 }
 export function demonstration(id: string): DemonstrationState {
   const session = sessions.get(id);
@@ -177,6 +184,7 @@ export function demonstration(id: string): DemonstrationState {
 export async function finishDemonstration(id: string): Promise<DemonstrationState> {
   const session = sessions.get(id);
   if (!session) throw new ReproError('input', 'NOT_FOUND', 'Demonstration not found.');
+  session.finished = true;
   if (session.state.status === 'recording' || session.state.status === 'starting') session.state.status = 'finished';
   await close(session);
   return structuredClone(session.state);

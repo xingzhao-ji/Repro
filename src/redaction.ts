@@ -53,6 +53,8 @@ function luhn(digits: string): boolean {
   }
   return sum % 10 === 0;
 }
+const COMMON_NAMES = new Set(['node', 'test', 'tests', 'dev', 'app', 'admin', 'user', 'root', 'runner', 'ubuntu', 'ec2-user', 'build', 'ci', 'docker', 'web', 'server', 'local', 'localhost', 'default', 'guest', 'demo', 'main', 'home']);
+function distinctive(name: string): boolean { return name.length >= 4 && !COMMON_NAMES.has(name.toLowerCase()); }
 function escapeRegExp(value: string): string { return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
 function privateIPv4(octets: number[]): boolean {
   const [a = 0, b = 0] = octets;
@@ -104,8 +106,10 @@ export function createRedactor(options: RedactorOptions = {}): Redactor {
     }
     if (home && home.length > 1) text = text.split(home).join('~');
     text = text.replace(/\/(Users|home)\/([^/\s'"]+)/g, (match, root: string, name: string) => name === '~' || name === 'Shared' ? match : `/${root}/${count('home-path')}`);
-    if (hostPattern) text = text.replace(hostPattern, () => count('hostname'));
-    if (user && user.length >= 3) text = text.replace(new RegExp(`(?<![A-Za-z0-9])${escapeRegExp(user)}(?![A-Za-z0-9])`, 'g'), () => count('username'));
+    // Bare names are replaced only in prose and logs, and only when distinctive: in code, or for
+    // names such as "node", "test" or "dev", a word match would rewrite ordinary identifiers.
+    if (broad && hostPattern && distinctive(host.replace(/\.local$/i, ''))) text = text.replace(hostPattern, () => count('hostname'));
+    if (broad && user && distinctive(user)) text = text.replace(new RegExp(`(?<![A-Za-z0-9])${escapeRegExp(user)}(?![A-Za-z0-9])`, 'g'), () => count('username'));
     return text;
   }
   return { redact, counts: () => ({ ...counts }), total: () => Object.values(counts).reduce((sum, value) => sum + (value ?? 0), 0) };
@@ -132,6 +136,27 @@ export function classifyInput(value: string, field: FieldDescription = {}): Inpu
   if (redacted === value) return 'plain';
   const kinds = Object.keys(probe.counts());
   return kinds.every(kind => kind === 'email' || kind === 'phone' || kind === 'ip-address') ? 'personal' : 'secret';
+}
+
+/**
+ * A git remote for a report: userinfo carrying a password or token is removed
+ * whole, but a plain transport user (git@host:path, ssh://git@host/…) is kept, and no
+ * email, username or hostname rule mangles the address.
+ */
+export function sanitizeRemote(raw: string, home = homedir()): { url: string; redacted: boolean } {
+  let url = raw.trim();
+  let redacted = false;
+  const scheme = /^([a-z][a-z0-9+.-]*:\/\/)([^/@]*)@/i.exec(url);
+  if (scheme) {
+    const [user, password] = scheme[2]!.split(':');
+    if (password !== undefined || (user && /^(?:gh[pousr]_|github_pat_|glpat-|x-access-token|oauth2|[A-Za-z0-9_-]{20,})/.test(user))) {
+      // A credential pair is removed whole: the recipient authenticates as themselves.
+      url = `${scheme[1]}${url.slice(scheme[0].length)}`;
+      redacted = true;
+    }
+  }
+  if (home && home.length > 1 && url.startsWith(home)) url = `~${url.slice(home.length)}`;
+  return { url, redacted };
 }
 
 /** A URL suitable for a report line: no credentials, query or fragment. */

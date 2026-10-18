@@ -49,7 +49,7 @@ const string = (value: unknown, name: string, maximum: number): string | undefin
 };
 /** The one-page report request: app location, the two descriptions and optional answers to earlier questions. */
 function reportRequest(input: Record<string, unknown>, confirmed: boolean): ReportRequest {
-  keys(input, ['app', 'title', 'wentWrong', 'shouldHappen', 'confirmed', 'requestKey', 'checkSelectors', 'reportBlocked']);
+  keys(input, ['app', 'title', 'wentWrong', 'shouldHappen', 'confirmed', 'requestKey', 'checkSelectors', 'reportBlocked', 'stepsIndependent']);
   const app = input.app && typeof input.app === 'object' && !Array.isArray(input.app) ? input.app as Record<string, unknown> : {};
   keys(app, ['repository', 'url', 'start']);
   const selectors = input.checkSelectors && typeof input.checkSelectors === 'object' && !Array.isArray(input.checkSelectors) ? input.checkSelectors as Record<string, unknown> : {};
@@ -59,7 +59,7 @@ function reportRequest(input: Record<string, unknown>, confirmed: boolean): Repo
     app: { repository: string(app.repository, 'App folder', 1000), url: string(app.url, 'URL', 500), start: string(app.start, 'Start command', 500) },
     ...(title ? { title } : {}),
     wentWrong: string(input.wentWrong, 'What went wrong', 6000) ?? '', shouldHappen: string(input.shouldHappen, 'What should happen', 6000) ?? '', confirmed,
-    options: { checkSelectors: selectors as Record<number, string>, reportBlocked: input.reportBlocked === true },
+    options: { checkSelectors: selectors as Record<number, string>, reportBlocked: input.reportBlocked === true, stepsIndependent: input.stepsIndependent === true },
   };
 }
 function appSummary(profile: Awaited<ReturnType<typeof prepareReport>>['profile']) {
@@ -151,7 +151,9 @@ export async function serve(options: { port: number; root: string; reportDefault
       }
       if (path === '/api/app/choose-folder') { keys(input, []); json(response, 200, { path: await chooseFolder() }); return; }
       if (path === '/api/demonstrations') {
-        keys(input, ['repository', 'url', 'start']);
+        keys(input, ['repository', 'url', 'start', 'confirmed']);
+        // Like a report, a demonstration runs the app's start command, so it needs the same explicit confirmation.
+        if (input.confirmed !== true) throw new ReproError('input', 'CONFIRM_REQUIRED', 'Confirm that Repro may start the app for the demonstration.');
         const prepared = await prepareReport({ app: { repository: string(input.repository, 'App folder', 1000), url: string(input.url, 'URL', 500), start: string(input.start, 'Start command', 500) }, wentWrong: '', shouldHappen: '', confirmed: false });
         const missing = prepared.profile.missing[0];
         if (missing || !prepared.profile.plan) throw new ReproError('input', 'APP_NOT_READY', missing?.question ?? 'Repro does not know how to start this app yet.');

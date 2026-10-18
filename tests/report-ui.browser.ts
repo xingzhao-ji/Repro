@@ -81,6 +81,8 @@ test('the one-page flow: app folder and description in, progress and cancellatio
     for (const heading of ['Summary', 'Expected and observed behavior', 'Steps to reproduce', 'Run the regression test', 'Checking a fix', 'Test files', 'Evidence'])
       await preview.getByRole('heading', { name: heading, exact: true }).waitFor();
     assert.match(await page.locator('.result-summary').innerText(), /^Reproduced: the failure occurred/);
+    // "X should show Y" depends on the steps, so Repro does not shorten them and says why.
+    await preview.getByText(/Repro did not shorten them: the expected value can depend on every step/).waitFor();
     await shot('05-result');
     const download = await Promise.all([page.waitForEvent('download'), page.getByRole('link', { name: 'Download REPRO.md' }).click()]).then(([item]) => item);
     assert.equal(download.suggestedFilename(), 'REPRO.md');

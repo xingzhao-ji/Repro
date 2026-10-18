@@ -18,7 +18,7 @@ const help = `Repro ${VERSION} — turn a bug in your local web app into one REP
 
 Your app:
   report --app DIR --went-wrong TEXT --should-happen TEXT [--url URL] [--start CMD]
-         [--title TEXT] [--yes] [--budget RUNS] [--no-fresh-check] [--report-blocked]
+         [--title TEXT] [--yes] [--budget RUNS] [--no-fresh-check] [--report-blocked] [--steps-independent]
                                      Reproduce the bug, shorten the steps and write REPRO.md
   report --issue FILE [--yes]        The same, from a JSON file {app, url, start, title, wentWrong, shouldHappen}
   app --app DIR [--url URL] [--start CMD]
@@ -70,7 +70,7 @@ async function main(): Promise<void> {
   const parsed = parseArgs({ allowPositionals: true, strict: true, options: {
     help: { type: 'boolean' }, case: { type: 'string' }, consent: { type: 'boolean' }, manifest: { type: 'string' }, capsule: { type: 'string' }, experiment: { type: 'string' }, output: { type: 'string' }, revision: { type: 'string' }, budget: { type: 'string' }, port: { type: 'string' },
     app: { type: 'string' }, url: { type: 'string' }, start: { type: 'string' }, title: { type: 'string' }, 'went-wrong': { type: 'string' }, 'should-happen': { type: 'string' },
-    issue: { type: 'string' }, yes: { type: 'boolean' }, 'no-fresh-check': { type: 'boolean' }, 'report-blocked': { type: 'boolean' },
+    issue: { type: 'string' }, yes: { type: 'boolean' }, 'no-fresh-check': { type: 'boolean' }, 'report-blocked': { type: 'boolean' }, 'steps-independent': { type: 'boolean' },
   } });
   const command = parsed.positionals[0]; const options = parsed.values;
   if (options.help || !command) { console.log(help); return; }
@@ -83,7 +83,7 @@ async function main(): Promise<void> {
     console.log(JSON.stringify(options.case ? declarations[0] : declarations, null, 2)); return;
   }
   if (command === 'doctor') { console.log(JSON.stringify(await doctor(), null, 2)); return; }
-  const reportOptions = ['app', 'url', 'start', 'title', 'went-wrong', 'should-happen', 'issue', 'yes', 'no-fresh-check', 'report-blocked'] as const;
+  const reportOptions = ['app', 'url', 'start', 'title', 'went-wrong', 'should-happen', 'issue', 'yes', 'no-fresh-check', 'report-blocked', 'steps-independent'] as const;
   if (command !== 'report' && command !== 'app' && reportOptions.some(name => options[name] !== undefined)) throw new ReproError('input', 'ARGUMENTS', 'Use --app, --url, --went-wrong and the other report options with report or app.');
   if (command === 'app') {
     const { inspectApp } = await import('./app-inspect.js');
@@ -142,7 +142,7 @@ async function main(): Promise<void> {
   } finally { process.removeListener('SIGINT', cancel); process.removeListener('SIGTERM', cancel); }
 }
 type ReportCliOptions = { app?: string | undefined; url?: string | undefined; start?: string | undefined; title?: string | undefined; 'went-wrong'?: string | undefined; 'should-happen'?: string | undefined;
-  issue?: string | undefined; yes?: boolean | undefined; 'no-fresh-check'?: boolean | undefined; 'report-blocked'?: boolean | undefined; budget?: string | undefined; output?: string | undefined };
+  issue?: string | undefined; yes?: boolean | undefined; 'no-fresh-check'?: boolean | undefined; 'report-blocked'?: boolean | undefined; 'steps-independent'?: boolean | undefined; budget?: string | undefined; output?: string | undefined };
 async function report(options: ReportCliOptions): Promise<void> {
   const { generateReport, prepareReport, slugify } = await import('./report-flow.js');
   let input: Record<string, unknown> = {};
@@ -158,7 +158,7 @@ async function report(options: ReportCliOptions): Promise<void> {
     ...((options.title ?? text(input['title'])) ? { title: (options.title ?? text(input['title']))! } : {}),
     wentWrong: options['went-wrong'] ?? text(input['wentWrong']) ?? '', shouldHappen: options['should-happen'] ?? text(input['shouldHappen']) ?? '',
     confirmed: false,
-    options: { ...(options.budget ? { budget: Number(options.budget) } : {}), freshCheck: !options['no-fresh-check'], reportBlocked: options['report-blocked'] === true },
+    options: { ...(options.budget ? { budget: Number(options.budget) } : {}), freshCheck: !options['no-fresh-check'], reportBlocked: options['report-blocked'] === true, stepsIndependent: options['steps-independent'] === true },
   };
   if (options.budget !== undefined && (!Number.isInteger(Number(options.budget)) || Number(options.budget) < 8 || Number(options.budget) > 120)) throw new ReproError('input', 'BUDGET', 'The report budget must be 8–120 runs.');
   const stamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\..*$/, '').replace('T', '-');
@@ -177,7 +177,13 @@ async function report(options: ReportCliOptions): Promise<void> {
     if (!process.stdin.isTTY) throw new ReproError('input', 'CONFIRM_REQUIRED', 'Review the steps, checks and scope above, then rerun with --yes to confirm them.');
     const { createInterface } = await import('node:readline/promises');
     const prompt = createInterface({ input: process.stdin, output: process.stderr });
-    confirmed = /^y(es)?$/i.test((await prompt.question('Is this right, and may Repro run it? [y/N] ')).trim());
+    try { confirmed = /^y(es)?$/i.test((await prompt.question('Is this right, and may Repro run it? [y/N] ')).trim()); }
+    catch (error) {
+      // Ctrl-C at the prompt cancels before anything ran.
+      if ((error as { code?: string }).code !== 'ABORT_ERR') throw error;
+      prompt.close();
+      console.log(JSON.stringify({ status: 'cancelled', reason: 'Nothing was run.' }, null, 2)); ownerCancelled = true; process.exitCode = 130; return;
+    }
     prompt.close();
     if (!confirmed) { console.log(JSON.stringify({ status: 'not-confirmed', reason: 'Nothing was run.' }, null, 2)); process.exitCode = 2; return; }
   }

@@ -47,6 +47,8 @@ function fence(content: string): string {
   const longest = Math.max(2, ...[...content.matchAll(/`+/g)].map(match => match[0].length));
   return '`'.repeat(longest + 1);
 }
+/** Untrusted output (app logs, command output) is indented, so none of its lines can open a file block. */
+function output(lines: string[]): string { return code(lines.map(line => `  ${line}`).join('\n'), 'text'); }
 function code(content: string, language = ''): string {
   const marks = fence(content);
   return `${marks}${language}\n${content.endsWith('\n') ? content : `${content}\n`}${marks}`;
@@ -75,7 +77,7 @@ export const EXTRACTOR = `node --input-type=module -e '
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { createHash } from "node:crypto";
 const markdown = readFileSync(process.argv[1], "utf8").replace(/\\r\\n/g, "\\n");
-const blocks = /^(\`{3,})[a-z]+ repro-file=(\\.repro\\/[A-Za-z0-9._-]+) sha256=([0-9a-f]{64})\\n([\\s\\S]*?)^\\1$/gm;
+const blocks = /^(\`{3,})[a-z]+ repro-file=(\\.repro\\/(?:[a-z0-9][a-z0-9-]*\\.test\\.mjs|package\\.json|package-lock\\.json|local-changes\\.patch)) sha256=([0-9a-f]{64})\\n([\\s\\S]*?)^\\1$/gm;
 let written = 0;
 for (const [, , path, sha256, content] of markdown.matchAll(blocks)) {
   if (createHash("sha256").update(content).digest("hex") !== sha256) throw new Error(path + " does not match its SHA-256; use an unmodified REPRO.md.");
@@ -89,7 +91,7 @@ if (!written) throw new Error("No .repro files found in this REPRO.md.");
 
 /** The same parse in TypeScript, used by Repro's own tests and fresh-checkout check. */
 export function extractReproFiles(markdown: string): { path: string; content: string; sha256: string; valid: boolean }[] {
-  const blocks = /^(`{3,})[a-z]+ repro-file=(\.repro\/[A-Za-z0-9._-]+) sha256=([0-9a-f]{64})\n([\s\S]*?)^\1$/gm;
+  const blocks = /^(`{3,})[a-z]+ repro-file=(\.repro\/(?:[a-z0-9][a-z0-9-]*\.test\.mjs|package\.json|package-lock\.json|local-changes\.patch)) sha256=([0-9a-f]{64})\n([\s\S]*?)^\1$/gm;
   return [...markdown.replace(/\r\n/g, '\n').matchAll(blocks)].map(([, , path, sha256, content]) => ({
     path: path!, content: content!, sha256: sha256!, valid: createHash('sha256').update(content!).digest('hex') === sha256,
   }));
@@ -140,7 +142,7 @@ export function renderReport(data: ReportData): string {
   out.push(`| **Status** | ${statusSentence(data)} |`);
   out.push(`| **App** | ${inline(data.app.name)}${git ? ` at commit ${inline(git.commit.slice(0, 12))}${git.branch ? ` on ${inline(git.branch)}` : ''}${git.dirty ? ' **with uncommitted changes**' : ''}` : ' (no git revision)'} |`);
   out.push(`| **Fresh checkout** | ${escapeCell(data.fresh.summary)} |`);
-  out.push(`| **Regression test** | ${inline(testCommand)} — ${data.status === 'not-reproduced' ? 'currently passes' : 'fails until the bug is fixed'} |`);
+  out.push(`| **Regression test** | ${inline(testCommand)} — ${({ reproduced: 'fails until the bug is fixed', intermittent: 'fails in some runs (the bug is intermittent)', 'not-reproduced': 'currently passes', blocked: 'not a verified reproduction' } as Record<ReportStatus, string>)[data.status]} |`);
   out.push(`| **Generated** | ${data.generatedAt} by Repro ${data.reproVersion}, locally, without an AI service |`, '');
   out.push('## Summary', '');
   const failing = data.expectation.checks.filter(check => !check.passed);
@@ -168,7 +170,9 @@ export function renderReport(data: ReportData): string {
 
   out.push('## Run the regression test', '');
   out.push('The test needs Node.js and npm; it does not need Repro, an account or an AI service. It contains only this bug’s steps and checks; it does not contain your application.', '');
-  out.push('### 1. Get the exact source', '');
+  let number = 0;
+  const heading = (text: string) => out.push(`### ${++number}. ${text}`, '');
+  heading('Get the exact source');
   if (git) {
     const remote = git.remotes.find(item => item.name === 'origin') ?? git.remotes[0];
     const folder = data.app.name.replace(/^@[^/]+\//, '').replace(/[^A-Za-z0-9._-]/g, '-');
@@ -176,34 +180,52 @@ export function renderReport(data: ReportData): string {
     out.push(code([`git clone ${reachable ? cloneUrl(reachable.url) : '<repository URL or path>'} ${folder}`, `cd ${folder}`, `git checkout ${git.commit}`, ...(git.appPath !== '.' ? [`cd ${git.appPath}`] : [])].join('\n'), 'sh'));
     if (!remote) out.push('', 'The repository has no remote configured. Use any copy that contains this commit, for example a pushed branch or `git bundle`.');
     else if (!reachable) out.push('', `The repository's ${remote.name} remote is a path on the reporter’s machine (${inline(remote.url)}), so it is not reachable from elsewhere. Use any copy that contains this commit, for example a pushed branch or \`git bundle\`.`);
-    if (git.dirty && data.app.patch) out.push('', 'This bug was reproduced with uncommitted local changes. The step 3 command also writes `.repro/local-changes.patch`; apply it right after step 3 with `git apply .repro/local-changes.patch`.');
-    else if (git.dirty) out.push('', '**The local changes Repro tested could not be embedded** (see “Source revision and local changes”), so a clean checkout may not reproduce the bug.');
+    if (git.dirty && !data.app.patch) out.push('', '**The local changes Repro tested could not be embedded** (see “Source revision and local changes”), so a clean checkout may not reproduce the bug.');
   } else out.push('No exact revision is available (the app folder is not a git repository). Use the same copy of the app the reporter used.');
-  out.push('', '### 2. Install the app’s dependencies', '');
-  out.push(data.app.install ? code(data.app.install, 'sh') : 'No install command is known for this app.');
-  out.push('', '### 3. Create the test files', '');
+  out.push('');
+  heading('Create the test files');
   out.push('Save this REPRO.md in the app folder, then run this from the app folder. It writes only the `.repro/` files listed under “Test files”, refuses to overwrite existing files, and checks each file’s SHA-256. You can also copy the blocks by hand.', '');
   out.push(code(`${EXTRACTOR} REPRO.md`, 'sh'), '');
-  out.push('### 4. Run it', '');
+  if (git?.dirty && data.app.patch) {
+    heading('Apply the local changes');
+    out.push('This bug was reproduced with uncommitted changes. The previous step wrote them to `.repro/local-changes.patch`; apply them before installing, because they may change dependencies.', '');
+    out.push(code(git.appPath === '.' ? 'git apply .repro/local-changes.patch' : 'git -C "$(git rev-parse --show-toplevel)" apply "$PWD/.repro/local-changes.patch"', 'sh'), '');
+  }
+  heading('Install the app’s dependencies');
+  out.push(data.app.install ? code(data.app.install, 'sh') : 'No install command is known for this app.', '');
+  heading('Run it');
   out.push(code([`(cd .repro && npm ci && npx playwright install chromium --only-shell)`, ...data.steps.secrets.map(secret => `export ${secret.name}='…'   # ${secret.purpose}`), testCommand].join('\n'), 'sh'), '');
   if (data.app.start?.command) out.push(`The test starts the app with ${inline(data.app.start.command)} (${data.app.start.source}) on a free port. To use an app you already started, set ${inline('REPRO_BASE_URL')}, for example ${inline('REPRO_BASE_URL=http://127.0.0.1:3000 ' + testCommand)}.`, '');
   else if (data.app.start?.kind === 'static') out.push('The test serves the app’s static files itself on a free port.', '');
   else out.push(`Start the app yourself and set ${inline('REPRO_BASE_URL')} to its address before running the test.`, '');
-  out.push(data.status === 'not-reproduced' ? 'Right now the test **passes**, because the bug did not reproduce.' : 'Right now the test **fails** with `REPRO_EXPECTATION_FAILED` and says “This is the failure recorded in REPRO.md”. If it fails with `REPRO_STEP_FAILED` instead, the app no longer matches the recorded steps; that is not the reported bug.', '');
+  out.push(({
+    reproduced: 'Right now the test **fails** with `REPRO_EXPECTATION_FAILED` and says “This is the failure recorded in REPRO.md”. If it fails with `REPRO_STEP_FAILED` instead, the app no longer matches the recorded steps; that is not the reported bug.',
+    intermittent: `The bug is **intermittent** (${data.statusDetail.replace(/\.$/, '')}), so a single run may pass or fail. When it fails in the reported way, it says “This is the failure recorded in REPRO.md”.`,
+    'not-reproduced': 'Right now the test **passes**, because the bug did not reproduce in Repro’s runs. It still records exactly what was tried.',
+    blocked: 'Repro could not complete the steps, so this test is not a verified reproduction. It is likely to stop with `REPRO_STEP_FAILED` at the step that could not be performed.',
+  } as Record<ReportStatus, string>)[data.status], '');
 
   out.push('## Checking a fix', '');
-  out.push('A fix is done when, in the app folder:', '');
-  out.push(list([`${inline(testCommand)} passes (exit code 0) with the test files exactly as written by step 3;`,
-    'the checks in “Expected and observed behavior” are unchanged — do not edit the test’s expected values or steps to make it pass;',
-    'the app’s own tests still pass.'], ''), '');
-  out.push('Running the same command before and after the change is the comparison: it fails on the commit above and should pass on the fixed code.', '');
+  if (data.status === 'reproduced') {
+    out.push('A fix is done when, in the app folder:', '');
+    out.push(list([`${inline(testCommand)} passes (exit code 0) with the test files exactly as written in step 2;`,
+      'the checks in “Expected and observed behavior” are unchanged — do not edit the test’s expected values or steps to make it pass;',
+      'the app’s own tests still pass.'], ''), '');
+    out.push('Running the same command before and after the change is the comparison: it fails on the commit above and should pass on the fixed code.', '');
+  } else if (data.status === 'intermittent') {
+    out.push('Because the bug is intermittent, one passing run proves nothing. A fix is done when the unchanged test passes 10 times in a row:', '');
+    out.push(code(`for run in 1 2 3 4 5 6 7 8 9 10; do ${testCommand} || exit 1; done`, 'sh'), '');
+    out.push('Do not edit the test’s expected values or steps to make it pass, and keep the app’s own tests passing.', '');
+  } else if (data.status === 'not-reproduced') {
+    out.push('There is nothing to fix yet: the expected behavior happened in every run. If you can make the bug happen, add the missing steps or conditions and generate a new report.', '');
+  } else out.push('There is no verified failure to fix yet. Resolve the step that could not be performed (see “Evidence”), then generate a new report.', '');
 
   out.push('## Test files', '');
   for (const file of data.test.files) out.push(`### ${inline(file.path)}`, '', fileBlock(file), '');
 
   out.push('## Evidence', '');
   out.push('### Observed facts', '');
-  out.push('Every row is an actual run from a fresh browser profile and a freshly started app.', '');
+  out.push(data.app.start?.kind === 'external' && !data.app.start.command ? 'Every row is an actual run from a fresh browser profile against the app that was already running; Repro did not restart it between runs.' : 'Every row is an actual run from a fresh browser profile and a freshly started app.', '');
   out.push('| Run | Result | Observed | Time |', '|---|---|---|---|');
   for (const run of data.runs) out.push(`| ${escapeCell(run.label)} | ${escapeCell(run.outcome)}${run.note ? ` — ${escapeCell(run.note)}` : ''} | ${run.values ? escapeCell(run.values.map(value => shown(value, 60)).join(', ')) : '—'} | ${(run.durationMs / 1000).toFixed(1)} s |`);
   if (data.trials.length) {
@@ -214,12 +236,12 @@ export function renderReport(data: ReportData): string {
     out.push('', '</details>');
   }
   out.push('', `**Fresh checkout:** ${data.fresh.summary}`);
-  if (data.fresh.commands.length) out.push('', '<details><summary>Fresh-checkout commands and output</summary>', '', code([...data.fresh.commands.map(command => `$ ${command}`), ...data.fresh.output].join('\n'), 'text'), '', '</details>');
+  if (data.fresh.commands.length) out.push('', '<details><summary>Fresh-checkout commands and output</summary>', '', output([...data.fresh.commands.map(command => `$ ${command}`), ...data.fresh.output]), '', '</details>');
   out.push('', '### Logs recorded during the runs (sanitized)', '');
   const logGroups: [string, string[]][] = [['Uncaught page errors', data.logs.pageErrors], ['Console errors and warnings', data.logs.console], ['Failed local requests', data.logs.failedRequests],
     ['Blocked non-local hosts', data.logs.blockedHosts], ['Dialogs and downloads', data.logs.dialogs]];
   for (const [name, entries] of logGroups) out.push(`- **${name}:** ${entries.length ? '' : 'none'}`, ...entries.slice(0, 20).map(entry => `  - ${inline(entry)}`));
-  if (data.logs.server.length) out.push('', '<details><summary>App server output (last ' + data.logs.server.length + ' lines, sanitized)</summary>', '', code(data.logs.server.join('\n'), 'text'), '', '</details>');
+  if (data.logs.server.length) out.push('', '<details><summary>App server output (last ' + data.logs.server.length + ' lines, sanitized)</summary>', '', output(data.logs.server), '', '</details>');
   out.push('', '### Suspected causes (not verified)', '');
   out.push(list(data.suspected, 'None recorded.'), '');
   out.push('### Verified causes', '');

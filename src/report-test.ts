@@ -119,7 +119,7 @@ import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
 import { createServer as createHttpServer, request as httpRequest } from 'node:http';
 import { createServer as createNetServer } from 'node:net';
-import { readFile, realpath, stat } from 'node:fs/promises';
+import { readFile, realpath, stat, writeFile } from 'node:fs/promises';
 import { extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { chromium } from 'playwright';
@@ -140,9 +140,10 @@ test(${literal(title)}, { timeout: 180_000 }, async () => {
   for (const [name, purpose] of Object.entries(SECRETS)) {
     assert.ok(process.env[name] !== undefined, 'Set ' + name + ' to ' + purpose + ' before running. REPRO.md withholds this value.');
   }
-  const app = await startApp();
-  const browser = await chromium.launch();
+  let app = null, browser = null;
   try {
+    app = await startApp();
+    browser = await chromium.launch();
     const context = await browser.newContext({ viewport: VIEWPORT, locale: 'en-US', timezoneId: 'UTC', serviceWorkers: 'block', acceptDownloads: false, colorScheme: 'light' });
     context.setDefaultTimeout(ACTION_TIMEOUT_MS);
     context.setDefaultNavigationTimeout(Math.max(ACTION_TIMEOUT_MS, 15_000));
@@ -161,8 +162,8 @@ ${manifest.expectation.checks.map(checkCode).join('\n')}
   console.log('REPRO_OBSERVATION ' + JSON.stringify({ values: observed, satisfied, matchesReportedFailure: !satisfied && matchesReported(checks, observed) }));
   assert.ok(satisfied, explain(checks, observed));
   } finally {
-    await browser.close().catch(() => {});
-    await app.stop();
+    await browser?.close().catch(() => {});
+    await app?.stop();
   }
 });
 
@@ -258,7 +259,7 @@ function matchesReported(checks, observed) {
   if (!REPORTED_FAILURE) return false;
   return checks.every((check, index) => REPORTED_FAILURE.exact[index]
     ? observed[index] === REPORTED_FAILURE.values[index]
-    : passes(check, observed[index]) === passes(check, REPORTED_FAILURE.values[index]));
+    : passes(check, observed[index]) === REPORTED_FAILURE.passed[index]);
 }
 function explain(checks, observed) {
   const shown = value => value === null ? '(element not found)' : JSON.stringify(value.length > 300 ? value.slice(0, 300) + '…' : value);
@@ -281,6 +282,12 @@ async function startApp() {
   const output = [];
   let exited = null;
   child.on('close', code => { exited = code; });
+  // The app runs in its own process group: stop it if this test is interrupted, and tell a supervising runner where it is.
+  if (process.env.REPRO_APP_PGID_FILE) await writeFile(process.env.REPRO_APP_PGID_FILE, String(child.pid));
+  const interrupted = signal => { try { process.kill(-child.pid, 'SIGTERM'); } catch {} setTimeout(() => { try { process.kill(-child.pid, 'SIGKILL'); } catch {} process.exit(signal === 'SIGINT' ? 130 : 143); }, 2000).unref(); };
+  process.once('SIGINT', interrupted);
+  process.once('SIGTERM', interrupted);
+  process.once('exit', () => { try { process.kill(-child.pid, 'SIGKILL'); } catch {} });
   for (const stream of [child.stdout, child.stderr]) stream.on('data', chunk => { output.push(...String(chunk).replace(/\\u001b\\[[0-9;?]*[ -/]*[@-~]/g, '').split(/\\r?\\n/)); if (output.length > 300) output.splice(0, output.length - 300); });
   const stop = async () => {
     const alive = () => { try { process.kill(-child.pid, 0); return true; } catch (error) { return error.code === 'EPERM'; } };

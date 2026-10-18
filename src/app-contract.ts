@@ -103,10 +103,12 @@ export function validateAppManifest(input: unknown): ManifestV4 {
   }
   const failure = manifest['failure'];
   if (failure !== null) {
-    const frozen = fields(failure, ['values', 'exact']);
+    const frozen = fields(failure, ['values', 'exact', 'passed']);
+    const booleans = (value: unknown) => Array.isArray(value) && value.length === checks.length && value.every(entry => typeof entry === 'boolean');
     if (!Array.isArray(frozen['values']) || frozen['values'].length !== checks.length
       || frozen['values'].some(entry => entry !== null && (typeof entry !== 'string' || entry.length > MAX_VALUE))
-      || !Array.isArray(frozen['exact']) || frozen['exact'].length !== checks.length || frozen['exact'].some(entry => typeof entry !== 'boolean')) invalid('APP_FAILURE', 'The frozen failure must record one observed value and comparison mode per check.');
+      || !booleans(frozen['exact']) || !booleans(frozen['passed'])) invalid('APP_FAILURE', 'The frozen failure must record one observed value, comparison mode and result per check.');
+    if ((frozen['passed'] as boolean[]).every(Boolean)) invalid('APP_FAILURE', 'A frozen failure has at least one failing check.');
     if (!resolved) invalid('APP_FAILURE', 'Only a resolved capture freezes an observed failure.');
   }
   if (manifest['assertionDigest'] !== appAssertionDigest(expectation as unknown as ManifestV4['expectation'], failure as ManifestV4['failure'])) {
@@ -182,7 +184,7 @@ export function validAppObservation(input: unknown, checks: number): AppObservat
   const keys = ['kind', 'values', 'url', 'pageErrors', 'console', 'failedRequests', 'blockedHosts', 'dialogs'];
   const trace = observation['trace'];
   if (trace !== undefined && (!Array.isArray(trace) || trace.length > MAX_STEPS || trace.some(row => !Array.isArray(row) || row.length !== checks
-    || row.some(value => value !== null && (typeof value !== 'string' || value.length > 120))))) throw new ReproError('verification', 'APP_OBSERVATION', 'The step trace is malformed.');
+    || row.some(value => value !== null && (typeof value !== 'string' || !/^[a-f0-9]{32}$/.test(value)))))) throw new ReproError('verification', 'APP_OBSERVATION', 'The step trace is malformed.');
   if (Object.keys(observation).length !== keys.length + (trace === undefined ? 0 : 1) || keys.some(key => !(key in observation)) || observation['kind'] !== 'local-app'
     || !Array.isArray(observation['values']) || observation['values'].length !== checks
     || observation['values'].some(value => value !== null && (typeof value !== 'string' || value.length > MAX_OBSERVED))
@@ -206,8 +208,8 @@ export function evaluateAppObservation(manifest: ManifestV4, input: unknown): 't
   if (checks.every((check, index) => checkPasses(check, observation.values[index] ?? null))) return 'requirement-satisfied';
   const failure = validated.failure;
   if (failure === null || checks.every((check, index) => {
-    const observed = observation.values[index] ?? null, frozen = failure.values[index] ?? null;
-    return failure.exact[index] ? observed === frozen : checkPasses(check, observed) === checkPasses(check, frozen);
+    const observed = observation.values[index] ?? null;
+    return failure.exact[index] ? observed === (failure.values[index] ?? null) : checkPasses(check, observed) === failure.passed[index];
   })) return 'target-failure';
   throw new ReproError('verification', 'DIFFERENT_FAILURE', 'The expectation was not met, but the observed result differs from the reported failure.');
 }
@@ -219,7 +221,13 @@ export function evaluateAppObservation(manifest: ManifestV4, input: unknown): 't
  */
 export function failureSignature(checks: AppCheck[], values: (string | null)[]): NonNullable<ManifestV4['failure']> {
   const exact = checks.map((check, index) => !check.comparison.endsWith('contains') && (values[index] ?? '').length <= MAX_VALUE);
-  return { values: values.map((value, index) => value === null ? null : exact[index] ? value : value.slice(0, 200)), exact };
+  const passed = checks.map((check, index) => checkPasses(check, values[index] ?? null));
+  return { values: values.map((value, index) => value === null ? null : exact[index] ? value : value.slice(0, 200)), exact, passed };
+}
+/** The text stored for a withheld input never contains the value. */
+export function withheldText(kind: string, secret: string, reference: TargetReference | AppTarget | null): string {
+  const target = !reference ? 'the field' : 'by' in reference ? `"${reference.value}"` : reference.text ? `"${reference.text}"` : reference.css ?? reference.testid ?? 'the field';
+  return `${kind === 'select' ? 'Select' : 'Type'} the value of $${secret} into ${target}`;
 }
 
 /** Simple dependency groups: steps run in the page their latest navigation opened; a bare key press needs the step that focused its field. */
@@ -248,7 +256,7 @@ export function createDraftManifest(input: DraftInput): ManifestV4 {
   const actions: AppAction[] = input.actions.map((action, index) => {
     const secret = input.secrets.get(index) ?? null;
     return { id: `step-${index + 1}`, kind: action.kind, target: null, reference: action.reference, value: secret ? '' : action.value,
-      secret, text: action.text.slice(0, 400), dependsOn: dependencies[index]! };
+      secret, text: secret ? withheldText(action.kind, secret, action.reference) : action.text.slice(0, 400), dependsOn: dependencies[index]! };
   });
   const expectation: ManifestV4['expectation'] = { invariantId: 'REPORTED_EXPECTATION', description: input.description.slice(0, 4000),
     checks: input.checks.map(check => ({ target: null, reference: check.reference, property: check.property, comparison: check.comparison, expected: check.expected, text: check.text.slice(0, 400) })) };
@@ -272,7 +280,7 @@ export function resolveManifest(draft: ManifestV4, resolution: Pick<AppResolutio
     const resolved = resolution.actions[index];
     if (!resolved || resolved.id !== action.id) invalid('APP_RESOLUTION', 'Resolution does not match the captured steps.');
     const secret = action.secret ?? (resolved.sensitive && ['fill', 'select'].includes(action.kind) ? secretFor(index) : null);
-    return { ...action, target: resolved.target, value: secret ? '' : action.value, secret };
+    return { ...action, target: resolved.target, value: secret ? '' : action.value, secret, text: secret && !action.secret ? withheldText(action.kind, secret, action.reference) : action.text };
   });
   const expectation = { ...manifest.expectation, checks: manifest.expectation.checks.map((check, index) => ({ ...check, target: resolution.checks[index] ?? null })) };
   const failure = observedValues ? failureSignature(expectation.checks, observedValues) : null;

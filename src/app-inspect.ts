@@ -2,11 +2,11 @@ import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { constants } from 'node:fs';
 import { lstat, open, readFile, realpath, stat } from 'node:fs/promises';
-import { homedir, platform, arch, release } from 'node:os';
+import { homedir, platform, arch, release, tmpdir } from 'node:os';
 import { basename, isAbsolute, join, relative, resolve, sep } from 'node:path';
 import { ReproError } from './contracts.js';
 import { digest } from './manifest.js';
-import { createRedactor, isSensitiveFileName } from './redaction.js';
+import { isSensitiveFileName, sanitizeRemote } from './redaction.js';
 import { isLoopbackUrl } from './app-execution.js';
 import type { LaunchPlan } from './app-process.js';
 
@@ -65,6 +65,11 @@ function run(command: string, args: string[], cwd: string, maxBuffer = 1024 * 10
 }
 const git = (cwd: string, args: string[], maxBuffer?: number) => run('git', ['-c', 'core.fsmonitor=false', '-c', 'core.quotepath=false', ...args], cwd, maxBuffer);
 
+/** An inline NAME=value assignment whose name suggests a credential, e.g. DB_PASSWORD=x npm run dev. */
+export function inlineSecret(command: string): string | null {
+  const match = /(?:^|\s)([A-Za-z_][A-Za-z0-9_]*(?:SECRET|TOKEN|PASSWORD|PASSWD|API_KEY|APIKEY|PRIVATE_KEY|CREDENTIAL)[A-Za-z0-9_]*)=\S/i.exec(command);
+  return match ? match[1]! : null;
+}
 export function expandHome(path: string): string { return path === '~' ? homedir() : path.startsWith('~/') ? join(homedir(), path.slice(2)) : path; }
 async function readJsonFile(path: string, limit = 256 * 1024): Promise<unknown> {
   const info = await lstat(path);
@@ -89,6 +94,7 @@ async function readConfig(directory: string): Promise<ReproConfig | null> {
   const unknown = Object.keys(config).filter(key => !allowed.includes(key));
   if (unknown.length) throw new ReproError('input', 'APP_CONFIG', `repro.config.json has unsupported fields: ${unknown.join(', ')}.`);
   for (const key of ['start', 'url', 'install', 'static'] as const) if (config[key] !== undefined && (typeof config[key] !== 'string' || !config[key] || (config[key] as string).length > 500 || /[\r\n]/.test(config[key] as string))) throw new ReproError('input', 'APP_CONFIG', `repro.config.json "${key}" must be a one-line string.`);
+  for (const key of ['start', 'install'] as const) if (typeof config[key] === 'string' && inlineSecret(config[key] as string)) throw new ReproError('input', 'APP_CONFIG', `repro.config.json "${key}" sets ${inlineSecret(config[key] as string)} inline. Put secrets in your shell environment instead.`);
   if (config['startTimeoutMs'] !== undefined && (!Number.isSafeInteger(config['startTimeoutMs']) || (config['startTimeoutMs'] as number) < 1000 || (config['startTimeoutMs'] as number) > 300_000)) throw new ReproError('input', 'APP_CONFIG', 'startTimeoutMs must be between 1000 and 300000.');
   const env = config['env'] === undefined ? {} : config['env'];
   if (!env || typeof env !== 'object' || Array.isArray(env) || Object.entries(env).some(([key, item]) => !/^[A-Z_][A-Z0-9_]{0,63}$/.test(key) || typeof item !== 'string' || item.length > 500
@@ -172,9 +178,8 @@ export async function gitIdentity(directory: string): Promise<GitIdentity | null
   const head = await git(root, ['rev-parse', '--verify', '-q', 'HEAD']);
   const commit = head.code === 0 ? head.stdout.trim() : null;
   const branch = (await git(root, ['symbolic-ref', '--short', '-q', 'HEAD'])).stdout.trim() || null;
-  const redactor = createRedactor();
   const remotes = [...new Map((await git(root, ['remote', '-v'])).stdout.split('\n').map(line => /^(\S+)\s+(\S+)\s+\(fetch\)$/.exec(line))
-    .filter(Boolean).map(match => [match![1]!, { name: match![1]!, url: redactor.redact(match![2]!) }])).values()];
+    .filter(Boolean).map(match => [match![1]!, { name: match![1]!, url: sanitizeRemote(match![2]!).url }])).values()];
   const pushedTo = commit ? (await git(root, ['branch', '-r', '--contains', commit, '--format=%(refname:short)'])).stdout.split('\n').map(line => line.trim()).filter(Boolean).slice(0, 10) : [];
   const status = await git(root, ['status', '--porcelain=v1', '-z', '--untracked-files=all'], 4 * 1024 * 1024);
   const changed: GitIdentity['changed'] = [], untracked: string[] = [];
@@ -209,6 +214,10 @@ export async function gitIdentity(directory: string): Promise<GitIdentity | null
     const diff = await git(root, ['diff', '--no-index', '--no-color', '--no-ext-diff', '--', '/dev/null', path]);
     patch += diff.stdout;
   }
+  if (patch.includes('\r')) {
+    omitted.push({ path: '(all local changes)', reason: 'the changes contain CRLF line endings, which a Markdown code block cannot carry exactly; commit the changes and share the commit instead' });
+    patch = '';
+  }
   if (Buffer.byteLength(patch) > MAX_PATCH) {
     omitted.push({ path: '(all local changes)', reason: `patch larger than ${MAX_PATCH / 1024} KiB; commit the changes and share the commit instead` });
     patch = '';
@@ -216,8 +225,11 @@ export async function gitIdentity(directory: string): Promise<GitIdentity | null
   return { root, appPath, commit, branch, remotes, pushedTo, dirty: changed.length > 0 || untracked.length > 0, changed, untracked, patch, omitted };
 }
 
-async function versionOf(command: string, directory: string): Promise<string | null> {
-  const result = await run(command, ['--version'], directory, 64 * 1024, 10_000);
+/** The globally installed package manager's version, probed from a neutral folder: inspection never executes the app's code or config. */
+async function versionOf(command: string): Promise<string | null> {
+  const result = await new Promise<{ code: number; stdout: string }>(accept => execFile(command, ['--version'], { cwd: tmpdir(), timeout: 10_000, maxBuffer: 64 * 1024, encoding: 'utf8',
+    env: { ...process.env, COREPACK_ENABLE_NETWORK: '0', COREPACK_ENABLE_DOWNLOAD_PROMPT: '0', YARN_IGNORE_PATH: '1' } },
+    (error, stdout) => accept({ code: error ? -1 : 0, stdout: String(stdout) })));
   return result.code === 0 ? result.stdout.trim().split('\n')[0]!.slice(0, 60) : null;
 }
 
@@ -228,6 +240,8 @@ export async function inspectApp(input: AppInput): Promise<AppProfile> {
   if (url && !isLoopbackUrl(url)) throw new ReproError('input', 'APP_URL', 'Use a running app on this machine: http://127.0.0.1:PORT, http://localhost:PORT or http://[::1]:PORT.');
   const start = input.start?.trim() || undefined;
   if (start && (start.length > 500 || /[\r\n]/.test(start))) throw new ReproError('input', 'APP_COMMAND', 'The start command must be a single line.');
+  // REPRO.md and the exported test repeat the start command, so it must not carry credentials.
+  if (start && inlineSecret(start)) throw new ReproError('input', 'APP_COMMAND_SECRET', `The start command sets ${inlineSecret(start)} inline. Put secrets in your shell environment instead; Repro passes your environment to the app but never writes it into the report.`);
   let directory: string | null = null;
   if (input.repository?.trim()) {
     const raw = expandHome(input.repository.trim());
@@ -256,7 +270,7 @@ export async function inspectApp(input: AppInput): Promise<AppProfile> {
       startPlan = { kind: 'static', directory: folder, command: null, url: null, env: {}, startTimeoutMs, source: `repro.config.json "static" (${config.static}) served by Repro` };
     } else if (facts) {
       const script = ['dev', 'start', 'serve', 'preview'].find(candidate => facts.scripts[candidate]);
-      if (script && manager) startPlan = { kind: 'command', directory, command: `${manager} run ${script}`, url: config?.url ?? null, env, startTimeoutMs, source: `package.json script "${script}" (${facts.scripts[script]!.slice(0, 120)})` };
+      if (script && manager) startPlan = { kind: 'command', directory, command: `${manager} run ${script}`, url: config?.url ?? null, env, startTimeoutMs, source: `package.json script "${script}" (${inlineSecret(facts.scripts[script]!) ? 'it sets a secret inline, so it is not shown' : facts.scripts[script]!.slice(0, 120)})` };
     }
     if (!startPlan && files.has('index.html')) startPlan = { kind: 'static', directory, command: null, url: null, env: {}, startTimeoutMs, source: 'index.html served by Repro (no start script found)' };
     if (!startPlan && !url) missing.push({ field: 'start', question: 'How do you start this app? Enter the command you use, e.g. npm run dev, or add a repro.config.json.' });
@@ -276,7 +290,7 @@ export async function inspectApp(input: AppInput): Promise<AppProfile> {
   if (url) notes.push(directory ? 'Repro used the already-running app at the URL you gave. It could not restart it between runs, so server state may carry over, and it cannot prove the server is running the recorded source.'
     : 'Only a URL was given. A URL does not provide source code or a portable environment, so the report cannot name a revision, dependencies or setup.');
   const environment = { os: `${platform()} ${release()} (${arch()})`, node: process.version,
-    packageManagerVersion: manager && directory ? await versionOf(manager, directory) : null };
+    packageManagerVersion: manager && directory ? await versionOf(manager) : null };
   const sourceDigest = digest({ commit: gitFacts?.commit ?? null, patch: createHash('sha256').update(gitFacts?.patch ?? '').digest('hex'),
     omitted: gitFacts?.omitted ?? [], lockfile: facts?.lockfile ?? null, command: plan?.command ?? null, kind: plan?.kind ?? null, appPath: gitFacts?.appPath ?? null });
   return { name, directory, plan, startPlan, install, packageManager: manager, dependenciesInstalled, git: gitFacts, packageFacts: facts, environment, missing, notes, sourceDigest };

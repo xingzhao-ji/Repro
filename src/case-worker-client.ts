@@ -182,13 +182,15 @@ function validReceipt(value: unknown, request: CaseWorkerRequest, acknowledged: 
     || r.environment.isolation !== policy.isolation
     || typeof r.environment.browser !== 'string' || !(r.environment.browser === 'not-launched'
       || /^(?:unknown|[0-9]{1,10}(?:\.[0-9]{1,10}){0,4}) \((?:pinned Chromium|explicit installed Chrome channel)\)$/.test(r.environment.browser))) return false;
+  let evaluated: string | null = null;
   if (r.observation !== null) {
     if (r.assertionCount !== 1) return false;
-    let evaluated: string;
     try { evaluated = policy.evaluate(r.observation); } catch { return false; }
     if (['target-failure', 'requirement-satisfied'].includes(String(r.outcome)) && evaluated !== r.outcome) return false;
     if (evaluated === 'different-failure' && !['inconclusive', 'cancelled'].includes(String(r.outcome))) return false;
   } else if (['target-failure', 'requirement-satisfied'].includes(String(r.outcome))) return false;
+  // A different-failure verdict must be backed by an observation that independently evaluates that way.
+  if (String(r.reason).startsWith('DIFFERENT_FAILURE:') && evaluated !== 'different-failure') return false;
   if (r.outcome === 'target-failure' || r.outcome === 'requirement-satisfied') {
     const reason = r.outcome === 'target-failure' ? policy.assertionMessages[0] : policy.assertionMessages[1];
     // A declared value is insufficient without the matching acquired execution

@@ -114,8 +114,11 @@ export interface ManifestV4 {
   assertionDigest: string;
   expectationBasis: 'reporter-approved' | 'proposed-unconfirmed';
   humanApproval: 'reporter-confirmed' | 'not-claimed';
-  /** Signature of the first failing capture: exact values for equality checks, pass/fail for containment checks. */
-  failure: { values: (string | null)[]; exact: boolean[] } | null;
+  /**
+   * Signature of the first failing capture. exact[i]: the observed value must match values[i];
+   * otherwise only passed[i] (computed on the full observed value) must match. values are for display.
+   */
+  failure: { values: (string | null)[]; exact: boolean[]; passed: boolean[] } | null;
   actions: AppAction[];
   responses: [];
   environment: {

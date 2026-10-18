@@ -33,6 +33,8 @@ Check "Done: Send invoice"
 Uncheck "Done: Send invoice"
 The counter then says "1 task remaining".`;
 const EXPECT = 'Unchecking a task should put it back in the count.\n"#remaining" should show "3 tasks remaining"';
+// Step-independent: the counter must never read "1 task remaining" after these steps, whichever of them ran.
+const INVARIANT = '"#remaining" should not show "1 task remaining"';
 const CANARIES = ['tt_live_0f1e2d3c4b5a69788796a5b4', 'maria.gonzalez@gmail.com', 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0YWxseSJ9', '7c1d55aa93b04e12'];
 const browsers = resolve(process.env['PLAYWRIGHT_BROWSERS_PATH'] ?? '.repro-cache/browsers');
 
@@ -40,7 +42,7 @@ test('a reproduced local-app bug becomes one REPRO.md whose test fails in a fres
   const app = await repository();
   const events: ReportProgress[] = [];
   const output = join(root, `report-${randomUUID()}`);
-  const outcome = await generateReport({ app: { repository: app }, title: 'Unchecking a task drops the remaining count', wentWrong: STEPS, shouldHappen: EXPECT, confirmed: true,
+  const outcome = await generateReport({ app: { repository: app }, title: 'Unchecking a task drops the remaining count', wentWrong: STEPS, shouldHappen: INVARIANT, confirmed: true,
     options: { budget: 40, npmCache, offline: true } }, { output, onProgress: event => events.push(event) });
   assert.equal(outcome.status, 'reproduced', outcome.summary);
   assert.deepEqual([...new Set(events.map(event => event.stage))], ['inspect', 'capture', 'reproduce', 'reduce', 'confirm', 'test', 'fresh-check', 'write']);
@@ -51,6 +53,7 @@ test('a reproduced local-app bug becomes one REPRO.md whose test fails in a fres
     assert.ok(markdown.includes(heading), `missing ${heading}`);
   assert.match(markdown, /\*\*Reproduced\*\* — the failure occurred in 4 of 4 conclusive runs/);
   assert.match(markdown, /`1 task remaining`/);
+  assert.match(markdown, /### 2\. Create the test files[\s\S]*### 3\. Install the app’s dependencies[\s\S]*### 4\. Run it/);
   assert.match(markdown, /\*\*Fresh checkout\*\* \| Reproduced: in a clean clone of the commit, the test failed with the same observed result/);
   assert.match(markdown, /Blocked non-local hosts:\*\* \n {2}- `fonts\.googleapis\.com`/);
   for (const canary of CANARIES) assert.equal(markdown.includes(canary), false, `canary ${canary} leaked into REPRO.md`);
@@ -59,7 +62,7 @@ test('a reproduced local-app bug becomes one REPRO.md whose test fails in a fres
   const finalSteps = markdown.slice(markdown.indexOf('## Steps to reproduce'), markdown.indexOf('<details><summary>Steps as originally reported'));
   assert.equal(finalSteps.includes('Hover over'), false);
   assert.match(finalSteps, /9\. Uncheck the checkbox "Done: Send invoice"/);
-  assert.match(finalSteps, /shortest sequence Repro verified within its search budget: \d+ of 11 reported steps/);
+  assert.match(finalSteps, /shortest sequence Repro verified within its search budget: 9 of 11 reported steps.*The expected behavior does not depend on which steps ran/);
   const files = extractReproFiles(markdown);
   assert.deepEqual(files.map(file => [file.path, file.valid]), [['.repro/unchecking-a-task-drops-the-remaining-count.test.mjs', true], ['.repro/package.json', true], ['.repro/package-lock.json', true]]);
 

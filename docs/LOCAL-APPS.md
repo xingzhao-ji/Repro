@@ -42,6 +42,8 @@ Repro uses the first of these that applies:
 
 Repro sets `PORT` to a free port and `HOST=127.0.0.1`. It then waits for the first local URL the app prints, or for the port it assigned, to answer HTTP.
 
+The guided demonstration (**Show me in a browser instead**) also starts the app, so it asks for the same confirmation first. It opens a visible browser, writes what you do as steps, and adds the element you mark as a check with `(expected value)` in place of its value. Replace that with what the element should show; Repro refuses to run while the placeholder is there, because the page's current value is the wrong one.
+
 You can also give a URL where the app is **already running**. Repro then cannot restart the app between runs, and it cannot prove which source the app serves. The report says so.
 
 Repro never installs dependencies in your folder. If they are missing, it asks you to run the install command yourself. It does run the install command in its own fresh clone when it checks the report.
@@ -96,26 +98,37 @@ Once a failure reproduces, Repro freezes it. A later run that fails differently,
 
 ## Shortening the steps
 
-The search is the same bounded delta-debugging used for the registered cases:
+Removing steps is safe only when the expected behavior cannot depend on which steps ran. Take "3 tasks remaining": it means something only after three tasks were added. In a "clicking Add does nothing" bug, the useless click *is* the bug, yet it changes no value, so no observation can show that removing it is harmless.
+
+Repro therefore shortens steps only in two cases:
+
+- **Every check is step-independent:** `There should be no errors`, `… should not show …`, `… should not contain …`, or `… should not be visible`.
+- **The reporter declares it:** tick *The expected values above stay the same whichever of my steps run* in **More options**, or pass `--steps-independent`.
+
+In every other case REPRO.md keeps the reported steps. It says why, and lists any steps that did not change a checked value in Repro's runs as *possibly unnecessary, not verified*.
+
+When it does shorten, the search is the same bounded delta-debugging used for the registered cases:
 
 - a trial removes steps;
 - it runs the rest twice from a fresh start;
 - the change is kept only if both runs show the same frozen failure.
 
-Repro also records every checked value after each step in one run. **It never removes a step that changed a checked value**, or a step such a step depends on. This matters when the expected value depends on the steps: "3 tasks remaining" means something only with three tasks added. Removing an add step could produce the same wrong-looking value through correct behavior.
+A failure that changes in any way counts as a different failure, not this bug. Repro also records every checked value after each step, and it never removes a step that changed a checked value, or anything such a step depends on.
 
-The default budget is 40 runs (`--budget` accepts 8–120). Shorter steps are confirmed with three more runs before they replace the reported ones. Minimality is claimed only among the permitted removals and within the budget. Global minimality is never claimed.
+The default budget is 40 runs (`--budget` accepts 8–120). Shorter steps are confirmed with three more runs before they replace the reported ones. Minimality is claimed only when at least one permitted removal was actually tested, and only among those removals. Global minimality is never claimed.
 
 ## The fresh-checkout check
 
 Before writing the final file, Repro follows its own REPRO.md:
 
 1. It clones your repository at the recorded commit into `.repro-runs/…`.
-2. It applies the embedded local-changes patch, if there is one.
-3. It runs the install command.
-4. It writes the test files with the extraction command from the report.
+2. It writes the test files with the extraction command from the report.
+3. It applies the embedded local-changes patch from the repository root, if there is one.
+4. It runs the install command.
 5. It installs the test's dependencies.
 6. It runs the test.
+
+These are the steps REPRO.md gives the recipient, in the same order. Extraction writes only the four expected names (`<name>.test.mjs`, `package.json`, `package-lock.json` and `local-changes.patch`), and log output in the report is indented so it can never look like a file block.
 
 The report then says whether the test failed in the same way in that clean checkout. If the result differs, the bug depends on something outside the commit and patch: untracked or ignored files, local data, or the environment. The clone is deleted afterwards; its commands and output stay in the report.
 
@@ -128,7 +141,9 @@ The report then says whether the test failed in the same way in that clean check
   - URL credentials;
   - emails outside reserved example domains, phone numbers and Luhn-valid card numbers;
   - public IP addresses, your home path, username and hostname.
-- **Files left out of the patch:** sensitive files (`.env*`, keys, certificates, `*credentials*`, `*secret*`, `.npmrc` and similar) are listed by name only. Binary files and changes over 256 KiB are listed but not embedded.
+- **Files left out of the patch:** sensitive files (`.env*`, keys, certificates, `*credentials*`, `*secret*`, `.npmrc` and similar) are listed by name only. So are untracked files that are not source code or configuration, such as notes, logs and data. Binary files, changes with CRLF line endings, and changes over 256 KiB are listed but not embedded.
+- **Start command:** an inline `NAME=value` in it, in `repro.config.json` or in a `package.json` script, whose name looks like a secret (`*PASSWORD*`, `*TOKEN*`, `*SECRET*`, `*API_KEY*` …), is refused or hidden. Set secrets in your shell; Repro passes your environment to the app and never writes it into the report.
+- **Remotes:** a git remote's address is kept, including the plain `git@` user, but a password or token in it is removed.
 - **Final scan:** before the file is written, a last pass over the whole document checks for withheld values and unambiguous credentials.
 
 Redaction is a safeguard, not a guarantee. Review REPRO.md before you share it beyond your team. Repro's local evidence folder, `.repro-runs/`, keeps your original request text and is not meant to be shared.
